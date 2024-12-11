@@ -1,0 +1,92 @@
+#loginpage{
+  /* height: 50vh; */
+  padding:100px 0;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 5%, rgba(0,0,0,1) 100%);
+
+  .loginform{
+    width:fit-content;
+    background-color: rgb(255, 255, 255,0.8);
+    /* border: 1px solid rgb(0, 0, 0,0.2); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding:20px 20px;
+    margin: auto;
+    
+
+    h2{
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+    }
+    p{
+      text-align: center;
+    }
+   
+    form{
+      font-weight: bold;
+      div{
+        margin-bottom: 5px;
+      }
+    }
+
+    input {
+      width: 100%;
+      font-weight: 100;
+      border: 1px solid rgb(0, 0, 0,0.2);
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: rgb(0, 0, 0,0.6);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+
+    }
+    input:focus {
+      outline: none; 
+ 
+  }
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #000000;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .loginwith{
+      text-align: right;
+      font-weight: 600;
+
+    }
+
+
+  }
+  
+ 
+  
+  
+  
+  .error {
+
+   position: fixed;
+   width: 100%;
+    top: 75px; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    transform: translateY(-100px);
+      animation: fadeInUp 1s forwards;
+
+    p{
+      background-color: rgb(255, 0, 0,0.9);
+      border-radius: 10px;
+      margin: auto;
+      width: fit-content;
+      color: rgb(0, 0, 0);
+      padding: 10px 20px;
+      font-size: 14px;
+
+    }
+
+
+  }
+}
