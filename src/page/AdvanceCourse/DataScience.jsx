@@ -9,7 +9,7 @@ import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 
-import dspdf from '../AdvanceCourse/DataScienceAdvancedPrgram.pdf';
+import dspdf from '../../../krutanic/mentorship/Android Development-min.pdf'
 
 import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
