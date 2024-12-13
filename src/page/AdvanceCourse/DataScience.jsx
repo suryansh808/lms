@@ -686,7 +686,7 @@ const DataScience = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/DataScienceAdvancedProgram.pdf"
+                  href="krutanic/DataScienceAdvancedProgram.pdf"
                   target="_blank"
                 >
                   {" "}
