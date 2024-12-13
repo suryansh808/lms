@@ -162,7 +162,8 @@
     padding: 10px;
     margin: auto;
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    padding-bottom: 50px;
     img {
       height: 10vw;
       width: auto;

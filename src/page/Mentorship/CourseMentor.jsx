@@ -25,6 +25,30 @@ import dataanalytics from "../../assets/mentorshipcourses/DA.jpg";
 import devops from "../../assets/mentorshipcourses/DEVOPS.jpg";
 import { Link } from "react-router-dom";
 
+import pdf1 from '../../../krutanic/Android Development.pdf' ;
+import pdf2 from '../../../krutanic/Artificial Intelligence.pdf' ;
+import pdf3 from '../../../krutanic/AutoCad Brochure.pdf' ;
+import pdf4 from '../../../krutanic/Business Analytics.pdf' ;
+import pdf5 from '../../../krutanic/Cloud Computing.pdf' ;
+import pdf6 from '../../../krutanic/Cyber Security.pdf' ;
+import pdf7 from '../../../krutanic/Data Analytics.pdf' ;
+import pdf8 from '../../../krutanic/Data Science.pdf' ;
+import pdf9 from '../../../krutanic/Dev ops.pdf' ;
+import pdf10 from '../../../krutanic/Digital Marketing.pdf' ;
+import pdf11 from '../../../krutanic/Embedded System.pdf' ;
+import pdf12 from '../../../krutanic/Finance.pdf' ;
+import pdf13 from '../../../krutanic/FinTech.pdf' ;
+import pdf14 from '../../../krutanic/Full Stack Development.pdf' ;
+import pdf15 from '../../../krutanic/Graphic Design.pdf' ;
+import pdf16 from '../../../krutanic/Human Resource.pdf' ;
+import pdf17 from '../../../krutanic/IOT and Robotics.pdf' ;
+import pdf18 from '../../../krutanic/Machine Learning.pdf' ;
+import pdf19 from '../../../krutanic/Nano Technology and Genetic.pdf' ;
+import pdf20 from '../../../krutanic/Psychology.pdf' ;
+import pdf21 from '../../../krutanic/Stock Market.pdf' ;
+import pdf22 from '../../../krutanic/Supply Chain Management.pdf' ;
+import pdf23 from '../../../krutanic/UI  UX-min.pdf' ;
+
 
 
 const CourseMentor = () => {
@@ -50,7 +74,7 @@ const CourseMentor = () => {
         id: 1,
         title: "Full Stack Web Development",
         image: `${fullStack}`,
-        pdf: `/krutanic/mentorship/Full Stack Development-min.pdf`,
+        pdf: `${pdf14}`,
         description:
           "Building and managing both the front-end and back-end of websites.",
         rating: 4.7,
@@ -60,7 +84,7 @@ const CourseMentor = () => {
         id: 2,
         title: "Android App Development",
         image: `${android}`,
-        pdf: `/krutanic/mentorship/Android Development-min.pdf`,
+        pdf: `${pdf1}`,
         description:
           "Designing and developing mobile apps for Android devices.",
         rating: 4.9,
@@ -70,7 +94,7 @@ const CourseMentor = () => {
         id: 3,
         title: "Artificial Intelligence",
         image: `${artificial}`,
-        pdf: `/krutanic/mentorship/Artificial Intelligence-min.pdf`,
+        pdf: `${pdf2}`,
         description:
           "Creating systems that simulate human intelligence for tasks like decision-making.",
         rating: 4.8,
@@ -80,7 +104,7 @@ const CourseMentor = () => {
         id: 4,
         title: "Machine Learning",
         image: `${machine}`,
-        pdf: `/krutanic/mentorship/Machine Learning-min.pdf`,
+        pdf: `${pdf18}`,
         description:
           "Teaching machines to recognize patterns and make predictions from data.",
         rating: 4.7,
@@ -90,7 +114,7 @@ const CourseMentor = () => {
         id: 5,
         title: "Cyber Security",
         image: `${cyber}`,
-        pdf: `/krutanic/mentorship/Cyber Security-min.pdf`,
+        pdf: `${pdf6}`,
         description:
           "Protecting networks, systems, and data from cyber attacks.",
         rating: 4.9,
@@ -100,7 +124,7 @@ const CourseMentor = () => {
         id: 6,
         title: "Data Science",
         image: `${datascience}`,
-        pdf: `/krutanic/mentorship/Data Science-min.pdf`,
+        pdf: `${pdf8}`,
         description:
           "Analyzing large data sets to extract insights and inform decisions.",
         rating: 4.8,
@@ -110,7 +134,7 @@ const CourseMentor = () => {
         id: 7,
         title: "Data Analytics",
         image: `${dataanalytics}`,
-        pdf: `/krutanic/mentorship/Data Analytics-min.pdf`,
+        pdf: `${pdf7}`,
         description:
           "Interpreting data to help businesses improve performance and make decisions.",
         rating: 4.7,
@@ -120,7 +144,7 @@ const CourseMentor = () => {
         id: 8,
         title: "UI/UX Design",
         image: `${uiux}`,
-        pdf: `/krutanic/mentorship/UI  UX-min.pdf`,
+        pdf: `${pdf23}`,
         description:
           "Designing intuitive user interfaces and ensuring a positive experience.",
         rating: 4.9,
@@ -130,7 +154,7 @@ const CourseMentor = () => {
         id: 9,
         title: "DevOps",
         image: `${devops}`,
-        pdf: `/krutanic/mentorship/Dev ops-min.pdf`,
+        pdf: `${pdf9}`,
         description: "Implement DevOps practices for software development.",
         rating: 4.8,
         studentsTaken: 1899,
@@ -141,7 +165,7 @@ const CourseMentor = () => {
         id: 10,
         title: "Business Analytics",
         image: `${bussinessanalytics}`,
-        pdf: `/krutanic/mentorship/Business Analytics-min.pdf`,
+        pdf: `${pdf4}`,
         description: "Using data to optimize business decisions and strategies",
         rating: 4.7,
         studentsTaken: 2102,
@@ -150,7 +174,7 @@ const CourseMentor = () => {
         id: 11,
         title: "Finance",
         image: `${finance}`,
-        pdf: `/krutanic/mentorship/Finance-min.pdf`,
+        pdf: `${pdf12}`,
         description:
           "Managing money, investments, and financial planning for individuals or companies.",
         rating: 4.8,
@@ -160,7 +184,7 @@ const CourseMentor = () => {
         id: 12,
         title: "Human Resource",
         image: `${hr}`,
-        pdf: `/krutanic/mentorship/Human Resource-min.pdf`,
+        pdf: `${pdf16}`,
         description:
           "Overseeing recruitment, employee development, and organizational culture.",
         rating: 4.9,
@@ -170,7 +194,7 @@ const CourseMentor = () => {
         id: 13,
         title: "Digital Marketing",
         image: `${digitalmarketing}`,
-        pdf: `/krutanic/mentorship/Digital Marketing-min.pdf`,
+        pdf: `${pdf10}`,
         description:
           " Promoting products and services through digital channels like social media and search engines.",
         rating: 4.7,
@@ -180,7 +204,7 @@ const CourseMentor = () => {
         id: 14,
         title: "Stock Marketing",
         image: `${stockmarketing}`,
-        pdf: `/krutanic/mentorship/Stock Market-min.pdf`,
+        pdf: `${pdf21}`,
         description:
           "Trading stocks, bonds, and other securities in financial markets.",
         rating: 4.8,
@@ -190,7 +214,7 @@ const CourseMentor = () => {
         id: 15,
         title: "Supply Chain Management",
         image: `${supplychainmanagement}`,
-        pdf: `/krutanic/mentorship/Supply Chain Management-min.pdf`,
+        pdf: `${pdf22}`,
         description:
           "Managing the production, distribution, and delivery of products.",
         rating: 4.7,
@@ -200,7 +224,7 @@ const CourseMentor = () => {
         id: 16,
         title: "Graphics Design",
         image: `${graphicdesign}`,
-        pdf: `/krutanic/mentorship/Graphic Design-min.pdf`,
+        pdf: `${pdf15}`,
         description: "Creating visual content for digital and print media.",
         rating: 4.9,
         studentsTaken: 2669,
@@ -209,7 +233,7 @@ const CourseMentor = () => {
         id: 17,
         title: "Fintech",
         image: `${fintech}`,
-        pdf: `/krutanic/mentorship/FinTech-min.pdf`,
+        pdf: `${pdf13}`,
         description:
           "Technology to improve financial services like banking, payments, and investments.",
         rating: 4.8,
@@ -221,7 +245,7 @@ const CourseMentor = () => {
         id: 18,
         title: "Embedded System",
         image: `${embeddedsystem}`,
-        pdf: `/krutanic/mentorship/Embedded System-min.pdf`,
+        pdf: `${pdf11}`,
         description:
           "Designing computer systems integrated into devices for specific functions.",
         rating: 4.9,
@@ -231,7 +255,7 @@ const CourseMentor = () => {
         id: 19,
         title: "Cloud Computing",
         image: `${cloudcomputing}`,
-        pdf: `/krutanic/mentorship/Cloud Computing-min.pdf`,
+        pdf: `${pdf5}`,
         description:
           "Providing scalable computing resources and storage via the internet.",
         rating: 4.8,
@@ -241,7 +265,7 @@ const CourseMentor = () => {
         id: 20,
         title: "IOT & Robotics",
         image: `${iotandrobotics}`,
-        pdf: `/krutanic/mentorship/IOT and Robotics-min.pdf`,
+        pdf: `${pdf17}`,
         description:
           "Developing robots and devices that communicate over the internet to perform tasks.",
         rating: 4.7,
@@ -253,7 +277,7 @@ const CourseMentor = () => {
         id: 21,
         title: "Nano Technology & Genetic Engineering",
         image: `${nano}`,
-        pdf: `/krutanic/mentorship/Nano Technology and Genetic-min.pdf`,
+        pdf: `${pdf19}`,
         description:
           " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
         rating: 4.9,
@@ -263,7 +287,7 @@ const CourseMentor = () => {
         id: 22,
         title: "Psychology",
         image: `${psycho}`,
-        pdf: `/krutanic/mentorship/Psychology-min.pdf`,
+        pdf: `${pdf20}`,
         description:
           "Studying mental processes and behavior to understand and address human conditions.",
         rating: 4.8,
@@ -275,7 +299,7 @@ const CourseMentor = () => {
         id: 23,
         title: "Auto Cad",
         image: `${autocad}`,
-        pdf: `/krutanic/mentorship/AutoCad Brochure-min.pdf`,
+        pdf: `${pdf3}`,
         description:
           "Using software to create detailed 2D and 3D designs for engineering and architecture.",
         rating: 4.7,

@@ -9,7 +9,7 @@ import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 
-import dspdf from '../../../krutanic/mentorship/Android Development-min.pdf'
+import pdfds from '../../../krutanic/DataScienceAdvancedProgram.pdf'
 
 import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
@@ -688,11 +688,11 @@ const DataScience = () => {
                   />
                 </svg>
                 <a
-                  href={dspdf}
+                  href={pdfds}
                   target="_blank"
                 >
                   
-                  Download abhi
+                  Download
                 </a>
               </button>
               <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md">

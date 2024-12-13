@@ -13,6 +13,7 @@ import Certification from "./Components/Certification";
 import MERN from "../../assets/Advanced Course Images/Mern Stack Development/mern.png";
 import curriculumimage from "../../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg";
 import { Link } from "react-router-dom";
+import pdfms from '../../../krutanic/Mern Stack Web Development Advanced Program.pdf'
 
 const MernStack = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
@@ -679,7 +680,7 @@ const MernStack = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/Mern Stack Web Development Advanced Program.pdf"
+                  href={pdfms}
                   target="blank"
                 >
                   {" "}

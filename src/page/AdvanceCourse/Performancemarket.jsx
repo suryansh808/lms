@@ -13,6 +13,7 @@ import StoreSection from "./Components/StoreSection";
 import PM from "../../assets/Advanced Course Images/Performance marketing/PM.png";
 import curriculumimage from "../../assets/Advanced Course Images/Performance marketing/pm.jpg";
 import { Link } from "react-router-dom";
+import pdfpm from '../../../krutanic/Performance marketing Advanced Program.pdf';
 
 const Performancemarket = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
@@ -684,7 +685,7 @@ const Performancemarket = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/Performance marketing Advanced Program.pdf"
+                  href={pdfpm}
                   target="_blank"
                 >
                   Download

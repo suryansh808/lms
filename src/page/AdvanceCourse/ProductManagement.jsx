@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import AOS from "aos";
 import "aos/dist/aos.css";
 // import MentorSection from "../../Components/MentorSection";
+import pdfpmm from '../../../krutanic/Product management Advanced program.pdf'
 
 import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
@@ -671,7 +672,7 @@ const ProductManagement = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/Product management Advanced program.pdf"
+                  href={pdfpmm}
                   target="blank"
                 >
                   {" "}

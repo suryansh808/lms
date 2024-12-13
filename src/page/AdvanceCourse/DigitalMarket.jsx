@@ -15,6 +15,8 @@ import DM from "../../assets/Advanced Course Images/Digital Markting/DM.png";
 import curriculumimage from "../../assets/Advanced Course Images/Digital Markting/DM 2.jpg";
 import { Link } from "react-router-dom";
 
+import pdfdm from '../../../krutanic/Digital Marketing Advanced Program.pdf'
+
 const DigitalMarket = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -676,7 +678,7 @@ const DigitalMarket = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/Digital Marketing Advanced Program.pdf"
+                  href={pdfdm}
                   target="blank"
                 >
                   {" "}

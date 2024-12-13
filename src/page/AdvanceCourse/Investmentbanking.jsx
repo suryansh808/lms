@@ -9,7 +9,7 @@ import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 import IB from "../../assets/Advanced Course Images/Investment banking/INB.png";
-import ib from "../../assets/Advanced Course Images/Investment banking/3.svg";
+import pdfib from '../../../krutanic/Investment Banking Advanced Program.pdf';
 import curriculumimage from "../../assets/Advanced Course Images/Investment banking/IB 6.jpg";
 import { Link } from "react-router-dom";
 
@@ -677,7 +677,7 @@ const Investmentbanking = () => {
                   />
                 </svg>
                 <a
-                  href="/krutanic/Investment Banking Advanced Program.pdf"
+                  href={pdfib}
                   target="blank"
                 >
                   {" "}
