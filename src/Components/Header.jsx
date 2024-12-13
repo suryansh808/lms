@@ -73,9 +73,7 @@ const Header = () => {
           <Link to="/TalentHunt" onClick={scrollToTop}>
             TALENT HUNT
           </Link>
-          <Link to="/Login" onClick={scrollToTop} className="btn">
-            <button>LOGIN</button>
-          </Link>
+          <a href="https://www.krutanic.online/login/" ><button className="btn">LOGIN</button> </a>
         </div>
         <div className="toggle">
           <span onClick={toggleVisibility}>☰</span>
@@ -106,15 +104,16 @@ const Header = () => {
             <Link to="/AboutUs" onClick={scrollToTop}>
               <li>About Us</li>
             </Link>
-            <Link
-            to="/Login"
+            <a href="https://www.krutanic.online/login/" ><button className="btn">LOGIN</button> </a>
+            {/* <Li
+            to="/https://www.krutanic.online/login/"
             onClick={() => {
               scrollToTop();
               toggleVisibility();
             }}
           >
            <li><button className="btn">LOGIN</button></li>
-          </Link>
+          </Li> */}
           </ul>
          
         </div>

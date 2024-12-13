@@ -3,15 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import Typed from 'typed.js';
 
-import images1 from '../assets/courses/datascience.jpg'
-import images2 from '../assets/courses/data-analayes.jpg'
-import images3 from '../assets/courses/mernmean.png'
-import images4 from '../assets/courses/cloud.png'
-import images5 from '../assets/courses/002.jpg'
-import images6 from '../assets/courses/006.jpg'
-import images7 from '../assets/courses/005.jpg'
-import images8 from '../assets/courses/003.jpg'
-import images9 from '../assets/courses/004.jpg'
+import images1 from '../assets/Advanced Course Images/Data science/DS.jpg'
+import images2 from '../assets/Advanced Course Images/Digital Markting/DM.png'
+import images3 from '../assets/Advanced Course Images/Investment banking/IB 6.jpg'
+import images4 from '../assets/Advanced Course Images/Mern Stack Development/MSD 2.jpg'
+import images5 from '../assets/Advanced Course Images/Product management/PM 4.jpg'
+import images6 from '../assets/Advanced Course Images/Product management/pm.jpg'
+import images7 from '../assets/Advanced Course Images/Data science/DS 3.jpg'
+import images8 from '../assets/Advanced Course Images/Digital Markting/DM 3.jpg'
+import images9 from '../assets/mentorshipcourses/DA.jpg'
 
 
 

@@ -3,7 +3,6 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import logo from '../assets/courses/logo.jpg'
-import suryansh from '../assets/courses/suryansh.jpg'
 
 import AOS from "aos";
 import "aos/dist/aos.css";

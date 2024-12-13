@@ -5,7 +5,6 @@ import "aos/dist/aos.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import mentorshipimg from '../assets/mentorshipcourses/book.svg'
 
 // certificate starts
 import certificate1 from "../assets/certificates/Certificate  of internship.png";

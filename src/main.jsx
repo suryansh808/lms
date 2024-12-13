@@ -19,9 +19,6 @@ import './style/Style.scss'
 import './style/Mentorship.css'
 import './style/FeesStructure.css'
 
-
-// import './style/SliderComponent.css'
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
