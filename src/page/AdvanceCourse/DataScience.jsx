@@ -9,6 +9,8 @@ import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 
+import dspdf from '../AdvanceCourse/DataScienceAdvancedPrgram.pdf';
+
 import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
 import { Link } from "react-router-dom";
@@ -686,11 +688,11 @@ const DataScience = () => {
                   />
                 </svg>
                 <a
-                  href="krutanic/DataScienceAdvancedProgram.pdf"
+                  href={dspdf}
                   target="_blank"
                 >
-                  {" "}
-                  Download
+                  
+                  Download abhi
                 </a>
               </button>
               <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md">
