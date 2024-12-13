@@ -50,90 +50,90 @@ const CourseMentor = () => {
         id: 1,
         title: "Full Stack Web Development",
         image: `${fullStack}`,
-        pdf: `/src/assets/coursespdf/Full Stack Development-min.pdf`,
+        pdf: `/krutanic/mentorship/Full Stack Development-min.pdf`,
         description:
           "Building and managing both the front-end and back-end of websites.",
         rating: 4.7,
-        studentsTaken: 2500,
+        studentsTaken: 2298,
       },
       {
         id: 2,
         title: "Android App Development",
         image: `${android}`,
-        pdf: `/src/assets/coursespdf/Android Development-min.pdf`,
+        pdf: `/krutanic/mentorship/Android Development-min.pdf`,
         description:
           "Designing and developing mobile apps for Android devices.",
         rating: 4.9,
-        studentsTaken: 2200,
+        studentsTaken: 1980,
       },
       {
         id: 3,
         title: "Artificial Intelligence",
         image: `${artificial}`,
-        pdf: `/src/assets/coursespdf/Artificial Intelligence-min.pdf`,
+        pdf: `/krutanic/mentorship/Artificial Intelligence-min.pdf`,
         description:
           "Creating systems that simulate human intelligence for tasks like decision-making.",
         rating: 4.8,
-        studentsTaken: 2100,
+        studentsTaken: 2340,
       },
       {
         id: 4,
         title: "Machine Learning",
         image: `${machine}`,
-        pdf: `/src/assets/coursespdf/Machine Learning-min.pdf`,
+        pdf: `/krutanic/mentorship/Machine Learning-min.pdf`,
         description:
           "Teaching machines to recognize patterns and make predictions from data.",
         rating: 4.7,
-        studentsTaken: 2800,
+        studentsTaken: 2456,
       },
       {
         id: 5,
         title: "Cyber Security",
         image: `${cyber}`,
-        pdf: `/src/assets/coursespdf/Cyber Security-min.pdf`,
+        pdf: `/krutanic/mentorship/Cyber Security-min.pdf`,
         description:
           "Protecting networks, systems, and data from cyber attacks.",
         rating: 4.9,
-        studentsTaken: 2400,
+        studentsTaken: 2409,
       },
       {
         id: 6,
         title: "Data Science",
         image: `${datascience}`,
-        pdf: `/src/assets/coursespdf/Data Science-min.pdf`,
+        pdf: `/krutanic/mentorship/Data Science-min.pdf`,
         description:
           "Analyzing large data sets to extract insights and inform decisions.",
         rating: 4.8,
-        studentsTaken: 2600,
+        studentsTaken: 2699,
       },
       {
         id: 7,
         title: "Data Analytics",
         image: `${dataanalytics}`,
-        pdf: `/src/assets/coursespdf/Data Analytics-min.pdf`,
+        pdf: `/krutanic/mentorship/Data Analytics-min.pdf`,
         description:
           "Interpreting data to help businesses improve performance and make decisions.",
         rating: 4.7,
-        studentsTaken: 2300,
+        studentsTaken: 2690,
       },
       {
         id: 8,
         title: "UI/UX Design",
         image: `${uiux}`,
-        pdf: `/src/assets/coursespdf/UI  UX-min.pdf`,
+        pdf: `/krutanic/mentorship/UI  UX-min.pdf`,
         description:
           "Designing intuitive user interfaces and ensuring a positive experience.",
         rating: 4.9,
-        studentsTaken: 2500,
+        studentsTaken: 2590,
       },
       {
         id: 9,
         title: "DevOps",
         image: `${devops}`,
-        pdf: `/src/assets/coursespdf/Dev ops-min.pdf`,
+        pdf: `/krutanic/mentorship/Dev ops-min.pdf`,
         description: "Implement DevOps practices for software development.",
         rating: 4.8,
-        studentsTaken: 2100,
+        studentsTaken: 1899,
       },
     ],
     Management: [
@@ -141,79 +141,79 @@ const CourseMentor = () => {
         id: 10,
         title: "Business Analytics",
         image: `${bussinessanalytics}`,
-        pdf: `/src/assets/coursespdf/Business Analytics-min.pdf`,
+        pdf: `/krutanic/mentorship/Business Analytics-min.pdf`,
         description: "Using data to optimize business decisions and strategies",
         rating: 4.7,
-        studentsTaken: 2700,
+        studentsTaken: 2102,
       },
       {
         id: 11,
         title: "Finance",
         image: `${finance}`,
-        pdf: `/src/assets/coursespdf/Finance-min.pdf`,
+        pdf: `/krutanic/mentorship/Finance-min.pdf`,
         description:
           "Managing money, investments, and financial planning for individuals or companies.",
         rating: 4.8,
-        studentsTaken: 2500,
+        studentsTaken: 2076,
       },
       {
         id: 12,
         title: "Human Resource",
         image: `${hr}`,
-        pdf: `/src/assets/coursespdf/Human Resource-min.pdf`,
+        pdf: `/krutanic/mentorship/Human Resource-min.pdf`,
         description:
           "Overseeing recruitment, employee development, and organizational culture.",
         rating: 4.9,
-        studentsTaken: 2300,
+        studentsTaken: 2087,
       },
       {
         id: 13,
         title: "Digital Marketing",
         image: `${digitalmarketing}`,
-        pdf: `/src/assets/coursespdf/Digital Marketing-min.pdf`,
+        pdf: `/krutanic/mentorship/Digital Marketing-min.pdf`,
         description:
           " Promoting products and services through digital channels like social media and search engines.",
         rating: 4.7,
-        studentsTaken: 2000,
+        studentsTaken: 2257,
       },
       {
         id: 14,
         title: "Stock Marketing",
         image: `${stockmarketing}`,
-        pdf: `/src/assets/coursespdf/Stock Market-min.pdf`,
+        pdf: `/krutanic/mentorship/Stock Market-min.pdf`,
         description:
           "Trading stocks, bonds, and other securities in financial markets.",
         rating: 4.8,
-        studentsTaken: 2400,
+        studentsTaken: 980,
       },
       {
         id: 15,
         title: "Supply Chain Management",
         image: `${supplychainmanagement}`,
-        pdf: `/src/assets/coursespdf/Supply Chain Management-min.pdf`,
+        pdf: `/krutanic/mentorship/Supply Chain Management-min.pdf`,
         description:
           "Managing the production, distribution, and delivery of products.",
         rating: 4.7,
-        studentsTaken: 2200,
+        studentsTaken: 1069,
       },
       {
         id: 16,
         title: "Graphics Design",
         image: `${graphicdesign}`,
-        pdf: `/src/assets/coursespdf/Graphic Design-min.pdf`,
+        pdf: `/krutanic/mentorship/Graphic Design-min.pdf`,
         description: "Creating visual content for digital and print media.",
         rating: 4.9,
-        studentsTaken: 2100,
+        studentsTaken: 2669,
       },
       {
         id: 17,
         title: "Fintech",
         image: `${fintech}`,
-        pdf: `/src/assets/coursespdf/FinTech-min.pdf`,
+        pdf: `/krutanic/mentorship/FinTech-min.pdf`,
         description:
           "Technology to improve financial services like banking, payments, and investments.",
         rating: 4.8,
-        studentsTaken: 2500,
+        studentsTaken: 1250,
       },
     ],
     "Electronics/Electrical": [
@@ -221,31 +221,31 @@ const CourseMentor = () => {
         id: 18,
         title: "Embedded System",
         image: `${embeddedsystem}`,
-        pdf: `/src/assets/coursespdf/Embedded System-min.pdf`,
+        pdf: `/krutanic/mentorship/Embedded System-min.pdf`,
         description:
           "Designing computer systems integrated into devices for specific functions.",
         rating: 4.9,
-        studentsTaken: 2600,
+        studentsTaken: 1645,
       },
       {
         id: 19,
         title: "Cloud Computing",
         image: `${cloudcomputing}`,
-        pdf: `/src/assets/coursespdf/Cloud Computing-min.pdf`,
+        pdf: `/krutanic/mentorship/Cloud Computing-min.pdf`,
         description:
           "Providing scalable computing resources and storage via the internet.",
         rating: 4.8,
-        studentsTaken: 2400,
+        studentsTaken: 2156,
       },
       {
         id: 20,
         title: "IOT & Robotics",
         image: `${iotandrobotics}`,
-        pdf: `/src/assets/coursespdf/IOT and Robotics-min.pdf`,
+        pdf: `/krutanic/mentorship/IOT and Robotics-min.pdf`,
         description:
           "Developing robots and devices that communicate over the internet to perform tasks.",
         rating: 4.7,
-        studentsTaken: 2500,
+        studentsTaken: 1260,
       },
     ],
     Medical: [
@@ -253,21 +253,21 @@ const CourseMentor = () => {
         id: 21,
         title: "Nano Technology & Genetic Engineering",
         image: `${nano}`,
-        pdf: `/src/assets/coursespdf/Nano Technology and Genetic-min.pdf`,
+        pdf: `/krutanic/mentorship/Nano Technology and Genetic-min.pdf`,
         description:
           " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
         rating: 4.9,
-        studentsTaken: 2200,
+        studentsTaken: 890,
       },
       {
         id: 22,
         title: "Psychology",
         image: `${psycho}`,
-        pdf: `/src/assets/coursespdf/Psychology-min.pdf`,
+        pdf: `/krutanic/mentorship/Psychology-min.pdf`,
         description:
           "Studying mental processes and behavior to understand and address human conditions.",
         rating: 4.8,
-        studentsTaken: 2100,
+        studentsTaken: 709,
       },
     ],
     "Mechanical/Civil": [
@@ -275,11 +275,11 @@ const CourseMentor = () => {
         id: 23,
         title: "Auto Cad",
         image: `${autocad}`,
-        pdf: `/src/assets/coursespdf/AutoCad Brochure-min.pdf`,
+        pdf: `/krutanic/mentorship/AutoCad Brochure-min.pdf`,
         description:
           "Using software to create detailed 2D and 3D designs for engineering and architecture.",
         rating: 4.7,
-        studentsTaken: 2000,
+        studentsTaken: 999,
       },
     ],
   };
@@ -287,12 +287,12 @@ const CourseMentor = () => {
   return (
     <div>
       <div className="container mx-auto">
-        <h2
+        <h1
           data-aos="fade-up"
-          className="text-3xl font-bold text-center text-[#f15b29] mb-10"
+          className=" font-bold text-center text-[#f15b29] mb-10"
         >
           | Our Mentorship Courses
-        </h2>
+        </h1>
         <div
           data-aos="fade-up"
           className="flex  justify-center flex-wrap mb-8 gap-3 "

@@ -47,7 +47,6 @@ const ContactUs = () => {
       {/* SECTION 1 */}
       <div className="section1" >
         <section className="flex-content padding_2x">
-          {/* <em className="tag">ABOUT US</em> */}
           <h1 data-aos="fade-up" data-aos-offset="300" data-aos-duration="500" data-aos-delay="100" data-aos-easing="linear" className="title medium">We’re here to help you with any queries</h1>
           <p data-aos="fade-up" data-aos-offset="300" data-aos-duration="700" data-aos-delay="200" data-aos-easing="linear">
             We’re here to help you with any queries, concerns, or suggestions you may have. Whether you’re looking for information on our courses, want to know more about our services, or need assistance with your enrollment, our team is ready to assist you.
@@ -113,7 +112,7 @@ const ContactUs = () => {
 
       {/* SECTION 2 */}
       <div className="sections section2 padding_2x">
-        <h1 data-aos="fade-up" className='text-center title text-4xl'>How to connect with us</h1>
+        <h1 data-aos="fade-up" className='text-center title'>How to connect with us</h1>
         <article className="cards padding_2x max-w-[1500px] mx-auto">
           <section data-aos="zoom-in" className="flex-content padding_2x text-white">
             <figure>

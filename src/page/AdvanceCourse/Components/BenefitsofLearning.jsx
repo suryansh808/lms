@@ -32,13 +32,13 @@ const BenefitsofLearning = () => {
   return (
     <div>
        <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-center text-3xl font-bold mb-8 text-orange-700"
+              className="text-center  font-bold mb-8 text-orange-700"
             >
               | Discover the Benefits of Learning with{" "}
               <span className="text-white font-bold">Krutanic</span>
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:px-20">
               {learn.map((learn, index) => (
                 <div

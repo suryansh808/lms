@@ -65,12 +65,12 @@ const MentorSection = () => {
 
   return (
     <div className="bg-cream px-4 py-10 text-center">
-      <h2 
+      <h1 
       data-aos="fade-up"
-      className="text-3xl text-[#f15b29] font-bold mb-4">
+      className=" text-[#f15b29] font-bold mb-4">
           
         | Our Esteemed Mentors
-      </h2>
+      </h1>
       <p  data-aos="fade-up" className="text-white mb-8">
         Discover the brilliant and visionary minds shaping our journey. Our
         mentors bring extensive expertise and an unwavering passion for

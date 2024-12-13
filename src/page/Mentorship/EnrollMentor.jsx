@@ -31,7 +31,7 @@ const EnrollMentor = () => {
       <div className="container mx-auto">
         <h1
           data-aos='fade-up'
-          className="text-center text-3xl text-[#f15b29]"
+          className="text-center text-[#f15b29]"
         >
           | How to Enroll with us.
         </h1>

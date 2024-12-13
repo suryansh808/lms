@@ -11,20 +11,24 @@ import danish from '../assets/developers/danish.jpg'
 import suryansh from '../assets/developers/suryanshsaxena.jpg'
 import affan from '../assets/developers/affan.jpg'
 
-import gallery1 from '../assets/gallery/002.jpg'
-import gallery2 from '../assets/gallery/003.jpg'
-import gallery3 from '../assets/gallery/004.jpg'
-import gallery4 from '../assets/gallery/005.jpg'
-import gallery5 from '../assets/gallery/006.jpg'
-import gallery6 from '../assets/gallery/007.jpg'
-import gallery7 from '../assets/gallery/008.jpg'
-import gallery8 from '../assets/gallery/002.jpg'
-import gallery9 from '../assets/gallery/003.jpg'
+import gallery1 from '../assets/gallery/1.jpg'
+import gallery2 from '../assets/gallery/2.jpg'
+import gallery3 from '../assets/gallery/3.jpg'
+import gallery4 from '../assets/gallery/4.jpg'
+import gallery5 from '../assets/gallery/5.jpg'
+import gallery6 from '../assets/gallery/6.jpg'
+import gallery7 from '../assets/gallery/7.jpg'
+import gallery8 from '../assets/gallery/8.jpg'
+import gallery9 from '../assets/gallery/9.jpg'
+import gallery10 from '../assets/gallery/10.jpg'
+import gallery11 from '../assets/gallery/11.jpg'
+import gallery12 from '../assets/gallery/12.jpg'
+import gallery13 from '../assets/gallery/13.jpg'
+import gallery14 from '../assets/gallery/14.jpg'
+import gallery15 from '../assets/gallery/15.jpg'
+import gallery16 from '../assets/gallery/16.jpg'
 
-import team1 from '../assets/team/saumya.jpg';
-import team2 from '../assets/team/aniket.jpg'
-import team3 from '../assets/team/abhishek.jpg'
-import team4 from '../assets/team/rajeshsir.jpg'
+
 
 
 import { FaBookOpen } from "react-icons/fa";
@@ -101,7 +105,7 @@ const AboutUs = () => {
           <main data-aos="fade-up">
             <div  className="content">
               <h2 className="title">About Us</h2>
-              <p className="">
+              <p className="font-semibold">
                 Krutanic Solutions is your gateway to mastering industry-leading
                 skills. As a premier course provider, we are dedicated to
                 offering high-quality, in-demand programs designed to empower
@@ -182,111 +186,76 @@ const AboutUs = () => {
         </section>
         <hr className=" opacity-10"/>
 
-       
-    
-    
-        <div className="ourteam px-[10px] py-[60px]" id="ourteam">
-         <div className="">
-         <h1 data-aos="fade-up" className="title">
-            Our Team
-          </h1>
-          <div data-aos="fade-up" className="ourteam_wrapper">
-            <Slider {...settings}>
-              <div className={`team_member relative`}>
-                <img
-                  src={team1}
-                  alt="Team Member 1"
-                />
-                <div className="info absolute z-10 top-0 opacity-0 transition-opacity duration-500 ease-in-out transform translate-y-8">
-                  <h1>Saumya Shanti</h1>
-                  <span>Sr.HR</span>
-                </div>
-              </div>
-              <div className="team_member relative">
-                <img
-                  src={team2}
-                  alt="Team Member 2"
-                />
-                <div className="info absolute z-10 top-0 opacity-0 transition-opacity duration-500 ease-in-out transform translate-y-8">
-                  <h1>Aneeket Parida</h1>
-                  <span>Sr.BDA</span>
-                  <p>
-                   
-                  </p>
-                </div>
-              </div>
-              <div className="team_member relative">
-                <img
-                  src={team3}
-                  alt="Team Member 3"
-                />
-                <div className="info absolute z-10 top-0 opacity-0 transition-opacity duration-500 ease-in-out transform translate-y-8">
-                  <h1> Abhishek Kumar</h1>
-                  <span>Sr.BDA</span>
-                  <p>
-                   
-                  </p>
-                </div>
-              </div>
-              <div className="team_member relative">
-                <img
-                  src={team4}
-                  alt="Team Member 4"
-                />
-                <div className="info absolute z-10 top-0 opacity-0 transition-opacity duration-500 ease-in-out transform translate-y-8">
-                  <h1>Rajesh Prasad </h1>
-                  <span>Head Of Sales</span>
-                  <p>
-                  
-                  </p>
-                </div>
-              </div>
-            </Slider>
-          </div>
-         </div>
-        </div>
-        
-
         <section className="px-[10px] py-[60px] z-10 ourteam relative">
         <h2 data-aos="fade-up"   className="text-4xl font-bold text-center mb-12 text-orange-700">
           | Life at Krutanic
         </h2>
-        <div data-aos="fade-up"   className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 lg:px-10">
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery9} alt="" className="object-cover h-96" />
+        <div data-aos="fade-up"  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 ">
+        <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery4} alt="" className="object-cover w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery1} alt="" className="object-cover w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery2} alt="" className="object-cover w-full h-full" />
+          </div>
+         
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery3} alt="" className="object-cover w-full h-full" />
           </div>
 
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery8} alt="" className="object-cover h-96" />
+        
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery8} alt="" className="object-cover w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery5} alt="" className="object-cover w-full h-full" />
           </div>
 
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery1} alt="" className="object-cover h-96" />
+         
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery9} alt="" className="object-cover w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery6} alt="" className="object-cover w-full h-full" />
+          </div>
+        
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery12} alt="" className="object-fill w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery15} alt="" className="object-cover w-full h-full" />
+          </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery16} alt="" className="object-cover w-full h-full " />
           </div>
 
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery2} alt="" className="object-cover h-96" />
+
+        
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery14} alt="" className="object-cover w-full h-full" />
           </div>
 
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery3} alt="" className="object-cover h-96" />
-          </div>
+         
 
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery4} alt="" className="object-cover h-96" />
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery7} alt="" className="object-cover w-full h-full" />
           </div>
-
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery5} alt="" className="object-cover h-96" />
+         
+         
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+            <img src={gallery10} alt="" className="object-cover w-full h-full" />
           </div>
-
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery6} alt="" className="object-cover h-96" />
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery11} alt="" className="object-cover w-full h-full " />
           </div>
-
-          <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
-            <img src={gallery7} alt="" className="object-cover h-96" />
+        
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center lg:col-span-3">
+            <img src={gallery13} alt="" className="object-center w-full h-full  " />
           </div>
+          
+         
         </div>
         </section>
         <hr className=" opacity-10"/>

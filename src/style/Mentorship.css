@@ -19,6 +19,16 @@
     }
 
 
+     #mentorshipbg{
+      background-image: url("../assets/Collaboration pics/college collab 2.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+     }
+
+
+
+
     .testimonial {
 
         padding: 50px 10px;
@@ -97,28 +107,6 @@
     
       }
 }
-
-/* #mentorship{
-  position: relative;
-  background-image: url('../assets/bg.gif');
-  background-size: 100% 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: screen;
-  overflow: hidden;
-} */
-/* #mentorship::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.952);
-  z-index: -1;
-} */
 
 
 

@@ -24,7 +24,7 @@ const Getintouch = () => {
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
               >
-                Get in Touch
+               Make Contact
               </h2>
               <p  className="text-gray-600 mb-6">
                 Want to learn more about how Krutanic Solutions can shape your

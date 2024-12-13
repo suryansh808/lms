@@ -4,28 +4,24 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import MentorSection from "../../Components/MentorSection";
-import Alumni from "../../Components/Alumni";
+// import MentorSection from "../../Components/MentorSection";
 import BenefitsofLearning from "./Components/BenefitsofLearning";
-import Skills from "./Components/Skills";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
-import IB from '../../assets/Advanced Course Images/Investment banking/INB.png'
-import ib from '../../assets/Advanced Course Images/Investment banking/3.svg'
-import curriculumimage from '../../assets/Advanced Course Images/Investment banking/IB 6.jpg'
+import IB from "../../assets/Advanced Course Images/Investment banking/INB.png";
+import ib from "../../assets/Advanced Course Images/Investment banking/3.svg";
+import curriculumimage from "../../assets/Advanced Course Images/Investment banking/IB 6.jpg";
 import { Link } from "react-router-dom";
-
 
 const Investmentbanking = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
- 
+
   // scrolling
   const [isVisible, setIsVisible] = useState(false);
   const [lastScrollPos, setLastScrollPos] = useState(0);
   // scrolling ends
-
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -119,8 +115,6 @@ const Investmentbanking = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollPos]);
- 
-
 
   const jobRoles = [
     {
@@ -152,6 +146,21 @@ const Investmentbanking = () => {
       title: "Risk Management Analyst",
       description:
         "Identifies and mitigates financial risks in investment portfolios, mergers, and corporate strategies.",
+    },
+    {
+      title: "Equity Research Analyst",
+      description:
+        "Evaluates stocks and market trends to guide investment decisions.",
+    },
+    {
+      title: "Portfolio Manager",
+      description:
+        "Provides strategic financial guidance for mergers, acquisitions, and restructuring.",
+    },
+    {
+      title: "Corporate Finance Advisor",
+      description:
+        "Manages investment portfolios to maximize returns and mitigate risks.",
     },
   ];
 
@@ -336,22 +345,29 @@ const Investmentbanking = () => {
     <div>
       <div className="bg-black text-white">
         {/* 1 hero part */}
-        <section id="advanceinvestmentbg" className="py-[60px] px-[10px] shadow-lg shadow-[#f15b29] min-h-screen flex items-center justify-center">
-         <div className="container mx-auto">
+        <section
+          id="advanceinvestmentbg"
+          className="py-[60px] px-[10px] shadow-lg shadow-[#f15b29] min-h-screen flex items-center justify-center"
+        >
+          <div className="container mx-auto">
             <div className=" text-center">
-              <h1  data-aos="fade-up" className="text-4xl font-bold mb-4">
-              <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
-    <i class="relative text-white "> Take Your Career to the Next Level with{" "}</i>
-   
-  </span>
-  
-                  <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
-    <i class="relative text-white ">Investment Banking</i>
-   
-  </span>
+              <h1 data-aos="fade-up" className="text-4xl font-bold mb-4">
+                <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
+                  <i class="relative text-white ">
+                    {" "}
+                    Take Your Career to the Next Level with{" "}
+                  </i>
+                </span>
+
+                <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
+                  <i class="relative text-white ">Investment Banking</i>
+                </span>
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div data-aos="fade-up" className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -365,11 +381,17 @@ const Investmentbanking = () => {
 
                   <p className="mt-4 font-semibold text-lg">Batch Starting</p>
                   <p>15th Febraury 2025</p>
-                  <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1"> Available Cohort </p>
-                  <p className="mt-2 text-md">  21/60 </p>
+                  <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1">
+                    {" "}
+                    Available Cohort{" "}
+                  </p>
+                  <p className="mt-2 text-md"> 21/60 </p>
                 </div>
 
-                <div data-aos="fade-up" className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border  border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border  border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -384,7 +406,10 @@ const Investmentbanking = () => {
                   <p>6 Months </p>
                 </div>
 
-                <div data-aos="fade-up" className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className=" backdrop-blur-md bg-[#ffffff59] text-black flex flex-col items-center p-6 border border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -396,23 +421,26 @@ const Investmentbanking = () => {
                     </svg>
                   </div>
                   <p className="mt-4 font-semibold text-lg">Program Rating</p>
-                  <p><span className="text-[#f15b29]">★★★★</span>☆ (4.5/5)</p>
+                  <p>
+                    <span className="text-[#f15b29]">★★★★</span>☆ (4.5/5)
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
-         {/* 14 why choose us */}
-         <section className=" py-[60px] px-[10px]">
+        {/* 14 why choose us */}
+        <section className=" py-[60px] px-[10px]">
           <div className="container mx-auto text-center">
-          <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-3xl font-bold mb-6"
+              className="text-[#f15b29]  font-bold mb-6"
             >
-              | Why Choose <span className="text-white">Investment Banking ? </span>
-            </h2>
+              | Why Choose{" "}
+              <span className="text-white">Investment Banking ? </span>
+            </h1>
             <p data-aos="fade-up" className="text-gray-400 mb-12">
               Acquire the knowledge and tools needed to excel in investment
               banking, from managing financial portfolios to influencing global
@@ -436,30 +464,33 @@ const Investmentbanking = () => {
               ))}
             </div>
           </div>
+          <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 15 why learn with us */}
         <section className="  py-[60px] px-[10px]">
-         <BenefitsofLearning/>
+          <BenefitsofLearning />
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 2 Course Overview Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-12 text-[#f15b29]"
+              className=" font-bold text-center mb-12 text-[#f15b29]"
             >
               | Program Overview
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {courseTopics.map((topic, index) => (
                 <div
                   data-aos="fade-up"
                   key={index}
-                className="bg-[#080810] p-6 rounded-lg text-center transition-transform duration-300 hover:scale-105"
+                  className="bg-[#080810] p-6 rounded-lg text-center transition-transform duration-300 hover:scale-105"
                 >
                   <div className="text-4xl mb-4">{topic.icon}</div>
                   <h3 className="text-xl font-bold uppercase text-white  hover:text-[#f15b29] transition-colors duration-300">
@@ -470,117 +501,118 @@ const Investmentbanking = () => {
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 3 key outcome section  */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto lg:flex gap-4">
-                      {/* Left side: Key Outcomes */}
-          <div className="w-full">
-          <h2
+            {/* Left side: Key Outcomes */}
+            <div className="w-full">
+              <h1
                 data-aos="fade-up"
-                className="text-2xl font-bold mb-4 text-[#f15b29]"
+                className=" font-bold mb-4 text-[#f15b29]"
               >
                 | Key Takeaways
-              </h2>
-            <ul className="space-y-4">
-              <li>
-                <span className="font-semibold text-[#f15b29]">
-                  Master Advanced Investment Banking Strategies{" "}
-                </span>
-                Learn to structure and execute complex financial transactions,
-                including IPOs, mergers, and acquisitions, using advanced
-                investment banking techniques.
-              </li>
-              <li>
-                <span className="font-semibold text-[#f15b29]">
-                  Develop Expertise in Financial Analysis and Modeling{" "}
-                </span>
+              </h1>
+              <ul className="space-y-4">
+                <li>
+                  <span className="font-semibold text-[#f15b29]">
+                    Master Advanced Investment Banking Strategies{" "}
+                  </span>
+                  Learn to structure and execute complex financial transactions,
+                  including IPOs, mergers, and acquisitions, using advanced
+                  investment banking techniques.
+                </li>
+                <li>
+                  <span className="font-semibold text-[#f15b29]">
+                    Develop Expertise in Financial Analysis and Modeling{" "}
+                  </span>
                   <span>
                     &nbsp;Gain hands-on experience with financial statements,
                     DCF models, and LBO analysis, equipping you to make informed
                     investment decisions.
                   </span>
-              </li>
-              <li>
-                    <span className="font-semibold text-[#f15b29]">
-                      Navigate M&A and Private Equity Deals{" "}
-                    </span>
-                    Understand the intricacies of M&A deals, private equity
-                    financing, and the strategies behind successful
-                    transactions.
-                  </li>
+                </li>
+                <li>
                   <span className="font-semibold text-[#f15b29]">
-                    Strengthen Risk Management and Regulatory Knowledge{" "}
+                    Navigate M&A and Private Equity Deals{" "}
                   </span>
-                  Build and maintain relationships with corporate clients,
-                  investors, and other stakeholders to provide financial
-                  advisory services. Regulatory Compliance and Financial
-                  Regulations.
+                  Understand the intricacies of M&A deals, private equity
+                  financing, and the strategies behind successful transactions.
+                </li>
+                <span className="font-semibold text-[#f15b29]">
+                  Strengthen Risk Management and Regulatory Knowledge{" "}
+                </span>
+                Build and maintain relationships with corporate clients,
+                investors, and other stakeholders to provide financial advisory
+                services. Regulatory Compliance and Financial Regulations.
+                {/* Hidden additional content */}
+                {isExpanded && (
+                  <>
+                    {/* Paragraphs */}
 
-              {/* Hidden additional content */}
-              {isExpanded && (
-                <>
-                  {/* Paragraphs */}
-                 
-                  <li>
-                    <span className="font-semibold text-[#f15b29]">
-                      Risk Management{" "}
-                    </span>
-                    Stay informed about financial regulations and compliance
-                    standards to ensure legal and ethical practices in
-                    investment banking.
-                  </li>
-                  <li>
-                    <span className="font-semibold text-[#f15b29]">
-                      Financial Risk Management Strategies.
-                    </span>
-                  </li>
-                  <li>
-                    <span className="font-semibold text-[#f15b29]">
-                     Regulatory Compliance in Banking.
-                    </span>
-                  </li>
-                </>
-              )}
-            </ul>
-            <button
-            data-aos="fade-up" 
-              onClick={toggleExpand}
-              className="mt-4 px-4 py-2 text-white font-medium border  rounded"
+                    <li>
+                      <span className="font-semibold text-[#f15b29]">
+                        Risk Management{" "}
+                      </span>
+                      Stay informed about financial regulations and compliance
+                      standards to ensure legal and ethical practices in
+                      investment banking.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-[#f15b29]">
+                        Financial Risk Management Strategies.
+                      </span>
+                    </li>
+                    <li>
+                      <span className="font-semibold text-[#f15b29]">
+                        Regulatory Compliance in Banking.
+                      </span>
+                    </li>
+                  </>
+                )}
+              </ul>
+              <button
+                data-aos="fade-up"
+                onClick={toggleExpand}
+                className="mt-4 px-4 py-2 text-white font-medium border  rounded"
+              >
+                {isExpanded ? "Read Less" : "Read More"}
+              </button>
+            </div>
+
+            {/* Right side: Image */}
+            <div
+              data-aos="fade-up"
+              className="lg:w-1/2 w-full rounded-lg shadow-lg h-[300px] shadow-[#E0E0E1] overflow-hidden"
             >
-              {isExpanded ? "Read Less" : "Read More"}
-            </button>
-          </div>
-
-          {/* Right side: Image */}
-          <div
-            data-aos="fade-up"
-            className="lg:w-1/2 w-full rounded-lg shadow-lg h-[300px] shadow-[#E0E0E1] overflow-hidden"
-          >
-            <img
-              src={IB}
-              alt="Curriculum"
-              className="w-full h-full object-cover"
-            />
-          </div>
+              <img
+                src={IB}
+                alt="Curriculum"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 4 Curriculum Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-5 text-[#f15b29]"
+              className=" font-bold text-center mb-5 text-[#f15b29]"
             >
-            |  Curriculum
-            </h2>
+              | Curriculum
+            </h1>
             <div className="lg:flex lg:gap-8">
-            <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img src={curriculumimage} alt="curriculum image" className="w-full h-full "/>
-             </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                />
+              </div>
               <div className="space-y-4 w-full lg:w-1/2 ">
                 {modules.map((module, index) => (
                   <div key={index} className=" pb-4">
@@ -630,66 +662,58 @@ const Investmentbanking = () => {
                 outcomes of the Investment Banking  program.
               </p>
             </div>
-           <div className="flex flex-col lg:flex-row  items-center justify-center gap-3">
-           <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 8a1 1 0 011-1h12a1 1 0 011 1v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm9 4a1 1 0 10-2 0V9.707l-.293.293a1 1 0 11-1.414-1.414l2-2a1 1 0 011.414 0l2 2a1 1 0 11-1.414 1.414L12 9.707V12z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <a href='/src/assets/Advanced Course Images/Investment banking/Investment Banking Advanced Program.pdf' target="blank"> Download</a>
-            </button>
-            <button
-                  
-                  className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md"
+            <div className="flex flex-col lg:flex-row  items-center justify-center gap-3">
+              <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  <Link to='https://prettyform.addxt.com/a/form/vf/1FAIpQLSc0U5iJFWM3f3oMa6g_5uUtuoiSfOf4CIltW77EH7dpRCuwPg' target='_blank'> Connect With Us</Link>
-            </button>
-           </div>
+                  <path
+                    fillRule="evenodd"
+                    d="M3 8a1 1 0 011-1h12a1 1 0 011 1v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm9 4a1 1 0 10-2 0V9.707l-.293.293a1 1 0 11-1.414-1.414l2-2a1 1 0 011.414 0l2 2a1 1 0 11-1.414 1.414L12 9.707V12z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <a
+                  href="/krutanic/Investment Banking Advanced Program.pdf"
+                  target="blank"
+                >
+                  {" "}
+                  Download
+                </a>
+              </button>
+              <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md">
+                <Link
+                  to="https://prettyform.addxt.com/a/form/vf/1FAIpQLSc0U5iJFWM3f3oMa6g_5uUtuoiSfOf4CIltW77EH7dpRCuwPg"
+                  target="_blank"
+                >
+                  {" "}
+                  Connect With Us
+                </Link>
+              </button>
+            </div>
           </div>
-         
         </section>
 
-         {/* 7 alumni section  */}
-         <section className="py-[60px] px-[10px]">
-          <div className="container mx-auto">
-          <h2
-              data-aos="fade-up"
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#f15b29] text-center mb-12"
-            >
-              | Our Alumni Excel at Prestigious Brands, Including
-            </h2>
-            <Alumni/>
-          </div>
-        </section>
 
-         {/* 10 skills section */}
-         <section id="ourAlumni" className="py-[60px] px-[10px]">
-         <Skills/>
-        </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 13 job roles section  */}
         <section className=" py-[60px] px-[10px]">
           <div className="container mx-auto">
-          <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-center text-3xl font-bold mb-8"
+              className="text-[#f15b29] text-center  font-bold mb-8"
             >
               | Career Opportunities in{" "}
               <span className="text-white font-bold">Investment Banking</span>
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {jobRoles.map((role, index) => (
                 <div
-                data-aos="fade-up"
+                  data-aos="fade-up"
                   key={index}
                   className="border-l-4 border-[#f15b29] bg-black p-4 text-white shadow-lg"
                 >
@@ -699,20 +723,23 @@ const Investmentbanking = () => {
               ))}
             </div>
           </div>
+          <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 12 key highlight section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
             <div className=" mx-auto px-4 flex flex-col lg:flex-row gap-5">
               <div className="w-full mb-8 lg:mb-0">
-              <h2
+                <h1
                   data-aos="fade-up"
-                  className="text-2xl font-bold text-center mb-6 text-[#f15b29]"
+                  className=" font-bold text-center mb-6 text-[#f15b29]"
                 >
                   | Course Benefits at a Glance
-                </h2>
+                </h1>
                 <p data-aos="fade-up" className="text-lg text-center mb-8">
                   Master advanced{" "}
                   <span className="text-[#f15b29] font-bold">
@@ -721,7 +748,10 @@ const Investmentbanking = () => {
                   techniques with hands-on projects, expert-led sessions, and
                   real-world applications.
                 </p>
-                <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  data-aos="fade-up"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4"
+                >
                   <div className=" p-6 rounded-lg text-center">
                     <h3 className="text-3xl font-bold text-[#f15b29]">200+</h3>
                     <p className="mt-2 text-gray-300">Mentees Placed</p>
@@ -741,42 +771,37 @@ const Investmentbanking = () => {
                     <p className="mt-2 text-gray-300">Hiring Partners</p>
                   </div>
                 </div>
-              </div>  
+              </div>
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
-
-
-    
+        <hr className=" opacity-10" />
 
         {/* 8 Certification section */}
         <section className="py-[60px] px-[10px]">
           <div data-aos="fade-up">
-
-           <Certification/>
+            <Certification />
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 9 mentors section  */}
-        <section className="py-[60px] px-[10px]">
-        <div  data-aos="fade-up"className="container mx-auto">
-        <MentorSection />
-        </div>
+        {/* <section className="py-[60px] px-[10px]">
+          <div data-aos="fade-up" className="container mx-auto">
+            <MentorSection />
+          </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" /> */}
 
-          {/* 16 store section  */}
-          <section className="bg-white py-[60px] px-[10px]">
-            <StoreSection/>
-          </section>
-         
+        {/* 16 store section  */}
+        <section className="bg-white py-[60px] px-[10px]">
+          <StoreSection />
+        </section>
 
         {/* 17 new FAQ section */}
         <section className=" bg-white py-[60px] px-[10px]">
-        <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2 text-4xl font-bold text-black">
+          <div data-aos="fade-up" className="container mx-auto">
+            <h1 className="text-center mb-2  font-bold text-black">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center flex-col md:flex-row">
@@ -842,32 +867,15 @@ const Investmentbanking = () => {
               isVisible ? "translate-y-0" : "translate-y-full"
             }`}
           >
-            <p className="text-lg text-center font-semibold text-black">
-             hello
-            </p>
+            <p className="text-lg font-semibold text-black">Program fees 65,000/-  + GST </p>
             <div className="flex space-x-2">
-              <button className="flex items-center px-4 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5 mr-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-9-13.5v12m0 0L7.5 10.5m3.5 2.5L16.5 10.5"
-                  />
-                </svg>
-                Brochure
+              <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
+               
+                <a href="https://rzp.io/rzp/advanced-training-program" target="blank" className="text-[#f15b29] whitespace-nowrap">Enroll Now</a>
               </button>
-           
             </div>
           </div>
         </section>
-
       </div>
     </div>
   );

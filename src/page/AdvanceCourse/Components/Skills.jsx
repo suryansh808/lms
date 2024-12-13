@@ -318,24 +318,24 @@ const Skills = () => {
   return (
     <div>
         <div className="container  mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#f15b29] text-center mb-12"
+              className="  font-bold text-[#f15b29] text-center mb-6"
             >
               | Learn the Must-Have Skills and Tools
-            </h2>
-            <div  data-aos="fade-up" className="logos">
-              {skills.map((skills, index) => (
-                <div key={`${skills.name}-${index}`} className="logo_items">
-                  <img
-                    src={skills.logo}
-                    alt={`${skills.name}`}
-                    className="max-w-[120px] mr-20 h-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    width={120}
-                    height={40}
-                  />
-                </div>
-              ))}
+            </h1>
+            <div className="logos">
+<div className='logodiv'>
+{skills.map((skills, index) => (
+  
+              
+              <img
+                src={skills.logo}
+                alt={`${skills.name}`}
+                className="filter grayscale hover:grayscale-0 transition-all duration-300"
+              />
+          ))}
+</div>
             </div>
           </div>
     </div>

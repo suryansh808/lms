@@ -4,18 +4,15 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import MentorSection from "../../Components/MentorSection";
-import Alumni from "../../Components/Alumni";
+// import MentorSection from "../../Components/MentorSection";
 import BenefitsofLearning from "./Components/BenefitsofLearning";
-import Skills from "./Components/Skills";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 
-
-import DS from "../../assets/Advanced Course Images/Data science/DS.png";
+import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
 import { Link } from "react-router-dom";
-// import logo from '../../assets/poplogo/LOGO3.jpg'
+
 const DataScience = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -145,6 +142,21 @@ const DataScience = () => {
       title: "AI Engineer",
       description:
         "Designs AI systems to solve complex problems using machine learning.",
+    },
+    {
+      title: " Big Data Specialist",
+      description:
+        "Expert in analyzing massive datasets for actionable insights..",
+    },
+    {
+      title: "Data Science Consultant",
+      description:
+        "Provides data-driven solutions to optimize business strategies and outcomes.",
+    },
+    {
+      title: "Quantitative Analyst",
+      description:
+        "Builds models to analyze financial data and predict market trends.",
     },
   ];
 
@@ -331,7 +343,10 @@ const DataScience = () => {
     <div>
       <div className="bg-black text-white">
         {/* 1 hero part */}
-        <section id="advancedatabg" className="py-[60px] shadow-lg shadow-[#f15b29]  px-[10px] min-h-screen flex items-center justify-center">
+        <section
+          id="advancedatabg"
+          className="py-[60px] shadow-lg shadow-[#f15b29]  px-[10px] min-h-screen flex items-center justify-center"
+        >
           <div className="container mx-auto ">
             <div className="">
               <h1
@@ -339,14 +354,15 @@ const DataScience = () => {
                 className="text-4xl text-center font-bold mb-3"
               >
                 <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
-    <i class="relative text-white "> Take Your Career to the Next Level with{" "}</i>
-   
-  </span>
-  
-                  <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
-    <i class="relative text-white ">Data Science</i>
-   
-  </span>
+                  <i class="relative text-white ">
+                    {" "}
+                    Take Your Career to the Next Level with{" "}
+                  </i>
+                </span>
+
+                <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
+                  <i class="relative text-white ">Data Science</i>
+                </span>
               </h1>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -367,8 +383,11 @@ const DataScience = () => {
                 <p className="mt-4 font-semibold text-lg">Batch Starting</p>
                 <p className="">15th Febraury 2025</p>
 
-                <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1"> Available Cohort </p>
-                <p className="mt-2 text-md">  11/60 </p>
+                <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1">
+                  {" "}
+                  Available Cohort{" "}
+                </p>
+                <p className="mt-2 text-md"> 11/60 </p>
               </div>
 
               <div
@@ -416,12 +435,12 @@ const DataScience = () => {
         {/* 14 why choose us */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto  text-center">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-3xl font-bold mb-6"
+              className="text-[#f15b29] font-bold mb-6"
             >
               | Why Choose <span className="text-white">Data Science ? </span>
-            </h2>
+            </h1>
             <p data-aos="fade-up" className="text-gray-400 mb-12">
               Discover the potential of data by learning advanced analytical
               skills and unlocking insights that can drive innovation and shape
@@ -445,6 +464,9 @@ const DataScience = () => {
               ))}
             </div>
           </div>
+          <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
         </section>
         <hr className=" opacity-10" />
 
@@ -457,12 +479,12 @@ const DataScience = () => {
         {/* 2 Course Overview Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-12 text-[#f15b29]"
+              className=" font-bold text-center mb-12 text-[#f15b29]"
             >
               | Program Overview
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {courseTopics.map((topic, index) => (
                 <div
@@ -486,12 +508,12 @@ const DataScience = () => {
           <div className="container mx-auto lg:flex lg:gap-10 flex-col lg:flex-row">
             {/* Left side: Key Outcomes */}
             <div className="w-full mb-3 lg:mb-0">
-              <h2
+              <h1
                 data-aos="fade-up"
-                className="text-2xl font-bold mb-4 text-[#f15b29]"
+                className=" font-bold mb-4 text-[#f15b29]"
               >
                 | Key Takeaways
-              </h2>
+              </h1>
               <ul data-aos="fade-up" className="space-y-4">
                 <li>
                   <span className="font-semibold text-[#f15b29]">
@@ -575,7 +597,7 @@ const DataScience = () => {
               data-aos="fade-up"
               className="lg:w-1/2 w-full h-[300px] rounded-lg shadow-lg shadow-slate-700 overflow-hidden"
             >
-              <img src={DS} alt="Curriculum" className="object-cover" />
+              <img src={DS} alt="Curriculum" className="object-cover h-full w-full" />
             </div>
           </div>
         </section>
@@ -584,12 +606,12 @@ const DataScience = () => {
         {/* 4 Curriculum Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-8 text-[#f15b29]"
+              className=" font-bold text-center mb-8 text-[#f15b29]"
             >
               | Curriculum
-            </h2>
+            </h1>
             <div className="lg:flex lg:gap-8">
               <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
                 <img
@@ -663,7 +685,13 @@ const DataScience = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <a href='/src/assets/Advanced Course Images/Data science/Data Science Advanced Program.pdf' target="_blank"> Download</a>
+                <a
+                  href="/krutanic/DataScienceAdvancedProgram.pdf"
+                  target="_blank"
+                >
+                  {" "}
+                  Download
+                </a>
               </button>
               <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md">
                 <Link
@@ -679,34 +707,19 @@ const DataScience = () => {
         </section>
 
         {/* 7 alumni section  */}
-        <section className="py-[60px] px-[10px]">
-          <div data-aos="fade-up" className="container mx-auto">
-            <h2
-              data-aos="fade-up"
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#f15b29] text-center mb-12"
-            >
-              | Our Alumni Excel at Prestigious Brands, Including
-            </h2>
-            <Alumni />
-          </div>
-        </section>
-
-        {/* 10 skills section */}
-        <section id="ourAlumni" className="py-[60px] px-[10px]">
-          <Skills />
-        </section>
+       
         <hr className=" opacity-10" />
 
         {/* 13 job roles section  */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-center text-3xl font-bold mb-8"
+              className="text-[#f15b29] text-center  font-bold mb-8"
             >
               | Career Opportunities in{" "}
               <span className="text-white font-bold">Data Science</span>
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {jobRoles.map((role, index) => (
                 <div
@@ -720,6 +733,10 @@ const DataScience = () => {
               ))}
             </div>
           </div>
+           <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
+
         </section>
         <hr className=" opacity-10" />
 
@@ -728,12 +745,12 @@ const DataScience = () => {
           <div className="container mx-auto">
             <div className="">
               <div className=" w-full mb-8 lg:mb-0">
-                <h2
+                <h1
                   data-aos="fade-up"
-                  className="text-2xl text-center font-bold mb-6 text-[#f15b29]"
+                  className=" text-center font-bold mb-6 text-[#f15b29]"
                 >
                   | Course Benefits at a Glance
-                </h2>
+                </h1>
                 <p data-aos="fade-up" className="text-lg text-center mb-8">
                   Master advanced{" "}
                   <span className="text-[#f15b29] font-bold">Data Science</span>{" "}
@@ -742,7 +759,7 @@ const DataScience = () => {
                 </p>
                 <div
                   data-aos="fade-up"
-                  className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:px-20"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-2 lg:px-20"
                 >
                   <div className=" inline-block p-6 rounded-lg text-center">
                     <h3 className="text-3xl font-bold text-[#f15b29]">200+</h3>
@@ -769,8 +786,6 @@ const DataScience = () => {
         </section>
         <hr className=" opacity-10" />
 
-      
-
         {/* 8 Certification section */}
         <section className="py-[60px] px-[10px]">
           <div data-aos="fade-up">
@@ -780,12 +795,12 @@ const DataScience = () => {
         <hr className=" opacity-10" />
 
         {/* 9 mentors section  */}
-        <section className="py-[60px] px-[10px]">
+        {/* <section className="py-[60px] px-[10px]">
           <div data-aos="fade-up" className="container mx-auto">
             <MentorSection />
           </div>
         </section>
-        <hr className=" opacity-10" />
+        <hr className=" opacity-10" /> */}
 
         {/* 16 store section  */}
         <section className="py-[60px] px-[10px] bg-white">
@@ -795,7 +810,7 @@ const DataScience = () => {
         {/* 17 new FAQ section */}
         <section className="py-[60px] px-[10px] bg-white">
           <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2 text-4xl font-bold text-black">
+            <h1 className="text-center mb-2  font-bold text-black">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center   flex-col md:flex-row">
@@ -861,24 +876,10 @@ const DataScience = () => {
               isVisible ? "translate-y-0" : "translate-y-full"
             }`}
           >
-            <p className="text-lg font-semibold text-black">hello</p>
+            <p className="text-lg font-semibold text-black">Program fees 61,999/-  + GST</p>
             <div className=" relative flex space-x-4">
-              <button className="flex items-center px-4 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5 mr-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-9-13.5v12m0 0L7.5 10.5m3.5 2.5L16.5 10.5"
-                  />
-                </svg>
-                Brochure
+              <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]"> 
+              <a href="https://rzp.io/rzp/advanced-training-program" target="blank" className="text-[#f15b29] whitespace-nowrap">Enroll Now</a>
               </button>
             </div>
           </div>

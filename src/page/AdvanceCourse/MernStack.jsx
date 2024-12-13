@@ -4,28 +4,26 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import MentorSection from "../../Components/MentorSection";
-import Alumni from "../../Components/Alumni";
+// import MentorSection from "../../Components/MentorSection";
+
 import BenefitsofLearning from "./Components/BenefitsofLearning";
-import Skills from "./Components/Skills";
+
 import StoreSection from "./Components/StoreSection";
 import Certification from "./Components/Certification";
-import MERN from '../../assets/Advanced Course Images/Mern Stack Development/mern.png'
-import  curriculumimage from '../../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg'
+import MERN from "../../assets/Advanced Course Images/Mern Stack Development/mern.png";
+import curriculumimage from "../../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg";
 import { Link } from "react-router-dom";
-
-
 
 const MernStack = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
- 
-   // scrolling
-   const [isVisible, setIsVisible] = useState(false);
-   const [lastScrollPos, setLastScrollPos] = useState(0);
-   // scrolling ends
- 
+
+  // scrolling
+  const [isVisible, setIsVisible] = useState(false);
+  const [lastScrollPos, setLastScrollPos] = useState(0);
+  // scrolling ends
+
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -116,8 +114,6 @@ const MernStack = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollPos]);
- 
- 
 
   const jobRoles = [
     {
@@ -149,6 +145,21 @@ const MernStack = () => {
       title: "Web Application Architect",
       description:
         "Designs scalable, maintainable web applications and oversees both frontend and backend systems.",
+    },
+    {
+      title: " Software Engineer",
+      description:
+        "Designs, develops, and maintains software solutions for various applications.",
+    },
+    {
+      title: " React Developer",
+      description:
+        "Builds dynamic, responsive web applications using the React framework.",
+    },
+    {
+      title: "JavaScript Developer",
+      description:
+        "Creates interactive web features and applications using JavaScript technologies.",
     },
   ];
 
@@ -325,7 +336,7 @@ const MernStack = () => {
       },
     ],
   };
- 
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
   }, []);
@@ -334,22 +345,32 @@ const MernStack = () => {
     <div>
       <div className="bg-black text-white">
         {/* 1 hero part */}
-        <section id="advancemernbg" className="py-[60px] px-[10px] shadow-lg shadow-[#f15b29] min-h-screen flex items-center justify-center">
+        <section
+          id="advancemernbg"
+          className="py-[60px] px-[10px] shadow-lg shadow-[#f15b29] min-h-screen flex items-center justify-center"
+        >
           <div className="container mx-auto">
             <div className="">
-            <h1  data-aos="fade-up" className="text-4xl text-center font-bold mb-3">
-            <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
-    <i class="relative text-white "> Take Your Career to the Next Level with{" "}</i>
-   
-  </span>
-  
-                  <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
-    <i class="relative text-white ">MERN Stack Developement</i>
-   
-  </span>
+              <h1
+                data-aos="fade-up"
+                className="text-4xl text-center font-bold mb-3"
+              >
+                <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
+                  <i class="relative text-white ">
+                    {" "}
+                    Take Your Career to the Next Level with{" "}
+                  </i>
+                </span>
+
+                <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#000] relative inline-block">
+                  <i class="relative text-white ">MERN Stack Developement</i>
+                </span>
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                <div data-aos="fade-up"  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -363,11 +384,17 @@ const MernStack = () => {
 
                   <p className="mt-4 font-semibold text-lg">Batch Starting</p>
                   <p>15th Febraury 2025</p>
-                  <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1"> Available Cohort </p>
-                <p className="mt-2 text-md">  16/60 </p>
+                  <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1">
+                    {" "}
+                    Available Cohort{" "}
+                  </p>
+                  <p className="mt-2 text-md"> 16/60 </p>
                 </div>
 
-                <div data-aos="fade-up"  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border  border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border  border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -382,7 +409,10 @@ const MernStack = () => {
                   <p>6 Months </p>
                 </div>
 
-                <div data-aos="fade-up"  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md">
+                <div
+                  data-aos="fade-up"
+                  className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md"
+                >
                   <div className="bg-[#f15b29] p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -394,23 +424,25 @@ const MernStack = () => {
                     </svg>
                   </div>
                   <p className="mt-4 font-semibold text-lg">Program Rating</p>
-                  <p><span className="text-[#f15b29]">★★★★</span>☆(4.8/5)</p>
+                  <p>
+                    <span className="text-[#f15b29]">★★★★</span>☆(4.8/5)
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 14 why choose us */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto  text-center">
-          <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-3xl font-bold mb-6"
+              className="text-[#f15b29]  font-bold mb-6"
             >
               | Why Choose <span className="text-white">MERN Stack ? </span>
-            </h2>
+            </h1>
             <p data-aos="fade-up" className="text-gray-400 mb-12">
               Gain expertise in full-stack development by mastering the MERN
               framework and building the applications for modern digital needs.
@@ -433,24 +465,27 @@ const MernStack = () => {
               ))}
             </div>
           </div>
+          <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 15 why learn with us */}
         <section className="py-[60px] px-[10px]">
-       <BenefitsofLearning/>
+          <BenefitsofLearning />
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 2 Course Overview Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-12 text-[#f15b29]"
+              className=" font-bold text-center mb-12 text-[#f15b29]"
             >
-             | Program Overview
-            </h2>
+              | Program Overview
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {courseTopics.map((topic, index) => (
                 <div
@@ -467,18 +502,18 @@ const MernStack = () => {
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 3 key outcome section  */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto lg:flex flex-col lg:flex-row">
             <div className=" w-full mb-3 lg:mb-0">
-              <h2
+              <h1
                 data-aos="fade-up"
-                className="text-2xl font-bold mb-4 text-[#f15b29]"
+                className=" font-bold mb-4 text-[#f15b29]"
               >
                 | Key Takeaways
-              </h2>
+              </h1>
               <ul data-aos="fade-up" className="space-y-4">
                 <li>
                   <span className="font-semibold text-[#f15b29]">
@@ -494,8 +529,8 @@ const MernStack = () => {
 
                   {isExpanded && (
                     <span>
-                      Gain hands-on experience in creating both the
-                      backend (Node.js, Express) and frontend (React) of web
+                      Gain hands-on experience in creating both the backend
+                      (Node.js, Express) and frontend (React) of web
                       applications.
                     </span>
                   )}
@@ -514,7 +549,7 @@ const MernStack = () => {
                 communication between your front-end and back-end systems.
                 <li>
                   <span className="font-semibold text-[#f15b29]">
-                   Handle Server-Side Logic with Node.js.{" "}
+                    Handle Server-Side Logic with Node.js.{" "}
                   </span>
                   Implement server-side logic with Node.js to handle requests,
                   interact with databases, and manage application logic.
@@ -525,12 +560,12 @@ const MernStack = () => {
                   <>
                     <li>
                       <span className="font-semibold text-[#f15b29]">
-                       Build RESTful APIs for Efficient Communication
+                        Build RESTful APIs for Efficient Communication
                       </span>
                     </li>
                     <li>
                       <span className="font-semibold text-[#f15b29]">
-                       Deploy Full-Stack Applications{" "}
+                        Deploy Full-Stack Applications{" "}
                       </span>
                       Learn how to deploy and host MERN stack applications on
                       platforms like Heroku, AWS, or DigitalOcean
@@ -540,7 +575,7 @@ const MernStack = () => {
                 )}
               </ul>
               <button
-              data-aos="fade-up" 
+                data-aos="fade-up"
                 onClick={toggleExpand}
                 className="mt-4 px-4 py-2 text-white font-medium border  rounded"
               >
@@ -549,7 +584,10 @@ const MernStack = () => {
             </div>
 
             {/* Right side: Image */}
-            <div data-aos="fade-up" className="lg:w-1/2 w-full h-[300px] rounded-lg shadow-lg shadow-[#082D39] overflow-hidden" >
+            <div
+              data-aos="fade-up"
+              className="lg:w-1/2 w-full h-[300px] rounded-lg shadow-lg shadow-[#082D39] overflow-hidden"
+            >
               <img
                 src={MERN}
                 alt="Curriculum"
@@ -558,21 +596,25 @@ const MernStack = () => {
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 4 Curriculum Section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-          <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-bold text-center mb-5 text-[#f15b29]"
+              className=" font-bold text-center mb-5 text-[#f15b29]"
             >
               | Curriculum
-            </h2>
+            </h1>
             <div className="lg:flex lg:gap-8">
-            <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img src={curriculumimage} alt="curriculum image" className="w-full h-full "/>
-             </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                />
+              </div>
               <div className="space-y-4 w-full lg:w-1/2">
                 {modules.map((module, index) => (
                   <div key={index} className=" pb-4">
@@ -613,7 +655,7 @@ const MernStack = () => {
             data-aos="fade-up"
             className="container mx-auto p-5 flex flex-col md:flex-row justify-between items-center flex-wrap gap-5 rounded-lg shadow-lg border-2 border-[#f15b29]"
           >
-             <div className="text-center md:text-left">
+            <div className="text-center md:text-left">
               <h2 className="text-xl font-bold mb-2 text-[#f15b29]">
                 | Get the Full Course Breakdown
               </h2>
@@ -622,62 +664,54 @@ const MernStack = () => {
                 outcomes of the MERN Stack Development program.
               </p>
             </div>
-           <div className="flex flex-col lg:flex-row  items-center justify-center gap-3">
-           <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded flex items-center gap-2 mt-4 md:mt-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 8a1 1 0 011-1h12a1 1 0 011 1v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm9 4a1 1 0 10-2 0V9.707l-.293.293a1 1 0 11-1.414-1.414l2-2a1 1 0 011.414 0l2 2a1 1 0 11-1.414 1.414L12 9.707V12z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <a href='/src/assets/Advanced Course Images/Mern Stack Development/Mern Stack Web Development Advanced Program.pdf' target="blank"> Download</a>
-            </button>
-            <button
-                  
-                  className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md"
+            <div className="flex flex-col lg:flex-row  items-center justify-center gap-3">
+              <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded flex items-center gap-2 mt-4 md:mt-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  
-                  <Link to='https://prettyform.addxt.com/a/form/vf/1FAIpQLSc0U5iJFWM3f3oMa6g_5uUtuoiSfOf4CIltW77EH7dpRCuwPg' target='_blank'> Connect With Us</Link>
-                </button>
-           </div>
+                  <path
+                    fillRule="evenodd"
+                    d="M3 8a1 1 0 011-1h12a1 1 0 011 1v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm9 4a1 1 0 10-2 0V9.707l-.293.293a1 1 0 11-1.414-1.414l2-2a1 1 0 011.414 0l2 2a1 1 0 11-1.414 1.414L12 9.707V12z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <a
+                  href="/krutanic/Mern Stack Web Development Advanced Program.pdf"
+                  target="blank"
+                >
+                  {" "}
+                  Download
+                </a>
+              </button>
+              <button className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded-md">
+                <Link
+                  to="https://prettyform.addxt.com/a/form/vf/1FAIpQLSc0U5iJFWM3f3oMa6g_5uUtuoiSfOf4CIltW77EH7dpRCuwPg"
+                  target="_blank"
+                >
+                  {" "}
+                  Connect With Us
+                </Link>
+              </button>
+            </div>
           </div>
         </section>
-
-        {/* 7 alumni section  */}
-        <section className="py-[60px] px-[10px]">
-          <div className="container mx-auto">
-          <h2
-              data-aos="fade-up"
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#f15b29] text-center mb-12"
-            >
-              | Our Alumni Excel at Prestigious Brands, Including
-            </h2>
-            <Alumni/>
-          </div>
-        </section>
-
-        {/* 10 skills section */}
-        <section id="ourAlumni" className="py-[60px] px-[10px]">
-        <Skills/>
-        </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 13 job roles section  */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
-          <h2
+            <h1
               data-aos="fade-up"
-              className="text-[#f15b29] text-center text-3xl font-bold mb-8"
+              className="text-[#f15b29] text-center  font-bold mb-8"
             >
               | Career Opportunities in{" "}
-              <span className="text-white font-bold">MERN Stack Development</span>
-            </h2>
+              <span className="text-white font-bold">
+                MERN Stack Development
+              </span>
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {jobRoles.map((role, index) => (
                 <div
@@ -690,29 +724,30 @@ const MernStack = () => {
               ))}
             </div>
           </div>
+          <div  data-aos="fade-up" className="mt-[20px] text-center">
+                And more
+           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 12 key highlight section */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto">
             <div className="lg:flex gap-5">
               <div className=" w-full mb-8 lg:mb-0">
-              <h2
+                <h1
                   data-aos="fade-up"
-                  className="text-2xl text-center font-bold mb-6 text-[#f15b29]"
+                  className=" text-center font-bold mb-6 text-[#f15b29]"
                 >
                   | Course Benefits at a Glance
-                </h2>
+                </h1>
                 <p className="text-lg text-center mb-8">
                   Master advanced{" "}
-                  <span className="text-[#f15b29] font-bold">
-                    MERN Stack 
-                  </span>{" "}
+                  <span className="text-[#f15b29] font-bold">MERN Stack</span>{" "}
                   techniques with hands-on projects, expert-led sessions, and
                   real-world applications.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className=" p-6 rounded-lg text-center">
                     <h3 className="text-3xl font-bold text-[#f15b29]">200+</h3>
                     <p className="mt-2 text-gray-300">Mentees Placed</p>
@@ -736,36 +771,33 @@ const MernStack = () => {
             </div>
           </div>
         </section>
-        <hr className=" opacity-10"/>
-
-  
+        <hr className=" opacity-10" />
 
         {/* 8 Certification section */}
         <section className="py-[60px] px-[10px]">
-          <div data-aos="fade-up" >
-
-          <Certification/>
+          <div data-aos="fade-up">
+            <Certification />
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" />
 
         {/* 9 mentors section  */}
-        <section className="py-[60px] px-[10px]">
-          <div data-aos="fade-up"  className="container mx-auto">
+        {/* <section className="py-[60px] px-[10px]">
+          <div data-aos="fade-up" className="container mx-auto">
             <MentorSection />
           </div>
         </section>
-        <hr className=" opacity-10"/>
+        <hr className=" opacity-10" /> */}
 
         {/* 16 store section */}
         <section className="py-[60px] px-[10px] bg-white">
-        <StoreSection/>
+          <StoreSection />
         </section>
 
         {/* 17 new FAQ section */}
         <section className="py-[60px] px-[10px] bg-white">
-        <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2 text-4xl font-bold text-black">
+          <div data-aos="fade-up" className="container mx-auto">
+            <h1 className="text-center mb-2  font-bold text-black">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center   flex-col md:flex-row">
@@ -831,24 +863,11 @@ const MernStack = () => {
               isVisible ? "translate-y-0" : "translate-y-full"
             }`}
           >
-            <p className="text-lg font-semibold text-black">hello</p>
+            <p className="text-lg font-semibold text-black"> Program fees 71,999/-  + GST </p>
             <div className="flex space-x-4">
-              <button className="flex items-center px-4 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5 mr-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-9-13.5v12m0 0L7.5 10.5m3.5 2.5L16.5 10.5"
-                  />
-                </svg>
-                Brochure
+              <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29] whitespace-nowrap">
+               
+              <a href="https://rzp.io/rzp/advanced-training-program" target="blank" className="text-[#f15b29] whitespace-nowrap">Enroll Now</a>
               </button>
             </div>
           </div>

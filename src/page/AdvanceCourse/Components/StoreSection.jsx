@@ -39,12 +39,12 @@ const StoreSection = () => {
   return (
     <div>
        <div className="container mx-auto">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-2xl md:text-3xl text-black font-bold text-center mb-10"
+              className="  text-black font-bold text-center mb-10"
             >
               | Let’s Reveal What’s in Store!
-            </h2>
+            </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <div

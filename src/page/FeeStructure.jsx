@@ -150,9 +150,9 @@ export default function FeeStructure() {
       {/* Fee Structure Table */}
       <section className="py-[60px] px-[10px]">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up"  className="text-3xl text-center font-extrabold  text-[#f15b29] mb-8">
+          <h1 data-aos="fade-up"  className="text-center font-extrabold  text-[#f15b29] mb-8">
             | Course Fee Structure
-          </h2>
+          </h1>
           <div data-aos="fade-up"  id="fees">
             <table>
               <thead>
@@ -204,9 +204,9 @@ export default function FeeStructure() {
       
       <section ref={LeearningSectionRef} className="py-[60px] px-[10px]">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up"  className="text-3xl text-center font-extrabold text-[#f15b29] mb-8">
+          <h1 data-aos="fade-up"  className="text-center font-extrabold text-[#f15b29] mb-8">
             | Learning Categories
-          </h2>
+          </h1>
           <div data-aos="fade-up"  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => (
               <div
@@ -259,9 +259,9 @@ export default function FeeStructure() {
 
       <section className="py-[60px] px-[10px]">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up"  className="text-3xl text-center font-extrabold text-[#f15b29] mb-8">
+          <h1 data-aos="fade-up"  className="text-center font-extrabold text-[#f15b29] mb-8">
             | Flexible Payment Options
-          </h2>
+          </h1>
           <div data-aos="fade-up"  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
             {paymentOptions.map((option, index) => (
               <div

@@ -37,12 +37,12 @@ const FAQMentor = () => {
   return (
     <div>
       <div className="container mx-auto">
-        <h2
+        <h1
          data-aos='fade-up'
-          className="text-4xl font-bold text-[#f15b29] text-center py-5"
+          className=" font-bold text-[#f15b29] text-center mb-4"
         >
-          | Commonly Asked Questions
-        </h2>
+          | Frequently Asked Questions
+        </h1>
         <div data-aos='fade-up' className="lg:flex gap-4">
           <div className="space-y-3 lg:w-1/2 w-full">
             {faqs.map((faq, index) => (

@@ -14,8 +14,8 @@ import certificate3 from "../assets/certificates/Certificate Of Training Complet
 import wiprologo from "../assets/certificates/wipro.svg";
 import aicte from "../assets/poplogo/aicte.png";
 import iso from "../assets/poplogo/iso.png";
-import mca from "../assets/poplogo/mcalogo.png";
-import msme from "../assets/poplogo/4.png";
+import mca from "../assets/poplogo/mca.png";
+import msme from "../assets/poplogo/msme.png";
 //certificate ends
 
 import Testimonial from "../Components/testimonial";
@@ -25,41 +25,10 @@ import PopularCourse from "./Mentorship/PopularCourse";
 import CourseMentor from "./Mentorship/CourseMentor";
 import Getintouch from "../Components/Getintouch";
 import { useNavigate } from "react-router-dom";
+import MentorShipMentors from "../Components/MentorShipMentors";
 
 const Mentorship = () => {
-  const intervalRef = useRef(null);
 
-  const testimonials = [
-    {
-      id: 1,
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      name: "Affan",
-      role: "Developer",
-    },
-    {
-      id: 2,
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      name: "Danish",
-      role: "Designer",
-    },
-    {
-      id: 3,
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      name: "Suryansh",
-      role: "Project Head",
-    },
-  ];
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
-
-  useEffect(() => {
-    intervalRef.current = setInterval(nextTestimonial, 5000);
-    return () => {
-      clearInterval(intervalRef.current);
-    };
-  }, []);
 
   const courseSectionRef = useRef(null);
   const scrollToCourse = () => {
@@ -92,13 +61,13 @@ const Mentorship = () => {
   return (
     <div id="mentorship" className="text-white bg-black">
       {/* Hero Section */}
-      <section id="mentorshipbg" className="h-screen flex items-center justify-center bg-white py-[60px] px-[10px] overflow-hidden">
+      <section id="mentorshipbg" className="h-[650px] shadow-lg shadow-[#f15b29]  flex  items-center justify-center py-[60px] px-[10px] overflow-hidden">
         <div className="container mx-auto">
-        <div data-aos="fade-up" className="lg:flex justify-between ">      
-            <div className=" w-full  lg:py-[20px]">
+        <div data-aos="fade-up" className="rounded-lg backdrop-blur-xl text-center bg-[#ffffff46]">      
+            <div className="flex flex-col  items-center justify-center lg:py-[20px]">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-black mb-6">
                 Discover a new way of learning with our{" "}
-                <span className="text-[#f15b29]">MENTORSHIP PROGRAM</span>
+                <span className="text-[#f15b29]">MENTORSHIP PROGRAM.</span>
               </h1>
               <p className="text-lg text-black mb-6">
                 Get personalized guidance from experienced mentors to help you
@@ -111,16 +80,14 @@ const Mentorship = () => {
                 onClick={scrollToCourse}
                 className=" border border-[#f15b29] text-black px-6 py-3 rounded-md font-semibold"
               >
-                Explore Courses
+                Explore Courses Catolog
               </button>
-            </div>
-            <div className="lg:w-1/2 md:w-1/2 w-full">
-              <img src={mentorshipimg} alt="" className="" />
             </div>
         </div>
         </div>
       
       </section>
+      
       <hr className=" opacity-10"/>
 
       <section ref={courseSectionRef} className="py-[60px] px-[10px]">
@@ -138,7 +105,7 @@ const Mentorship = () => {
         <div className="container mx-auto">
           <h1
             data-aos="fade-up"
-            className="text-3xl font-bold text-[#f15b29] mb-2 text-center justify-center"
+            className=" font-bold text-[#f15b29] mb-2 text-center justify-center"
           >
             | Certification Overview
           </h1>
@@ -308,9 +275,9 @@ const Mentorship = () => {
 
       {/* Testimonials Section */}
       <section id="advancesection" className="py-[60px] px-[10px]">
-        <div  data-aos='fade-up' className="text-3xl mb-4 text-center text-[#f15b29]">
-          | What Our Mentees Are Saying
-        </div>
+
+         <h1 data-aos='fade-up' className="text-center text-[#f15b29]"> | What Our Mentees Are Saying</h1>
+       
         <div data-aos='fade-up' className="testimonial">
           <Testimonial />
         </div>
@@ -320,23 +287,30 @@ const Mentorship = () => {
       <section className="py-[60px] px-[10px]">
         <div className="container mx-auto flex items-center justify-center">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-[#f15b29] mb-4">
+            <h1 className=" font-bold text-[#f15b29] mb-4">
               Want to Know the Fee Structure?
-            </h2>
+            </h1>
             <p className="text-white mb-6">
-              Inquire now to learn about our mentorship program and associated
-              fees.
+            Find detailed information about our mentorship program and fees on the subsequent page.
             </p>
             <button
               onClick={handleNavigate}
               className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-4 rounded"
             >
-              View Fee Structure
+              View Pricing Information
             </button>
           </div>
         </div>
       </section>
        <hr className=" opacity-10"/>
+
+
+        {/* mentors section */}
+      <section className="py-[60px] px-[10px]">
+        <div>
+          <MentorShipMentors/>
+        </div>
+      </section>
 
       {/* FAQ Section */}
       <section className="py-[60px] px-[10px]">

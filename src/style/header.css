@@ -157,14 +157,18 @@
   }
 
   .second {
+    /* background-color: #f15b29; */
     width: fit-content;
     padding: 10px;
     margin: auto;
-
+    display: flex;
+    gap: 20px;
     img {
-      width: 20vw;
-      height: auto;
+      height: 10vw;
+      width: auto;
       margin: auto;
+
+      
     }
   }
 }

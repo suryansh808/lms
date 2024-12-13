@@ -41,11 +41,11 @@ const ClientsCarousel = () => {
     Infinite:true,
     autoplay: true,
     autoplaySpeed: -100,
-    slidesToShow: 9,
+    slidesToShow: 10,
     slidesToScroll:1,
     cssEase:'linear',
     // dots: false,
-    speed:3000,
+    speed:4000,
     arrow:false
     // rtl: true, 
     // responsive: [
@@ -86,11 +86,11 @@ const ClientsCarousel = () => {
     Infinite:true,
     autoplay: true,
     autoplaySpeed: -100,
-    slidesToShow: 9,
+    slidesToShow: 10,
     slidesToScroll:1,
     cssEase:'linear',
     dots: false,
-    speed:3000,
+    speed:4000,
     arrow:false,
     rtl: true,
   }

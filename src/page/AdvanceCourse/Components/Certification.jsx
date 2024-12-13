@@ -8,12 +8,12 @@ const Certification = () => {
   return (
     <div>
       <div className="container mx-auto">
-        <h2
+        <h1
           data-aos="fade-up"
-          className="text-[#f15b29] text-center lg:text-3xl lg:font-bold"
+          className="text-[#f15b29] text-center  lg:font-bold"
         >
           | Professional Certifications
-        </h2>
+        </h1>
         <div className=" text-white py-10 px-5 md:px-20">
           <div className="lg:flex items-center gap-8">
             <div  className="lg:w-1/2 w-full">

@@ -13,6 +13,7 @@
     font-size: 30px;
     word-spacing: 0px;
     letter-spacing: 5px;
+    font-family:  cursive;
   }
 
 
@@ -23,7 +24,7 @@
 
 
   .ourteam {
-    padding: 50px 10px;
+    padding: 60px 10px;
     text-align: center;
 
     >div {
@@ -54,8 +55,6 @@
   .ourteam_wrapper .team_member {
     width: 100px;
     height: auto;
-
-    /* height: 400px; */
     cursor: pointer;
     overflow: hidden;
   }
@@ -104,19 +103,14 @@
 
 #abouttopcontent {
   main {
-
-    /* width: fit-content; */
-
     max-width: 1400px;
     margin: auto;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     place-items: center;
-    /* min-height: 100vh; */
     min-height: 650px;
-    padding: 10px 10px 50px 10px;
+    
   }
 
   /* Content */
@@ -131,7 +125,7 @@
     font-family: "Dancing Script", cursive;
     font-size: clamp(2.5rem, 4vw, 6rem);
     font-weight: 700;
-
+     color: #f15b29;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

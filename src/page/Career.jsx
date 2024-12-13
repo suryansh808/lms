@@ -18,13 +18,13 @@ import img1 from '../assets/developers/affan.jpg'
 import img2 from '../assets/developers/danish.jpg'
 import img3 from '../assets/developers/suryanshsaxena.jpg'
 
-import gallery1 from '../assets/gallery/002.jpg'
-import gallery2 from '../assets/gallery/003.jpg'
-import gallery3 from '../assets/gallery/004.jpg'
-import gallery4 from '../assets/gallery/005.jpg'
-import gallery5 from '../assets/gallery/006.jpg'
-import gallery6 from '../assets/gallery/007.jpg'
-import Getintouch from "../Components/Getintouch";
+// import gallery1 from '../assets/gallery/002.jpg'
+// import gallery2 from '../assets/gallery/003.jpg'
+// import gallery3 from '../assets/gallery/004.jpg'
+// import gallery4 from '../assets/gallery/005.jpg'
+// import gallery5 from '../assets/gallery/006.jpg'
+// import gallery6 from '../assets/gallery/007.jpg'
+
 
 
 
@@ -174,9 +174,9 @@ const Career = () => {
         <div className="container mx-auto px-4">
           <div className="lg:flex">
             <div className="w-full lg:w-1/2 mb-4 flex flex-col">
-              <h2 data-aos="fade-up"   className="lg:text-3xl text-2xl font-bold mb-6 text-orange-700">
+              <h1 data-aos="fade-up"   className=" font-bold mb-6 text-orange-700">
                 | About Our Company
-              </h2>
+              </h1>
              <p className=" text-2xl">
         {words.map((word, index) => (
           <span
@@ -211,9 +211,9 @@ const Career = () => {
       {/* Our Values */}
       <section className="py-[60px] px-[10px] z-10 relative">
         <div className="container mx-auto px-4">
-          <h2 data-aos="fade-up"   className="text-3xl font-bold text-center mb-12 text-orange-700">
+          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
             | Our Values
-          </h2>
+          </h1>
           <div data-aos="fade-up"  className="grid md:grid-cols-3 gap-3">
             {[
               {
@@ -267,11 +267,11 @@ const Career = () => {
       </section>
 
       {/* Life at Krutanic Section */}
-      <section className="py-[60px] px-[10px] z-10 relative">
+      {/* <section className="py-[60px] px-[10px] z-10 relative">
        <div className="career">
-       <h2 data-aos="fade-up"   className="text-4xl font-bold text-center mb-12 text-orange-700">
+       <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
           | Life at Krutanic
-        </h2>
+        </h1>
         <div data-aos="fade-up"   className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 lg:px-10">
           <div className="relative overflow-hidden rounded-lg bg-gray-800 flex items-center justify-center">
             <img src={gallery1} alt="" className="object-cover h-96" />
@@ -298,15 +298,15 @@ const Career = () => {
           </div>
         </div>
        </div>
-      </section>
+      </section> */}
 
 
       {/* Job Section */}
       <section ref={jobSectionRef} id="job-openings" className="z-10 relative bg-[#080810ce]  px-[10px]  py-[60px]">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up"   className="lg:text-3xl text-2xl  font-bold text-center mb-12 text-orange-700">
+          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
             | Current Job Openings
-          </h2>
+          </h1>
           <div data-aos="fade-up"   className="space-y-10">
             {jobList.map((job, index) => (
               <div key={index} className="border-b p-2 rounded-lg shadow-md ">
@@ -406,9 +406,9 @@ const Career = () => {
       {/* what our emloyes says */}
       <section className="z-10 relative  px-[10px] py-[60px]">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up"   className="lg:text-3xl text-xl font-bold text-center mb-12 text-orange-700">
+          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
             | What Our Employees Say
-          </h2>
+          </h1>
           <div data-aos="fade-up"   className="grid md:grid-cols-3 lg:gap-8 gap-3">
             {[
               {
@@ -441,7 +441,7 @@ const Career = () => {
                       <img src={testimonial.image} alt="employee" className="w-full h-full object-cover"/>
                     </div>
                     <div>
-                      <h1 className="font-semibold">{testimonial.name}</h1>
+                      <h2 className="font-semibold">{testimonial.name}</h2>
                       <p className="text-sm text-gray-500">
                         {testimonial.role}
                       </p>
@@ -457,9 +457,9 @@ const Career = () => {
          {/* Why Work With Us */}
       <section className="py-[60px] px-[10px] z-10  relative bg-white text-black ">
         <div className="container mx-auto px-4">
-          <h2 data-aos="fade-up"   className="text-3xl font-bold text-center mb-12 text-orange-700">
+          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
             | Why Work With Us
-          </h2>
+          </h1>
           <div data-aos="fade-up"   className="grid md:grid-cols-2 gap-8">
             {[
               {

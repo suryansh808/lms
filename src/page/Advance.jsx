@@ -115,7 +115,8 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               
               className="bg-[#f15b29] hover:bg-orange-700 text-white transition-colors duration-300 px-6 py-3 rounded-lg font-semibold"
             >
-              Explore Now
+              Find Your Course
+
             </button>
           </div>
           <div className="">
@@ -158,15 +159,15 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
       {/* Our Course Section */}
       <section ref={courseSectionRef} className="px-[10px] py-[60px]">
        <div className="width">
-       <h2
+       <h1
           
-          className="text-4xl font-bold text-center py-5 text-[#f15b29]"
+          className=" font-bold text-center py-5 text-[#f15b29]"
         >
           Our Advanced Courses
-        </h2>
+        </h1>
         <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-[10px] md:px-12 lg:px-26">
           <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
-           <div className="overflow-hidden bg-red-800 lg:h-[300px]">
+           <div className="overflow-hidden  lg:h-[300px]">
            <img
               src={datascience}
               alt="Data Science"
@@ -184,7 +185,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse1}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-              View Details
+              Explore Details
             </button>
             </div>
           </div>
@@ -207,7 +208,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse2}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-              View Details
+             Explore Details
             </button>
             </div>
           </div>
@@ -230,7 +231,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse3}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-              View Details
+              Explore Details
             </button>
             </div>
           </div>
@@ -253,7 +254,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse4}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-               View Details
+              Explore Details
             </button>
            </div>
           </div>
@@ -277,7 +278,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse5}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-               View Details
+               Explore Details
             </button>
             </div>
           </div>
@@ -301,7 +302,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               onClick={handleViewCourse6}
               className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
-               View Details
+              Explore Details
             </button>
              </div>
           </div>
@@ -313,7 +314,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
        {/* program info  */}
        <section className="px-[10px] py-[60px]">
         <div className="width">
-          <h1 data-aos='fade-up' className="text-3xl text-center text-[#f15b29] justify-center font-semibold mb-9">
+          <h1 data-aos='fade-up' className=" text-center text-[#f15b29] justify-center font-semibold mb-9">
             | We have designed a flexible program for you{" "}
           </h1>
           <div data-aos='fade-up' className="px-4 grid lg:grid-cols-3 gap-3 text-white">
@@ -388,9 +389,9 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
       {/* FAQ Section */}
       <section className="px-[10px] py-[60px] text-white">
         <div className="container width px-4">
-          <h2 data-aos="fade-up" className="text-4xl font-bold text-[#f15b29] text-center py-5">
+          <h1 data-aos="fade-up" className=" font-bold text-[#f15b29] text-center py-5">
            | Frequently Asked Questions
-          </h2>
+          </h1>
          <div className="lg:flex lg:gap-4  lg:h-[400px] overflow-hidden">
          <div data-aos="fade-up" className="space-y-4 lg:w-1/2">
             {faqs.map((faq, index) => (

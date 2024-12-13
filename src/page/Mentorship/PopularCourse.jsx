@@ -16,7 +16,7 @@ const PopularCourse = () => {
       title: "Full Stack Web Developer",
       description: "Building and managing both the front-end and back-end of websites",
       rating: 4.7,
-      studentsTaken: 2500,
+      studentsTaken: 2298,
       image: `${fullStack}`,
       },
     {
@@ -24,7 +24,7 @@ const PopularCourse = () => {
       title: "Artificial Intelligence",
       description: "Creating systems that simulate human intelligence for tasks like decision-making.",
         rating: 4.8,
-        studentsTaken: 2100,
+        studentsTaken: 2340,
       image: `${artificial}`,
       },
     {
@@ -32,7 +32,7 @@ const PopularCourse = () => {
       title: "Data Analytics",
       description: "Interpreting data to help businesses improve performance and make decisions.",
         rating: 4.7,
-        studentsTaken: 2300,
+        studentsTaken: 2690,
       image: `${dataanalytics}`,
       },
     {
@@ -40,7 +40,7 @@ const PopularCourse = () => {
       title: "Cloud Computing",
       description: "Providing scalable computing resources and storage via the internet.",
         rating: 4.8,
-        studentsTaken: 2400,
+        studentsTaken: 2156,
       image: `${cloudcomputing}`,
       },
     {
@@ -48,7 +48,7 @@ const PopularCourse = () => {
       title: "Data Science",
       description: "Analyzing large data sets to extract insights and inform decisions.",
       rating: 4.8,
-      studentsTaken: 2600,
+      studentsTaken: 2699,
       image: `${datascience}`,
       },
     {
@@ -56,7 +56,7 @@ const PopularCourse = () => {
       title: "Digital Marketing",
       description: "Promoting products and services through digital channels like social media and search engines.",
         rating: 4.7,
-        studentsTaken: 2000,
+        studentsTaken: 2257,
       image: `${digitalmarketing}`,
       },
   ];
@@ -65,12 +65,12 @@ const PopularCourse = () => {
   return (
     <section className="py-[60px] px-[10px]">
       <div className="container mx-auto">
-        <h2
+        <h1
           data-aos="fade-up"
-          className="text-3xl font-bold text-center text-[#f15b29] mb-10"
+          className=" font-bold text-center text-[#f15b29] lg:mb-10 mb-6"
         >
           | Our Popular Courses
-        </h2>
+        </h1>
         <div
           data-aos="fade-up"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:px-24"

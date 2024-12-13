@@ -1,16 +1,15 @@
+#advance-course {
+  #advancecourse {
 
-
-#advance-course{
-#advancecourse {
- 
     background-color: #000;
     color: white;
-  overflow: hidden;
-}
+    overflow: hidden;
+  }
 }
 
-#advancesection{
+#advancesection {
   overflow: hidden;
+
   .testimonial {
 
     .testimonialcontainer {
@@ -22,12 +21,12 @@
       padding: 5px;
       cursor: grab;
 
-      .revtxt{
+      .revtxt {
         /* background-color: #f15b29; */
         height: 200px;
         overflow: auto;
         scrollbar-width: none;
-        padding:0 2px;
+        padding: 0 2px;
 
       }
     }
@@ -54,10 +53,11 @@
         width: 80px;
         height: 80px;
       }
-h2{
-  font-size:16px ;
-  color: #f15b29;
-}
+
+      h2 {
+        font-size: 16px;
+        color: #f15b29;
+      }
 
       h3 {
         font-size: 12px;
@@ -77,91 +77,50 @@ h2{
   }
 }
 
-#ourAlumni{
-  .logos {
-    overflow: hidden;
-    padding: 30px 0px;
-    white-space: nowrap;
-    position: relative;
-  }
-  
-  .logos:before, .logos:after {
-    position: absolute;
-    top: 0;
-    content: '';
-    width: 250px;
-    height: 100%;
-    z-index: 2;
-  }
-  
-  .logos:before {
-    left: 0;
-    background: linear-gradient(to left, rgba(255,255,255,0), rgb(0, 0, 0));
-  }
-  
-  .logos:after {
-    right: 0;
-    background: linear-gradient(to right, rgba(255,255,255,0 ), rgb(0, 0, 0));
-  }
-  
-  .logo_items {
-    display: inline-block;
-    animation: 3s sliders  linear  infinite;
-  }
-  
-  .logos:hover .logo_items {
-    animation-play-state: paused;
-  }
-  
-  .logo_items img{
-    margin-right: 20px;
-    height: 50px;
-  }
-}
-@keyframes sliders {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
 
 
-#advanceinvestmentbg{
+
+#advanceinvestmentbg {
   background-image: url('../assets/Advanced Course Images/Investment banking/3.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#advancedigitalbg{
-  background-image: url('../assets/Advanced Course Images/Digital Markting/2.svg');
+#advancedigitalbg {
+  background-image: url('../assets/Advanced Course Images/Digital Markting/2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-#advanceperformancebg{
-  background-image: url('../assets/Advanced Course Images/Performance marketing/6.svg');
+
+#advanceperformancebg {
+  background-image: url('../assets/Advanced Course Images/Performance marketing/3.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-#advancemernbg{
-  background-image: url('../assets/Advanced Course Images/Mern Stack Development/4.svg');
+
+#advancemernbg {
+  background-image: url('../assets/Advanced Course Images/Mern Stack Development/4.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-#advanceproductbg{
-  background-image: url('../assets/Advanced Course Images/Product management/5.svg');
+
+#advanceproductbg {
+  background-image: url('../assets/Advanced Course Images/Product management/5.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-#advancedatabg{
-  background-image: url('../assets/Advanced Course Images/Data science/6.svg');
+
+#advancedatabg {
+  background-image: url('../assets/Advanced Course Images/Data science/6.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
+

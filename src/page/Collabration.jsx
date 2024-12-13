@@ -18,8 +18,8 @@ const Collabration = () => {
   const stats = [
     { name: "Years of Collaboration", value: "10+" },
     { name: "Joint Research Projects", value: "150+" },
-    { name: "Student Internships", value: "2000+" },
-    { name: "Industry Partnerships", value: "150+" },
+    { name: "Student Internships", value: "3476+" },
+    { name: "Industry Partnerships", value: "250+" },
   ];
 
   const [entityType, setEntityType] = useState("company" || "college" || null);
@@ -86,12 +86,12 @@ const Collabration = () => {
             >
               Our Impact
             </h2>
-            <p
+            <h1
               data-aos="fade-up"
-              className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl mt-4"
+              className=" font-extrabold tracking-tight text-white mt-4"
             >
               Driving Innovation Together
-            </p>
+            </h1>
             <p
               data-aos="fade-up"
               className="max-w-2xl text-md text-white lg:mx-auto mt-6"
@@ -174,12 +174,12 @@ const Collabration = () => {
       </section>
 
       <section className="destinations py-16 px-6 sm:px-8">
-        <h3
+        <h1
           data-aos="fade-up"
-          className="text-3xl gradient-text  sm:text-4xl lg:text-5xl font-extrabold text-center text-white"
+          className="gradient-text font-extrabold text-center text-white"
         >
           Be a Part of Our Growth Story
-        </h3>
+        </h1>
         <p
           data-aos="fade-up"
           className="mt-6 max-w-3xl mx-auto text-base sm:text-lg text-white text-center"
@@ -215,9 +215,9 @@ const Collabration = () => {
       </section>
 
       <section className="packages">
-        <h3 data-aos="fade-up" className="title gradient-text">
+        <h1 data-aos="fade-up" className="title gradient-text">
           What Our Collaborations Bring to You
-        </h3>
+        </h1>
         <p data-aos="fade-up">
           We are always looking for visionary companies and organizations to
           join us on our mission to transform education and careers. By
@@ -296,9 +296,9 @@ const Collabration = () => {
       </section>
 
       <section className="testimonials">
-        <h3 data-aos="fade-up" className="title">
-          Building a Brighter Tomorrow with You
-        </h3>
+        <h1 data-aos="fade-up" className="title text-center mb-2">
+        Shaping Futures Through Collaboration
+        </h1>
         <hr data-aos="fade-up" />
         <p data-aos="fade-up" className="quote">
           Krutanic solutions recognize that educators and staff play in shaping
@@ -334,12 +334,12 @@ const Collabration = () => {
       <section className="partnerships py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2
+            <h1
               data-aos="fade-up"
-              className="text-3xl font-extrabold sm:text-4xl"
+              className=" font-extrabold"
             >
               Collaboration by the Numbers
-            </h2>
+            </h1>
             <p
               data-aos="fade-up"
               className="mt-3 max-w-2xl mx-auto text-xl sm:mt-4"
@@ -400,28 +400,17 @@ const Collabration = () => {
               <div className="flex flex-col gap-4">
                 <div className="space-y-2">
                   <label htmlFor="firstName" className="block font-medium">
-                    First Name
+                    Full Name
                   </label>
                   <input
                     id="firstName"
                     type="text"
-                    placeholder="Suryansh"
+                    placeholder="Enter your name"
                     required
                     className="w-full px-3 py-2 border rounded-md"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="lastName" className="block font-medium">
-                    Last Name
-                  </label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    placeholder="Saxena"
-                    required
-                    className="w-full px-3 py-2 border rounded-md"
-                  />
-                </div>
+               
               </div>
 
               <div className="space-y-2">
@@ -431,7 +420,7 @@ const Collabration = () => {
                 <input
                   id="email"
                   type="email"
-                  placeholder="suryanshsaxena@example.com"
+                  placeholder="Enter your email"
                   required
                   className="w-full px-3 py-2 border rounded-md"
                 />
@@ -496,12 +485,12 @@ const Collabration = () => {
               {entityType === "company" && (
                 <div className="space-y-2">
                   <label htmlFor="companyName" className="block font-medium">
-                    Company Name
+                    Organization Name
                   </label>
                   <input
                     id="companyName"
                     type="text"
-                    placeholder="Acme Inc."
+                    placeholder="Enter your organization name"
                     required
                     className="w-full px-3 py-2 border rounded-md"
                   />

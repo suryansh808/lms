@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import logo3 from "../assets/LOGO3.png";
 import wipro from "../assets/wipro.svg";
-import logo4 from '../assets/poplogo/4logo.png'
 
-import iso from "../assets/poplogo/iso.png";
-import aicte from "../assets/poplogo/aicte.png";
-import mca from "../assets/poplogo/mcalogo.png";
-import msme from "../assets/poplogo/msme3.jpeg";
+import mca from '../assets/poplogo/mca.png';
+import iso from '../assets/poplogo/iso.png';
+import msme from '../assets/poplogo/msme.png';
+
 
 const Header = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
@@ -132,9 +131,11 @@ const Header = () => {
               <h2>Our Credential Partner</h2>
               <img src={wipro} alt="wipro" />
             </div>
-            <h3>Our Other Certifcation partner</h3>
+            <h3>Our Prestigious Certifications</h3>
             <div className="second">
-             <img src={logo4} alt="" />
+              <img src={mca} alt="" />
+              <img src={iso} alt="" />
+              <img src={msme} alt="" />
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { useEffect} from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Alumni from "../Components/Alumni";
 
 
 
@@ -101,9 +100,9 @@ const TalentHunt = () => {
 
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-8 text-center gradient-text">
+          <h1 data-aos="fade-up" className="font-bold mb-8 text-center gradient-text">
             About the Talent Hunt
-          </h2>
+          </h1>
           <p data-aos="fade-up" className="text-lg text-center max-w-3xl mx-auto">
             Our annual Talent Hunt is designed to discover and nurture the
             brightest minds in education technology. Whether you're a coding
@@ -115,9 +114,9 @@ const TalentHunt = () => {
 
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-12 text-center gradient-text">
+          <h1 data-aos="fade-up" className="font-bold mb-12 text-center gradient-text">
             Categories
-          </h2>
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {
               category.map((category, index) => (
@@ -136,22 +135,12 @@ const TalentHunt = () => {
         </div>
       </section>
        <hr className=" opacity-10"/>
-
-
-      <section className="">
-        <div className="container mx-auto">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-12 text-center gradient-text">
-           | Our Sponsors
-          </h2>
-          <Alumni/>
-        </div>
-      </section>
        
 
 
-      <section className="py-16 px-4 text-center ">
+      {/* <section className="py-16 px-4 text-center ">
         <div className="container">
-        <h2 data-aos="fade-up" className="text-3xl font-semibold gradient-text">| Leaderboard</h2>
+        <h1 data-aos="fade-up" className="font-semibold gradient-text">| Leaderboard</h1>
         <p data-aos="fade-up" className="my-4 text-lg">
           Check out the top scorers in each category!
         </p>
@@ -214,14 +203,14 @@ const TalentHunt = () => {
           </div>
         </div>
         </div>
-      </section>
+      </section> */}
        <hr className=" opacity-10"/>
 
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-12 text-center text-[#f15b29]">
+          <h1 data-aos="fade-up" className=" font-bold mb-12 text-center text-[#f15b29]">
            | How to Participate
-          </h2>
+          </h1>
           <div className="flex items-center justify-center flex-wrap gap-4 max-[600px]:justify-start">
             {[
               "Register on our platform",
