@@ -7,14 +7,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // certificate starts
-import certificate1 from "../assets/certificates/Certificate  of internship.png";
-import certificate2 from "../assets/certificates/Certificate of Excellence.png";
-import certificate3 from "../assets/certificates/Certificate Of Training Completion.png";
+import certificate1 from "../assets/certificates/Certificateofinternship.jpg";
+import certificate2 from "../assets/certificates/CertificateofExcellence.jpg";
+import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
 import wiprologo from "../assets/certificates/wipro.svg";
 import aicte from "../assets/poplogo/aicte.png";
 import iso from "../assets/poplogo/iso.png";
 import mca from "../assets/poplogo/mca.png";
-import msme from "../assets/poplogo/msme.png";
+import msme from "../assets/poplogo/4.png";
 //certificate ends
 
 import Testimonial from "../Components/testimonial";
@@ -77,7 +77,7 @@ const Mentorship = () => {
               </p>
               <button
                 onClick={scrollToCourse}
-                className=" border border-[#f15b29] text-black px-6 py-3 rounded-md font-semibold"
+                className=" border border-[#f15b29] mb-3 lg:mb-0 text-black px-6 py-3 rounded-md font-semibold"
               >
                 Explore Courses Catolog
               </button>

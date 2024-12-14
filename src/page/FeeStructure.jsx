@@ -120,7 +120,7 @@ export default function FeeStructure() {
       {/* Hero Section */}
       <section className="py-[60px] px-[10px]">
         <div className="container text-white flex flex-col justify-center lg:py-5 mx-auto lg:flex-row lg:items-center gap-4 lg:justify-between">
-          <div className="text-left lg:w-1/2">
+          <div className="text-left lg:text-center lg:w-1/2">
             <h1 data-aos="fade-up"  className="text-5xl font-bold leading-none sm:text-6xl">
               Fee
               {" "}
@@ -131,7 +131,7 @@ export default function FeeStructure() {
               Choose how you invest in your growth - pay upfront, split the
               cost, or opt for our income-share model.
             </p>
-            <div data-aos="fade-up"  className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+            <div data-aos="fade-up"  className="flex flex-col space-y-4 sm:items-center sm:justify-center  sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-center">
               <Link
                 to="/Mentorship"
                 className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-800"
@@ -141,7 +141,7 @@ export default function FeeStructure() {
             </div>
           </div>
           <div data-aos="fade-up"  className=" lg:w-1/2">
-            <img src={feesimg} alt="" className="rounded-lg opacity-95" />
+            <img src={feesimg} alt="" className="rounded-lg " />
           </div>
         </div>
       </section>
@@ -283,7 +283,7 @@ export default function FeeStructure() {
       </section>
 
       <section className="py-[60px] px-[10px] bg-white">
-        <div className="container mx-auto text-center">
+        <div data-aos="fade-up"   className="container mx-auto text-center">
           <h2 data-aos="fade-up"  className="text-3xl font-extrabold text-[#f15b29]  mb-4">
             | Ready to launch your career with us?
           </h2>
@@ -291,7 +291,7 @@ export default function FeeStructure() {
             Your dream career is just a step away. Enroll today and begin your
             transformation
           </p>
-          <button data-aos="fade-up"   className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#f15b29] hover:bg-[#f15b29] transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+          <button  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#f15b29] hover:bg-[#f15b29] transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
             <Link  to="/Contactus">Contact Us</Link>
           </button>
         </div>

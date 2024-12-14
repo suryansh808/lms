@@ -3,6 +3,8 @@ import registerguideimg1 from '../assets/Formfill.png'
 import registerguideimg2 from '../assets/Registration.png'
 import registerguideimg3 from '../assets/waitfortheresponse.png'
 
+import emailjs from '@emailjs/browser';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -10,21 +12,42 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     fname: '',
     cno: '',
-    zip: '',
-    service: '1',
+    email: '',
+    message: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({...formData , [name]:value});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted with data:', formData);
+     const { fname , cno , email , message} = formData;
+     if(!fname || !cno || !email || !message){
+      alert("Please fill all the fields..");
+      return;
+     }
+
+     emailjs
+     .send(
+      'service_slojvso',
+      'template_xq9b7eo',
+      {
+        fname: formData.fname,
+        cno: formData.cno,
+        email: formData.email,
+        message:formData.message  
+      },
+      "MLIuDW2i4XLVymeHC"
+     ).then((Response)=>{
+      console.log("succes", Response.status, Response.text);
+      alert("Message has been send successfull..");
+      setFormData({fname:"" , cno:"" , email:"", message:""});
+     },(err) => {
+      console.error("faild", err);
+      alert("failed to send mail , try after sometime or else contact through whatsapp");
+     });
   };
 
   useEffect(() => {
@@ -60,7 +83,7 @@ const ContactUs = () => {
                 type="text"
                 name="fname"
                 id="fname"
-                placeholder='Full Name...'
+                placeholder='Full Name'
                 maxlength="60"
                 value={formData.fname}
                 onChange={handleChange}
@@ -73,7 +96,7 @@ const ContactUs = () => {
                 type="tel"
                 name="cno"
                 id="cno"
-                placeholder='Contact Number...'
+                placeholder='Contact Number'
                 maxlength="15"
                 value={formData.cno}
                 onChange={handleChange}
@@ -86,9 +109,8 @@ const ContactUs = () => {
                 type="email"
                 name="email"
                 id="email"
-                placeholder='Email Id...'
-                // maxlength="8"
-                value={formData.zip}
+                placeholder='Email Id'
+                value={formData.email}
                 onChange={handleChange}
                 className=' placeholder:text-black'
               />
@@ -96,9 +118,11 @@ const ContactUs = () => {
             <fieldset>
 
               <textarea
-                placeholder='Message...'
+                value={formData.message}
+                onChange={handleChange}
+                placeholder='Message'
                 className='w-full resize-none border h-40 px-2 py-2 bg-[#f7f7f7] rounded-lg placeholder:text-black' name="message" id="message">
-
+              
               </textarea>
             </fieldset>
             <fieldset>

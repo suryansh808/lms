@@ -15,7 +15,7 @@ import img2 from "../assets/Advanced Course Images/Digital Markting/DM 4.jpg";
 import img3 from "../assets/Advanced Course Images/Data science/DS 4.jpg";
 import img4 from "../assets/Advanced Course Images/Product management/PM 5.jpg";
 
-import faqimg from '../assets/Advanced Course Images/Digital Markting/DM 3.jpg'
+import faqimg from '../assets/Advanced Course Images/Digital Markting/questionmark.jpg'
 
 import datascience from '../assets/Advanced Course Images/Data science/DS 3.jpg'
 import digital from '../assets/Advanced Course Images/Digital Markting/DM 1.jpg'
@@ -163,7 +163,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
           
           className=" font-bold text-center py-5 text-[#f15b29]"
         >
-          Our Advanced Courses
+         | Our Advanced Courses
         </h1>
         <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-[10px] md:px-12 lg:px-26">
           <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
@@ -387,12 +387,12 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
       <hr className=" opacity-10"/>
 
       {/* FAQ Section */}
-      <section className="px-[10px] py-[60px] text-white">
+      <section className="px-[10px] py-[60px]  text-white">
         <div className="container width px-4">
           <h1 data-aos="fade-up" className=" font-bold text-[#f15b29] text-center py-5">
            | Frequently Asked Questions
           </h1>
-         <div className="lg:flex lg:gap-4  lg:h-[400px] overflow-hidden">
+         <div className="lg:flex lg:gap-4   overflow-hidden">
          <div data-aos="fade-up" className="space-y-4 lg:w-1/2">
             {faqs.map((faq, index) => (
               <div  key={index} className=" rounded-lg overflow-hidden ease-linear duration-500">
@@ -414,8 +414,8 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
               </div>
             ))}
           </div>
-          <div data-aos="fade-up" className=" lg:w-1/2 lg:mt-0 mt-4 overflow-hidden rounded-lg">
-            <img className="w-full object-center" src={faqimg} alt="" />
+          <div data-aos="fade-up" className=" lg:w-1/2 lg:mt-0 mt-4  overflow-hidden rounded-lg">
+            <img className="w-full rounded-lg" src={faqimg} alt="img" />
           </div>
          </div>
         </div>

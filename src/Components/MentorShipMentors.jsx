@@ -72,12 +72,12 @@ const MentorShipMentors = () => {
   return (
     <div className="container mx-auto">
       <div data-aos="fade-up" className="  text-center">
-        <h2
+        <h1
           data-aos="fade-up"
           className="text-3xl text-[#f15b29] font-bold mb-4"
         >
           Meet our Mentors{" "}
-        </h2>
+        </h1>
         <p data-aos="fade-up" className="text-white mb-8">
           Meet the talented and creative minds behind our work. Our mentors
           bring a wealth of experience and a passion for innovation to every
