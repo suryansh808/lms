@@ -1,0 +1,24 @@
+.counselor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .counselor-table th, .counselor-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  .counselor-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .counselor-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .counselor-table tr:hover {
+    background-color: #f1f1f1;
+  }

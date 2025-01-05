@@ -1,0 +1,35 @@
+.revenue{
+      font-family: Arial, sans-serif;
+      margin: 20px 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+}
+
+.revenue-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+  }
+  .revenue-card h2 {
+    margin: 0 0 20px;
+    font-size: 1.5rem;
+    color: #333;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 10px;
+  }
+  .revenue-card p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  .revenue-card p span {
+    font-weight: bold;
+    color: #4caf50;
+  }

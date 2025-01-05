@@ -1,0 +1,66 @@
+import React, { useState, useEffect, useRef } from "react";
+import logo from '../User/playerlogo.jpg';
+import { useLocation } from 'react-router-dom';
+
+const Learning = () => {
+
+  const [isSessionVisible, setisSessionVisible] = useState(false);
+  const [selectedSession, setselectedSession] = useState({});
+  const location = useLocation();
+  const { courseTitle, sessions } = location.state || {};
+  console.log("danish", courseTitle, sessions);
+
+  const sessionVisibility = () => {
+    setisSessionVisible((prevState) => !prevState);
+  };
+
+  const handleSessionClick = (session) => {
+    setselectedSession(session);
+    console.log("course clicked", session);
+  };
+
+  useEffect(() => {
+    if (sessions) {
+      setselectedSession(Object.values(sessions)[0]);
+    }
+  }, [sessions]);
+
+  return (
+    <div id='UserLearning'>
+      <h2>{courseTitle}</h2>
+      <div className='learningtop'>
+        <span onClick={sessionVisibility}>COURSE MENU</span>
+        <h2>{selectedSession.title}</h2>
+      </div>
+      {isSessionVisible && (
+        <div className='sessionlist'>
+          <h2>COURSE CONTENT</h2>
+          <ul onClick={sessionVisibility}>
+            {sessions && Object.keys(sessions).map((key) => (
+              <li key={key}  onClick={() => handleSessionClick(sessions[key])}  ><span>{key}: {sessions[key].title}</span> <i class="fa fa-play-circle"></i></li>
+            ))
+            }
+
+          </ul>
+        </div>
+      )}
+      {selectedSession && (
+      <div className='player'>
+      
+        <div className='logo'>
+          <img src={logo} alt="" />
+        </div>
+        <iframe
+        src={`https://drive.google.com/file/d/${selectedSession.description}/preview`}
+          allow="autoplay"
+          allowFullScreen
+        >
+        </iframe>
+     
+      </div>
+ )}
+    </div>
+  )
+}
+
+export default Learning;
