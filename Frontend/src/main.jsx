@@ -21,7 +21,7 @@ import './style/FeesStructure.css'
 import './Admin/AdminPanel.css'
 import './User/UserPanel.css'
 import './BDA/BdaPanel.css'
-import './Operation/operationPanel.css'
+import './Operation/OperationPanel.css'
 import './Manager/Manager.css'
 
 import "./axiosConfig";
