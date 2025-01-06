@@ -12,6 +12,7 @@ const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
+const test = require("./routes/test");
 
 
 dotenv.config();
@@ -43,6 +44,8 @@ app.use("/", User);
 app.use("/", admin);
 //manager
 app.use("/", Manager);
+
+app.use("/test" ,test);
 
 // Connect to MongoDB
 mongoose
