@@ -81,7 +81,7 @@ router.post("/otpverify",async(req, res) => {
     if (!admin) {
       return res.status(404).json({ error: "Admin not found" });
       }
-      if (admin.otp !==  parseInt(otp)) {
+      if (admin.otp !== otp) {
         return res.status(401).json({ error: "Invalid OTP" });
         }
         admin.otp = null;
