@@ -24,6 +24,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON
 app.use(express.json());
 
+
 //create course
 app.use("/", createcourse);
 //create operation
