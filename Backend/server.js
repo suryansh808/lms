@@ -26,7 +26,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 // const DB_URI = process.env.DB_URI;
 
 // Middleware to parse JSON
