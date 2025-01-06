@@ -45,7 +45,7 @@ app.use("/", NewStudentEnroll);
 //user
 app.use("/", User);
 // admin
-app.use("/admin", admin);
+app.use("/", admin);
 //manager
 app.use("/", Manager);
 
