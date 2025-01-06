@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Quill's CSS for styling
+import "react-quill/dist/quill.snow.css";
 
 const AddCourse = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
@@ -12,7 +12,8 @@ const AddCourse = () => {
   const [editingCourseId, setEditingCourseId] = useState(null);
 
   const toggleVisibility = () => {
-    setiscourseFormVisible((prevState) => !prevState);
+    // setiscourseFormVisible((prevState) => !prevState);
+    setiscourseFormVisible(!iscourseFormVisible);
   };
 
   const resetForm = () => {
@@ -117,7 +118,7 @@ const AddCourse = () => {
       <div className="coursetable">
         <div>
         <h2>Added Courses</h2>
-          <span onClick={toggleVisibility}>+ Add New Course</span>
+          <button onClick={toggleVisibility}>+ Add New Course</button>
         </div>
         <table>
           <thead>
