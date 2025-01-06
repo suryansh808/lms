@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 
-router.post("/api/admin/:id", async (req, res) => {
+router.post("/api/admin", async (req, res) => {
   const { email } = req.body;
   try {
     const newAdmin = new adminMail({ email });
@@ -19,12 +19,9 @@ router.post("/api/admin/:id", async (req, res) => {
 
 //  mail id verfication
 
-
-
-
 let otpStore = {};
 // after verification if the admin mail is matched from database the otp is sent directly to the matched mail or not
-router.post("/api/otp-send/:id", expressAsyncHandler (async (req, res) => {
+router.post("/api/otp-send", expressAsyncHandler (async (req, res) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ error: "Email is required" });
@@ -77,7 +74,7 @@ router.post("/api/otp-send/:id", expressAsyncHandler (async (req, res) => {
 
 
 // Route to verify OTP admin
-router.post("/api/otp-verify/:id", (req, res) => {
+router.post("/api/otp-verify", (req, res) => {
   const { email, otp } = req.body;
 
   if (!email || !otp) {
