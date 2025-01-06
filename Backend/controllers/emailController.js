@@ -11,9 +11,34 @@ let transporter = nodemailer.createTransport({
     user: process.env.SMTP_MAIL, // generated ethereal user
     pass: process.env.SMTP_PASSWORD, // generated ethereal password
   },
+  tls: {
+    rejectUnauthorized: false, // Avoid certificate issues (use cautiously)
+  },
+  pool: true, 
 });
+/**
+ * @param {Object} mailOptions
+  * @param {string}
+  * * @param {string} 
+  *  * @param {string}
+ * @returns {Promise<void>}
+ */
+const sendEmail = async (mailOptions) => {
+ for (let attempt = 1; attempt <= 3; attempt++) {
+   try {
+     await transporter.sendMail(mailOptions);
+     console.log("Email sent successfully!");
+     return; // Exit loop on success
+   } catch (error) {
+     console.error(`Attempt ${attempt} failed: ${error.message}`);
+     if (attempt === 3) {
+       throw new Error("Failed to send email after 3 attempts");
+     }
+   }
+ }
+};
 
-const sendEmail = expressAsyncHandler(async (req, res) => {
+const sendEmailController  = expressAsyncHandler(async (req, res) => {
   const { email, subject, message } = req.body;
 
   var mailOptions = {
@@ -32,4 +57,4 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { sendEmail };
+module.exports = { sendEmail ,sendEmailController };

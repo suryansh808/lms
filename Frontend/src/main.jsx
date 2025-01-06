@@ -27,8 +27,7 @@ import './Manager/Manager.css'
 import "./axiosConfig";
 
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);

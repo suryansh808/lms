@@ -4,8 +4,9 @@ const adminMail = require("../models/AdminMail");
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { sendEmail } = require("../controllers/emailController");
+const { sendEmail , sendEmailController } = require("../controllers/emailController");
 
+router.post("/send", sendEmailController);
 // Route to save admin email
 router.post(
   "/admin",
