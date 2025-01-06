@@ -1,5 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+// import { StrictMode } from 'react'
+// import { createRoot } from 'react-dom/client'
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+
+
 import App from './App.jsx'
 import './index.css'
 import './style/header.css'
@@ -27,7 +33,11 @@ import './Manager/Manager.css'
 import "./axiosConfig";
 
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+// createRoot(document.getElementById('root')).render(
+//   <StrictMode>
+//     <App />
+//   </StrictMode>,
+// )
+
+const root = ReactDOM.createRoot(document.getElementById('root')); // Create a root using createRoot
+root.render(<App />); // Render your App component
