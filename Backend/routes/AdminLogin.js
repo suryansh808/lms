@@ -31,12 +31,12 @@ router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
         return res.status(500).json({ error: "Admin email not found" });
       }
 
-      if (email !== admin.email) {
-        return res.status(401).json({ error: "You are not admin" });
-      }
+      // if (email !== admin.email) {
+      //   return res.status(401).json({ error: "You are not admin" });
+      // }
 
-      const otp = Math.floor(100000 + Math.random() * 900000);
-      admin.otp = otp;
+      // const otp = Math.floor(100000 + Math.random() * 900000);
+      // admin.otp = otp;
       await admin.save();
 
       await sendEmail({
