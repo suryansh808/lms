@@ -24,7 +24,7 @@ const corsOptions = {
   allowedHeaders:["Content-Type" , "Authorization"],
 };
 
-app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 // const DB_URI = process.env.DB_URI;
