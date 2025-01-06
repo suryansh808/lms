@@ -20,7 +20,7 @@ const app = express();
 
 app.use(cors());
 
-
+const allowedOrigins = process.env.FRONTEND_URL
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -34,8 +34,18 @@ app.use(cors({
   credentials: true // Enable cookies and credentials
 }));
 
-app.options('*', cors()); // Preflight requests for all routes
-
+// app.options('*', cors()); // Preflight requests for all routes
+app.use((err, req, res, next) => {
+  if (err) {
+    console.error(err.message); // Log the error
+    res.status(500).json({ error: err.message });
+  } else {
+    next();
+  }
+});
+app.options('*', (req, res) => {
+  res.sendStatus(204); // Respond with "No Content" for preflight
+});
 
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
