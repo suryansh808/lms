@@ -19,7 +19,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: true,
+  origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders:["Content-Type" , "Authorization"],
 };
@@ -31,10 +31,6 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON
 app.use(express.json());
-
-app.post('/otp-send', (req, res) => {
-  res.status(200).send({ message: 'OTP sent!' });
-});
 
 //create course
 app.use("/", createcourse);
