@@ -12,8 +12,9 @@ const AddCourse = () => {
   const [editingCourseId, setEditingCourseId] = useState(null);
 
   const toggleVisibility = () => {
-    // setiscourseFormVisible((prevState) => !prevState);
-    setiscourseFormVisible(!iscourseFormVisible);
+    console.log("open hua");
+    setiscourseFormVisible((prevState) => !prevState);
+    // setiscourseFormVisible(!iscourseFormVisible);
   };
 
   const resetForm = () => {
@@ -118,7 +119,7 @@ const AddCourse = () => {
       <div className="coursetable">
         <div>
         <h2>Added Courses</h2>
-          <button onClick={toggleVisibility}>+ Add New Course</button>
+          <button onClick={toggleVisibility}> + Add New Course</button>
         </div>
         <table>
           <thead>
