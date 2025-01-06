@@ -19,7 +19,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 // const DB_URI = process.env.DB_URI;
 
 // Middleware to parse JSON
@@ -47,6 +47,7 @@ app.use("/", Manager);
 
 app.use("/test" ,test);
 
+
 // Connect to MongoDB
 mongoose
   .connect(
@@ -58,3 +59,5 @@ mongoose
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;
