@@ -9,7 +9,7 @@ const AdminLogIn = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30); 
+  const [timeLeft, setTimeLeft] = useState(120); 
   const [isTimerActive, setIsTimerActive] = useState(false);
 
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const AdminLogIn = () => {
       return;
     }
     try {
-      await axios.post(`${API}/otp-send`, { email });
+      await axios.post(`${API}aw/otp-send`, { email });
       setIsOtpSent(true);
-      setTimeLeft(30);
+      setTimeLeft(120);
       setIsTimerActive(true);
     } catch (err) {
       toast.error("You are not Admin");
