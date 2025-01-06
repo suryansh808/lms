@@ -45,8 +45,8 @@ app.use("/", NewStudentEnroll);
 //user
 app.use("/", User);
 // admin
-app.use("/admin/api/otp-send", admin);
-app.use("/admin/api/otp-verify",admin);
+app.use("/", admin);
+// app.use("/",admin);
 //manager
 app.use("/", Manager);
 
