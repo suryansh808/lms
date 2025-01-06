@@ -7,7 +7,7 @@ require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 
 router.post("/admin", async (req, res) => {
-  const { email } = req.body;
+  const { email} = req.body;
   try {
     const newAdmin = new adminMail({ email });
     await newAdmin.save();
@@ -20,7 +20,7 @@ router.post("/admin", async (req, res) => {
 //  mail id verfication
 
 // after verification if the admin mail is matched from database the otp is sent directly to the matched mail or not
-router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
+router.post("/otp-send", expressAsyncHandler (async (req, res) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ error: "Email is required" });
@@ -31,12 +31,12 @@ router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
         return res.status(500).json({ error: "Admin email not found" });
       }
 
-      // if (email !== admin.email) {
-      //   return res.status(401).json({ error: "You are not admin" });
-      // }
+      if (email !== admin.email) {
+        return res.status(401).json({ error: "You are not admin" });
+      }
 
-      // const otp = Math.floor(100000 + Math.random() * 900000);
-      // admin.otp = otp;
+      const otp = Math.floor(100000 + Math.random() * 900000);
+      admin.otp = otp;
       await admin.save();
 
       await sendEmail({
@@ -74,7 +74,7 @@ router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
 
 
 // Route to verify OTP admin
-router.post("/admin/otp-verify",async(req, res) => {
+router.post("/otp-verify",async(req, res) => {
   const { email, otp } = req.body;
   try{
     const admin = await admin.findOne({ email });

@@ -7,7 +7,7 @@ const AdminSchema = new mongoose.Schema({
     unique: true
   },
   otp:{
-    type:String
+    type:Number,
   }
 });
 
