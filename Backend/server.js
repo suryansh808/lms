@@ -12,7 +12,7 @@ const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
-const test = require("./routes/test");
+
 
 
 dotenv.config();
@@ -45,7 +45,12 @@ app.use("/", admin);
 //manager
 app.use("/", Manager);
 
-app.use("/test" ,test);
+app.get("/", (req, res) => {
+  res.send("Welcome to the Backend Server!");
+});
+
+// Export the app for Vercel
+module.exports = app;
 
 
 // Connect to MongoDB
@@ -60,4 +65,3 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-module.exports = app;
