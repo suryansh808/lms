@@ -32,7 +32,7 @@ const AdminLogIn = () => {
       return;
     }
     try {
-      await axios.post(`${API}aw/otp-send`, { email });
+      await axios.post(`${API}/otpsend`, { email });
       setIsOtpSent(true);
       setTimeLeft(120);
       setIsTimerActive(true);
@@ -47,7 +47,7 @@ const AdminLogIn = () => {
       return;
     }
     try {
-    const response =   await axios.post(`${API}/otp-verify`, { email, otp });
+    const response =   await axios.post(`${API}/otpverify`, { email, otp });
     toast.success('logout successful!!!');
     setTimeout(() => {
       localStorage.setItem("adminToken", response.data.token);

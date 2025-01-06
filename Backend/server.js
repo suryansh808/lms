@@ -24,27 +24,27 @@ const allowedOrigins = process.env.FRONTEND_URL
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow if origin is in the list
+      callback(null, true); 
     } else {
-      callback(new Error('Not allowed by CORS')); // Reject other origins
+      callback(new Error('Not allowed by CORS')); 
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  credentials: true // Enable cookies and credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true 
 }));
 
-// app.options('*', cors()); // Preflight requests for all routes
+
 app.use((err, req, res, next) => {
   if (err) {
-    console.error(err.message); // Log the error
+    console.error(err.message);
     res.status(500).json({ error: err.message });
   } else {
     next();
   }
 });
 app.options('*', (req, res) => {
-  res.sendStatus(204); // Respond with "No Content" for preflight
+  res.sendStatus(204); 
 });
 
 app.use(bodyParser.json());
