@@ -33,6 +33,7 @@
     "react-quill": "^2.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
+    "react-scripts": "^5.0.1",
     "react-slick": "^0.30.3",
     "router": "^2.0.0",
     "sass": "^1.83.1",
