@@ -19,34 +19,12 @@ router.post("/api/admin", async (req, res) => {
 
 //  mail id verfication
 
-let otpStore = {}; // Store OTPs temp
 
-// Route to verify OTP admin
-router.post("/api/otp-verify", (req, res) => {
-  const { email, otp } = req.body;
 
-  if (!email || !otp) {
-    return res.status(400).json({ error: "Email and OTP are required" });
-  }
-  if (otpStore[email] == otp) {
-    delete otpStore[email];
-    const payload = { email };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    return res.status(200).json({
-      message: "OTP verified successfully, login allowed!",
-      token,
-    });
-  } else {
-    return res.status(400).json({ error: "Invalid OTP" });
-  }
-});
 
+let otpStore;
 // after verification if the admin mail is matched from database the otp is sent directly to the matched mail or not
-router.post(
-  "/api/otp-send",
-  expressAsyncHandler(async (req, res) => {
+router.post("/api/otp-send", expressAsyncHandler (async (req, res) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ error: "Email is required" });
@@ -95,6 +73,30 @@ router.post(
     }
   })
 );
+
+
+
+// Route to verify OTP admin
+router.post("/api/otp-verify", (req, res) => {
+  const { email, otp } = req.body;
+
+  if (!email || !otp) {
+    return res.status(400).json({ error: "Email and OTP are required" });
+  }
+  if (otpStore[email] === otp) {
+    delete otpStore[email];
+    const payload = { email };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    return res.status(200).json({
+      message: "OTP verified successfully, login allowed!",
+      token,
+    });
+  } else {
+    return res.status(400).json({ error: "Invalid OTP" });
+  }
+});
 
 
 
