@@ -32,6 +32,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON
 app.use(express.json());
 
+app.post('/otp-send', (req, res) => {
+  res.status(200).send({ message: 'OTP sent!' });
+});
 
 //create course
 app.use("/", createcourse);
