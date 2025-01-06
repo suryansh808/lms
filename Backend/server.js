@@ -17,11 +17,14 @@ const bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
-app.use(cors({
-  origin: 'https://frontend-5pk71h01g-suryansh808s-projects.vercel.app',
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+  allowedHeaders:["Content-Type" , "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 4000;
 // const DB_URI = process.env.DB_URI;
