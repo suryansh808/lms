@@ -19,7 +19,6 @@ router.post("/admin", async (req, res) => {
 
 //  mail id verfication
 
-let otpStore = {};
 // after verification if the admin mail is matched from database the otp is sent directly to the matched mail or not
 router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
     const { email } = req.body;
@@ -37,7 +36,8 @@ router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
       }
 
       const otp = Math.floor(100000 + Math.random() * 900000);
-      otpStore[email] = otp;
+      admin.otp = otp;
+      await admin.save();
 
       await sendEmail({
         body: {
@@ -74,24 +74,22 @@ router.post("/admin/otp-send", expressAsyncHandler (async (req, res) => {
 
 
 // Route to verify OTP admin
-router.post("/admin/otp-verify", (req, res) => {
+router.post("/admin/otp-verify",async(req, res) => {
   const { email, otp } = req.body;
-
-  if (!email || !otp) {
-    return res.status(400).json({ error: "Email and OTP are required" });
-  }
-  if (otpStore[email] === otp) {
-    delete otpStore[email];
-    const payload = { email };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    return res.status(200).json({
-      message: "OTP verified successfully, login allowed!",
-      token,
-    });
-  } else {
-    return res.status(400).json({ error: "Invalid OTP" });
+  try{
+    const admin = await admin.findOne({ email });
+    if (!admin) {
+      return res.status(404).json({ error: "Admin not found" });
+      }
+      if (admin.otp !== otp) {
+        return res.status(401).json({ error: "Invalid OTP" });
+        }
+        // admin.otp = null;
+        await admin.save();
+        res.status(200).json({ message: "OTP verified successfully" });
+        } 
+        catch (error) {
+          res.status(500).json({ message: "Failed to verify OTP", error: error.message})          
   }
 });
 
