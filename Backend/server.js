@@ -17,7 +17,11 @@ const bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://frontend-5pk71h01g-suryansh808s-projects.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 4000;
 // const DB_URI = process.env.DB_URI;

@@ -39,8 +39,8 @@ router.post("/api/otp-send", expressAsyncHandler (async (req, res) => {
         return res.status(401).json({ error: "You are not admin" });
       }
 
-      const otp = Math.floor(100000 + Math.random() * 900000);
-      otpStore[email] = otp;
+      // const otp = Math.floor(100000 + Math.random() * 900000);
+      // otpStore[email] = otp;
 
       await sendEmail({
         body: {
