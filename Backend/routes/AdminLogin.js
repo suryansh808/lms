@@ -5,7 +5,7 @@ const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
-
+const crypto = require('crypto'); 
 // Route to save admin email
 router.post(
   "/admin",
@@ -43,8 +43,9 @@ router.post(
       }
 
 
-
-      const otp = Math.floor(100000 + Math.random() * 900000);
+      const otp = crypto.randomInt(100000, 1000000);
+      console.log(otp);
+      // const otp = Math.floor(100000 + Math.random() * 900000);
       await sendEmail({
         body: {
           email,
