@@ -37,6 +37,7 @@ import DefaultList from "./Admin/DefaultList";
 import FullPaidList from "./Admin/FullPaidList";
 import AdminLogIn from "./Admin/AdminLogin";
 import Createmanager from "./Admin/CreateManager";
+import LoginAdmin from "./Admin/LoginAdmin";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -45,6 +46,7 @@ import OperationDashboard from "./Operation/OperationDashboard";
 import BookedPayment from "./Operation/BookedPayment";
 import FullPayment from "./Operation/FullPayment";
 import DefaultPayment from "./Operation/DefaultPayment";
+import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
 import BDAlogin from "./BDA/BDAlogin";
@@ -53,6 +55,7 @@ import BBookedPayment from "./BDA/BBookedPayment";
 import BDAHeader from "./BDA/BDAHeader";
 import BDefualtPayment from "./BDA/BDefualtPayment";
 import BFullPayment from "./BDA/BFullPayment";
+import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
 // User Student
 import UserHeader from "./User/UserHeader";
@@ -73,6 +76,7 @@ import ManagerLogin from "./Manager/ManagerLogin";
 import BookingList from "./Manager/BookingList";
 import DefaultedList from "./Manager/DefaultedList";
 import FullPaymentList from "./Manager/FullPaymentList";
+import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
 
 
 
@@ -110,6 +114,10 @@ const AppContent = () => {
     "/bdalogin",
     "/adminlogin",
     "/managerlogin",
+    "/operationagainlogin",
+    "/bdagainlogin",
+    "/manageragainlogin",
+    "/loginadmin"
   ];
   const adminheaderPaths = [
     "/admindashboard",
@@ -125,6 +133,7 @@ const AppContent = () => {
     "/createmanager",
     "/mentorqueries",
     "/advancequeries",
+
   ];
   const operationheaderPaths = [
     "/operationdashboard",
@@ -201,6 +210,7 @@ const AppContent = () => {
 
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />
+        <Route path="/LoginAdmin" element={<LoginAdmin />} />
         <Route path="/AdminDashboard" element={isAuthenticatedAdmin()? <AdminDashboard/> : <Navigate to="/AdminLogin"/>} />
         <Route path="/AddCourse" element={isAuthenticatedAdmin()? <AddCourse /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/AddModule" element={isAuthenticatedAdmin()? <AddModule /> : <Navigate to="/AdminLogin"/>} />
@@ -222,10 +232,12 @@ const AppContent = () => {
         <Route path="/FullPayment" element={isAuthenticatedOperation()?<FullPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/DefaultPayment" element={isAuthenticatedOperation()?<DefaultPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationLogin" element={<OperationLogin />} />
+        <Route path="/OperationAgainLogin" element={<OperationAgainLogin/>} />
         {/* Operation Panel End */}
 
         {/* bda panel start */}
           <Route path="/BDAlogin" element={<BDAlogin />} />
+          <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} />
           <Route path="/BDADashboard" element={ isAuthenticatedBda() ? <BDADashboard /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BFullPayment" element={isAuthenticatedBda() ?<BFullPayment /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BDefaultPayment" element={isAuthenticatedBda() ?<BDefualtPayment /> : <Navigate to="/BDAlogin"/>} />
@@ -241,6 +253,7 @@ const AppContent = () => {
 
         {/* Manager Panel */}
         <Route path="/ManagerLogin" element={<ManagerLogin />} />
+        <Route path="/ManagerAgainLogin" element={<ManagerAgainLogin/>} />
         <Route path="/ManagerDashboard" element={isAuthenticatedManager() ? <ManagerDashboard /> : <Navigate to="/ManagerLogin" />} />
         <Route path="/BookingList" element={isAuthenticatedManager() ? <BookingList /> : <Navigate to="/ManagerLogin" />} />
         <Route path="/DefaultedList" element={isAuthenticatedManager() ? <DefaultedList /> : <Navigate to="/ManagerLogin" />} />

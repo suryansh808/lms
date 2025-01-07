@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 import axios from "axios";
 import toast ,{Toaster} from 'react-hot-toast';
@@ -79,7 +79,7 @@ const ManagerLogin = () => {
             <input
               type="email"
               id="email"
-              placeholder="Enter your email"
+              placeholder="Enter company mail id"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -100,6 +100,10 @@ const ManagerLogin = () => {
             <button type="submit">Verify OTP</button>
           </form>
         )}
+        <div className="loginwith">
+        <p>--------------------or--------------------</p>
+          <Link to="/ManagerAgainLogin">Login with password</Link>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 import toast ,{Toaster} from 'react-hot-toast';
 
@@ -55,7 +55,7 @@ const BDAlogin = () => {
               <input
                 type="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Enter company mail id"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -83,6 +83,10 @@ const BDAlogin = () => {
             </div>
           </form>
         )}
+        <p>--------------------or--------------------</p>
+        <div className="loginwith">
+          <Link to="/BDAAgainLogin">Login with password</Link>
+        </div>
       </div>
     </div>
   );
