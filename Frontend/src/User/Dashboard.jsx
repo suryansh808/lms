@@ -6,7 +6,7 @@ import API from "../API";
 
 
 const Dashboard = () => {
-  const userEmail = atob(localStorage.getItem("userEmail"));
+  const userEmail = localStorage.getItem("userEmail");
   const [enrollData, setenrollData] = useState([]);
 
   const fetchenrollData = async () => {
