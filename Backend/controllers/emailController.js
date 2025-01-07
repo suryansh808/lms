@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
-  secure: true, // true for 465, false for other ports
+  secure: false, // true for 465, false for other ports
   auth: {
     user: process.env.SMTP_MAIL, // generated ethereal user
     pass: process.env.SMTP_PASSWORD, // generated ethereal password
@@ -15,9 +15,6 @@ let transporter = nodemailer.createTransport({
     rejectUnauthorized: false, 
   },
   pool: true, 
-  maxConnections: 5, // Limit the number of connections
-  maxMessages: 100, // Limit the number of messages sent per connection
-  rateLimit: 5, // Limit messages per second
 });
 
 
