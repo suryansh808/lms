@@ -22,7 +22,7 @@ const Login = () => {
                 setTimeout(() => {
                 console.log(response.data);
                localStorage.setItem('userId', response.data._id);
-               localStorage.setItem('userEmail', btoa(response.data.email));            
+               localStorage.setItem('userEmail', response.data.email);            
                localStorage.setItem("token", response.data.token);
               navigate("/Dashboard");
             }, 2000);

@@ -7,7 +7,7 @@ import DOMPurify from "dompurify";
 
 const EnrolledCourse = () => {
   const [isLeftVisible, setisLeftVisible] = useState(false);
-  const userEmail = atob(localStorage.getItem("userEmail"));
+  const userEmail = localStorage.getItem("userEmail");
   const [enrollData, setenrollData] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const navigate = useNavigate();
