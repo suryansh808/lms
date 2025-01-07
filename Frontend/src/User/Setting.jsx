@@ -29,10 +29,6 @@ const Setting = () => {
     }
   };
 
-  const closeAlert = () => {
-    setShowAlert(false);
-  };
-
   return (
     <div id="usersetting">
       <Toaster position="top-center" reverseOrder={false} />

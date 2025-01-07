@@ -5,7 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const AddCourse = () => {
-  const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
+  // const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [courses, setCourses] = useState([]);
@@ -92,11 +92,11 @@ const AddCourse = () => {
 
   return (
     <div id="AdminAddCourse">
-      {iscourseFormVisible && (
-        <div className="form">
+       {/* {iscourseFormVisible && ( */}
+       <div className="form">
           <form onSubmit={handleSumbit}>
-            <span onClick={resetForm}>✖</span>
-            <h1>{editingCourseId ? "Edit Course" : "Add New Course"}</h1>
+            <h2>{editingCourseId ? "Edit Course" : "Add New Course"}</h2>
+            {/* <span onClick={resetForm}>✖</span> */}
             <input
               type="text"
               value={title}
@@ -112,10 +112,10 @@ const AddCourse = () => {
               onChange={(value) => setDescription(value)}
               required
             />
-            <input className="cursor-pointer" type="submit" />
+            <input className="cursor-pointer" type="submit" value="Add Course" />
           </form>
         </div>
-      )}
+       {/* )}  */}
       <div className="coursetable">
         <div>
         <h2>Added Courses</h2>

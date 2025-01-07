@@ -54,31 +54,31 @@
 
 #AdminAddCourse {
   .form {
-      position: absolute;
+      /* position: absolute;
       background-color: rgb(0, 0, 0, 0.5);
       height: 100%;
       width: 100%;
-      padding: 10px;
+      padding: 10px; */
 
       form {
-          padding: 20px;
+          padding: 10px;
           border-radius: 10px;
           margin: auto;
           background-color: rgb(255, 255, 255);
           width: fit-content;
 
-          span {
+          /* span {
               float: right;
               padding: 5px;
               margin-bottom: 20;
               cursor: pointer;
 
-          }
+          } */
 
 
       }
 
-      h1 {
+      h2 {
           text-align: center;
       }
 
@@ -87,16 +87,16 @@
           padding: 10px;
           border: 1px solid #CCCCCC;
           width: 100%;
-          margin: 3px 0;
+          /* margin: 3px 0; */
       }
       input:focus{
         outline: none;
       }
 
       .reactquill {
-          margin: 10px 0;
+          margin: 2px 0;
           overflow-y: hidden; 
-          height: 350px;
+          height: 200px;
           width: 420px;
 
       }
