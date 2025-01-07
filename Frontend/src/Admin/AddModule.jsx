@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../API";
 import logo from "../assets/logo.jpg";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 
 const AddModule = () => {
   const [isLeftSidebar, setisLeftSidebar] = useState(true);
@@ -29,7 +29,7 @@ const AddModule = () => {
     }
   };
 
-  const sanitizedDescription = DOMPurify.sanitize(selectedCourse?.description);
+  // const sanitizedDescription = DOMPurify.sanitize(selectedCourse?.description);
  
 
   useEffect(() => {
@@ -219,9 +219,12 @@ const AddModule = () => {
               </table>
               <div className="description">
                 <h3>Description of {selectedCourse.title} !!!</h3>
-                <pre
+                {/* <pre
                   dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-                />
+                /> */}
+                <pre>
+                  {selectedCourse.description}
+                </pre>
               </div>
             </div>
           </div>
