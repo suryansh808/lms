@@ -32,14 +32,13 @@ const sendEmail  = expressAsyncHandler(async (req, res) => {
     priority: "high",
   };
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`[${new Date().toISOString()}] Email sent: ${info.response}`);
-    res.status(200).json({ message: "Email sent successfully!" });
-  } catch (error) {
-    console.error(`[${new Date().toISOString()}] Error sending email: ${error}`);
-    res.status(500).json({ message: "Failed to send email", error });
-  }
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent successfully!");
+    }
+  });
 });
 
 module.exports = { sendEmail};
