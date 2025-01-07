@@ -5,6 +5,7 @@ const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Manager = require("../models/Manager");
+const crypto = require('crypto'); 
 
 
 //post to create a new manager account
@@ -84,8 +85,8 @@ router.delete("/deletemanager/:id", async (req, res) => {
 });
 
 // api to verfiy the login credentials and send otp
- const generateOTP = () =>
-    Math.floor(100000 + Math.random() * 900000).toString();
+//  const generateOTP = () =>
+//     Math.floor(100000 + Math.random() * 900000).toString();
   
   // Send OTP to manager Email
 router.post("/managersendotp", async (req, res) => {
@@ -95,9 +96,8 @@ router.post("/managersendotp", async (req, res) => {
       if (!manager) {
         return res.status(404).json({ message: "manager user not found" });
       }
-      const otp = generateOTP();
-      manager.otp = otp;
-      await manager.save();
+      const otp = crypto.randomInt(100000, 1000000);
+
       await sendEmail({
         body: {
           email,
@@ -118,6 +118,10 @@ router.post("/managersendotp", async (req, res) => {
         `,
         },
       });
+
+      manager.otp = otp;
+      await manager.save();
+      
   
       res.status(200).json({ message: "OTP sent to your email!" });
     } catch (error) {

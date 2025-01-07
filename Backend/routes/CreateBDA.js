@@ -3,6 +3,7 @@ const router = express.Router();
 const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 const CreateBDA = require("../models/CreateBDA");
+const crypto = require('crypto'); 
 
 //post to create a new bda account
 router.post("/createbda", async (req, res) => {
@@ -72,8 +73,8 @@ router.delete("/deletebda/:id", async (req, res) => {
   }
 });
 
-const generateOTP = () =>
-  Math.floor(100000 + Math.random() * 900000).toString();
+// const generateOTP = () =>
+//   Math.floor(100000 + Math.random() * 900000).toString();
 
 //Send OTP to BDA Email
 router.post("/bdasendotp", async (req, res) => {
@@ -83,34 +84,37 @@ router.post("/bdasendotp", async (req, res) => {
     if (!bda) {
       return res.status(404).json({ message: "BDA not found" });
     }
-    const otp = generateOTP();
+    const otp = crypto.randomInt(100000, 1000000);
+
+      // Send OTP via Email
+      await sendEmail({
+        body: {
+          email,
+          subject: "BDA Login Credtials",
+          message: `
+           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+          <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+              <h1>Krutanic Solutions</h1>
+          </div>
+          <div style="padding: 20px; text-align: center;">
+              <p style="font-size: 16px; color: #333;">Welcome back! Agent,</p>
+              <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
+              <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
+              <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
+          </div>
+          <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+              <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+              <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+          </div>
+      </div>
+      `,
+        },
+      });
+
     bda.otp = otp; 
     await bda.save();
 
-    // Send OTP via Email
-    await sendEmail({
-      body: {
-        email,
-        subject: "BDA Login Credtials",
-        message: `
-         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-            <h1>Krutanic Solutions</h1>
-        </div>
-        <div style="padding: 20px; text-align: center;">
-            <p style="font-size: 16px; color: #333;">Welcome back! Agent,</p>
-            <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
-            <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
-            <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
-        </div>
-        <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-            <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
-            <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
-        </div>
-    </div>
-    `,
-      },
-    });
+  
 
     res.status(200).json({ message: "OTP sent to your email!" });
   } catch (error) {

@@ -6,7 +6,7 @@ require("dotenv").config();
 const authMiddleware = require("../middleware/UserAuth");
 const { sendEmail } = require("../controllers/emailController");
 const rateLimit = require("express-rate-limit");
-
+const crypto = require('crypto'); 
 // checkuser login with throttling
 const loginLimiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 15 minutes window
@@ -147,14 +147,9 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
       return res.status(404).json({ message: "User not found enter a valid email" });
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    // const otp = Math.floor(100000 + Math.random() * 900000).toString();
+     const otp = crypto.randomInt(100000, 1000000);
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 mins expiration
-
-    user.otp = otp;
-    user.otpExpires = otpExpires;
-    await user.save();
-
-    // Send OTP via email
     await sendEmail({
       body: {
         email: user.email,
@@ -178,6 +173,13 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
     `,
       },
     });
+
+    user.otp = otp;
+    user.otpExpires = otpExpires;
+    await user.save();
+
+    // Send OTP via email
+   
 
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (err) {

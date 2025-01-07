@@ -48,7 +48,7 @@ const AdminLogIn = () => {
     }
     try {
     const response =   await axios.post(`${API}/otpverify`, { email, otp });
-    toast.success('logout successful!!!');
+    toast.success('login successful!!!');
     setTimeout(() => {
       localStorage.setItem("adminToken", response.data.token);
       navigate("/AdminDashboard");
