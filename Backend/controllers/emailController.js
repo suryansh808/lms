@@ -15,6 +15,9 @@ let transporter = nodemailer.createTransport({
     rejectUnauthorized: false, 
   },
   pool: true, 
+  maxConnections: 5, // Limit the number of connections
+  maxMessages: 100, // Limit the number of messages sent per connection
+  rateLimit: 5, // Limit messages per second
 });
 
 
@@ -26,15 +29,17 @@ const sendEmail  = expressAsyncHandler(async (req, res) => {
     to: email,
     subject: subject,
     html: message,
+    priority: "high",
   };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent successfully!");
-    }
-  });
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`[${new Date().toISOString()}] Email sent: ${info.response}`);
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error(`[${new Date().toISOString()}] Error sending email: ${error}`);
+    res.status(500).json({ message: "Failed to send email", error });
+  }
 });
 
 module.exports = { sendEmail};
