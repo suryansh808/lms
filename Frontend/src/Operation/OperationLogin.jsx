@@ -11,7 +11,8 @@ const OperationLogin = () => {
   const errorRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
     if (!email) {
       toast.error("Please enter your email.");
       return;
@@ -74,7 +75,7 @@ const OperationLogin = () => {
       <div className="loginform">
         <h2>Operation Login</h2>
         {!otpSent ? (
-          <div>
+          <form onSubmit={handleSendOtp}>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -84,8 +85,8 @@ const OperationLogin = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={handleSendOtp}>Send OTP</button>
-          </div>
+            <button>Send OTP</button>
+          </form>
         ) : (
           <form onSubmit={handleVerifyOtp}>
             <label htmlFor="otp">Enter OTP:</label>
