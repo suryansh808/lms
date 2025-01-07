@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -51,6 +51,10 @@ const LoginAdmin = () => {
           placeholder="Password"
         />
         <button onClick={handleLogin}>Log In</button>
+        <p>--------------------or--------------------</p>
+                <div className='loginwith'>
+                    <Link to="/AdminLogin">Login with OTP</Link>
+                </div>
       </div>
     </div>
   );

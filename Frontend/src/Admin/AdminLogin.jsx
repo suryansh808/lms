@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 import toast ,{Toaster} from 'react-hot-toast';
 
@@ -68,7 +68,7 @@ const AdminLogIn = () => {
   return (
     <div id="loginpage">
        <Toaster position="top-center" reverseOrder={false}/>
-     <div className="loginform">
+       <div className="loginform">
         <h2>Admin LogIn</h2>
           <div>
           <input
@@ -102,6 +102,10 @@ const AdminLogIn = () => {
           >
             {isOtpSent ? "Verify OTP" : "Send OTP"}
           </button>
+          <p>--------------------or--------------------</p>
+        <div className="loginwith">
+          <Link to="/LoginAdmin">Login with password</Link>
+        </div>
           
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../API';
+import axios from 'axios';
 
 const ManagerAgainLogin = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ const ManagerAgainLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${API}/checkmanager`, {
+            const response = await axios.post(`${API}/checkmanager`, {
                 email, password ,
             });
             if (response.status === 200) {
