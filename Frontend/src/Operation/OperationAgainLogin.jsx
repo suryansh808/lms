@@ -3,6 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Link , useNavigate } from 'react-router-dom';
 
 import API from '../API';
+import axios from 'axios';
 
 const OperationAgainLogin = () => {
     const [email, setEmail] = useState('');
@@ -13,11 +14,11 @@ const OperationAgainLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${API}/checkoperation`, {
+            const response = await axios.post(`${API}/checkoperation`, {
                 email, password,
             });
+            toast.success('Login successful!');
             if (response.status === 200) {
-                toast.success('Login successful!');
                 setTimeout(() => {
                     localStorage.setItem("operationId", response.data._id);
                 localStorage.setItem("operationName", response.data.operationName);
