@@ -48,11 +48,13 @@ const AdminLogIn = () => {
     }
     try {
     const response =   await axios.post(`${API}/otpverify`, { email, otp });
-    toast.success('login successful!!!');
-    setTimeout(() => {
-      localStorage.setItem("adminToken", response.data.token);
-      navigate("/AdminDashboard");
-    }, 2000);
+      if(response.status === 200){
+        toast.success('login successful!!!');
+        setTimeout(() => {
+          localStorage.setItem("adminToken", response.data.token);
+          navigate("/AdminDashboard");
+        }, 1500);
+      }
     } catch (err) {
       toast.error("Failed to verify OTP");
     }

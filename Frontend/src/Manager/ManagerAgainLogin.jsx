@@ -13,16 +13,9 @@ const ManagerAgainLogin = () => {
 
         try {
             const response = await fetch(`${API}/checkmanager`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+                email, password ,
             });
-
-            const data = await response.json();
-
-            if (response.ok) {
+            if (response.status === 200) {
                 toast.success('Login successful!');
                 setTimeout(() => {
                     localStorage.setItem("managerId", response.data._id);

@@ -176,7 +176,7 @@ router.post("/checkbdaauth", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ token, _id: bda._id, email: bda.email });
+    res.status(200).json({ token, bdaId: bda._id, bdaName: bda.fullname });
   } catch (err) {
     console.error("Error during login", err);
     res.status(500).json({ message: "Server error" });

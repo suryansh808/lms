@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link , useNavigate } from 'react-router-dom';
 import API from '../API';
+import axios from "axios";
 
 const BDAAgainLogin = () => {
     const [email, setEmail] = useState('');
@@ -12,18 +13,13 @@ const BDAAgainLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${API}/checkbdaauth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+            const response = await axios.post(`${API}/checkbdaauth`, {
+                email, password,
             });
-            const data = await response.json();
-            toast.success('Login successful!');
-            if (response.ok) {
+            if (response.status === 200) {
+                toast.success('Login successful!');
                 setTimeout(() => {
-                    localStorage.setItem("bdaId", response.data.bdaId);
+                localStorage.setItem("bdaId", response.data.bdaId);
                 localStorage.setItem("bdaName", response.data.bdaName);
                 localStorage.setItem("bdaToken", response.data.token);
                 navigate("/bdadashboard");

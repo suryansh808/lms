@@ -21,11 +21,13 @@ const LoginAdmin = () => {
         email,
         password,
       });
-      toast.success("Login successful!");
+     if(response.status === 200){
+       toast.success("Login successful!");
       setTimeout(() => {
-          localStorage.setItem("adminToken", response.data.token);
+        localStorage.setItem("adminToken", response.data.token);
         navigate("/AdminDashboard");
       }, 1500);
+     }
     } catch (err) {
       toast.error(err.response?.data?.error || "Login failed");
     }
