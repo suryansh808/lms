@@ -29,7 +29,7 @@ const OperationAgainLogin = () => {
                     localStorage.setItem("operationId", response.data._id);
                 localStorage.setItem("operationName", response.data.operationName);
                 localStorage.setItem("operationToken", response.data.token);
-                navigate("/OperationDashboard");
+                navigate("/operationdashboard");
                 }, 1500);
             } else {
                 toast.error(data.message || 'Login failed');

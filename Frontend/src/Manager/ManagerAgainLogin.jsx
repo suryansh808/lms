@@ -28,7 +28,7 @@ const ManagerAgainLogin = () => {
                     localStorage.setItem("managerId", response.data._id);
                 localStorage.setItem("managerEmail", response.data.email);
                 localStorage.setItem("managerToken", response.data.token);
-                navigate("/ManagerDashboard");
+                navigate("/managerdashboard");
                 }, 1500);
             } else {
                 toast.error(data.message || 'Login failed');

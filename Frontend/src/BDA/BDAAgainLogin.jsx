@@ -26,7 +26,7 @@ const BDAAgainLogin = () => {
                     localStorage.setItem("bdaId", response.data.bdaId);
                 localStorage.setItem("bdaName", response.data.bdaName);
                 localStorage.setItem("bdaToken", response.data.token);
-                navigate("/BDADashboard");
+                navigate("/bdadashboard");
                 }, 1500);
             } else {
                 toast.error(data.message || 'Login failed');
