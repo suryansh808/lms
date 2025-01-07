@@ -47,7 +47,7 @@ const OperationLogin = () => {
         localStorage.setItem("operationName", response.data.operationName);
         localStorage.setItem("operationToken", response.data.token);
         navigate("/operationdashboard");
-      }, 2000); 
+      }, 1500); 
       }
     } catch (error) {
       toast.error(

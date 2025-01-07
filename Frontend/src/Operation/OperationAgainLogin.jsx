@@ -14,17 +14,10 @@ const OperationAgainLogin = () => {
 
         try {
             const response = await fetch(`${API}/checkoperation`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+                email, password,
             });
-
-            const data = await response.json();
-
-            toast.success('Login successful!');
-            if (response.ok) {
+            if (response.status === 200) {
+                toast.success('Login successful!');
                 setTimeout(() => {
                     localStorage.setItem("operationId", response.data._id);
                 localStorage.setItem("operationName", response.data.operationName);

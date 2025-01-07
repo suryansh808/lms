@@ -22,8 +22,8 @@ const ManagerAgainLogin = () => {
 
             const data = await response.json();
 
-            toast.success('Login successful!');
             if (response.ok) {
+                toast.success('Login successful!');
                 setTimeout(() => {
                     localStorage.setItem("managerId", response.data._id);
                 localStorage.setItem("managerEmail", response.data.email);
