@@ -7,11 +7,12 @@ const crypto = require('crypto');
 
 //post to create a new bda account
 router.post("/createbda", async (req, res) => {
-  const { fullname, email } = req.body;
+  const { fullname, email , password } = req.body;
   try {
     const newbda = new CreateBDA({
       fullname,
       email,
+      password
     });
     await newbda.save();
     res.status(201).json(newbda);
@@ -28,7 +29,7 @@ router.get("/getbda", async (req, res) => {
     if(bdaId){
        bda = await CreateBDA.findById(bdaId);
        if (!bda) {
-        return res.status(404).json({ message: "Bda not found for the given userId" });
+        return res.status(404).json({ message: "Bda not found for the given bdaId" });
       }
     }else{
        bda = await CreateBDA.find().sort({ _id: -1 });
@@ -154,6 +155,31 @@ router.post("/bdaverifyotp", async (req, res) => {
     res
       .status(500)
       .json({ message: "OTP verification failed", error: error.message });
+  }
+});
+
+router.post("/checkbdaauth", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Find the bda by email
+    const bda = await CreateBDA.findOne({ email });
+    if (!bda) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    if (password !== bda.password) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign(
+      { id: bda._id, email: bda.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ token, _id: bda._id, email: bda.email });
+  } catch (err) {
+    console.error("Error during login", err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

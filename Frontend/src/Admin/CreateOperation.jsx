@@ -7,6 +7,7 @@ const CreateOperation = () => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
+    password:""
   });
   const [operation, setOperation] = useState(null);
   const [editingOperationId, setEditingOperationId] = useState(null);
@@ -20,6 +21,7 @@ const CreateOperation = () => {
     const newOperation = {
       fullname: formData.fullname,
       email: formData.email,
+      password: formData.password
     };
     try {
       if (editingOperationId) {
@@ -60,6 +62,7 @@ const CreateOperation = () => {
     setFormData({
       fullname: "",
       email: "",
+      password: ""
     });
     setEditingOperationId(null);
     setiscourseFormVisible(false);
@@ -97,6 +100,7 @@ const CreateOperation = () => {
       setFormData({
         fullname: operation.fullname,
         email: operation.email,
+        password: operation.password
       });
       setEditingOperationId(operation._id);
       setiscourseFormVisible(true);
@@ -132,6 +136,7 @@ const CreateOperation = () => {
               placeholder="Enter email id"
               required
             />
+            <input type="text" placeholder="Create password" name="password" id="password" value={formData.password} onChange={handleChange} required />
 
             <input
               className=" cursor-pointer"
@@ -153,7 +158,7 @@ const CreateOperation = () => {
               <th>Sl No.</th>
               <th>Full Name</th>
               <th>Email</th>
-
+               <th>Password</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -163,7 +168,7 @@ const CreateOperation = () => {
                 <td>{index + 1}</td>
                 <td>{operation.fullname}</td>
                 <td>{operation.email}</td>
-
+                 <td>{operation.password}</td>
                 <td>
                   <button onClick={() => handleDelete(operation._id)}>
                     Delete

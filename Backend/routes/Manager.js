@@ -10,11 +10,12 @@ const crypto = require('crypto');
 
 //post to create a new manager account
 router.post("/createmanager", async (req, res) => {
-    const { email, fullname } = req.body;
+    const { email, fullname , password } = req.body;
     try {
       const newmanager = new Manager({
         email: email,
-        fullname: fullname
+        fullname: fullname,
+        password: password
       });
       await newmanager.save()
       .then(() => {
@@ -55,10 +56,10 @@ router.get("/getmanager", async (req, res) => {
 router.put("/updatemanager/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email } = req.body;
+    const { fullname, email , password } = req.body;
     const updatedmanager = await Manager.findByIdAndUpdate(
       id,
-      { fullname, email},
+      { fullname, email , password},
       { new: true }
     );
     if (!updatedmanager) {
@@ -167,5 +168,32 @@ router.post("/managerverifyotp", async (req, res) => {
 router.get("/managerDashboard", authMiddleware, (req, res) => {
     res.status(200).json({ message: "Welcome to the dashboard!" });
   });
+
+
+  router.post("/checkmanager", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      // Find the manager by email
+      const manager = await Manager.findOne({ email });
+      if (!manager) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      if (password !== manager.password) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      const token = jwt.sign(
+        { id: manager._id, email: manager.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({ token, _id: manager._id, email: manager.email });
+    } catch (err) {
+      console.error("Error during login", err);
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+  
 
   module.exports = router;

@@ -10,7 +10,10 @@ const managerSchema = new mongoose.Schema({
     },
     otp: {
         type: String,
-    }
+    },
+    password: {
+        type: String,
+        },
 });
 
 const Manager = mongoose.model('Manager', managerSchema);

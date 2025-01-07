@@ -6,6 +6,10 @@ const AdminSchema = new mongoose.Schema({
   },
   otp:{
     type:String,
+  },
+  password:{
+    type:String,
+    default: "Admin@123"
   }
 });
 

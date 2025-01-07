@@ -7,6 +7,7 @@ const CreateBDA = () => {
   const [formData, setFormData] = useState({
      fullname: "",
      email: "",
+     password:""
    
    });
   const [bda, setBda] = useState([]);
@@ -28,6 +29,7 @@ const CreateBDA = () => {
     setFormData({
       fullname: "",
       email: "",
+      password:""
      
     });
     setEditingBdaId(null);
@@ -39,6 +41,7 @@ const CreateBDA = () => {
     const newBda = {
       fullname: formData.fullname,
       email: formData.email,
+      password:formData.password
      
     };
     try {
@@ -86,6 +89,7 @@ const CreateBDA = () => {
     setFormData({
       fullname: bdaId.fullname,
       email: bdaId.email,
+      password: bdaId.password
     
     });
     setEditingBdaId(bdaId._id);
@@ -120,6 +124,7 @@ const CreateBDA = () => {
           placeholder="Enter email id"
           required
         />
+        <input type="text" value={formData.password} onChange={handleChange} required name="password" id="password" placeholder="Create password" />
        
             <input className="cursor-pointer" type="submit" value={editingBdaId ? "Edit Account" : "Create Account"} />
           </form>
@@ -136,7 +141,7 @@ const CreateBDA = () => {
               <th>Sl.No</th>
               <th>Full Name</th>
               <th>Email</th>
-            
+              <th>Password</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -146,7 +151,7 @@ const CreateBDA = () => {
                 <td>{index + 1}</td>
                 <td>{bda.fullname}</td>
                 <td>{bda.email}</td>
-             
+                 <td>{bda.password}</td>
                 <td>
                   <button onClick={() => handleDelete(bda._id)}>
                     Delete

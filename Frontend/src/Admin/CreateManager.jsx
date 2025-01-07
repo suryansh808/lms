@@ -7,6 +7,7 @@ const Createmanager = () => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
+    password:""
   });
   const [manager, setmanager] = useState(null);
   const [editingmanagerId, setEditingmanagerId] = useState(null);
@@ -20,6 +21,7 @@ const Createmanager = () => {
     const newmanager = {
       fullname: formData.fullname,
       email: formData.email,
+      password: formData.password
     };
     try {
       if (editingmanagerId) {
@@ -61,6 +63,7 @@ const Createmanager = () => {
     setFormData({
       fullname: "",
       email: "",
+      password: ""
     });
     setEditingmanagerId(null);
     setiscourseFormVisible(false);
@@ -98,6 +101,7 @@ const Createmanager = () => {
       setFormData({
         fullname: manager.fullname,
         email: manager.email,
+        password: manager.password,
       });
       setEditingmanagerId(manager._id);
       setiscourseFormVisible(true);
@@ -133,6 +137,7 @@ const Createmanager = () => {
               placeholder="Enter email id"
               required
             />
+            <input type="text" placeholder="Create password" name="password" id="pasword" value={formData.password} onChange={handleChange} required />
 
             <input
               className=" cursor-pointer"
@@ -154,7 +159,7 @@ const Createmanager = () => {
               <th>Sl No.</th>
               <th>Full Name</th>
               <th>Email</th>
-
+               <th>Password</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -164,7 +169,7 @@ const Createmanager = () => {
                 <td>{index + 1}</td>
                 <td>{manager.fullname}</td>
                 <td>{manager.email}</td>
-
+                <td>{manager.password}</td>
                 <td>
                   <button onClick={() => handleDelete(manager._id)}>
                     Delete

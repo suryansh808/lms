@@ -11,11 +11,12 @@ const crypto = require('crypto');
 
 //post to create a new operation account
 router.post("/createoperation", async (req, res) => {
-  const { fullname, email } = req.body;
+  const { fullname, email , password } = req.body;
   try {
     const newoperation = new CreateOperation({
       fullname: fullname,
       email: email,
+      password: password
     });
     await newoperation.save()
     .then(() => {
@@ -56,10 +57,10 @@ router.get("/getoperation", async (req, res) => {
 router.put("/updateoperation/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email } = req.body;
+    const { fullname, email , password } = req.body;
     const updatedOperation = await CreateOperation.findByIdAndUpdate(
       id,
-      { fullname, email},
+      { fullname, email , password},
       { new: true }
     );
     if (!updatedOperation) {
@@ -220,5 +221,31 @@ router.put('/mailsendedchange/:id', async (req, res) => {
     res.status(500).send({ message: 'Failed to update student record.' });
   }
 });
+
+router.post("/checkoperation", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Find the operation by email
+    const operation = await CreateOperation.findOne({ email });
+    if (!operation) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    if (password !== operation.password) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign(
+      { id: operation._id, email: operation.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ token, _id: operation._id, email: operation.email });
+  } catch (err) {
+    console.error("Error during login", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;
