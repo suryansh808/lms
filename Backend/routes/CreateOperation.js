@@ -240,7 +240,7 @@ router.post("/checkoperation", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ token, _id: operation._id, email: operation.email });
+    res.status(200).json({ token, _id: operation._id, operationName: operation.operationName });
   } catch (err) {
     console.error("Error during login", err);
     res.status(500).json({ message: "Server error" });
