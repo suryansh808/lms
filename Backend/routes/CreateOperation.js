@@ -91,14 +91,14 @@ router.delete("/deleteoperation/:id", async (req, res) => {
 //   Math.floor(100000 + Math.random() * 900000).toString();
 
 // Send OTP to Operation Email
-router.post("/operationsendotp", async (req, res) => {
-  const { email } = req.body;
-  try {
-    const operation = await CreateOperation.findOne({ email });
-    if (!operation) {
-      return res.status(404).json({ message: "Operation user not found" });
-    }
- const otp = crypto.randomInt(100000, 1000000);
+// router.post("/operationsendotp", async (req, res) => {
+//   const { email } = req.body;
+//   try {
+//     const operation = await CreateOperation.findOne({ email });
+//     if (!operation) {
+//       return res.status(404).json({ message: "Operation user not found" });
+//     }
+//  const otp = crypto.randomInt(100000, 1000000);
 //  await sendEmail({
 //   body: {
 //     email,
@@ -125,12 +125,56 @@ router.post("/operationsendotp", async (req, res) => {
 //     operation.otp = otp;
 //     await operation.save();
 
-// Parallel execution for sending email and saving OTP
-const sendEmailPromise = sendEmail({
-  body: {
-    email,
-    subject: "Operation Login Credentials",
-    message: `
+// const sendEmailPromise = sendEmail({
+//   body: {
+//     email,
+//     subject: "Operation Login Credentials",
+//     message: `
+//       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+//         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+//           <h1>Krutanic Solutions</h1>
+//         </div>
+//         <div style="padding: 20px; text-align: center;">
+//           <p style="font-size: 16px; color: #333;">Welcome back! Operation Agent,</p>
+//           <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
+//           <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
+//           <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
+//         </div>
+//         <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+//           <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+//           <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+//         </div>
+//       </div>
+//     `,
+//   },
+// });
+// const saveOtpPromise = (async () => {
+//   operation.otp = otp;
+//   await operation.save();
+// })();
+
+// await Promise.all([sendEmailPromise, saveOtpPromise]);
+//     res.status(200).json({ message: "OTP sent to your email!" });
+//   } catch (error) {
+//     console.error("Failed to send OTP:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Failed to send OTP", error: error.message });
+//   }
+// });
+
+router.post("/operationsendotp", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const operation = await CreateOperation.findOne({ email });
+    if (!operation) {
+      return res.status(404).json({ message: "Operation user not found" });
+    }
+
+    const otp = crypto.randomInt(100000, 1000000);
+
+    // Email message
+    const emailMessage = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
           <h1>Krutanic Solutions</h1>
@@ -146,27 +190,24 @@ const sendEmailPromise = sendEmail({
           <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
         </div>
       </div>
-    `,
-  },
-});
+    `;
 
-const saveOtpPromise = (async () => {
-  operation.otp = otp;
-  await operation.save();
-})();
-
-// Wait for both promises to complete
-await Promise.all([sendEmailPromise, saveOtpPromise]);
- 
+    // Save OTP in database and send email simultaneously
+    operation.otp = otp;
+    await Promise.all([
+      operation.save(),
+      sendEmail({ email, subject: "Operation Login Credentials", message: emailMessage }),
+    ]);
 
     res.status(200).json({ message: "OTP sent to your email!" });
   } catch (error) {
     console.error("Failed to send OTP:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to send OTP", error: error.message });
+    res.status(500).json({ message: "Failed to send OTP", error: error.message });
   }
 });
+
+
+
 
 // Verify OTP and Login
 router.post("/operationverifyotp", async (req, res) => {

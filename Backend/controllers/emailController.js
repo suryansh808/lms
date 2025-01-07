@@ -18,10 +18,8 @@ let transporter = nodemailer.createTransport({
 });
 
 
-const sendEmail  = expressAsyncHandler(async (req, res) => {
-  const { email, subject, message } = req.body;
-
-  var mailOptions = {
+const sendEmail = async ({ email, subject, message }) => {
+  const mailOptions = {
     from: process.env.SMTP_MAIL,
     to: email,
     subject: subject,
@@ -29,13 +27,17 @@ const sendEmail  = expressAsyncHandler(async (req, res) => {
     priority: "high",
   };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent successfully!");
-    }
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        reject(error); // Return the error
+      } else {
+        console.log("Email sent successfully!", info.response);
+        resolve(info.response); // Return success
+      }
+    });
   });
-});
+};
 
 module.exports = { sendEmail};
