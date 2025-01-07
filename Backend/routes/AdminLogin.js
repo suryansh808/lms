@@ -42,10 +42,9 @@ router.post(
         return res.status(401).json({ error: "You are not authorized as admin" });
       }
 
-      const otp = Math.floor(100000 + Math.random() * 900000);
-      admin.otp = otp;
-      await admin.save();
 
+
+      const otp = Math.floor(100000 + Math.random() * 900000);
       await sendEmail({
         body: {
           email,
@@ -69,6 +68,10 @@ router.post(
           `,
         },
       });
+      admin.otp = otp;
+      await admin.save();
+
+      
 
       res.status(200).json({ message: "OTP sent to your email!" });
     } catch (error) {

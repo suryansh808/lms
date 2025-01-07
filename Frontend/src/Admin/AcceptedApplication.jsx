@@ -88,7 +88,7 @@ const AcceptedApplication = () => {
             />
             <input
               type="text"
-              name="contact"
+              name="phone"
               placeholder="Candidate contact no"
               value={formData.phone}
               onChange={handleInputChange}
