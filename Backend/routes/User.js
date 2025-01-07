@@ -150,11 +150,8 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
     // const otp = Math.floor(100000 + Math.random() * 900000).toString();
      const otp = crypto.randomInt(100000, 1000000);
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 mins expiration
-    await sendEmail({
-      body: {
-        email: user.email,
-        subject: "Your OTP for Login",
-        message: `
+
+       const  EmailMessage = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #4a90e2; color: #fff; text-align: center; padding: 20px;">
             <h1>Krutanic Solution</h1>
@@ -170,17 +167,14 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
             <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
         </div>
     </div>
-    `,
-      },
-    });
+    `;
 
     user.otp = otp;
     user.otpExpires = otpExpires;
-    await user.save();
-
-    // Send OTP via email
-   
-
+    await Promise.all([
+      user.save(),
+      sendEmail({email ,  subject: "Your OTP for Login", message: EmailMessage}),
+    ]);
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (err) {
     console.error(err);

@@ -39,13 +39,8 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
       }
 
       const otp = crypto.randomInt(100000, 1000000);
-      console.log(otp);
-      // const otp = Math.floor(100000 + Math.random() * 900000);
-      await sendEmail({
-        body: {
-          email,
-          subject: "Krutanic Admin Login Credentials",
-          message: `
+ 
+         const EmailMessage = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
               <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
                 <h1>Krutanic Solutions</h1>
@@ -61,14 +56,12 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
                 <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
               </div>
             </div>
-          `,
-        },
-      });
+          `;
       admin.otp = otp;
-      await admin.save();
-
-      
-
+        await Promise.all([
+          admin.save(),
+          sendEmail({ email , subject: "Krutanic Admin Login Credentials", message: EmailMessage}),
+        ]);
       res.status(200).json({ message: "OTP sent to your email!" });
     } catch (error) {
       res.status(500).json({ message: "Failed to send OTP", error: error.message });

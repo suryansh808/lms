@@ -85,9 +85,6 @@ router.delete("/deletemanager/:id", async (req, res) => {
   }
 });
 
-// api to verfiy the login credentials and send otp
-//  const generateOTP = () =>
-//     Math.floor(100000 + Math.random() * 900000).toString();
   
   // Send OTP to manager Email
 router.post("/managersendotp", async (req, res) => {
@@ -99,11 +96,7 @@ router.post("/managersendotp", async (req, res) => {
       }
       const otp = crypto.randomInt(100000, 1000000);
 
-      await sendEmail({
-        body: {
-          email,
-          subject: "Your OTP for Secure Login",
-          message: `
+         const EmailMessage = `
           <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <h2 style="color: #2c3e50;">🔐 Welcome back, manager!</h2>
             <p>Your <strong>One-Time Password (OTP)</strong> for secure login is:</p>
@@ -116,14 +109,14 @@ router.post("/managersendotp", async (req, res) => {
             <strong>Krutanic Solution</strong></p>
             <hr />
           </div> 
-        `,
-        },
-      });
-
+        `;
+        
       manager.otp = otp;
-      await manager.save();
-      
-  
+
+      await Promise.all([
+        manager.save(),
+        sendEmail({email,  subject: "Your OTP for Login", message : EmailMessage}),
+      ]);
       res.status(200).json({ message: "OTP sent to your email!" });
     } catch (error) {
       console.error("Failed to send OTP:", error);

@@ -86,83 +86,6 @@ router.delete("/deleteoperation/:id", async (req, res) => {
   }
 });
 
-// api to verfiy the login credentials and send otp
-// const generateOTP = () =>
-//   Math.floor(100000 + Math.random() * 900000).toString();
-
-// Send OTP to Operation Email
-// router.post("/operationsendotp", async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     const operation = await CreateOperation.findOne({ email });
-//     if (!operation) {
-//       return res.status(404).json({ message: "Operation user not found" });
-//     }
-//  const otp = crypto.randomInt(100000, 1000000);
-//  await sendEmail({
-//   body: {
-//     email,
-//     subject: "Operation Login Credtials",
-//     message: `
-//    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-//     <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-//         <h1>Krutanic Solutions</h1>
-//     </div>
-//     <div style="padding: 20px; text-align: center;">
-//         <p style="font-size: 16px; color: #333;">Welcome back! Operation Agent,</p>
-//         <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
-//         <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
-//         <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
-//     </div>
-//     <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-//         <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
-//         <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
-//     </div>
-// </div>
-//   `,
-//   },
-// });
-//     operation.otp = otp;
-//     await operation.save();
-
-// const sendEmailPromise = sendEmail({
-//   body: {
-//     email,
-//     subject: "Operation Login Credentials",
-//     message: `
-//       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-//         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-//           <h1>Krutanic Solutions</h1>
-//         </div>
-//         <div style="padding: 20px; text-align: center;">
-//           <p style="font-size: 16px; color: #333;">Welcome back! Operation Agent,</p>
-//           <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
-//           <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
-//           <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
-//         </div>
-//         <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-//           <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
-//           <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
-//         </div>
-//       </div>
-//     `,
-//   },
-// });
-// const saveOtpPromise = (async () => {
-//   operation.otp = otp;
-//   await operation.save();
-// })();
-
-// await Promise.all([sendEmailPromise, saveOtpPromise]);
-//     res.status(200).json({ message: "OTP sent to your email!" });
-//   } catch (error) {
-//     console.error("Failed to send OTP:", error);
-//     res
-//       .status(500)
-//       .json({ message: "Failed to send OTP", error: error.message });
-//   }
-// });
-
 router.post("/operationsendotp", async (req, res) => {
   const { email } = req.body;
   try {
@@ -207,8 +130,6 @@ router.post("/operationsendotp", async (req, res) => {
 });
 
 
-
-
 // Verify OTP and Login
 router.post("/operationverifyotp", async (req, res) => {
   const { email, otp } = req.body;
@@ -248,35 +169,53 @@ router.get("/OperationDashboard", authMiddleware, (req, res) => {
 router.post('/send-email', async (req, res) => {
   const { fullname, email, program, counselor, domain } = req.body;
   const defaultPassword = 'Krutanic@123';
+
+  // HTML email message
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic!</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Thank you for joining us! Here are your details:</p>
+        <ul style="font-size: 14px; color: #555; line-height: 1.5;">
+          <li style="text-transform: capitalize;"><strong>Mode of Program:</strong> ${program}</li>
+          <li style="text-transform: capitalize;"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
+          <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain:</strong> ${domain}</li>
+        </ul>
+        <p style="font-size: 14px; color: #555;">Here are your login details:</p>
+        <p style="font-size: 14px; color: #333;">Use your email (<strong>${email}</strong>) and the default password provided below to log in:</p>
+        <p style="text-align: center; font-size: 18px; font-weight: bold; color: #4a90e2;">${defaultPassword}</p>
+        <p style="font-size: 14px; color: #555;">
+          <a href="https://www.krutanic.com/login" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+          After logging in, please set a new password according to your preferences or official requirements.
+        </p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out.</p>
+        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+
   try {
+    // Send email
     await sendEmail({
-      body:{
       email,
       subject: `Welcome to Our ${program} Program`,
-      message: `
-       <p style="text-transform:capitalize">Dear ${fullname},</p>
-<p>Thank you for joining us! Here are your details:</p>
-<ul >
-  <li style="text-transform:capitalize"><strong>Mode of Program:</strong> ${program}</li>
-  <li style="text-transform:capitalize"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
-  <li style="text-transform:capitalize"><strong>You Have Opted for a Domain:</strong> ${domain}</li>
-</ul>
-<p>Here are your login details:</p>
-<p>Use your email (<strong>${email}</strong>) and the default password provided below to log in.
-<a href="https://www.krutanic.com/login" target="_blank">Click here to log in</a>. 
- After logging in, please set a new password according to your preferences or official requirements.</p>
-<p>Your default password is: <strong>${defaultPassword}</strong></p>
-<p>If you need further assistance, feel free to reach out.</p>
-<p>Best regards,</p>
-<p>Team Krutanic</p>
-      `,}
+      message: emailMessage,
     });
-    res.status(200).send({ message: 'Email sent successfully!' });
+
+    res.status(200).json({ message: 'Email sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).send({ message: 'Error sending email.', error });
+    res.status(500).json({ message: 'Error sending email.', error: error.message });
   }
 });
+
 
 router.put('/mailsendedchange/:id', async (req, res) => {
   const { id } = req.params;

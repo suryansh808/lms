@@ -88,11 +88,8 @@ router.post("/bdasendotp", async (req, res) => {
     const otp = crypto.randomInt(100000, 1000000);
 
       // Send OTP via Email
-      await sendEmail({
-        body: {
-          email,
-          subject: "BDA Login Credtials",
-          message: `
+  
+         const emailMessage = `
            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
               <h1>Krutanic Solutions</h1>
@@ -108,15 +105,14 @@ router.post("/bdasendotp", async (req, res) => {
               <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
           </div>
       </div>
-      `,
-        },
-      });
+      `;
+     
 
     bda.otp = otp; 
-    await bda.save();
-
-  
-
+    await Promise.all([
+        bda.save(),
+        sendEmail({ email , subject : "Bda Login Credentials" ,  message: emailMessage }),
+    ]);
     res.status(200).json({ message: "OTP sent to your email!" });
   } catch (error) {
     res
