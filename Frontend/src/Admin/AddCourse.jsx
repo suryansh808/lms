@@ -107,7 +107,7 @@ const AddCourse = () => {
             <textarea 
               placeholder="Enter course description"
               value={description}
-              onChange={(value) => setDescription(value)}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
             <input className="cursor-pointer" type="submit" value="Add Course" />
