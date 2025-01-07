@@ -18,37 +18,24 @@ let transporter = nodemailer.createTransport({
 });
 
 
-const sendEmail = async ({ email, subject, message }) => {
-  try {
-    const mailOptions = {
-      from: process.env.SMTP_MAIL,
-      to: email,
-      subject: subject,
-      html: message,
-      priority: "high",
-    };
+const sendEmail  = expressAsyncHandler(async (req, res) => {
+  const { email, subject, message } = req.body;
 
-    const info = await new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(info);
-        }
-      });
-    });
-    console.log("Email sent successfully:", info.response);
-    return { success: true, response: info.response };
-  } catch (error) {
-    console.error("Error sending email:", {
-      message: error.message,
-      stack: error.stack,
-      code: error.code,
-    });
-    return { success: false, error: error.message };
-  }
-};
+  var mailOptions = {
+    from: process.env.SMTP_MAIL,
+    to: email,
+    subject: subject,
+    html: message,
+    priority: "high",
+  };
 
-
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent successfully!");
+    }
+  });
+});
 
 module.exports = { sendEmail};
