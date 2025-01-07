@@ -369,7 +369,7 @@ const MernStack = () => {
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
-        window.open(pdfds, "_blank");
+        window.open(pdfms, "_blank");
         setShowForm(false);
       }, 1500);
     } catch (error) {

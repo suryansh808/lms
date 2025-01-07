@@ -370,7 +370,7 @@ const Performancemarket = () => {
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
-        window.open(pdfds, "_blank");
+        window.open(pdfpm, "_blank");
         setShowForm(false);
       }, 1500);
     } catch (error) {
