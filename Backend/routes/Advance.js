@@ -2,21 +2,21 @@ const express = require("express");
 const router = express.Router();
 const Advance = require("../models/Advance");
 
-router.post("/advance/register", async (req, res) => {
-  const { name, email, phone } = req.body;
-  try {
-    const newRegistration = new Advance({
-      name,
-      email,
-      phone,
-    });
-    await newRegistration.save();
-    res.status(201).json({ message: "Registration successful!" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error. Please try again later." });
-  }
-});
+// router.post("/advance/register", async (req, res) => {
+//   const { name, email, phone } = req.body;
+//   try {
+//     const newRegistration = new Advance({
+//       name,
+//       email,
+//       phone,
+//     });
+//     await newRegistration.save();
+//     res.status(201).json({ message: "Registration successful!" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Server error. Please try again later." });
+//   }
+// });
 
 router.get("/advancequeries", async (req, res) => {
   try {
