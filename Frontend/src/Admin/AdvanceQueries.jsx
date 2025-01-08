@@ -69,6 +69,7 @@ const AdvanceQueries = () => {
                            <tr>
                              <td colSpan="7" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'left'}}>
                                {date}
+                               
                              </td>
                            </tr>
                            {groupedQueries[date].map((query, index) => (
