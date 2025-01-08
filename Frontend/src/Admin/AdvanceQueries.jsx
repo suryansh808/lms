@@ -67,7 +67,7 @@ const AdvanceQueries = () => {
                        Object.keys(groupedQueries).map((date, dateIndex) => (
                          <React.Fragment key={dateIndex}>
                            <tr>
-                             <td colSpan="3" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'left'}}>
+                             <td colSpan="7" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'left'}}>
                                {date}
                              </td>
                            </tr>
