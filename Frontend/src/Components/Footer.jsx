@@ -30,10 +30,10 @@ const Footer = () => {
       </div>
       <footer className="footer">
         <div className="footercontact">
-          <a href="mailto:info@krutanic.org" target="blank">
+          <a href="mailto:support@krutanic.com" target="blank">
             {" "}
             <i class="fa fa-envelope text-red-600"></i> <br /> Mail us <br />{" "}
-            info@krutanic.org
+           support@krutanic.com
           </a>
           <a href="tel:+917022812878" target="blank">
             {" "}
@@ -45,7 +45,7 @@ const Footer = () => {
             <i class="fa fa-whatsapp text-green-600"> </i>
             <br /> WhatsApp us <br /> +91-7022812878
           </a>
-          <a href="https://maps.app.goo.gl/QngUSd16wdRhk71H8" target="blank">
+          <a>
             {" "}
             <i class="fa fa-map-marker text-red-500"> </i>
             <br /> Find us <br /> Bengaluru, Karnataka{" "}
@@ -55,13 +55,7 @@ const Footer = () => {
         <div className="footerlink">
           <div className="footerlinkleft">
             <img src={logowhite} alt="" />
-
-            <p>
-              Krutanic Solutions is your gateway to mastering industry-leading
-              skills. As a premier course provider, we offer high-quality,
-              in-demand programs. Our focus is on delivering real-world skills
-              to empower individuals and excel in their careers.
-            </p>
+            <p>Krutanic Solutions is your gateway to mastering industry-leading skills. As a premier course provider, we offer high-quality, in-demand programs. Our focus is on delivering real-world skills to empower individuals and excel in their careers.</p>
             <br />
             <h2>Follow Us</h2>
             <a
@@ -70,9 +64,9 @@ const Footer = () => {
             >
               <span className="fa fa-facebook"></span>
             </a>
-            {/* <a  href="https://www.youtube.com/krutanic" className="text-red-800  hover:text-red-900">
+            <a  href="https://www.youtube.com/@KrutanicSolutions" className="text-red-800  hover:text-red-900">
               <span className="fa fa-youtube"></span>
-            </a> */}
+            </a>
             <a
               href="https://www.instagram.com/krutanic"
               className="text-pink-500  hover:text-pink-700"

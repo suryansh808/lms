@@ -421,6 +421,53 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
         </div>
       </section>
      
+      <section className=" px-[10px] py-[60px]">
+        <div className="container mx-auto">
+          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-orange-700">
+            | What Our Students Say
+          </h1>
+          <div data-aos="fade-up"   className="grid md:grid-cols-3 lg:gap-8 gap-3">
+            {[
+              {
+                // image: `${img1}`,
+                name: <a href="https://in.linkedin.com/in/mohammedafan" target="blank" >"Mohammed Afan R" </a>,
+                role: "MERN Developer",
+                quote: "my journey with krutanic Innovators has been an incredible learning experience. The hands-on projects and guidance from experts have truly shaped my skills and passion for development.",
+              },
+              {
+                // image: `${img2}`,
+                name: <a href="https://in.linkedin.com/in/danish-raja-akhtar" target="blank" >"Danish Raja Akhtar"</a>,
+                role: "Web Developer",
+                quote: "Being a student here has been amazing! The mentorship and teamwork have helped me develop both technically and personally. I feel more confident in my skills every day.",
+              },
+              {
+                // image: `${img3}`,
+                name: <a href="https://in.linkedin.com/in/suryansh-saxena" target="blank" >"Suryansh Saxena" </a>,
+                role: "MERN Developer",
+                quote: "I’ve gained so much from krutanic Solution. The exposure to real-world challenges has helped me grow my problem-solving skills and prepared me for a successful career in tech.",
+              },
+              
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-[#080810] rounded-md">
+                <div className="p-6">
+                  <p className="mb-4 italic">"{testimonial.quote}"</p>
+                  <div className="flex items-center">
+                    {/* <div className="w-12 h-12 rounded-full mr-4">
+                      <img src={testimonial.image} alt="employee" className="w-full h-full object-cover"/>
+                    </div> */}
+                    <div>
+                      <h2 className="font-semibold">{testimonial.name}</h2>
+                      <p className="text-sm text-gray-500">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        </section>
        
        <section>
           <Getintouch/>

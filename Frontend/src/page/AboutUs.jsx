@@ -106,11 +106,7 @@ const AboutUs = () => {
             <div  className="content">
               <h2 className="title">About Us</h2>
               <p className="font-semibold">
-                Krutanic Solutions is your gateway to mastering industry-leading
-                skills. As a premier course provider, we are dedicated to
-                offering high-quality, in-demand programs designed to empower
-                individuals and help them excel in their careers. With a strong
-                focus on delivering real-world skills.
+              Krutanic Solutions is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic Solutions today and take the next step toward achieving your career goals.
               </p>
             </div>
 
@@ -201,44 +197,36 @@ const AboutUs = () => {
             <img src={gallery2} alt="" className="object-cover w-full h-full" />
           </div>
          
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+          {/* <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
             <img src={gallery3} alt="" className="object-cover w-full h-full" />
-          </div>
-
-        
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
-            <img src={gallery8} alt="" className="object-cover w-full h-full" />
-          </div>
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
+          </div> */}
+<div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
             <img src={gallery5} alt="" className="object-cover w-full h-full" />
-          </div>
-
-         
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
-            <img src={gallery9} alt="" className="object-cover w-full h-full" />
           </div>
           <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
             <img src={gallery6} alt="" className="object-cover w-full h-full" />
           </div>
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery8} alt="" className="object-cover w-full h-full" />
+          </div>
+          
+
+         
+          {/* <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery9} alt="" className="object-cover w-full h-full" />
+          </div> */}
+          
         
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+          {/* <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
             <img src={gallery12} alt="" className="object-fill w-full h-full" />
-          </div>
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+          </div> */}
+          {/* <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
             <img src={gallery15} alt="" className="object-cover w-full h-full" />
-          </div>
+          </div> */}
+          
           <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
             <img src={gallery16} alt="" className="object-cover w-full h-full " />
           </div>
-
-
-        
-          <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
-            <img src={gallery14} alt="" className="object-cover w-full h-full" />
-          </div>
-
-         
-
           <div className="relative overflow-hidden rounded-lg flex items-center justify-center col-span-2">
             <img src={gallery7} alt="" className="object-cover w-full h-full" />
           </div>
@@ -248,6 +236,15 @@ const AboutUs = () => {
             <img src={gallery10} alt="" className="object-cover w-full h-full" />
           </div>
           <div className="relative overflow-hidden rounded-lg flex items-center justify-center">
+            <img src={gallery14} alt="" className="object-cover w-full h-full" />
+          </div>
+
+         
+
+         
+         
+         
+          <div className="relative overflow-hidden rounded-lg flex items-center justify-center lg:col-span-3">
             <img src={gallery11} alt="" className="object-cover w-full h-full " />
           </div>
         

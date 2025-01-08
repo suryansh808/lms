@@ -72,6 +72,16 @@ const CreateBDA = () => {
       console.error("There was an error fetching bda:", error);
     }
   };
+  if(!bda){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   const handleDelete = (_id) => {
    const isConfirmed =  window.confirm("Are you sure you want to delete the BDA account?");
      if(isConfirmed){
@@ -99,15 +109,6 @@ const CreateBDA = () => {
     fetchBda();
   }, []);
 
-  if(!bda){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
 
   return (
     <div id="AdminAddCourse">

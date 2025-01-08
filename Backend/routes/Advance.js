@@ -27,4 +27,26 @@ router.get("/advancequeries", async (req, res) => {
   }
 });
 
+router.post("/advance/register", async (req, res) => {
+  const { name, email, phone, currentRole, experience, goal, goalOther, domain, domainOther } = req.body;
+  try {
+    const newRegistration = new Advance({
+      name,
+      email,
+      phone,
+      currentRole,
+      experience,
+      goal,
+      goalOther: goal === "Other" ? goalOther : undefined,
+      domain,
+      domainOther: domain === "Other" ? domainOther : undefined,
+    });
+    await newRegistration.save();
+    res.status(201).json({ message: "Registration successful!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error. Please try again later." });
+  }
+});
+
 module.exports = router;

@@ -4,7 +4,7 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import API from '../../API';
+import API from "../../API";
 import axios from "axios";
 // import MentorSection from "../../Components/MentorSection";
 
@@ -16,7 +16,7 @@ import MERN from "../../assets/Advanced Course Images/Mern Stack Development/mer
 import curriculumimage from "../../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg";
 
 import pdfms from "../../../krutanic/Mern Stack Web Development Advanced Program.pdf";
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 const MernStack = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -30,6 +30,12 @@ const MernStack = () => {
     name: "",
     email: "",
     number: "",
+    currentRole: "",
+    experience: "",
+    goal: "",
+    goalOther: "",
+    domain: "",
+    domainOther: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -366,6 +372,13 @@ const MernStack = () => {
         name: formData.name,
         email: formData.email,
         phone: formData.number,
+        currentRole: formData.currentRole,
+        experience: formData.experience,
+        goal: formData.goal,
+        goalOther: formData.goal === "Other" ? formData.goalOther : undefined,
+        domain: formData.domain,
+        domainOther:
+          formData.domain === "Other" ? formData.domainOther : undefined,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
@@ -373,19 +386,26 @@ const MernStack = () => {
         setShowForm(false);
       }, 1500);
     } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-      console.error(error.response?.data?.error)
+      toast.error(
+        error.response?.data?.error || "Something went wrong. Please try again."
+      );
     }
     setFormData({
       name: "",
       email: "",
       number: "",
+      currentRole: "",
+      experience: "",
+      goal: "",
+      goalOther: "",
+      domain: "",
+      domainOther: "",
     });
   };
   return (
     <div>
       <div className="bg-black text-white">
-          <Toaster position="top-center" reverseOrder={false}/>
+        <Toaster position="top-center" reverseOrder={false} />
         {/* 1 hero part */}
         <section
           id="advancemernbg"
@@ -724,78 +744,165 @@ const MernStack = () => {
 
           {/* Dialog Box for Form */}
           {showForm && (
-            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-10">
-              <div className="bg-white text-black p-6 rounded-lg shadow-lg w-96">
-                <h3 className="text-xl font-semibold mb-4">
+            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[9999]">
+              <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
+                <h3 className="text-md text-center font-semibold mb-2">
                   Register to Download Brochure
                 </h3>
-                {successMessage && (
-                  <p className="text-green-600">{successMessage}</p>
-                )}
-                {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-semibold"
-                    >
-                      Name
-                    </label>
+                <form onSubmit={handleFormSubmit} className="space-y-2">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  />
+
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    id="number"
+                    name="number"
+                    placeholder="Enter your phone number"
+                    value={formData.number}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  />
+
+                  <label
+                    htmlFor="currentRole"
+                    className="block text-sm font-semibold"
+                  >
+                    What do you currently do?
+                  </label>
+                  <select
+                    id="currentRole"
+                    name="currentRole"
+                    value={formData.currentRole}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="Founder">Founder</option>
+                    <option value="Student">Student</option>
+                    <option value="Working Professional">
+                      Working Professional
+                    </option>
+                    <option value="Self Employed">Self Employed</option>
+                  </select>
+
+                  <label
+                    htmlFor="experience"
+                    className="block text-sm font-semibold"
+                  >
+                    Experience
+                  </label>
+                  <select
+                    id="experience"
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="0 year">0 year (Fresher)</option>
+                    <option value="1-2 years">1-2 years</option>
+                    <option value="3-5 years">3-5 years</option>
+                    <option value="5+ years">5+ years</option>
+                  </select>
+
+                  <label htmlFor="goal" className="block text-sm font-semibold">
+                    Goal of taking this program
+                  </label>
+                  <select
+                    id="goal"
+                    name="goal"
+                    value={formData.goal}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="Career Transition">Career Transition</option>
+                    <option value="Kickstart Career">Kickstart Career</option>
+                    <option value="Upskilling">Upskilling</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {formData.goal === "Other" && (
                     <input
                       type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      name="goalOther"
+                      value={formData.goalOther}
                       onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-2 rounded-md"
+                      placeholder="Please specify your goal"
+                      className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
                       required
                     />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-semibold"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-2 rounded-md"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="number"
-                      className="block text-sm font-semibold"
-                    >
-                      Phone Number
-                    </label>
+                  )}
+
+                  <label
+                    htmlFor="domain"
+                    className="block text-sm font-semibold"
+                  >
+                    Domain currently working in
+                  </label>
+                  <select
+                    id="domain"
+                    name="domain"
+                    value={formData.domain}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="Digital Marketing/Performance marketing">
+                      Digital Marketing/Performance Marketing
+                    </option>
+                    <option value="Marketing/Sales">Marketing/Sales</option>
+                    <option value="Management/Operations">
+                      Management/Operations
+                    </option>
+                    <option value="IT/Tech/Product">IT/Tech/Product</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {formData.domain === "Other" && (
                     <input
                       type="text"
-                      id="number"
-                      name="number"
-                      value={formData.number}
+                      name="domainOther"
+                      value={formData.domainOther}
                       onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-2 rounded-md"
+                      placeholder="Please specify your domain"
+                      className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
                       required
                     />
-                  </div>
+                  )}
                   <div className="flex justify-end gap-2">
                     <button
                       type="button"
                       onClick={() => setShowForm(false)}
-                      className="px-4 py-2 text-gray-500 border border-gray-300 rounded-md"
+                      className="px-4 py-1 text-gray-500 border border-gray-300 rounded-md"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-[#f15b29] text-white rounded-md"
+                      className="px-4 py-1 bg-[#f15b29] text-white rounded-md"
                     >
                       Submit
                     </button>
@@ -972,7 +1079,7 @@ const MernStack = () => {
           >
             <p className="text-lg font-semibold text-black">
               {" "}
-              Program fees 71,999/- + GST{" "}
+              Program fees 71,999/- + 18% GST
             </p>
             <div className="flex space-x-4">
               <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29] whitespace-nowrap">

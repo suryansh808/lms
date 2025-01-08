@@ -4,7 +4,6 @@
 
 body {
   font-family: "Montserrat";
-  user-select: none;
 }
 h1 {
   font-size: clamp(24px, 5vw, 40px);

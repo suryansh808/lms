@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { color } from "framer-motion";
+// import { color } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaHandshake } from "react-icons/fa";
+// import { FaHandshake } from "react-icons/fa";
 
 import ShuffleHero from "../Components/ShuffleHero";
 import ClientsCarousel from "../Components/our_alumni";
@@ -12,7 +12,7 @@ import Wavefull from "../Components/wave_full";
 import Popularcourse from "../Components/popularcourse";
 import VerticalAccordion from "../Components/VerticalAccordion";
 
-import whychoose from "../assets/whatmakedifferent.png";
+// import whychoose from "../assets/whatmakedifferent.png";
 import specialization from "../assets/specialization.jpg";
 import whyimg from "../assets/whychoose.jpg";
 import corporate from "../assets/corporatesolution.jpg";
@@ -38,11 +38,7 @@ const HomePage = () => {
           <div className="text">
             <h1 data-aos="zoom-in">| About Us</h1>
             <p>
-              Krutanic Solutions is your gateway to mastering industry-leading
-              skills. As a premier course provider, we are dedicated to offering
-              high-quality, in-demand programs designed to empower individuals
-              and help them excel in their careers. With a strong focus on
-              delivering real-world skills.
+            Krutanic Solutions is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic Solutions today and take the next step toward achieving your career goals.
             </p>
             <Link to="/AboutUs">
               <button className="btnblack">LEARN MORE</button>{" "}
@@ -480,12 +476,12 @@ const HomePage = () => {
 
         {/* what makes us different */}
 
-        <div className="whatmakesusdifferent">
+        {/* <div className="whatmakesusdifferent">
           <h1 data-aos="zoom-in">| What Makes Us Different ?</h1>
           <div className="whatmakesusdifferentdiv">
             <img src={whychoose} alt="img" />
           </div>
-        </div>
+        </div> */}
 
         {/* what makes us different end */}
 

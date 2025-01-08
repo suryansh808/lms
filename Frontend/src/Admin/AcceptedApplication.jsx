@@ -137,7 +137,7 @@ const AcceptedApplication = () => {
           <tbody>
             {
               users.length > 0 ? (
-                users.map((user, index) => (
+                users?.map((user, index) => (
                   <tr key={user._id}>
                     <td>{index + 1}</td>
                     <td>{user.fullName}</td>

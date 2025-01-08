@@ -56,6 +56,10 @@ const AdvanceQueries = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Current Role</th>
+            <th>Experiece</th>
+            <th>Goal</th>
+            <th>Domain</th>
           </tr>
         </thead>
         <tbody>
@@ -72,6 +76,10 @@ const AdvanceQueries = () => {
                                <td>{query.name}</td>
                                <td>{query.email}</td>
                                <td>{query.phone}</td>
+                               <td>{query.currentRole}</td>
+                               <td>{query.experience}</td>
+                               <td>{query.goal === "Other" ? query.goalOther : query.goal}</td>
+                               <td>{query.domain === "Other" ? query.domainOther : query.domain}</td>
                              </tr>
                            ))}
                          </React.Fragment>
