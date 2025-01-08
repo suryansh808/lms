@@ -31,10 +31,10 @@ const sendEmail = async ({ email, subject, message }) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error("Error sending email:", error);
-        reject(error); // Return the error
+        reject(error); 
       } else {
         console.log("Email sent successfully!", info.response);
-        resolve(info.response); // Return success
+        resolve(info.response); 
       }
     });
   });

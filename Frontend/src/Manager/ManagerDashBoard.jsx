@@ -47,7 +47,13 @@ const ManagerDashBoard = () => {
   };
   
   if (!operationData) {
-    return <div>Loading...</div>;
+    return <div className="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
   }
   
   const groupedData = groupAndCalculateData(operationData);
