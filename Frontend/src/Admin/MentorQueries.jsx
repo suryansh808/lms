@@ -38,7 +38,7 @@ const MentorQueries = () => {
    
     const groupedQueries = groupByDate(queries);
 
-    if(!queries){
+    if(!groupedQueries){
       return <div id="loader">
       <div class="three-body">
     <div class="three-body__dot"></div>

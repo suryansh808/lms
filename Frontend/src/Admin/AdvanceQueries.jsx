@@ -33,8 +33,9 @@ const AdvanceQueries = () => {
   useEffect(() => {
     getQueries();
   }, []);
+  const groupedQueries = groupByDate(queries);
 
-  if(!queries){
+  if(!groupedQueries){
     return <div id="loader">
     <div class="three-body">
   <div class="three-body__dot"></div>
@@ -44,7 +45,7 @@ const AdvanceQueries = () => {
   </div>;
  }
  
-  const groupedQueries = groupByDate(queries);
+
   return (
     <div id="AdminAddCourse">
       <h2 className="text-center my-5">Advance Course Queries</h2>

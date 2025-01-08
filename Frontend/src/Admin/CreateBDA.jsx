@@ -156,7 +156,7 @@ const CreateBDA = () => {
             </tr>
           </thead>
           <tbody>
-            {bda.map((bda, index) => (
+            {bda?.map((bda, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{bda.fullname}</td>

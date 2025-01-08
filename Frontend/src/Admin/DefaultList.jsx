@@ -48,7 +48,7 @@ const DefaultList = () => {
     setFilteredStudents(filtered);
   };
 
-  if(!newStudent || !filteredStudents){
+  if(!filteredStudents){
     return <div id="loader">
     <div class="three-body">
   <div class="three-body__dot"></div>
@@ -91,7 +91,7 @@ const DefaultList = () => {
       </thead>
       <tbody>
         {Array.isArray(filteredStudents) && filteredStudents.length > 0 ? (
-          filteredStudents.map((item, index) => (
+          filteredStudents?.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
               <td className="capitalize">{item.fullname}</td>
