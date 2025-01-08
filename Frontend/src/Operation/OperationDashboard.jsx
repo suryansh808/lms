@@ -48,6 +48,16 @@ const OperationDashboard = () => {
     ],
   };
 
+  if(!operationData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   return (
     <div id="AdminDashboard">
       <h2 className="text-center font-semibold mb-4">Operation Dashboard</h2>

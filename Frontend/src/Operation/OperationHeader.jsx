@@ -36,7 +36,7 @@ const OperationHeader = () => {
     localStorage.removeItem("operationName");
     localStorage.removeItem("operationToken");
     navigate("/OperationLogin");
-  }, 2000);
+  }, 1500);
   };
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,6 +52,19 @@ const OperationHeader = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+
+  if(!operationData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
+
   return (
     <div id="AdminHeader">
        <Toaster position="top-center" reverseOrder={false}/>

@@ -17,7 +17,6 @@ const formatDate = (date) => {
     }, {});
   };
 
-
 const AdvanceQueries = () => {
   const [queries, setQueries] = useState([]);
 
@@ -34,6 +33,16 @@ const AdvanceQueries = () => {
   useEffect(() => {
     getQueries();
   }, []);
+
+  if(!queries){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
  
   const groupedQueries = groupByDate(queries);
   return (

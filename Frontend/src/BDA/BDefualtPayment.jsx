@@ -18,6 +18,16 @@ const BDefualtPayment = () => {
     fetchNewStudent();
   }, []);
 
+  if(!newStudent){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   return (
     <div id="AdminAddCourse">
     <div className="coursetable">

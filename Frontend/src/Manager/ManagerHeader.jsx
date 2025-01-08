@@ -1,27 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate  } from "react-router-dom";
-import API from "../API";
-import axios from "axios";
 import logo from "../assets/LOGO3.png";
 import toast ,{Toaster} from 'react-hot-toast';
 
 const OperationHeader = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
   const mobileMenuRef = useRef(null);
-  const [operationData, setOperationData] = useState(null);
+ 
   const navigate = useNavigate();
-  const fetchOperationData = async () => {
-    // const operationId = localStorage.getItem("operationId");
-    try {
-      const response = await axios.get(`${API}/getoperation`);
-      setOperationData(response.data);
-    } catch (err) {
-      console.log("Failed to fetch user data");
-    }
-  };
-  useEffect(() => {
-    fetchOperationData();
-  }, []);
+
   const toggleVisibility = () => {
     setisMobileVisible((prevState) => !prevState);
   };
@@ -32,7 +19,7 @@ const OperationHeader = () => {
     localStorage.removeItem("managerEmail");
     localStorage.removeItem("managerToken");
     navigate("/ManagerLogin");
-  }, 2000);
+  }, 1500);
   };
   useEffect(() => {
     const handleClickOutside = (event) => {

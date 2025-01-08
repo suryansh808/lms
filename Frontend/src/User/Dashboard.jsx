@@ -20,15 +20,24 @@ const Dashboard = () => {
   };
 
   const navigate = useNavigate();
-
   const handleStartLearning = (title, sessionlist) => {
     console.log("learning", title, sessionlist);
     navigate('/Learning', { state: { courseTitle: title, sessions: sessionlist } });
   };
-
   useEffect(() => {
     fetchenrollData();
   }, []);
+
+  if(!enrollData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
 
   return (
     <div id='UserDashboard'>

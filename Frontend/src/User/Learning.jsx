@@ -25,6 +25,16 @@ const Learning = () => {
     }
   }, [sessions]);
 
+  if(!selectedSession){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   return (
     <div id='UserLearning'>
       <h2>{courseTitle}</h2>

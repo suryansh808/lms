@@ -69,6 +69,16 @@ const Createmanager = () => {
     setiscourseFormVisible(false);
   };
 
+  if(!manager){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({

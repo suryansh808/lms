@@ -36,15 +36,11 @@ const BDADashboard = () => {
     0
   );
   const defaultAmount = newStudent.reduce((acc, student) => {
-    // If student status is 'default', add their paidAmount to the accumulator
     if (student.status === 'default') {
       return acc + (student.paidAmount || 0);
     }
-    // Otherwise, add the defaultAmount (if available) to the accumulator
     return acc + (student.defaultAmount || 0);
   }, 0);
-
-  // const defaultAmount = newStudent.filter((item) => item.status === "default" ? item.paidAmount : 0)
 
   const data = {
     labels: ["Total Revenue", "Total Booked", "Default Amount"],
@@ -57,6 +53,16 @@ const BDADashboard = () => {
     ],
   };
 
+  if(!newStudent){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+ 
   return (
     <div id="AdminDashboard">
       <h2 className="text-center font-semibold mb-2">Dashboard</h2>

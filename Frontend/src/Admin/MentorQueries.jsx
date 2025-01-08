@@ -38,6 +38,16 @@ const MentorQueries = () => {
    
     const groupedQueries = groupByDate(queries);
 
+    if(!queries){
+      return <div id="loader">
+      <div class="three-body">
+    <div class="three-body__dot"></div>
+    <div class="three-body__dot"></div>
+    <div class="three-body__dot"></div>
+    </div>
+    </div>;
+   }
+
   return (
     <div id="AdminAddCourse">
       <h2 className="text-center my-5">Mentorship Course Queries</h2>

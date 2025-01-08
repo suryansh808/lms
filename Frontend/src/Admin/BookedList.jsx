@@ -45,7 +45,6 @@ const BookedList = () => {
        
    
   };
-
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
@@ -58,6 +57,16 @@ const BookedList = () => {
     );
     setFilteredStudents(filtered);
   };
+
+  if(!newStudent || !filteredStudents){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
 
   return (
     <div id="AdminAddCourse">

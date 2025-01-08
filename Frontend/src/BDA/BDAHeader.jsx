@@ -36,10 +36,21 @@ const BDAHeader = () => {
     localStorage.removeItem("bdaName");
     localStorage.removeItem("bdaToken");
     navigate("/bdalogin");
-    }, 2000);
+    }, 1500);
   }; 
  
-   const BdaName = localStorage.getItem("bdaName")
+   const BdaName = localStorage.getItem("bdaName");
+
+   if(!BdaName){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   return (
     <div id="AdminHeader">
         <Toaster position="top-center" reverseOrder={false}/>

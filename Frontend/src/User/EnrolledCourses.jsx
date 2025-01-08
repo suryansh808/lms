@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../API";
 
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 
 const EnrolledCourse = () => {
   const [isLeftVisible, setisLeftVisible] = useState(false);
@@ -32,7 +32,7 @@ const EnrolledCourse = () => {
       console.error("There was an error fetching enrolledData:", error);
     }
   };
-  const sanitizedDescription = DOMPurify.sanitize(selectedCourse?.description);
+  // const sanitizedDescription = DOMPurify.sanitize(selectedCourse?.description);
 
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
@@ -47,6 +47,27 @@ const EnrolledCourse = () => {
       setSelectedCourse(enrollData[0].domain);
     }
   }, [enrollData]);
+
+  if(!enrollData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
+ if(!selectedCourse){
+  return <div id="loader">
+  <div class="three-body">
+<div class="three-body__dot"></div>
+<div class="three-body__dot"></div>
+<div class="three-body__dot"></div>
+</div>
+</div>;
+}
+
 
   return (
     <div id="enrolledcourse">
@@ -86,7 +107,8 @@ const EnrolledCourse = () => {
             <h2></h2>
             {/* <button onClick={() => handleStartLearning(selectedCourse.title,selectedCourse.session)}>Start Learning</button> */}
           </div>
-          <pre dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+          {/* <pre dangerouslySetInnerHTML={{ __html: sanitizedDescription }} /> */}
+          <pre>{selectedCourse.description}</pre>
           <h2>COURSE CONTENT</h2>
           <table>
             {selectedCourse.session &&

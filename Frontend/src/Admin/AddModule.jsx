@@ -29,8 +29,6 @@ const AddModule = () => {
     }
   };
 
-  // const sanitizedDescription = DOMPurify.sanitize(selectedCourse?.description);
- 
 
   useEffect(() => {
     fetchCourses();
@@ -107,7 +105,6 @@ const AddModule = () => {
       }
     }
   };
-
   const resetForm = () => {
     setModuleTitle("");
     setModuleDescription("");
@@ -115,6 +112,15 @@ const AddModule = () => {
     setisModuleFormVisible(false);
   };
 
+  if(!courses){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
   return (
     <div id="addmodule">
       {isLeftSidebar && (

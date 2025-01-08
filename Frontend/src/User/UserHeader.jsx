@@ -31,7 +31,7 @@ const UserHeader = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("userEmail");
       navigate("/Login");
-    }, 2000);
+    }, 1500);
   };
 
   const toggleVisibility = () => {
@@ -56,6 +56,16 @@ const UserHeader = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  if(!userData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
   return (
     <div id="UserHeader">
       <Toaster position="top-center" reverseOrder={false} />
