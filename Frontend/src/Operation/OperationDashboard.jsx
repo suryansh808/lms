@@ -26,6 +26,16 @@ const OperationDashboard = () => {
   useEffect(() => {
     fetchOperationData();
   }, []);
+  
+  if(!operationData){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
 
   const bookedCount = operationData.filter(
     (item) => item.status === "booked"
@@ -48,15 +58,7 @@ const OperationDashboard = () => {
     ],
   };
 
-  if(!operationData){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
+
 
   return (
     <div id="AdminDashboard">

@@ -56,7 +56,7 @@ const DefaultPayment = () => {
         </thead>
         <tbody>
           {Array.isArray(newStudent) && newStudent.length > 0 ? (
-            newStudent.map((item, index) => (
+            newStudent?.map((item, index) => (
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td className="capitalize">{item.fullname}</td>
