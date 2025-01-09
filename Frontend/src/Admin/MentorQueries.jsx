@@ -4,7 +4,7 @@ import API from "../API";
 
 const formatDate = (date) => {
     const d = new Date(date);
-    return d.toISOString().split('T')[0]; // Extracts 'YYYY-MM-DD'
+    return d.toISOString().split('T')[0];
   };
   const groupByDate = (queries) => {
     return queries.reduce((acc, query) => {
@@ -21,7 +21,6 @@ const formatDate = (date) => {
 
 const MentorQueries = () => {
     const [queries, setQueries] = useState([]);
-
     const getQueries = async () => {
       try {
         const response = await axios.get(`${API}/mentorqueries`);

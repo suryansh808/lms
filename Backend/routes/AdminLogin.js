@@ -5,6 +5,8 @@ const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
+
+
 const crypto = require('crypto'); 
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {

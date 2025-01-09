@@ -27,7 +27,7 @@ const LoginWithOtp = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${API}/verify-otp`, { email, otp });
-      toast.success('logout successful!!!');
+      toast.success('login successful!!!');
       if (response.status === 200) {
         setTimeout(() => {
         localStorage.setItem('userId', response.data._id);

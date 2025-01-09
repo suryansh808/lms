@@ -46,6 +46,7 @@ const DefaultPayment = () => {
             <th>Contact</th>
             <th>Mode of Program</th>
             <th>Counselor Name</th>
+            <th>Got Payment On</th>
             <th>Opted Domain</th>
             <th>Program Price</th>
             <th>Paid Amount </th>
@@ -64,6 +65,7 @@ const DefaultPayment = () => {
                 <td>{item.phone}</td>
                 <td className="capitalize">{item.program}</td>
                 <td className="capitalize">{item.counselor}</td>
+                <td> {new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
                 <td className="capitalize">{item.domain}</td>
                 <td>{item.programPrice}</td>
                 <td>{item.paidAmount}</td>

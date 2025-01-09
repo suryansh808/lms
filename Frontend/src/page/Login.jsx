@@ -41,17 +41,17 @@ const Login = () => {
               }
 
         }
-        useEffect(() => {
-            const handleClickOutside = (event) => {
-                if (errorRef.current && !errorRef.current.contains(event.target)) {
-                    setErrors(null);
-                }
-            };
-            document.addEventListener('click', handleClickOutside);
-            return () => {
-                document.removeEventListener('click', handleClickOutside);
-            };
-        }, []);
+        // useEffect(() => {
+        //     const handleClickOutside = (event) => {
+        //         if (errorRef.current && !errorRef.current.contains(event.target)) {
+        //             setErrors(null);
+        //         }
+        //     };
+        //     document.addEventListener('click', handleClickOutside);
+        //     return () => {
+        //         document.removeEventListener('click', handleClickOutside);
+        //     };
+        // }, []);
  
     return (
         <div id='loginpage'>

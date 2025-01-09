@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 
-
-
 const Dashboard = () => {
   const userEmail = localStorage.getItem("userEmail");
   const [enrollData, setenrollData] = useState([]);
@@ -19,15 +17,6 @@ const Dashboard = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const handleStartLearning = (title, sessionlist) => {
-    console.log("learning", title, sessionlist);
-    navigate('/Learning', { state: { courseTitle: title, sessions: sessionlist } });
-  };
-  useEffect(() => {
-    fetchenrollData();
-  }, []);
-
   if(!enrollData){
     return <div id="loader">
     <div class="three-body">
@@ -36,48 +25,76 @@ const Dashboard = () => {
   <div class="three-body__dot"></div>
   </div>
   </div>;
- }
+  }
 
+  const navigate = useNavigate();
+  const handleStartLearning = (title, sessionlist) => {
+    console.log("learning", title, sessionlist);
+    navigate("/Learning", {
+      state: { courseTitle: title, sessions: sessionlist },
+    });
+  };
+  useEffect(() => {
+    fetchenrollData();
+  }, []);
 
   return (
-    <div id='UserDashboard'>
-      <div className='password'>
-        <span><i className="fa fa-lock"></i> Change Password</span>
+    <div id="UserDashboard">
+      <div className="password">
+        <span>
+          <i className="fa fa-lock"></i> Change Password
+        </span>
         <Link to="/Setting"> Click Here</Link>
       </div>
       <br />
       <h2>Dashboard</h2>
-      <div className='number'>
+      <div className="number">
         <div>
-          <span><i className='fa fa-book' ></i> Enrolled Courses</span>
+          <span>
+            <i className="fa fa-book"></i> Enrolled Courses
+          </span>
           <h2>{enrollData.length}</h2>
         </div>
         <div>
-          <span> <i className='fa fa-graduation-cap'></i> Active Courses</span>
-          <h2>{(enrollData.filter((item) => item.status === "fullPaid")).length}</h2>
+          <span>
+            {" "}
+            <i className="fa fa-graduation-cap"></i> Active Courses
+          </span>
+          <h2>
+            {enrollData.filter((item) => item.status === "fullPaid").length}
+          </h2>
         </div>
       </div>
       <br />
       <h2>Courses</h2>
-      <div className='courselist'>
-
-        {enrollData.map((item, index) => (
+      <div className="courselist">
+        {enrollData?.map((item, index) => (
           <div key={index} className="list">
             <h2>{item.domain.title}</h2>
             <span>★★★★★</span>
             <p> Session {Object.keys(item.domain.session).length}</p>
+            <p><strong>Your Due Payment Amount Is :</strong> ₹ {item.programPrice - item.paidAmount}/-</p>
 
             {item.status === "fullPaid" ? (
-              <button onClick={() => handleStartLearning(item.domain.title,item.domain.session)}>Start Learning</button>
+              <button
+                onClick={() =>
+                  handleStartLearning(item.domain.title, item.domain.session)
+                }
+              >
+                Start Learning
+              </button>
             ) : (
-              <h3>Your Due Date: {item.clearPaymentMonth}</h3>
+             <div>
+               <h3><strong>Your Due Date:</strong> {item.clearPaymentMonth}</h3>
+               <p>To begin your learning journey, please ensure your outstanding payment is cleared. Kindly settle the due amount before the specified due date. </p>
+             </div>
+
             )}
           </div>
         ))}
-
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Dashboard;

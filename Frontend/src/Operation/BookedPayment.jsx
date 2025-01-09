@@ -225,6 +225,17 @@ const BookedAmount = () => {
   </div>;
  }
 
+ const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+
+const groupedData = newStudent.reduce((acc, item) => {
+  const date = formatDate(item.createdAt);
+  if (!acc[date]) {
+    acc[date] = [];
+  }
+  acc[date].push(item);
+  return acc;
+}, {});
+
   return (
     <div id="OperationEnroll">
       <Toaster position="top-center" reverseOrder={false}/>
@@ -268,7 +279,7 @@ const BookedAmount = () => {
               <option value="Mentor Leed">Mentor Led</option>
               <option value="Professional">Professional</option>
             </select>
-            <select
+            <select disabled={editingStudentId !== null}
               value={counselor}
               onChange={(e) => setCounselor(e.target.value)}
             >
@@ -279,7 +290,8 @@ const BookedAmount = () => {
                 <option value={item.fullname}>{item.fullname}</option>
               ))}
             </select>
-            <select value={domain} onChange={(e) => setDomain(e.target.value)}>
+            <select
+            value={domain} onChange={(e) => setDomain(e.target.value)}>
               <option value="" selected disabled>
                 Select Opted Domain
               </option>
@@ -293,6 +305,7 @@ const BookedAmount = () => {
               type="number"
               placeholder="Program Price"
               required
+              disabled={editingStudentId !== null}
             />
             <input
               value={paidAmount}
@@ -339,79 +352,97 @@ const BookedAmount = () => {
           </span>
         </div>
         <table>
-          <thead>
+    <thead>
+      <tr>
+        <th>Sl No</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Program</th>
+        <th>Counselor</th>
+        <th>Domain</th>
+        <th>Program Price</th>
+        <th>Paid Amount</th>
+        <th>Remaining Amount</th>
+        <th>Month Opted</th>
+        <th>Clear Payment Month</th>
+        <th>Actions</th>
+        <th>Remark</th>
+        <th>Last Remark</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.keys(groupedData).length > 0 ? (
+        Object.keys(groupedData).map((date, groupIndex) => (
+          <React.Fragment key={date}>
+            {/* Render date row */}
             <tr>
-              <th>Sl</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Mode of Program</th>
-              <th>Counselor Name</th>
-              <th>Opted Domain</th>
-              <th>Program Price</th>
-              <th>Paid Amount </th>
-              <th>Pending </th>
-              <th>Month Opted</th>
-              <th>Due Date</th>
-              <th>Action</th>
-              <th>Remark</th>
-              <th>Your Remarks</th>
-              <th>Send mail to Candidate</th>
+              <td colSpan="16" style={{ fontWeight: "bold" }}>
+             {date}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(newStudent) && newStudent.length > 0 ? (
-              newStudent?.map((item, index) => (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td className="capitalize">{item.fullname}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                  <td className="capitalize">{item.program}</td>
-                  <td className="capitalize">{item.counselor}</td>
-                  <td className="capitalize">{item.domain}</td>
-                  <td>{item.programPrice}</td>
-                  <td>{item.paidAmount}</td>
-                  <td>{item.programPrice - item.paidAmount}</td>
-                  <td className="capitalize">{item.monthOpted}</td>
-                  <td className="whitespace-nowrap">
-                    {item.clearPaymentMonth}
-                  </td>
-                  <td>
-                    <button onClick={() => handleEdit(item._id)}>Edit</button>
-                  </td>
-                  <td>
-                    <form action="" onSubmit={(e) => handleRemark(e, item._id)}>
-                      <input
-                        type="text"
-                        name="remark"
-                        id="remark"
-                        value={remarks[item._id] || ""}
-                        onChange={(e) =>
-                          setRemarks((prev) => ({
-                            ...prev,
-                            [item._id]: e.target.value,
-                          }))
-                        }
-                        required
-                        style={{ border: "1px solid" }}
-                      />
-                      <button>submit</button>
-                    </form>
-                  </td>
-                  <td>{item.remark[item.remark.length - 1]}</td>
-                  <td>
-                  <button onClick={() => handleSendEmail(item)} disabled={item.mailSended}> {item.mailSended ? 'Already Sent' : 'Send'}</button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="14">No data found</td>
+            {/* Render student data rows */}
+            {groupedData[date].map((item, index) => (
+              <tr key={item._id}>
+                <td>{index + 1}</td>
+                <td className="capitalize">{item.fullname}</td>
+                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td className="capitalize">{item.program}</td>
+                <td className="capitalize">{item.counselor}</td>
+                <td className="capitalize">{item.domain}</td>
+                <td>{item.programPrice}</td>
+                <td>{item.paidAmount}</td>
+                <td>{item.programPrice - item.paidAmount}</td>
+                <td className="capitalize">{item.monthOpted}</td>
+                <td className="whitespace-nowrap">{item.clearPaymentMonth}</td>
+                <td>
+                  <button onClick={() => handleEdit(item._id)}>Edit</button>
+                </td>
+                <td>
+                  <form
+                    action=""
+                    onSubmit={(e) => handleRemark(e, item._id)}
+                  >
+                    <input
+                      type="text"
+                      name="remark"
+                      id="remark"
+                      value={remarks[item._id] || ""}
+                      onChange={(e) =>
+                        setRemarks((prev) => ({
+                          ...prev,
+                          [item._id]: e.target.value,
+                        }))
+                      }
+                      required
+                      style={{ border: "1px solid" }}
+                    />
+                    <button>Submit</button>
+                  </form>
+                </td>
+                <td>{item.remark[item.remark.length - 1]}</td>
+                <td>
+                  <div
+                  className=" cursor-pointer"
+                    onClick={() => handleSendEmail(item)}
+                    disabled={item.mailSended}
+                  >
+                    {item.mailSended ? <i class="fa fa-send-o text-green-600"></i> : <i class="fa fa-send-o text-red-600"></i>}
+                  </div>
+                </td>
               </tr>
-            )}
-          </tbody>
-        </table>
+            ))}
+          </React.Fragment>
+        ))
+      ) : (
+        <tr>
+          <td colSpan="17">No data found</td>
+        </tr>
+      )}
+    </tbody>
+  </table>
       </div>
     </div>
   );

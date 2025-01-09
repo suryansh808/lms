@@ -15,6 +15,7 @@ const FullPayment = () => {
           (item) => item.operationId === operationId && item.status === "fullPaid"
         )
       );
+      console.log(response.data);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     }
@@ -31,6 +32,7 @@ const FullPayment = () => {
   </div>
   </div>;
  }
+
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
@@ -44,6 +46,7 @@ const FullPayment = () => {
             <th>Contact</th>
             <th>Mode of Program</th>
             <th>Counselor Name</th>
+            <th>Got Payment On</th>
             <th>Opted Domain</th>
             <th>Program Price</th>
             <th>Paid Amount </th>
@@ -62,6 +65,7 @@ const FullPayment = () => {
                 <td>{item.phone}</td>
                 <td className="capitalize">{item.program}</td>
                 <td className="capitalize">{item.counselor}</td>
+                <td> {new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
                 <td className="capitalize">{item.domain}</td>
                 <td>{item.programPrice}</td>
                 <td>{item.paidAmount}</td>

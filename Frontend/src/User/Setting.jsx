@@ -33,7 +33,7 @@ const Setting = () => {
     <div id="usersetting">
       <Toaster position="top-center" reverseOrder={false} />
       <h2>Change Password</h2>
-      <div className="form">
+      <div className="form relative">
         <form onSubmit={handleSubmit}>
           <div className="password-field">
             <input
@@ -44,9 +44,7 @@ const Setting = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            <span onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
+           
           </div>
           <div className="password-field">
             <input
@@ -58,7 +56,8 @@ const Setting = () => {
               onChange={(e) => setRePassword(e.target.value)}
             />
           </div>
-          <input type="submit" className="btn" value="Update Password" />
+          <span className=" absolute bottom-16 right-5" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+          <input type="submit" className="btn mt-3" value="Update Password" />
         </form>
       </div>
     </div>
