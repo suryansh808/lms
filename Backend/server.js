@@ -88,7 +88,7 @@ module.exports = app;
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://suryanshsaxena808:f6MubFzl3L5vcWnv@krutanic.dzbh1.mongodb.net/krutanicDB",
+    "mongodb+srv://shrikant:3EMYjxbi8cUiGCZN@krutanic.pkdq7.mongodb.net/?retryWrites=true&w=majority&appName=krutanic",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connected to MongoDB"))
