@@ -125,7 +125,7 @@ const OperationDashboard = () => {
         </div>
       </div>
 
-     <div className="w-full flex items-center justify-center flex-wrap mb-3">
+     <div className="w-full flex items-center justify-center flex-wrap my-5 py-2">
      <div className="text-center flex flex-col items-center justify-center">
         <h2>Overall Status</h2>
         <div className="w-[400px]">

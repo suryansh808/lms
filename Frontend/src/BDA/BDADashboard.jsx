@@ -170,17 +170,14 @@ const BDADashboard = () => {
             <Pie data={data} />
           </div>
         </div>
+      </div>
 
-        <div className="revenue-card">
+      <div className="revenue-growth">
         <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
         <div className="w-[600px]">
           <Line data={lineChartData} />
         </div>
       </div>
-
-      </div>
-
-     
     </div>
   );
 };
