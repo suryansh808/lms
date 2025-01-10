@@ -194,13 +194,13 @@ const BookedAmount = () => {
       clearPaymentMonth: value.clearPaymentMonth,
     };
     try {
-      const response = await axios.post(`${API}/sendmailtooperation`, emailData);
+      const response = await axios.post(`${API}/send-email`, emailData);
       if (response.status === 200) {
         toast.success('Email sent successfully!');
-        const operationData = {
+        const studentData = {
           mailSended: true,
         };
-        const updateResponse = await axios.put(`${API}/mailsendedoperation/${value._id}`, operationData);
+        const updateResponse = await axios.put(`${API}/mailsendedchange/${value._id}`, studentData);
         if (updateResponse.status === 200) {
           toast.success('Operation record updated successfully!');
         } else {
