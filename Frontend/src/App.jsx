@@ -38,6 +38,7 @@ import FullPaidList from "./Admin/FullPaidList";
 import AdminLogIn from "./Admin/AdminLogin";
 import Createmanager from "./Admin/CreateManager";
 import LoginAdmin from "./Admin/LoginAdmin";
+import RevenueSheet from "./Admin/RevenueSheet";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -77,6 +78,7 @@ import BookingList from "./Manager/BookingList";
 import DefaultedList from "./Manager/DefaultedList";
 import FullPaymentList from "./Manager/FullPaymentList";
 import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
+
 
 
 
@@ -133,6 +135,7 @@ const AppContent = () => {
     "/createmanager",
     "/mentorqueries",
     "/advancequeries",
+    "/RevenueSheet"
 
   ];
   const operationheaderPaths = [
@@ -224,6 +227,7 @@ const AppContent = () => {
         <Route path="/AdvanceQueries" element={isAuthenticatedAdmin()? <AdvanceQueries /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/MentorQueries" element={isAuthenticatedAdmin()? <MentorQueries /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/CreateManager" element={isAuthenticatedAdmin()? <Createmanager /> : <Navigate to="/AdminLogin"/>} />
+        <Route path="/RevenueSheet" element={isAuthenticatedAdmin()? <RevenueSheet /> : <Navigate to="/AdminLogin"/>} />
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
