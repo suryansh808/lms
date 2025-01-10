@@ -74,8 +74,6 @@ router.delete("/deletebda/:id", async (req, res) => {
   }
 });
 
-// const generateOTP = () =>
-//   Math.floor(100000 + Math.random() * 900000).toString();
 
 //Send OTP to BDA Email
 router.post("/bdasendotp", async (req, res) => {

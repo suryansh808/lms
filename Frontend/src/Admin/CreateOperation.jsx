@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "../API";
+import toast ,{Toaster} from 'react-hot-toast';
 
 const CreateOperation = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
@@ -29,18 +30,18 @@ const CreateOperation = () => {
           `${API}/updateoperation/${editingOperationId}`,
           newOperation
         );
-        alert("Operation updated successfully");
+        toast.success("Operation updated successfully");
       } else {
         const response = await axios.post(
           `${API}/createoperation`,
           newOperation
         );
-        alert("Operation created successfully");
+        toast.success("Operation created successfully");
       }
       fetchOperation();
       resetForm();
     } catch (error) {
-      alert("There was an error while creating or updating the operation");
+      toast.error("There was an error while creating or updating the operation");
       console.error("Error creating or updating operation", error);
     }
   };
@@ -53,10 +54,6 @@ const CreateOperation = () => {
       console.error("There was an error fetching operation:", error);
     }
   };
-
-  useEffect(() => {
-    fetchOperation();
-  }, []);
 
 
   if(!operation){
@@ -118,7 +115,6 @@ const CreateOperation = () => {
     }
   };
 
-
  const handleSendEmail = async (value) => {
   const emailData = {
     fullname: value.fullname,
@@ -133,7 +129,7 @@ const CreateOperation = () => {
       };
       const updateResponse = await axios.put(`${API}/mailsendedoperation/${value._id}`, operationData);
       if (updateResponse.status === 200) {
-        toast.success('Student record updated successfully!');
+        toast.success('Operation record updated successfully!');
       } else {
         toast.error('Failed to update student record.');
       }
@@ -144,11 +140,16 @@ const CreateOperation = () => {
   } catch (error) {
     toast.error('An error occurred while sending the email.');
   }
-  fetchNewStudent();
+  fetchOperation();
 };
+
+useEffect(() => {
+  fetchOperation();
+}, []);
 
   return (
     <div id="AdminAddCourse">
+        <Toaster position="top-center" reverseOrder={false}/>
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>

@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const adminMail = require("../models/AdminMail"); 
-const Operation = require("../models/CreateOperation")
+const Operation = require("../models/CreateOperation");
+const bda = require("../models/CreateBDA");
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
-
-
 const crypto = require('crypto'); 
+
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
     const { email , password , otp } = req.body;
@@ -106,6 +106,7 @@ router.post("/otpverify",expressAsyncHandler(async (req, res) => {
   })
 );
 
+//if in case login with password so cheack email and password 
 router.post("/checkadmin", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -130,6 +131,7 @@ router.post("/checkadmin", async (req, res) => {
   }
 });
 
+//send login details to operation team
 router.post('/sendmailtooperation', async (req, res) => {
   const { fullname, email } = req.body;
   const emailMessage = `
@@ -143,7 +145,7 @@ router.post('/sendmailtooperation', async (req, res) => {
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;">Use your offical company email with otp for login (<strong>${email}</strong>)</p>
         <p style="font-size: 14px; color: #555;">
-          <a href="https://www.krutanic.com/operationlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+          <a href="https://www.krutanic.com/operationLogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
         </p>
         <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT support team.</p>
         <p style="font-size: 14px; color: #333;">Best regards,</p>
@@ -167,6 +169,7 @@ router.post('/sendmailtooperation', async (req, res) => {
   }
 });
 
+// store a value after sending a login details to operation team
 router.put('/mailsendedoperation/:id', async (req, res) => {
   const { id } = req.params;
   const { mailSended } = req.body;
@@ -184,7 +187,63 @@ router.put('/mailsendedoperation/:id', async (req, res) => {
     res.status(500).send({ message: 'Failed to update updating operation record.' });
   }
 });
+// -------------------------
+//send login details to sales team
+router.post('/sendmailtobda', async (req, res) => {
+  const { fullname, email } = req.body;
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic Solutions!</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Sales Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Here are your login details:</p>
+        <p style="font-size: 14px; color: #333;">Use your offical company email with otp for login (<strong>${email}</strong>)</p>
+        <p style="font-size: 14px; color: #555;">
+          <a href="https://www.krutanic.com/bdalogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+        </p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT support team.</p>
+        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+  try {
+    await sendEmail({
+      email,
+      subject: 'Welcome to Krutanic Solutions - Sales Team Login',
+      message: emailMessage,
+    });
+    res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ message: 'Error sending email.', error: error.message });
+  }
+});
 
+// store a value after sending a login details to sales team 
+router.put('/mailsendedbda/:id', async (req, res) => {
+  const { id } = req.params;
+  const { mailSended } = req.body;
+  const objectId = new mongoose.Types.ObjectId(id);
+  try {
+    const bdaData = await bda.findById({ _id: objectId});
+    if (!bdaData) {
+      return res.status(404).send({ message: 'Bda not found.' });
+    }
+    bdaData.mailSended = mailSended;
+    await bdaData.save();
+    res.status(200).send({ message: 'Bda record updated successfully!', bdaData });
+  } catch (error) {
+    console.error('Error updating  Bda data record:', error);
+    res.status(500).send({ message: 'Failed to update updating  Bda record.' });
+  }
+});
 
 
 module.exports = router;
