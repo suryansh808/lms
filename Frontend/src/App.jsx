@@ -135,7 +135,7 @@ const AppContent = () => {
     "/createmanager",
     "/mentorqueries",
     "/advancequeries",
-    "/RevenueSheet"
+    "/revenuesheet"
 
   ];
   const operationheaderPaths = [

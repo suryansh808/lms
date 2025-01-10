@@ -221,6 +221,18 @@ const BookedAmount = () => {
     fetchNewStudent();
   };
 
+  
+  const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+
+  const groupedData = newStudent.reduce((acc, item) => {
+    const date = formatDate(item.createdAt);
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(item);
+    return acc;
+  }, {});
+
   if (!groupedData) {
     return (
       <div id="loader">
@@ -233,16 +245,6 @@ const BookedAmount = () => {
     );
   }
 
-  const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-
-  const groupedData = newStudent.reduce((acc, item) => {
-    const date = formatDate(item.createdAt);
-    if (!acc[date]) {
-      acc[date] = [];
-    }
-    acc[date].push(item);
-    return acc;
-  }, {});
 
   return (
     <div id="OperationEnroll">
@@ -382,7 +384,7 @@ const BookedAmount = () => {
           </thead>
           <tbody>
             {Object.keys(groupedData).length > 0 ? (
-              Object.keys(groupedData).map((date, groupIndex) => (
+              Object.keys(groupedData).map((date) => (
                 <React.Fragment key={date}>
                   <tr>
                     <td colSpan="16" style={{ fontWeight: "bold" }}>
