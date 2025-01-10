@@ -129,7 +129,6 @@ router.post("/operationsendotp", async (req, res) => {
   }
 });
 
-
 // Verify OTP and Login
 router.post("/operationverifyotp", async (req, res) => {
   const { email, otp } = req.body;
@@ -166,11 +165,10 @@ router.get("/OperationDashboard", authMiddleware, (req, res) => {
   res.status(200).json({ message: "Welcome to the dashboard!" });
 });
 
+//send course details and login details to user
 router.post('/send-email', async (req, res) => {
-  const { fullname, email, program, counselor, domain , clearPaymentMonth } = req.body;
+  const { fullname, email, program, counselor, domain , clearPaymentMonth , monthOpted } = req.body;
   const defaultPassword = 'Krutanic@123';
-
-  // HTML email message
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
@@ -181,6 +179,7 @@ router.post('/send-email', async (req, res) => {
         <p style="font-size: 14px; color: #555;">Thank you for joining us! Here are your details:</p>
         <ul style="font-size: 14px; color: #555; line-height: 1.5;">
           <li style="text-transform: capitalize;"><strong>Mode of Program:</strong> ${program}</li>
+          <li style="text-transform: capitalize;"><strong>You have opted a:</strong> ${monthOpted} month</li>
           <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain:</strong> ${domain}</li>
           <li style="text-transform: capitalize;"><strong>Clear Due Payment Date:strong> ${clearPaymentMonth}</ </li>
           <li style="text-transform: capitalize;"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
@@ -202,15 +201,12 @@ router.post('/send-email', async (req, res) => {
       </div>
     </div>
   `;
-
   try {
-    // Send email
     await sendEmail({
       email,
       subject: `Welcome to Our ${program} Program`,
       message: emailMessage,
     });
-
     res.status(200).json({ message: 'Email sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
@@ -218,7 +214,7 @@ router.post('/send-email', async (req, res) => {
   }
 });
 
-
+//store a value after send a login details 
 router.put('/mailsendedchange/:id', async (req, res) => {
   const { id } = req.params;
   const { mailSended } = req.body;
@@ -237,10 +233,10 @@ router.put('/mailsendedchange/:id', async (req, res) => {
   }
 });
 
+// if in case operation login with email and password 
 router.post("/checkoperation", async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Find the operation by email
     const operation = await CreateOperation.findOne({ email });
     if (!operation) {
       return res.status(401).json({ message: "Invalid email or password" });

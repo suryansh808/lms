@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 const BookedAmount = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
@@ -80,16 +80,17 @@ const BookedAmount = () => {
         );
         minimalResponse = { status: 200 };
       } else {
-         response = await axios.post(`${API}/newstudentenroll`, formData);
-         minimalResponse = await axios.post(`${API}/users`, minimalData);
+        response = await axios.post(`${API}/newstudentenroll`, formData);
+        minimalResponse = await axios.post(`${API}/users`, minimalData);
       }
-      if ( (response.status === 200 || response.status === 201) &&
-      (minimalResponse.status === 200 || minimalResponse.status === 201))
-         {
-          toast.success(
+      if (
+        (response.status === 200 || response.status === 201) &&
+        (minimalResponse.status === 200 || minimalResponse.status === 201)
+      ) {
+        toast.success(
           editingStudentId
-           ? "Student updated successfully"
-          : "Form submitted successfully and minimal data saved"
+            ? "Student updated successfully"
+            : "Form submitted successfully and minimal data saved"
         );
         fetchNewStudent();
         resetForm();
@@ -97,8 +98,9 @@ const BookedAmount = () => {
         toast.error("Error submitting the form.");
       }
     } catch (error) {
-      toast.error("An error occurred while submitting the form. or student already exists, Please try again .");
-      
+      toast.error(
+        "An error occurred while submitting the form. or student already exists, Please try again ."
+      );
     }
   };
 
@@ -192,54 +194,59 @@ const BookedAmount = () => {
       counselor: value.counselor,
       domain: value.domain,
       clearPaymentMonth: value.clearPaymentMonth,
+      monthOpted: value.monthOpted,
     };
     try {
       const response = await axios.post(`${API}/send-email`, emailData);
       if (response.status === 200) {
-        toast.success('Email sent successfully!');
+        toast.success("Email sent successfully!");
         const studentData = {
           mailSended: true,
         };
-        const updateResponse = await axios.put(`${API}/mailsendedchange/${value._id}`, studentData);
+        const updateResponse = await axios.put(
+          `${API}/mailsendedchange/${value._id}`,
+          studentData
+        );
         if (updateResponse.status === 200) {
-          toast.success('Operation record updated successfully!');
+          toast.success("Operation record updated successfully!");
         } else {
-          toast.error('Failed to update student record.');
+          toast.error("Failed to update student record.");
         }
-      }
-       else {
-        toast.error('Failed to send email.');
+      } else {
+        toast.error("Failed to send email.");
       }
     } catch (error) {
-      toast.error('An error occurred while sending the email.');
+      toast.error("An error occurred while sending the email.");
     }
     fetchNewStudent();
   };
-  
-  if(!groupedData){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
 
- const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-
-const groupedData = newStudent.reduce((acc, item) => {
-  const date = formatDate(item.createdAt);
-  if (!acc[date]) {
-    acc[date] = [];
+  if (!groupedData) {
+    return (
+      <div id="loader">
+        <div class="three-body">
+          <div class="three-body__dot"></div>
+          <div class="three-body__dot"></div>
+          <div class="three-body__dot"></div>
+        </div>
+      </div>
+    );
   }
-  acc[date].push(item);
-  return acc;
-}, {});
+
+  const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+
+  const groupedData = newStudent.reduce((acc, item) => {
+    const date = formatDate(item.createdAt);
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(item);
+    return acc;
+  }, {});
 
   return (
     <div id="OperationEnroll">
-      <Toaster position="top-center" reverseOrder={false}/>
+      <Toaster position="top-center" reverseOrder={false} />
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>
@@ -280,7 +287,8 @@ const groupedData = newStudent.reduce((acc, item) => {
               <option value="Mentor Leed">Mentor Led</option>
               <option value="Professional">Professional</option>
             </select>
-            <select disabled={editingStudentId !== null}
+            <select
+              disabled={editingStudentId !== null}
               value={counselor}
               onChange={(e) => setCounselor(e.target.value)}
             >
@@ -291,8 +299,7 @@ const groupedData = newStudent.reduce((acc, item) => {
                 <option value={item.fullname}>{item.fullname}</option>
               ))}
             </select>
-            <select
-            value={domain} onChange={(e) => setDomain(e.target.value)}>
+            <select value={domain} onChange={(e) => setDomain(e.target.value)}>
               <option value="" selected disabled>
                 Select Opted Domain
               </option>
@@ -347,103 +354,109 @@ const groupedData = newStudent.reduce((acc, item) => {
       )}
       <div className="coursetable">
         <div className="mb-2">
-        <h2>New Enroll Booking:  </h2>
+          <h2>New Enroll Booking: </h2>
           <span onClick={() => setiscourseFormVisible(true)}>
-           + Add New Candidate 
+            + Add New Candidate
           </span>
         </div>
         <table>
-    <thead>
-      <tr>
-        <th>Sl No</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Program</th>
-        <th>Counselor</th>
-        <th>Domain</th>
-        <th>Program Price</th>
-        <th>Paid Amount</th>
-        <th>Remaining Amount</th>
-        <th>Month Opted</th>
-        <th>Clear Payment Month</th>
-        <th>Actions</th>
-        <th>Remark</th>
-        <th>Last Remark</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      {Object.keys(groupedData).length > 0 ? (
-        Object.keys(groupedData).map((date, groupIndex) => (
-          <React.Fragment key={date}>
-            {/* Render date row */}
+          <thead>
             <tr>
-              <td colSpan="16" style={{ fontWeight: "bold" }}>
-             {date}
-              </td>
+              <th>Sl No</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Program</th>
+              <th>Counselor</th>
+              <th>Domain</th>
+              <th>Program Price</th>
+              <th>Paid Amount</th>
+              <th>Remaining Amount</th>
+              <th>Month Opted</th>
+              <th>Clear Payment Month</th>
+              <th>Actions</th>
+              <th>Remark</th>
+              <th>Last Remark</th>
+              <th>Email</th>
             </tr>
-            {/* Render student data rows */}
-            {groupedData[date].map((item, index) => (
-              <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td className="capitalize">{item.fullname}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
-                <td className="capitalize">{item.program}</td>
-                <td className="capitalize">{item.counselor}</td>
-                <td className="capitalize">{item.domain}</td>
-                <td>{item.programPrice}</td>
-                <td>{item.paidAmount}</td>
-                <td>{item.programPrice - item.paidAmount}</td>
-                <td className="capitalize">{item.monthOpted}</td>
-                <td className="whitespace-nowrap">{item.clearPaymentMonth}</td>
-                <td>
-                  <button onClick={() => handleEdit(item._id)}>Edit</button>
-                </td>
-                <td>
-                  <form
-                    action=""
-                    onSubmit={(e) => handleRemark(e, item._id)}
-                  >
-                    <input
-                      type="text"
-                      name="remark"
-                      id="remark"
-                      value={remarks[item._id] || ""}
-                      onChange={(e) =>
-                        setRemarks((prev) => ({
-                          ...prev,
-                          [item._id]: e.target.value,
-                        }))
-                      }
-                      required
-                      style={{ border: "1px solid" }}
-                    />
-                    <button>Submit</button>
-                  </form>
-                </td>
-                <td>{item.remark[item.remark.length - 1]}</td>
-                <td>
-                  <div
-                  className=" cursor-pointer"
-                    onClick={() => handleSendEmail(item)}
-                    disabled={item.mailSended}
-                  >
-                    {item.mailSended ? <i class="fa fa-send-o text-green-600"></i> : <i class="fa fa-send-o text-red-600"></i>}
-                  </div>
-                </td>
+          </thead>
+          <tbody>
+            {Object.keys(groupedData).length > 0 ? (
+              Object.keys(groupedData).map((date, groupIndex) => (
+                <React.Fragment key={date}>
+                  <tr>
+                    <td colSpan="16" style={{ fontWeight: "bold" }}>
+                      {date}
+                    </td>
+                  </tr>
+                  {groupedData[date].map((item, index) => (
+                    <tr key={item._id}>
+                      <td>{index + 1}</td>
+                      <td className="capitalize">{item.fullname}</td>
+                      <td>{item.email}</td>
+                      <td>{item.phone}</td>
+                      <td className="capitalize">{item.program}</td>
+                      <td className="capitalize">{item.counselor}</td>
+                      <td className="capitalize">{item.domain}</td>
+                      <td>{item.programPrice}</td>
+                      <td>{item.paidAmount}</td>
+                      <td>{item.programPrice - item.paidAmount}</td>
+                      <td className="capitalize">{item.monthOpted}</td>
+                      <td className="whitespace-nowrap">
+                        {item.clearPaymentMonth}
+                      </td>
+                      <td>
+                        <button onClick={() => handleEdit(item._id)}>
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <form
+                          action=""
+                          onSubmit={(e) => handleRemark(e, item._id)}
+                        >
+                          <input
+                            type="text"
+                            name="remark"
+                            id="remark"
+                            value={remarks[item._id] || ""}
+                            onChange={(e) =>
+                              setRemarks((prev) => ({
+                                ...prev,
+                                [item._id]: e.target.value,
+                              }))
+                            }
+                            required
+                            style={{ border: "1px solid" }}
+                          />
+                          <button>Submit</button>
+                        </form>
+                      </td>
+                      <td>{item.remark[item.remark.length - 1]}</td>
+                      <td>
+                        <div
+                          className=" cursor-pointer"
+                          onClick={() => handleSendEmail(item)}
+                          disabled={item.mailSended}
+                        >
+                          {item.mailSended ? (
+                            <i class="fa fa-send-o text-green-600"></i>
+                          ) : (
+                            <i class="fa fa-send-o text-red-600"></i>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </React.Fragment>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="17">No data found</td>
               </tr>
-            ))}
-          </React.Fragment>
-        ))
-      ) : (
-        <tr>
-          <td colSpan="17">No data found</td>
-        </tr>
-      )}
-    </tbody>
-  </table>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

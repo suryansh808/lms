@@ -16,24 +16,6 @@ const CreateBDA = () => {
     setiscourseFormVisible((prevState) => !prevState);
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const resetForm = () => {
-    setFormData({
-      fullname: "",
-      email: "",
-      password: "",
-    });
-    setEditingBdaId(null);
-    setiscourseFormVisible(false);
-  };
-
   const handleSumbit = async (e) => {
     e.preventDefault();
     const newBda = {
@@ -73,6 +55,16 @@ const CreateBDA = () => {
     fetchBda();
   }, []);
 
+  const resetForm = () => {
+    setFormData({
+      fullname: "",
+      email: "",
+      password: "",
+    });
+    setEditingBdaId(null);
+    setiscourseFormVisible(false);
+  };
+
   if (!bda) {
     return (
       <div id="loader">
@@ -84,6 +76,14 @@ const CreateBDA = () => {
       </div>
     );
   }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleDelete = (_id) => {
     const isConfirmed = window.confirm(
