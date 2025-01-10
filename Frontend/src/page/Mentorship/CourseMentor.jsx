@@ -442,7 +442,7 @@ const CourseMentor = ({}) => {
               />
                <input
                 type="text"
-                name="number"
+                name="collegeName"
                 value={formData.collegeName}
                 onChange={handleInputChange}
                 placeholder="Enter your college name"
@@ -451,7 +451,7 @@ const CourseMentor = ({}) => {
               />
                <input
                 type="text"
-                name="number"
+                name="domain"
                 value={formData.domain}
                 onChange={handleInputChange}
                 placeholder="Enter interest domain name"

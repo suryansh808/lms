@@ -57,6 +57,8 @@ const MentorQueries = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>College Name</th>
+            <th>Interested Domain</th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +75,8 @@ const MentorQueries = () => {
                       <td>{query.name}</td>
                       <td>{query.email}</td>
                       <td>{query.phone}</td>
+                      <td>{query.collegeName}</td>
+                      <td>{query.domain}</td>
                     </tr>
                   ))}
                 </React.Fragment>
