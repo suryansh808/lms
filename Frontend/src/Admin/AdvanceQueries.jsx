@@ -87,7 +87,7 @@ const AdvanceQueries = () => {
                        ))
                      ) : (
                        <tr>
-                         <td colSpan="3">No Queries Found</td>
+                         <td colSpan="7">No Queries Found</td>
                        </tr>
                      )}
         </tbody>

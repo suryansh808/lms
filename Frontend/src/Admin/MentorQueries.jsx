@@ -66,7 +66,7 @@ const MentorQueries = () => {
               Object.keys(groupedQueries).map((date, dateIndex) => (
                 <React.Fragment key={dateIndex}>
                   <tr>
-                    <td colSpan="3" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
+                    <td colSpan="5" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
                       {date}
                     </td>
                   </tr>
@@ -83,7 +83,7 @@ const MentorQueries = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="3">No Queries Found</td>
+                <td colSpan="5">No Queries Found</td>
               </tr>
             )}
         </tbody>
