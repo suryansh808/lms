@@ -180,8 +180,8 @@ router.post('/send-email', async (req, res) => {
         <ul style="font-size: 14px; color: #555; line-height: 1.5;">
           <li style="text-transform: capitalize;"><strong>Mode of Program:</strong> ${program}</li>
           <li style="text-transform: capitalize;"><strong>You have opted a:</strong> ${monthOpted} month</li>
-          <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain:</strong> ${domain}</li>
-          <li style="text-transform: capitalize;"><strong>Clear Due Payment Date:strong> ${clearPaymentMonth}</ </li>
+          <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain: </strong> ${domain}</li>
+          <li style="text-transform: capitalize;"><strong>Clear Due Payment Date:</strong> ${clearPaymentMonth}</ </li>
           <li style="text-transform: capitalize;"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
         </ul>
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>

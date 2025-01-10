@@ -187,6 +187,9 @@ const BookedAmount = () => {
   }, []);
 
   const handleSendEmail = async (value) => {
+    if (value.isSending) return;
+    value.isSending = true; 
+
     const emailData = {
       fullname: value.fullname,
       email: value.email,
@@ -217,8 +220,10 @@ const BookedAmount = () => {
       }
     } catch (error) {
       toast.error("An error occurred while sending the email.");
+    } finally {
+      fetchNewStudent();
+      value.isSending = false;
     }
-    fetchNewStudent();
   };
 
   
@@ -438,7 +443,7 @@ const BookedAmount = () => {
                       <td>
                         <div
                           className=" cursor-pointer"
-                          onClick={() => handleSendEmail(item)}
+                          onClick={!item.mailSended ? () => handleSendEmail(item) : null}
                           disabled={item.mailSended}
                         >
                           {item.mailSended ? (

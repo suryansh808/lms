@@ -175,7 +175,7 @@ const BDADashboard = () => {
       <div className="revenue">
         <div className="revenue-growth">
           <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
-          <div className="">
+          <div>
             <Line data={lineChartData} />
           </div>
         </div>
