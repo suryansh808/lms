@@ -5,7 +5,7 @@ const CreateBDA = new mongoose.Schema({
     email: { type: String, unique: true },
     password: { type: String },
     otp: { type: String },
-    mailSended : {type: Boolean , default:false},
+    mailSended : {type: Boolean , default: false},
   });
   
   const BDA = mongoose.model("BDA", CreateBDA);

@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 const crypto = require('crypto'); 
-
+const { default: mongoose } = require("mongoose");
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
     const { email , password , otp } = req.body;
