@@ -21,6 +21,17 @@ const FullPaidList = () => {
   useEffect(() => {
     fetchNewStudent();
   }, []);
+  if (!newStudent) {
+    return (
+      <div id="loader">
+        <div class="three-body">
+          <div class="three-body__dot"></div>
+          <div class="three-body__dot"></div>
+          <div class="three-body__dot"></div>
+        </div>
+      </div>
+    );
+  }
 
   const handleChangeStatus = async (studentId, action) => {
     const isConfirmed = window.confirm("Are you sure you want to undo?");
@@ -45,22 +56,22 @@ const FullPaidList = () => {
         student.phone.toLowerCase().includes(value.toLowerCase()) ||
         student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase())
+        student.operationName.toLowerCase().includes(value.toLowerCase())||
+        student.createdAt.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
 
-  if (!filteredStudents) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    );
-  }
+
+  const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+  const groupedData = filteredStudents.reduce((acc, item) => {
+    const date = formatDate(item.createdAt);
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(item);
+    return acc;
+  }, {});
   
   return (
     <div id="AdminAddCourse">
@@ -95,8 +106,15 @@ const FullPaidList = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(filteredStudents) && filteredStudents.length > 0 ? (
-              filteredStudents?.map((item, index) => (
+           {Object.keys(groupedData).length > 0 ? (
+                         Object.keys(groupedData).map((date) => (
+                           <React.Fragment key={date}>
+                             <tr>
+                               <td colSpan="16" style={{ fontWeight: "bold" }}>
+                                 {date}
+                               </td>
+                             </tr>
+             { groupedData[date].map((item, index) => (
                 <tr key={item._id}>
                   <td>{index + 1}</td>
                   <td className="capitalize">{item.fullname}</td>
@@ -120,6 +138,8 @@ const FullPaidList = () => {
                     </button>
                   </td>
                 </tr>
+                 ))}
+                                </React.Fragment>
               ))
             ) : (
               <tr>

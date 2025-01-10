@@ -68,7 +68,8 @@ const BookedList = () => {
         student.phone.toLowerCase().includes(value.toLowerCase()) ||
         student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase())
+        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
+        student.createdAt.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
