@@ -172,10 +172,12 @@ const BDADashboard = () => {
         </div>
       </div>
 
-      <div className="revenue-growth">
-        <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
-        <div className="w-[600px]">
-          <Line data={lineChartData} />
+      <div className="revenue">
+        <div className="revenue-growth">
+          <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
+          <div className="">
+            <Line data={lineChartData} />
+          </div>
         </div>
       </div>
     </div>
