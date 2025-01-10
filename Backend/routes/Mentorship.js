@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Mentorship = require("../models/Mentorship");
 
-// GET request to retrieve all mentorship registrations
+// post request to add new mentorship enqueries
 router.post("/mentorship/register", async (req, res) => {
-  const { name, email, phone } = req.body;
+  const { name, email, phone , collegeName, domain } = req.body;
   try {
     const existingUser = await Mentorship.findOne({ email });
     if (existingUser) {
@@ -16,6 +16,8 @@ router.post("/mentorship/register", async (req, res) => {
       name,
       email,
       phone,
+      collegeName,
+      domain
     });
     await newRegistration.save();
     res.status(201).json({ message: "Registration successful!" });
@@ -25,6 +27,7 @@ router.post("/mentorship/register", async (req, res) => {
   }
 });
 
+//get request to retrieve all the mentorship data in admin 
 router.get("/mentorqueries", async (req, res) => {
   try {
       queries = await Mentorship.find().sort({ _id: -1 });

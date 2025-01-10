@@ -55,6 +55,7 @@ const RevenueSheet = () => {
 
             return (
                 <div key={groupIndex} style={{ marginBottom: "20px", border: "1px solid #ccc", padding: "10px" }}>
+                    <h1 className="text-center">Revenue Sheet</h1>
                     <h2>Group {groupIndex + 1}</h2>
                     {group.map((month, index) => {
                         const { totalRevenue, booked, credited, defaulted } = revenueByMonth[month];

@@ -10,6 +10,12 @@ const MentorshipSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  collegeName:{
+    type:String
+  },
+  domain:{
+    type:String
+  },
   createdAt: {
     type: Date,
     default: Date.now,

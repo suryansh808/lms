@@ -54,7 +54,7 @@ import toast ,{Toaster} from 'react-hot-toast';
 const CourseMentor = ({}) => {
   const [showForm, setShowForm] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", number: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", number: "" , collegeName: "", domain:"" });
   const [selectedCategory, setSelectedCategory] = useState("Computer science");
 
   const categories = [
@@ -320,6 +320,8 @@ const CourseMentor = ({}) => {
         name: formData.name,
         email: formData.email,
         phone: formData.number,
+        collegeName:formData.collegeName,
+        domain : formData.domain,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
@@ -333,7 +335,9 @@ const CourseMentor = ({}) => {
     setFormData({
       name: '',
       email: '',
-      number: ''
+      number: '',
+      collegeName:'',
+      domain:'',
     });
   };
 
@@ -414,7 +418,7 @@ const CourseMentor = ({}) => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Name"
+                placeholder="Enter your name"
                 className="mb-4 p-2 w-full border rounded"
                 required
               />
@@ -423,7 +427,7 @@ const CourseMentor = ({}) => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Email"
+                placeholder="Enter your email id"
                 className="mb-4 p-2 w-full border rounded"
                 required
               />
@@ -432,10 +436,29 @@ const CourseMentor = ({}) => {
                 name="number"
                 value={formData.number}
                 onChange={handleInputChange}
-                placeholder="Number"
+                placeholder="Enter phone number"
                 className="mb-4 p-2 w-full border rounded"
                 required
               />
+               <input
+                type="text"
+                name="number"
+                value={formData.collegeName}
+                onChange={handleInputChange}
+                placeholder="Enter your college name"
+                className="mb-4 p-2 w-full border rounded"
+                required
+              />
+               <input
+                type="text"
+                name="number"
+                value={formData.domain}
+                onChange={handleInputChange}
+                placeholder="Enter interest domain name"
+                className="mb-4 p-2 w-full border rounded"
+                required
+              />
+            
               <div className="flex justify-between">
                 <button
                   type="submit"

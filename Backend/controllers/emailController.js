@@ -22,6 +22,7 @@ const sendEmail = async ({ email, subject, message }) => {
   const mailOptions = {
     from: process.env.SMTP_MAIL,
     to: email,
+    cc: process.env.SMTP_ADMIN_MAIL,
     subject: subject,
     html: message,
     priority: "high",
