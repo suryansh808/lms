@@ -191,17 +191,18 @@ const BookedAmount = () => {
       program: value.program,
       counselor: value.counselor,
       domain: value.domain,
+      clearPaymentMonth: value.clearPaymentMonth,
     };
     try {
-      const response = await axios.post(`${API}/send-email`, emailData);
+      const response = await axios.post(`${API}/sendmailtooperation`, emailData);
       if (response.status === 200) {
         toast.success('Email sent successfully!');
-        const studentData = {
+        const operationData = {
           mailSended: true,
         };
-        const updateResponse = await axios.put(`${API}/mailsendedchange/${value._id}`, studentData);
+        const updateResponse = await axios.put(`${API}/mailsendedoperation/${value._id}`, operationData);
         if (updateResponse.status === 200) {
-          toast.success('Student record updated successfully!');
+          toast.success('Operation record updated successfully!');
         } else {
           toast.error('Failed to update student record.');
         }
@@ -215,7 +216,7 @@ const BookedAmount = () => {
     fetchNewStudent();
   };
   
-  if(!newStudent){
+  if(!groupedData){
     return <div id="loader">
     <div class="three-body">
   <div class="three-body__dot"></div>

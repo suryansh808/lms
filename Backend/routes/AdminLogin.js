@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const adminMail = require("../models/AdminMail"); 
+const Operation = require("../models/CreateOperation")
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -128,6 +129,62 @@ router.post("/checkadmin", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+router.post('/sendmailtooperation', async (req, res) => {
+  const { fullname, email } = req.body;
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic Solutions!</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Operations Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Here are your login details:</p>
+        <p style="font-size: 14px; color: #333;">Use your offical company email with otp for login (<strong>${email}</strong>)</p>
+        <p style="font-size: 14px; color: #555;">
+          <a href="https://www.krutanic.com/operationlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+        </p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT support team.</p>
+        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+  try {
+    await sendEmail({
+      email,
+      subject: 'Welcome to Krutanic Solutions - Operations Team Login',
+      message: emailMessage,
+    });
+    res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ message: 'Error sending email.', error: error.message });
+  }
+});
+
+router.put('/mailsendedoperation/:id', async (req, res) => {
+  const { id } = req.params;
+  const { mailSended } = req.body;
+  const objectId = new mongoose.Types.ObjectId(id);
+  try {
+    const opData = await Operation.findById({ _id: objectId});
+    if (!opData) {
+      return res.status(404).send({ message: 'Operation not found.' });
+    }
+    opData.mailSended = mailSended;
+    await opData.save();
+    res.status(200).send({ message: 'Operaton record updated successfully!', opData });
+  } catch (error) {
+    console.error('Error updating operation data record:', error);
+    res.status(500).send({ message: 'Failed to update updating operation record.' });
+  }
+});
+
 
 
 module.exports = router;

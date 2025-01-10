@@ -58,6 +58,17 @@ const CreateOperation = () => {
     fetchOperation();
   }, []);
 
+
+  if(!operation){
+    return <div id="loader">
+    <div class="three-body">
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  <div class="three-body__dot"></div>
+  </div>
+  </div>;
+ }
+
   const resetForm = () => {
     setFormData({
       fullname: "",
@@ -107,15 +118,34 @@ const CreateOperation = () => {
     }
   };
 
-  if(!operation){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
+
+ const handleSendEmail = async (value) => {
+  const emailData = {
+    fullname: value.fullname,
+    email: value.email,
+  };
+  try {
+    const response = await axios.post(`${API}/send-email`, emailData);
+    if (response.status === 200) {
+      toast.success('Email sent successfully!');
+      const studentData = {
+        mailSended: true,
+      };
+      const updateResponse = await axios.put(`${API}/mailsendedchange/${value._id}`, studentData);
+      if (updateResponse.status === 200) {
+        toast.success('Student record updated successfully!');
+      } else {
+        toast.error('Failed to update student record.');
+      }
+    }
+     else {
+      toast.error('Failed to send email.');
+    }
+  } catch (error) {
+    toast.error('An error occurred while sending the email.');
+  }
+  fetchNewStudent();
+};
 
   return (
     <div id="AdminAddCourse">
@@ -170,6 +200,7 @@ const CreateOperation = () => {
               <th>Email</th>
                <th>Password</th>
               <th>Action</th>
+              <th>Send Login Credentials</th>
             </tr>
           </thead>
           <tbody>
@@ -184,6 +215,15 @@ const CreateOperation = () => {
                     Delete
                   </button>
                   <button onClick={() => handleEdit(operation)}>Edit</button>
+                </td>
+                <td>
+                  <div
+                  className=" cursor-pointer"
+                    onClick={() => handleSendEmail(operation)}
+                    disabled={operation.mailSended}
+                  >
+                    {operation.mailSended ? <i class="fa fa-send-o text-green-600"></i> : <i class="fa fa-send-o text-red-600"></i>}
+                  </div>
                 </td>
               </tr>
             ))}

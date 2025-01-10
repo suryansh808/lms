@@ -167,22 +167,23 @@ router.get("/OperationDashboard", authMiddleware, (req, res) => {
 });
 
 router.post('/send-email', async (req, res) => {
-  const { fullname, email, program, counselor, domain } = req.body;
+  const { fullname, email, program, counselor, domain , clearPaymentMonth } = req.body;
   const defaultPassword = 'Krutanic@123';
 
   // HTML email message
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic!</h1>
+        <h1>Welcome to Krutanic Solutions!</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
         <p style="font-size: 14px; color: #555;">Thank you for joining us! Here are your details:</p>
         <ul style="font-size: 14px; color: #555; line-height: 1.5;">
           <li style="text-transform: capitalize;"><strong>Mode of Program:</strong> ${program}</li>
-          <li style="text-transform: capitalize;"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
           <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain:</strong> ${domain}</li>
+          <li style="text-transform: capitalize;"><strong>Clear Due Payment Date:strong> ${clearPaymentMonth}</ </li>
+          <li style="text-transform: capitalize;"><strong>Any Doubts? Talk to Your Counselor:</strong> ${counselor}</li>
         </ul>
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;">Use your email (<strong>${email}</strong>) and the default password provided below to log in:</p>
@@ -191,6 +192,7 @@ router.post('/send-email', async (req, res) => {
           <a href="https://www.krutanic.com/login" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
           After logging in, please set a new password according to your preferences or official requirements.
         </p>
+        <p>Note: Once you clear due amount then you'll get the access to your enrolled course.</p>
         <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out.</p>
         <p style="font-size: 14px; color: #333;">Best regards,</p>
         <p style="font-size: 14px; color: #333;">Team Krutanic</p>

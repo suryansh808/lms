@@ -5,6 +5,7 @@ const CreateOperation = new mongoose.Schema({
     email: { type: String, unique: true },
     otp: { type: String },
     password: { type: String },
+    mailSended: { type: Boolean, default: false },
 });
 
 const Operation =  mongoose.model("Operation" , CreateOperation);
