@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "../API";
-
+import toast ,{Toaster} from 'react-hot-toast';
 const Createmanager = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,18 +29,18 @@ const Createmanager = () => {
           `${API}/updatemanager/${editingmanagerId}`,
           newmanager
         );
-        alert("manager updated successfully");
+        toast.success("manager updated successfully");
       } else {
         const response = await axios.post(
           `${API}/createmanager`,
           newmanager
         );
-        alert("manager created successfully");
+        toast.success("manager created successfully");
       }
       fetchmanager();
       resetForm();
     } catch (error) {
-      alert("There was an error while creating or updating the manager");
+      toast.error("There was an error while creating or updating the manager");
       console.error("Error creating or updating manager", error);
     }
   };
@@ -118,8 +118,38 @@ const Createmanager = () => {
     }
   };
 
+  const handleSendEmail = async (value) => {
+    const emailData = {
+      fullname: value.fullname,
+      email: value.email,
+    };
+    try {
+      const response = await axios.post(`${API}/sendmailtomanager`, emailData);
+      if (response.status === 200) {
+        toast.success('Email sent successfully!');
+        const managerData = {
+          mailSended: true,
+        };
+        const updateResponse = await axios.put(`${API}/mailsendedmanager/${value._id}`, managerData);
+        if (updateResponse.status === 200) {
+          toast.success('Manager record updated successfully!');
+        } else {
+          toast.error('Failed to update manager record.');
+        }
+      }
+       else {
+        toast.error('Failed to send email.');
+      }
+    } catch (error) {
+      toast.error('An error occurred while sending the email.');
+    }
+    fetchmanager();
+  };
+
+
   return (
     <div id="AdminAddCourse">
+       <Toaster position="top-center" reverseOrder={false}/>
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>
@@ -171,6 +201,7 @@ const Createmanager = () => {
               <th>Email</th>
                <th>Password</th>
               <th>Action</th>
+              <th>Send Login Credentials</th>
             </tr>
           </thead>
           <tbody>
@@ -185,6 +216,15 @@ const Createmanager = () => {
                     Delete
                   </button>
                   <button onClick={() => handleEdit(manager)}>Edit</button>
+                </td>
+                <td>
+                  <div
+                  className=" cursor-pointer"
+                    onClick={() => handleSendEmail(manager)}
+                    disabled={manager.mailSended}
+                  >
+                    {manager.mailSended ? <i class="fa fa-send-o text-green-600"></i> : <i class="fa fa-send-o text-red-600"></i>}
+                  </div>
                 </td>
               </tr>
             ))}
