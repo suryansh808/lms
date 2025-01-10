@@ -68,6 +68,10 @@ const CreateBDA = () => {
       console.error("There was an error fetching bda:", error);
     }
   };
+  
+  useEffect(() => {
+    fetchBda();
+  }, []);
 
   if (!bda) {
     return (
@@ -134,9 +138,7 @@ const CreateBDA = () => {
     fetchBda();
   };
 
-  useEffect(() => {
-    fetchBda();
-  }, []);
+  
 
   return (
     <div id="AdminAddCourse">

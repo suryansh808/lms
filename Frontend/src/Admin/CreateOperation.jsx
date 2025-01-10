@@ -55,6 +55,9 @@ const CreateOperation = () => {
     }
   };
 
+  useEffect(() => {
+    fetchOperation();
+  }, []);
 
   if(!operation){
     return <div id="loader">
@@ -143,9 +146,7 @@ const CreateOperation = () => {
   fetchOperation();
 };
 
-useEffect(() => {
-  fetchOperation();
-}, []);
+
 
   return (
     <div id="AdminAddCourse">
