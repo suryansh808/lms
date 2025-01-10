@@ -125,19 +125,21 @@ const OperationDashboard = () => {
         </div>
       </div>
 
-      <div className="text-center flex flex-col items-center justify-center mt-5">
+     <div className="w-full flex items-center justify-center flex-wrap mb-3">
+     <div className="text-center flex flex-col items-center justify-center">
         <h2>Overall Status</h2>
         <div className="w-[400px]">
           <Pie data={data} />
         </div>
       </div>
 
-      <div className="text-center flex flex-col items-center justify-center mt-5">
+      <div className="text-center flex flex-col items-center justify-center">
         <h2>Revenue Growth</h2>
         <div className="w-[600px]">
           <Line data={lineChartData} />
         </div>
       </div>
+     </div>
     </div>
   );
 };

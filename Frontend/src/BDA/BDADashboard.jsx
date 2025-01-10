@@ -1,10 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
 import API from "../API";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement
+);
 
 const BDADashboard = () => {
   const [newStudent, setNewStudent] = useState([]);
@@ -36,11 +53,57 @@ const BDADashboard = () => {
     0
   );
   const defaultAmount = newStudent.reduce((acc, student) => {
-    if (student.status === 'default') {
+    if (student.status === "default") {
       return acc + (student.paidAmount || 0);
     }
     return acc + (student.defaultAmount || 0);
   }, 0);
+
+  // Calculate revenue by month
+  const revenueByMonth = newStudent.reduce((acc, student) => {
+    const month = new Date(student.createdAt).toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
+
+    if (!acc[month]) {
+      acc[month] = { totalRevenue: 0 };
+    }
+
+    if (student.status === "booked" || student.status === "default") {
+      acc[month].totalRevenue += student.paidAmount || 0;
+    } else if (student.status === "fullPaid") {
+      acc[month].totalRevenue += student.programPrice || 0;
+    }
+
+    return acc;
+  }, {});
+
+  // Get last 2 months
+  const sortedMonths = Object.keys(revenueByMonth).sort(
+    (a, b) => new Date(`1 ${a}`) - new Date(`1 ${b}`)
+  );
+  const lastTwoMonths = sortedMonths.slice(-2);
+
+  // Prepare line chart data
+  const revenueData = lastTwoMonths.map((month) => ({
+    month,
+    revenue: revenueByMonth[month]?.totalRevenue || 0,
+  }));
+
+  const lineChartData = {
+    labels: revenueData.map((data) => data.month),
+    datasets: [
+      {
+        label: "Revenue Growth (₹)",
+        data: revenueData.map((data) => data.revenue),
+        borderColor: "#4CAF50",
+        backgroundColor: "rgba(76, 175, 80, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
 
   const data = {
     labels: ["Total Revenue", "Total Booked", "Default Amount"],
@@ -53,16 +116,18 @@ const BDADashboard = () => {
     ],
   };
 
-  if(!newStudent){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
- 
+  if (!newStudent) {
+    return (
+      <div id="loader">
+        <div className="three-body">
+          <div className="three-body__dot"></div>
+          <div className="three-body__dot"></div>
+          <div className="three-body__dot"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div id="AdminDashboard">
       <h2 className="text-center font-semibold mb-2">Dashboard</h2>
@@ -100,11 +165,19 @@ const BDADashboard = () => {
         </div>
 
         <div className="revenue-card">
-        <h2 className="text-lg font-medium mb-4">Overall Performance</h2>
-        <div className="">
-          <Pie data={data} />
+          <h2 className="text-lg font-medium mb-4">Overall Performance</h2>
+          <div className="">
+            <Pie data={data} />
+          </div>
+        </div>
+
+        <div className="revenue-card">
+        <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
+        <div className="w-[600px]">
+          <Line data={lineChartData} />
         </div>
       </div>
+
       </div>
 
      
