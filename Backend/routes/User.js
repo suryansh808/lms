@@ -153,7 +153,7 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
 
        const  EmailMessage = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #4a90e2; color: #fff; text-align: center; padding: 20px;">
+        <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
             <h1>Krutanic Solution</h1>
         </div>
         <div style="padding: 20px; text-align: center;">
@@ -163,7 +163,7 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
             <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
         </div>
         <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-            <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+            <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
             <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
         </div>
     </div>

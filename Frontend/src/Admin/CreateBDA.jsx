@@ -147,7 +147,7 @@ const CreateBDA = () => {
         <div className="form">
           <form onSubmit={handleSumbit}>
             <span onClick={resetForm}>✖</span>
-            <h1>{editingBdaId ? "Edit BDA Account" : "Create BDA Account"}</h1>
+            <h2>{editingBdaId ? "Edit BDA Account" : "Create BDA Account"}</h2>
             <input
               value={formData.fullname}
               onChange={handleChange}

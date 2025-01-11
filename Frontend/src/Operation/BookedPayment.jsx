@@ -110,11 +110,11 @@ const BookedAmount = () => {
       const response = await axios.get(`${API}/getnewstudentenroll`, {
         params: { operationId },
       });
-      setNewStudent(
-        response.data.filter(
-          (item) => item.operationId === operationId && item.status === "booked"
-        )
+      const bookedStudents = response.data.filter(
+        (item) => item.status === "booked"
       );
+      setNewStudent(bookedStudents);
+      setFilteredStudents(bookedStudents);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     }
@@ -144,6 +144,8 @@ const BookedAmount = () => {
       }
     } catch (error) {
       console.error("Error submitting remark:", error);
+    } finally {
+      fetchNewStudent();
     }
   };
 
@@ -188,7 +190,7 @@ const BookedAmount = () => {
 
   const handleSendEmail = async (value) => {
     if (value.isSending) return;
-    value.isSending = true; 
+    value.isSending = true;
 
     const emailData = {
       fullname: value.fullname,
@@ -226,10 +228,37 @@ const BookedAmount = () => {
     }
   };
 
-  
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogData, setDialogData] = useState(null);
+  const handleDialogOpen = (item) => {
+    setDialogData(item);
+    setDialogVisible(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogVisible(false);
+    setDialogData(null);
+  };
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchQuery(value);
+    const filtered = newStudent.filter(
+      (student) =>
+        student.email.toLowerCase().includes(value.toLowerCase()) ||
+        student.phone.toLowerCase().includes(value.toLowerCase()) ||
+        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
+        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
+        student.operationName.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredStudents(filtered);
+  };
+
   const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
 
-  const groupedData = newStudent.reduce((acc, item) => {
+  const groupedData = filteredStudents.reduce((acc, item) => {
     const date = formatDate(item.createdAt);
     if (!acc[date]) {
       acc[date] = [];
@@ -250,17 +279,16 @@ const BookedAmount = () => {
     );
   }
 
-
   return (
     <div id="OperationEnroll">
       <Toaster position="top-center" reverseOrder={false} />
       {iscourseFormVisible && (
         <div className="form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-5">
             <span onClick={resetForm}>✖</span>
-            <h1>
-              {editingStudentId ? "Edit Student Details" : "Add New Student"}
-            </h1>
+            <h2>
+              {editingStudentId ? "Edit Enrolled Details" : "Add New Enrollment"}
+            </h2>
             <input
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
@@ -314,6 +342,27 @@ const BookedAmount = () => {
                 <option value={item.title}>{item.title}</option>
               ))}
             </select>
+            <select
+              value={monthOpted}
+              onChange={(e) => setMonthOpted(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select Opted Month
+              </option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
             <input
               value={programPrice}
               onChange={(e) => setProgramPrice(e.target.value)}
@@ -329,17 +378,8 @@ const BookedAmount = () => {
               placeholder="Paid Amount"
               required
             />
-            <div>
-              <input
-                value={monthOpted}
-                onChange={(e) => setMonthOpted(e.target.value)}
-                type="text"
-                placeholder="Month Opted"
-                name=""
-                id=""
-                required
-              />
-            </div>
+
+           
             <div>
               Due date for clear payment ?
               <input
@@ -366,25 +406,43 @@ const BookedAmount = () => {
             + Add New Candidate
           </span>
         </div>
+        <section className="flex items-center gap-1">
+          <input
+            type="type"
+            placeholder="Search here by "
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="border border-black px-2 py-1 rounded-lg"
+          />
+
+          <div className="relative group inline-block">
+            <i class="fa fa-info-circle text-lg cursor-pointer"></i>
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+              Name, Email, Contact ,Counselor Name, Operation Name
+              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+            </div>
+          </div>
+        </section>
         <table>
           <thead>
             <tr>
               <th>Sl No</th>
               <th>Full Name</th>
-              <th>Email</th>
+              {/* <th>Email</th>
               <th>Phone</th>
               <th>Program</th>
-              <th>Counselor</th>
-              <th>Domain</th>
+              <th>Counselor</th> */}
+              {/* <th>Domain</th> */}
               <th>Program Price</th>
               <th>Paid Amount</th>
               <th>Remaining Amount</th>
               <th>Month Opted</th>
-              <th>Clear Payment Month</th>
+              <th>Clear Month</th>
               <th>Actions</th>
               <th>Remark</th>
               <th>Last Remark</th>
               <th>Email</th>
+              <th>More Details</th>
             </tr>
           </thead>
           <tbody>
@@ -400,11 +458,11 @@ const BookedAmount = () => {
                     <tr key={item._id}>
                       <td>{index + 1}</td>
                       <td className="capitalize">{item.fullname}</td>
-                      <td>{item.email}</td>
+                      {/* <td>{item.email}</td>
                       <td>{item.phone}</td>
                       <td className="capitalize">{item.program}</td>
-                      <td className="capitalize">{item.counselor}</td>
-                      <td className="capitalize">{item.domain}</td>
+                      <td className="capitalize">{item.counselor}</td> */}
+                      {/* <td className="capitalize">{item.domain}</td> */}
                       <td>{item.programPrice}</td>
                       <td>{item.paidAmount}</td>
                       <td>{item.programPrice - item.paidAmount}</td>
@@ -443,7 +501,11 @@ const BookedAmount = () => {
                       <td>
                         <div
                           className=" cursor-pointer"
-                          onClick={!item.mailSended ? () => handleSendEmail(item) : null}
+                          onClick={
+                            !item.mailSended
+                              ? () => handleSendEmail(item)
+                              : null
+                          }
                           disabled={item.mailSended}
                         >
                           {item.mailSended ? (
@@ -452,6 +514,12 @@ const BookedAmount = () => {
                             <i class="fa fa-send-o text-red-600"></i>
                           )}
                         </div>
+                      </td>
+                      <td>
+                        <i
+                          class="fa fa-info-circle text-2xl cursor-pointer"
+                          onClick={() => handleDialogOpen(item)}
+                        ></i>
                       </td>
                     </tr>
                   ))}
@@ -464,6 +532,44 @@ const BookedAmount = () => {
             )}
           </tbody>
         </table>
+        {dialogVisible && dialogData && (
+          <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
+            <h2>Details</h2>
+            <div className="space-y-2">
+              <p>
+                <strong>Email:</strong> {dialogData.email}
+              </p>
+              <p>
+                <strong>Phone:</strong> {dialogData.phone}
+              </p>
+              <p>
+                <strong>Program:</strong> {dialogData.program}
+              </p>
+              <p>
+                <strong>Domian Opted:</strong> {dialogData.domain}
+              </p>
+
+              <p>
+                <strong>Counselor:</strong> {dialogData.counselor}
+              </p>
+            </div>
+            <button onClick={handleDialogClose}>Close</button>
+          </div>
+        )}
+        {dialogVisible && (
+          <div
+            onClick={handleDialogClose}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+            }}
+          ></div>
+        )}
       </div>
     </div>
   );

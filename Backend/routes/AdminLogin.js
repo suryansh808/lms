@@ -56,7 +56,7 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
                 <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
               </div>
               <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-                <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+                <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
                 <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
               </div>
             </div>
@@ -149,7 +149,7 @@ router.post('/sendmailtooperation', async (req, res) => {
         <p style="font-size: 14px; color: #555;">
           <a href="https://www.krutanic.com/operationLogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
         </p>
-        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT support team.</p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT team.</p>
         <p style="font-size: 14px; color: #333;">Best regards,</p>
         <p style="font-size: 14px; color: #333;">Team Krutanic</p>
       </div>
@@ -206,7 +206,7 @@ router.post('/sendmailtobda', async (req, res) => {
         <p style="font-size: 14px; color: #555;">
           <a href="https://www.krutanic.com/bdalogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
         </p>
-        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT support team.</p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT team.</p>
         <p style="font-size: 14px; color: #333;">Best regards,</p>
         <p style="font-size: 14px; color: #333;">Team Krutanic</p>
       </div>
@@ -266,7 +266,7 @@ router.post('/sendmailtomanager', async (req, res) => {
     <p style="font-size: 14px; color: #555;">
       <a href="https://www.krutanic.com/managerlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>.
     </p>
-    <p style="font-size: 14px; color: #555;">For any assistance or technical support, feel free to reach out to the IT support team.</p>
+    <p style="font-size: 14px; color: #555;">For any assistance or technical support, feel free to reach out to the IT team.</p>
     <p style="font-size: 14px; color: #333;">Best regards,</p>
     <p style="font-size: 14px; color: #333;">Team Krutanic</p>
   </div>

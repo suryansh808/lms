@@ -164,6 +164,14 @@ const BDADashboard = () => {
           <p>Default Amount: {defaultAmount}/-</p>
         </div>
 
+        <div className="revenue-growth">
+          <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
+          <div>
+            <Line data={lineChartData} />
+          </div>
+        </div>
+
+
         <div className="revenue-card">
           <h2 className="text-lg font-medium mb-4">Overall Performance</h2>
           <div className="">
@@ -172,14 +180,6 @@ const BDADashboard = () => {
         </div>
       </div>
 
-      <div className="revenue">
-        <div className="revenue-growth">
-          <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
-          <div>
-            <Line data={lineChartData} />
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

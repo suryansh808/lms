@@ -78,13 +78,22 @@ const DefaultList = () => {
       <div className="coursetable">
         <div className="mb-2">
           <h2>Default List </h2>
-          <input
+          <section className="flex items-center  gap-1">
+          <div className="relative group inline-block">
+      <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+          Name, Email, Contact ,Counselor Name, Operation Name
+        <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+      </div>
+         </div>
+         <input
             type="type"
-            placeholder="Search here "
+            placeholder="Search here by "
             value={searchQuery}
             onChange={handleSearchChange}
             className="border border-black px-2 py-1 rounded-lg"
           />
+    </section>
         </div>
 
         <table>

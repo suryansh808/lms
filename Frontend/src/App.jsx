@@ -117,7 +117,7 @@ const AppContent = () => {
     "/adminlogin",
     "/managerlogin",
     "/operationagainlogin",
-    "/bdagainlogin",
+    "/bdaagainlogin",
     "/manageragainlogin",
     "/loginadmin"
   ];

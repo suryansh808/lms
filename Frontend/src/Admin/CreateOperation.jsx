@@ -154,11 +154,11 @@ const CreateOperation = () => {
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>
-            <h1>
+            <h2>
               {editingOperationId
                 ? "Edit Operation Account"
                 : "Create Operation Account"}
-            </h1>
+            </h2>
             <span onClick={resetForm}>✖</span>
             <input
               value={formData.fullname}

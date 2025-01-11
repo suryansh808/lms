@@ -153,11 +153,11 @@ const Createmanager = () => {
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>
-            <h1>
+            <h2>
               {editingmanagerId
                 ? "Edit manager Account"
                 : "Create manager Account"}
-            </h1>
+            </h2>
             <span onClick={resetForm}>✖</span>
             <input
               value={formData.fullname}

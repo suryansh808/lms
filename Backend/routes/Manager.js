@@ -97,18 +97,21 @@ router.post("/managersendotp", async (req, res) => {
       const otp = crypto.randomInt(100000, 1000000);
 
          const EmailMessage = `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <h2 style="color: #2c3e50;">🔐 Welcome back, manager!</h2>
-            <p>Your <strong>One-Time Password (OTP)</strong> for secure login is:</p>
-            <h1 style="background: #f4f4f4; color: #2c3e50; padding: 10px; text-align: center; border-radius: 5px;">
-              ${otp}
-            </h1>
-            <p>Stay secure, stay productive!</p>
-            <p><strong>Best regards,</strong><br />
-            <strong>The IT Team</strong><br />
-            <strong>Krutanic Solution</strong></p>
-            <hr />
-          </div> 
+         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+          <h1>Krutanic Solutions</h1>
+        </div>
+        <div style="padding: 20px; text-align: center;">
+          <p style="font-size: 16px; color: #333;">Welcome back! Manager,</p>
+          <p style="font-size: 14px; color: #555;">Your One-Time Password (OTP) for verification is:</p>
+          <p style="font-size: 24px; font-weight: bold; color: #4a90e2; margin: 10px 0;">${otp}</p>
+          <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
+        </div>
+        <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+          <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
+          <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+        </div>
+      </div>
         `;
         
       manager.otp = otp;

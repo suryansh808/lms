@@ -148,10 +148,10 @@ const AddModule = () => {
             {isModuleFormVisible && (
               <div className="moduleform">
                 <form onSubmit={handleModuleSubmit}>
-                  <strong>
                     <h2>
                       {editingModule ? "Update Session" : "Add New Session"}{" "}
                     </h2>
+                  <strong>
                     <span onClick={resetForm}>✖</span>
                   </strong>
                   <input
@@ -195,7 +195,7 @@ const AddModule = () => {
                 <tbody>
                   {Object.keys(selectedCourse.session).map((key) => (
                     <tr key={key}>
-                      <td>{key}</td>
+                      <td className=" capitalize">{key}</td>
                       <td>{selectedCourse.session[key].title}</td>
                       <td>{selectedCourse.session[key].description}</td>
                       <td>

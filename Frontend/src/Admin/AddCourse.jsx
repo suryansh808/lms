@@ -105,7 +105,7 @@ const AddCourse = () => {
        {iscourseFormVisible && (
        <div className="form">
           <form onSubmit={handleSumbit}>
-            <h1>{editingCourseId ? "Edit Course" : "Add New Course"}</h1>
+            <h2>{editingCourseId ? "Edit Course" : "Add New Course"}</h2>
             <span onClick={resetForm}>✖</span>
             <input
               type="text"

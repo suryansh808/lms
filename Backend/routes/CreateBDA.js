@@ -99,7 +99,7 @@ router.post("/bdasendotp", async (req, res) => {
               <p style="font-size: 14px; color: #555;">This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
           </div>
           <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-              <p>If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+              <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
               <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
           </div>
       </div>
