@@ -16,7 +16,7 @@ const Setting = () => {
       return;
     }
     try {
-      const email = atob(localStorage.getItem("userEmail"));
+      const email = localStorage.getItem("userEmail");
       const response = await axios.put(`${API}/updatepassword`, {
         email,
         newPassword,

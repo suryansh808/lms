@@ -103,10 +103,12 @@
         a {
             font-weight: 600;
             background-color: rgb(0, 0, 0);
-            border-radius: 10px;
             color: white;
-            padding: 5px 10px;
+            padding: 8px 10px;
             font-size: 12px;
+        }
+        a:hover{
+            border-radius: 20px;
         }
     }
 
@@ -161,10 +163,12 @@
             button {
                 background-color: rgb(0, 0, 0);
                 float: inline-end;
-                border-radius: 10px;
-                padding: 5px 10px;
+                padding: 8px 10px;
                 font-size: 12px;
                 color: rgb(255, 255, 255);
+            }
+            button:hover{
+                border-radius: 20px;
             }
         }
     }
@@ -244,6 +248,7 @@
 
         pre{
             margin-bottom: 5px;
+            white-space: wrap;
         }
 
         table {

@@ -228,6 +228,7 @@ router.post("/verify-otp", otpLimiter, async (req, res) => {
 router.put("/updatepassword",passwordResetLimiter, async (req, res) => {
   try {
     const { email, newPassword } = req.body;
+    console.log(email , newPassword);
 
     if (!email || !newPassword) {
       return res

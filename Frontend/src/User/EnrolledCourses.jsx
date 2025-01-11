@@ -102,7 +102,7 @@ const EnrolledCourse = () => {
             <h2
               onClick={toggleLeftVisibility}
               className=""
-            ><span>☰ </span>Enroll Courses</h2>
+            ><span>☰ </span></h2>
             <h2>{selectedCourse.title}</h2>
             <h2></h2>
             {/* <button onClick={() => handleStartLearning(selectedCourse.title,selectedCourse.session)}>Start Learning</button> */}
