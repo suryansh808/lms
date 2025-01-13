@@ -4,6 +4,7 @@ import axios from "axios";
 
 const PendingApplication = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${API}/users`);
@@ -17,68 +18,75 @@ const PendingApplication = () => {
   }, []);
 
   const handleActiveNow = async (id) => {
-    const isConfirmed = window.confirm("Are you sure you want to active the user?")
-    if(isConfirmed){
+    const isConfirmed = window.confirm(
+      "Are you sure you want to active the user?"
+    );
+    if (isConfirmed) {
       try {
         await axios.put(`${API}/users/${id}`, { status: "active" });
         fetchUsers();
-      }
-      catch (error) {
+      } catch (error) {
         console.error("Error activating user:", error);
       }
     }
-  }
+  };
 
-  if(!users){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
+  useEffect(() => {
+    if (users) {
+      setLoading(false);
+    }
+  }, [users]);
 
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
-      <h1>Inactive Users List</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Sl</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>Password</th>
-            <th>Status</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-          users.length > 0 ? (
-            users?.map((user, index) => (
-              <tr key={user._id}>
-                <td>{index + 1}</td>
-                <td>{user.fullName}</td>
-                <td>{user.email}</td>
-                <td>{user.contact}</td>
-                <td>{user.password}</td>
-                <td>{user.status}</td>
-                <td>
-                  <button onClick={()=> handleActiveNow(user._id)}>Active now</button>
-                </td>
+        <h1>Inactive Users List</h1>
+        {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Sl</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Active</th>
               </tr>
-            ))
-          ):(
-            <tr>
-              <td colSpan="7">no inactive users</td>
-            </tr>
-          )
-          }
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {users.length > 0 ? (
+                users.map((user, index) => (
+                  <tr key={user._id}>
+                    <td>{index + 1}</td>
+                    <td>{user.fullName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.contact}</td>
+                    <td>{user.password}</td>
+                    <td>{user.status}</td>
+                    <td>
+                      <button onClick={() => handleActiveNow(user._id)}>
+                        Active now
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7">no inactive users</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

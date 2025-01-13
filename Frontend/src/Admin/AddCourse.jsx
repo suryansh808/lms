@@ -10,6 +10,7 @@ const AddCourse = () => {
   const [description, setDescription] = useState("");
   const [courses, setCourses] = useState([]);
   const [editingCourseId, setEditingCourseId] = useState(null);
+   const [loading, setLoading] = useState(true);
 
   const toggleVisibility = () => {
     console.log("open hua");
@@ -90,15 +91,11 @@ const AddCourse = () => {
     fetchCourses();
   }, []);
 
-  if(!courses){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
+ useEffect(() => {
+     if (courses) {
+       setLoading(false);
+     }
+   }, [courses]);
 
   return (
     <div id="AdminAddCourse">
@@ -129,6 +126,15 @@ const AddCourse = () => {
         <h2>Added Courses</h2>
           <button onClick={toggleVisibility}> + Add New Course</button>
         </div>
+        {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
         <table>
           <thead>
             <tr>
@@ -152,6 +158,7 @@ const AddCourse = () => {
             ))}
           </tbody>
         </table>
+      )}
       </div>
     </div>
   );

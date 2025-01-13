@@ -202,8 +202,6 @@ const AddModule = () => {
                         <div className="video">
                           <img src={logo} alt="" />
                           <iframe
-                            // src="https://www.youtube.com/embed/wspbXSjRlCs?si=PolO8cr2MI5umdD8"
-
                             src={`https://drive.google.com/file/d/${selectedCourse.session[key].description}/preview`}
                             allow="autoplay"
                             allowFullScreen

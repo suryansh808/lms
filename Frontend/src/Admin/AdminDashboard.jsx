@@ -7,6 +7,7 @@ const AdminDashboard = () => {
   const [Operation, setOperation] = useState([]);
   const [bda, setBda] = useState([]);
   const [payment, setPayment] = useState([]);
+  const [loading, setLoading] = useState(true);
   const fetchCourses = async () => {
     try {
       const response = await axios.get(`${API}/getcourses`);
@@ -15,6 +16,7 @@ const AdminDashboard = () => {
       console.error("There was an error fetching courses:", error);
     }
   };
+
   const fetchOperation = async () => {
     try {
       const response = await axios.get(`${API}/getoperation`);
@@ -43,28 +45,16 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
-  useEffect(() => {
     fetchOperation();
-  }, []);
-  useEffect(() => {
     fetchBda();
-  }, []);
-  useEffect(() => {
     fetchNewStudent();
   }, []);
 
-  if (!courses || !Operation || !bda || !payment) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (courses) {
+      setLoading(false);
+    }
+  }, [courses]);
 
   return (
     <div id="AdminDashboard">
@@ -107,23 +97,32 @@ const AdminDashboard = () => {
         </div>
       </div>
       <br />
-      <br />
       <h3>Added Courses</h3>
       <div className="courselist">
-        <table>
-          <tr>
-            <th>Sl</th>
-            <th>Course</th>
-            <th>Session</th>
-          </tr>
-          {courses?.map((course, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{course.title}</td>
-              <td>{Object.keys(course.session).length}</td>
+        {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
+          <table>
+            <tr>
+              <th>Sl</th>
+              <th>Course</th>
+              <th>Session</th>
             </tr>
-          ))}
-        </table>
+            {courses.map((course, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{course.title}</td>
+                <td>{Object.keys(course.session).length}</td>
+              </tr>
+            ))}
+          </table>
+        )}
       </div>
     </div>
   );

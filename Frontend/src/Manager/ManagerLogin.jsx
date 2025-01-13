@@ -100,10 +100,10 @@ const ManagerLogin = () => {
             <button type="submit">Verify OTP</button>
           </form>
         )}
-        <div className="loginwith">
+        {/* <div className="loginwith">
         <p>--------------------or--------------------</p>
           <Link to="/ManagerAgainLogin">Login with password</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

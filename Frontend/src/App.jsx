@@ -47,7 +47,7 @@ import OperationDashboard from "./Operation/OperationDashboard";
 import BookedPayment from "./Operation/BookedPayment";
 import FullPayment from "./Operation/FullPayment";
 import DefaultPayment from "./Operation/DefaultPayment";
-import OperationAgainLogin from "./Operation/OperationAgainLogin";
+// import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
 import BDAlogin from "./BDA/BDAlogin";
@@ -56,7 +56,7 @@ import BBookedPayment from "./BDA/BBookedPayment";
 import BDAHeader from "./BDA/BDAHeader";
 import BDefualtPayment from "./BDA/BDefualtPayment";
 import BFullPayment from "./BDA/BFullPayment";
-import BDAAgainLogin from "./BDA/BDAAgainLogin";
+// import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
 // User Student
 import UserHeader from "./User/UserHeader";
@@ -77,7 +77,7 @@ import ManagerLogin from "./Manager/ManagerLogin";
 import BookingList from "./Manager/BookingList";
 import DefaultedList from "./Manager/DefaultedList";
 import FullPaymentList from "./Manager/FullPaymentList";
-import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
+// import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
 
 
 
@@ -116,9 +116,9 @@ const AppContent = () => {
     "/bdalogin",
     "/adminlogin",
     "/managerlogin",
-    "/operationagainlogin",
-    "/bdaagainlogin",
-    "/manageragainlogin",
+    // "/operationagainlogin",
+    // "/bdaagainlogin",
+    // "/manageragainlogin",
     "/loginadmin"
   ];
   const adminheaderPaths = [
@@ -236,12 +236,12 @@ const AppContent = () => {
         <Route path="/FullPayment" element={isAuthenticatedOperation()?<FullPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/DefaultPayment" element={isAuthenticatedOperation()?<DefaultPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationLogin" element={<OperationLogin />} />
-        <Route path="/OperationAgainLogin" element={<OperationAgainLogin/>} />
+        {/* <Route path="/OperationAgainLogin" element={<OperationAgainLogin/>} /> */}
         {/* Operation Panel End */}
 
         {/* bda panel start */}
           <Route path="/BDAlogin" element={<BDAlogin />} />
-          <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} />
+          {/* <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} /> */}
           <Route path="/BDADashboard" element={ isAuthenticatedBda() ? <BDADashboard /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BFullPayment" element={isAuthenticatedBda() ?<BFullPayment /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BDefaultPayment" element={isAuthenticatedBda() ?<BDefualtPayment /> : <Navigate to="/BDAlogin"/>} />
@@ -257,7 +257,7 @@ const AppContent = () => {
 
         {/* Manager Panel */}
         <Route path="/ManagerLogin" element={<ManagerLogin />} />
-        <Route path="/ManagerAgainLogin" element={<ManagerAgainLogin/>} />
+        {/* <Route path="/ManagerAgainLogin" element={<ManagerAgainLogin/>} /> */}
         <Route path="/ManagerDashboard" element={isAuthenticatedManager() ? <ManagerDashboard /> : <Navigate to="/ManagerLogin" />} />
         <Route path="/BookingList" element={isAuthenticatedManager() ? <BookingList /> : <Navigate to="/ManagerLogin" />} />
         <Route path="/DefaultedList" element={isAuthenticatedManager() ? <DefaultedList /> : <Navigate to="/ManagerLogin" />} />

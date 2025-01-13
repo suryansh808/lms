@@ -101,10 +101,10 @@ const OperationLogin = () => {
             <button type="submit">Verify OTP</button>
           </form>
         )}
-          <p>--------------------or--------------------</p>
-        <div className="loginwith">
+          {/* <p>----------------------------------------</p> */}
+        {/* <div className="loginwith">
           <Link to="/OperationAgainLogin">Login with password</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

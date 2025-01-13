@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 const CreateBDA = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const CreateBDA = () => {
   });
   const [bda, setBda] = useState([]);
   const [editingBdaId, setEditingBdaId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const toggleVisibility = () => {
     setiscourseFormVisible((prevState) => !prevState);
@@ -37,7 +38,7 @@ const CreateBDA = () => {
       resetForm();
       fetchBda();
     } catch (error) {
-      toast.error("There was an error while creating or updating the bda")
+      toast.error("There was an error while creating or updating the bda");
       console.error("There was an error submitting the bda:", error);
     }
   };
@@ -50,7 +51,7 @@ const CreateBDA = () => {
       console.error("There was an error fetching bda:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchBda();
   }, []);
@@ -64,18 +65,6 @@ const CreateBDA = () => {
     setEditingBdaId(null);
     setiscourseFormVisible(false);
   };
-
-  if (!bda) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    );
-  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -109,7 +98,7 @@ const CreateBDA = () => {
     setEditingBdaId(bdaId._id);
     setiscourseFormVisible(true);
   };
-  
+
   const handleSendEmail = async (value) => {
     const emailData = {
       fullname: value.fullname,
@@ -118,31 +107,37 @@ const CreateBDA = () => {
     try {
       const response = await axios.post(`${API}/sendmailtobda`, emailData);
       if (response.status === 200) {
-        toast.success('Email sent successfully!');
+        toast.success("Email sent successfully!");
         const bdaData = {
           mailSended: true,
         };
-        const updateResponse = await axios.put(`${API}/mailsendedbda/${value._id}`, bdaData);
+        const updateResponse = await axios.put(
+          `${API}/mailsendedbda/${value._id}`,
+          bdaData
+        );
         if (updateResponse.status === 200) {
-          toast.success('BDA record updated successfully!');
+          toast.success("BDA record updated successfully!");
         } else {
-          toast.error('Failed to update Bda record.');
+          toast.error("Failed to update Bda record.");
         }
-      }
-       else {
-        toast.error('Failed to send email.');
+      } else {
+        toast.error("Failed to send email.");
       }
     } catch (error) {
-      toast.error('An error occurred while sending the email.');
+      toast.error("An error occurred while sending the email.");
     }
     fetchBda();
   };
 
-  
+  useEffect(() => {
+    if (bda) {
+      setLoading(false);
+    }
+  }, [bda]);
 
   return (
     <div id="AdminAddCourse">
-        <Toaster position="top-center" reverseOrder={false}/>
+      <Toaster position="top-center" reverseOrder={false} />
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSumbit}>
@@ -189,41 +184,57 @@ const CreateBDA = () => {
           <h1>BDA's List:</h1>
           <span onClick={toggleVisibility}>+ Add New BDA</span>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Sl.No</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>Action</th>
-              <th>Send Login Credentials</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bda?.map((bda, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{bda.fullname}</td>
-                <td>{bda.email}</td>
-                <td>{bda.password}</td>
-                <td>
-                  <button onClick={() => handleDelete(bda._id)}>Delete</button>
-                  <button onClick={() => handleEdit(bda)}>Edit</button>
-                </td>
-                <td>
-                  <div
-                  className=" cursor-pointer"
-                    onClick={() => handleSendEmail(bda)}
-                    disabled={bda.mailSended}
-                  >
-                    {bda.mailSended ? <i class="fa fa-send-o text-green-600"></i> : <i class="fa fa-send-o text-red-600"></i>}
-                  </div>
-                </td>
+        {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Sl.No</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Action</th>
+                <th>Send Login Credentials</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {bda.map((bda, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{bda.fullname}</td>
+                  <td>{bda.email}</td>
+                  <td>{bda.password}</td>
+                  <td>
+                    <button onClick={() => handleDelete(bda._id)}>
+                      Delete
+                    </button>
+                    <button onClick={() => handleEdit(bda)}>Edit</button>
+                  </td>
+                  <td>
+                    <div
+                      className=" cursor-pointer"
+                      onClick={() => handleSendEmail(bda)}
+                      disabled={bda.mailSended}
+                    >
+                      {bda.mailSended ? (
+                        <i class="fa fa-send-o text-green-600"></i>
+                      ) : (
+                        <i class="fa fa-send-o text-red-600"></i>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

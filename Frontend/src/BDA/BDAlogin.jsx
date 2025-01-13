@@ -83,10 +83,10 @@ const BDAlogin = () => {
             </div>
           </form>
         )}
-        <p>--------------------or--------------------</p>
-        <div className="loginwith">
+        {/* <p>--------------------or--------------------</p> */}
+        {/* <div className="loginwith">
           <Link to="/BDAAgainLogin">Login with password</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

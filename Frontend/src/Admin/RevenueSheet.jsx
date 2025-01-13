@@ -14,6 +14,7 @@ const RevenueSheet = () => {
        useEffect(() => {
               fetchNewStudent();
           }, []);
+
   return (
     <div>
     {(() => {
