@@ -6,6 +6,8 @@ const AcceptedApplication = () => {
   const [users, setUsers] = useState([]);
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredStudents, setFilteredStudents] = useState([]);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -45,7 +47,11 @@ const AcceptedApplication = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${API}/users`);
-      setUsers(response.data.filter((user) => user.status === "active"));
+      const activeUsers = response.data.filter(
+        (user) => user.status === "active"
+      );
+      setUsers(activeUsers);
+      setFilteredStudents(activeUsers);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -73,6 +79,17 @@ const AcceptedApplication = () => {
     }
   }, [users]);
 
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchQuery(value);
+    const filtered = users.filter(
+      (student) =>
+        student.fullName.toLowerCase().includes(value.toLowerCase()) ||
+        student.email.toLowerCase().includes(value.toLowerCase()) ||
+        student.phone.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredStudents(filtered);
+  };
   return (
     <div id="AdminAddCourse">
       {iscourseFormVisible && (
@@ -118,6 +135,22 @@ const AcceptedApplication = () => {
       )}
       <div className="coursetable">
         <h1>Active Users List</h1>
+        <section className="flex items-center  gap-1">
+          <input
+            type="type"
+            placeholder="Search here by "
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="border border-black px-2 py-1 rounded-lg"
+          />
+          <div className="relative group inline-block">
+            <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+              Name, Email, and Contact no
+              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+            </div>
+          </div>
+        </section>
         {loading ? (
           <div id="loader">
             <div class="three-body">
@@ -140,8 +173,8 @@ const AcceptedApplication = () => {
               </tr>
             </thead>
             <tbody>
-              {users.length > 0 ? (
-                users.map((user, index) => (
+              {filteredStudents.length > 0 ? (
+                filteredStudents.map((user, index) => (
                   <tr key={user._id}>
                     <td>{index + 1}</td>
                     <td>{user.fullName}</td>
@@ -159,7 +192,7 @@ const AcceptedApplication = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7">no active users</td>
+                  <td colSpan="7">No Active Users</td>
                 </tr>
               )}
             </tbody>

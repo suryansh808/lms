@@ -20,9 +20,9 @@ const CreateOperation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newOperation = {
-      fullname: formData.fullname,
-      email: formData.email,
-      password: formData.password
+      fullname: formData.fullname.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim()
     };
     try {
       if (editingOperationId) {

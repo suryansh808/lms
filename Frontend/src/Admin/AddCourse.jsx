@@ -28,8 +28,8 @@ const AddCourse = () => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     const newCourse = {
-      title: title,
-      description: description,
+      title: title.trim(),
+      description: description.trim(),
     };
     try {
       if (editingCourseId) {

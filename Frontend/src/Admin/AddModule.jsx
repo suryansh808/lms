@@ -41,8 +41,8 @@ const AddModule = () => {
 
     if (selectedCourse) {
       const newModul = {
-        title: moduleTitle,
-        description: moduleDescription,
+        title: moduleTitle.trim(),
+        description: moduleDescription.trim(),
       };
       const updatedCourse = { ...selectedCourse };
       if (editingModule) {

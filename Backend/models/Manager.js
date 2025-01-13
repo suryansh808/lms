@@ -7,6 +7,7 @@ const managerSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
+    lowercase: true,
   },
   otp: {
     type: String,

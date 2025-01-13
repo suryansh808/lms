@@ -61,17 +61,42 @@ router.post("/updateremark", async (req, res) => {
 // Handle PUT request to update student details
 router.put("/editstudentdetails/:_id", async (req, res) => {
   const { _id } = req.params;
-  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth } = req.body;
+  const { fullname, email, phone, program, counselor, domain, programPrice, paidAmount, monthOpted, clearPaymentMonth } = req.body;
 
   try {
+    // Check if domain has changed
+    let domainId = null;
+    if (domain) {
+      // Fetch the domainId based on the domain name
+      const foundDomain = await CreateCourse.findOne({ title: domain }); // assuming domain field is 'name'
+      if (foundDomain) {
+        domainId = foundDomain._id;
+      } else {
+        return res.status(404).json({ message: "Domain not found" });
+      }
+    }
+
+    // Update the student details including domainId
     const studentData = await NewEnrollStudent.findByIdAndUpdate(
       _id,
-      { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth  },
+      {
+        fullname,
+        email,
+        phone,
+        program,
+        counselor,
+        domain,
+        domainId, // Update domainId if domain was provided
+        programPrice,
+        paidAmount,
+        monthOpted,
+        clearPaymentMonth,
+      },
       { new: true }
     );
 
     if (!studentData) {
-      return res.status(404).json({ message: "Course not found" });
+      return res.status(404).json({ message: "Student not found" });
     }
 
     res.status(200).json(studentData);

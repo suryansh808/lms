@@ -8,6 +8,7 @@ const AdvanceSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    lowercase: true,
   },
   phone: {
     type: String,

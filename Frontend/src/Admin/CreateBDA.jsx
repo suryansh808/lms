@@ -20,9 +20,9 @@ const CreateBDA = () => {
   const handleSumbit = async (e) => {
     e.preventDefault();
     const newBda = {
-      fullname: formData.fullname,
-      email: formData.email,
-      password: formData.password,
+      fullname: formData.fullname.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim(),
     };
     try {
       if (editingBdaId) {
