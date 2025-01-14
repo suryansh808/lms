@@ -55,7 +55,7 @@ const AcceptedApplication = () => {
       setFilteredStudents(activeUsers);
     } catch (error) {
       console.error("Error fetching users:", error);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -131,33 +131,33 @@ const AcceptedApplication = () => {
         </div>
       )}
       {loading ? (
-          <div id="loader">
-            <div class="three-body">
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-            </div>
+        <div id="loader">
+          <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
           </div>
-        ) : (
-      <div className="coursetable">
-        <h1>Active Users List</h1>
-        <section className="flex items-center  gap-1">
-          <input
-            type="type"
-            placeholder="Search here by "
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="border border-black px-2 py-1 rounded-lg"
-          />
-          <div className="relative group inline-block">
-            <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-              Name, Email, and Contact no
-              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+        </div>
+      ) : (
+        <div className="coursetable">
+          <h1>Active Users List</h1>
+          <section className="flex items-center  gap-1">
+            <input
+              type="type"
+              placeholder="Search here by "
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="border border-black px-2 py-1 rounded-lg"
+            />
+            <div className="relative group inline-block">
+              <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+                Name, Email, and Contact no
+                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+              </div>
             </div>
-          </div>
-        </section>
-        
+          </section>
+
           <table>
             <thead>
               <tr>
@@ -182,9 +182,23 @@ const AcceptedApplication = () => {
                     <td>{user.status}</td>
                     <td>
                       <button onClick={() => handleActiveNow(user._id)}>
-                        Inactive now
+                        <div className="relative group inline-block">
+                          <i class="fa fa-eye-slash"></i>
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+                            Inactive
+                            <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+                          </div>
+                        </div>
                       </button>
-                      <button onClick={() => handleEdit(user._id)}>Edit</button>
+                      <button onClick={() => handleEdit(user._id)}>
+                        <div className="relative group inline-block">
+                          <i class="fa fa-edit"></i>
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+                            Edit
+                            <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+                          </div>
+                        </div>
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -195,8 +209,8 @@ const AcceptedApplication = () => {
               )}
             </tbody>
           </table>
-      </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

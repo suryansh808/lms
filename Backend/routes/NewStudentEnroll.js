@@ -6,15 +6,15 @@ const CreateCourse = require("../models/CreateCourse");
 // post request to post all the new student enroll
 router.post("/newstudentenroll", async (req, res) => {
   const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId } = req.body; 
-  // console.log("data coming from frontend",req.body)
+  console.log("data coming from frontend",req.body)
   try {
     const course = await CreateCourse.findOne({ title: domain });
-    // console.log("find data", course)
+    console.log("find data", course)
 
     const newStudent = new NewEnrollStudent({
         fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId  , edit: false , status: "booked", domainId: course._id,
     });
-    // console.log("new data",newStudent)
+    console.log("new data",newStudent)
     await newStudent.save();
     res.status(201).json({ message: "Registration successful!" });
   } catch (error) {

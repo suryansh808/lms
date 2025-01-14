@@ -213,10 +213,8 @@ const CreateOperation = () => {
                 <td>{operation.email}</td>
                  <td>{operation.password}</td>
                 <td>
-                  <button onClick={() => handleDelete(operation._id)}>
-                    Delete
-                  </button>
-                  <button onClick={() => handleEdit(operation)}>Edit</button>
+                  <button onClick={() => handleEdit(operation)}> <i class="fa fa-edit"></i></button>
+                  <button onClick={() => handleDelete(operation._id)}><i class="fa fa-trash-o text-red-600"></i></button>
                 </td>
                 <td>
                   <div

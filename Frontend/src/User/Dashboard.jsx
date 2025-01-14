@@ -2,12 +2,15 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
+import debounce from "lodash/debounce";
 
 const Dashboard = () => {
   const userEmail = localStorage.getItem("userEmail");
   const [enrollData, setenrollData] = useState([]);
-const [loading, setLoading] = useState(true);
-  const fetchenrollData = async () => {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const fetchenrollData = debounce(async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/enrollments`);
@@ -17,18 +20,17 @@ const [loading, setLoading] = useState(true);
     }finally {
       setLoading(false);
     }
-  };
+  }, 500);
+
+
   useEffect(() => {
     fetchenrollData();
   }, []);
 
 
-  const navigate = useNavigate();
+ 
   const handleStartLearning = (title, sessionlist) => {
-    console.log("learning", title, sessionlist);
-    navigate("/Learning", {
-      state: { courseTitle: title, sessions: sessionlist },
-    });
+    navigate("/Learning", {state: { courseTitle: title, sessions: sessionlist },});
   };
 
 

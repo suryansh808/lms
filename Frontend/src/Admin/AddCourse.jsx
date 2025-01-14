@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const AddCourse = () => {
@@ -131,7 +130,7 @@ const AddCourse = () => {
       <div className="coursetable">
         <div>
         <h2>Added Courses</h2>
-          <button onClick={toggleVisibility}> + Add New Course</button>
+          <button className="p-2 border border-black rounded-md" onClick={toggleVisibility}> + Add New Course</button>
         </div>
        
         <table>
@@ -148,10 +147,8 @@ const AddCourse = () => {
                 <td>{index + 1}</td>
                 <td>{course.title}</td>
                 <td>
-                  <button onClick={() => handleDelete(course._id,course)}>
-                    Delete
-                  </button>
-                  <button onClick={() => handleEdit(course._id)}>Edit</button>
+                  <button ><i class="fa fa-edit" onClick={() => handleEdit(course._id)}></i></button>
+                  <button onClick={() => handleDelete(course._id,course)}><i class="fa fa-trash-o text-red-600"></i></button>
                 </td>
               </tr>
             ))}

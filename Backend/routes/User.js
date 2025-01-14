@@ -5,31 +5,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const authMiddleware = require("../middleware/UserAuth");
 const { sendEmail } = require("../controllers/emailController");
-const rateLimit = require("express-rate-limit");
 const crypto = require('crypto'); 
-// checkuser login with throttling
-const loginLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 15 minutes window
-  max: 15, // Limit each IP to 15 login attempts per window
-  message: "Too many login attempts from this IP, please try again after 10 minutes later.",
-});
-// otp throttling
-const otpLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 15 minutes window
-  max: 15, // Limit each IP to 15 OTP requests per window
-  message: "Too many OTP requests from this IP, please try again after 10 minutes later.",
-});
-// update password throttling
-const passwordResetLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 15 hour window
-  max: 15, // limit each IP to 15 password reset requests per hour
-  message: {
-    status: 429,
-     message: "Too many password reset attempts from this IP, please try again after 10 hours later.",
-  },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
+
 
 // create user
 router.post("/users", async (req, res) => {
@@ -60,7 +37,6 @@ router.get("/users", async (req, res) => {
   try {
     let users;
     if (userId) {
-      // Fetch specific users by userId
       users = await User.findById(userId);
       if (!users) {
         return res
@@ -68,7 +44,6 @@ router.get("/users", async (req, res) => {
           .json({ message: "user not found for the given userId" });
       }
     } else {
-      // Fetch all user if no userId is provided
       users = await User.find().sort({ _id: -1 });
     }
     res.status(200).json(users);
@@ -101,27 +76,21 @@ router.put("/users/:id", async (req, res) => {
 });
 
 // check user login
-router.post("/checkuserauth",loginLimiter, async (req, res) => {
+router.post("/checkuserauth", async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-      // Check if the user status is inactive
       if (user.status === "inactive") {
         return res
           .status(403)
           .json({ message: "Your account is inactive. Please contact support." });
       }
-
-    // Compare the plain text password directly (no hashing)
     if (password !== user.password) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
-    // Generate JWT token if credentials are valid
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
@@ -139,18 +108,15 @@ router.get("/dashboard", authMiddleware, (req, res) => {
 });
 
 // send otp route
-router.post("/send-otp", otpLimiter, async (req, res) => {
+router.post("/send-otp",async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found enter a valid email" });
     }
-
-    // const otp = Math.floor(100000 + Math.random() * 900000).toString();
      const otp = crypto.randomInt(100000, 1000000);
     const otpExpires = Date.now() + 10 * 60 * 1000; // 10 mins expiration
-
        const  EmailMessage = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
@@ -168,7 +134,6 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
         </div>
     </div>
     `;
-
     user.otp = otp;
     user.otpExpires = otpExpires;
     await Promise.all([
@@ -183,15 +148,13 @@ router.post("/send-otp", otpLimiter, async (req, res) => {
 });
 
 // verfiy otp route
-router.post("/verify-otp", otpLimiter, async (req, res) => {
+router.post("/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
   try {
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-      // Check if the user status is inactive
       if (user.status === "inactive") {
         return res.status(403).json({ message: "Your account is inactive. Please contact support." });
       }
@@ -205,8 +168,6 @@ router.post("/verify-otp", otpLimiter, async (req, res) => {
     if (user.otp !== otp) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
-
-    // Clear OTP after successful verification
     user.otp = null;
     user.otpExpires = null;
     await user.save();
@@ -223,9 +184,9 @@ router.post("/verify-otp", otpLimiter, async (req, res) => {
     res.status(500).json({ message: "Error verifying OTP" });
   }
 });
-// isko uthale
+
 // update password route
-router.put("/updatepassword",passwordResetLimiter, async (req, res) => {
+router.put("/updatepassword", async (req, res) => {
   try {
     const { email, newPassword } = req.body;
     console.log(email , newPassword);

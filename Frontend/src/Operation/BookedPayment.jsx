@@ -54,11 +54,11 @@ const BookedAmount = () => {
     event.preventDefault();
     const formData = {
       fullname: fullname,
-      email: email,
+      email: email.trim(),
       phone: phone,
       program: program,
       counselor: counselor,
-      domain: domain,
+      domain: domain.trim(),
       programPrice: programPrice,
       paidAmount: paidAmount,
       monthOpted: monthOpted,
@@ -68,7 +68,7 @@ const BookedAmount = () => {
     };
     const minimalData = {
       fullName: fullname,
-      email: email,
+      email: email.trim(),
       phone: phone,
     };
     try {

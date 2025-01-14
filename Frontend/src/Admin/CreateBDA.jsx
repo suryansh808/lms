@@ -210,10 +210,8 @@ const CreateBDA = () => {
                   <td>{bda.email}</td>
                   <td>{bda.password}</td>
                   <td>
-                    <button onClick={() => handleDelete(bda._id)}>
-                      Delete
-                    </button>
-                    <button onClick={() => handleEdit(bda)}>Edit</button>
+                    <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
+                    <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
                   </td>
                   <td>
                     <div

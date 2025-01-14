@@ -208,10 +208,10 @@ const AddModule = () => {
                       <td>
                         {" "}
                         <button onClick={() => handleEditModule(key)}>
-                          Edit
+                         <i class="fa fa-edit"></i>
                         </button>
                         <button onClick={() => handleDeleteModule(key)}>
-                          Delete
+                          <i class="fa fa-trash-o text-red-600"></i>
                         </button>{" "}
                       </td>
                     </tr>

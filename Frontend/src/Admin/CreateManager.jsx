@@ -212,10 +212,8 @@ const Createmanager = () => {
                 <td>{manager.email}</td>
                 <td>{manager.password}</td>
                 <td>
-                  <button onClick={() => handleDelete(manager._id)}>
-                    Delete
-                  </button>
-                  <button onClick={() => handleEdit(manager)}>Edit</button>
+                  <button onClick={() => handleEdit(manager)}><i class="fa fa-edit"></i></button>
+                  <button onClick={() => handleDelete(manager._id)}><i class="fa fa-trash-o text-red-600"></i></button>
                 </td>
                 <td>
                   <div
