@@ -56,7 +56,7 @@ const Setting = () => {
               onChange={(e) => setRePassword(e.target.value)}
             />
           </div>
-          <span className=" absolute bottom-16 right-5" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+          <span className=" absolute bottom-16 right-5" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEye /> :  <FaEyeSlash />}</span>
           <input type="submit" className="btn mt-3" value="Update Password" />
         </form>
       </div>

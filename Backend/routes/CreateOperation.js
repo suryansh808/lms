@@ -172,7 +172,7 @@ router.post('/send-email', async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions!</h1>
+        <h1>Welcome to Krutanic Solutions</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>

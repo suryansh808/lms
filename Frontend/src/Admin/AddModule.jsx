@@ -29,7 +29,6 @@ const AddModule = () => {
     }
   };
 
-
   useEffect(() => {
     fetchCourses();
   }, []);
@@ -46,10 +45,8 @@ const AddModule = () => {
       };
       const updatedCourse = { ...selectedCourse };
       if (editingModule) {
-        // Editing existing module
         updatedCourse.session[editingModule] = newModul;
       } else {
-        // Adding new module
         updatedCourse.session = {
           ...updatedCourse.session,
           [`session${Object.keys(updatedCourse.session).length + 1}`]: newModul,
@@ -223,9 +220,6 @@ const AddModule = () => {
               </table>
               <div className="description">
                 <h3>Description of {selectedCourse.title} !!!</h3>
-                {/* <pre
-                  dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-                /> */}
                 <pre>
                   {selectedCourse.description}
                 </pre>

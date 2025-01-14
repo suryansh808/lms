@@ -6,26 +6,22 @@ import API from "../API";
 const Dashboard = () => {
   const userEmail = localStorage.getItem("userEmail");
   const [enrollData, setenrollData] = useState([]);
-
+const [loading, setLoading] = useState(true);
   const fetchenrollData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/enrollments`);
-      console.log("enrooled data", response.data);
       setenrollData(response.data.filter((item) => item.email === userEmail));
     } catch (error) {
       console.error("There was an error fetching enrolledData:", error);
+    }finally {
+      setLoading(false);
     }
   };
+  useEffect(() => {
+    fetchenrollData();
+  }, []);
 
-  if(!enrollData){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
-  }
 
   const navigate = useNavigate();
   const handleStartLearning = (title, sessionlist) => {
@@ -34,9 +30,7 @@ const Dashboard = () => {
       state: { courseTitle: title, sessions: sessionlist },
     });
   };
-  useEffect(() => {
-    fetchenrollData();
-  }, []);
+
 
   return (
     <div id="UserDashboard">
@@ -65,15 +59,23 @@ const Dashboard = () => {
           </h2>
         </div>
       </div>
-      <br />
       <h2>Courses</h2>
+      {loading ? (
+         <div id="loader">
+         <div class="three-body">
+           <div class="three-body__dot"></div>
+           <div class="three-body__dot"></div>
+           <div class="three-body__dot"></div>
+         </div>
+       </div>
+        ) : (
       <div className="courselist">
-        {enrollData?.map((item, index) => (
+        {enrollData.map((item, index) => (
           <div key={index} className="list">
             <h2>{item.domain.title}</h2>
             <span>★★★★★</span>
             <p> Session {Object.keys(item.domain.session).length}</p>
-            <p><strong>Your Due Payment Amount Is :</strong> ₹ {item.programPrice - item.paidAmount}/-</p>
+            
 
             {item.status === "fullPaid" ? (
               <button
@@ -86,6 +88,7 @@ const Dashboard = () => {
             ) : (
              <div>
                <h3><strong>Your Due Date:</strong> {item.clearPaymentMonth}</h3>
+               <p><strong>Your Due Payment Amount Is :</strong> ₹ {item.programPrice - item.paidAmount}/-</p>
                <p>To begin your learning journey, please ensure your outstanding payment is cleared. Kindly settle the due amount before the specified due date. </p>
              </div>
 
@@ -93,6 +96,7 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+       )}
     </div>
   );
 };

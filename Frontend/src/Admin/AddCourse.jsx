@@ -49,11 +49,14 @@ const AddCourse = () => {
     }
   };
   const fetchCourses = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/getcourses`);
       setCourses(response.data);
     } catch (error) {
       console.error("There was an error fetching courses:", error);
+    } finally{
+      setLoading(false);
     }
   };
   const handleDelete = (_id,selectedCourse) => {
@@ -91,11 +94,6 @@ const AddCourse = () => {
     fetchCourses();
   }, []);
 
- useEffect(() => {
-     if (courses) {
-       setLoading(false);
-     }
-   }, [courses]);
 
   return (
     <div id="AdminAddCourse">
@@ -121,11 +119,6 @@ const AddCourse = () => {
           </form>
         </div>
        )}  
-      <div className="coursetable">
-        <div>
-        <h2>Added Courses</h2>
-          <button onClick={toggleVisibility}> + Add New Course</button>
-        </div>
         {loading ? (
           <div id="loader">
             <div class="three-body">
@@ -135,6 +128,12 @@ const AddCourse = () => {
             </div>
           </div>
         ) : (
+      <div className="coursetable">
+        <div>
+        <h2>Added Courses</h2>
+          <button onClick={toggleVisibility}> + Add New Course</button>
+        </div>
+       
         <table>
           <thead>
             <tr>
@@ -158,8 +157,8 @@ const AddCourse = () => {
             ))}
           </tbody>
         </table>
-      )}
       </div>
+      )}
     </div>
   );
 };

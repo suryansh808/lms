@@ -8,6 +8,7 @@ const BookedList = () => {
   const [loading, setLoading] = useState(true);
   const fetchNewStudent = async () => {
     const operationId = localStorage.getItem("operationId");
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`, {
         params: { operationId },
@@ -19,6 +20,8 @@ const BookedList = () => {
       setFilteredStudents(studentsData);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
+    }finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -73,11 +76,6 @@ const BookedList = () => {
     return acc;
   }, {});
 
-  useEffect(() => {
-    if (groupedData) {
-      setLoading(false);
-    }
-  }, [groupedData]);
 
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogData, setDialogData] = useState(null);
@@ -93,6 +91,15 @@ const BookedList = () => {
 
   return (
     <div id="AdminAddCourse">
+      {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
       <div className="coursetable">
         <div className="mb-2">
           <h2>Booked Lists </h2>
@@ -113,15 +120,7 @@ const BookedList = () => {
             />
           </section>
         </div>
-        {loading ? (
-          <div id="loader">
-            <div class="three-body">
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-            </div>
-          </div>
-        ) : (
+        
           <table>
             <thead>
               <tr>
@@ -203,7 +202,7 @@ const BookedList = () => {
               )}
             </tbody>
           </table>
-        )}
+        
         {dialogVisible && dialogData && (
           <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
             <h2>Details</h2>
@@ -243,6 +242,7 @@ const BookedList = () => {
           ></div>
         )}
       </div>
+      )}
     </div>
   );
 };

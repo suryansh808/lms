@@ -45,6 +45,7 @@ const AcceptedApplication = () => {
     setiscourseFormVisible(false);
   };
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/users`);
       const activeUsers = response.data.filter(
@@ -54,6 +55,8 @@ const AcceptedApplication = () => {
       setFilteredStudents(activeUsers);
     } catch (error) {
       console.error("Error fetching users:", error);
+    }finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -72,12 +75,6 @@ const AcceptedApplication = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (users) {
-      setLoading(false);
-    }
-  }, [users]);
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -133,6 +130,15 @@ const AcceptedApplication = () => {
           </form>
         </div>
       )}
+      {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
       <div className="coursetable">
         <h1>Active Users List</h1>
         <section className="flex items-center  gap-1">
@@ -151,15 +157,7 @@ const AcceptedApplication = () => {
             </div>
           </div>
         </section>
-        {loading ? (
-          <div id="loader">
-            <div class="three-body">
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-            </div>
-          </div>
-        ) : (
+        
           <table>
             <thead>
               <tr>
@@ -197,8 +195,8 @@ const AcceptedApplication = () => {
               )}
             </tbody>
           </table>
-        )}
       </div>
+        )}
     </div>
   );
 };

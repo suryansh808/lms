@@ -8,6 +8,7 @@ const FullPaidList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const fetchNewStudent = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
       const studentsData = response.data.filter(
@@ -17,22 +18,13 @@ const FullPaidList = () => {
       setFilteredStudents(studentsData);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
+    }finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
     fetchNewStudent();
   }, []);
-  if (!newStudent) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    );
-  }
 
   const handleChangeStatus = async (studentId, action) => {
     const isConfirmed = window.confirm("Are you sure you want to undo?");
@@ -73,13 +65,17 @@ const FullPaidList = () => {
     return acc;
   }, {});
 
-  useEffect(() => {
-    if (groupedData) {
-      setLoading(false);
-    }
-  }, [groupedData]);
   return (
     <div id="AdminAddCourse">
+       {loading ? (
+          <div id="loader">
+            <div class="three-body">
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+              <div class="three-body__dot"></div>
+            </div>
+          </div>
+        ) : (
       <div className="coursetable">
         <div className="mb-2">
           <h2>Full Payments </h2>
@@ -100,15 +96,7 @@ const FullPaidList = () => {
             />
           </section>
         </div>
-        {loading ? (
-          <div id="loader">
-            <div class="three-body">
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-            </div>
-          </div>
-        ) : (
+       
           <table>
             <thead>
               <tr>
@@ -172,8 +160,8 @@ const FullPaidList = () => {
               )}
             </tbody>
           </table>
-        )}
       </div>
+        )}
     </div>
   );
 };

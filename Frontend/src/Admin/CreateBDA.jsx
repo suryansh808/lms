@@ -43,12 +43,15 @@ const CreateBDA = () => {
     }
   };
   const fetchBda = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
       setBda(response.data);
       console.log(bda);
     } catch (error) {
       console.error("There was an error fetching bda:", error);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -129,11 +132,6 @@ const CreateBDA = () => {
     fetchBda();
   };
 
-  useEffect(() => {
-    if (bda) {
-      setLoading(false);
-    }
-  }, [bda]);
 
   return (
     <div id="AdminAddCourse">
