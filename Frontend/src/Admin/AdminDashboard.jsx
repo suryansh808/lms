@@ -9,11 +9,14 @@ const AdminDashboard = () => {
   const [payment, setPayment] = useState([]);
   const [loading, setLoading] = useState(true);
   const fetchCourses = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API}/getcourses`);
       setCourses(response.data);
     } catch (error) {
       console.error("There was an error fetching courses:", error);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -50,11 +53,7 @@ const AdminDashboard = () => {
     fetchNewStudent();
   }, []);
 
-  useEffect(() => {
-    if (courses) {
-      setLoading(false);
-    }
-  }, [courses]);
+
 
   return (
     <div id="AdminDashboard">

@@ -52,23 +52,23 @@ const BookedAmount = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
-      fullname: fullname.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      program: program.trim(),
-      counselor: counselor.trim(),
-      domain: domain.trim(),
-      programPrice: programPrice.trim(),
-      paidAmount: paidAmount.trim(),
-      monthOpted: monthOpted.trim(),
-      clearPaymentMonth: clearPaymentMonth.trim(),
-      operationName: operationData.fullname.trim(),
-      operationId: operationData._id.trim(),
+      fullname: fullname,
+      email: email,
+      phone: phone,
+      program: program,
+      counselor: counselor,
+      domain: domain,
+      programPrice: programPrice,
+      paidAmount: paidAmount,
+      monthOpted: monthOpted,
+      clearPaymentMonth: clearPaymentMonth,
+      operationName: operationData.fullname,
+      operationId: operationData._id,
     };
     const minimalData = {
-      fullName: fullname.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
+      fullName: fullname,
+      email: email,
+      phone: phone,
     };
     try {
       let response;
