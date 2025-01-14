@@ -17,6 +17,7 @@ const BookedAmount = () => {
     setPaidAmount("");
     setMonthOpted("");
     setClearPaymentMonth("");
+    setEditingStudentId(null);
   };
   const [course, setCourse] = useState([]);
   const fetchCourses = async () => {
@@ -279,6 +280,12 @@ const BookedAmount = () => {
     );
   }
 
+  const handleAddNewCandidate = () => {
+    resetForm();
+    setEditingStudentId(null); 
+    setiscourseFormVisible(true); 
+  };
+
   return (
     <div id="OperationEnroll">
       <Toaster position="top-center" reverseOrder={false} />
@@ -347,7 +354,7 @@ const BookedAmount = () => {
               onChange={(e) => setMonthOpted(e.target.value)}
               required
             >
-              <option value="" disabled>
+              <option value="" selected disabled>
                 Select Opted Month
               </option>
               <option value="January">January</option>
@@ -402,7 +409,7 @@ const BookedAmount = () => {
       <div className="coursetable">
         <div className="mb-2">
           <h2>New Enroll Booking: </h2>
-          <span onClick={() => setiscourseFormVisible(true)}>
+          <span onClick={handleAddNewCandidate}>
             + Add New Candidate
           </span>
         </div>
