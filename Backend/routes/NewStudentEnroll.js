@@ -21,7 +21,7 @@ router.post("/newstudentenroll", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Server error. Please try again later." });
   }
-});
+}); 
 
 // GET request to retrieve all new student enroll
 router.get("/getnewstudentenroll", async (req, res) => {

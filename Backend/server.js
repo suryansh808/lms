@@ -43,6 +43,7 @@ app.use((err, req, res, next) => {
     next();
   }
 });
+
 app.options('*', (req, res) => {
   res.sendStatus(204); 
 });
@@ -78,12 +79,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Backend Server!");
 });
 
-
-
-
 // Export the app for Vercel
 module.exports = app;
-
 
 // Connect to MongoDB
 mongoose
