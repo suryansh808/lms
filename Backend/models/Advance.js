@@ -24,6 +24,10 @@ const AdvanceSchema = new mongoose.Schema({
     enum: ["0 year", "1-2 years", "3-5 years", "5+ years"],
     required: true,
   },
+  interestedDomain:{
+     type:String,
+     required:true,
+  },
   goal: {
     type: String,
     enum: ["Career Transition", "Kickstart Career", "Upskilling", "Other"],

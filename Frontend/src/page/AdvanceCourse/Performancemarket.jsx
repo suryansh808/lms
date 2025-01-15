@@ -35,9 +35,9 @@ const Performancemarket = () => {
     goalOther: "",
     domain: "",
     domainOther: "",
+    interestedDomain: "",
   });
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -379,6 +379,7 @@ const Performancemarket = () => {
         goalOther: formData.goal === "Other" ? formData.goalOther : undefined,
         domain: formData.domain,
         domainOther: formData.domain === "Other" ? formData.domainOther : undefined,
+        interestedDomain:formData.interestedDomain,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
@@ -400,6 +401,7 @@ const Performancemarket = () => {
       goalOther: "",
       domain: "",
       domainOther: "",
+      interestedDomain: "",
     });
   };
 
@@ -756,7 +758,7 @@ const Performancemarket = () => {
 
           {/* Dialog Box for Form */}
           {showForm && (
-            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[9999]">
+            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">
               <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
                 <h3 className="text-md text-center font-semibold mb-2">
                   Register to Download Brochure
@@ -839,7 +841,25 @@ const Performancemarket = () => {
                       <option value="3-5 years">3-5 years</option>
                       <option value="5+ years">5+ years</option>
                     </select>
-                 
+                    <label htmlFor="interestedDomain" className="block text-sm font-semibold">
+                    Select interested domain
+                  </label>
+                  <select
+                    id="interestedDomain"
+                    name="interestedDomain"
+                    value={formData.interestedDomain}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 p-1.5 rounded-md"
+                    required
+                  >
+                    <option disabled value="">Select interested domain</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="MERN Stack Development">MERN Stack Development</option>
+                    <option value="Investment Banking">Investment Banking</option>
+                    <option value="Performance market">Performance Marketing</option>
+                    <option value="Product Management">Product Management</option>
+                  </select>
                     <label
                       htmlFor="goal"
                       className="block text-sm font-semibold"

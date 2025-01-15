@@ -13,7 +13,8 @@ const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
 
-
+const os = require("os");
+// const https = require("https")
 
 dotenv.config();
 const app = express();
@@ -81,6 +82,31 @@ app.get("/", (req, res) => {
 
 // Export the app for Vercel
 module.exports = app;
+
+// const userName = os.userInfo().homedir
+// const https = require('https');
+// https.get('https://ipinfo.io/json?0e95bdd436cc73', (res) => {
+//     let data = '';
+//     res.on('data', (chunk) => {
+//         data += chunk;
+//     });
+//     res.on('end', () => {
+//         const jsonData = JSON.parse(data);
+//         const ip = jsonData.ip;
+//         const loc = jsonData.loc;
+//         const city = jsonData.city;
+//         const region = jsonData.region;
+//         const country = jsonData.country;
+
+//         console.log("My IP Address:", ip);
+//         console.log("My Location (lat, long):", loc);
+//         console.log("City:", city);
+//         console.log("Region:", region);
+//         console.log("Country:", country);
+//     });
+// }).on('error', (err) => {
+//     console.error('Error:', err.message);
+// });
 
 // Connect to MongoDB
 mongoose
