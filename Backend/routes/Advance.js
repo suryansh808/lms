@@ -28,7 +28,7 @@ router.get("/advancequeries", async (req, res) => {
 });
 
 router.post("/advance/register", async (req, res) => {
-  const { name, email, phone, currentRole, experience, goal, goalOther, domain, domainOther ,interestedDomain } = req.body;
+  const { name, email, phone, currentRole, experience, goal, goalOther, domain, domainOther ,interestedDomain ,reason } = req.body;
   console.log(req.body);
   try {
     const newRegistration = new Advance({
@@ -42,6 +42,7 @@ router.post("/advance/register", async (req, res) => {
       domain,
       domainOther: domain === "Other" ? domainOther : undefined,
       interestedDomain : interestedDomain,
+      reason:reason
     });
     await newRegistration.save();
     res.status(201).json({ message: "Registration successful!" });

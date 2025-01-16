@@ -47,6 +47,8 @@ const MentorQueries = () => {
     </div>;
    }
 
+
+
   return (
     <div id="AdminAddCourse">
       <h2 className="text-center my-5">Mentorship Course Queries</h2>
@@ -59,6 +61,8 @@ const MentorQueries = () => {
             <th>Phone</th>
             <th>College Name</th>
             <th>Interested Domain</th>
+            <th>Passing Year</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>
@@ -66,24 +70,31 @@ const MentorQueries = () => {
               Object.keys(groupedQueries).map((date, dateIndex) => (
                 <React.Fragment key={dateIndex}>
                   <tr>
-                    <td colSpan="5" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
+                    <td colSpan="6" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
                       {date}
                     </td>
                   </tr>
-                  {groupedQueries[date].map((query, index) => (
-                    <tr key={index}>
-                      <td>{query.name}</td>
-                      <td>{query.email}</td>
-                      <td>{query.phone}</td>
-                      <td>{query.collegeName}</td>
-                      <td>{query.domain}</td>
-                    </tr>
-                  ))}
+                  {groupedQueries[date].map((query, index) => {
+        const dateObject = new Date(query.createdAt);
+        const time = dateObject.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' ,hour12: true });
+
+        return (
+          <tr key={index}>
+            <td className="capitalize">{query.name}</td>
+            <td>{query.email}</td>
+            <td>{query.phone}</td>
+            <td className="capitalize">{query.collegeName}</td>
+            <td className="capitalize">{query.domain}</td>
+            <td>{query.passingyear}</td>
+            <td className="uppercase">{time}</td>
+          </tr>
+        );
+      })}
                 </React.Fragment>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Queries Found</td>
+                <td colSpan="6">No Queries Found</td>
               </tr>
             )}
         </tbody>

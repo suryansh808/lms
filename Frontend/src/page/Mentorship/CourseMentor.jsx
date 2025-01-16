@@ -48,13 +48,20 @@ import pdf22 from "../../../krutanic/Supply Chain Management.pdf";
 import pdf23 from "../../../krutanic/UI  UX-min.pdf";
 
 import axios from "axios";
-import API from '../../API';
-import toast ,{Toaster} from 'react-hot-toast';
+import API from "../../API";
+import toast, { Toaster } from "react-hot-toast";
 
 const CourseMentor = ({}) => {
   const [showForm, setShowForm] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", number: "" , collegeName: "", domain:"" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    collegeName: "",
+    domain: "",
+    passingyear:"",
+  });
   const [selectedCategory, setSelectedCategory] = useState("Computer science");
 
   const categories = [
@@ -65,244 +72,244 @@ const CourseMentor = ({}) => {
     "Mechanical/Civil",
   ];
   const coursesData = {
-     "Computer science": [
-       {
-         id: 1,
-         title: "Full Stack Web Development",
-         image: `${fullStack}`,
-         pdf: `${pdf14}`,
-         description:
-           "Building and managing both the front-end and back-end of websites.",
-         rating: 4.7,
-         studentsTaken: 2298,
-       },
-       {
-         id: 2,
-         title: "Android App Development",
-         image: `${android}`,
-         pdf: `${pdf1}`,
-         description:
-           "Designing and developing mobile apps for Android devices.",
-         rating: 4.9,
-         studentsTaken: 1980,
-       },
-       {
-         id: 3,
-         title: "Artificial Intelligence",
-         image: `${artificial}`,
-         pdf: `${pdf2}`,
-         description:
-           "Creating systems that simulate human intelligence for tasks like decision-making.",
-         rating: 4.8,
-         studentsTaken: 2340,
-       },
-       {
-         id: 4,
-         title: "Machine Learning",
-         image: `${machine}`,
-         pdf: `${pdf18}`,
-         description:
-           "Teaching machines to recognize patterns and make predictions from data.",
-         rating: 4.7,
-         studentsTaken: 2456,
-       },
-       {
-         id: 5,
-         title: "Cyber Security",
-         image: `${cyber}`,
-         pdf: `${pdf6}`,
-         description:
-           "Protecting networks, systems, and data from cyber attacks.",
-         rating: 4.9,
-         studentsTaken: 2409,
-       },
-       {
-         id: 6,
-         title: "Data Science",
-         image: `${datascience}`,
-         pdf: `${pdf8}`,
-         description:
-           "Analyzing large data sets to extract insights and inform decisions.",
-         rating: 4.8,
-         studentsTaken: 2699,
-       },
-       {
-         id: 7,
-         title: "Data Analytics",
-         image: `${dataanalytics}`,
-         pdf: `${pdf7}`,
-         description:
-           "Interpreting data to help businesses improve performance and make decisions.",
-         rating: 4.7,
-         studentsTaken: 2690,
-       },
-       {
-         id: 8,
-         title: "UI/UX Design",
-         image: `${uiux}`,
-         pdf: `${pdf23}`,
-         description:
-           "Designing intuitive user interfaces and ensuring a positive experience.",
-         rating: 4.9,
-         studentsTaken: 2590,
-       },
-       {
-         id: 9,
-         title: "DevOps",
-         image: `${devops}`,
-         pdf: `${pdf9}`,
-         description: "Implement DevOps practices for software development.",
-         rating: 4.8,
-         studentsTaken: 1899,
-       },
-     ],
-     Management: [
-       {
-         id: 10,
-         title: "Business Analytics",
-         image: `${bussinessanalytics}`,
-         pdf: `${pdf4}`,
-         description: "Using data to optimize business decisions and strategies",
-         rating: 4.7,
-         studentsTaken: 2102,
-       },
-       {
-         id: 11,
-         title: "Finance",
-         image: `${finance}`,
-         pdf: `${pdf12}`,
-         description:
-           "Managing money, investments, and financial planning for individuals or companies.",
-         rating: 4.8,
-         studentsTaken: 2076,
-       },
-       {
-         id: 12,
-         title: "Human Resource",
-         image: `${hr}`,
-         pdf: `${pdf16}`,
-         description:
-           "Overseeing recruitment, employee development, and organizational culture.",
-         rating: 4.9,
-         studentsTaken: 2087,
-       },
-       {
-         id: 13,
-         title: "Digital Marketing",
-         image: `${digitalmarketing}`,
-         pdf: `${pdf10}`,
-         description:
-           " Promoting products and services through digital channels like social media and search engines.",
-         rating: 4.7,
-         studentsTaken: 2257,
-       },
-       {
-         id: 14,
-         title: "Stock Marketing",
-         image: `${stockmarketing}`,
-         pdf: `${pdf21}`,
-         description:
-           "Trading stocks, bonds, and other securities in financial markets.",
-         rating: 4.8,
-         studentsTaken: 980,
-       },
-       {
-         id: 15,
-         title: "Supply Chain Management",
-         image: `${supplychainmanagement}`,
-         pdf: `${pdf22}`,
-         description:
-           "Managing the production, distribution, and delivery of products.",
-         rating: 4.7,
-         studentsTaken: 1069,
-       },
-       {
-         id: 16,
-         title: "Graphics Design",
-         image: `${graphicdesign}`,
-         pdf: `${pdf15}`,
-         description: "Creating visual content for digital and print media.",
-         rating: 4.9,
-         studentsTaken: 2669,
-       },
-       {
-         id: 17,
-         title: "Fintech",
-         image: `${fintech}`,
-         pdf: `${pdf13}`,
-         description:
-           "Technology to improve financial services like banking, payments, and investments.",
-         rating: 4.8,
-         studentsTaken: 1250,
-       },
-     ],
-     "Electronics/Electrical": [
-       {
-         id: 18,
-         title: "Embedded System",
-         image: `${embeddedsystem}`,
-         pdf: `${pdf11}`,
-         description:
-           "Designing computer systems integrated into devices for specific functions.",
-         rating: 4.9,
-         studentsTaken: 1645,
-       },
-       {
-         id: 19,
-         title: "Cloud Computing",
-         image: `${cloudcomputing}`,
-         pdf: `${pdf5}`,
-         description:
-           "Providing scalable computing resources and storage via the internet.",
-         rating: 4.8,
-         studentsTaken: 2156,
-       },
-       {
-         id: 20,
-         title: "IOT & Robotics",
-         image: `${iotandrobotics}`,
-         pdf: `${pdf17}`,
-         description:
-           "Developing robots and devices that communicate over the internet to perform tasks.",
-         rating: 4.7,
-         studentsTaken: 1260,
-       },
-     ],
-     Medical: [
-       {
-         id: 21,
-         title: "Nano Technology & Genetic Engineering",
-         image: `${nano}`,
-         pdf: `${pdf19}`,
-         description:
-           " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
-         rating: 4.9,
-         studentsTaken: 890,
-       },
-       {
-         id: 22,
-         title: "Psychology",
-         image: `${psycho}`,
-         pdf: `${pdf20}`,
-         description:
-           "Studying mental processes and behavior to understand and address human conditions.",
-         rating: 4.8,
-         studentsTaken: 709,
-       },
-     ],
-     "Mechanical/Civil": [
-       {
-         id: 23,
-         title: "Auto Cad",
-         image: `${autocad}`,
-         pdf: `${pdf3}`,
-         description:
-           "Using software to create detailed 2D and 3D designs for engineering and architecture.",
-         rating: 4.7,
-         studentsTaken: 999,
-       },
-     ],
-   };
+    "Computer science": [
+      {
+        id: 1,
+        title: "Full Stack Web Development",
+        image: `${fullStack}`,
+        pdf: `${pdf14}`,
+        description:
+          "Building and managing both the front-end and back-end of websites.",
+        rating: 4.7,
+        studentsTaken: 2298,
+      },
+      {
+        id: 2,
+        title: "Android App Development",
+        image: `${android}`,
+        pdf: `${pdf1}`,
+        description:
+          "Designing and developing mobile apps for Android devices.",
+        rating: 4.9,
+        studentsTaken: 1980,
+      },
+      {
+        id: 3,
+        title: "Artificial Intelligence",
+        image: `${artificial}`,
+        pdf: `${pdf2}`,
+        description:
+          "Creating systems that simulate human intelligence for tasks like decision-making.",
+        rating: 4.8,
+        studentsTaken: 2340,
+      },
+      {
+        id: 4,
+        title: "Machine Learning",
+        image: `${machine}`,
+        pdf: `${pdf18}`,
+        description:
+          "Teaching machines to recognize patterns and make predictions from data.",
+        rating: 4.7,
+        studentsTaken: 2456,
+      },
+      {
+        id: 5,
+        title: "Cyber Security",
+        image: `${cyber}`,
+        pdf: `${pdf6}`,
+        description:
+          "Protecting networks, systems, and data from cyber attacks.",
+        rating: 4.9,
+        studentsTaken: 2409,
+      },
+      {
+        id: 6,
+        title: "Data Science",
+        image: `${datascience}`,
+        pdf: `${pdf8}`,
+        description:
+          "Analyzing large data sets to extract insights and inform decisions.",
+        rating: 4.8,
+        studentsTaken: 2699,
+      },
+      {
+        id: 7,
+        title: "Data Analytics",
+        image: `${dataanalytics}`,
+        pdf: `${pdf7}`,
+        description:
+          "Interpreting data to help businesses improve performance and make decisions.",
+        rating: 4.7,
+        studentsTaken: 2690,
+      },
+      {
+        id: 8,
+        title: "UI/UX Design",
+        image: `${uiux}`,
+        pdf: `${pdf23}`,
+        description:
+          "Designing intuitive user interfaces and ensuring a positive experience.",
+        rating: 4.9,
+        studentsTaken: 2590,
+      },
+      {
+        id: 9,
+        title: "DevOps",
+        image: `${devops}`,
+        pdf: `${pdf9}`,
+        description: "Implement DevOps practices for software development.",
+        rating: 4.8,
+        studentsTaken: 1899,
+      },
+    ],
+    Management: [
+      {
+        id: 10,
+        title: "Business Analytics",
+        image: `${bussinessanalytics}`,
+        pdf: `${pdf4}`,
+        description: "Using data to optimize business decisions and strategies",
+        rating: 4.7,
+        studentsTaken: 2102,
+      },
+      {
+        id: 11,
+        title: "Finance",
+        image: `${finance}`,
+        pdf: `${pdf12}`,
+        description:
+          "Managing money, investments, and financial planning for individuals or companies.",
+        rating: 4.8,
+        studentsTaken: 2076,
+      },
+      {
+        id: 12,
+        title: "Human Resource",
+        image: `${hr}`,
+        pdf: `${pdf16}`,
+        description:
+          "Overseeing recruitment, employee development, and organizational culture.",
+        rating: 4.9,
+        studentsTaken: 2087,
+      },
+      {
+        id: 13,
+        title: "Digital Marketing",
+        image: `${digitalmarketing}`,
+        pdf: `${pdf10}`,
+        description:
+          " Promoting products and services through digital channels like social media and search engines.",
+        rating: 4.7,
+        studentsTaken: 2257,
+      },
+      {
+        id: 14,
+        title: "Stock Marketing",
+        image: `${stockmarketing}`,
+        pdf: `${pdf21}`,
+        description:
+          "Trading stocks, bonds, and other securities in financial markets.",
+        rating: 4.8,
+        studentsTaken: 980,
+      },
+      {
+        id: 15,
+        title: "Supply Chain Management",
+        image: `${supplychainmanagement}`,
+        pdf: `${pdf22}`,
+        description:
+          "Managing the production, distribution, and delivery of products.",
+        rating: 4.7,
+        studentsTaken: 1069,
+      },
+      {
+        id: 16,
+        title: "Graphics Design",
+        image: `${graphicdesign}`,
+        pdf: `${pdf15}`,
+        description: "Creating visual content for digital and print media.",
+        rating: 4.9,
+        studentsTaken: 2669,
+      },
+      {
+        id: 17,
+        title: "Fintech",
+        image: `${fintech}`,
+        pdf: `${pdf13}`,
+        description:
+          "Technology to improve financial services like banking, payments, and investments.",
+        rating: 4.8,
+        studentsTaken: 1250,
+      },
+    ],
+    "Electronics/Electrical": [
+      {
+        id: 18,
+        title: "Embedded System",
+        image: `${embeddedsystem}`,
+        pdf: `${pdf11}`,
+        description:
+          "Designing computer systems integrated into devices for specific functions.",
+        rating: 4.9,
+        studentsTaken: 1645,
+      },
+      {
+        id: 19,
+        title: "Cloud Computing",
+        image: `${cloudcomputing}`,
+        pdf: `${pdf5}`,
+        description:
+          "Providing scalable computing resources and storage via the internet.",
+        rating: 4.8,
+        studentsTaken: 2156,
+      },
+      {
+        id: 20,
+        title: "IOT & Robotics",
+        image: `${iotandrobotics}`,
+        pdf: `${pdf17}`,
+        description:
+          "Developing robots and devices that communicate over the internet to perform tasks.",
+        rating: 4.7,
+        studentsTaken: 1260,
+      },
+    ],
+    Medical: [
+      {
+        id: 21,
+        title: "Nano Technology & Genetic Engineering",
+        image: `${nano}`,
+        pdf: `${pdf19}`,
+        description:
+          " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
+        rating: 4.9,
+        studentsTaken: 890,
+      },
+      {
+        id: 22,
+        title: "Psychology",
+        image: `${psycho}`,
+        pdf: `${pdf20}`,
+        description:
+          "Studying mental processes and behavior to understand and address human conditions.",
+        rating: 4.8,
+        studentsTaken: 709,
+      },
+    ],
+    "Mechanical/Civil": [
+      {
+        id: 23,
+        title: "Auto Cad",
+        image: `${autocad}`,
+        pdf: `${pdf3}`,
+        description:
+          "Using software to create detailed 2D and 3D designs for engineering and architecture.",
+        rating: 4.7,
+        studentsTaken: 999,
+      },
+    ],
+  };
   const handleBrochureClick = (course) => {
     setSelectedCourse(course);
     setShowForm(true);
@@ -312,7 +319,7 @@ const CourseMentor = ({}) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -320,40 +327,42 @@ const CourseMentor = ({}) => {
         name: formData.name,
         email: formData.email,
         phone: formData.number,
-        collegeName:formData.collegeName,
-        domain : formData.domain,
+        collegeName: formData.collegeName,
+        domain: formData.domain,
+        passingyear : formData.passingyear
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
         window.open(selectedCourse.pdf, "_blank");
-        setShowForm(false);
-      }, 1500); 
+        ClearForm();
+      }, 1500);
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
-      console.error(error.response?.data?.error)
+      console.error(error.response?.data?.error);
     }
-    setFormData({
-      name: '',
-      email: '',
-      number: '',
-      collegeName:'',
-      domain:'',
-    });
   };
+
+  const ClearForm = () =>{
+    setShowForm(false);
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+      collegeName: "",
+      domain: "",
+      passingyear: ""
+    });
+  }
 
 
   return (
     <div>
       <div className="container mx-auto">
-         <Toaster position="top-center"  reverseOrder={false}/>
-        <h1
-          className="font-bold text-center text-[#f15b29] mb-10"
-        >
+        <Toaster position="top-center" reverseOrder={false} />
+        <h1 className="font-bold text-center text-[#f15b29] mb-10">
           | Our Mentorship Courses
         </h1>
-        <div
-          className="flex justify-center flex-wrap mb-8 gap-3 "
-        >
+        <div className="flex justify-center flex-wrap mb-8 gap-3 ">
           {categories.map((category) => (
             <button
               key={category}
@@ -419,7 +428,7 @@ const CourseMentor = ({}) => {
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Enter your name"
-                className="mb-4 p-2 w-full border rounded"
+                className="mb-3 p-2 w-full border rounded"
                 required
               />
               <input
@@ -428,7 +437,7 @@ const CourseMentor = ({}) => {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email id"
-                className="mb-4 p-2 w-full border rounded"
+                className="mb-3 p-2 w-full border rounded"
                 required
               />
               <input
@@ -437,28 +446,44 @@ const CourseMentor = ({}) => {
                 value={formData.number}
                 onChange={handleInputChange}
                 placeholder="Enter phone number"
-                className="mb-4 p-2 w-full border rounded"
+                className="mb-3 p-2 w-full border rounded"
                 required
               />
-               <input
+              <select
+                id="passingyear"
+                name="passingyear"
+                value={formData.passingyear}
+                onChange={handleInputChange}
+                className="w-full border  p-2 mb-3  rounded"
+                required
+              >
+                <option disabled value=""> Select year of passing</option>
+                <option value="1st year">1st year</option>
+                <option value="2nd year">2nd year</option>
+                <option value="3rd year">3rd year</option>
+                <option value="4th year">4th year</option>
+                <option value="Graduated">Graduated</option>
+                <option value="Passed Out">Passed Out</option>
+              </select>
+              <input
                 type="text"
                 name="collegeName"
                 value={formData.collegeName}
                 onChange={handleInputChange}
                 placeholder="Enter your college name"
-                className="mb-4 p-2 w-full border rounded"
+                className="mb-3 p-2 w-full border rounded"
                 required
               />
-               <input
+              <input
                 type="text"
                 name="domain"
                 value={formData.domain}
                 onChange={handleInputChange}
                 placeholder="Enter interest domain name"
-                className="mb-4 p-2 w-full border rounded"
+                className="mb-3 p-2 w-full border rounded"
                 required
               />
-            
+
               <div className="flex justify-between">
                 <button
                   type="submit"
@@ -468,7 +493,7 @@ const CourseMentor = ({}) => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setShowForm(false)}
+                  onClick={ClearForm}
                   className="px-4 py-2 bg-gray-300 text-black rounded"
                 >
                   Cancel

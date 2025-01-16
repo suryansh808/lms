@@ -5,13 +5,11 @@ import API from "../API";
 const FullPayment = () => {
   const [newStudent, setNewStudent] = useState([]);
   const fetchNewStudent = async () => {
-    const operationId = localStorage.getItem("operationId");
+    const operationName = localStorage.getItem("operationName");
     try {
-      const response = await axios.get(`${API}/getnewstudentenroll`, {
-        params: { operationId },
-      });
+      const response = await axios.get(`${API}/getnewstudentenroll`);
       const bookedStudents = response.data.filter(
-        (item) => item.status === "fullPaid"
+        (item) => item.status === "fullPaid" && item.operationName === operationName
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);

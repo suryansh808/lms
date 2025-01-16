@@ -6,7 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import API from '../../API';
 import axios from "axios";
-// import MentorSection from "../../Components/MentorSection";
+import { RiCustomerService2Fill } from "react-icons/ri";
 import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
@@ -14,6 +14,7 @@ import IB from "../../assets/Advanced Course Images/Investment banking/INB.png";
 import pdfib from "../../../krutanic/Investment Banking Advanced Program.pdf";
 import curriculumimage from "../../assets/Advanced Course Images/Investment banking/IB 6.jpg";
 import toast ,{Toaster} from 'react-hot-toast';
+import ApplyNowButton from "./Components/ApplyNowButton";
 const Investmentbanking = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -364,7 +365,7 @@ const Investmentbanking = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e , actionType , interestedDomain ) => {
     e.preventDefault();
     try {
       await axios.post(`${API}/advance/register`, {
@@ -377,7 +378,8 @@ const Investmentbanking = () => {
         goalOther: formData.goal === "Other" ? formData.goalOther : undefined,
         domain: formData.domain,
         domainOther: formData.domain === "Other" ? formData.domainOther : undefined,
-        interestedDomain:formData.interestedDomain,
+        interestedDomain: interestedDomain,
+        reason: actionType,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
@@ -402,7 +404,20 @@ const Investmentbanking = () => {
       interestedDomain: "",
     });
   };
-
+  const OffForm = () =>{
+    setShowForm(false);
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+      currentRole: "",
+      experience: "",
+      goal: "",
+      goalOther: "",
+      domain: "",
+      domainOther: "",
+    });
+  }
   return (
     <div>
       <div className="bg-black text-white">
@@ -489,6 +504,9 @@ const Investmentbanking = () => {
                   </p>
                 </div>
               </div>
+              <div className="flex items-center justify-center mt-3">
+              <ApplyNowButton courseValue="Investment Banking"/>
+            </div>
             </div>
           </div>
         </section>
@@ -743,199 +761,149 @@ const Investmentbanking = () => {
           </div>
 
           {/* Dialog Box for Form */}
-          {showForm && (
-            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">
-              <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
-                <h3 className="text-md text-center font-semibold mb-2">
-                  Register to Download Brochure
-                </h3>
-                <form onSubmit={handleFormSubmit} className="space-y-2">
-               
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Enter your name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    />
-                 
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    />
-                 
-                    <input
-                      type="text"
-                      id="number"
-                      name="number"
-                      placeholder="Enter your phone number"
-                      value={formData.number}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    />
-                
-                    <label
-                      htmlFor="currentRole"
-                      className="block text-sm font-semibold"
-                    >
-                      What do you currently do?
-                    </label>
-                    <select
-                      id="currentRole"
-                      name="currentRole"
-                      value={formData.currentRole}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    >
-                      <option value="">Select</option>
-                      <option value="Founder">Founder</option>
-                      <option value="Student">Student</option>
-                      <option value="Working Professional">
-                        Working Professional
-                      </option>
-                      <option value="Self Employed">Self Employed</option>
-                    </select>
-                
-                    <label
-                      htmlFor="experience"
-                      className="block text-sm font-semibold"
-                    >
-                      Experience
-                    </label>
-                    <select
-                      id="experience"
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    >
-                      <option value="">Select</option>
-                      <option value="0 year">0 year (Fresher)</option>
-                      <option value="1-2 years">1-2 years</option>
-                      <option value="3-5 years">3-5 years</option>
-                      <option value="5+ years">5+ years</option>
-                    </select>
-                    <label htmlFor="interestedDomain" className="block text-sm font-semibold">
-                    Select interested domain
-                  </label>
-                  <select
-                    id="interestedDomain"
-                    name="interestedDomain"
-                    value={formData.interestedDomain}
-                    onChange={handleInputChange}
-                    className="w-full border border-gray-300 p-1.5 rounded-md"
-                    required
-                  >
-                    <option disabled value="">Select interested domain</option>
-                    <option value="Data Science">Data Science</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="MERN Stack Development">MERN Stack Development</option>
-                    <option value="Investment Banking">Investment Banking</option>
-                    <option value="Performance market">Performance Marketing</option>
-                    <option value="Product Management">Product Management</option>
-                  </select>
-                    <label
-                      htmlFor="goal"
-                      className="block text-sm font-semibold"
-                    >
-                      Goal of taking this program
-                    </label>
-                    <select
-                      id="goal"
-                      name="goal"
-                      value={formData.goal}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    >
-                      <option value="">Select</option>
-                      <option value="Career Transition">
-                        Career Transition
-                      </option>
-                      <option value="Kickstart Career">Kickstart Career</option>
-                      <option value="Upskilling">Upskilling</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {formData.goal === "Other" && (
-                      <input
-                        type="text"
-                        name="goalOther"
-                        value={formData.goalOther}
-                        onChange={handleInputChange}
-                        placeholder="Please specify your goal"
-                        className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
-                        required
-                      />
+           {showForm && (
+                      <div className="fixed top-8 inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">
+                        <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
+                          <span className="text-md float-end mb-2 font-bold border rounded-full px-2 cursor-pointer"  onClick={OffForm}>X</span>
+                          <h3 className="text-md text-center font-semibold mb-2">
+                            Register to Download Brochure
+                          </h3>
+                          <form className="space-y-2">
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              placeholder="Enter your name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            />
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="Enter your email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            />
+                            <input
+                              type="text"
+                              id="number"
+                              name="number"
+                              placeholder="Enter your phone number"
+                              value={formData.number}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            />
+                            <select
+                              id="currentRole"
+                              name="currentRole"
+                              value={formData.currentRole}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            >
+                              <option disabled value="">What do you currently do?</option>
+                              <option value="Founder">Founder</option>
+                              <option value="Student">Student</option>
+                              <option value="Working Professional">
+                                Working Professional
+                              </option>
+                              <option value="Self Employed">Self Employed</option>
+                            </select>
+                            <select
+                              id="experience"
+                              name="experience"
+                              value={formData.experience}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            >
+                              <option disabled value="">Select Experience</option>
+                              <option value="0 year">0 year (Fresher)</option>
+                              <option value="1-2 years">1-2 years</option>
+                              <option value="3-5 years">3-5 years</option>
+                              <option value="5+ years">5+ years</option>
+                            </select>
+                            <select
+                              id="goal"
+                              name="goal"
+                              value={formData.goal}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            >
+                              <option disabled value="">Goal of taking this program</option>
+                              <option value="Career Transition">Career Transition</option>
+                              <option value="Kickstart Career">Kickstart Career</option>
+                              <option value="Upskilling">Upskilling</option>
+                              <option value="Other">Other</option>
+                            </select>
+                            {formData.goal === "Other" && (
+                              <input
+                                type="text"
+                                name="goalOther"
+                                value={formData.goalOther}
+                                onChange={handleInputChange}
+                                placeholder="Please specify your goal"
+                                className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
+                                required
+                              />
+                            )}
+                            <select
+                              id="domain"
+                              name="domain"
+                              value={formData.domain}
+                              onChange={handleInputChange}
+                              className="w-full border border-gray-300 p-1.5 rounded-md"
+                              required
+                            >
+                              <option disabled value="">Domain currently working in</option>
+                              <option value="Digital Marketing/Performance marketing">
+                                Digital Marketing/Performance Marketing
+                              </option>
+                              <option value="Marketing/Sales">Marketing/Sales</option>
+                              <option value="Management/Operations">
+                                Management/Operations
+                              </option>
+                              <option value="IT/Tech/Product">IT/Tech/Product</option>
+                              <option value="Other">Other</option>
+                            </select>
+                            {formData.domain === "Other" && (
+                              <input
+                                type="text"
+                                name="domainOther"
+                                value={formData.domainOther}
+                                onChange={handleInputChange}
+                                placeholder="Please specify your domain"
+                                className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
+                                required
+                              />
+                            )}
+                            <div className="flex justify-center gap-2">
+                              <button
+                                type="submit"
+                                onClick={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Investment Banking')}
+                                className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
+                              >
+                               <i class="fa fa-download"></i>
+                              </button>
+                              <button
+                                type="submit"
+                                onClick={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Investment Banking')}
+                                className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
+                              >
+                             <i class="fa fa-download"></i> + <RiCustomerService2Fill />
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     )}
-                
-                    <label
-                      htmlFor="domain"
-                      className="block text-sm font-semibold"
-                    >
-                      Domain currently working in
-                    </label>
-                    <select
-                      id="domain"
-                      name="domain"
-                      value={formData.domain}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-300 p-1.5 rounded-md"
-                      required
-                    >
-                      <option value="">Select</option>
-                      <option value="Digital Marketing/Performance marketing">
-                        Digital Marketing/Performance Marketing
-                      </option>
-                      <option value="Marketing/Sales">Marketing/Sales</option>
-                      <option value="Management/Operations">
-                        Management/Operations
-                      </option>
-                      <option value="IT/Tech/Product">IT/Tech/Product</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {formData.domain === "Other" && (
-                      <input
-                        type="text"
-                        name="domainOther"
-                        value={formData.domainOther}
-                        onChange={handleInputChange}
-                        placeholder="Please specify your domain"
-                        className="w-full border border-gray-300 p-1.5 rounded-md mt-2"
-                        required
-                      />
-                    )}
-                
-                  <div className="flex justify-end gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="px-4 py-1 text-gray-500 border border-gray-300 rounded-md"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-4 py-1 bg-[#f15b29] text-white rounded-md"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
         </section>
 
         <hr className=" opacity-10" />

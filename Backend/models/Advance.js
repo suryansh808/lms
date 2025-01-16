@@ -8,7 +8,6 @@ const AdvanceSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    lowercase: true,
   },
   phone: {
     type: String,
@@ -16,22 +15,21 @@ const AdvanceSchema = new mongoose.Schema({
   },
   currentRole: {
     type: String,
-    enum: ["Founder", "Student", "Working Professional", "Self Employed"],
     required: true,
+    enum: ["Founder", "Student", "Working Professional", "Self Employed"],
   },
   experience: {
     type: String,
-    enum: ["0 year", "1-2 years", "3-5 years", "5+ years"],
     required: true,
+    enum: ["0 year", "1-2 years", "3-5 years", "5+ years"],
   },
   interestedDomain:{
      type:String,
-     required:true,
   },
   goal: {
     type: String,
-    enum: ["Career Transition", "Kickstart Career", "Upskilling", "Other"],
     required: true,
+    enum: ["Career Transition", "Kickstart Career", "Upskilling", "Other"],
   },
   goalOther: {
     type: String,
@@ -41,14 +39,17 @@ const AdvanceSchema = new mongoose.Schema({
   },
   domain: {
     type: String,
-    enum: ["Digital Marketing/Performance marketing", "Marketing/Sales", "Management/Operations", "IT/Tech/Product", "Other"],
     required: true,
+    enum: ["Digital Marketing/Performance marketing", "Marketing/Sales", "Management/Operations", "IT/Tech/Product", "Other"],
   },
   domainOther: {
     type: String,
     required: function () {
       return this.domain === "Other";
     },
+  },
+  reason:{
+    type:String,
   },
   createdAt: {
     type: Date,

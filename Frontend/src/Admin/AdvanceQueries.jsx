@@ -61,6 +61,8 @@ const AdvanceQueries = () => {
               <th>Interested Domain</th>
               <th>Goal</th>
               <th>Domain</th>
+              <th>Reason</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +71,7 @@ const AdvanceQueries = () => {
                 <React.Fragment key={dateIndex}>
                   <tr>
                     <td
-                      colSpan="8"
+                      colSpan="10"
                       style={{
                         fontWeight: "bold",
                         backgroundColor: "#f0f0f0",
@@ -79,29 +81,43 @@ const AdvanceQueries = () => {
                       {date}
                     </td>
                   </tr>
-                  {groupedQueries[date].map((query, index) => (
-                    <tr key={index}>
-                      <td>{query.name}</td>
-                      <td>{query.email}</td>
-                      <td>{query.phone}</td>
-                      <td>{query.currentRole}</td>
-                      <td>{query.experience}</td>
-                      <td>{query.interestedDomain}</td>
-                      <td>
-                        {query.goal === "Other" ? query.goalOther : query.goal}
-                      </td>
-                      <td>
-                        {query.domain === "Other"
-                          ? query.domainOther
-                          : query.domain}
-                      </td>
-                    </tr>
-                  ))}
+                  {groupedQueries[date].map((query, index) => {
+                    const dateObject = new Date(query.createdAt);
+                    const time = dateObject.toLocaleTimeString("en-GB", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: true,
+                    });
+
+                    return (
+                      <tr key={index}>
+                        <td className=" capitalize">{query.name}</td>
+                        <td>{query.email}</td>
+                        <td>{query.phone}</td>
+                        <td className=" capitalize">{query.currentRole}</td>
+                        <td>{query.experience}</td>
+                        <td className=" capitalize">{query.interestedDomain}</td>
+                        <td className=" capitalize">
+                          {query.goal === "Other"
+                            ? query.goalOther
+                            : query.goal}
+                        </td>
+                        <td className=" capitalize">
+                          {query.domain === "Other"
+                            ? query.domainOther
+                            : query.domain}
+                        </td>
+                        <td>{query.reason}</td>
+                        <td className=" uppercase">{time}</td>
+                      </tr>
+                    );
+                  })}
                 </React.Fragment>
               ))
             ) : (
               <tr>
-                <td colSpan="8">No Queries Found</td>
+                <td colSpan="10">No Queries Found</td>
               </tr>
             )}
           </tbody>

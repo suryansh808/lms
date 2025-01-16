@@ -17,6 +17,9 @@ const MentorshipSchema = new mongoose.Schema({
   domain:{
     type:String
   },
+  passingyear:{
+    type:String
+  },
   createdAt: {
     type: Date,
     default: Date.now,

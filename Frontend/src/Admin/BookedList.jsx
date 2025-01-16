@@ -7,12 +7,9 @@ const BookedList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const fetchNewStudent = async () => {
-    const operationId = localStorage.getItem("operationId");
     setLoading(true);
     try {
-      const response = await axios.get(`${API}/getnewstudentenroll`, {
-        params: { operationId },
-      });
+      const response = await axios.get(`${API}/getnewstudentenroll`);
       const studentsData = response.data.filter(
         (item) => item.status === "booked"
       );
@@ -160,18 +157,34 @@ const BookedList = () => {
                         </td>
                         <td>
                           <button
+                          className="button"
                             onClick={() =>
                               handleStatusChange(item._id, "fullPaid")
                             }
                           >
-                            Paid
+                     
+                      <div className="relative group inline-block">
+                      <i class="fa fa-money" aria-hidden="true"></i>
+                              <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+                                FullPaid
+                                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+                              </div>
+                            </div>
                           </button>
                           <button
+                          className="button"
                             onClick={() =>
                               handleStatusChange(item._id, "default")
                             }
                           >
-                            Default
+                           
+                            <div className="relative group inline-block">
+                            <i class="fa fa-ban"></i>
+                              <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+                                Default
+                                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+                              </div>
+                            </div>
                           </button>
                         </td>
                         <td>
@@ -217,14 +230,14 @@ const BookedList = () => {
                 <strong>Program:</strong> {dialogData.program}
               </p>
               <p>
-                <strong>Domian Opted:</strong> {dialogData.domain}
+                <strong>Operation Name:</strong> {dialogData.operationName}
               </p>
 
               <p>
                 <strong>Counselor:</strong> {dialogData.counselor}
               </p>
             </div>
-            <button onClick={handleDialogClose}>Close</button>
+            <button className="bg-black px-4 py-1 text-white rounded-md mt-2" onClick={handleDialogClose}>Close</button>
           </div>
         )}
         {dialogVisible && (

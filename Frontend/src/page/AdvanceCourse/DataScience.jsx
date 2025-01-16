@@ -6,7 +6,7 @@ import AOS from "aos";
 import API from "../../API";
 import "aos/dist/aos.css";
 import axios from "axios";
-// import MentorSection from "../../Components/MentorSection";
+import { RiCustomerService2Fill } from "react-icons/ri";
 import BenefitsofLearning from "./Components/BenefitsofLearning";
 import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
@@ -16,6 +16,9 @@ import pdfds from "../../../krutanic/DataScienceAdvancedProgram.pdf";
 import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
 import toast, { Toaster } from "react-hot-toast";
+import ApplyNowButton from "./Components/ApplyNowButton";
+
+
 const DataScience = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -34,7 +37,6 @@ const DataScience = () => {
     goalOther: "",
     domain: "",
     domainOther: "",
-    interestedDomain: "",
   });
 
   const toggleExpand = () => {
@@ -364,7 +366,22 @@ const DataScience = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
+  const OffForm = () =>{
+    setShowForm(false);
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+      currentRole: "",
+      experience: "",
+      goal: "",
+      goalOther: "",
+      domain: "",
+      domainOther: "",
+    });
+  }
+
+  const handleFormSubmit = async (e , actionType , interestedDomain ) => {
     e.preventDefault();
     try {
       await axios.post(`${API}/advance/register`, {
@@ -377,31 +394,22 @@ const DataScience = () => {
         goalOther: formData.goal === "Other" ? formData.goalOther : undefined,
         domain: formData.domain,
         domainOther:formData.domain === "Other" ? formData.domainOther : undefined,
-        interestedDomain:formData.interestedDomain,
+        interestedDomain: interestedDomain,
+        reason: actionType,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
         window.open(pdfds, "_blank");
-        setShowForm(false);
+        OffForm();
       }, 1500);
     } catch (error) {
       toast.error(
         error.response?.data?.error || "Something went wrong. Please try again."
       );
     }
-    setFormData({
-      name: "",
-      email: "",
-      number: "",
-      currentRole: "",
-      experience: "",
-      goal: "",
-      goalOther: "",
-      domain: "",
-      domainOther: "",
-      interestedDomain: "",
-    });
   };
+
+ 
 
   return (
     <div>
@@ -414,10 +422,7 @@ const DataScience = () => {
         >
           <div className="container mx-auto ">
             <div className="">
-              <h1
-                data-aos="fade-up"
-                className="text-4xl text-center font-bold mb-3"
-              >
+              <h1 data-aos="fade-up" className="text-4xl text-center font-bold mb-3">
                 <span class="before:block m-2 p-1 before:absolute before:-inset-1 before:-skew-y-2 before:bg-[#f15b29] relative inline-block">
                   <i class="relative text-white ">
                     {" "}
@@ -454,7 +459,6 @@ const DataScience = () => {
                 </p>
                 <p className="mt-2 text-md"> 11/60 </p>
               </div>
-
               <div
                 data-aos="fade-up"
                 className=" border border-gray-700 p-6 flex flex-col bg-[#ffffff59] text-black items-center   rounded-md"
@@ -472,7 +476,6 @@ const DataScience = () => {
                 <p className="mt-4 font-semibold text-lg">Duration</p>
                 <p className="">6 Months</p>
               </div>
-
               <div
                 data-aos="fade-up"
                 className=" border border-gray-700 p-6 flex flex-col bg-[#ffffff59] text-black items-center   rounded-md"
@@ -492,6 +495,9 @@ const DataScience = () => {
                   <span className="text-[#f15b29]">★★★★</span>☆ (4.8/5)
                 </p>
               </div>
+            </div>
+            <div className="flex items-center justify-center mt-3">
+              <ApplyNowButton courseValue="Data Science"/>
             </div>
           </div>
         </section>
@@ -737,7 +743,7 @@ const DataScience = () => {
             <div className="flex flex-col lg:flex-row items-center justify-center gap-3">
               <button
                 className="bg-[#f15b29] hover:bg-[#f15b29] text-white font-semibold py-2 px-6 rounded flex items-center gap-2"
-                onClick={handleBrochureClick} // Open the form when clicked
+                onClick={handleBrochureClick}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -758,21 +764,23 @@ const DataScience = () => {
 
           {/* Dialog Box for Form */}
           {showForm && (
-            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">
+            <div className="fixed top-8 inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">
               <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
+                <span className="text-md float-end mb-2 font-bold border rounded-full px-2 cursor-pointer"  onClick={OffForm}>X</span>
                 <h3 className="text-md text-center font-semibold mb-2">
                   Register to Download Brochure
                 </h3>
-                <form onSubmit={handleFormSubmit} className="space-y-2">
+                <form className="space-y-2">
                   <input
                     type="text"
                     id="name"
                     name="name"
                     placeholder="Enter your name"
+                    required
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full border border-gray-300 p-1.5 rounded-md"
-                    required
+                    
                   />
                   <input
                     type="email"
@@ -794,12 +802,6 @@ const DataScience = () => {
                     className="w-full border border-gray-300 p-1.5 rounded-md"
                     required
                   />
-                  <label
-                    htmlFor="currentRole"
-                    className="block text-sm font-semibold"
-                  >
-                    What do you currently do?
-                  </label>
                   <select
                     id="currentRole"
                     name="currentRole"
@@ -808,7 +810,7 @@ const DataScience = () => {
                     className="w-full border border-gray-300 p-1.5 rounded-md"
                     required
                   >
-                    <option value="">Select</option>
+                    <option disabled value="">What do you currently do?</option>
                     <option value="Founder">Founder</option>
                     <option value="Student">Student</option>
                     <option value="Working Professional">
@@ -816,12 +818,6 @@ const DataScience = () => {
                     </option>
                     <option value="Self Employed">Self Employed</option>
                   </select>
-                  <label
-                    htmlFor="experience"
-                    className="block text-sm font-semibold"
-                  >
-                    Experience
-                  </label>
                   <select
                     id="experience"
                     name="experience"
@@ -830,34 +826,12 @@ const DataScience = () => {
                     className="w-full border border-gray-300 p-1.5 rounded-md"
                     required
                   >
-                    <option value="">Select</option>
+                    <option disabled value="">Select Experience</option>
                     <option value="0 year">0 year (Fresher)</option>
                     <option value="1-2 years">1-2 years</option>
                     <option value="3-5 years">3-5 years</option>
                     <option value="5+ years">5+ years</option>
                   </select>
-                  <label htmlFor="interestedDomain" className="block text-sm font-semibold">
-                    Select interested domain
-                  </label>
-                  <select
-                    id="interestedDomain"
-                    name="interestedDomain"
-                    value={formData.interestedDomain}
-                    onChange={handleInputChange}
-                    className="w-full border border-gray-300 p-1.5 rounded-md"
-                    required
-                  >
-                    <option disabled value="">Select interested domain</option>
-                    <option value="Data Science">Data Science</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="MERN Stack Development">MERN Stack Development</option>
-                    <option value="Investment Banking">Investment Banking</option>
-                    <option value="Performance market">Performance Marketing</option>
-                    <option value="Product Management">Product Management</option>
-                  </select>
-                  <label htmlFor="goal" className="block text-sm font-semibold">
-                    Goal of taking this program
-                  </label>
                   <select
                     id="goal"
                     name="goal"
@@ -866,7 +840,7 @@ const DataScience = () => {
                     className="w-full border border-gray-300 p-1.5 rounded-md"
                     required
                   >
-                    <option disabled value="">Select program goal</option>
+                    <option disabled value="">Goal of taking this program</option>
                     <option value="Career Transition">Career Transition</option>
                     <option value="Kickstart Career">Kickstart Career</option>
                     <option value="Upskilling">Upskilling</option>
@@ -883,12 +857,6 @@ const DataScience = () => {
                       required
                     />
                   )}
-                  <label
-                    htmlFor="domain"
-                    className="block text-sm font-semibold"
-                  >
-                    Domain currently working in
-                  </label>
                   <select
                     id="domain"
                     name="domain"
@@ -897,7 +865,7 @@ const DataScience = () => {
                     className="w-full border border-gray-300 p-1.5 rounded-md"
                     required
                   >
-                    <option disabled value="">Select domain</option>
+                    <option disabled value="">Domain currently working in</option>
                     <option value="Digital Marketing/Performance marketing">
                       Digital Marketing/Performance Marketing
                     </option>
@@ -919,19 +887,20 @@ const DataScience = () => {
                       required
                     />
                   )}
-                  <div className="flex justify-end gap-2">
+                  <div className="flex justify-center gap-2">
                     <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="px-4 py-1 text-gray-500 border border-gray-300 rounded-md"
+                      type="submit"
+                      onClick={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Data Science')}
+                      className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                     >
-                      Cancel
+                     <i class="fa fa-download"></i>
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-1 bg-[#f15b29] text-white rounded-md"
+                      onClick={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Data Science')}
+                      className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                     >
-                      Submit
+                   <i class="fa fa-download"></i> + <RiCustomerService2Fill />
                     </button>
                   </div>
                 </form>
@@ -1024,14 +993,6 @@ const DataScience = () => {
           </div>
         </section>
         <hr className=" opacity-10" />
-
-        {/* 9 mentors section  */}
-        {/* <section className="py-[60px] px-[10px]">
-          <div data-aos="fade-up" className="container mx-auto">
-            <MentorSection />
-          </div>
-        </section>
-        <hr className=" opacity-10" /> */}
 
         {/* 16 store section  */}
         <section className="py-[60px] px-[10px] bg-white">
