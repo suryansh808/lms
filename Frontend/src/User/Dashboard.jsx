@@ -88,10 +88,10 @@ const Dashboard = () => {
                 Start Learning
               </button>
             ) : (
-             <div>
+             <div className=" space-y-2">
                <h3><strong>Your Due Date:</strong> {item.clearPaymentMonth}</h3>
                <p><strong>Your Due Payment Amount Is :</strong> ₹ {item.programPrice - item.paidAmount}/-</p>
-               <p>To begin your learning journey, please ensure your outstanding payment is cleared. Kindly settle the due amount before the specified due date. </p>
+               <p className="text-center"><strong>Note:</strong> <span className="font-bold">To begin your learning journey, please ensure your outstanding payment is cleared. Kindly settle the due amount before the specified due date.</span> </p>
              </div>
 
             )}

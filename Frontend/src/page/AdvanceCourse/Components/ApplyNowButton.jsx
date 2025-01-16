@@ -42,24 +42,15 @@ const ApplyNowButton = ({ courseValue }) => {
             domain: formData.domain,
             domainOther:formData.domain === "Other" ? formData.domainOther : undefined,
             interestedDomain: courseValue,
+            reason: "Requested To Call Back",
           });
           toast.success(`You have successfully applied for the ${courseValue}. Our counselor will connect with you shortly.`);
+          FormOff();
         } catch (error) {
           toast.error(
             error.response?.data?.error || "Something went wrong. Please try again."
           );
         }
-        setFormData({
-          name: "",
-          email: "",
-          number: "",
-          currentRole: "",
-          experience: "",
-          goal: "",
-          goalOther: "",
-          domain: "",
-          domainOther: "",
-        });
       };
 
       const FormOff = ()=>{
