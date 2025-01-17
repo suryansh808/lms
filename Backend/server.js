@@ -21,7 +21,7 @@ const app = express();
 
 app.use(cors());
 
-const allowedOrigins = process.env.FRONTEND_URL
+const allowedOrigins = process.env.FRONTEND_URL?.split(",") || [];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {

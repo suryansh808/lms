@@ -3,15 +3,15 @@ const router = express.Router();
 const authMiddleware = require("../middleware/UserAuth");
 const CreateOperation = require("../models/CreateOperation");
 const NewEnrollStudent = require("../models/NewStudentEnroll");
-const { sendEmail , sendEmailWithAttachment } = require("../controllers/emailController");
+const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 const crypto = require("crypto");
 
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
-const fs = require('fs');
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads/' });
+// const fs = require('fs');
 
 
 //post to create a new operation account
@@ -348,57 +348,57 @@ router.post("/sendedOnboardingMail", async (req, res) => {
 // ........................................................
 // upload.single('offerLetter')
 //post to send offer letter 
-router.post("/sendedOfferLetterMail", upload.single('offerLetter'), async (req, res) => {
-  const {
-    fullname,
-    email,
-    domain,
-    monthOpted,
-  } = req.body;
-  const file = req.file;
+// router.post("/sendedOfferLetterMail", upload.single('offerLetter'), async (req, res) => {
+//   const {
+//     fullname,
+//     email,
+//     domain,
+//     monthOpted,
+//   } = req.body;
+//   const file = req.file;
 
-  const emailMessage = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Offer Letter - ${domain} Intern</h1>
-      </div>
-      <div style="padding: 20px;">
-        <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>
-        <p style="font-size: 14px; color: #555;">We at Krutanic are happy to inform you that based on your application and subsequent interview, you have secured the role of ${domain} Intern with us. This email is to be considered as a formal offer for the mentioned role.</p>
-        <p style="font-size: 14px; color: #555;">Kindly find attached an offer letter with the particulars of your employment. We are extremely happy to offer you this role and look forward to having you on board with us. The date of commencement of your employment is 5th of ${monthOpted}.</p>
-        <p style="font-size: 14px; color: #555;">For any further information, please do not hesitate to contact us via this mail ID <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a></p>
-        <p style="font-size: 14px; color: #555;">Wishing you all the best on your new journey.</p>
-        <p style="font-size: 14px; color: #333;">Best regards,</p>
-        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
-      </div>
-      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
-      </div>
-    </div>
-  `;
+//   const emailMessage = `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+//       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+//         <h1>Offer Letter - ${domain} Intern</h1>
+//       </div>
+//       <div style="padding: 20px;">
+//         <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>
+//         <p style="font-size: 14px; color: #555;">We at Krutanic are happy to inform you that based on your application and subsequent interview, you have secured the role of ${domain} Intern with us. This email is to be considered as a formal offer for the mentioned role.</p>
+//         <p style="font-size: 14px; color: #555;">Kindly find attached an offer letter with the particulars of your employment. We are extremely happy to offer you this role and look forward to having you on board with us. The date of commencement of your employment is 5th of ${monthOpted}.</p>
+//         <p style="font-size: 14px; color: #555;">For any further information, please do not hesitate to contact us via this mail ID <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a></p>
+//         <p style="font-size: 14px; color: #555;">Wishing you all the best on your new journey.</p>
+//         <p style="font-size: 14px; color: #333;">Best regards,</p>
+//         <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+//       </div>
+//       <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+//         <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+//       </div>
+//     </div>
+//   `;
 
-  try {
-    await sendEmailWithAttachment({
-      email,
-      subject: `Offer Letter - ${domain} Intern`,
-      message: emailMessage,
-      attachment: file.path,
-    });
+//   try {
+//     await sendEmailWithAttachment({
+//       email,
+//       subject: `Offer Letter - ${domain} Intern`,
+//       message: emailMessage,
+//       attachment: file.path,
+//     });
 
-    fs.unlink(file.path, (err) => {
-      if (err) {
-        console.error('Error deleting the file:', err);
-      } else {
-        console.log('File deleted successfully');
-      }
-    });
+//     fs.unlink(file.path, (err) => {
+//       if (err) {
+//         console.error('Error deleting the file:', err);
+//       } else {
+//         console.log('File deleted successfully');
+//       }
+//     });
 
-    res.status(200).json({ message: "Offer letter email sent successfully!" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ message: "Error sending email.", error: error.message });
-  }
-});
+//     res.status(200).json({ message: "Offer letter email sent successfully!" });
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//     res.status(500).json({ message: "Error sending email.", error: error.message });
+//   }
+// });
 
 
 
