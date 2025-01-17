@@ -3,6 +3,9 @@ const nodemailer = require("nodemailer");
 // const path = require('path');
 
 
+
+
+
 let transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
