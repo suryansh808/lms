@@ -45,11 +45,10 @@ const newStudentEnrollSchema = new Schema(
       type: String,
     },
     remark: [{ type: String }],
-    status: {
-      type: String,
-      default: "booked",
-      },
-      mailSended: { type: Boolean, default: false },
+    status: {type: String, default: "booked"},
+    mailSended: { type: Boolean, default: false },
+    onboardingSended:{type: Boolean , default : false},
+    offerLetterSended:{type: Boolean , default : false},
   },
   {
     timestamps: true,

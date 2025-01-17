@@ -449,7 +449,6 @@ const Performancemarket = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 <div
                   data-aos="fade-up"
-                  data-aos-duration="500"
                   className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md"
                 >
                   <div className="bg-[#f15b29] p-3 rounded-full">
@@ -473,7 +472,6 @@ const Performancemarket = () => {
                 </div>
                 <div
                   data-aos="fade-up"
-                  data-aos-duration="1000"
                   className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border  border-gray-700 rounded-md"
                 >
                   <div className="bg-[#f15b29] p-3 rounded-full">
@@ -492,7 +490,6 @@ const Performancemarket = () => {
 
                 <div
                   data-aos="fade-up"
-                  data-aos-duration="1500"
                   className="flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center p-6 border border-gray-700 rounded-md"
                 >
                   <div className="bg-[#f15b29] p-3 rounded-full">

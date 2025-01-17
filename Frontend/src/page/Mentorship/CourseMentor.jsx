@@ -457,7 +457,7 @@ const CourseMentor = ({}) => {
                 className="w-full border  p-2 mb-3  rounded"
                 required
               >
-                <option disabled value=""> Select year of passing</option>
+                <option disabled value=""> Select year of study</option>
                 <option value="1st year">1st year</option>
                 <option value="2nd year">2nd year</option>
                 <option value="3rd year">3rd year</option>

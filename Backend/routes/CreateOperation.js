@@ -2,31 +2,36 @@ const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../middleware/UserAuth");
 const CreateOperation = require("../models/CreateOperation");
-const NewEnrollStudent = require('../models/NewStudentEnroll');
+const NewEnrollStudent = require("../models/NewStudentEnroll");
 const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
-const crypto = require('crypto'); 
+const crypto = require("crypto");
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+
 
 //post to create a new operation account
 router.post("/createoperation", async (req, res) => {
-  const { fullname, email , password } = req.body;
+  const { fullname, email, password } = req.body;
   try {
     const newoperation = new CreateOperation({
       fullname: fullname,
       email: email,
-      password: password
+      password: password,
     });
-    await newoperation.save()
-    .then(() => {
-      res.status(201).json(newoperation);
-    })
-    .catch((saveError) => {
-      console.error("Error saving data:", saveError);
-      res.status(400).json({ message: saveError.message });
-    });
-   
+    await newoperation
+      .save()
+      .then(() => {
+        res.status(201).json(newoperation);
+      })
+      .catch((saveError) => {
+        console.error("Error saving data:", saveError);
+        res.status(400).json({ message: saveError.message });
+      });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -38,18 +43,23 @@ router.get("/getoperation", async (req, res) => {
   try {
     let operation;
     if (operationId) {
-      // Fetch specific operation by userId
       operation = await CreateOperation.findById(operationId);
       if (!operation) {
-        return res.status(404).json({ message: "Operation not found for the given userId" });
+        return res
+          .status(404)
+          .json({ message: "Operation not found for the given userId" });
       }
     } else {
-      // Fetch all operations if no userId is provided
       operation = await CreateOperation.find().sort({ _id: -1 });
     }
     res.status(200).json(operation);
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while fetching data", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "An error occurred while fetching data",
+        error: error.message,
+      });
   }
 });
 
@@ -57,10 +67,10 @@ router.get("/getoperation", async (req, res) => {
 router.put("/updateoperation/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email , password } = req.body;
+    const { fullname, email, password } = req.body;
     const updatedOperation = await CreateOperation.findByIdAndUpdate(
       id,
-      { fullname, email , password},
+      { fullname, email, password },
       { new: true }
     );
     if (!updatedOperation) {
@@ -119,13 +129,19 @@ router.post("/operationsendotp", async (req, res) => {
     operation.otp = otp;
     await Promise.all([
       operation.save(),
-      sendEmail({ email, subject: "Operation Login Credentials", message: emailMessage }),
+      sendEmail({
+        email,
+        subject: "Operation Login Credentials",
+        message: emailMessage,
+      }),
     ]);
 
     res.status(200).json({ message: "OTP sent to your email!" });
   } catch (error) {
     console.error("Failed to send OTP:", error);
-    res.status(500).json({ message: "Failed to send OTP", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to send OTP", error: error.message });
   }
 });
 
@@ -166,9 +182,17 @@ router.get("/OperationDashboard", authMiddleware, (req, res) => {
 });
 
 //send course details and login details to user
-router.post('/send-email', async (req, res) => {
-  const { fullname, email, program, counselor, domain , clearPaymentMonth , monthOpted } = req.body;
-  const defaultPassword = 'Krutanic@123';
+router.post("/send-email", async (req, res) => {
+  const {
+    fullname,
+    email,
+    program,
+    counselor,
+    domain,
+    clearPaymentMonth,
+    monthOpted,
+  } = req.body;
+  const defaultPassword = "Krutanic@123";
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
@@ -192,8 +216,8 @@ router.post('/send-email', async (req, res) => {
           After logging in, please set a new password according to your preferences or official requirements.
         </p>
         <p>Note: Once you clear due amount then you'll get the access to your enrolled course.</p>
-        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out.</p>
-        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #555;">If you need any further assistance, feel free to reach out at <a href="mailto:support@krutanic.com" style="color: #0066cc; text-decoration: none;">support@krutanic.com</a>.</p>
+        <p style="font-size: 14px; color: #333;">Best regards</p>
         <p style="font-size: 14px; color: #333;">Team Krutanic</p>
       </div>
       <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
@@ -207,33 +231,45 @@ router.post('/send-email', async (req, res) => {
       subject: `Welcome to Our ${program} Program`,
       message: emailMessage,
     });
-    res.status(200).json({ message: 'Email sent successfully!' });
+    res.status(200).json({ message: "Email sent successfully!" });
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Error sending email.', error: error.message });
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .json({ message: "Error sending email.", error: error.message });
   }
 });
 
-//store a value after send a login details 
-router.put('/mailsendedchange/:id', async (req, res) => {
+//store a value after send a login details
+router.put("/mailsendedchange/:id", async (req, res) => {
   const { id } = req.params;
-  const { mailSended } = req.body;
+  const { mailSended , onboardingSended , offerLetterSended } = req.body;
   const objectId = new mongoose.Types.ObjectId(id);
   try {
-    const student = await NewEnrollStudent.findById({ _id: objectId});
+    const student = await NewEnrollStudent.findById({ _id: objectId });
     if (!student) {
-      return res.status(404).send({ message: 'Student not found.' });
+      return res.status(404).send({ message: "Student not found." });
     }
-    student.mailSended = mailSended;
+    if (mailSended !== undefined) {
+      student.mailSended = mailSended;
+    }
+    if (onboardingSended !== undefined) {
+      student.onboardingSended = onboardingSended;
+    }
+    if (offerLetterSended !== undefined) {
+      student.offerLetterSended = offerLetterSended;
+    }
     await student.save();
-    res.status(200).send({ message: 'Student record updated successfully!', student });
+    res
+      .status(200)
+      .send({ message: "Student record updated successfully!", student });
   } catch (error) {
-    console.error('Error updating student record:', error);
-    res.status(500).send({ message: 'Failed to update student record.' });
+    console.error("Error updating student record:", error);
+    res.status(500).send({ message: "Failed to update student record." });
   }
 });
 
-// if in case operation login with email and password 
+// if in case operation login with email and password
 router.post("/checkoperation", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -251,12 +287,118 @@ router.post("/checkoperation", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ token, _id: operation._id, operationName: operation.fullname });
+    res
+      .status(200)
+      .json({ token, _id: operation._id, operationName: operation.fullname });
   } catch (err) {
     console.error("Error during login", err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// ----------------------------------------------------
+//post to send onboarding details
+router.post("/sendedOnboardingMail", async (req, res) => {
+  const {
+    fullname,
+    email,
+    domain,
+    monthOpted,
+    programPrice,
+    paidAmount
+  } = req.body;
+
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic Solutions</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Warm greetings from Krutanic! We're excited to have you on board for our ${domain}, commencing on the 5th of ${monthOpted}. Your journey with us promises to be an enriching experience.</p>
+        <p style="font-size: 14px; color: #555;">To ensure a seamless start, we kindly request you to login an LMS (Learning Management System) account by visiting <a href="https://www.krutanic.com" style="color: #F15B29;">krutanic.com</a> and selecting the "Login" option. Doing this promptly will help prevent any delays when the program begins. Training sessions will be available on the start date.</p>
+        <p style="font-size: 14px; color: #555;">Should you have any questions or need assistance, please don't hesitate to contact us via email at <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a>. We're here to support you every step of the way.</p>
+        <p style="font-size: 14px; color: #555;">If you wish to clear your pending amount of <strong>${programPrice - paidAmount} INR</strong> in advance to expedite your participation in projects, please use the link below:</p>
+        <p style="text-align: center;">
+          <a href="https://smartpay.easebuzz.in/132907/pay" target="_blank" style="background-color: #F15B29; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Pay Now</a>
+        </p>
+        <p style="font-size: 14px; color: #555;">Once again, welcome to Krutanic's ${domain}. We look forward to embarking on this learning journey with you!</p>
+        <p style="font-size: 14px; color: #333;">Warm regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+
+  try {
+    await sendEmail({
+      email,
+      subject: `Welcome to Krutanic's ${domain} Program!`,
+      message: emailMessage,
+    });
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ message: "Error sending email.", error: error.message });
+  }
+});
+
+// ........................................................
+//post to send offer letter 
+router.post("/sendedOfferLetterMail", upload.single('offerLetter'),async (req, res) => {
+  const {
+    fullname,
+    email,
+    domain,
+    monthOpted,
+  } = req.body;
+  const file = req.file;
+
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Offer Letter - ${domain} Intern</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">We at Krutanic are happy to inform you that based on your application and subsequent interview, you have secured the role of ${domain} Intern with us. This email is to be considered as a formal offer for the mentioned role.</p>
+        <p style="font-size: 14px; color: #555;">Kindly find attached an offer letter with the particulars of your employment. We are extremely happy to offer you this role and look forward to having you on board with us. The date of commencement of your employment is 5th of ${monthOpted}.</p>
+        <p style="font-size: 14px; color: #555;">For any further information, please do not hesitate to contact us via this mail ID <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a></p>
+        <p style="font-size: 14px; color: #555;">Wishing you all the best on your new journey.</p>
+        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+
+  try {
+    await sendEmail({
+      email,
+      subject: `Offer Letter - ${domain} Intern`,
+      message: emailMessage,
+      attachment: file.path,
+    });
+
+    fs.unlink(file.path, (err) => {
+      if (err) {
+        console.error('Error deleting the file:', err);
+      } else {
+        console.log('File deleted successfully');
+      }
+    });
+
+    res.status(200).json({ message: "Offer letter email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ message: "Error sending email.", error: error.message });
+  }
+});
+
 
 
 module.exports = router;

@@ -61,7 +61,7 @@ const MentorQueries = () => {
             <th>Phone</th>
             <th>College Name</th>
             <th>Interested Domain</th>
-            <th>Passing Year</th>
+            <th>Study Year</th>
             <th>Time</th>
           </tr>
         </thead>
