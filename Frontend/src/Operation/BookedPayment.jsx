@@ -628,8 +628,8 @@ const BookedAmount = () => {
                         </td>
                         <td>
                          <div>
-                          <form onClick={()=> handleSendOfferLetter(item)}>
                           <input className="bg-black cursor-pointer text-white rounded-md mb-2" type="file" accept="application/pdf" onChange={handleFileChange} required />
+                          <form onClick={()=> handleSendOfferLetter(item)}>
                          <div className="flex item-center justify-center cursor-pointer">
                          {item.offerLetterSended ? (
                             <div className="flex items-center justify-center w-full"> <SlEnvolopeLetter /><i class="fa fa-send-o text-green-600"></i></div>  
