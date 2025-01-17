@@ -3,7 +3,7 @@ import axios from "axios";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 import { PiLockKeyOpenFill , PiLockKeyFill } from "react-icons/pi";
-import { SlEnvolopeLetter } from "react-icons/sl";
+// import { SlEnvolopeLetter } from "react-icons/sl";
 import { RiMailSendFill } from "react-icons/ri";
 
 
@@ -294,100 +294,100 @@ const BookedAmount = () => {
 
 
   //send onboarding mail
-   const handleSendOnboardingDetails = async(value) =>{
-    const isConfirmed = window.confirm("Are you sure you want to send onboading email?");
-      if(isConfirmed){
-        if (value.isSending) return;
-        value.isSending = true;
-        const emailData = {
-          fullname: value.fullname,
-          email: value.email,
-          domain: value.domain,
-          monthOpted: value.monthOpted,
-          programPrice: value.programPrice,
-          paidAmount: value.paidAmount,
-        };
-        try {
-          const response = await axios.post(`${API}/sendedOnboardingMail`, emailData);
-          if (response.status === 200) {
-            toast.success("Onboarding email sent successfully!!");
-            const onboardingData = {
-              onboardingSended: true,
-            };
-            const updateResponse = await axios.put(
-              `${API}/mailsendedchange/${value._id}`,
-              onboardingData
-            );
-            if (updateResponse.status === 200) {
-              toast.success("Onboarding Updated");
-            } else {
-              toast.error("Failed to update onboarding.");
-            }
-          } else {
-            toast.error("Failed to send onboading email.");
-          }
-        } catch (error) {
-          toast.error("An error occurred while sending the email.");
-        } finally {
-          fetchNewStudent();
-          value.isSending = false;
-        }
-      }
-   }
+  //  const handleSendOnboardingDetails = async(value) =>{
+  //   const isConfirmed = window.confirm("Are you sure you want to send onboading email?");
+  //     if(isConfirmed){
+  //       if (value.isSending) return;
+  //       value.isSending = true;
+  //       const emailData = {
+  //         fullname: value.fullname,
+  //         email: value.email,
+  //         domain: value.domain,
+  //         monthOpted: value.monthOpted,
+  //         programPrice: value.programPrice,
+  //         paidAmount: value.paidAmount,
+  //       };
+  //       try {
+  //         const response = await axios.post(`${API}/sendedOnboardingMail`, emailData);
+  //         if (response.status === 200) {
+  //           toast.success("Onboarding email sent successfully!!");
+  //           const onboardingData = {
+  //             onboardingSended: true,
+  //           };
+  //           const updateResponse = await axios.put(
+  //             `${API}/mailsendedchange/${value._id}`,
+  //             onboardingData
+  //           );
+  //           if (updateResponse.status === 200) {
+  //             toast.success("Onboarding Updated");
+  //           } else {
+  //             toast.error("Failed to update onboarding.");
+  //           }
+  //         } else {
+  //           toast.error("Failed to send onboading email.");
+  //         }
+  //       } catch (error) {
+  //         toast.error("An error occurred while sending the email.");
+  //       } finally {
+  //         fetchNewStudent();
+  //         value.isSending = false;
+  //       }
+  //     }
+  //  }
 
     //send offer letter
-   const [file, setFile] = useState(null);
-   const handleFileChange = (event) => {
-     setFile(event.target.files[0]);
-   };
-   const handleSendOfferLetter = async (value)=>{
-    const isConfirmed = window.confirm("Are you sure you want to send offer letter?");
-    if(isConfirmed){
-      if (value.isSending) return;
-      value.isSending = true;
+  //  const [file, setFile] = useState(null);
+  //  const handleFileChange = (event) => {
+  //    setFile(event.target.files[0]);
+  //  };
+  //  const handleSendOfferLetter = async (value)=>{
+  //   const isConfirmed = window.confirm("Are you sure you want to send offer letter?");
+  //   if(isConfirmed){
+  //     if (value.isSending) return;
+  //     value.isSending = true;
 
-      if(!file){
-        toast.error("Please select a file");
-        return;
-      }
-      const formData = new FormData();
-      formData.append('fullname', value.fullname);
-      formData.append('email', value.email);
-      formData.append('domain', value.domain);
-      formData.append('monthOpted', value.monthOpted);
-      formData.append('programPrice', value.programPrice);
-      formData.append('paidAmount', value.paidAmount);
-      formData.append('offerLetter', file);
+  //     if(!file){
+  //       toast.error("Please select a file");
+  //       return;
+  //     }
+  //     const formData = new FormData();
+  //     formData.append('fullname', value.fullname);
+  //     formData.append('email', value.email);
+  //     formData.append('domain', value.domain);
+  //     formData.append('monthOpted', value.monthOpted);
+  //     formData.append('programPrice', value.programPrice);
+  //     formData.append('paidAmount', value.paidAmount);
+  //     formData.append('offerLetter', file);
          
-      try {
-        const response = await axios.post(`${API}/sendedOfferLetterMail`, formData);
-        if (response.status === 200) {
-          toast.success(" Offer Letter sent successfully!!");
-          const offerLetterData = {
-            offerLetterSended: true,
-          };
-          const updateResponse = await axios.put(
-            `${API}/mailsendedchange/${value._id}`,
-            offerLetterData
-          );
-          if (updateResponse.status === 200) {
-            toast.success("Onboarding Updated");
-          } else {
-            toast.error("Failed to update offer letter.");
-          }
-          setFile(null);
-        } else {
-          toast.error("Failed to send  email.");
-        }
-      } catch (error) {
-        toast.error("An error occurred while sending the email.");
-      } finally {
-        fetchNewStudent();
-        value.isSending = false;
-      }
-    }
+  //     try {
+  //       const response = await axios.post(`${API}/sendedOfferLetterMail`, formData);
+  //       if (response.status === 200) {
+  //         toast.success(" Offer Letter sent successfully!!");
+  //         const offerLetterData = {
+  //           offerLetterSended: true,
+  //         };
+  //         const updateResponse = await axios.put(
+  //           `${API}/mailsendedchange/${value._id}`,
+  //           offerLetterData
+  //         );
+  //         if (updateResponse.status === 200) {
+  //           toast.success("Onboarding Updated");
+  //         } else {
+  //           toast.error("Failed to update offer letter.");
+  //         }
+  //         setFile(null);
+  //       } else {
+  //         toast.error("Failed to send  email.");
+  //       }
+  //     } catch (error) {
+  //       toast.error("An error occurred while sending the email.");
+  //     } finally {
+  //       fetchNewStudent();
+  //       value.isSending = false;
+  //     }
+  //   }
 
-   }
+  //  }
 
 
   return (
@@ -615,7 +615,8 @@ const BookedAmount = () => {
                          
                         </div>
                       </td>
-                      <td><div className="flex item-center justify-center cursor-pointer" onClick={() => handleSendOnboardingDetails(item)}>
+                      <td>
+                        {/* <div className="flex item-center justify-center cursor-pointer" onClick={() => handleSendOnboardingDetails(item)}>
                         {item.onboardingSended ? (
                             <div className="flex items-center justify-center w-full"> <RiMailSendFill /><i class="fa fa-send-o text-green-600"></i></div>
                             
@@ -624,10 +625,10 @@ const BookedAmount = () => {
                            
                           )}
                         
-                        </div>
+                        </div> */}
                         </td>
                         <td>
-                         <div>
+                         {/* <div>
                           <input className="bg-black cursor-pointer text-white rounded-md mb-2" type="file" accept="application/pdf" onChange={handleFileChange} required />
                           <form onClick={()=> handleSendOfferLetter(item)}>
                          <div className="flex item-center justify-center cursor-pointer">
@@ -639,7 +640,7 @@ const BookedAmount = () => {
                          </div>
                           </form>
                         
-                         </div>
+                         </div> */}
                         </td>
                       <td>
                         <i
