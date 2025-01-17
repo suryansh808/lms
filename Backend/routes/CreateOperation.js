@@ -9,9 +9,9 @@ const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 const crypto = require("crypto");
 
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
-const fs = require('fs');
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads/' });
+// const fs = require('fs');
 
 
 //post to create a new operation account
@@ -346,15 +346,16 @@ router.post("/sendedOnboardingMail", async (req, res) => {
 });
 
 // ........................................................
+// upload.single('offerLetter')
 //post to send offer letter 
-router.post("/sendedOfferLetterMail", upload.single('offerLetter'),async (req, res) => {
+router.post("/sendedOfferLetterMail",async (req, res) => {
   const {
     fullname,
     email,
     domain,
     monthOpted,
   } = req.body;
-  const file = req.file;
+  // const file = req.file;
 
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
@@ -381,16 +382,16 @@ router.post("/sendedOfferLetterMail", upload.single('offerLetter'),async (req, r
       email,
       subject: `Offer Letter - ${domain} Intern`,
       message: emailMessage,
-      attachment: file.path,
+      // attachment: file.path,
     });
 
-    fs.unlink(file.path, (err) => {
-      if (err) {
-        console.error('Error deleting the file:', err);
-      } else {
-        console.log('File deleted successfully');
-      }
-    });
+    // fs.unlink(file.path, (err) => {
+    //   if (err) {
+    //     console.error('Error deleting the file:', err);
+    //   } else {
+    //     console.log('File deleted successfully');
+    //   }
+    // });
 
     res.status(200).json({ message: "Offer letter email sent successfully!" });
   } catch (error) {
