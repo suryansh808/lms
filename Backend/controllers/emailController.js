@@ -29,8 +29,9 @@ const sendEmail = async ({ email, subject, message }) => {
     subject: subject,
     html: message,
     priority: "high",
-    // attachments: [],
+    
   };
+  // attachments: [],
   // if (attachment) {
   //   mailOptions.attachments.push({
   //     filename: path.basename(attachment), 

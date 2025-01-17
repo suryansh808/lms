@@ -13,7 +13,7 @@ const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
 
-// const os = require("os");
+const os = require("os");
 
 
 dotenv.config();
@@ -35,6 +35,7 @@ app.use(cors({
   credentials: true 
 }));
 
+// kuch likh do suryansh 
 
 app.use((err, req, res, next) => {
   if (err) {
