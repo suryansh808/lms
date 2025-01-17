@@ -1,6 +1,6 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
-const path = require('path');
+// const path = require('path');
 
 
 let transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ let transporter = nodemailer.createTransport({
 });
 
 
-const sendEmail = async ({ email, subject, message, attachment  }) => {
+const sendEmail = async ({ email, subject, message }) => {
   const mailOptions = {
     from: process.env.SMTP_MAIL,
     to: email,
@@ -26,15 +26,15 @@ const sendEmail = async ({ email, subject, message, attachment  }) => {
     subject: subject,
     html: message,
     priority: "high",
-    attachments: [],
+    // attachments: [],
   };
-  if (attachment) {
-    mailOptions.attachments.push({
-      filename: path.basename(attachment), 
-      path: attachment, 
-      contentType: 'application/pdf',
-    });
-  }
+  // if (attachment) {
+  //   mailOptions.attachments.push({
+  //     filename: path.basename(attachment), 
+  //     path: attachment, 
+  //     contentType: 'application/pdf',
+  //   });
+  // }
 
   return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, (error, info) => {
