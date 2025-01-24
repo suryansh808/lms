@@ -238,14 +238,22 @@ router.post("/send-email", async (req, res) => {
 //store a value after send a login details
 router.put("/mailsendedchange/:id", async (req, res) => {
   const { id } = req.params;
-  const { mailSended } = req.body;
+  const { mailSended , onboardingSended , offerLetterSended } = req.body;
   const objectId = new mongoose.Types.ObjectId(id);
   try {
     const student = await NewEnrollStudent.findById({ _id: objectId });
     if (!student) {
       return res.status(404).send({ message: "Student not found." });
     }
-    student.mailSended = mailSended;
+    if (mailSended !== undefined) {
+      student.mailSended = mailSended;
+    }
+    if (onboardingSended !== undefined) {
+      student.onboardingSended = onboardingSended;
+    }
+    if (offerLetterSended !== undefined) {
+      student.offerLetterSended = offerLetterSended;
+    }
     await student.save();
     res
       .status(200)
@@ -284,59 +292,51 @@ router.post("/checkoperation", async (req, res) => {
 });
 
 // ----------------------------------------------------
-// router.post("/sendedOnboardingMail", async (req, res) => {
-//   const {
-//     fullname,
-//     email,
-//     program,
-//     domain,
-//     clearPaymentMonth,
-//     monthOpted,
-//   } = req.body;
-//   const emailMessage = `
-//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-//       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-//         <h1>Welcome to Krutanic Solutions</h1>
-//       </div>
-//       <div style="padding: 20px;">
-//         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
-//         <p style="font-size: 14px; color: #555;">Thank you for joining us! Here are your details:</p>
-//         <ul style="font-size: 14px; color: #555; line-height: 1.5;">
-//           <li style="text-transform: capitalize;"><strong>Mode of Program:</strong> ${program}</li>
-//           <li style="text-transform: capitalize;"><strong>You have opted a:</strong> ${monthOpted} month</li>
-//           <li style="text-transform: capitalize;"><strong>You Have Opted for a Domain: </strong> ${domain}</li>
-//           <li style="text-transform: capitalize;"><strong>Clear Due Payment Date:</strong> ${clearPaymentMonth}</ </li>
-//         </ul>
-//         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
-//         <p style="font-size: 14px; color: #333;">Use your email (<strong>${email}</strong>) and the default password provided below to log in:</p>
-//         <p style="text-align: center; font-size: 18px; font-weight: bold; color: #4a90e2;">${defaultPassword}</p>
-//         <p style="font-size: 14px; color: #555;">
-//           <a href="https://www.krutanic.com/login" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
-//           After logging in, please set a new password according to your preferences or official requirements.
-//         </p>
-//         <p>Note: Once you clear due amount then you'll get the access to your enrolled course.</p>
-//         <p style="font-size: 14px; color: #555;">If you need any further assistance, feel free to reach out at <a href="mailto:support@krutanic.com" style="color: #0066cc; text-decoration: none;">support@krutanic.com</a>.</p>
-//         <p style="font-size: 14px; color: #333;">Best regards</p>
-//         <p style="font-size: 14px; color: #333;">Team Krutanic</p>
-//       </div>
-//       <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-//         <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
-//       </div>
-//     </div>
-//   `;
-//   try {
-//     await sendEmail({
-//       email,
-//       subject: `Welcome to Our ${program} Program`,
-//       message: emailMessage,
-//     });
-//     res.status(200).json({ message: "Email sent successfully!" });
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//     res
-//       .status(500)
-//       .json({ message: "Error sending email.", error: error.message });
-//   }
-// });
+router.post("/sendedOnboardingMail", async (req, res) => {
+  const {
+    fullname,
+    email,
+    domain,
+    monthOpted,
+    programPrice,
+    paidAmount
+  } = req.body;
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic Solutions</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Warm greetings from Krutanic! We're excited to have you on board for our ${domain}, commencing on the 5th of ${monthOpted}. Your journey with us promises to be an enriching experience.</p>
+        <p style="font-size: 14px; color: #555;">To ensure a seamless start, we kindly request you to login an LMS (Learning Management System) account by visiting <a href="https://www.krutanic.com" style="color: #F15B29;">krutanic.com</a> and selecting the "Login" option. Doing this promptly will help prevent any delays when the program begins. Training sessions will be available on the start date.</p>
+        <p style="font-size: 14px; color: #555;">Should you have any questions or need assistance, please don't hesitate to contact us via email at <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a>. We're here to support you every step of the way.</p>
+        <p style="font-size: 14px; color: #555;">If you wish to clear your pending amount of <strong>${programPrice - paidAmount} INR</strong> in advance to expedite your participation in projects, please use the link below:</p>
+        <p style="text-align: center;">
+          <a href="https://smartpay.easebuzz.in/132907/pay" target="_blank" style="background-color: #F15B29; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Pay Now</a>
+        </p>
+        <p style="font-size: 14px; color: #555;">Once again, welcome to Krutanic's ${domain}. We look forward to embarking on this learning journey with you!</p>
+        <p style="font-size: 14px; color: #333;">Warm regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+  try {
+    await sendEmail({
+      email,
+      subject: `Welcome to Krutanic's ${domain} Program!`,
+      message: emailMessage,
+    });
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .json({ message: "Error sending email.", error: error.message });
+  }
+});
 
 module.exports = router;

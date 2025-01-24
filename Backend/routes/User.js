@@ -7,9 +7,6 @@ const authMiddleware = require("../middleware/UserAuth");
 const { sendEmail } = require("../controllers/emailController");
 const crypto = require('crypto'); 
 
-
-
-
 // create user
 router.post("/users", async (req, res) => {
   const { fullName, email, phone } = req.body;

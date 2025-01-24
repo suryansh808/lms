@@ -17,6 +17,7 @@ import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
+import ApplyForm from "./Components/ApplyForm";
 
 
 const DataScience = () => {
@@ -496,7 +497,7 @@ const DataScience = () => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center justify-center mt-3">
+            <div className=" flex items-center justify-center mt-6">
               <ApplyNowButton courseValue="Data Science"/>
             </div>
           </div>
@@ -682,13 +683,7 @@ const DataScience = () => {
               | Curriculum
             </h1>
             <div className="lg:flex lg:gap-8">
-              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                />
-              </div>
+             
               <div className="lg:w-1/2 w-full">
                 <div className="space-y-4">
                   {modules.map((module, index) => (
@@ -721,16 +716,24 @@ const DataScience = () => {
                   ))}
                 </div>
               </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                {/* <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                /> */}
+                 <div className="">
+              <ApplyForm courseValue="Data Science"/>
+            </div>
+
+              </div>
             </div>
           </div>
         </section>
 
         {/* 5 download curriculum section */}
         <section className="py-[60px] px-[10px]">
-          <div
-            data-aos="fade-up"
-            className="container mx-auto p-5 flex flex-col md:flex-row justify-between items-center flex-wrap gap-5 rounded-lg shadow-lg border-2 border-[#f15b29]"
-          >
+          <div data-aos="fade-up" className="container mx-auto p-5 flex flex-col md:flex-row justify-between items-center flex-wrap gap-5 rounded-lg shadow-lg border-2 border-[#f15b29]">
             <div className="text-center md:text-left">
               <h2 className="text-xl font-bold mb-2 text-[#f15b29]">
                 | Get the Full Course Breakdown
@@ -761,7 +764,6 @@ const DataScience = () => {
               </button>
             </div>
           </div>
-
           {/* Dialog Box for Form */}
           {showForm && (
             <div className="fixed top-8 inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-[999]">

@@ -19,6 +19,7 @@ import axios from "axios";
 import pdfdm from "../../../krutanic/Digital Marketing Advanced Program.pdf";
 import toast ,{Toaster} from 'react-hot-toast';
 import ApplyNowButton from "./Components/ApplyNowButton";
+import ApplyForm from "./Components/ApplyForm";
 const DigitalMarket = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -680,13 +681,7 @@ const DigitalMarket = () => {
               | Curriculum
             </h1>
             <div className="lg:flex lg:gap-8">
-              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                />
-              </div>
+              
               <div className="lg:w-1/2 w-full">
                 <div className="space-y-4  ">
                   {modules.map((module, index) => (
@@ -718,6 +713,16 @@ const DigitalMarket = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                {/* <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                /> */}
+                <div className="">
+              <ApplyForm courseValue="Data Science"/>
+            </div>
               </div>
             </div>
           </div>

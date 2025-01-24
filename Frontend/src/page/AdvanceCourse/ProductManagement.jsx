@@ -18,6 +18,7 @@ import curriculumimage from "../../assets/Advanced Course Images/Product managem
 import API from '../../API';
 import toast ,{Toaster} from 'react-hot-toast';
 import ApplyNowButton from "./Components/ApplyNowButton";
+import ApplyForm from "./Components/ApplyForm";
 const ProductManagement = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -678,13 +679,7 @@ const ProductManagement = () => {
               | Curriculum
             </h1>
             <div className="lg:flex lg:gap-8">
-              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                />
-              </div>
+             
               <div className="space-y-4  w-full lg:w-1/2">
                 {modules.map((module, index) => (
                   <div key={index} className=" pb-4">
@@ -714,6 +709,16 @@ const ProductManagement = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                {/* <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                /> */}
+                 <div className="">
+              <ApplyForm courseValue="Data Science"/>
+            </div>
               </div>
             </div>
           </div>

@@ -6,9 +6,9 @@ import API from "../../../API";
 import toast, { Toaster } from "react-hot-toast";
 
 
-const ApplyNowButton = ({ courseValue }) => {
+const ApplyForm = ({ courseValue }) => {
   
-    const [showForm, setShowForm] = useState(false);
+    // const [showForm, setShowForm] = useState(false);
       const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -24,9 +24,9 @@ const ApplyNowButton = ({ courseValue }) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
       };
-      const handleBrochureClick = () => {
-        setShowForm(true);
-      };
+      // const handleBrochureClick = () => {
+      //   setShowForm(true);
+      // };
    
       const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -54,7 +54,7 @@ const ApplyNowButton = ({ courseValue }) => {
       };
 
       const FormOff = ()=>{
-        setShowForm(false);
+        // setShowForm(false);
         setFormData({
           name: "",
           email: "",
@@ -77,19 +77,19 @@ const ApplyNowButton = ({ courseValue }) => {
   return (
     <div>
         <Toaster position="top-center" reverseOrder={false} />
-      <button
+      {/* <button
        data-aos="fade-up"
         onClick={handleBrochureClick}
         className="bg-[#f15b29] border text-white font-semibold  ease-linear duration-500 px-6 py-2 hover:rounded-xl hover:text-black rounded-sm">
         Apply Now
-      </button>
-      {showForm && (
-            <div className=" fixed inset-0 bg-gray-700 bg-opacity-50 z-[999] flex justify-center items-center">
+      </button> */}
+      {/* {showForm && ( */}
+            <div className=" flex justify-center items-center">
               <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
                 <h3 className="text-md text-center font-semibold mb-2">
                   Apply Now For {courseValue}
                 </h3>
-                <form onSubmit={handleFormSubmit} className="space-y-2">
+                <form onSubmit={handleFormSubmit} className="space-y-3">
                   <input
                     type="text"
                     id="name"
@@ -205,14 +205,14 @@ const ApplyNowButton = ({ courseValue }) => {
                       required
                     />
                   )}
-                  <div className="flex justify-end gap-2">
-                    <button
+                  <div className="flex justify-center gap-2">
+                    {/* <button
                       type="button"
                       onClick={FormOff}
                       className="px-4 py-1 text-gray-500 border border-gray-300 rounded-md"
                     >
                       Cancel
-                    </button>
+                    </button> */}
                     <button
                       type="submit"
                       className="px-4 py-1 bg-[#f15b29] text-white rounded-md"
@@ -223,9 +223,9 @@ const ApplyNowButton = ({ courseValue }) => {
                 </form>
               </div>
             </div>
-          )}
+          {/* )} */}
     </div>
   );
 };
 
-export default ApplyNowButton;
+export default ApplyForm;

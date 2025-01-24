@@ -50,6 +50,8 @@ const newStudentEnrollSchema = new Schema(
       default: "booked",
       },
       mailSended: { type: Boolean, default: false },
+      onboardingSended:{type:Boolean , default:false},
+      offerLetterSended : {type:Boolean , default:false},
   },
   {
     timestamps: true,

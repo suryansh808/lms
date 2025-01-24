@@ -8,6 +8,9 @@ const createbda = require("./routes/CreateBDA");
 const Mentorship = require("./routes/Mentorship");
 const Advance = require("./routes/Advance");
 const NewStudentEnroll = require("./routes/NewStudentEnroll");
+
+const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
+
 const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
@@ -72,9 +75,12 @@ app.use("/", NewStudentEnroll);
 app.use("/", User);
 // admin
 app.use("/", admin);
-// app.use("/",admin);
+
 //manager
 app.use("/", Manager);
+
+//send mail with attchement
+app.use("/", sendMailWithAttchement);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Backend Server!");

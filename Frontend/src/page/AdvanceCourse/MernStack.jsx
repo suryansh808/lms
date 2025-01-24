@@ -18,6 +18,7 @@ import curriculumimage from "../../assets/Advanced Course Images/Mern Stack Deve
 import pdfms from "../../../krutanic/Mern Stack Web Development Advanced Program.pdf";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
+import ApplyForm from "./Components/ApplyForm";
 const MernStack = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -684,13 +685,7 @@ const MernStack = () => {
               | Curriculum
             </h1>
             <div className="lg:flex lg:gap-8">
-              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                />
-              </div>
+            
               <div className="space-y-4 w-full lg:w-1/2">
                 {modules.map((module, index) => (
                   <div key={index} className=" pb-4">
@@ -720,6 +715,16 @@ const MernStack = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                {/* <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                /> */}
+                <div className="">
+              <ApplyForm courseValue="Data Science"/>
+            </div>
               </div>
             </div>
           </div>

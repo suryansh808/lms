@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
-
+import { RiMailSendFill } from "react-icons/ri";
+import { PiLockKeyOpenFill, PiLockKeyFill } from "react-icons/pi";
+import { SlEnvolopeLetter } from "react-icons/sl";
 
 const BookedAmount = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
@@ -111,7 +113,8 @@ const BookedAmount = () => {
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
       const bookedStudents = response.data.filter(
-        (item) => item.status === "booked" && item.operationName === operationName
+        (item) =>
+          item.status === "booked" && item.operationName === operationName
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
@@ -149,10 +152,9 @@ const BookedAmount = () => {
     }
   };
 
-
   const handleEdit = (studentId) => {
-     const isConfirmed = window.confirm("Are you sure you want to edit this?");
-     if (isConfirmed) {
+    const isConfirmed = window.confirm("Are you sure you want to edit this?");
+    if (isConfirmed) {
       const editStudent = newStudent.find((item) => item._id === studentId);
       setFullname(editStudent.fullname);
       setEmail(editStudent.email);
@@ -166,7 +168,7 @@ const BookedAmount = () => {
       setClearPaymentMonth(editStudent.clearPaymentMonth);
       setEditingStudentId(studentId);
       setiscourseFormVisible(true);
-     }
+    }
   };
 
   const [operationData, setOperationData] = useState(null);
@@ -281,34 +283,118 @@ const BookedAmount = () => {
 
   const handleAddNewCandidate = () => {
     resetForm();
-    setEditingStudentId(null); 
-    setiscourseFormVisible(true); 
+    setEditingStudentId(null);
+    setiscourseFormVisible(true);
   };
 
-   const handleSendOnboardingDetails = async(value) =>{
-    const isConfirmed = window.confirm("Are you sure you want to send onboading email?");
-      if(isConfirmed){
-        const emailData = {
-          fullname: value.fullname,
-          email: value.email,
-          program: value.program,
-          domain: value.domain,
-          clearPaymentMonth: value.clearPaymentMonth,
-          monthOpted: value.monthOpted,
-        };
-        try {
-          const response = await axios.post(`${API}/sendedOnboardingMail`, emailData);
-          if (response.status === 200) {
-            toast.success("Onboarding email sent successfully!!");
+  const handleSendOnboardingDetails = async (value) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to send onboading email?"
+    );
+    if (isConfirmed) {
+      const emailData = {
+        fullname: value.fullname,
+        email: value.email,
+        program: value.program,
+        domain: value.domain,
+        clearPaymentMonth: value.clearPaymentMonth,
+        monthOpted: value.monthOpted,
+      };
+      try {
+        const response = await axios.post(
+          `${API}/sendedOnboardingMail`,
+          emailData
+        );
+        if (response.status === 200) {
+          toast.success("Onboarding email sent successfully!!");
+          const onboardingData = {
+            onboardingSended: true,
+          };
+          const updateResponse = await axios.put(
+            `${API}/mailsendedchange/${value._id}`,
+            onboardingData
+          );
+          if (updateResponse.status === 200) {
+            toast.success("Onboarding record updated successfully!");
           } else {
-            toast.error("Failed to send onboading email.");
+            toast.error("Failed to update onboarding record.");
           }
-        } catch (error) {
-          toast.error("An error occurred while sending the email.");
-        } 
+        } else {
+          toast.error("Failed to send onboading email.");
+        }
+      } catch (error) {
+        toast.error("An error occurred while sending the email.");
       }
-   }
+    }
+  };
 
+  // const handleFileChange = (e, item) => {
+  //   const file = e.target.files[0];
+  //   console.log("file" , file)
+  //   if (file) {
+  //     item.selectedFile = file;
+  //   }
+  // };
+  // const handleSendOfferLetter = async (value) => {
+  //   const isConfirmed = window.confirm(
+  //     "Are you sure you want to send the offer letter?"
+  //   );
+  //   if (isConfirmed) {
+  //     const emailData = {
+  //       fullname: value.fullname,
+  //       email: value.email,
+  //       domain: value.domain,
+  //       monthOpted: value.monthOpted,
+  //     };
+     
+     
+  //     const formData = new FormData();
+  //   formData.append("fullname", emailData.fullname);
+  //   formData.append("email", emailData.email);
+  //   formData.append("domain", emailData.domain);
+  //   formData.append("monthOpted", emailData.monthOpted);
+  //   if (value.selectedFile) {
+  //     formData.append("offerLetter", value.selectedFile);
+  //   } else {
+  //     console.log("No file selected!");
+  //     return;
+  //   }
+  //     try {
+  //       const response = await axios.post(
+  //         `${API}/sendedOfferLetterMail`,
+  //         formData ,{
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         } );
+
+  //       if (response.status === 200) {
+  //         toast.success("Offer Letter sent successfully!");
+  //         const offerLetterData = { offerLetterSended: true };
+  //         const updateResponse = await axios.put(
+  //           `${API}/mailsendedchange/${value._id}`,
+  //           offerLetterData
+  //         );
+  //         if (updateResponse.status === 200) {
+  //           toast.success("Onboarding Updated");
+  //         } else {
+  //           toast.error("Failed to update offer letter.");
+  //         }
+  //       } else {
+  //         toast.error("Failed to send email.");
+  //       }
+  //       value.selectedFile = null;
+  //       const fileInput = document.querySelector(`#file-input-${value._id}`);
+  //       if (fileInput) {
+  //         fileInput.value = '';
+  //       }
+  //     } catch (error) {
+  //       toast.error("An error occurred while sending the email.");
+  //     } finally {
+  //       fetchNewStudent();
+  //     }
+  //   }
+  // };
 
   return (
     <div id="OperationEnroll">
@@ -318,7 +404,9 @@ const BookedAmount = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             <span onClick={resetForm}>✖</span>
             <h2>
-              {editingStudentId ? "Edit Enrolled Details" : "Add New Enrollment"}
+              {editingStudentId
+                ? "Edit Enrolled Details"
+                : "Add New Enrollment"}
             </h2>
             <input
               value={fullname}
@@ -410,7 +498,6 @@ const BookedAmount = () => {
               required
             />
 
-           
             <div>
               Due date for clear payment ?
               <input
@@ -433,9 +520,7 @@ const BookedAmount = () => {
       <div className="coursetable">
         <div className="mb-2">
           <h2>New Enroll Booking: </h2>
-          <span onClick={handleAddNewCandidate}>
-            + Add New Candidate
-          </span>
+          <span onClick={handleAddNewCandidate}>+ Add New Candidate</span>
         </div>
         <section className="flex items-center gap-1">
           <input
@@ -469,7 +554,7 @@ const BookedAmount = () => {
               <th>Last Remark</th>
               <th>Login Credentials</th>
               <th>Send Onboarding Details</th>
-              <th>Send Offer Letter</th>
+              {/* <th>Send Offer Letter</th> */}
               <th>More Details</th>
             </tr>
           </thead>
@@ -532,14 +617,58 @@ const BookedAmount = () => {
                           disabled={item.mailSended}
                         >
                           {item.mailSended ? (
-                            <i class="fa fa-send-o text-green-600"></i>
+                            <div className="flex items-center justify-center w-full">
+                              <PiLockKeyOpenFill />
+                              <i class="fa fa-send-o text-green-600"></i>
+                            </div>
                           ) : (
-                            <i class="fa fa-send-o text-red-600"></i>
+                            <div className="flex items-center justify-center w-full">
+                              <PiLockKeyFill />{" "}
+                              <i class="fa fa-send-o text-red-600"></i>
+                            </div>
                           )}
                         </div>
                       </td>
-                      <td><i class="fa fa-send-o cursor-pointer" onClick={() => handleSendOnboardingDetails(item)}></i></td>
-                      <td><i class="fa fa-send-o cursor-pointer"></i></td>
+                      <td>
+                        <div
+                          className="flex item-center justify-center cursor-pointer"
+                          onClick={() => handleSendOnboardingDetails(item)}
+                        >
+                          {item.onboardingSended ? (
+                            <div className="flex items-center justify-center w-full">
+                              {" "}
+                              <RiMailSendFill />
+                              <i class="fa fa-send-o text-green-600"></i>
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center w-full">
+                              <RiMailSendFill />{" "}
+                              <i class="fa fa-send-o text-red-600"></i>
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      {/* <td>
+                        <div>
+                          <input id={`file-input-${item._id}`} type="file"  onChange={(e) => handleFileChange(e, item)} />
+                          <div
+                            onClick={() => handleSendOfferLetter(item)}
+                            className="flex items-center justify-center cursor-pointer"
+                          >
+                            {item.offerLetterSended ? (
+                              <div className="flex items-center justify-center w-full">
+                                <SlEnvolopeLetter />
+                                <i className="fa fa-send-o text-green-600"></i>
+                              </div>
+                            ) : (
+                              <div className="flex items-center justify-center w-full">
+                                <SlEnvolopeLetter />
+                                <i className="fa fa-send-o text-red-600"></i>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </td> */}
                       <td>
                         <i
                           class="fa fa-info-circle text-2xl cursor-pointer"
