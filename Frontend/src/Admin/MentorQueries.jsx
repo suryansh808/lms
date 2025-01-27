@@ -63,6 +63,7 @@ const MentorQueries = () => {
             <th>Interested Domain</th>
             <th>Study Year</th>
             <th>Time</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -70,7 +71,7 @@ const MentorQueries = () => {
               Object.keys(groupedQueries).map((date, dateIndex) => (
                 <React.Fragment key={dateIndex}>
                   <tr>
-                    <td colSpan="7" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
+                    <td colSpan="8" style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' , textAlign: 'center'}}>
                       {date}
                     </td>
                   </tr>
@@ -87,6 +88,9 @@ const MentorQueries = () => {
             <td className="capitalize">{query.domain}</td>
             <td>{query.passingyear}</td>
             <td className="uppercase">{time}</td>
+            <td>
+             <input type="checkbox" name="done" id="done" />
+            </td>
           </tr>
         );
       })}
@@ -94,7 +98,7 @@ const MentorQueries = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7">No Queries Found</td>
+                <td colSpan="8">No Queries Found</td>
               </tr>
             )}
         </tbody>

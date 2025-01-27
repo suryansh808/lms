@@ -60,7 +60,7 @@ const CourseMentor = ({}) => {
     number: "",
     collegeName: "",
     domain: "",
-    passingyear:"",
+    passingyear: "",
   });
   const [selectedCategory, setSelectedCategory] = useState("Computer science");
 
@@ -319,7 +319,7 @@ const CourseMentor = ({}) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -329,7 +329,7 @@ const CourseMentor = ({}) => {
         phone: formData.number,
         collegeName: formData.collegeName,
         domain: formData.domain,
-        passingyear : formData.passingyear
+        passingyear: formData.passingyear,
       });
       toast.success("Registration successful! Opening the brochure...");
       setTimeout(() => {
@@ -342,7 +342,7 @@ const CourseMentor = ({}) => {
     }
   };
 
-  const ClearForm = () =>{
+  const ClearForm = () => {
     setShowForm(false);
     setFormData({
       name: "",
@@ -350,10 +350,9 @@ const CourseMentor = ({}) => {
       number: "",
       collegeName: "",
       domain: "",
-      passingyear: ""
+      passingyear: "",
     });
-  }
-
+  };
 
   return (
     <div>
@@ -457,7 +456,10 @@ const CourseMentor = ({}) => {
                 className="w-full border  p-2 mb-3  rounded"
                 required
               >
-                <option disabled value=""> Select year of study</option>
+                <option disabled value="">
+                  {" "}
+                  Select year of study
+                </option>
                 <option value="1st year">1st year</option>
                 <option value="2nd year">2nd year</option>
                 <option value="3rd year">3rd year</option>
@@ -474,15 +476,44 @@ const CourseMentor = ({}) => {
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
-              <input
-                type="text"
+              <select
                 name="domain"
                 value={formData.domain}
                 onChange={handleInputChange}
-                placeholder="Enter interest domain name"
-                className="mb-3 p-2 w-full border rounded"
+                className="mb-4 p-2 w-full border rounded"
                 required
-              />
+              >
+                <option value="">-- Select a Domain --</option>
+                {[
+                  "Full Stack Web Development",
+                  "Android App Development",
+                  "Artificial Intelligence",
+                  "Machine Learning",
+                  "Cyber Security",
+                  "Data Science",
+                  "Data Analytics",
+                  "UI/UX Design",
+                  "DevOps",
+                  "Business Analytics",
+                  "Finance",
+                  "Human Resource",
+                  "Digital Marketing",
+                  "Stock Marketing",
+                  "Supply Chain Management",
+                  "Fintech",
+                  "Graphics Design",
+                  "Embedded System",
+                  "Cloud Computing",
+                  "IOT & Robotics",
+                  "Nano Technology & Genetic Engineering",
+                  "Psychology",
+                  "Auto Cad",
+                ].map((domain, index) => (
+                  <option key={index} value={domain}>
+                    {domain}
+                  </option>
+                ))}
+              </select>
 
               <div className="flex justify-between">
                 <button

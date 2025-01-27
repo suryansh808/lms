@@ -513,6 +513,63 @@ const ProductManagement = () => {
         </section>
         <hr className=" opacity-10" />
 
+
+          {/* 4 Curriculum Section */}
+          <section className="py-[60px] px-[10px]">
+          <div className="container mx-auto">
+            <h1
+              data-aos="fade-up"
+              className=" font-bold text-center mb-5 text-[#f15b29]"
+            >
+              | Curriculum
+            </h1>
+            <div className="lg:flex lg:gap-8">
+             
+              <div className="space-y-4  w-full lg:w-1/2">
+                {modules.map((module, index) => (
+                  <div key={index} className=" pb-4">
+                    <button
+                      className="w-full text-left hover:text-[#f15b29] transition-colors duration-300 focus:outline-none"
+                      onClick={() =>
+                        document
+                          .getElementById(`module-${index}`)
+                          .classList.toggle("hidden")
+                      }
+                    >
+                      <h3 className="text-xl font-semibold">
+                        Module {index + 1}: {module.title}
+                      </h3>
+                      <p className="text-sm text-gray-400">
+                        {module.objectives}
+                      </p>
+                    </button>
+                    <div id={`module-${index}`} className="hidden mt-4">
+                      <ul className="list-disc pl-9 text-gray-300">
+                        {module.topics.map((topic, topicIndex) => (
+                          <li key={topicIndex} className="mb-2">
+                            {topic}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
+                {/* <img
+                  src={curriculumimage}
+                  alt="curriculum image"
+                  className="w-full h-full "
+                /> */}
+                 <div className="">
+              <ApplyForm courseValue="Data Science"/>
+            </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr className=" opacity-10" />
+
         {/* 14 why choose us */}
         <section className="py-[60px] px-[10px]">
           <div className="container mx-auto text-center">
@@ -669,60 +726,7 @@ const ProductManagement = () => {
         </section>
         <hr className=" opacity-10" />
 
-        {/* 4 Curriculum Section */}
-        <section className="py-[60px] px-[10px]">
-          <div className="container mx-auto">
-            <h1
-              data-aos="fade-up"
-              className=" font-bold text-center mb-5 text-[#f15b29]"
-            >
-              | Curriculum
-            </h1>
-            <div className="lg:flex lg:gap-8">
-             
-              <div className="space-y-4  w-full lg:w-1/2">
-                {modules.map((module, index) => (
-                  <div key={index} className=" pb-4">
-                    <button
-                      className="w-full text-left hover:text-[#f15b29] transition-colors duration-300 focus:outline-none"
-                      onClick={() =>
-                        document
-                          .getElementById(`module-${index}`)
-                          .classList.toggle("hidden")
-                      }
-                    >
-                      <h3 className="text-xl font-semibold">
-                        Module {index + 1}: {module.title}
-                      </h3>
-                      <p className="text-sm text-gray-400">
-                        {module.objectives}
-                      </p>
-                    </button>
-                    <div id={`module-${index}`} className="hidden mt-4">
-                      <ul className="list-disc pl-9 text-gray-300">
-                        {module.topics.map((topic, topicIndex) => (
-                          <li key={topicIndex} className="mb-2">
-                            {topic}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                {/* <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                /> */}
-                 <div className="">
-              <ApplyForm courseValue="Data Science"/>
-            </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      
 
         {/* 5 download curriculum section */}
 

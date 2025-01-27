@@ -373,11 +373,8 @@ const Footer = () => {
             <div className="text">
               <h2>No Refund Policy </h2>
               <p>
-                At Krutanic, we are committed to delivering high-quality
-                educational programs and services. To maintain the integrity of
-                our offerings and the resources we allocate to each participant,
-                we adhere to a strict No Refund Policy for all our courses,
-                training programs, and educational services.
+              By enrolling in any of our educational programs, you acknowledge and agree that all fees, tuition, and payments made towards the program are strictly "Non-refundable" under any circumstances. This policy applies regardless of withdrawal, cancellation, non-completion, dismissal, or any other reason.
+              By making payment, you confirm that you have read, understood, and accepted this "Non-refundable" policy.
               </p>
               <h3>Policy Details</h3>
               <h2>Non-Refundable Payments</h2>
