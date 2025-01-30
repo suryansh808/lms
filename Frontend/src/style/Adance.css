@@ -107,3 +107,8 @@
     }
   }
 
+  @media (max-width: 764px) {
+    #hidden{
+      display: none;
+    }
+  }

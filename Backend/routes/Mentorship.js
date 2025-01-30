@@ -38,4 +38,34 @@ router.get("/mentorqueries", async (req, res) => {
   }
 });
 
+//put request to update the mentorship data in admin
+router.put("/queriesaction/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { action } = req.body;
+    const query = await Mentorship.findById(id);
+    if (query) {
+      if (action === "Shared") {
+        query.action = "Shared";
+      }
+      if (action === "Not Interested") {
+        query.action = "Not Interested";
+      }
+      if (action === "Already Paid") {
+        query.action = "Already Paid";
+      }
+      if (action === "Unseen") {
+        query.action = "Unseen";
+      }
+      await query.save();
+
+      res.status(200).json({ message: "Query updated successfully" });
+      } else {
+      res.status(404).json({ message: "Query not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred while updating data", error: error.message });
+  }
+});
+
 module.exports = router;

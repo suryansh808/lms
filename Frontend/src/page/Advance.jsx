@@ -14,6 +14,8 @@ import img1 from "../assets/Advanced Course Images/Mern Stack Development/MSD 2.
 import img2 from "../assets/Advanced Course Images/Digital Markting/DM 4.jpg";
 import img3 from "../assets/Advanced Course Images/Data science/DS 4.jpg";
 import img4 from "../assets/Advanced Course Images/Product management/PM 5.jpg";
+import bg from "../assets/girl.png";
+import bgImage from "../assets/background1.png";
 
 import faqimg from '../assets/Advanced Course Images/Digital Markting/questionmark.jpg'
 
@@ -24,6 +26,8 @@ import MERN from '../assets/Advanced Course Images/Mern Stack Development/MSD 1.
 import ProductManagement from '../assets/Advanced Course Images/Product management/PM 4.jpg'
 import  ProformanceMarket from '../assets/Advanced Course Images/Performance marketing/PM 3.jpg'
 import Getintouch from "../Components/Getintouch";
+
+import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
 
 
 
@@ -310,6 +314,33 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
        </div>
       </section>
       <hr className=" opacity-10"/>
+
+       <section className="px-[10px] py-[60px]">
+          <div className="width">
+            <div className="lg:h-[400px] bg-cover bg-center lg:flex md:flex overflow-hidden" style={{ backgroundImage: `url(${bgImage})`}}>
+              <div className="lg:w-1/2 md:w-1/2 w-full  ">
+              <h2 className=" font-bold lg:text-4xl text-xl text-center mb-2 mt-2">| Talk to our program advisor?</h2>
+              <h2 className="text-center lg:text-xl mb-2 font-semibold">And get</h2>
+              <ul className="text-white text-lg font-semibold space-y-2 px-2">
+                <li><i class="fa fa-hand-o-right"></i> Program Overview </li>
+               
+                <li><i class="fa fa-hand-o-right"></i> Industry-Tested Curriculum Designed By Experts</li>
+                <li><i class="fa fa-hand-o-right"></i> Hands-On Learing Via 50+ Projects</li>
+                <li><i class="fa fa-hand-o-right"></i> 1:1 Mentorship From AI Specialists</li>
+                <li><i class="fa fa-hand-o-right"></i> Personalized  Career Guidence </li>
+                <li><i class="fa fa-hand-o-right"></i> Fees Structure </li>
+              </ul>
+              <div className="flex items-center justify-center mt-6">
+              <AdvisorForm/>
+            </div>
+              </div>
+              <div className="lg:w-1/2 md:w-1/2 w-full  flex items-center justify-center">
+              <img src={bg} alt="" className="h-full object-center" />
+              </div>
+          </div>
+          </div>
+       </section>
+       <hr className=" opacity-10"/>
 
        {/* program info  */}
        <section className="px-[10px] py-[60px]">

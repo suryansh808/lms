@@ -134,6 +134,19 @@
 
   }
 
+  /*-----------------------roadmap section---------------------------  */
+.roadmap{
+  background-color: white;
+  padding:0 10px;
+
+  >div{
+    color: #000000;
+    max-width: 1500px;
+    margin: auto;
+  }
+}
+
+
   /*-----------------------StartCareer section---------------------------  */
   .startcareer {
     padding: 20px 10px 70px 10px;

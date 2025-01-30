@@ -69,6 +69,8 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import PageNotFound from "./PageNotFound";
 import AdvanceQueries from "./Admin/AdvanceQueries";
 import MentorQueries from "./Admin/MentorQueries";
+import JobBoard from "./User/JobBoard";
+import MyJob from "./User/MyJob";
 
 // Manager
 import ManagerHeader from "./Manager/ManagerHeader";
@@ -78,6 +80,16 @@ import BookingList from "./Manager/BookingList";
 import DefaultedList from "./Manager/DefaultedList";
 import FullPaymentList from "./Manager/FullPaymentList";
 // import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
+
+// placementcoordinator
+import PCHeader from "./PlacementCoordinator.jsx/PCHeader";
+import PClogin from "./PlacementCoordinator.jsx/PClogin";
+import PCDashboard from "./PlacementCoordinator.jsx/PCDashboard";
+import JobPost from "./PlacementCoordinator.jsx/JobPost";
+import Application from "./PlacementCoordinator.jsx/Application";
+import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
+import MockInterview from "./User/MockInterview";
+import Exercise from "./User/Excercise";
 
 
 
@@ -119,7 +131,8 @@ const AppContent = () => {
     // "/operationagainlogin",
     // "/bdaagainlogin",
     // "/manageragainlogin",
-    "/loginadmin"
+    "/loginadmin",
+    "/pclogin",
   ];
   const adminheaderPaths = [
     "/admindashboard",
@@ -135,7 +148,8 @@ const AppContent = () => {
     "/createmanager",
     "/mentorqueries",
     "/advancequeries",
-    "/revenuesheet"
+    "/revenuesheet",
+    "/createplacementcoordinator",
 
   ];
   const operationheaderPaths = [
@@ -155,6 +169,10 @@ const AppContent = () => {
     "/enrolledcourses",
     "/learning",
     "/setting",
+    "/mockinterview",
+    "/exercise",
+    "/jobboard",
+    "/myjob",
   ];
   
   const managerHeaderPaths =[
@@ -162,11 +180,17 @@ const AppContent = () => {
     "/bookinglist",
     "/defaultedlist",
     "/fullpaymentlist",    
-  ]
+  ];
+  const placementcoodinatorHeaderPaths = [
+    "/pcdashboard",
+    "/jobpost",
+    "/application",
+  ];
 
 
 
-  const lmsFooterPaths = ['/dashboard','/enrolledcourses','/learning','/setting'];
+
+  const lmsFooterPaths = ['/dashboard','/enrolledcourses','/learning','/setting','/jobboard','/myjob'];
 
   
   const isAuthenticated = () => !!localStorage.getItem("token");
@@ -174,7 +198,7 @@ const AppContent = () => {
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
   const isAuthenticatedAdmin = () => !!localStorage.getItem("adminToken");
   const isAuthenticatedManager = () => !!localStorage.getItem("managerToken");
- 
+  const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
 
   return (
 
@@ -187,7 +211,10 @@ const AppContent = () => {
       {bdaheaderPaths.includes(location.pathname.toLowerCase()) && ( <BDAHeader />)}
       {userheaderPaths.includes(location.pathname.toLowerCase()) && (<UserHeader />)}
       {managerHeaderPaths.includes(location.pathname.toLowerCase()) && (<ManagerHeader />)}
-        
+      {placementcoodinatorHeaderPaths.includes(
+        location.pathname.toLowerCase()
+      ) && <PCHeader />}
+
       <Routes>
         <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<HomePage />} />
@@ -229,6 +256,16 @@ const AppContent = () => {
         <Route path="/MentorQueries" element={isAuthenticatedAdmin()? <MentorQueries /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/CreateManager" element={isAuthenticatedAdmin()? <Createmanager /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/RevenueSheet" element={isAuthenticatedAdmin()? <RevenueSheet /> : <Navigate to="/AdminLogin"/>} />
+        <Route
+          path="/CreatePlacementCoordinator"
+          element={
+            isAuthenticatedAdmin() ? (
+              <CreatePlacementCoordinator />
+            ) : (
+              <Navigate to="/AdminLogin" />
+            )
+          }
+        />
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
@@ -254,7 +291,27 @@ const AppContent = () => {
         <Route path="/EnrolledCourses" element={isAuthenticated() ?<EnrolledCourses /> : <Navigate to="/login" />} />
         <Route path="/Setting" element={isAuthenticated() ?<Setting /> : <Navigate to="/login" />} />
         <Route path="/Learning" element={isAuthenticated() ?<Learning />: <Navigate to="/login" />} />
+        <Route path="/JobBoard" element={isAuthenticated() ?<JobBoard /> : <Navigate to="/login" />} />
+        <Route path="/MyJob" element={isAuthenticated() ?<MyJob />: <Navigate to="/login" />} />
+        <Route
+          path="/MockInterview"
+          element={
+            isAuthenticated() ? <MockInterview /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/Exercise"
+          element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />}
+        />
+
         {/* User Panel End */}
+
+        {/* placement coodinator panel starts */}
+        <Route path="/PClogin" element={<PClogin />} />
+        <Route path="/PCDashboard"   element={ isAuthenticatedPC()? <PCDashboard /> : <Navigate to="/PClogin" />}/>
+        <Route path="/JobPost"  element={isAuthenticatedPC()? <JobPost /> : <Navigate to="/PClogin" /> }/>
+        <Route path="/Application" element={isAuthenticatedPC()? <Application /> : <Navigate to="/PClogin" />}/>
+        {/* placement coodinator panel ends */}
 
         {/* Manager Panel */}
         <Route path="/ManagerLogin" element={<ManagerLogin />} />

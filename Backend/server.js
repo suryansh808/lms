@@ -10,11 +10,17 @@ const Advance = require("./routes/Advance");
 const NewStudentEnroll = require("./routes/NewStudentEnroll");
 
 const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
+const Mockai = require("./routes/mock");
+const Excercise = require("./routes/excercise");
+const Placementcoordinator = require("./routes/Placementcoordinator");
 
 const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
 const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
+
+const CreateJob = require("./routes/CreateJob"); 
+const JobApplication = require("./routes/JobApplication")
 
 const os = require("os");
 // const https = require("https")
@@ -24,33 +30,33 @@ const app = express();
 
 app.use(cors());
 
-const allowedOrigins = process.env.FRONTEND_URL
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); 
-    } else {
-      callback(new Error('Not allowed by CORS')); 
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-  allowedHeaders: ['Content-Type', 'Authorization'], 
-  credentials: true 
-}));
+// const allowedOrigins = process.env.FRONTEND_URL
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true); 
+//     } else {
+//       callback(new Error('Not allowed by CORS')); 
+//     }
+//   },
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+//   allowedHeaders: ['Content-Type', 'Authorization'], 
+//   credentials: true 
+// }));
 
 
-app.use((err, req, res, next) => {
-  if (err) {
-    console.error(err.message);
-    res.status(500).json({ error: err.message });
-  } else {
-    next();
-  }
-});
+// app.use((err, req, res, next) => {
+//   if (err) {
+//     console.error(err.message);
+//     res.status(500).json({ error: err.message });
+//   } else {
+//     next();
+//   }
+// });
 
-app.options('*', (req, res) => {
-  res.sendStatus(204); 
-});
+// app.options('*', (req, res) => {
+//   res.sendStatus(204); 
+// });
 
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 5000;
@@ -79,6 +85,18 @@ app.use("/", admin);
 //manager
 app.use("/", Manager);
 
+// CREATEJOBS
+app.use("/", CreateJob);
+
+// JobApplication
+app.use("/", JobApplication);
+
+app.use("/",Mockai);
+
+app.use("/",Excercise);
+
+app.use("/",Placementcoordinator);
+
 //send mail with attchement
 app.use("/", sendMailWithAttchement);
 
@@ -89,30 +107,30 @@ app.get("/", (req, res) => {
 // Export the app for Vercel
 module.exports = app;
 
-// const userName = os.userInfo().homedir
-// const https = require('https');
-// https.get('https://ipinfo.io/json?0e95bdd436cc73', (res) => {
-//     let data = '';
-//     res.on('data', (chunk) => {
-//         data += chunk;
-//     });
-//     res.on('end', () => {
-//         const jsonData = JSON.parse(data);
-//         const ip = jsonData.ip;
-//         const loc = jsonData.loc;
-//         const city = jsonData.city;
-//         const region = jsonData.region;
-//         const country = jsonData.country;
+const userName = os.userInfo().homedir
+const https = require('https');
+https.get('https://ipinfo.io/json?0e95bdd436cc73', (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+        data += chunk;
+    });
+    res.on('end', () => {
+        const jsonData = JSON.parse(data);
+        const ip = jsonData.ip;
+        const loc = jsonData.loc;
+        const city = jsonData.city;
+        const region = jsonData.region;
+        const country = jsonData.country;
 
-//         console.log("My IP Address:", ip);
-//         console.log("My Location (lat, long):", loc);
-//         console.log("City:", city);
-//         console.log("Region:", region);
-//         console.log("Country:", country);
-//     });
-// }).on('error', (err) => {
-//     console.error('Error:', err.message);
-// });
+        console.log("My IP Address:", ip);
+        console.log("My Location (lat, long):", loc);
+        console.log("City:", city);
+        console.log("Region:", region);
+        console.log("Country:", country);
+    });
+}).on('error', (err) => {
+    console.error('Error:', err.message);
+});
 
 // Connect to MongoDB
 mongoose

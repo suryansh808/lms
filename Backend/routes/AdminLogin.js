@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 const crypto = require('crypto'); 
+const PlacementCoordinator = require("../models/placementcoordinator");
 const { default: mongoose } = require("mongoose");
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
@@ -307,6 +308,80 @@ router.put('/mailsendedmanager/:id', async (req, res) => {
     res.status(500).send({ message: 'Failed to update updating  manager record.' });
   }
 });
+
+router.post("/sendmailtoplacementcoordinator", async (req, res) => {
+  const { fullname, email } = req.body;
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+      <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
+        <h1>Welcome to Krutanic Solutions!</h1>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Placement Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Here are your login details:</p>
+        <p style="font-size: 14px; color: #333;"> Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.</p>
+        <p style="font-size: 14px; color: #555;">
+          <a href="https://www.krutanic.com/placementcoordinatorlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+        </p>
+        <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT team.</p>
+        <p style="font-size: 14px; color: #333;">Best regards,</p>
+        <p style="font-size: 14px; color: #333;">Team Krutanic</p>
+      </div>
+      <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
+        <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
+      </div>
+    </div>
+  `;
+
+  try {
+    // Send email to the Placement Coordinator
+    await sendEmail({
+      email,
+      subject: "Welcome to Krutanic Solutions - Placement Team Login",
+      message: emailMessage,
+    });
+
+    // Mark email as sent (mailSended)
+    const coordinator = await PlacementCoordinator.findOne({ email });
+    if (coordinator) {
+      coordinator.mailSended = true;
+      await coordinator.save();
+    }
+
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .json({ message: "Error sending email.", error: error.message });
+  }
+});
+
+// PUT request to update the "mailSended" field for Placement Coordinator after sending email
+router.put("/mailsendedplacementcoordinator/:id", async (req, res) => {
+  const { id } = req.params;
+  const { mailSended } = req.body;
+  try {
+    const coordinator = await PlacementCoordinator.findById(id);
+    if (!coordinator) {
+      return res.status(404).send({ message: "Coordinator not found." });
+    }
+
+    coordinator.mailSended = mailSended;
+    await coordinator.save();
+    res
+      .status(200)
+      .send({
+        message: "Coordinator record updated successfully!",
+        coordinator,
+      });
+  } catch (error) {
+    console.error("Error updating coordinator record:", error);
+    res.status(500).send({ message: "Failed to update coordinator record." });
+  }
+});
+
 
 
 module.exports = router;

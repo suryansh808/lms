@@ -39,7 +39,7 @@ const Learning = () => {
     <div id='UserLearning'>
       <h2>{courseTitle}</h2>
       <div className='learningtop'>
-        <span onClick={sessionVisibility}>COURSE MENU</span>
+        <span onClick={sessionVisibility}>☰ MENU</span>
         <h2>{selectedSession.title}</h2>
       </div>
       {isSessionVisible && (

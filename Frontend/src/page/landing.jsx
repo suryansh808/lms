@@ -18,6 +18,8 @@ import whyimg from "../assets/whychoose.jpg";
 import corporate from "../assets/corporatesolution.jpg";
 import comingsoon from "../assets/comingsoon.jpg";
 
+import roadmap from "../assets/roadmap.png";
+
 const HomePage = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -91,6 +93,15 @@ const HomePage = () => {
         </div>
       </div>
       {/* section aboutus end*/}
+
+     
+        <div className="roadmap">
+          <div>
+          <h1>| Roadmap to your Success</h1>
+            <img src={roadmap} alt="Road Map" />
+          </div>
+        </div>
+   
 
       {/* Start Your Career */}
       <div className="startcareer">

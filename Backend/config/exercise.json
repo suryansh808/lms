@@ -1,0 +1,4094 @@
+[
+    {
+      "category": "Data Analytics",
+      "question": "What is Data Analytics?",
+      "options": [
+        "The process of analyzing raw data to draw insights",
+        "The study of building websites",
+        "A technique for compressing files",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of analyzing raw data to draw insights"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which tool is widely used for Data Analytics?",
+      "options": ["Tableau", "Photoshop", "TensorFlow", "AutoCAD"],
+      "correctAnswer": "Tableau"
+    },
+    { 
+      "category": "Data Analytics",
+      "question": "What does KPI stand for?",
+      "options": [
+        "Key Performance Indicator",
+        "Key Process Input",
+        "Knowledge Process Indicator",
+        "None of the above"
+      ],
+      "correctAnswer": "Key Performance Indicator"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is the purpose of a dashboard in Data Analytics?",
+      "options": [
+        "To visualize and summarize key metrics",
+        "To create machine learning models",
+        "To encrypt data",
+        "None of the above"
+      ],
+      "correctAnswer": "To visualize and summarize key metrics"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is a data pipeline?",
+      "options": [
+        "A series of processes to move and transform data",
+        "A tool for creating visualizations",
+        "A type of database",
+        "None of the above"
+      ],
+      "correctAnswer": "A series of processes to move and transform data"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What does ETL stand for in Data Analytics?",
+      "options": [
+        "Extract, Transform, Load",
+        "Evaluate, Test, Load",
+        "Extract, Test, Launch",
+        "None of the above"
+      ],
+      "correctAnswer": "Extract, Transform, Load"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which of the following is a primary component of Big Data?",
+      "options": ["Volume, Velocity, Variety", "Volume, Viscosity, Velocity", "Variety, Vacuum, Volume", "None of the above"],
+      "correctAnswer": "Volume, Velocity, Variety"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What does SQL stand for?",
+      "options": [
+        "Structured Query Language",
+        "Sequential Query Language",
+        "Standard Query Language",
+        "None of the above"
+      ],
+      "correctAnswer": "Structured Query Language"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which of the following is an open-source data visualization tool?",
+      "options": ["Tableau", "Power BI", "Matplotlib", "Excel"],
+      "correctAnswer": "Matplotlib"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is a primary goal of Data Analytics?",
+      "options": [
+        "To derive actionable insights",
+        "To delete unnecessary data",
+        "To create large datasets",
+        "None of the above"
+      ],
+      "correctAnswer": "To derive actionable insights"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is the role of machine learning in Data Analytics?",
+      "options": [
+        "To create predictive models",
+        "To encrypt data",
+        "To clean raw data",
+        "None of the above"
+      ],
+      "correctAnswer": "To create predictive models"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which of the following is a type of unstructured data?",
+      "options": ["Audio files", "SQL tables", "Spreadsheets", "None of the above"],
+      "correctAnswer": "Audio files"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which programming language is widely used for Data Analytics?",
+      "options": ["Python", "C++", "JavaScript", "Ruby"],
+      "correctAnswer": "Python"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is a data warehouse?",
+      "options": [
+        "A central repository for storing integrated data",
+        "A physical location for storing files",
+        "A type of software for machine learning",
+        "None of the above"
+      ],
+      "correctAnswer": "A central repository for storing integrated data"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which statistical measure indicates the average of a dataset?",
+      "options": ["Mean", "Median", "Mode", "Range"],
+      "correctAnswer": "Mean"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is the purpose of data normalization?",
+      "options": [
+        "To scale data to a common range",
+        "To duplicate data",
+        "To create larger datasets",
+        "None of the above"
+      ],
+      "correctAnswer": "To scale data to a common range"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is the difference between supervised and unsupervised learning?",
+      "options": [
+        "Supervised uses labeled data, unsupervised does not",
+        "Supervised is faster than unsupervised",
+        "Unsupervised uses labeled data, supervised does not",
+        "None of the above"
+      ],
+      "correctAnswer": "Supervised uses labeled data, unsupervised does not"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What is the term for cleaning data by removing inaccuracies?",
+      "options": ["Data Wrangling", "Data Mining", "Data Encoding", "None of the above"],
+      "correctAnswer": "Data Wrangling"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "Which type of chart is best for showing proportions?",
+      "options": ["Pie Chart", "Line Chart", "Scatter Plot", "Bar Chart"],
+      "correctAnswer": "Pie Chart"
+    },
+    {
+      "category": "Data Analytics",
+      "question": "What does 'R' stand for in the R programming language?",
+      "options": ["The name of the co-creators", "Data Representation", "Random Data", "None of the above"],
+      "correctAnswer": "The name of the co-creators"
+    },
+  
+  
+  
+  
+  
+     {
+      "category": "DevOps",
+      "question": "What is DevOps?",
+      "options": [
+        "A set of practices that combines software development and IT operations",
+        "A programming language",
+        "A tool for project management",
+        "None of the above"
+      ],
+      "correctAnswer": "A set of practices that combines software development and IT operations"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is CI/CD in DevOps?",
+      "options": [
+        "Continuous Integration and Continuous Deployment",
+        "Code Integration and Component Development",
+        "Custom Installation and Continuous Design",
+        "None of the above"
+      ],
+      "correctAnswer": "Continuous Integration and Continuous Deployment"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is commonly used for version control in DevOps?",
+      "options": ["Git", "Docker", "Kubernetes", "Jenkins"],
+      "correctAnswer": "Git"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the purpose of containerization in DevOps?",
+      "options": [
+        "To package applications and their dependencies together",
+        "To monitor server performance",
+        "To create UI components",
+        "None of the above"
+      ],
+      "correctAnswer": "To package applications and their dependencies together"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is widely used for container orchestration?",
+      "options": ["Kubernetes", "Ansible", "Jenkins", "Terraform"],
+      "correctAnswer": "Kubernetes"
+    },
+    {
+      "category": "DevOps",
+      "question": "What does IaC stand for in DevOps?",
+      "options": [
+        "Infrastructure as Code",
+        "Integration and Configuration",
+        "Information as Cloud",
+        "None of the above"
+      ],
+      "correctAnswer": "Infrastructure as Code"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is commonly used for continuous integration?",
+      "options": ["Jenkins", "Docker", "Terraform", "Kubernetes"],
+      "correctAnswer": "Jenkins"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the primary purpose of Jenkins in DevOps?",
+      "options": [
+        "To automate CI/CD pipelines",
+        "To create virtual machines",
+        "To manage Kubernetes clusters",
+        "None of the above"
+      ],
+      "correctAnswer": "To automate CI/CD pipelines"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is used for configuration management in DevOps?",
+      "options": ["Ansible", "Git", "Docker", "Terraform"],
+      "correctAnswer": "Ansible"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the purpose of Terraform in DevOps?",
+      "options": [
+        "To manage infrastructure as code",
+        "To monitor server logs",
+        "To build container images",
+        "None of the above"
+      ],
+      "correctAnswer": "To manage infrastructure as code"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the role of monitoring tools in DevOps?",
+      "options": [
+        "To track application and infrastructure performance",
+        "To automate code testing",
+        "To manage repositories",
+        "None of the above"
+      ],
+      "correctAnswer": "To track application and infrastructure performance"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is commonly used for log aggregation in DevOps?",
+      "options": ["ELK Stack", "Git", "Docker", "Jenkins"],
+      "correctAnswer": "ELK Stack"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the main benefit of using microservices architecture in DevOps?",
+      "options": [
+        "Scalability and independent deployments",
+        "To reduce code complexity",
+        "To centralize database operations",
+        "None of the above"
+      ],
+      "correctAnswer": "Scalability and independent deployments"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the role of Docker in DevOps?",
+      "options": [
+        "To provide containerization for applications",
+        "To create virtual machines",
+        "To monitor server performance",
+        "None of the above"
+      ],
+      "correctAnswer": "To provide containerization for applications"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which DevOps principle focuses on improving feedback loops?",
+      "options": [
+        "Continuous Feedback",
+        "Continuous Development",
+        "Continuous Delivery",
+        "None of the above"
+      ],
+      "correctAnswer": "Continuous Feedback"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the purpose of GitHub Actions in DevOps?",
+      "options": [
+        "To automate workflows and CI/CD processes",
+        "To monitor server performance",
+        "To manage Kubernetes clusters",
+        "None of the above"
+      ],
+      "correctAnswer": "To automate workflows and CI/CD processes"
+    },
+    {
+      "category": "DevOps",
+      "question": "What does the 'shift-left' approach in DevOps mean?",
+      "options": [
+        "Incorporating testing early in the development lifecycle",
+        "Postponing testing until the deployment phase",
+        "Focusing only on operational tasks",
+        "None of the above"
+      ],
+      "correctAnswer": "Incorporating testing early in the development lifecycle"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is used to create and manage virtual environments in DevOps?",
+      "options": ["Vagrant", "Ansible", "Terraform", "Docker"],
+      "correctAnswer": "Vagrant"
+    },
+    {
+      "category": "DevOps",
+      "question": "What is the purpose of a release pipeline in DevOps?",
+      "options": [
+        "To automate the process of delivering software to production",
+        "To monitor server logs",
+        "To create repositories for code",
+        "None of the above"
+      ],
+      "correctAnswer": "To automate the process of delivering software to production"
+    },
+    {
+      "category": "DevOps",
+      "question": "Which tool is used for secrets management in DevOps?",
+      "options": ["Vault", "Git", "Jenkins", "Kubernetes"],
+      "correctAnswer": "Vault"
+    },
+  
+  
+  
+   {
+      "category": "UI/UX Design",
+      "question": "What does UI stand for?",
+      "options": [
+        "User Interface",
+        "User Integration",
+        "Universal Interaction",
+        "None of the above"
+      ],
+      "correctAnswer": "User Interface"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What does UX stand for?",
+      "options": [
+        "User Experience",
+        "Universal Experience",
+        "User Extension",
+        "None of the above"
+      ],
+      "correctAnswer": "User Experience"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is wireframing?",
+      "options": [
+        "Creating a basic layout of a user interface",
+        "Developing a mobile application",
+        "Writing backend code",
+        "None of the above"
+      ],
+      "correctAnswer": "Creating a basic layout of a user interface"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the purpose of usability testing?",
+      "options": [
+        "To evaluate how easy it is for users to interact with a design",
+        "To deploy a web application",
+        "To manage backend databases",
+        "None of the above"
+      ],
+      "correctAnswer": "To evaluate how easy it is for users to interact with a design"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "Which tool is commonly used for creating UI designs?",
+      "options": ["Figma", "Photoshop", "TensorFlow", "AutoCAD"],
+      "correctAnswer": "Figma"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is a prototype in UI/UX design?",
+      "options": [
+        "A high-fidelity interactive model of a design",
+        "A final version of the application",
+        "A backend process for APIs",
+        "None of the above"
+      ],
+      "correctAnswer": "A high-fidelity interactive model of a design"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the goal of UI design?",
+      "options": [
+        "To create visually appealing and user-friendly interfaces",
+        "To write backend logic",
+        "To develop machine learning models",
+        "None of the above"
+      ],
+      "correctAnswer": "To create visually appealing and user-friendly interfaces"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the purpose of a color palette in UI design?",
+      "options": [
+        "To maintain consistent colors across the design",
+        "To randomly generate colors for the application",
+        "To encode data",
+        "None of the above"
+      ],
+      "correctAnswer": "To maintain consistent colors across the design"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the first step in UX design?",
+      "options": [
+        "Conducting user research",
+        "Coding the backend",
+        "Deploying the application",
+        "None of the above"
+      ],
+      "correctAnswer": "Conducting user research"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "Which principle is crucial for responsive design?",
+      "options": [
+        "Flexibility to adapt to different screen sizes",
+        "Using only fixed layouts",
+        "Creating a single layout for all devices",
+        "None of the above"
+      ],
+      "correctAnswer": "Flexibility to adapt to different screen sizes"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What does a persona represent in UX design?",
+      "options": [
+        "A fictional representation of a target user",
+        "A character in the application",
+        "A UI element like a button",
+        "None of the above"
+      ],
+      "correctAnswer": "A fictional representation of a target user"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the significance of whitespace in UI design?",
+      "options": [
+        "To improve readability and focus",
+        "To store unused elements",
+        "To make the design compact",
+        "None of the above"
+      ],
+      "correctAnswer": "To improve readability and focus"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is a user journey map?",
+      "options": [
+        "A visual representation of the user’s interaction with a product",
+        "A map showing the backend architecture",
+        "A roadmap for coding the application",
+        "None of the above"
+      ],
+      "correctAnswer": "A visual representation of the user’s interaction with a product"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "Which tool is used for prototyping in UI/UX design?",
+      "options": ["Adobe XD", "MySQL", "TensorFlow", "Unity"],
+      "correctAnswer": "Adobe XD"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the purpose of A/B testing in UX design?",
+      "options": [
+        "To compare two versions of a design to determine the better one",
+        "To conduct backend performance testing",
+        "To debug the application",
+        "None of the above"
+      ],
+      "correctAnswer": "To compare two versions of a design to determine the better one"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "Which of these is a key principle of UX design?",
+      "options": [
+        "User-centered design",
+        "Backend performance optimization",
+        "Data encryption",
+        "None of the above"
+      ],
+      "correctAnswer": "User-centered design"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the goal of interaction design in UX?",
+      "options": [
+        "To create seamless and meaningful user interactions",
+        "To test the server performance",
+        "To design databases",
+        "None of the above"
+      ],
+      "correctAnswer": "To create seamless and meaningful user interactions"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is the role of typography in UI design?",
+      "options": [
+        "To enhance readability and visual hierarchy",
+        "To compress text files",
+        "To improve server performance",
+        "None of the above"
+      ],
+      "correctAnswer": "To enhance readability and visual hierarchy"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "What is an accessibility guideline in UI/UX design?",
+      "options": [
+        "Designing for users with disabilities",
+        "Ensuring only advanced users can access the application",
+        "Restricting access to certain features",
+        "None of the above"
+      ],
+      "correctAnswer": "Designing for users with disabilities"
+    },
+    {
+      "category": "UI/UX Design",
+      "question": "Which of these is a common UX research method?",
+      "options": ["User interviews", "SQL queries", "Data encryption", "None of the above"],
+      "correctAnswer": "User interviews"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What does 'Full Stack' mean in web development?",
+      "options": [
+        "Working on both the frontend and backend of a web application",
+        "Focusing only on frontend development",
+        "Specializing in database management",
+        "None of the above"
+      ],
+      "correctAnswer": "Working on both the frontend and backend of a web application"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which language is commonly used for frontend development?",
+      "options": ["JavaScript", "Python", "Java", "SQL"],
+      "correctAnswer": "JavaScript"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the purpose of Node.js in web development?",
+      "options": [
+        "To run JavaScript on the server-side",
+        "To create databases",
+        "To design the UI",
+        "None of the above"
+      ],
+      "correctAnswer": "To run JavaScript on the server-side"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is a REST API?",
+      "options": [
+        "An interface that allows communication between systems using HTTP",
+        "A database management system",
+        "A frontend framework",
+        "None of the above"
+      ],
+      "correctAnswer": "An interface that allows communication between systems using HTTP"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which of the following is a popular JavaScript framework for frontend development?",
+      "options": ["React", "Node.js", "Django", "Spring Boot"],
+      "correctAnswer": "React"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What does CRUD stand for in web development?",
+      "options": [
+        "Create, Read, Update, Delete",
+        "Copy, Rename, Update, Delete",
+        "Connect, Remove, Update, Debug",
+        "None of the above"
+      ],
+      "correctAnswer": "Create, Read, Update, Delete"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which database is a NoSQL database?",
+      "options": ["MongoDB", "MySQL", "PostgreSQL", "SQLite"],
+      "correctAnswer": "MongoDB"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the purpose of middleware in a web application?",
+      "options": [
+        "To handle requests between the client and server",
+        "To manage frontend design",
+        "To create database schemas",
+        "None of the above"
+      ],
+      "correctAnswer": "To handle requests between the client and server"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which HTTP method is used to send data to the server?",
+      "options": ["POST", "GET", "DELETE", "PUT"],
+      "correctAnswer": "POST"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the purpose of version control systems like Git?",
+      "options": [
+        "To track changes in code over time",
+        "To deploy web applications",
+        "To create databases",
+        "None of the above"
+      ],
+      "correctAnswer": "To track changes in code over time"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What does JSX stand for in React?",
+      "options": [
+        "JavaScript XML",
+        "JavaScript Extension",
+        "JSON XML",
+        "None of the above"
+      ],
+      "correctAnswer": "JavaScript XML"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is Express.js?",
+      "options": [
+        "A web application framework for Node.js",
+        "A database management tool",
+        "A CSS library",
+        "None of the above"
+      ],
+      "correctAnswer": "A web application framework for Node.js"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which CSS framework is widely used for responsive design?",
+      "options": ["Bootstrap", "TensorFlow", "Flask", "Django"],
+      "correctAnswer": "Bootstrap"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the purpose of a package manager like npm?",
+      "options": [
+        "To manage and install libraries and dependencies",
+        "To compile JavaScript code",
+        "To optimize images",
+        "None of the above"
+      ],
+      "correctAnswer": "To manage and install libraries and dependencies"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the DOM in web development?",
+      "options": [
+        "Document Object Model",
+        "Data Output Method",
+        "Direct Object Mapping",
+        "None of the above"
+      ],
+      "correctAnswer": "Document Object Model"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the difference between frontend and backend development?",
+      "options": [
+        "Frontend focuses on UI/UX, backend focuses on server logic",
+        "Backend focuses on design, frontend focuses on databases",
+        "Frontend is about databases, backend is about UI",
+        "None of the above"
+      ],
+      "correctAnswer": "Frontend focuses on UI/UX, backend focuses on server logic"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "Which of the following is an example of a full stack framework?",
+      "options": ["Django", "Bootstrap", "React", "Flask"],
+      "correctAnswer": "Django"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the purpose of a web server?",
+      "options": [
+        "To handle and respond to HTTP requests",
+        "To design user interfaces",
+        "To store images",
+        "None of the above"
+      ],
+      "correctAnswer": "To handle and respond to HTTP requests"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is the significance of an API in web development?",
+      "options": [
+        "To allow communication between different software applications",
+        "To create UI designs",
+        "To store data locally",
+        "None of the above"
+      ],
+      "correctAnswer": "To allow communication between different software applications"
+    },
+    {
+      "category": "Full Stack Web Development",
+      "question": "What is WebSocket used for in web development?",
+      "options": [
+        "To enable real-time, bidirectional communication",
+        "To compress images",
+        "To optimize SQL queries",
+        "None of the above"
+      ],
+      "correctAnswer": "To enable real-time, bidirectional communication"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is Android?",
+      "options": [
+        "An open-source mobile operating system",
+        "A programming language",
+        "A type of mobile device",
+        "None of the above"
+      ],
+      "correctAnswer": "An open-source mobile operating system"
+    },
+    {
+      "category": "Android App Development",
+      "question": "Which programming language is primarily used for Android app development?",
+      "options": ["Java", "C#", "Swift", "Ruby"],
+      "correctAnswer": "Java"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is an APK file?",
+      "options": [
+        "Android Package File for distributing and installing apps",
+        "A file format for images",
+        "A file type for debugging",
+        "None of the above"
+      ],
+      "correctAnswer": "Android Package File for distributing and installing apps"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is Android Studio?",
+      "options": [
+        "Official IDE for Android development",
+        "A database management system",
+        "A type of mobile operating system",
+        "None of the above"
+      ],
+      "correctAnswer": "Official IDE for Android development"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What does the AndroidManifest.xml file do?",
+      "options": [
+        "Defines the app’s permissions, components, and other configurations",
+        "Stores app data",
+        "Contains the app’s main activity",
+        "None of the above"
+      ],
+      "correctAnswer": "Defines the app’s permissions, components, and other configurations"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is an Activity in Android?",
+      "options": [
+        "A single screen in an app with a user interface",
+        "A background service that runs tasks",
+        "A file manager for the app",
+        "None of the above"
+      ],
+      "correctAnswer": "A single screen in an app with a user interface"
+    },
+    {
+      "category": "Android App Development",
+      "question": "Which of these is a layout used in Android?",
+      "options": ["LinearLayout", "GridLayout", "RelativeLayout", "All of the above"],
+      "correctAnswer": "All of the above"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the purpose of the `onCreate()` method in an Android Activity?",
+      "options": [
+        "To initialize the activity and set up the user interface",
+        "To load background data",
+        "To handle app crashes",
+        "None of the above"
+      ],
+      "correctAnswer": "To initialize the activity and set up the user interface"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is a Fragment in Android?",
+      "options": [
+        "A reusable UI component that can be combined with other fragments",
+        "A file storage method",
+        "A security protocol",
+        "None of the above"
+      ],
+      "correctAnswer": "A reusable UI component that can be combined with other fragments"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the purpose of a RecyclerView in Android?",
+      "options": [
+        "To display large sets of data in an efficient scrollable list",
+        "To manage background tasks",
+        "To store app data",
+        "None of the above"
+      ],
+      "correctAnswer": "To display large sets of data in an efficient scrollable list"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is an Intent in Android?",
+      "options": [
+        "An object used to initiate activities, services, or send broadcasts",
+        "A type of layout",
+        "A method for handling app crashes",
+        "None of the above"
+      ],
+      "correctAnswer": "An object used to initiate activities, services, or send broadcasts"
+    },
+    {
+      "category": "Android App Development",
+      "question": "Which class is used for handling user input in Android?",
+      "options": ["EditText", "Button", "RadioButton", "Spinner"],
+      "correctAnswer": "EditText"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is a Content Provider in Android?",
+      "options": [
+        "A component that allows apps to share data with other apps",
+        "A method for managing user interface components",
+        "A tool for storing logs",
+        "None of the above"
+      ],
+      "correctAnswer": "A component that allows apps to share data with other apps"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the purpose of `SharedPreferences` in Android?",
+      "options": [
+        "To store small amounts of data persistently",
+        "To manage network requests",
+        "To handle background services",
+        "None of the above"
+      ],
+      "correctAnswer": "To store small amounts of data persistently"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the Gradle build system used for in Android development?",
+      "options": [
+        "To automate the process of building, testing, and packaging Android apps",
+        "To create the user interface",
+        "To manage API calls",
+        "None of the above"
+      ],
+      "correctAnswer": "To automate the process of building, testing, and packaging Android apps"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the purpose of `Android Virtual Device (AVD)`?",
+      "options": [
+        "To emulate Android devices on a computer for testing purposes",
+        "To manage app data",
+        "To store images",
+        "None of the above"
+      ],
+      "correctAnswer": "To emulate Android devices on a computer for testing purposes"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is a Service in Android?",
+      "options": [
+        "A component that runs in the background to perform long-running tasks",
+        "A type of UI component",
+        "A layout for displaying data",
+        "None of the above"
+      ],
+      "correctAnswer": "A component that runs in the background to perform long-running tasks"
+    },
+    {
+      "category": "Android App Development",
+      "question": "Which permission is required to access the device's camera in Android?",
+      "options": [
+        "CAMERA",
+        "INTERNET",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE"
+      ],
+      "correctAnswer": "CAMERA"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the purpose of Android's `onResume()` method?",
+      "options": [
+        "To resume the activity when it comes to the foreground",
+        "To start a background service",
+        "To pause an activity",
+        "None of the above"
+      ],
+      "correctAnswer": "To resume the activity when it comes to the foreground"
+    },
+    {
+      "category": "Android App Development",
+      "question": "What is the Android SDK?",
+      "options": [
+        "A set of tools and libraries for building Android apps",
+        "A development environment",
+        "A database manager",
+        "None of the above"
+      ],
+      "correctAnswer": "A set of tools and libraries for building Android apps"
+    },
+    {
+      "category": "Android App Development",
+      "question": "Which Android component is responsible for handling background tasks?",
+      "options": ["Service", "Activity", "Broadcast Receiver", "Content Provider"],
+      "correctAnswer": "Service"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is Machine Learning?",
+      "options": [
+        "A type of artificial intelligence that allows systems to learn from data",
+        "A method for encrypting data",
+        "A database management technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of artificial intelligence that allows systems to learn from data"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is supervised learning?",
+      "options": [
+        "A type of machine learning where the model is trained using labeled data",
+        "A type of machine learning without labeled data",
+        "A method of clustering data",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of machine learning where the model is trained using labeled data"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "Which of these algorithms is used for classification in machine learning?",
+      "options": ["Support Vector Machine", "K-Means", "Principal Component Analysis", "None of the above"],
+      "correctAnswer": "Support Vector Machine"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What does the term 'overfitting' mean in machine learning?",
+      "options": [
+        "When the model learns too much from the training data and performs poorly on unseen data",
+        "When the model underperforms on both training and testing data",
+        "When the model is too simple to learn any patterns",
+        "None of the above"
+      ],
+      "correctAnswer": "When the model learns too much from the training data and performs poorly on unseen data"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the purpose of the loss function in machine learning?",
+      "options": [
+        "To measure the difference between predicted and actual values",
+        "To determine the accuracy of a model",
+        "To optimize the learning rate",
+        "None of the above"
+      ],
+      "correctAnswer": "To measure the difference between predicted and actual values"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the main difference between classification and regression?",
+      "options": [
+        "Classification deals with predicting categories, while regression deals with predicting continuous values",
+        "Classification deals with continuous values, while regression deals with categories",
+        "Both involve predicting categorical values",
+        "None of the above"
+      ],
+      "correctAnswer": "Classification deals with predicting categories, while regression deals with predicting continuous values"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the purpose of feature selection in machine learning?",
+      "options": [
+        "To choose the most relevant features that contribute to the model’s performance",
+        "To increase the size of the dataset",
+        "To normalize the data",
+        "None of the above"
+      ],
+      "correctAnswer": "To choose the most relevant features that contribute to the model’s performance"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the difference between bagging and boosting?",
+      "options": [
+        "Bagging reduces variance, while boosting reduces bias",
+        "Bagging increases bias, while boosting increases variance",
+        "Both methods perform the same task",
+        "None of the above"
+      ],
+      "correctAnswer": "Bagging reduces variance, while boosting reduces bias"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is a neural network?",
+      "options": [
+        "A model inspired by the structure of the human brain, used for complex pattern recognition",
+        "A type of regression model",
+        "A supervised learning algorithm",
+        "None of the above"
+      ],
+      "correctAnswer": "A model inspired by the structure of the human brain, used for complex pattern recognition"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What does the term 'training data' refer to?",
+      "options": [
+        "The dataset used to train a model to learn patterns",
+        "The data used to test a model’s performance",
+        "Data that is used for cross-validation",
+        "None of the above"
+      ],
+      "correctAnswer": "The dataset used to train a model to learn patterns"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is unsupervised learning?",
+      "options": [
+        "A type of machine learning where the model is trained using data that is not labeled",
+        "A type of machine learning where the model is trained using labeled data",
+        "A supervised learning method",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of machine learning where the model is trained using data that is not labeled"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "Which of these is an example of a clustering algorithm?",
+      "options": ["K-Means", "Logistic Regression", "Decision Tree", "None of the above"],
+      "correctAnswer": "K-Means"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is cross-validation in machine learning?",
+      "options": [
+        "A technique used to evaluate the model’s performance by splitting the data into multiple subsets",
+        "A method for optimizing model parameters",
+        "A technique for feature extraction",
+        "None of the above"
+      ],
+      "correctAnswer": "A technique used to evaluate the model’s performance by splitting the data into multiple subsets"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is deep learning?",
+      "options": [
+        "A subset of machine learning that uses neural networks with many layers to model complex patterns",
+        "A type of reinforcement learning",
+        "A technique for clustering data",
+        "None of the above"
+      ],
+      "correctAnswer": "A subset of machine learning that uses neural networks with many layers to model complex patterns"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the role of an activation function in a neural network?",
+      "options": [
+        "To introduce non-linearity into the model, enabling it to learn complex patterns",
+        "To convert categorical data into numerical data",
+        "To calculate the loss",
+        "None of the above"
+      ],
+      "correctAnswer": "To introduce non-linearity into the model, enabling it to learn complex patterns"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is reinforcement learning?",
+      "options": [
+        "A type of machine learning where an agent learns by interacting with the environment and receiving feedback",
+        "A supervised learning technique",
+        "A method for data preprocessing",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of machine learning where an agent learns by interacting with the environment and receiving feedback"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "Which algorithm is commonly used for regression tasks?",
+      "options": ["Linear Regression", "K-Means", "Decision Trees", "SVM"],
+      "correctAnswer": "Linear Regression"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is transfer learning?",
+      "options": [
+        "A technique where a pre-trained model is used for a different but related task",
+        "A technique for improving training data",
+        "A method of clustering",
+        "None of the above"
+      ],
+      "correctAnswer": "A technique where a pre-trained model is used for a different but related task"
+    },
+    {
+      "category": "Machine Learning",
+      "question": "What is the purpose of normalization in machine learning?",
+      "options": [
+        "To scale the features so that they have a mean of 0 and a standard deviation of 1",
+        "To increase the size of the dataset",
+        "To remove outliers",
+        "None of the above"
+      ],
+      "correctAnswer": "To scale the features so that they have a mean of 0 and a standard deviation of 1"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is Cyber Security?",
+      "options": [
+        "Protecting systems, networks, and programs from digital attacks",
+        "Storing data in the cloud",
+        "A method of encrypting emails",
+        "None of the above"
+      ],
+      "correctAnswer": "Protecting systems, networks, and programs from digital attacks"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is phishing?",
+      "options": [
+        "A type of cyber attack where attackers impersonate legitimate entities to steal information",
+        "A method of protecting online data",
+        "A tool for encrypting messages",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of cyber attack where attackers impersonate legitimate entities to steal information"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a firewall?",
+      "options": [
+        "A network security system that monitors and controls incoming and outgoing network traffic",
+        "A method of password hashing",
+        "A tool for detecting viruses",
+        "None of the above"
+      ],
+      "correctAnswer": "A network security system that monitors and controls incoming and outgoing network traffic"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is encryption?",
+      "options": [
+        "A process of converting data into a coded form to prevent unauthorized access",
+        "A method for creating passwords",
+        "A type of malware",
+        "None of the above"
+      ],
+      "correctAnswer": "A process of converting data into a coded form to prevent unauthorized access"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a virus in the context of cyber security?",
+      "options": [
+        "A malicious software that can replicate itself and spread to other systems",
+        "A type of encrypted message",
+        "A secure method for online transactions",
+        "None of the above"
+      ],
+      "correctAnswer": "A malicious software that can replicate itself and spread to other systems"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a DDoS attack?",
+      "options": [
+        "A Distributed Denial of Service attack where multiple systems overwhelm a target with traffic",
+        "A type of email encryption",
+        "A method for monitoring network traffic",
+        "None of the above"
+      ],
+      "correctAnswer": "A Distributed Denial of Service attack where multiple systems overwhelm a target with traffic"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is two-factor authentication (2FA)?",
+      "options": [
+        "A security method that requires two forms of identification to access an account",
+        "A type of encryption",
+        "A method for creating backups",
+        "None of the above"
+      ],
+      "correctAnswer": "A security method that requires two forms of identification to access an account"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a Trojan horse in cyber security?",
+      "options": [
+        "Malware disguised as a legitimate software to gain unauthorized access",
+        "A tool for data encryption",
+        "A method of detecting viruses",
+        "None of the above"
+      ],
+      "correctAnswer": "Malware disguised as a legitimate software to gain unauthorized access"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is social engineering?",
+      "options": [
+        "Manipulating individuals into revealing confidential information",
+        "A process for secure data storage",
+        "A type of firewall configuration",
+        "None of the above"
+      ],
+      "correctAnswer": "Manipulating individuals into revealing confidential information"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a ransomware attack?",
+      "options": [
+        "A malicious software that encrypts files and demands payment for decryption",
+        "A type of data breach",
+        "A method for stealing passwords",
+        "None of the above"
+      ],
+      "correctAnswer": "A malicious software that encrypts files and demands payment for decryption"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a zero-day exploit?",
+      "options": [
+        "An attack that exploits a vulnerability that has not been publicly disclosed",
+        "A method of encrypting emails",
+        "A type of password cracking tool",
+        "None of the above"
+      ],
+      "correctAnswer": "An attack that exploits a vulnerability that has not been publicly disclosed"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is the principle of least privilege?",
+      "options": [
+        "Limiting user access to only the resources necessary for their job",
+        "A type of virus protection",
+        "A method for securing passwords",
+        "None of the above"
+      ],
+      "correctAnswer": "Limiting user access to only the resources necessary for their job"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a botnet?",
+      "options": [
+        "A network of infected computers controlled by an attacker",
+        "A type of security software",
+        "A method for encrypting files",
+        "None of the above"
+      ],
+      "correctAnswer": "A network of infected computers controlled by an attacker"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a VPN (Virtual Private Network)?",
+      "options": [
+        "A service that creates a secure connection to the internet by masking the user's IP address",
+        "A method for storing passwords",
+        "A firewall configuration",
+        "None of the above"
+      ],
+      "correctAnswer": "A service that creates a secure connection to the internet by masking the user's IP address"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is an intrusion detection system (IDS)?",
+      "options": [
+        "A device or software that monitors network traffic for suspicious activity",
+        "A tool for encrypting data",
+        "A method for preventing viruses",
+        "None of the above"
+      ],
+      "correctAnswer": "A device or software that monitors network traffic for suspicious activity"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is a backdoor in cyber security?",
+      "options": [
+        "A method of bypassing normal authentication to gain unauthorized access",
+        "A tool for monitoring user activity",
+        "A firewall configuration",
+        "None of the above"
+      ],
+      "correctAnswer": "A method of bypassing normal authentication to gain unauthorized access"
+    },
+    {
+      "category": "Cyber Security",
+      "question": "What is the primary purpose of a password manager?",
+      "options": [
+        "To store and encrypt passwords securely",
+        "To generate random passwords",
+        "To monitor network traffic",
+        "None of the above"
+      ],
+      "correctAnswer": "To store and encrypt passwords securely"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is Data Science?",
+      "options": [
+        "The field of study that uses scientific methods, processes, algorithms, and systems to extract knowledge from structured and unstructured data",
+        "A subset of business analytics",
+        "A type of machine learning",
+        "None of the above"
+      ],
+      "correctAnswer": "The field of study that uses scientific methods, processes, algorithms, and systems to extract knowledge from structured and unstructured data"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the main goal of data cleaning?",
+      "options": [
+        "To remove or correct erroneous data to ensure the dataset is accurate and usable",
+        "To generate graphs from the data",
+        "To categorize the data into classes",
+        "None of the above"
+      ],
+      "correctAnswer": "To remove or correct erroneous data to ensure the dataset is accurate and usable"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is exploratory data analysis (EDA)?",
+      "options": [
+        "The process of visually and statistically analyzing data to summarize its main characteristics",
+        "A machine learning algorithm",
+        "A type of data visualization",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of visually and statistically analyzing data to summarize its main characteristics"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the difference between structured and unstructured data?",
+      "options": [
+        "Structured data is highly organized, while unstructured data is not easily organized",
+        "Unstructured data is highly organized, while structured data is not",
+        "Both are the same",
+        "None of the above"
+      ],
+      "correctAnswer": "Structured data is highly organized, while unstructured data is not easily organized"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the purpose of feature engineering in machine learning?",
+      "options": [
+        "To select the most important features from raw data to improve model performance",
+        "To clean the dataset",
+        "To apply machine learning algorithms",
+        "None of the above"
+      ],
+      "correctAnswer": "To select the most important features from raw data to improve model performance"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the difference between supervised and unsupervised learning?",
+      "options": [
+        "Supervised learning uses labeled data while unsupervised learning uses unlabeled data",
+        "Supervised learning uses unlabeled data while unsupervised learning uses labeled data",
+        "There is no difference",
+        "None of the above"
+      ],
+      "correctAnswer": "Supervised learning uses labeled data while unsupervised learning uses unlabeled data"
+    },
+    {
+      "category": "Data Science",
+      "question": "Which of these is a popular data visualization tool?",
+      "options": ["Tableau", "Excel", "Power BI", "All of the above"],
+      "correctAnswer": "All of the above"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the purpose of regression analysis?",
+      "options": [
+        "To predict the relationship between a dependent and one or more independent variables",
+        "To categorize data into classes",
+        "To test hypotheses",
+        "None of the above"
+      ],
+      "correctAnswer": "To predict the relationship between a dependent and one or more independent variables"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is a random forest algorithm?",
+      "options": [
+        "An ensemble learning method used for classification and regression",
+        "A data preprocessing technique",
+        "A type of decision tree",
+        "None of the above"
+      ],
+      "correctAnswer": "An ensemble learning method used for classification and regression"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the purpose of dimensionality reduction in data science?",
+      "options": [
+        "To reduce the number of features in a dataset while retaining important information",
+        "To increase the dataset size",
+        "To generate more data",
+        "None of the above"
+      ],
+      "correctAnswer": "To reduce the number of features in a dataset while retaining important information"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the k-means algorithm?",
+      "options": [
+        "A clustering algorithm that groups similar data points together",
+        "A regression technique",
+        "A supervised learning algorithm",
+        "None of the above"
+      ],
+      "correctAnswer": "A clustering algorithm that groups similar data points together"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the purpose of a confusion matrix?",
+      "options": [
+        "To evaluate the performance of classification models",
+        "To create data visualizations",
+        "To clean the dataset",
+        "None of the above"
+      ],
+      "correctAnswer": "To evaluate the performance of classification models"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is a neural network in machine learning?",
+      "options": [
+        "A system of algorithms inspired by the human brain, used for deep learning tasks",
+        "A decision tree algorithm",
+        "A method for clustering data",
+        "None of the above"
+      ],
+      "correctAnswer": "A system of algorithms inspired by the human brain, used for deep learning tasks"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is the purpose of cross-validation?",
+      "options": [
+        "To assess the performance of a machine learning model by splitting the data into multiple training and testing sets",
+        "To normalize data",
+        "To create features",
+        "None of the above"
+      ],
+      "correctAnswer": "To assess the performance of a machine learning model by splitting the data into multiple training and testing sets"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is a decision tree?",
+      "options": [
+        "A model used for classification and regression tasks that splits data based on decision rules",
+        "A clustering algorithm",
+        "A method for dimensionality reduction",
+        "None of the above"
+      ],
+      "correctAnswer": "A model used for classification and regression tasks that splits data based on decision rules"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is deep learning?",
+      "options": [
+        "A subset of machine learning that uses neural networks with multiple layers to analyze complex data",
+        "A type of regression model",
+        "A method for classification",
+        "None of the above"
+      ],
+      "correctAnswer": "A subset of machine learning that uses neural networks with multiple layers to analyze complex data"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is time series analysis?",
+      "options": [
+        "A method for analyzing data points collected or recorded at specific time intervals",
+        "A method for clustering data",
+        "A classification technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A method for analyzing data points collected or recorded at specific time intervals"
+    },
+    {
+      "category": "Data Science",
+      "question": "What is reinforcement learning?",
+      "options": [
+        "A type of machine learning where an agent learns by interacting with its environment and receiving feedback",
+        "A supervised learning technique",
+        "A method for data cleaning",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of machine learning where an agent learns by interacting with its environment and receiving feedback"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is Business Analytics?",
+      "options": [
+        "The use of data analysis and statistical methods to make business decisions",
+        "A method for managing business finances",
+        "A software for tracking sales",
+        "None of the above"
+      ],
+      "correctAnswer": "The use of data analysis and statistical methods to make business decisions"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is predictive analytics?",
+      "options": [
+        "Using historical data and statistical algorithms to forecast future trends",
+        "A technique for visualizing business data",
+        "A method of financial accounting",
+        "None of the above"
+      ],
+      "correctAnswer": "Using historical data and statistical algorithms to forecast future trends"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of a KPI (Key Performance Indicator)?",
+      "options": [
+        "To measure and evaluate the success of a business activity",
+        "To store data for analysis",
+        "To automate business processes",
+        "None of the above"
+      ],
+      "correctAnswer": "To measure and evaluate the success of a business activity"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is descriptive analytics?",
+      "options": [
+        "The process of analyzing past data to understand trends and patterns",
+        "A technique for predicting future events",
+        "A method for creating financial models",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of analyzing past data to understand trends and patterns"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is data visualization?",
+      "options": [
+        "The graphical representation of data to help understand and interpret it",
+        "A method of storing data in a database",
+        "A form of data encryption",
+        "None of the above"
+      ],
+      "correctAnswer": "The graphical representation of data to help understand and interpret it"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is a business intelligence tool?",
+      "options": [
+        "A software that helps analyze and visualize business data to support decision-making",
+        "A financial accounting software",
+        "A tool for managing inventory",
+        "None of the above"
+      ],
+      "correctAnswer": "A software that helps analyze and visualize business data to support decision-making"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of a SWOT analysis?",
+      "options": [
+        "To assess the strengths, weaknesses, opportunities, and threats related to a business or project",
+        "To analyze financial data",
+        "To predict future trends",
+        "None of the above"
+      ],
+      "correctAnswer": "To assess the strengths, weaknesses, opportunities, and threats related to a business or project"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the difference between data mining and business analytics?",
+      "options": [
+        "Data mining focuses on discovering patterns in large datasets, while business analytics uses data to make informed decisions",
+        "Data mining is about storing data, while business analytics is about organizing it",
+        "Both are the same",
+        "None of the above"
+      ],
+      "correctAnswer": "Data mining focuses on discovering patterns in large datasets, while business analytics uses data to make informed decisions"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of regression analysis in business analytics?",
+      "options": [
+        "To predict the relationship between variables and forecast future trends",
+        "To create financial reports",
+        "To perform market segmentation",
+        "None of the above"
+      ],
+      "correctAnswer": "To predict the relationship between variables and forecast future trends"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is prescriptive analytics?",
+      "options": [
+        "A type of analytics that recommends actions to optimize outcomes based on data",
+        "A method of visualizing data",
+        "A statistical technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of analytics that recommends actions to optimize outcomes based on data"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of market segmentation?",
+      "options": [
+        "To divide a broad consumer or business market into subgroups of consumers based on shared characteristics",
+        "To track financial performance",
+        "To create new product features",
+        "None of the above"
+      ],
+      "correctAnswer": "To divide a broad consumer or business market into subgroups of consumers based on shared characteristics"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of financial modeling in business analytics?",
+      "options": [
+        "To create representations of a company's financial performance for decision-making",
+        "To predict future sales figures",
+        "To manage company expenses",
+        "None of the above"
+      ],
+      "correctAnswer": "To create representations of a company's financial performance for decision-making"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the primary purpose of benchmarking in business analytics?",
+      "options": [
+        "To compare a company's performance with industry standards or competitors",
+        "To evaluate employee performance",
+        "To analyze customer feedback",
+        "None of the above"
+      ],
+      "correctAnswer": "To compare a company's performance with industry standards or competitors"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is a dashboard in business analytics?",
+      "options": [
+        "A data visualization tool that consolidates and presents key performance indicators (KPIs)",
+        "A tool for market research",
+        "A report generator",
+        "None of the above"
+      ],
+      "correctAnswer": "A data visualization tool that consolidates and presents key performance indicators (KPIs)"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is a correlation analysis?",
+      "options": [
+        "A method to assess the relationship between two or more variables",
+        "A way to categorize customers",
+        "A tool for organizing data",
+        "None of the above"
+      ],
+      "correctAnswer": "A method to assess the relationship between two or more variables"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is a key advantage of using predictive analytics in business?",
+      "options": [
+        "It helps businesses anticipate future trends and make data-driven decisions",
+        "It is used for data storage",
+        "It automates customer service",
+        "None of the above"
+      ],
+      "correctAnswer": "It helps businesses anticipate future trends and make data-driven decisions"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What does the term 'big data' refer to?",
+      "options": [
+        "Extremely large datasets that cannot be processed using traditional data processing tools",
+        "A type of data analysis",
+        "Data stored on physical servers",
+        "None of the above"
+      ],
+      "correctAnswer": "Extremely large datasets that cannot be processed using traditional data processing tools"
+    },
+    {
+      "category": "Business Analytics",
+      "question": "What is the purpose of A/B testing in business analytics?",
+      "options": [
+        "To compare two versions of a product or service to determine which performs better",
+        "To segment customers into different groups",
+        "To analyze customer behavior",
+        "None of the above"
+      ],
+      "correctAnswer": "To compare two versions of a product or service to determine which performs better"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the primary goal of financial management?",
+      "options": [
+        "Maximizing the wealth of shareholders",
+        "Minimizing costs",
+        "Maximizing revenue",
+        "None of the above"
+      ],
+      "correctAnswer": "Maximizing the wealth of shareholders"
+    },
+    {
+      "category": "Finance",
+      "question": "What is a balance sheet?",
+      "options": [
+        "A financial statement showing the company’s assets, liabilities, and equity",
+        "A summary of financial transactions over a period",
+        "A statement of cash flows",
+        "None of the above"
+      ],
+      "correctAnswer": "A financial statement showing the company’s assets, liabilities, and equity"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the difference between debt and equity financing?",
+      "options": [
+        "Debt financing involves borrowing money, while equity financing involves selling shares of the company",
+        "Debt financing involves selling shares, while equity financing involves borrowing money",
+        "Both are the same",
+        "None of the above"
+      ],
+      "correctAnswer": "Debt financing involves borrowing money, while equity financing involves selling shares of the company"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the time value of money?",
+      "options": [
+        "The concept that money today is worth more than the same amount in the future due to its potential earning capacity",
+        "The cost of borrowing money",
+        "The interest earned on an investment",
+        "None of the above"
+      ],
+      "correctAnswer": "The concept that money today is worth more than the same amount in the future due to its potential earning capacity"
+    },
+    {
+      "category": "Finance",
+      "question": "What is ROI (Return on Investment)?",
+      "options": [
+        "A measure of the profitability of an investment",
+        "A tool for budgeting",
+        "A measure of financial liquidity",
+        "None of the above"
+      ],
+      "correctAnswer": "A measure of the profitability of an investment"
+    },
+    {
+      "category": "Finance",
+      "question": "What is an income statement?",
+      "options": [
+        "A financial report that shows a company’s revenues, expenses, and profits over a period",
+        "A report that lists the company’s assets and liabilities",
+        "A report that tracks investments",
+        "None of the above"
+      ],
+      "correctAnswer": "A financial report that shows a company’s revenues, expenses, and profits over a period"
+    },
+    {
+      "category": "Finance",
+      "question": "What is working capital?",
+      "options": [
+        "The difference between a company's current assets and current liabilities",
+        "The money required to launch a new business",
+        "A method for calculating profit margins",
+        "None of the above"
+      ],
+      "correctAnswer": "The difference between a company's current assets and current liabilities"
+    },
+    {
+      "category": "Finance",
+      "question": "What is diversification in investment?",
+      "options": [
+        "Spreading investments across different types of assets to reduce risk",
+        "Investing all funds into a single asset",
+        "A strategy of selling assets quickly",
+        "None of the above"
+      ],
+      "correctAnswer": "Spreading investments across different types of assets to reduce risk"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the capital asset pricing model (CAPM)?",
+      "options": [
+        "A model used to determine the expected return on an investment based on its risk",
+        "A method to calculate a company’s profit",
+        "A strategy for risk management",
+        "None of the above"
+      ],
+      "correctAnswer": "A model used to determine the expected return on an investment based on its risk"
+    },
+    {
+      "category": "Finance",
+      "question": "What is liquidity?",
+      "options": [
+        "The ease with which an asset can be converted into cash",
+        "The total debt of a company",
+        "The amount of capital invested in a company",
+        "None of the above"
+      ],
+      "correctAnswer": "The ease with which an asset can be converted into cash"
+    },
+    {
+      "category": "Finance",
+      "question": "What is a bond?",
+      "options": [
+        "A debt security issued by an entity to raise capital",
+        "A type of equity investment",
+        "A method for calculating interest",
+        "None of the above"
+      ],
+      "correctAnswer": "A debt security issued by an entity to raise capital"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the purpose of a budget?",
+      "options": [
+        "To plan and control financial resources",
+        "To calculate investment returns",
+        "To track debt payments",
+        "None of the above"
+      ],
+      "correctAnswer": "To plan and control financial resources"
+    },
+    {
+      "category": "Finance",
+      "question": "What is financial forecasting?",
+      "options": [
+        "The process of estimating future financial outcomes based on historical data",
+        "A method for reducing company debt",
+        "A technique for predicting stock market trends",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of estimating future financial outcomes based on historical data"
+    },
+    {
+      "category": "Finance",
+      "question": "What is the significance of financial ratios?",
+      "options": [
+        "They are used to assess a company's financial performance and health",
+        "They track employee salaries",
+        "They are used for risk management",
+        "None of the above"
+      ],
+      "correctAnswer": "They are used to assess a company's financial performance and health"
+    },
+    {
+      "category": "Finance",
+      "question": "What is a stock market?",
+      "options": [
+        "A place where stocks and other securities are bought and sold",
+        "A financial institution for issuing loans",
+        "A method of saving money",
+        "None of the above"
+      ],
+      "correctAnswer": "A place where stocks and other securities are bought and sold"
+    },
+    {
+      "category": "Finance",
+      "question": "What is an exchange rate?",
+      "options": [
+        "The value of one currency in relation to another",
+        "The price of stocks in a country",
+        "The interest rate on a government bond",
+        "None of the above"
+      ],
+      "correctAnswer": "The value of one currency in relation to another"
+    },
+    {
+      "category": "Finance",
+      "question": "What is a dividend?",
+      "options": [
+        "A payment made by a corporation to its shareholders from profits",
+        "A type of investment",
+        "A tax on profits",
+        "None of the above"
+      ],
+      "correctAnswer": "A payment made by a corporation to its shareholders from profits"
+    },
+    {
+      "category": "Finance",
+      "question": "What is an IPO (Initial Public Offering)?",
+      "options": [
+        "The process of offering shares of a private company to the public for the first time",
+        "A financial statement",
+        "A type of loan",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of offering shares of a private company to the public for the first time"
+    },
+    {
+      "category": "Finance",
+      "question": "What is net worth?",
+      "options": [
+        "The total assets minus total liabilities",
+        "The total assets of a company",
+        "The annual revenue of a company",
+        "None of the above"
+      ],
+      "correctAnswer": "The total assets minus total liabilities"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is Human Resource Management (HRM)?",
+      "options": [
+        "The process of recruiting, managing, and developing employees within an organization",
+        "A method of calculating employee salaries",
+        "A technique for managing financial resources",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of recruiting, managing, and developing employees within an organization"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is recruitment?",
+      "options": [
+        "The process of attracting, selecting, and hiring employees",
+        "The method of training employees",
+        "The process of firing employees",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of attracting, selecting, and hiring employees"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is employee onboarding?",
+      "options": [
+        "The process of integrating new employees into the organization",
+        "A method of evaluating employee performance",
+        "A process for employee termination",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of integrating new employees into the organization"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is performance appraisal?",
+      "options": [
+        "The process of evaluating and assessing employee performance",
+        "A method for promoting employees",
+        "The process of recruiting candidates",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of evaluating and assessing employee performance"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is employee motivation?",
+      "options": [
+        "The process of encouraging employees to perform their best",
+        "A method of evaluating performance",
+        "A process for hiring candidates",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of encouraging employees to perform their best"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is a compensation package?",
+      "options": [
+        "The total salary and benefits offered to an employee",
+        "A method for evaluating performance",
+        "A tool for training employees",
+        "None of the above"
+      ],
+      "correctAnswer": "The total salary and benefits offered to an employee"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is employee engagement?",
+      "options": [
+        "The level of an employee’s emotional commitment to their work and the organization",
+        "A process for hiring employees",
+        "A method for calculating compensation",
+        "None of the above"
+      ],
+      "correctAnswer": "The level of an employee’s emotional commitment to their work and the organization"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is labor law?",
+      "options": [
+        "Laws that govern the rights and responsibilities of workers and employers",
+        "A method for firing employees",
+        "A performance evaluation tool",
+        "None of the above"
+      ],
+      "correctAnswer": "Laws that govern the rights and responsibilities of workers and employers"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is a job description?",
+      "options": [
+        "A document outlining the duties, responsibilities, and qualifications for a specific job",
+        "A process for hiring employees",
+        "A document for firing employees",
+        "None of the above"
+      ],
+      "correctAnswer": "A document outlining the duties, responsibilities, and qualifications for a specific job"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is the role of HR in employee development?",
+      "options": [
+        "To provide training and development opportunities to improve employee skills",
+        "To calculate employee compensation",
+        "To monitor employee performance",
+        "None of the above"
+      ],
+      "correctAnswer": "To provide training and development opportunities to improve employee skills"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is succession planning?",
+      "options": [
+        "The process of identifying and preparing future leaders for key positions in the organization",
+        "A method of firing employees",
+        "A tool for evaluating employee performance",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of identifying and preparing future leaders for key positions in the organization"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is the primary purpose of HRM?",
+      "options": [
+        "To manage an organization's human resources efficiently to achieve business goals",
+        "To handle employee paychecks",
+        "To create job descriptions",
+        "None of the above"
+      ],
+      "correctAnswer": "To manage an organization's human resources efficiently to achieve business goals"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is a recruitment process?",
+      "options": [
+        "A series of steps taken to attract, evaluate, and hire employees",
+        "A method of employee training",
+        "A process for terminating employees",
+        "None of the above"
+      ],
+      "correctAnswer": "A series of steps taken to attract, evaluate, and hire employees"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is an exit interview?",
+      "options": [
+        "A meeting conducted with an employee when they leave the company to understand their reasons for leaving",
+        "A method of employee evaluation",
+        "A tool for recruitment",
+        "None of the above"
+      ],
+      "correctAnswer": "A meeting conducted with an employee when they leave the company to understand their reasons for leaving"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is a talent management strategy?",
+      "options": [
+        "A plan to attract, retain, and develop skilled employees to meet business needs",
+        "A performance evaluation tool",
+        "A method for creating job descriptions",
+        "None of the above"
+      ],
+      "correctAnswer": "A plan to attract, retain, and develop skilled employees to meet business needs"
+    },
+    {
+      "category": "Human Resource",
+      "question": "What is an employee retention strategy?",
+      "options": [
+        "A method used to keep employees satisfied and reduce turnover",
+        "A performance review tool",
+        "A hiring technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A method used to keep employees satisfied and reduce turnover"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is digital marketing?",
+      "options": [
+        "The use of digital channels, such as search engines, social media, and websites to promote products or services",
+        "A method for increasing offline sales",
+        "A traditional marketing technique",
+        "None of the above"
+      ],
+      "correctAnswer": "The use of digital channels, such as search engines, social media, and websites to promote products or services"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is SEO?",
+      "options": [
+        "Search Engine Optimization, the practice of improving website visibility in search engine results",
+        "Social Engagement Optimization",
+        "Standardized Electronic Outreach",
+        "None of the above"
+      ],
+      "correctAnswer": "Search Engine Optimization, the practice of improving website visibility in search engine results"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is content marketing?",
+      "options": [
+        "Creating and distributing valuable content to attract and engage a target audience",
+        "Sending promotional emails",
+        "Posting ads on social media platforms",
+        "None of the above"
+      ],
+      "correctAnswer": "Creating and distributing valuable content to attract and engage a target audience"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is email marketing?",
+      "options": [
+        "Using email to send promotional messages or newsletters to a targeted audience",
+        "Sending out advertisements through postal mail",
+        "Advertising products on social media",
+        "None of the above"
+      ],
+      "correctAnswer": "Using email to send promotional messages or newsletters to a targeted audience"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is social media marketing?",
+      "options": [
+        "Using social media platforms to promote products or services",
+        "Paying for advertisements on search engines",
+        "Creating a website for a business",
+        "None of the above"
+      ],
+      "correctAnswer": "Using social media platforms to promote products or services"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is PPC (Pay-Per-Click) advertising?",
+      "options": [
+        "A form of online advertising where advertisers pay each time a user clicks on their ad",
+        "A method of optimizing website traffic",
+        "A way of measuring content effectiveness",
+        "None of the above"
+      ],
+      "correctAnswer": "A form of online advertising where advertisers pay each time a user clicks on their ad"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is influencer marketing?",
+      "options": [
+        "Partnering with influential individuals to promote products or services",
+        "Using traditional media channels to advertise products",
+        "A method of organic SEO",
+        "None of the above"
+      ],
+      "correctAnswer": "Partnering with influential individuals to promote products or services"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is affiliate marketing?",
+      "options": [
+        "A performance-based marketing strategy where a business rewards affiliates for each customer brought by their marketing efforts",
+        "Creating content for a website",
+        "An organic SEO technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A performance-based marketing strategy where a business rewards affiliates for each customer brought by their marketing efforts"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is SEM (Search Engine Marketing)?",
+      "options": [
+        "The practice of promoting websites by increasing their visibility on search engine results through paid advertising",
+        "Optimizing content for organic search rankings",
+        "Using email to promote products",
+        "None of the above"
+      ],
+      "correctAnswer": "The practice of promoting websites by increasing their visibility on search engine results through paid advertising"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is conversion rate optimization (CRO)?",
+      "options": [
+        "The process of improving the percentage of website visitors who take a desired action, such as making a purchase",
+        "Creating content for social media platforms",
+        "A method for analyzing digital traffic",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of improving the percentage of website visitors who take a desired action, such as making a purchase"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is a landing page?",
+      "options": [
+        "A standalone web page designed to convert visitors into leads or customers",
+        "A homepage for a business website",
+        "A blog page on a website",
+        "None of the above"
+      ],
+      "correctAnswer": "A standalone web page designed to convert visitors into leads or customers"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is customer segmentation?",
+      "options": [
+        "Dividing customers into groups based on similar characteristics for targeted marketing",
+        "Creating customer loyalty programs",
+        "Offering discounts to all customers",
+        "None of the above"
+      ],
+      "correctAnswer": "Dividing customers into groups based on similar characteristics for targeted marketing"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is retargeting in digital marketing?",
+      "options": [
+        "Reaching out to customers who have interacted with your business but didn't convert",
+        "Targeting customers who are visiting your website for the first time",
+        "A method for segmenting customers",
+        "None of the above"
+      ],
+      "correctAnswer": "Reaching out to customers who have interacted with your business but didn't convert"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is content curation?",
+      "options": [
+        "The process of finding, organizing, and sharing relevant content for a target audience",
+        "Writing original articles for websites",
+        "Creating video ads",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of finding, organizing, and sharing relevant content for a target audience"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is a call to action (CTA)?",
+      "options": [
+        "A prompt that encourages users to take a specific action, such as clicking a link or making a purchase",
+        "A social media post",
+        "A type of email marketing",
+        "None of the above"
+      ],
+      "correctAnswer": "A prompt that encourages users to take a specific action, such as clicking a link or making a purchase"
+    },
+    {
+      "category": "Digital Marketing",
+      "question": "What is a hashtag?",
+      "options": [
+        "A symbol used on social media to group content by topic or theme",
+        "A paid social media post",
+        "A method of tracking analytics",
+        "None of the above"
+      ],
+      "correctAnswer": "A symbol used on social media to group content by topic or theme"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is the stock market?",
+      "options": [
+        "A marketplace where securities, such as stocks and bonds, are bought and sold",
+        "A type of investment account",
+        "A financial institution",
+        "None of the above"
+      ],
+      "correctAnswer": "A marketplace where securities, such as stocks and bonds, are bought and sold"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a stock?",
+      "options": [
+        "A share in the ownership of a company",
+        "A type of debt investment",
+        "A type of bank deposit",
+        "None of the above"
+      ],
+      "correctAnswer": "A share in the ownership of a company"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a bond?",
+      "options": [
+        "A fixed-income investment where an investor loans money to an entity",
+        "A share in company ownership",
+        "A type of short-term debt",
+        "None of the above"
+      ],
+      "correctAnswer": "A fixed-income investment where an investor loans money to an entity"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is an IPO (Initial Public Offering)?",
+      "options": [
+        "The first sale of shares by a company to the public",
+        "The sale of a company’s bonds to the public",
+        "A public announcement of a company’s earnings",
+        "None of the above"
+      ],
+      "correctAnswer": "The first sale of shares by a company to the public"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a dividend?",
+      "options": [
+        "A payment made by a corporation to its shareholders from its profits",
+        "A type of bond payment",
+        "The difference between buying and selling a stock",
+        "None of the above"
+      ],
+      "correctAnswer": "A payment made by a corporation to its shareholders from its profits"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What does it mean when a stock is described as 'blue-chip'?",
+      "options": [
+        "A stock from a well-established, financially stable company",
+        "A type of investment with a high risk",
+        "A government bond",
+        "None of the above"
+      ],
+      "correctAnswer": "A stock from a well-established, financially stable company"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a stock exchange?",
+      "options": [
+        "A marketplace where stocks and bonds are bought and sold",
+        "A type of financial advisory service",
+        "A bank where stocks are stored",
+        "None of the above"
+      ],
+      "correctAnswer": "A marketplace where stocks and bonds are bought and sold"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a market order?",
+      "options": [
+        "An order to buy or sell a stock at the current market price",
+        "An order to buy stocks at a specific price",
+        "A type of corporate bond transaction",
+        "None of the above"
+      ],
+      "correctAnswer": "An order to buy or sell a stock at the current market price"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a limit order?",
+      "options": [
+        "An order to buy or sell a stock at a specific price or better",
+        "An order to buy at the current market price",
+        "A request to transfer stocks between brokers",
+        "None of the above"
+      ],
+      "correctAnswer": "An order to buy or sell a stock at a specific price or better"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is market capitalization?",
+      "options": [
+        "The total market value of a company's outstanding shares of stock",
+        "The number of shares issued by a company",
+        "The amount of profit a company generates",
+        "None of the above"
+      ],
+      "correctAnswer": "The total market value of a company's outstanding shares of stock"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a bear market?",
+      "options": [
+        "A market condition where stock prices are falling or expected to fall",
+        "A market condition where stock prices are rising",
+        "A type of trading strategy",
+        "None of the above"
+      ],
+      "correctAnswer": "A market condition where stock prices are falling or expected to fall"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a bull market?",
+      "options": [
+        "A market condition where stock prices are rising or expected to rise",
+        "A type of short-term investment",
+        "A type of stock",
+        "None of the above"
+      ],
+      "correctAnswer": "A market condition where stock prices are rising or expected to rise"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a stockbroker?",
+      "options": [
+        "A professional who buys and sells stocks on behalf of clients",
+        "An individual investor",
+        "A person who creates company shares",
+        "None of the above"
+      ],
+      "correctAnswer": "A professional who buys and sells stocks on behalf of clients"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is short selling?",
+      "options": [
+        "Selling stocks that you do not own, with the intention of buying them back at a lower price",
+        "Selling stocks to long-term investors",
+        "A form of buying shares on margin",
+        "None of the above"
+      ],
+      "correctAnswer": "Selling stocks that you do not own, with the intention of buying them back at a lower price"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is margin trading?",
+      "options": [
+        "Borrowing funds from a broker to trade financial assets",
+        "Trading on the stock exchange",
+        "A type of bond investment",
+        "None of the above"
+      ],
+      "correctAnswer": "Borrowing funds from a broker to trade financial assets"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is a stock split?",
+      "options": [
+        "A corporate action where a company issues more shares to shareholders, typically lowering the share price",
+        "The merging of two companies",
+        "A dividend payment",
+        "None of the above"
+      ],
+      "correctAnswer": "A corporate action where a company issues more shares to shareholders, typically lowering the share price"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is an index fund?",
+      "options": [
+        "A type of mutual fund designed to replicate the performance of a financial market index",
+        "A bond issued by a government",
+        "A type of investment account",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of mutual fund designed to replicate the performance of a financial market index"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is diversification in investing?",
+      "options": [
+        "Spreading investments across different types of assets to reduce risk",
+        "Focusing all investments in a single asset",
+        "A method of increasing returns by using debt",
+        "None of the above"
+      ],
+      "correctAnswer": "Spreading investments across different types of assets to reduce risk"
+    },
+    {
+      "category": "Stock Market",
+      "question": "What is an ETF (Exchange-Traded Fund)?",
+      "options": [
+        "A type of investment fund that holds a collection of assets and is traded on stock exchanges",
+        "A type of savings account",
+        "A bond investment strategy",
+        "None of the above"
+      ],
+      "correctAnswer": "A type of investment fund that holds a collection of assets and is traded on stock exchanges"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is supply chain management (SCM)?",
+      "options": [
+        "The management of the flow of goods and services from raw materials to final products",
+        "The process of managing employee schedules",
+        "A technique for managing financial resources",
+        "None of the above"
+      ],
+      "correctAnswer": "The management of the flow of goods and services from raw materials to final products"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is logistics in the context of supply chain management?",
+      "options": [
+        "The process of planning, implementing, and controlling the efficient flow of goods and services",
+        "Managing employee compensation",
+        "The management of digital assets",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of planning, implementing, and controlling the efficient flow of goods and services"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is a supplier?",
+      "options": [
+        "An entity that provides raw materials, components, or services to a company",
+        "A company that manufactures products",
+        "A customer of the company",
+        "None of the above"
+      ],
+      "correctAnswer": "An entity that provides raw materials, components, or services to a company"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is inventory management?",
+      "options": [
+        "The process of overseeing and controlling the inventory of goods to meet demand without overstocking",
+        "A method of manufacturing products",
+        "The process of selling products to customers",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of overseeing and controlling the inventory of goods to meet demand without overstocking"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is demand forecasting?",
+      "options": [
+        "The process of predicting future customer demand based on historical data",
+        "The method of producing goods based on supply",
+        "A technique for marketing products",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of predicting future customer demand based on historical data"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is Just-in-Time (JIT) inventory?",
+      "options": [
+        "An inventory management strategy where goods are produced or acquired only when needed",
+        "A method for creating more storage space in warehouses",
+        "A technique for organizing shipments",
+        "None of the above"
+      ],
+      "correctAnswer": "An inventory management strategy where goods are produced or acquired only when needed"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is a supply chain network?",
+      "options": [
+        "A system of organizations, people, activities, information, and resources involved in moving a product from supplier to customer",
+        "A network of sales teams",
+        "A distribution strategy",
+        "None of the above"
+      ],
+      "correctAnswer": "A system of organizations, people, activities, information, and resources involved in moving a product from supplier to customer"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is the role of transportation in supply chain management?",
+      "options": [
+        "To move goods from one location to another, ensuring timely delivery",
+        "To manage customer relationships",
+        "To track sales data",
+        "None of the above"
+      ],
+      "correctAnswer": "To move goods from one location to another, ensuring timely delivery"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is supply chain visibility?",
+      "options": [
+        "The ability to track and monitor the flow of products and information across the supply chain",
+        "A method of increasing product pricing",
+        "A technique for marketing products",
+        "None of the above"
+      ],
+      "correctAnswer": "The ability to track and monitor the flow of products and information across the supply chain"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is procurement?",
+      "options": [
+        "The process of sourcing and acquiring goods or services from suppliers",
+        "A method for storing goods in a warehouse",
+        "A technique for advertising products",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of sourcing and acquiring goods or services from suppliers"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is supply chain optimization?",
+      "options": [
+        "The process of improving the efficiency and effectiveness of the entire supply chain",
+        "The method of selling goods to customers",
+        "A technique for tracking financial assets",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of improving the efficiency and effectiveness of the entire supply chain"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is a distribution center?",
+      "options": [
+        "A facility used for storing products before they are shipped to customers",
+        "A type of retail store",
+        "A method of producing goods",
+        "None of the above"
+      ],
+      "correctAnswer": "A facility used for storing products before they are shipped to customers"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is the role of packaging in the supply chain?",
+      "options": [
+        "To protect products during transportation and storage",
+        "To display product details",
+        "To advertise products",
+        "None of the above"
+      ],
+      "correctAnswer": "To protect products during transportation and storage"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is RFID (Radio Frequency Identification)?",
+      "options": [
+        "A technology used for tracking and managing inventory",
+        "A method of encrypting data",
+        "A type of barcode",
+        "None of the above"
+      ],
+      "correctAnswer": "A technology used for tracking and managing inventory"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is the bullwhip effect?",
+      "options": [
+        "The amplification of demand fluctuations as they move up the supply chain",
+        "A method for predicting sales trends",
+        "A form of warehouse management",
+        "None of the above"
+      ],
+      "correctAnswer": "The amplification of demand fluctuations as they move up the supply chain"
+    },
+    {
+      "category": "Supply Chain Management",
+      "question": "What is supply chain collaboration?",
+      "options": [
+        "The process of working together with suppliers, distributors, and other stakeholders to improve the overall supply chain performance",
+        "A method for increasing product prices",
+        "A technique for market research",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of working together with suppliers, distributors, and other stakeholders to improve the overall supply chain performance"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is Fintech?",
+      "options": [
+        "A combination of finance and technology, focusing on using technology to improve and automate financial services",
+        "A financial institution",
+        "A government organization",
+        "None of the above"
+      ],
+      "correctAnswer": "A combination of finance and technology, focusing on using technology to improve and automate financial services"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is blockchain?",
+      "options": [
+        "A distributed ledger technology used to store transactions in a secure, transparent, and decentralized manner",
+        "A type of cryptocurrency",
+        "A type of banking system",
+        "None of the above"
+      ],
+      "correctAnswer": "A distributed ledger technology used to store transactions in a secure, transparent, and decentralized manner"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is cryptocurrency?",
+      "options": [
+        "A digital or virtual currency that uses cryptography for security",
+        "A type of traditional currency",
+        "A form of financial regulation",
+        "None of the above"
+      ],
+      "correctAnswer": "A digital or virtual currency that uses cryptography for security"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is peer-to-peer (P2P) lending?",
+      "options": [
+        "A method where individuals lend money to other individuals or businesses via an online platform without using traditional financial institutions",
+        "A type of insurance",
+        "A method for investment in stocks",
+        "None of the above"
+      ],
+      "correctAnswer": "A method where individuals lend money to other individuals or businesses via an online platform without using traditional financial institutions"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is mobile banking?",
+      "options": [
+        "A system that allows users to access their bank accounts and perform financial transactions using a mobile device",
+        "A type of banking account",
+        "A form of financial investment",
+        "None of the above"
+      ],
+      "correctAnswer": "A system that allows users to access their bank accounts and perform financial transactions using a mobile device"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is robo-advising?",
+      "options": [
+        "A technology-driven financial advisory service that uses algorithms to provide automated financial advice",
+        "A type of banking service",
+        "A type of mobile wallet",
+        "None of the above"
+      ],
+      "correctAnswer": "A technology-driven financial advisory service that uses algorithms to provide automated financial advice"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is Insurtech?",
+      "options": [
+        "The use of technology to improve and automate the insurance industry",
+        "A type of cryptocurrency",
+        "A financial service for businesses",
+        "None of the above"
+      ],
+      "correctAnswer": "The use of technology to improve and automate the insurance industry"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is an e-wallet?",
+      "options": [
+        "A digital wallet that stores payment information and allows users to make electronic transactions",
+        "A type of bank account",
+        "A credit card",
+        "None of the above"
+      ],
+      "correctAnswer": "A digital wallet that stores payment information and allows users to make electronic transactions"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is a smart contract?",
+      "options": [
+        "A self-executing contract with the terms of the agreement directly written into code and automatically executed",
+        "A type of financial asset",
+        "A legal document",
+        "None of the above"
+      ],
+      "correctAnswer": "A self-executing contract with the terms of the agreement directly written into code and automatically executed"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is a fintech startup?",
+      "options": [
+        "A new business that uses technology to improve and disrupt the traditional financial services industry",
+        "A type of financial institution",
+        "A regulatory body for the financial market",
+        "None of the above"
+      ],
+      "correctAnswer": "A new business that uses technology to improve and disrupt the traditional financial services industry"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is biometric authentication?",
+      "options": [
+        "A security system that uses unique physical characteristics, such as fingerprints or facial recognition, for identity verification",
+        "A type of insurance",
+        "A digital asset",
+        "None of the above"
+      ],
+      "correctAnswer": "A security system that uses unique physical characteristics, such as fingerprints or facial recognition, for identity verification"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is peer-to-peer (P2P) payments?",
+      "options": [
+        "A system that allows individuals to send and receive money directly from each other using mobile apps or online platforms",
+        "A method of investing in stocks",
+        "A digital payment tool for businesses",
+        "None of the above"
+      ],
+      "correctAnswer": "A system that allows individuals to send and receive money directly from each other using mobile apps or online platforms"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is blockchain technology used for?",
+      "options": [
+        "To enable secure, transparent, and decentralized transactions across various industries",
+        "A method for investing in stocks",
+        "A type of encryption for online banking",
+        "None of the above"
+      ],
+      "correctAnswer": "To enable secure, transparent, and decentralized transactions across various industries"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is a financial inclusion?",
+      "options": [
+        "Efforts to make financial services accessible to underserved or unbanked populations",
+        "A regulatory method for ensuring fair banking",
+        "A type of credit score",
+        "None of the above"
+      ],
+      "correctAnswer": "Efforts to make financial services accessible to underserved or unbanked populations"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is crowdfunding?",
+      "options": [
+        "A method of raising money for a project or venture by collecting small amounts of money from a large number of people, typically via the internet",
+        "A type of loan",
+        "A form of insurance",
+        "None of the above"
+      ],
+      "correctAnswer": "A method of raising money for a project or venture by collecting small amounts of money from a large number of people, typically via the internet"
+    },
+    {
+      "category": "Fintech",
+      "question": "What is digital lending?",
+      "options": [
+        "The use of online platforms to provide loans or credit to consumers or businesses",
+        "A type of mobile wallet",
+        "A method of trading stocks",
+        "None of the above"
+      ],
+      "correctAnswer": "The use of online platforms to provide loans or credit to consumers or businesses"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is graphic design?",
+      "options": [
+        "The art and practice of planning and projecting ideas and experiences through visual and textual content",
+        "A method for creating digital animations",
+        "A process for coding websites",
+        "None of the above"
+      ],
+      "correctAnswer": "The art and practice of planning and projecting ideas and experiences through visual and textual content"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is Adobe Photoshop used for?",
+      "options": [
+        "Photo editing and manipulation",
+        "Creating animations",
+        "Writing code",
+        "None of the above"
+      ],
+      "correctAnswer": "Photo editing and manipulation"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is vector graphics?",
+      "options": [
+        "Images created using paths defined by mathematical equations, which can be resized without losing quality",
+        "A type of raster image",
+        "A form of 3D modeling",
+        "None of the above"
+      ],
+      "correctAnswer": "Images created using paths defined by mathematical equations, which can be resized without losing quality"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is typography in graphic design?",
+      "options": [
+        "The art of arranging type to make written language legible, readable, and appealing",
+        "The use of color in designs",
+        "The creation of logos",
+        "None of the above"
+      ],
+      "correctAnswer": "The art of arranging type to make written language legible, readable, and appealing"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the purpose of using layers in Photoshop?",
+      "options": [
+        "To separate different elements of a design for easy editing",
+        "To adjust the contrast of an image",
+        "To add a background color",
+        "None of the above"
+      ],
+      "correctAnswer": "To separate different elements of a design for easy editing"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the rule of thirds in design?",
+      "options": [
+        "A composition principle where an image is divided into nine equal parts to create a balanced composition",
+        "A method for creating 3D graphics",
+        "A technique for coding websites",
+        "None of the above"
+      ],
+      "correctAnswer": "A composition principle where an image is divided into nine equal parts to create a balanced composition"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the difference between raster and vector graphics?",
+      "options": [
+        "Raster graphics are made of pixels, while vector graphics are made of paths and can be resized without losing quality",
+        "Raster graphics are used for web design, while vector graphics are used for print",
+        "Vector graphics have more colors than raster graphics",
+        "None of the above"
+      ],
+      "correctAnswer": "Raster graphics are made of pixels, while vector graphics are made of paths and can be resized without losing quality"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is Adobe Illustrator primarily used for?",
+      "options": [
+        "Creating vector graphics, such as logos and illustrations",
+        "Editing photographs",
+        "Creating video animations",
+        "None of the above"
+      ],
+      "correctAnswer": "Creating vector graphics, such as logos and illustrations"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is a color palette?",
+      "options": [
+        "A set of colors used in a design to ensure consistency",
+        "A tool for editing images",
+        "A method for organizing layers",
+        "None of the above"
+      ],
+      "correctAnswer": "A set of colors used in a design to ensure consistency"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is a logo?",
+      "options": [
+        "A graphic mark or emblem used to represent a company, brand, or product",
+        "A background image in a website",
+        "A photo filter",
+        "None of the above"
+      ],
+      "correctAnswer": "A graphic mark or emblem used to represent a company, brand, or product"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the purpose of contrast in graphic design?",
+      "options": [
+        "To create visual interest and make elements stand out from each other",
+        "To reduce the size of elements",
+        "To make everything blend together",
+        "None of the above"
+      ],
+      "correctAnswer": "To create visual interest and make elements stand out from each other"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is a wireframe?",
+      "options": [
+        "A basic layout that shows the structure of a webpage or app without detailed design elements",
+        "A type of font",
+        "A method for adding images to a design",
+        "None of the above"
+      ],
+      "correctAnswer": "A basic layout that shows the structure of a webpage or app without detailed design elements"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the Pantone Matching System?",
+      "options": [
+        "A standardized color matching system used in design and printing",
+        "A type of font used in graphic design",
+        "A method for creating images in Photoshop",
+        "None of the above"
+      ],
+      "correctAnswer": "A standardized color matching system used in design and printing"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is a composition in design?",
+      "options": [
+        "The arrangement of visual elements in a work of art",
+        "The process of selecting colors for a design",
+        "The tool used to edit photos",
+        "None of the above"
+      ],
+      "correctAnswer": "The arrangement of visual elements in a work of art"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the purpose of whitespace in design?",
+      "options": [
+        "To create a clean, uncluttered design and allow elements to stand out",
+        "To make text appear larger",
+        "To add images to a design",
+        "None of the above"
+      ],
+      "correctAnswer": "To create a clean, uncluttered design and allow elements to stand out"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is the concept of visual hierarchy?",
+      "options": [
+        "The arrangement of elements in a design to guide the viewer’s attention in a specific order",
+        "The way colors are selected for a design",
+        "The method of choosing a font",
+        "None of the above"
+      ],
+      "correctAnswer": "The arrangement of elements in a design to guide the viewer’s attention in a specific order"
+    },
+    {
+      "category": "Graphics Design",
+      "question": "What is an infographic?",
+      "options": [
+        "A visual representation of information or data, often using graphics and charts",
+        "A type of website layout",
+        "A photo-editing tool",
+        "None of the above"
+      ],
+      "correctAnswer": "A visual representation of information or data, often using graphics and charts"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is an embedded system?",
+      "options": [
+        "A computer designed to perform a specific function within a larger system",
+        "A type of server used for networking",
+        "A tool for programming software",
+        "None of the above"
+      ],
+      "correctAnswer": "A computer designed to perform a specific function within a larger system"
+    },
+    {
+      "category": "Embedded System",
+      "question": "Which of these is an example of an embedded system?",
+      "options": [
+        "A microcontroller in a microwave oven",
+        "A personal computer",
+        "A smartphone",
+        "None of the above"
+      ],
+      "correctAnswer": "A microcontroller in a microwave oven"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is a microcontroller?",
+      "options": [
+        "A small computer on a chip, used in embedded systems to control devices",
+        "A type of network server",
+        "A large data processing machine",
+        "None of the above"
+      ],
+      "correctAnswer": "A small computer on a chip, used in embedded systems to control devices"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the role of real-time operating systems (RTOS) in embedded systems?",
+      "options": [
+        "To ensure timely execution of critical tasks and processes in real-time",
+        "To store data in memory",
+        "To manage software updates",
+        "None of the above"
+      ],
+      "correctAnswer": "To ensure timely execution of critical tasks and processes in real-time"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the difference between a microprocessor and a microcontroller?",
+      "options": [
+        "A microprocessor is a general-purpose processor, while a microcontroller integrates a processor, memory, and peripherals for specific tasks",
+        "They are the same",
+        "A microprocessor is used for embedded systems only",
+        "None of the above"
+      ],
+      "correctAnswer": "A microprocessor is a general-purpose processor, while a microcontroller integrates a processor, memory, and peripherals for specific tasks"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the purpose of an embedded system's I/O interfaces?",
+      "options": [
+        "To allow the system to communicate with external devices like sensors or displays",
+        "To store data locally",
+        "To improve processing power",
+        "None of the above"
+      ],
+      "correctAnswer": "To allow the system to communicate with external devices like sensors or displays"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is an example of a communication protocol used in embedded systems?",
+      "options": [
+        "I2C (Inter-Integrated Circuit)",
+        "HTTP",
+        "FTP",
+        "None of the above"
+      ],
+      "correctAnswer": "I2C (Inter-Integrated Circuit)"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the significance of low power consumption in embedded systems?",
+      "options": [
+        "To prolong the lifespan of battery-operated devices",
+        "To reduce the size of the device",
+        "To increase the processing power",
+        "None of the above"
+      ],
+      "correctAnswer": "To prolong the lifespan of battery-operated devices"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is firmware in the context of embedded systems?",
+      "options": [
+        "Software programmed into non-volatile memory that provides low-level control for the hardware",
+        "A tool for debugging embedded software",
+        "A hardware component",
+        "None of the above"
+      ],
+      "correctAnswer": "Software programmed into non-volatile memory that provides low-level control for the hardware"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is an example of an embedded system in consumer electronics?",
+      "options": [
+        "Smart TVs",
+        "Washing machines",
+        "Car infotainment systems",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is a watchdog timer in an embedded system?",
+      "options": [
+        "A timer used to monitor and reset the system if it becomes unresponsive",
+        "A timer used to measure performance",
+        "A timer for tracking user input",
+        "None of the above"
+      ],
+      "correctAnswer": "A timer used to monitor and reset the system if it becomes unresponsive"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the difference between volatile and non-volatile memory?",
+      "options": [
+        "Volatile memory loses its data when power is lost, while non-volatile memory retains data",
+        "Volatile memory is faster than non-volatile memory",
+        "Non-volatile memory is used for temporary storage",
+        "None of the above"
+      ],
+      "correctAnswer": "Volatile memory loses its data when power is lost, while non-volatile memory retains data"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the purpose of a debugger in embedded system development?",
+      "options": [
+        "To detect and fix errors in embedded software",
+        "To simulate hardware performance",
+        "To increase processing power",
+        "None of the above"
+      ],
+      "correctAnswer": "To detect and fix errors in embedded software"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is an ADC (Analog-to-Digital Converter) used for in embedded systems?",
+      "options": [
+        "To convert analog signals into digital data that can be processed by a microcontroller",
+        "To store data in memory",
+        "To power the system",
+        "None of the above"
+      ],
+      "correctAnswer": "To convert analog signals into digital data that can be processed by a microcontroller"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the significance of real-time processing in embedded systems?",
+      "options": [
+        "To ensure that tasks are completed within a strict time constraint",
+        "To improve power consumption",
+        "To increase storage space",
+        "None of the above"
+      ],
+      "correctAnswer": "To ensure that tasks are completed within a strict time constraint"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is a system on a chip (SoC)?",
+      "options": [
+        "A single chip that integrates all components of a computer or embedded system",
+        "A type of microcontroller",
+        "A software tool for embedded systems",
+        "None of the above"
+      ],
+      "correctAnswer": "A single chip that integrates all components of a computer or embedded system"
+    },
+    {
+      "category": "Embedded System",
+      "question": "What is the role of sensors in embedded systems?",
+      "options": [
+        "To gather data from the environment, such as temperature or motion, for processing",
+        "To display output",
+        "To store data",
+        "None of the above"
+      ],
+      "correctAnswer": "To gather data from the environment, such as temperature or motion, for processing"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is cloud computing?",
+      "options": [
+        "The delivery of computing services, including storage, networking, databases, and software, over the internet",
+        "A type of local server",
+        "A method for optimizing hardware performance",
+        "None of the above"
+      ],
+      "correctAnswer": "The delivery of computing services, including storage, networking, databases, and software, over the internet"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is SaaS (Software as a Service)?",
+      "options": [
+        "A cloud computing model where software applications are provided over the internet",
+        "A type of network service",
+        "A database management tool",
+        "None of the above"
+      ],
+      "correctAnswer": "A cloud computing model where software applications are provided over the internet"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is IaaS (Infrastructure as a Service)?",
+      "options": [
+        "A cloud computing model that provides virtualized computing resources over the internet",
+        "A service for web hosting",
+        "A type of operating system",
+        "None of the above"
+      ],
+      "correctAnswer": "A cloud computing model that provides virtualized computing resources over the internet"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is PaaS (Platform as a Service)?",
+      "options": [
+        "A cloud computing model that provides a platform allowing customers to develop, run, and manage applications without managing infrastructure",
+        "A type of database system",
+        "A type of data storage",
+        "None of the above"
+      ],
+      "correctAnswer": "A cloud computing model that provides a platform allowing customers to develop, run, and manage applications without managing infrastructure"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is multi-cloud computing?",
+      "options": [
+        "The use of multiple cloud computing services from different providers to avoid vendor lock-in and increase redundancy",
+        "A method of increasing storage capacity",
+        "A way of improving internet speed",
+        "None of the above"
+      ],
+      "correctAnswer": "The use of multiple cloud computing services from different providers to avoid vendor lock-in and increase redundancy"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is virtualization in cloud computing?",
+      "options": [
+        "The creation of virtual versions of hardware, operating systems, storage devices, or network resources",
+        "The process of storing data in physical servers",
+        "A method of optimizing network performance",
+        "None of the above"
+      ],
+      "correctAnswer": "The creation of virtual versions of hardware, operating systems, storage devices, or network resources"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is cloud storage?",
+      "options": [
+        "A service that allows users to store data on remote servers, accessible via the internet",
+        "A method of saving data locally",
+        "A type of database management",
+        "None of the above"
+      ],
+      "correctAnswer": "A service that allows users to store data on remote servers, accessible via the internet"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is an example of a public cloud provider?",
+      "options": [
+        "Amazon Web Services (AWS)",
+        "Google Drive",
+        "Microsoft OneDrive",
+        "None of the above"
+      ],
+      "correctAnswer": "Amazon Web Services (AWS)"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is the benefit of cloud computing?",
+      "options": [
+        "Scalability, cost-efficiency, and flexibility",
+        "Limited access to services",
+        "Increased security risks",
+        "None of the above"
+      ],
+      "correctAnswer": "Scalability, cost-efficiency, and flexibility"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is serverless computing?",
+      "options": [
+        "A cloud computing model where developers can build and run applications without managing servers",
+        "A type of virtual machine",
+        "A data storage technique",
+        "None of the above"
+      ],
+      "correctAnswer": "A cloud computing model where developers can build and run applications without managing servers"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is a cloud API?",
+      "options": [
+        "A set of programming tools that allow applications to interact with cloud services",
+        "A method for encrypting data in the cloud",
+        "A form of cloud security",
+        "None of the above"
+      ],
+      "correctAnswer": "A set of programming tools that allow applications to interact with cloud services"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is a cloud-based application?",
+      "options": [
+        "An application that runs on a cloud platform and is accessible through the internet",
+        "A mobile application",
+        "A website",
+        "None of the above"
+      ],
+      "correctAnswer": "An application that runs on a cloud platform and is accessible through the internet"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is cloud computing security?",
+      "options": [
+        "The measures taken to protect data and applications hosted in the cloud from unauthorized access",
+        "A way to improve the speed of cloud services",
+        "A form of storage management",
+        "None of the above"
+      ],
+      "correctAnswer": "The measures taken to protect data and applications hosted in the cloud from unauthorized access"
+    },
+    {
+      "category": "Cloud Computing",
+      "question": "What is edge computing?",
+      "options": [
+        "Processing data closer to where it is generated (e.g., on local devices or edge servers) rather than sending it to a central cloud server",
+        "A form of cloud storage",
+        "A technique for improving internet speed",
+        "None of the above"
+      ],
+      "correctAnswer": "Processing data closer to where it is generated (e.g., on local devices or edge servers) rather than sending it to a central cloud server"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What does IoT (Internet of Things) refer to?",
+      "options": [
+        "A network of physical devices, vehicles, appliances, and other objects embedded with sensors, software, and connectivity",
+        "A method of controlling robotics with human input",
+        "A system for optimizing cloud services",
+        "None of the above"
+      ],
+      "correctAnswer": "A network of physical devices, vehicles, appliances, and other objects embedded with sensors, software, and connectivity"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is a robot?",
+      "options": [
+        "A machine capable of carrying out tasks autonomously or with minimal human intervention",
+        "A type of software used in automation",
+        "A kind of IoT device",
+        "None of the above"
+      ],
+      "correctAnswer": "A machine capable of carrying out tasks autonomously or with minimal human intervention"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the main purpose of sensors in IoT devices?",
+      "options": [
+        "To collect data from the physical environment and transmit it to other devices or systems",
+        "To store large amounts of data",
+        "To power IoT devices",
+        "None of the above"
+      ],
+      "correctAnswer": "To collect data from the physical environment and transmit it to other devices or systems"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is an actuator in robotics?",
+      "options": [
+        "A device that converts electrical signals into physical movement or action",
+        "A sensor that detects environmental changes",
+        "A software program used to control robots",
+        "None of the above"
+      ],
+      "correctAnswer": "A device that converts electrical signals into physical movement or action"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is a smart home?",
+      "options": [
+        "A residence equipped with IoT devices that allow remote monitoring and control of systems like lighting, security, and temperature",
+        "A fully automated industrial robot",
+        "A network of interconnected home appliances",
+        "None of the above"
+      ],
+      "correctAnswer": "A residence equipped with IoT devices that allow remote monitoring and control of systems like lighting, security, and temperature"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the role of the cloud in IoT?",
+      "options": [
+        "To provide centralized storage and processing power for data generated by IoT devices",
+        "To enable real-time communication between IoT devices",
+        "To monitor battery levels of IoT devices",
+        "None of the above"
+      ],
+      "correctAnswer": "To provide centralized storage and processing power for data generated by IoT devices"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is machine learning's role in IoT?",
+      "options": [
+        "To analyze and interpret data collected from IoT devices for predictive insights",
+        "To increase the connectivity of IoT devices",
+        "To reduce the size of IoT devices",
+        "None of the above"
+      ],
+      "correctAnswer": "To analyze and interpret data collected from IoT devices for predictive insights"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the primary function of a robot in industrial automation?",
+      "options": [
+        "To automate repetitive tasks such as assembly, welding, and packaging",
+        "To collect data from the environment",
+        "To provide user feedback",
+        "None of the above"
+      ],
+      "correctAnswer": "To automate repetitive tasks such as assembly, welding, and packaging"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What does the term 'autonomous robot' mean?",
+      "options": [
+        "A robot that can perform tasks without human intervention, using sensors and algorithms",
+        "A robot that requires constant human control",
+        "A robot that only works with external power sources",
+        "None of the above"
+      ],
+      "correctAnswer": "A robot that can perform tasks without human intervention, using sensors and algorithms"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the role of edge computing in IoT?",
+      "options": [
+        "To process data closer to where it is generated rather than relying on the cloud, reducing latency",
+        "To store IoT data on local servers",
+        "To increase the range of IoT networks",
+        "None of the above"
+      ],
+      "correctAnswer": "To process data closer to where it is generated rather than relying on the cloud, reducing latency"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the Internet of Medical Things (IoMT)?",
+      "options": [
+        "A network of connected devices used in healthcare to monitor and manage patient care",
+        "A robot used in surgeries",
+        "An IoT device for fitness tracking",
+        "None of the above"
+      ],
+      "correctAnswer": "A network of connected devices used in healthcare to monitor and manage patient care"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is a drone in the context of robotics?",
+      "options": [
+        "A flying robot that can be remotely controlled or autonomously navigate to complete tasks like delivery or surveillance",
+        "A type of unmanned ground vehicle",
+        "A system used for processing data from IoT sensors",
+        "None of the above"
+      ],
+      "correctAnswer": "A flying robot that can be remotely controlled or autonomously navigate to complete tasks like delivery or surveillance"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is swarm robotics?",
+      "options": [
+        "A system where multiple robots collaborate to perform tasks together, often mimicking the behavior of social animals",
+        "A method of controlling a robot swarm using artificial intelligence",
+        "A system for building larger robots",
+        "None of the above"
+      ],
+      "correctAnswer": "A system where multiple robots collaborate to perform tasks together, often mimicking the behavior of social animals"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the importance of security in IoT?",
+      "options": [
+        "To prevent unauthorized access and ensure that IoT devices and networks are protected from cyberattacks",
+        "To track the movement of devices",
+        "To increase processing speed",
+        "None of the above"
+      ],
+      "correctAnswer": "To prevent unauthorized access and ensure that IoT devices and networks are protected from cyberattacks"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What is the function of a robotic arm?",
+      "options": [
+        "To perform precise tasks such as welding, picking, and placing items",
+        "To transport robots between locations",
+        "To communicate with IoT sensors",
+        "None of the above"
+      ],
+      "correctAnswer": "To perform precise tasks such as welding, picking, and placing items"
+    },
+    {
+      "category": "IoT & Robotics",
+      "question": "What does 'smart city' mean?",
+      "options": [
+        "A city that uses IoT devices to improve infrastructure, services, and quality of life for residents",
+        "A city with advanced robotics in every household",
+        "A digital city with full automation",
+        "None of the above"
+      ],
+      "correctAnswer": "A city that uses IoT devices to improve infrastructure, services, and quality of life for residents"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is nanotechnology?",
+      "options": [
+        "The manipulation of matter on an atomic or molecular scale to create materials with unique properties",
+        "A method of genetic modification",
+        "A technique for designing large-scale machinery",
+        "None of the above"
+      ],
+      "correctAnswer": "The manipulation of matter on an atomic or molecular scale to create materials with unique properties"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is genetic engineering?",
+      "options": [
+        "The direct manipulation of an organism's DNA to modify its characteristics",
+        "A type of gene therapy for treating diseases",
+        "A process of creating synthetic materials",
+        "None of the above"
+      ],
+      "correctAnswer": "The direct manipulation of an organism's DNA to modify its characteristics"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What are nanoparticles?",
+      "options": [
+        "Particles with sizes between 1 and 100 nanometers, often used in medicine and material science",
+        "Microscopic robots used in surgery",
+        "Large-scale robots used in factories",
+        "None of the above"
+      ],
+      "correctAnswer": "Particles with sizes between 1 and 100 nanometers, often used in medicine and material science"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is CRISPR?",
+      "options": [
+        "A revolutionary gene-editing tool that allows precise modifications to DNA",
+        "A type of nanomaterial",
+        "A drug delivery system",
+        "None of the above"
+      ],
+      "correctAnswer": "A revolutionary gene-editing tool that allows precise modifications to DNA"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is a genetically modified organism (GMO)?",
+      "options": [
+        "An organism whose genetic material has been altered through genetic engineering techniques",
+        "A type of nanomaterial",
+        "An organism created using natural breeding methods",
+        "None of the above"
+      ],
+      "correctAnswer": "An organism whose genetic material has been altered through genetic engineering techniques"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is gene therapy?",
+      "options": [
+        "A technique used to treat genetic disorders by altering the genes inside a patient's cells",
+        "A method of cloning organisms",
+        "A process of adding artificial genes to plants",
+        "None of the above"
+      ],
+      "correctAnswer": "A technique used to treat genetic disorders by altering the genes inside a patient's cells"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is DNA sequencing?",
+      "options": [
+        "The process of determining the exact order of nucleotides within a DNA molecule",
+        "A method of creating artificial genes",
+        "A technique for growing cells in culture",
+        "None of the above"
+      ],
+      "correctAnswer": "The process of determining the exact order of nucleotides within a DNA molecule"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is the significance of quantum dots in nanotechnology?",
+      "options": [
+        "Nanoparticles with unique electronic properties used in applications such as imaging and solar cells",
+        "A type of artificial intelligence used in nanorobots",
+        "A genetic modification tool",
+        "None of the above"
+      ],
+      "correctAnswer": "Nanoparticles with unique electronic properties used in applications such as imaging and solar cells"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What are the potential applications of nanotechnology in medicine?",
+      "options": [
+        "Drug delivery, diagnostics, and tissue engineering",
+        "Creating artificial organs",
+        "Building nanobots for surgery",
+        "None of the above"
+      ],
+      "correctAnswer": "Drug delivery, diagnostics, and tissue engineering"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is synthetic biology?",
+      "options": [
+        "An interdisciplinary field that combines engineering, biology, and nanotechnology to create new biological systems",
+        "A method of nanomaterial creation",
+        "A technique for gene sequencing",
+        "None of the above"
+      ],
+      "correctAnswer": "An interdisciplinary field that combines engineering, biology, and nanotechnology to create new biological systems"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is a biosensor?",
+      "options": [
+        "A device that detects biological changes or the presence of biological substances",
+        "A tool for gene editing",
+        "A technique for studying nanomaterials",
+        "None of the above"
+      ],
+      "correctAnswer": "A device that detects biological changes or the presence of biological substances"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is a nanorobot?",
+      "options": [
+        "A tiny robot that operates at the nanoscale and can be used for tasks like drug delivery or surgery",
+        "A type of genetically modified organism",
+        "A device for DNA analysis",
+        "None of the above"
+      ],
+      "correctAnswer": "A tiny robot that operates at the nanoscale and can be used for tasks like drug delivery or surgery"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What are carbon nanotubes?",
+      "options": [
+        "Cylindrical nanomaterials made of carbon atoms, known for their strength and electrical conductivity",
+        "A type of nanorobot",
+        "A form of artificial DNA",
+        "None of the above"
+      ],
+      "correctAnswer": "Cylindrical nanomaterials made of carbon atoms, known for their strength and electrical conductivity"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is gene silencing?",
+      "options": [
+        "A technique used to turn off or suppress the expression of specific genes",
+        "A method for creating GMOs",
+        "A form of DNA replication",
+        "None of the above"
+      ],
+      "correctAnswer": "A technique used to turn off or suppress the expression of specific genes"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What is a nanoparticle?",
+      "options": [
+        "A particle with a size between 1 and 100 nanometers that has unique properties compared to larger particles",
+        "A type of nanorobot",
+        "A method for editing genes",
+        "None of the above"
+      ],
+      "correctAnswer": "A particle with a size between 1 and 100 nanometers that has unique properties compared to larger particles"
+    },
+    {
+      "category": "Nano Technology & Genetic Engineering",
+      "question": "What are gene drives?",
+      "options": [
+        "A technology that forces a specific genetic trait to be passed on to almost all offspring in a population",
+        "A method of gene sequencing",
+        "A technique for protein synthesis",
+        "None of the above"
+      ],
+      "correctAnswer": "A technology that forces a specific genetic trait to be passed on to almost all offspring in a population"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is psychology?",
+      "options": [
+        "The scientific study of the mind and behavior",
+        "The study of the brain's physical structure",
+        "The analysis of chemical reactions in the body",
+        "None of the above"
+      ],
+      "correctAnswer": "The scientific study of the mind and behavior"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is behavioral psychology?",
+      "options": [
+        "A branch of psychology that focuses on how behavior is influenced by the environment and learning",
+        "A method of brain surgery",
+        "A technique for improving memory",
+        "None of the above"
+      ],
+      "correctAnswer": "A branch of psychology that focuses on how behavior is influenced by the environment and learning"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is cognitive psychology?",
+      "options": [
+        "The study of mental processes such as perception, memory, and problem-solving",
+        "The study of unconscious desires",
+        "The practice of psychotherapy",
+        "None of the above"
+      ],
+      "correctAnswer": "The study of mental processes such as perception, memory, and problem-solving"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is developmental psychology?",
+      "options": [
+        "The study of how people grow and change throughout their life span",
+        "The study of abnormal behavior",
+        "The practice of cognitive therapy",
+        "None of the above"
+      ],
+      "correctAnswer": "The study of how people grow and change throughout their life span"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is social psychology?",
+      "options": [
+        "The study of how individuals' thoughts, feelings, and behaviors are influenced by others",
+        "The study of brain diseases",
+        "The analysis of personality traits",
+        "None of the above"
+      ],
+      "correctAnswer": "The study of how individuals' thoughts, feelings, and behaviors are influenced by others"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is the theory of classical conditioning?",
+      "options": [
+        "A learning process in which a neutral stimulus becomes associated with a meaningful stimulus to elicit a similar response",
+        "The process of learning through reward and punishment",
+        "A method of studying the unconscious mind",
+        "None of the above"
+      ],
+      "correctAnswer": "A learning process in which a neutral stimulus becomes associated with a meaningful stimulus to elicit a similar response"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is operant conditioning?",
+      "options": [
+        "A method of learning that involves reinforcement or punishment to influence behavior",
+        "A form of brain training",
+        "A technique used in psychotherapy",
+        "None of the above"
+      ],
+      "correctAnswer": "A method of learning that involves reinforcement or punishment to influence behavior"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is personality psychology?",
+      "options": [
+        "The study of individual differences in characteristic patterns of thinking, feeling, and behaving",
+        "The study of cognitive processes",
+        "The study of mental disorders",
+        "None of the above"
+      ],
+      "correctAnswer": "The study of individual differences in characteristic patterns of thinking, feeling, and behaving"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is the unconscious mind according to Freud?",
+      "options": [
+        "A part of the mind that contains thoughts and memories that are not easily accessible to consciousness",
+        "A concept related to abnormal behavior",
+        "A place where memories are stored temporarily",
+        "None of the above"
+      ],
+      "correctAnswer": "A part of the mind that contains thoughts and memories that are not easily accessible to consciousness"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is the purpose of cognitive therapy?",
+      "options": [
+        "To change negative thought patterns and behaviors that contribute to psychological problems",
+        "To analyze unconscious desires",
+        "To study brain activity",
+        "None of the above"
+      ],
+      "correctAnswer": "To change negative thought patterns and behaviors that contribute to psychological problems"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is a psychological disorder?",
+      "options": [
+        "A condition characterized by abnormal thoughts, feelings, or behaviors that cause distress or dysfunction",
+        "A form of anxiety",
+        "A reaction to stressful situations",
+        "None of the above"
+      ],
+      "correctAnswer": "A condition characterized by abnormal thoughts, feelings, or behaviors that cause distress or dysfunction"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is humanistic psychology?",
+      "options": [
+        "An approach that emphasizes the individual’s potential for personal growth and self-actualization",
+        "A theory focused on unconscious desires",
+        "The study of animal behavior",
+        "None of the above"
+      ],
+      "correctAnswer": "An approach that emphasizes the individual’s potential for personal growth and self-actualization"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is Maslow’s hierarchy of needs?",
+      "options": [
+        "A theory that suggests human needs must be fulfilled in a specific order, starting with basic needs and moving to higher psychological needs",
+        "A type of cognitive therapy",
+        "A technique for treating anxiety disorders",
+        "None of the above"
+      ],
+      "correctAnswer": "A theory that suggests human needs must be fulfilled in a specific order, starting with basic needs and moving to higher psychological needs"
+    },
+    {
+      "category": "Psychology",
+      "question": "What is the placebo effect?",
+      "options": [
+        "A psychological phenomenon where a person experiences a perceived improvement in condition due to believing they are receiving treatment, even if it’s inactive",
+        "A method of treating mental disorders",
+        "A cognitive distortion",
+        "None of the above"
+      ],
+      "correctAnswer": "A psychological phenomenon where a person experiences a perceived improvement in condition due to believing they are receiving treatment, even if it’s inactive"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is AutoCAD?",
+      "options": [
+        "A computer-aided design (CAD) software used for creating 2D and 3D designs",
+        "A program for programming microcontrollers",
+        "A software for managing financial data",
+        "None of the above"
+      ],
+      "correctAnswer": "A computer-aided design (CAD) software used for creating 2D and 3D designs"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is a layer in AutoCAD?",
+      "options": [
+        "A way of organizing objects in a drawing by placing them on different layers for easier management",
+        "A method of applying colors to a design",
+        "A tool for changing the dimensions of an object",
+        "None of the above"
+      ],
+      "correctAnswer": "A way of organizing objects in a drawing by placing them on different layers for easier management"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of dimensioning in AutoCAD?",
+      "options": [
+        "To add measurements to a drawing to indicate size and placement of objects",
+        "To change the appearance of an object",
+        "To delete objects in the drawing",
+        "None of the above"
+      ],
+      "correctAnswer": "To add measurements to a drawing to indicate size and placement of objects"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the difference between 2D and 3D AutoCAD drawings?",
+      "options": [
+        "2D drawings are flat and contain height and width, while 3D drawings add depth to the design",
+        "3D drawings are only for architectural designs",
+        "2D drawings can be rotated, while 3D cannot",
+        "None of the above"
+      ],
+      "correctAnswer": "2D drawings are flat and contain height and width, while 3D drawings add depth to the design"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is an XREF in AutoCAD?",
+      "options": [
+        "An external reference file that is linked to the current drawing",
+        "A type of object in the drawing",
+        "A command for grouping objects",
+        "None of the above"
+      ],
+      "correctAnswer": "An external reference file that is linked to the current drawing"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is a block in AutoCAD?",
+      "options": [
+        "A collection of objects that are grouped together and treated as a single object",
+        "A tool for changing the color of an object",
+        "A type of layer",
+        "None of the above"
+      ],
+      "correctAnswer": "A collection of objects that are grouped together and treated as a single object"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of the trim command in AutoCAD?",
+      "options": [
+        "To remove parts of objects that extend beyond a boundary",
+        "To extend objects to a boundary",
+        "To mirror objects",
+        "None of the above"
+      ],
+      "correctAnswer": "To remove parts of objects that extend beyond a boundary"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is a viewport in AutoCAD?",
+      "options": [
+        "A window or area in the layout where you can view and print a portion of your drawing",
+        "A tool for changing object properties",
+        "A layer in the drawing",
+        "None of the above"
+      ],
+      "correctAnswer": "A window or area in the layout where you can view and print a portion of your drawing"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of the hatch command in AutoCAD?",
+      "options": [
+        "To fill an enclosed area with a pattern or solid fill",
+        "To outline objects in the drawing",
+        "To create 3D models",
+        "None of the above"
+      ],
+      "correctAnswer": "To fill an enclosed area with a pattern or solid fill"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is a polyline in AutoCAD?",
+      "options": [
+        "A series of connected lines and curves that are treated as a single object",
+        "A type of block",
+        "A 3D object",
+        "None of the above"
+      ],
+      "correctAnswer": "A series of connected lines and curves that are treated as a single object"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is a UCS (User Coordinate System) in AutoCAD?",
+      "options": [
+        "A coordinate system used to define the orientation of a drawing",
+        "A type of measurement tool",
+        "A command for drawing shapes",
+        "None of the above"
+      ],
+      "correctAnswer": "A coordinate system used to define the orientation of a drawing"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of the fillet command in AutoCAD?",
+      "options": [
+        "To round the corner of two objects",
+        "To extend the length of a line",
+        "To mirror an object",
+        "None of the above"
+      ],
+      "correctAnswer": "To round the corner of two objects"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the explode command in AutoCAD?",
+      "options": [
+        "A command used to break down a block into its individual components",
+        "A command to delete objects",
+        "A command for creating 3D objects",
+        "None of the above"
+      ],
+      "correctAnswer": "A command used to break down a block into its individual components"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the offset command in AutoCAD?",
+      "options": [
+        "A command used to create a parallel copy of an object at a specified distance",
+        "A command for rotating objects",
+        "A command for scaling objects",
+        "None of the above"
+      ],
+      "correctAnswer": "A command used to create a parallel copy of an object at a specified distance"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of the mirror command in AutoCAD?",
+      "options": [
+        "To create a mirror image of an object across a specified axis",
+        "To change the orientation of an object",
+        "To adjust object size",
+        "None of the above"
+      ],
+      "correctAnswer": "To create a mirror image of an object across a specified axis"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the difference between AutoCAD's 2D and 3D modeling?",
+      "options": [
+        "2D modeling involves flat drawings, while 3D modeling adds depth to the design",
+        "3D modeling is only for architectural designs",
+        "2D modeling uses curves only, while 3D uses lines",
+        "None of the above"
+      ],
+      "correctAnswer": "2D modeling involves flat drawings, while 3D modeling adds depth to the design"
+    },
+    {
+      "category": "AutoCAD",
+      "question": "What is the purpose of the extend command in AutoCAD?",
+      "options": [
+        "To lengthen objects so they reach other objects or boundaries",
+        "To trim parts of objects",
+        "To rotate objects",
+        "None of the above"
+      ],
+      "correctAnswer": "To lengthen objects so they reach other objects or boundaries"
+    }
+  
+  ]
+  
+  

@@ -20,6 +20,10 @@ const MentorshipSchema = new mongoose.Schema({
   passingyear:{
     type:String
   },
+  action:{
+    type:String,
+    default:"Unseen"
+  },
   createdAt: {
     type: Date,
     default: Date.now,

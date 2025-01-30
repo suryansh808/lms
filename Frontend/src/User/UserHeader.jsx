@@ -91,9 +91,21 @@ const UserHeader = () => {
           <Link to="/EnrolledCourses">
             <i className="fa fa-book"></i> Enrolled Courses
           </Link>
+          {/* <Link to="/JobBoard">
+            <i className="fa fa-briefcase"></i> Job Board
+          </Link> */}
+          {/* <Link to="/MyJob">
+            <i className="fa fa-suitcase"></i> My Job
+          </Link> */}
           <Link to="/Setting">
             <i className="fa fa-gear"></i> Setting
           </Link>
+          {/* <Link to="/MockInterview">
+            <i className="fa fa-desktop"></i> Mock Prep
+          </Link>
+          <Link to="/Exercise">
+            <i className="fa fa-ticket"></i> Exercise Prep
+          </Link> */}
           <button onClick={handleLogout}>
             <i className="fa fa-sign-out"></i> LogOut
           </button>
