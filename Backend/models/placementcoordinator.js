@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PlacementcoordinatorSchema = new mongoose.Schema({
+const PlacementCoordinatorSchema = new mongoose.Schema({
   fullname: {
     type: String,
   },
@@ -21,9 +21,9 @@ const PlacementcoordinatorSchema = new mongoose.Schema({
   },
 });
 
-const Placementcoordinator = mongoose.model(
-  "Placementcoordinator",
-  PlacementcoordinatorSchema
+const PlacementCoordinator = mongoose.model(
+  "PlacementCoordinator",
+  PlacementCoordinatorSchema
 );
 
-module.exports = Placementcoordinator;
+module.exports = PlacementCoordinator;

@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/UserAuth"); // Assuming same middl
 const { sendEmail } = require("../controllers/emailController"); // Assuming same email controller
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const PlacementCoordinator = require("../models/placementcoordinator"); // Model for PlacementCoordinator
+const PlacementCoordinator = require("../models/PlacementCoordinator"); // Model for PlacementCoordinator
 const crypto = require("crypto"); 
 
 // POST request to create a new Placement Coordinator account
