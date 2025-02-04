@@ -127,7 +127,6 @@ const OnBoardingForm = () => {
       phone: phone,
     };
     if (getTransactionId.some(item => item.transactionId === transactionId)) {
-
     try {
       let response;
       let minimalResponse;

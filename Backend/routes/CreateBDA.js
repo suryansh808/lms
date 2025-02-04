@@ -194,16 +194,16 @@ router.post("/addtransactionid", async (req, res) => {
 
 
 // GET request to retrieve all transaction ids
-// router.get("/gettransactionid", async (req, res) => {
-//   try {
-//     const transactionId = await TransactionId.find().sort({ _id: -1 });
-//     res.status(200).json(transactionId);
-//   }
-//   catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// }
-// );
+router.get("/gettransactionid", async (req, res) => {
+  try {
+    const transactionId = await TransactionId.find().sort({ _id: -1 });
+    res.status(200).json(transactionId);
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+);
 
 
 module.exports = router;
