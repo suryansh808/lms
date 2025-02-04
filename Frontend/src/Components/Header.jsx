@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import logo3 from "../assets/LOGO3.png";
 import wipro from "../assets/wipro.svg";
 
@@ -7,21 +7,29 @@ import mca from "../assets/poplogo/mca.png";
 import iso from "../assets/poplogo/iso.png";
 import msme from "../assets/poplogo/msme.png";
 
+import { Link, useLocation } from "react-router-dom";
+
 const Header = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
   const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
-  // Create a ref for the mobile menu
   const mobileMenuRef = useRef(null);
-
+  const location = useLocation();
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setisAutopopupVisible(true);
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, []);
   useEffect(() => {
-    // Set the div to be visible after 3 seconds
-    const timer = setTimeout(() => {
-      setisAutopopupVisible(true);
-    }, 1000); // 3000 milliseconds = 3 seconds
+  const excludedRoutes = ["/login", "/operationlogin" , "/managerlogin", "/bdalogin" , "/adminlogin" , "/onboardingform"]; // List of routes to exclude
+    if (!excludedRoutes.includes(location.pathname)) {
+      const timer = setTimeout(() => {
+        setisAutopopupVisible(true);
+      }, 1000);
 
-    // Cleanup the timeout if the component is unmounted
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
   const autoPopup = () => {
     setisAutopopupVisible(false);
@@ -35,7 +43,6 @@ const Header = () => {
     setisMobileVisible((prevState) => !prevState);
   };
 
-  // Close the menu if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (

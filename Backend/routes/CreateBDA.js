@@ -3,6 +3,7 @@ const router = express.Router();
 const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 const CreateBDA = require("../models/CreateBDA");
+const TransactionId = require("../models/AddTransactionId");
 const crypto = require('crypto'); 
 
 //post to create a new bda account
@@ -176,5 +177,34 @@ router.post("/checkbdaauth", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+//post request to add transaction id
+router.post("/addtransactionid", async (req, res) => {
+  const { fullname, transactionId } = req.body;
+  try {
+    const AddTransactionId = new TransactionId({
+      fullname,
+      transactionId,
+    });
+    await AddTransactionId.save();
+    res.status(201).json(AddTransactionId);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+// GET request to retrieve all transaction ids
+router.get("/gettransactionid", async (req, res) => {
+  try {
+    const transactionId = await TransactionId.find().sort({ _id: -1 });
+    res.status(200).json(transactionId);
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+);
+
 
 module.exports = router;

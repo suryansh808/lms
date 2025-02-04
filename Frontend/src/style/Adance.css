@@ -1,4 +1,5 @@
 #advance{
+  position: relative;
   color: white;
   background-color: black;
 
@@ -97,6 +98,26 @@
       
       
 }
+
+  /*-----------------------roadmap section---------------------------  */
+  .roadmap{
+    background-color: white;
+    padding:0 10px;
+     
+    h1{
+      color: #f15b29;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px 0 0 0;
+    }
+    >div{
+      color: #000000;
+      max-width: 1200px;
+      margin: auto;
+
+    }
+  }
+  
 
 @keyframes slide {
     0% {

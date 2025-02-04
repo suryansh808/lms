@@ -1084,7 +1084,7 @@ const Investmentbanking = () => {
             }`}
           >
             <p className="text-lg font-semibold text-black">
-              Program fees 65,000/- + 18% GST
+              Program fees 76,700/- Inculding GST
             </p>
             <div className="flex space-x-2">
               <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">

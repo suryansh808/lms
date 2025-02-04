@@ -56,6 +56,7 @@ import BBookedPayment from "./BDA/BBookedPayment";
 import BDAHeader from "./BDA/BDAHeader";
 import BDefualtPayment from "./BDA/BDefualtPayment";
 import BFullPayment from "./BDA/BFullPayment";
+import OnBoarding from "./BDA/OnBoarding";
 // import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
 // User Student
@@ -90,6 +91,11 @@ import Application from "./PlacementCoordinator.jsx/Application";
 import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 import MockInterview from "./User/MockInterview";
 import Exercise from "./User/Excercise";
+
+import OnBoardingForm from "./page/OnBoardingForm";
+import OnBoardingDetails from "./Admin/OnBoardingDetails";
+import AddTransactionId from "./BDA/AddTransactionId";
+
 
 
 
@@ -133,6 +139,7 @@ const AppContent = () => {
     // "/manageragainlogin",
     "/loginadmin",
     "/pclogin",
+    "/onboardingform",
   ];
   const adminheaderPaths = [
     "/admindashboard",
@@ -150,6 +157,7 @@ const AppContent = () => {
     "/advancequeries",
     "/revenuesheet",
     "/createplacementcoordinator",
+    "/onboardingdetails",
 
   ];
   const operationheaderPaths = [
@@ -163,6 +171,8 @@ const AppContent = () => {
     "/bfullpayment",
     "/bdefaultpayment",
     "/bbookedpayment",
+    "/onboarding",
+    "/addtransactionid"
   ];
   const userheaderPaths = [
     "/dashboard",
@@ -237,6 +247,7 @@ const AppContent = () => {
         <Route path="/MernStack" element={<MernStack />} />
         <Route path="/Investmentbanking" element={<Investmentbanking />} />
         <Route path="/ProductManagement" element={<ProductManagement />} />
+        <Route path="/OnBoardingForm" element={<OnBoardingForm />} />
         
 
         {/* Admin Panel Start */}
@@ -256,6 +267,7 @@ const AppContent = () => {
         <Route path="/MentorQueries" element={isAuthenticatedAdmin()? <MentorQueries /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/CreateManager" element={isAuthenticatedAdmin()? <Createmanager /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/RevenueSheet" element={isAuthenticatedAdmin()? <RevenueSheet /> : <Navigate to="/AdminLogin"/>} />
+        <Route path="/OnBoardingDetails" element={isAuthenticatedAdmin()? <OnBoardingDetails /> : <Navigate to="/AdminLogin"/>} />
         <Route
           path="/CreatePlacementCoordinator"
           element={
@@ -284,6 +296,10 @@ const AppContent = () => {
           <Route path="/BFullPayment" element={isAuthenticatedBda() ?<BFullPayment /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BDefaultPayment" element={isAuthenticatedBda() ?<BDefualtPayment /> : <Navigate to="/BDAlogin"/>} />
           <Route path="/BBookedPayment"element={isAuthenticatedBda() ?<BBookedPayment /> : <Navigate to="/BDAlogin"/> }/>
+          <Route path="/OnBoarding" element={isAuthenticatedBda() ?<OnBoarding/> : <Navigate to="/BDAlogin"/> }/>
+          <Route path="/AddTransactionId" element={isAuthenticatedBda() ?<AddTransactionId/> : <Navigate to="/BDAlogin"/> }/>
+
+
         {/* bda panel ends */}
 
         {/* User Panel */}

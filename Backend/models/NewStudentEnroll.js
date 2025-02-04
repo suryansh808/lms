@@ -19,6 +19,10 @@ const newStudentEnrollSchema = new Schema(
     phone: {
       type: String,
     },
+    transactionId:{
+      type: String,
+      unique: true
+      },
     program: {
       type: String,
     },

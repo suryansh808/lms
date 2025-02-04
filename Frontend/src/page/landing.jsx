@@ -95,12 +95,12 @@ const HomePage = () => {
       {/* section aboutus end*/}
 
      
-        <div className="roadmap">
+        {/* <div className="roadmap">
           <div>
           <h1>| Roadmap to your Success</h1>
             <img src={roadmap} alt="Road Map" />
           </div>
-        </div>
+        </div> */}
    
 
       {/* Start Your Career */}
@@ -461,7 +461,6 @@ const HomePage = () => {
 
       <div className="whitediv">
         {/* how to enroll  */}
-
         <div className="ourprocess">
           <div className="ourprocessdiv">
             <div className="process1">

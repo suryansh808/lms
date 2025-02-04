@@ -25,6 +25,9 @@ import CourseMentor from "./Mentorship/CourseMentor";
 import Getintouch from "../Components/Getintouch";
 import { useNavigate } from "react-router-dom";
 import MentorShipMentors from "../Components/MentorShipMentors";
+import ApplyNowButton from "./AdvanceCourse/Components/ApplyNowButton";
+
+// import ApplyForm from "./AdvanceCourse/Components/ApplyForm";
 
 const Mentorship = () => {
 
@@ -62,7 +65,7 @@ const Mentorship = () => {
       {/* Hero Section */}
       <section id="mentorshipbg" className="h-[650px] shadow-lg shadow-[#f15b29]  flex  items-center justify-center py-[60px] px-[10px] overflow-hidden">
         <div className="container mx-auto">
-        <div data-aos="fade-up" className="rounded-lg backdrop-blur-xl text-center bg-[#ffffff46]">      
+        <div data-aos="fade-up" className="rounded-lg backdrop-blur-xl text-center py-2 bg-[#ffffff46]">      
             <div className="flex flex-col  items-center justify-center lg:py-[20px]">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-black mb-6">
                 Discover a new way of learning with our{" "}
@@ -81,6 +84,9 @@ const Mentorship = () => {
               >
                 Explore Courses Catolog
               </button>
+            </div>
+            <div className=" flex items-center justify-center">
+             <ApplyNowButton/>
             </div>
         </div>
         </div>

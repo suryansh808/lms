@@ -1083,7 +1083,7 @@ const MernStack = () => {
           >
             <p className="text-lg font-semibold text-black">
               {" "}
-              Program fees 71,999/- + 18% GST
+              Program fees 84,958/- Inculding GST
             </p>
             <div className="flex space-x-4">
               <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29] whitespace-nowrap">

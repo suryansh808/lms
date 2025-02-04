@@ -33,6 +33,17 @@
     flex-direction: column;
     transform: translateX(200px);
     animation: fadeInUp 1.1s forwards;
+    max-height: calc(100vh - 80px);
+     overflow-y: scroll; 
+    scrollbar-width: none; 
+
+    /* .sidebar::-webkit-scrollbar {
+      width: 0px; 
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+      background: transparent; 
+    }  */
 
     a {
       font-size: 20px;

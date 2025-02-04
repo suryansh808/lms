@@ -1099,7 +1099,7 @@ const Performancemarket = () => {
           >
             <p className="text-xl font-semibold text-black">
               {" "}
-              Program fees 60,000/- + 18% GST
+              Program fees 70,800/- Inculding GST 
             </p>
             <button className="flex items-center justify-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
               <a

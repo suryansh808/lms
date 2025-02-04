@@ -322,6 +322,19 @@ const CourseMentor = ({}) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const phoneRegex = /^[0-9]{10}$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  
+    if (!phoneRegex.test(formData.number)) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
+  
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    
     try {
       await axios.post(`${API}/mentorship/register`, {
         name: formData.name,
@@ -417,7 +430,8 @@ const CourseMentor = ({}) => {
       {showForm && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white text-black p-6 rounded-lg w-[400px]">
-            <h2 className="text-lg font-semibold mb-4">
+            <span className="text-xl bg-black text-white px-2 cursor-pointer rounded-full font-bold float-end" onClick={ClearForm}>X</span>
+            <h2 className="text-lg text-center font-semibold mb-4">
               Register to Access Brochure
             </h2>
             <form onSubmit={handleFormSubmit}>
@@ -448,6 +462,15 @@ const CourseMentor = ({}) => {
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
+               <input
+                type="text"
+                name="collegeName"
+                value={formData.collegeName}
+                onChange={handleInputChange}
+                placeholder="Enter your college name"
+                className="mb-3 p-2 w-full border rounded"
+                required
+              />
               <select
                 id="passingyear"
                 name="passingyear"
@@ -467,15 +490,7 @@ const CourseMentor = ({}) => {
                 <option value="Graduated">Graduated</option>
                 <option value="Passed Out">Passed Out</option>
               </select>
-              <input
-                type="text"
-                name="collegeName"
-                value={formData.collegeName}
-                onChange={handleInputChange}
-                placeholder="Enter your college name"
-                className="mb-3 p-2 w-full border rounded"
-                required
-              />
+             
               <select
                 name="domain"
                 value={formData.domain}
@@ -483,7 +498,7 @@ const CourseMentor = ({}) => {
                 className="mb-4 p-2 w-full border rounded"
                 required
               >
-                <option value="">-- Select a Domain --</option>
+                <option disabled value="">Select a Domain</option>
                 {[
                   "Full Stack Web Development",
                   "Android App Development",
@@ -515,19 +530,12 @@ const CourseMentor = ({}) => {
                 ))}
               </select>
 
-              <div className="flex justify-between">
+              <div className="flex justify-center">
                 <button
                   type="submit"
                   className="px-4 py-2 bg-[#f15b29] text-white rounded"
                 >
                   Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={ClearForm}
-                  className="px-4 py-2 bg-gray-300 text-black rounded"
-                >
-                  Cancel
                 </button>
               </div>
             </form>

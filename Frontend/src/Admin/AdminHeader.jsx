@@ -54,9 +54,9 @@ const navigate = useNavigate();
       <Link to="/CreateManager">Create Manager A/c</Link>
       <Link to="/CreateBDA">Create BDA A/c</Link>
       <Link to="/CreatePlacementCoordinator">Create PC A/c</Link>
-
       <Link to="/AcceptedApplication">Active Users</Link>
       <Link to="/PendingApplication">Inactive Users</Link>
+      <Link to="/OnBoardingDetails">OnBoarding Details</Link>
       <Link to="/BookedList">Booked Amount List</Link>
       <Link to="/DefaultList">Default Amount List</Link>
       <Link to="/FullPaidList">Full Paid Amount List</Link>

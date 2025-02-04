@@ -800,3 +800,17 @@ h2{
     min-height: 40px;
   }
 }
+
+.talktoadvisor{
+  >div{
+    position: relative;
+
+    >div{
+      position: absolute;
+      text-align: center;
+      /* background-color: #f15b29; */
+      bottom: 12%;
+      left: 10%;
+    }
+  }
+}

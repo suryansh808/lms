@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const NewEnrollStudent = require('../models/NewStudentEnroll');
 const CreateCourse = require("../models/CreateCourse");
-
+const mongoose = require('mongoose');
 // post request to post all the new student enroll
 router.post("/newstudentenroll", async (req, res) => {
-  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId } = req.body; 
+  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId } = req.body; 
   // console.log("data coming from frontend" , req.body)
   try {
     const course = await CreateCourse.findOne({ title: domain });
     // console.log("coures found" , course)
 
     const newStudent = new NewEnrollStudent({
-        fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId, status: "booked", domainId: course._id,
+        fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, transactionId, operationId, status: "booked", domainId: course._id,
     });
 
     // console.log("data saved", newStudent);
@@ -152,5 +152,28 @@ router.get("/enrollments", async (req, res) => {
   }
 });
 
+//post request to update the operation name and id from admin panel 
+router.post('/update-operation/:id', async (req, res) => {
+  try {
+    const { operationName, operationId } = req.body;
+    const { id } = req.params;
+   const objectId = new mongoose.Types.ObjectId(id);
+    const updatedItem = await NewEnrollStudent.findByIdAndUpdate(
+     { _id : objectId},
+      {
+       operationName: operationName,
+        operationId: operationId,
+      },
+      { new: true }
+    );
+    if (updatedItem) {
+      res.status(200).json({ message: 'Operation updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Item not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating operation', error });
+  }
+});
 
 module.exports = router;
