@@ -370,9 +370,9 @@ const BookedAmount = () => {
                 {" "}
                 Mode of Program
               </option>
-              <option value="Self Placed">Self Placed</option>
-              <option value="Mentor Leed">Mentor Led</option>
-              <option value="Professional">Professional</option>
+              <option value="Self-guided">Self-guided</option>
+              <option value="Instructor Led">Instructor Led</option>
+              <option value="Career Advancement">Career Advancement</option>
             </select>
             <select
               disabled={editingStudentId !== null}

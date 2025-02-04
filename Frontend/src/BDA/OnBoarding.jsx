@@ -42,17 +42,17 @@ const [transactionId, setTransactionId] = useState("");
     setTransactionId("");
   };
 
-  const transactionIdRegex = /^[a-zA-Z0-9]{10,20}$/;
+  // const transactionIdRegex = /^[a-zA-Z0-9]{10,20}$/;
   const handleSubmit = async (event) => {
     const bdaName = localStorage.getItem("bdaName");
     event.preventDefault();
-    if (!transactionId) {
-        toast.error("Transaction ID is required.");
-        return;
-      } else if (!transactionIdRegex.test(transactionId)) {
-        toast.error("Transaction ID must be alphanumeric and between 10 to 20 characters.");
-        return;
-      }
+    // if (!transactionId) {
+    //     toast.error("Transaction ID is required.");
+    //     return;
+    //   } else if (!transactionIdRegex.test(transactionId)) {
+    //     toast.error("Transaction ID must be alphanumeric and between 10 to 20 characters.");
+    //     return;
+    //   }
     const formData = {
       fullname: fullname,
       email: email.trim(),
@@ -214,9 +214,9 @@ const [transactionId, setTransactionId] = useState("");
                 {" "}
                 Mode of Program
               </option>
-              <option value="Self Placed">Self Placed</option>
-              <option value="Mentor Leed">Mentor Led</option>
-              <option value="Professional">Professional</option>
+              <option value="Self-guided">Self-guided</option>
+              <option value="Instructor Led">Instructor Led</option>
+              <option value="Career Advancement">Career Advancement</option>
             </select>
             {/* <select
               disabled={editingStudentId !== null}
