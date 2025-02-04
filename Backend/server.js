@@ -31,32 +31,32 @@ const app = express();
 app.use(cors());
 
 // const allowedOrigins = process.env.FRONTEND_URL
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true); 
-//     } else {
-//       callback(new Error('Not allowed by CORS')); 
-//     }
-//   },
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-//   allowedHeaders: ['Content-Type', 'Authorization'], 
-//   credentials: true 
-// }));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); 
+    } else {
+      callback(new Error('Not allowed by CORS')); 
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true 
+}));
 
 
-// app.use((err, req, res, next) => {
-//   if (err) {
-//     console.error(err.message);
-//     res.status(500).json({ error: err.message });
-//   } else {
-//     next();
-//   }
-// });
+app.use((err, req, res, next) => {
+  if (err) {
+    console.error(err.message);
+    res.status(500).json({ error: err.message });
+  } else {
+    next();
+  }
+});
 
-// app.options('*', (req, res) => {
-//   res.sendStatus(204); 
-// });
+app.options('*', (req, res) => {
+  res.sendStatus(204); 
+});
 
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 5000;
