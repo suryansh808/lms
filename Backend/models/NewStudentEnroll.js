@@ -26,6 +26,9 @@ const newStudentEnrollSchema = new Schema(
     program: {
       type: String,
     },
+    modeofpayment: {
+      type: String,
+    },
     counselor: {
       type: String,
     },

@@ -21,7 +21,7 @@ const Header = () => {
   //   return () => clearTimeout(timer);
   // }, []);
   useEffect(() => {
-  const excludedRoutes = ["/login", "/operationlogin" , "/managerlogin", "/bdalogin" , "/adminlogin" , "/onboardingform"]; // List of routes to exclude
+  const excludedRoutes = ["/login", "/operationlogin" , "/managerlogin", "/bdalogin" , "/Advance", "/DataScience","/DigitalMarket", "/Investmentbanking","/MernStack", "/Performancemarket","/ProductManagement", "/adminlogin" , "/onboardingform"]; // List of routes to exclude
     if (!excludedRoutes.includes(location.pathname)) {
       const timer = setTimeout(() => {
         setisAutopopupVisible(true);

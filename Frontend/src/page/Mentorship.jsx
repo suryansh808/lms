@@ -25,7 +25,8 @@ import CourseMentor from "./Mentorship/CourseMentor";
 import Getintouch from "../Components/Getintouch";
 import { useNavigate } from "react-router-dom";
 import MentorShipMentors from "../Components/MentorShipMentors";
-import ApplyNowButton from "./AdvanceCourse/Components/ApplyNowButton";
+// import ApplyNowButton from "./AdvanceCourse/Components/ApplyNowButton";
+import MentorshipForm from "./MentorshipForm";
 
 // import ApplyForm from "./AdvanceCourse/Components/ApplyForm";
 
@@ -86,7 +87,7 @@ const Mentorship = () => {
               </button>
             </div>
             <div className=" flex items-center justify-center">
-             <ApplyNowButton/>
+             <MentorshipForm/>
             </div>
         </div>
         </div>

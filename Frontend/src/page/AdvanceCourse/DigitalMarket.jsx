@@ -417,6 +417,13 @@ const DigitalMarket = () => {
       domainOther: "",
     });
   }
+
+   const [activeModule, setActiveModule] = useState(null);
+  
+    const toggleModule = (index) => {
+      setActiveModule(activeModule === index ? null : index);
+    };
+  
   return (
     <div>
       <div className="bg-black text-white">
@@ -527,17 +534,13 @@ const DigitalMarket = () => {
             </h1>
             <div className="lg:flex lg:gap-8">
               
-              <div className="lg:w-1/2 w-full">
-                <div className="space-y-4  ">
+            <div className="lg:w-1/2 w-full">
+                <div className="space-y-4">
                   {modules.map((module, index) => (
-                    <div key={index} className=" pb-4">
+                    <div key={index} className="pb-5">
                       <button
                         className="w-full text-left hover:text-[#f15b29] transition-colors duration-300 focus:outline-none"
-                        onClick={() =>
-                          document
-                            .getElementById(`module-${index}`)
-                            .classList.toggle("hidden")
-                        }
+                        onClick={() => toggleModule(index)}
                       >
                         <h3 className="text-xl font-semibold">
                           Module {index + 1}: {module.title}
@@ -546,25 +549,22 @@ const DigitalMarket = () => {
                           {module.objectives}
                         </p>
                       </button>
-                      <div id={`module-${index}`} className="hidden mt-4">
-                        <ul className="list-disc pl-9 text-gray-300">
-                          {module.topics.map((topic, topicIndex) => (
-                            <li key={topicIndex} className="mb-2">
-                              {topic}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {activeModule === index && (
+                        <div className="mt-4">
+                          <ul className="list-disc pl-9 text-gray-300">
+                            {module.topics.map((topic, topicIndex) => (
+                              <li key={topicIndex} className="mb-2">
+                                {topic}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
               <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
-                {/* <img
-                  src={curriculumimage}
-                  alt="curriculum image"
-                  className="w-full h-full "
-                /> */}
                 <div className="">
               <ApplyForm courseValue="Data Science"/>
             </div>

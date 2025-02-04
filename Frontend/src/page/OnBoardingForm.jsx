@@ -17,11 +17,30 @@ const OnBoardingForm = () => {
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
-    const [transactionId, setTransactionId] = useState("");
-//   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
-  //   const [newStudent, setNewStudent] = useState([]);
-  //   const [editingStudentId, setEditingStudentId] = useState(null);
+  const [monthsToShow, setMonthsToShow] = useState([]);
+   const [transactionId, setTransactionId] = useState("");
+  const [clearPaymentMonth, setClearPaymentMonth] = useState("");
+  const [modeofpayment, setModeOfPayment] = useState("");
   const [course, setCourse] = useState([]);
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
+      'September', 'October', 'November', 'December'
+    ];
+
+    let months = [];
+    if (currentMonthIndex === 1 && currentDay <= 7) {
+      months = [monthNames[1], monthNames[2], monthNames[3]];
+    } else {
+      months = [monthNames[2], monthNames[3], monthNames[4]];
+    }
+
+    setMonthsToShow(months);
+  }, []);
   const fetchCourses = async () => {
     try {
       const response = await axios.get(`${API}/getcourses`);
@@ -48,6 +67,9 @@ const OnBoardingForm = () => {
     setPaidAmount("");
     setMonthOpted("");
     setTransactionId("");
+    setClearPaymentMonth("");
+    setModeOfPayment("");
+
     // setClearPaymentMonth("");
     // setEditingStudentId(null);
   };
@@ -69,6 +91,18 @@ const OnBoardingForm = () => {
     getTransactionIdList();
     }, []);
 
+    const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split('T')[0]; // Today's date in yyyy-mm-dd format
+    const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split('T')[0]; // 5 days from today
+
+    setMinDate(minDate);
+    setMaxDate(maxDate);
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
@@ -82,6 +116,8 @@ const OnBoardingForm = () => {
       paidAmount: paidAmount,
       monthOpted: monthOpted,
       transactionId: transactionId,
+      clearPaymentMonth: clearPaymentMonth,
+      modeofpayment: modeofpayment,
       operationName: null,
       operationId: null,
     };
@@ -90,19 +126,11 @@ const OnBoardingForm = () => {
       email: email.trim(),
       phone: phone,
     };
-    // alert(getTransactionId.some(item => item.transactionId === transactionId));
     if (getTransactionId.some(item => item.transactionId === transactionId)) {
 
     try {
       let response;
       let minimalResponse;
-    //   if (editingStudentId) {
-    //     response = await axios.put(
-    //       `${API}/editstudentdetails/${editingStudentId}`,
-    //       formData
-    //     );
-      //   minimalResponse = { status: 200 };
-      // } 
        {
         response = await axios.post(`${API}/newstudentenroll`, formData);
         minimalResponse = await axios.post(`${API}/users`, minimalData);
@@ -139,8 +167,8 @@ const OnBoardingForm = () => {
       </div>
       <Wavefull/>
       {iscourseFormVisible && (
-        <div className="form z-[999] absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] p-10 rounded-lg shadow-lg">
-          <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="form z-[999] absolute overflow-scroll top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] p-10 rounded-lg shadow-lg">
+          <form onSubmit={handleSubmit} className="">
             <span onClick={resetForm}>✖</span>
             <h2>OnBoarding Form</h2>
             <input
@@ -182,19 +210,19 @@ const OnBoardingForm = () => {
               <option value="Mentor Leed">Mentor Led</option>
               <option value="Professional">Professional</option>
             </select>
-            {/* <select
-              disabled={editingStudentId !== null}
-              value={counselor}
-              onChange={(e) => setCounselor(e.target.value)}
-            > */}
-            {/* <option value="" selected disabled>
-                Select Counselor name
-              </option> */}
-            {/* {bda.map((item) => (
-                <option value={item.fullname}>{item.fullname}</option>
-              ))} */}
-
-            {/* </select> */}
+            <select
+              value={modeofpayment}
+              onChange={(e) => setModeOfPayment(e.target.value)}
+            >
+              <option value="" selected disabled>
+                {" "}
+                Mode of Payment
+              </option>
+              <option value="RazorPay">RazorPay</option>
+              <option value="QR Code">QR Code</option>
+              <option value="EaseBuZZ">EaseBuZZ</option>
+              <option value="PayPal">PayPal</option>
+            </select>
             <select value={domain} onChange={(e) => setDomain(e.target.value)}>
               <option value="" selected disabled>
                 Select Opted Domain
@@ -211,18 +239,11 @@ const OnBoardingForm = () => {
               <option value="" selected disabled>
                 Select Opted Month
               </option>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
+              {monthsToShow.map((month, index) => (
+        <option key={index} value={month}>
+          {month}
+        </option>
+      ))}
             </select>
             <input
               value={programPrice}
@@ -240,7 +261,7 @@ const OnBoardingForm = () => {
             />
             <input type="text" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} placeholder="Enter Transaction ID" required />
 
-            {/* <div>
+            <div>
               Due date for clear payment ?
               <input
                 value={clearPaymentMonth}
@@ -249,8 +270,11 @@ const OnBoardingForm = () => {
                 name=""
                 id=""
                 required
+                min={minDate}
+                max={maxDate}
+
               />
-            </div> */}
+            </div>
             <input className="cursor-pointer" type="submit" value="Submit" />
           </form>
         </div>

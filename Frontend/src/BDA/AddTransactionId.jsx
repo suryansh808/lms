@@ -4,7 +4,7 @@ import API from '../API';
 import toast ,{Toaster} from 'react-hot-toast';
 
 const AddTransactionId = () => {
-  const [fullname, setFullname] = useState('');
+  // const [fullname, setFullname] = useState('');
   const [transactionId, setTransactionId] = useState('');
 
   const handleFullnameChange = (e) => {
@@ -15,30 +15,31 @@ const AddTransactionId = () => {
     setTransactionId(e.target.value);
   };
 
-  const [getTransactionId, setGetTransactionId] = useState([]);
-  const getTransactionIdList = async () => {
-    try {
-        const response = await axios.get(`${API}/gettransactionid`);
-        setGetTransactionId(response.data);
-        }
-    catch (error) {
-        console.error(error);
-    }
-    };
+  // const [getTransactionId, setGetTransactionId] = useState([]);
+  // const getTransactionIdList = async () => {
+  //   const bdaName = localStorage.getItem('bdaName');
+  //   try {
+  //       const response = await axios.get(`${API}/gettransactionid`);
+  //       setGetTransactionId(response.data);
+  //       }
+  //   catch (error) {
+  //       console.error(error);
+  //   }
+  //   };
 
-   useEffect(() => {
-    getTransactionIdList();
-    }, []);
+  //  useEffect(() => {
+  //   getTransactionIdList();
+  //   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { fullname, transactionId };
+    const data = {transactionId };
     try {
       const response = await axios.post(`${API}/addtransactionid`, data);
       toast.success('Transaction ID added successfully:');
-        setFullname('');
+        // setFullname('');
         setTransactionId('');
-        getTransactionIdList();
+        // getTransactionIdList();
     } catch (error) {
         toast.error('Error adding transaction ID or already exsists');
     }
@@ -54,7 +55,7 @@ const AddTransactionId = () => {
       <h2>Add Transaction ID</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        {/* <div>
           <input
             type="text"
             id="fullname"
@@ -63,7 +64,7 @@ const AddTransactionId = () => {
             onChange={handleFullnameChange}
             required
           />
-        </div>
+        </div> */}
         <div>
           <input
             type="text"
@@ -81,7 +82,7 @@ const AddTransactionId = () => {
         </div>
      
  
-        <div className='coursetable'>
+        {/* <div className='coursetable'>
         <h1>Transaction ID List</h1>
         <table>
             <thead>
@@ -101,7 +102,7 @@ const AddTransactionId = () => {
                 ))}
             </tbody>
         </table>
-        </div>
+        </div> */}
         
      
     </div>

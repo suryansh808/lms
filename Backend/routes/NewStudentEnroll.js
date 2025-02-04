@@ -5,14 +5,14 @@ const CreateCourse = require("../models/CreateCourse");
 const mongoose = require('mongoose');
 // post request to post all the new student enroll
 router.post("/newstudentenroll", async (req, res) => {
-  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId } = req.body; 
+  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, modeofpayment } = req.body; 
   // console.log("data coming from frontend" , req.body)
   try {
     const course = await CreateCourse.findOne({ title: domain });
     // console.log("coures found" , course)
 
     const newStudent = new NewEnrollStudent({
-        fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, transactionId, operationId, status: "booked", domainId: course._id,
+        fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
     });
 
     // console.log("data saved", newStudent);
