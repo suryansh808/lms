@@ -123,11 +123,16 @@ const BookedList = () => {
               <tr>
                 <th>Sl</th>
                 <th>Name</th>
-                <th>Opted Domain</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Domain</th>
+                {/* <th>Program</th> */}
+                <th>Month Opted</th>
                 <th>Program Price</th>
                 <th>Paid Amount </th>
-                <th>Pending </th>
-                <th>Month Opted</th>
+                {/* <th>Pending </th> */}
+                <th>BDA</th>
+                <th>Operation</th>
                 <th>Due Date</th>
                 <th>Status</th>
                 <th>Remark</th>
@@ -147,11 +152,16 @@ const BookedList = () => {
                       <tr key={item._id}>
                         <td>{index + 1}</td>
                         <td className="capitalize">{item.fullname}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.email}</td>
                         <td>{item.domain}</td>
-                        <td>{item.programPrice}</td>
-                        <td>{item.paidAmount}</td>
-                        <td>{item.programPrice - item.paidAmount}</td>
+                        {/* <td>{item.program}</td> */}
                         <td className="capitalize">{item.monthOpted}</td>
+                        <td className="text-green-600 font-bold">{item.programPrice}</td>
+                        <td>{item.paidAmount}</td>
+                        {/* <td className="text-red-600 font-bold">{item.programPrice - item.paidAmount}</td> */}
+                        <td>{item.counselor}</td>
+                        <td>{item.operationName}</td>
                         <td className="whitespace-nowrap">
                           {item.clearPaymentMonth}
                         </td>
@@ -220,21 +230,20 @@ const BookedList = () => {
           <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
             <h2>Details</h2>
             <div className="space-y-2">
-              <p>
+              {/* <p>
                 <strong>Email:</strong> {dialogData.email}
               </p>
               <p>
                 <strong>Phone:</strong> {dialogData.phone}
-              </p>
+              </p> */}
               <p>
                 <strong>Program:</strong> {dialogData.program}
               </p>
               <p>
-                <strong>Operation Name:</strong> {dialogData.operationName}
+                <strong>Pending:</strong> {dialogData.programPrice - dialogData.paidAmount}
               </p>
-
               <p>
-                <strong>Counselor:</strong> {dialogData.counselor}
+                <strong> Alternative Email:</strong> {dialogData.alternativeEmail}
               </p>
             </div>
             <button className="bg-black px-4 py-1 text-white rounded-md mt-2" onClick={handleDialogClose}>Close</button>

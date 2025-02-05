@@ -109,8 +109,8 @@ const CreateOperation = () => {
     );
     if (isConfirmed) {
       setFormData({
-        fullname: operation.fullname,
-        email: operation.email,
+        fullname: operation.fullname.trim(),
+        email: operation.email.trim(),
         password: operation.password
       });
       setEditingOperationId(operation._id);

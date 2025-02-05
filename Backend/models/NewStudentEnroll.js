@@ -15,6 +15,10 @@ const newStudentEnrollSchema = new Schema(
     email: {
       type: String,
       lowercase: true,
+      unique: true,
+    },
+    alternativeEmail:{
+      type:String,
     },
     phone: {
       type: String,

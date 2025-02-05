@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,11 +9,11 @@ const OnBoarding = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [program, setProgram] = useState([]);
-//   const [counselor, setCounselor] = useState([]);
   const [domain, setDomain] = useState([]);
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
+   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
 const [transactionId, setTransactionId] = useState("");
   const [course, setCourse] = useState([]);
   const fetchCourses = async () => {
@@ -40,69 +39,9 @@ const [transactionId, setTransactionId] = useState("");
     setPaidAmount("");
     setMonthOpted("");
     setTransactionId("");
+    setClearPaymentMonth("");
   };
 
-  // const transactionIdRegex = /^[a-zA-Z0-9]{10,20}$/;
-  const handleSubmit = async (event) => {
-    const bdaName = localStorage.getItem("bdaName");
-    event.preventDefault();
-    // if (!transactionId) {
-    //     toast.error("Transaction ID is required.");
-    //     return;
-    //   } else if (!transactionIdRegex.test(transactionId)) {
-    //     toast.error("Transaction ID must be alphanumeric and between 10 to 20 characters.");
-    //     return;
-    //   }
-    const formData = {
-      fullname: fullname,
-      email: email.trim(),
-      phone: phone,
-      program: program,
-      counselor: bdaName.trim(),
-      domain: domain.trim(),
-      programPrice: programPrice,
-      paidAmount: paidAmount,
-      monthOpted: monthOpted,
-      transactionId: transactionId,
-      operationName: null,
-      operationId: null,
-    };
-    const minimalData = {
-      fullName: fullname,
-      email: email.trim(),
-      phone: phone,
-    };
-    try {
-      let response;
-      let minimalResponse;
-    //   if (editingStudentId) {
-    //     response = await axios.put(
-    //       `${API}/editstudentdetails/${editingStudentId}`,
-    //       formData
-    //     );
-    //     minimalResponse = { status: 200 };
-    //   } 
-       {
-        response = await axios.post(`${API}/newstudentenroll`, formData);
-        minimalResponse = await axios.post(`${API}/users`, minimalData);
-      }
-      if (
-        (response.status === 200 || response.status === 201) 
-        &&
-        (minimalResponse.status === 200 || minimalResponse.status === 201)
-      ) {
-        toast.success("Onboarding Form submitted successfully.");
-        // fetchNewStudent();
-        resetForm();
-      } else {
-        toast.error("Error submitting the form.");
-      }
-    } catch (error) {
-      toast.error(
-        "An error occurred while submitting the form. or student already exists, Please try again ."
-      );
-    }
-  };
   const handleAddNewCandidate = () => {
     setiscourseFormVisible(true);
   };
@@ -132,6 +71,62 @@ const [transactionId, setTransactionId] = useState("");
   useEffect(() => {
     fetchNewStudent();
   }, []);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const handleSubmit = async (event) => {
+    const bdaName = localStorage.getItem("bdaName");
+    event.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    const formData = {
+      fullname: fullname,
+      email: email.trim(),
+      phone: phone,
+      program: program,
+      counselor: bdaName.trim(),
+      domain: domain.trim(),
+      programPrice: programPrice,
+      paidAmount: paidAmount,
+      monthOpted: monthOpted,
+      transactionId: transactionId,
+      clearPaymentMonth: clearPaymentMonth,
+      operationName: null,
+      operationId: null,
+    };
+    const minimalData = {
+      fullName: fullname,
+      email: email.trim(),
+      phone: phone,
+    };
+    try {
+      let response;
+      let minimalResponse;
+       {
+        response = await axios.post(`${API}/newstudentenroll`, formData);
+        minimalResponse = await axios.post(`${API}/users`, minimalData);
+      }
+      if (
+        (response.status === 200 || response.status === 201) 
+        &&
+        (minimalResponse.status === 200 || minimalResponse.status === 201)
+      ) {
+        toast.success("Onboarding Form submitted successfully.");
+        fetchNewStudent();
+        resetForm();
+      } else {
+        toast.error("Error submitting the form.");
+      }
+    } catch (error) {
+      toast.error(
+        "An error occurred while submitting the form. or student already exists, Please try again ."
+      );
+    }finally {
+      setIsSubmitting(false);
+    }
+  };
+
+
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -170,6 +165,16 @@ const [transactionId, setTransactionId] = useState("");
     setDialogData(null);
   };
 
+  const [minDate, setMinDate] = useState("");
+    const [maxDate, setMaxDate] = useState("");
+  
+    useEffect(() => {
+      const today = new Date();
+      const minDate = today.toISOString().split('T')[0];
+      const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split('T')[0];
+      setMinDate(minDate);
+      setMaxDate(maxDate);
+    }, []);
 
   return (
     <div id="OperationEnroll">
@@ -189,23 +194,17 @@ const [transactionId, setTransactionId] = useState("");
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="text"
+              type="email"
               placeholder="Candidate Email"
               required
             />
             <input
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              type="text"
+              type="number"
               placeholder="Candidate Contact No"
               required
             />
-            {/* <input
-              type="text"
-              value={counselor}
-              placeholder="Counselor Name"
-              onChange={(e) => setCounselor(e.target.value)}
-            /> */}
             <select
               value={program}
               onChange={(e) => setProgram(e.target.value)}
@@ -218,19 +217,6 @@ const [transactionId, setTransactionId] = useState("");
               <option value="Instructor Led">Instructor Led</option>
               <option value="Career Advancement">Career Advancement</option>
             </select>
-            {/* <select
-              disabled={editingStudentId !== null}
-              value={counselor}
-              onChange={(e) => setCounselor(e.target.value)}
-            > */}
-            {/* <option value="" selected disabled>
-                Select Counselor name
-              </option> */}
-            {/* {bda.map((item) => (
-                <option value={item.fullname}>{item.fullname}</option>
-              ))} */}
-
-            {/* </select> */}
             <select value={domain} onChange={(e) => setDomain(e.target.value)}>
               <option value="" selected disabled>
                 Select Opted Domain
@@ -276,7 +262,7 @@ const [transactionId, setTransactionId] = useState("");
             />
             <input type="text" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} placeholder="Enter Transaction ID" required />
 
-            {/* <div>
+            <div>
               Due date for clear payment ?
               <input
                 value={clearPaymentMonth}
@@ -285,9 +271,12 @@ const [transactionId, setTransactionId] = useState("");
                 name=""
                 id=""
                 required
+                min={minDate}
+                max={maxDate}
+
               />
-            </div> */}
-            <input className="cursor-pointer" type="submit" value="Submit" />
+            </div>
+            <input className="cursor-pointer" disabled={isSubmitting} type="submit" value="Submit" />
           </form>
         </div>
       )}

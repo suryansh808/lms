@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const CreateOperation = new mongoose.Schema({
-    fullname: {type:String},
+    fullname: {type:String, unique: true , lowercase: true,},
     email: { type: String, unique: true , lowercase: true, },
     otp: { type: String },
     password: { type: String },

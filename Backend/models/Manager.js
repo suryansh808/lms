@@ -9,6 +9,13 @@ const managerSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
   },
+  team: {
+    type: String,
+  },
+  designation: {
+    type: String,
+  },
+
   otp: {
     type: String,
   },

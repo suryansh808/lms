@@ -106,6 +106,7 @@ const FullPaidList = () => {
                 <th>Contact</th>
                 <th>Mode of Program</th>
                 <th>Counselor Name</th>
+                <th>Op Name</th>
                 <th>Opted Domain</th>
                 <th>Program Price</th>
                 <th>Paid Amount </th>
@@ -131,7 +132,8 @@ const FullPaidList = () => {
                         <td>{item.email}</td>
                         <td>{item.phone}</td>
                         <td className="capitalize">{item.program}</td>
-                        <td className="capitalize">{item.counselor}</td>
+                        <td>{item.counselor}</td>
+                        <td>{item.operationName}</td>
                         <td className="capitalize">{item.domain}</td>
                         <td>{item.programPrice}</td>
                         <td>{item.paidAmount}</td>

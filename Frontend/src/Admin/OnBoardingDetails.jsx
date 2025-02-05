@@ -130,6 +130,23 @@ const handleOperationChange = async (e, rowId) => {
   }
 };
 
+//  const [bda, setBda] = useState([]);
+// const fetchBda = async () => {
+//   setLoading(true);
+//   try {
+//     const response = await axios.get(`${API}/getbda`);
+//     setBda(response.data);
+//     // console.log(bda);
+//   } catch (error) {
+//     console.error("There was an error fetching bda:", error);
+//   } finally{
+//     setLoading(false);
+//   }
+// };
+
+// useEffect(() => {
+//   fetchBda();
+// }, []);
 
   return (
     <div id="AdminAddCourse">
@@ -145,7 +162,7 @@ const handleOperationChange = async (e, rowId) => {
         ) : (
       <div className="coursetable">
         <div className="mb-2">
-          <h2>Booked Lists </h2>
+          <h2>OnBoarding List:</h2>
           <section className="flex items-center  gap-1">
             <div className="relative group inline-block">
               <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
@@ -169,14 +186,20 @@ const handleOperationChange = async (e, rowId) => {
               <tr>
                 <th>Sl</th>
                 <th>Name</th>
-                <th>Opted Domain</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Domain</th>
+                {/* <th>Program</th> */}
+                <th>Month Opted</th>
                 <th>Program Price</th>
                 <th>Paid Amount </th>
-                <th>Pending </th>
-                <th>Transaction Id</th>
+                {/* <th>Pending </th> */}
+                <th>BDA </th>
+                {/* <th>Transaction Id</th> */}
+                <th>Operation </th>
                 <th>Status</th>
                 <th>More Details</th>
-                <th>Action</th>
+                <th>Asign Operation</th>
               </tr>
             </thead>
             <tbody>
@@ -192,11 +215,17 @@ const handleOperationChange = async (e, rowId) => {
                       <tr key={item._id}>
                         <td>{index + 1}</td>
                         <td className="capitalize">{item.fullname}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.email}</td>
                         <td>{item.domain}</td>
-                        <td>{item.programPrice}</td>
+                        {/* <td>{item.program}</td> */}
+                        <td>{item.monthOpted}</td>
+                        <td className="text-green-600 font-bold" >{item.programPrice}</td>
                         <td>{item.paidAmount}</td>
-                        <td>{item.programPrice - item.paidAmount}</td>
-                        <td className="capitalize">{item.transactionId}</td>
+                        {/* <td className="text-red-600 font-bold">{item.programPrice - item.paidAmount}</td> */}
+                        <td>{item.counselor}</td>
+                        {/* <td className="capitalize">{item.transactionId}</td> */}
+                        <td>{item.operationName}</td>
                         <td>
                           <button
                           className="button"
@@ -238,8 +267,8 @@ const handleOperationChange = async (e, rowId) => {
                         <td>
                          {
                             operation && operation.length > 0 && (
-                              <select onChange={(e) => handleOperationChange(e, item._id)}>
-                                <option value="" disabled>
+                              <select className="border rounded-full border-black " onChange={(e) => handleOperationChange(e, item._id)} defaultValue="Select Operation">
+                                <option value="Select Operation" disabled>
                                   Select Operation
                                 </option>
                                 {operation.map((item) => (
@@ -265,21 +294,24 @@ const handleOperationChange = async (e, rowId) => {
           <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
             <h2>Details</h2>
             <div className="space-y-2">
-              <p>
+              {/* <p>
                 <strong>Email:</strong> {dialogData.email}
               </p>
               <p>
                 <strong>Phone:</strong> {dialogData.phone}
-              </p>
+              </p> */}
               <p>
                 <strong>Program:</strong> {dialogData.program}
               </p>
               <p>
-                <strong>Month Opted:</strong> {dialogData.monthOpted}
+                <strong>Pending:</strong> {dialogData.programPrice - dialogData.paidAmount}
               </p>
 
               <p>
-                <strong>Counselor:</strong> {dialogData.counselor}
+                <strong>Transaction Id:</strong> {dialogData.transactionId}
+              </p>
+              <p>
+                <strong> Alternative Email:</strong> {dialogData.alternativeEmail}
               </p>
             </div>
             <button className="bg-black px-4 py-1 text-white rounded-md mt-2" onClick={handleDialogClose}>Close</button>

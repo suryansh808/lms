@@ -4,7 +4,7 @@ import API from '../API';
 import toast ,{Toaster} from 'react-hot-toast';
 
 const AddTransactionId = () => {
-  // const [fullname, setFullname] = useState('');
+  const [fullname, setFullname] = useState('');
   const [transactionId, setTransactionId] = useState('');
 
   const handleFullnameChange = (e) => {
@@ -15,33 +15,41 @@ const AddTransactionId = () => {
     setTransactionId(e.target.value);
   };
 
-  // const [getTransactionId, setGetTransactionId] = useState([]);
-  // const getTransactionIdList = async () => {
-  //   const bdaName = localStorage.getItem('bdaName');
-  //   try {
-  //       const response = await axios.get(`${API}/gettransactionid`);
-  //       setGetTransactionId(response.data);
-  //       }
-  //   catch (error) {
-  //       console.error(error);
-  //   }
-  //   };
+  const [getTransactionId, setGetTransactionId] = useState([]);
+  const getTransactionIdList = async () => {
+    try {
+        const response = await axios.get(`${API}/gettransactionid`);
+        setGetTransactionId(response.data);
+        }
+    catch (error) {
+        console.error(error);
+    }
+    };
 
-  //  useEffect(() => {
-  //   getTransactionIdList();
-  //   }, []);
+   useEffect(() => {
+    getTransactionIdList();
+    }, []);
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmit = async (e) => {
+    const bdaName = localStorage.getItem('bdaName');
     e.preventDefault();
-    const data = {transactionId };
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+   
+    const data = { fullname,transactionId,counselor:bdaName};
     try {
       const response = await axios.post(`${API}/addtransactionid`, data);
       toast.success('Transaction ID added successfully:');
-        // setFullname('');
+        setFullname('');
         setTransactionId('');
-        // getTransactionIdList();
+        getTransactionIdList();
     } catch (error) {
         toast.error('Error adding transaction ID or already exsists');
+    }finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -55,41 +63,42 @@ const AddTransactionId = () => {
       <h2>Add Transaction ID</h2>
 
       <form onSubmit={handleSubmit}>
-        {/* <div>
+        <div>
           <input
             type="text"
             id="fullname"
             value={fullname}
-            placeholder='Enter Full Name'
+            placeholder='Enter candidate name'
             onChange={handleFullnameChange}
             required
           />
-        </div> */}
+        </div>
         <div>
           <input
-            type="text"
+            type="email"
             id="transactionId"
             value={transactionId}
-            placeholder='Enter Transaction ID'
+            placeholder='Enter candidate email id'
             onChange={handleTransactionIdChange}
             required
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button disabled={isSubmitting} type="submit">Submit</button>
         </div>
       </form>
         </div>
      
  
-        {/* <div className='coursetable'>
+        <div className='coursetable'>
         <h1>Transaction ID List</h1>
         <table>
             <thead>
                 <tr>
                     <th>Sl.No</th>
                 <th>Full Name</th>
-                <th>Transaction ID</th>
+                <th>Email Id</th>
+                <th>Counselor Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,11 +107,12 @@ const AddTransactionId = () => {
                     <td>{index + 1}</td>
                     <td>{transactionId.fullname}</td>
                     <td>{transactionId.transactionId}</td>
+                    <td>{transactionId.counselor}</td>
                 </tr>
                 ))}
             </tbody>
         </table>
-        </div> */}
+        </div>
         
      
     </div>

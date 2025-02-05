@@ -100,7 +100,7 @@
       resize: none;
     }
 
-    input {
+    input , select {
       padding: 10px;
       border-radius: 10px;
       border: 1px solid #cccccc;

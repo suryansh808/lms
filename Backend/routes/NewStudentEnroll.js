@@ -5,18 +5,18 @@ const CreateCourse = require("../models/CreateCourse");
 const mongoose = require('mongoose');
 // post request to post all the new student enroll
 router.post("/newstudentenroll", async (req, res) => {
-  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, modeofpayment } = req.body; 
+  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body; 
   // console.log("data coming from frontend" , req.body)
   try {
     const course = await CreateCourse.findOne({ title: domain });
     // console.log("coures found" , course)
 
     const newStudent = new NewEnrollStudent({
-        fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
+        fullname,email,alternativeEmail,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
     });
 
     // console.log("data saved", newStudent);
-    await newStudent.save();
+    await newStudent.save();3
     res.status(201).json({ message: "Registration successful!" });
   } catch (error) {
     console.error(error);
@@ -65,7 +65,7 @@ router.post("/updateremark", async (req, res) => {
 // Handle PUT request to update student details
 router.put("/editstudentdetails/:_id", async (req, res) => {
   const { _id } = req.params;
-  const { fullname, email, phone, program, counselor, domain, programPrice, paidAmount, monthOpted, clearPaymentMonth } = req.body;
+  const { fullname, email,alternativeEmail, phone, program, counselor, domain, programPrice, paidAmount, monthOpted, clearPaymentMonth } = req.body;
 
   try {
     // Check if domain has changed
@@ -86,11 +86,12 @@ router.put("/editstudentdetails/:_id", async (req, res) => {
       {
         fullname,
         email,
+        alternativeEmail,
         phone,
         program,
         counselor,
         domain,
-        domainId, // Update domainId if domain was provided
+        domainId, 
         programPrice,
         paidAmount,
         monthOpted,

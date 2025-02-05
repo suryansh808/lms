@@ -8,12 +8,13 @@ const crypto = require('crypto');
 
 //post to create a new bda account
 router.post("/createbda", async (req, res) => {
-  const { fullname, email , password } = req.body;
+  const { fullname, email , password, team } = req.body;
   try {
     const newbda = new CreateBDA({
       fullname,
       email,
-      password
+      password,
+      team,
     });
     await newbda.save();
     res.status(201).json(newbda);
@@ -46,10 +47,10 @@ router.get("/getbda", async (req, res) => {
 router.put("/updatebda/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email, password } = req.body;
+    const { fullname, email, password , team } = req.body;
     const updatedbda = await CreateBDA.findByIdAndUpdate(
       id,
-      { fullname, email, password },
+      { fullname, email, password , team },
       { new: true }
     );
     if (!updatedbda) {
@@ -180,10 +181,12 @@ router.post("/checkbdaauth", async (req, res) => {
 
 //post request to add transaction id
 router.post("/addtransactionid", async (req, res) => {
-  const {transactionId} = req.body;
+  const {transactionId , fullname , counselor} = req.body;
   try {
     const AddTransactionId = new TransactionId({
-      transactionId
+      transactionId,
+      fullname,
+      counselor
     });
     await AddTransactionId.save();
     res.status(201).json(AddTransactionId);
@@ -204,6 +207,26 @@ router.get("/gettransactionid", async (req, res) => {
   }
 }
 );
+
+// GET request to retrieve all transaction ids with name 
+router.get("/gettransactionwithname", async (req, res) => {
+  try {
+   const transactions = await TransactionId.find();
+   const transactionList = transactions.map(item => item.transactionId);
+   const counselorList = transactions.map(item => item.counselor);
+   
+   res.status(200).json({
+     transaction: transactionList,
+     counselor: counselorList
+   });
+ }
+ catch (error) {
+   res.status(400).json({ message: error.message });
+  }
+}
+);
+
+
 
 
 module.exports = router;

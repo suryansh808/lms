@@ -10,11 +10,13 @@ const crypto = require('crypto');
 
 //post to create a new manager account
 router.post("/createmanager", async (req, res) => {
-    const { email, fullname , password } = req.body;
+    const { email, fullname, team, designation , password } = req.body;
     try {
       const newmanager = new Manager({
         email: email,
         fullname: fullname,
+        team: team,
+        designation: designation,
         password: password
       });
       await newmanager.save()
@@ -56,10 +58,10 @@ router.get("/getmanager", async (req, res) => {
 router.put("/updatemanager/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email , password } = req.body;
+    const { fullname, email , password ,team , designation } = req.body;
     const updatedmanager = await Manager.findByIdAndUpdate(
       id,
-      { fullname, email , password},
+      { fullname, email , password ,team , designation },
       { new: true }
     );
     if (!updatedmanager) {

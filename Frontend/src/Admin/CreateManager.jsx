@@ -7,7 +7,9 @@ const Createmanager = () => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
-    password:""
+    password:"",
+    team: "",
+    designation: ""
   });
   const [manager, setmanager] = useState(null);
   const [editingmanagerId, setEditingmanagerId] = useState(null);
@@ -21,7 +23,9 @@ const Createmanager = () => {
     const newmanager = {
       fullname: formData.fullname.trim(),
       email: formData.email.trim(),
-      password: formData.password.trim()
+      password: formData.password.trim(),
+      team: formData.team.trim(),
+      designation: formData.designation.trim()
     };
     try {
       if (editingmanagerId) {
@@ -63,7 +67,9 @@ const Createmanager = () => {
     setFormData({
       fullname: "",
       email: "",
-      password: ""
+      password: "",
+      team: "",
+      designation: ""
     });
     setEditingmanagerId(null);
     setiscourseFormVisible(false);
@@ -112,6 +118,8 @@ const Createmanager = () => {
         fullname: manager.fullname,
         email: manager.email,
         password: manager.password,
+        team: manager.team,
+        designation: manager.designation
       });
       setEditingmanagerId(manager._id);
       setiscourseFormVisible(true);
@@ -177,6 +185,19 @@ const Createmanager = () => {
               placeholder="Enter email id"
               required
             />
+            <select name="team" id="team" value={formData.team} onChange={handleChange} required>
+              <option disabled value="Select Team">Select Team</option>
+              <option value="TITAN">TITAN</option>
+              <option value="GLADIATOR">GLADIATOR</option>
+              <option value="BEAST">BEAST</option>
+              <option value="WARRIOR">WARRIOR</option>
+            </select>
+            <select name="designation" id="designation" value={formData.designation} onChange={handleChange} required>
+              <option disabled value="Select Designation">Select Designation</option>
+              <option value="MANAGER">MANAGER</option>
+              <option value="TL">TL</option>
+              <option value="ATL">ATL</option>
+            </select>
             <input type="text" placeholder="Create password" name="password" id="pasword" value={formData.password} onChange={handleChange} required />
 
             <input
@@ -200,6 +221,8 @@ const Createmanager = () => {
               <th>Full Name</th>
               <th>Email</th>
                <th>Password</th>
+              <th>Team</th>
+              <th>Designation</th>
               <th>Action</th>
               <th>Send Login Credentials</th>
             </tr>
@@ -211,6 +234,8 @@ const Createmanager = () => {
                 <td>{manager.fullname}</td>
                 <td>{manager.email}</td>
                 <td>{manager.password}</td>
+                <td>{manager.team}</td>
+                <td>{manager.designation}</td>
                 <td>
                   <button onClick={() => handleEdit(manager)}><i class="fa fa-edit"></i></button>
                   <button onClick={() => handleDelete(manager._id)}><i class="fa fa-trash-o text-red-600"></i></button>

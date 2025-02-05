@@ -8,6 +8,7 @@ const CreateBDA = () => {
     fullname: "",
     email: "",
     password: "",
+    team: "",
   });
   const [bda, setBda] = useState([]);
   const [editingBdaId, setEditingBdaId] = useState(null);
@@ -23,6 +24,7 @@ const CreateBDA = () => {
       fullname: formData.fullname.trim(),
       email: formData.email.trim(),
       password: formData.password.trim(),
+      team: formData.team.trim(),
     };
     try {
       if (editingBdaId) {
@@ -42,12 +44,12 @@ const CreateBDA = () => {
       console.error("There was an error submitting the bda:", error);
     }
   };
+  
   const fetchBda = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
       setBda(response.data);
-      console.log(bda);
     } catch (error) {
       console.error("There was an error fetching bda:", error);
     } finally{
@@ -64,6 +66,7 @@ const CreateBDA = () => {
       fullname: "",
       email: "",
       password: "",
+      team: "",
     });
     setEditingBdaId(null);
     setiscourseFormVisible(false);
@@ -97,6 +100,7 @@ const CreateBDA = () => {
       fullname: bdaId.fullname,
       email: bdaId.email,
       password: bdaId.password,
+      team: bdaId.team,
     });
     setEditingBdaId(bdaId._id);
     setiscourseFormVisible(true);
@@ -147,7 +151,7 @@ const CreateBDA = () => {
               type="text"
               name="fullname"
               id="fullname"
-              placeholder="Enter full Name"
+              placeholder="Enter First Name"
               required
             />
             <input
@@ -168,6 +172,13 @@ const CreateBDA = () => {
               id="password"
               placeholder="Create password"
             />
+             <select name="team" id="team" value={formData.team} onChange={handleChange} required>
+              <option disabled value="">Select Team</option>
+              <option value="TITAN">TITAN</option>
+              <option value="GLADIATOR">GLADIATOR</option>
+              <option value="BEAST">BEAST</option>
+              <option value="WARRIOR">WARRIOR</option>
+            </select>
 
             <input
               className="cursor-pointer"
@@ -195,9 +206,10 @@ const CreateBDA = () => {
             <thead>
               <tr>
                 <th>Sl.No</th>
-                <th>Full Name</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Team</th>
                 <th>Action</th>
                 <th>Send Login Credentials</th>
               </tr>
@@ -209,6 +221,7 @@ const CreateBDA = () => {
                   <td>{bda.fullname}</td>
                   <td>{bda.email}</td>
                   <td>{bda.password}</td>
+                  <td>{bda.team}</td>
                   <td>
                     <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
