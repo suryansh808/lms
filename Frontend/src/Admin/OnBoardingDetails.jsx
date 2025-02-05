@@ -147,6 +147,20 @@ const handleOperationChange = async (e, rowId) => {
 // useEffect(() => {
 //   fetchBda();
 // }, []);
+const convertToIST = (utcDate) => {
+  const date = new Date(utcDate);
+  // Adjust to IST (UTC +5:30)
+  date.setHours(date.getHours() + 0);
+  date.setMinutes(date.getMinutes() + 0);
+
+  // Format time (HH:mm:ss)
+  return date.toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  });
+};
 
   return (
     <div id="AdminAddCourse">
@@ -200,6 +214,7 @@ const handleOperationChange = async (e, rowId) => {
                 <th>Status</th>
                 <th>More Details</th>
                 <th>Asign Operation</th>
+                <th>Time</th>
               </tr>
             </thead>
             <tbody>
@@ -277,6 +292,9 @@ const handleOperationChange = async (e, rowId) => {
                               </select>
                             )
                          }
+                        </td>
+                        <td>
+                        {convertToIST(item.createdAt)}
                         </td>
                       </tr>
                     ))}

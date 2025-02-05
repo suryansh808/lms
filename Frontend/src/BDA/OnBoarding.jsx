@@ -75,10 +75,10 @@ const [transactionId, setTransactionId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleSubmit = async (event) => {
+    setIsSubmitting(true);
     const bdaName = localStorage.getItem("bdaName");
     event.preventDefault();
-    if (isSubmitting) return;
-    setIsSubmitting(true);
+    
     const formData = {
       fullname: fullname,
       email: email.trim(),
@@ -116,12 +116,12 @@ const [transactionId, setTransactionId] = useState("");
         resetForm();
       } else {
         toast.error("Error submitting the form.");
+        setIsSubmitting(false);
       }
     } catch (error) {
       toast.error(
         "An error occurred while submitting the form. or student already exists, Please try again ."
       );
-    }finally {
       setIsSubmitting(false);
     }
   };

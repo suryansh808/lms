@@ -60,7 +60,7 @@ const AddTransactionId = () => {
     <div id="AdminAddCourse">
          <Toaster position="top-center" reverseOrder={false}/>
         <div id='form'>
-      <h2>Add Transaction ID</h2>
+      <h2>Add Email Id</h2>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -91,7 +91,7 @@ const AddTransactionId = () => {
      
  
         <div className='coursetable'>
-        <h1>Transaction ID List</h1>
+        <h1>List of Onboarding Candidates</h1>
         <table>
             <thead>
                 <tr>
