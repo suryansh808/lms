@@ -47,6 +47,7 @@ router.get("/getnewstudentenroll", async (req, res) => {
 // Handle POST request to update remark for an existing student
 router.post("/updateremark", async (req, res) => {
   const { remark, studentId } = req.body;
+  console.log(remark, studentId)
   try {
     const existingStudent = await NewEnrollStudent.findById(studentId);
     if (!existingStudent) {

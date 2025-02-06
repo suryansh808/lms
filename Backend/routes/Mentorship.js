@@ -4,7 +4,7 @@ const Mentorship = require("../models/Mentorship");
 
 // post request to add new mentorship enqueries
 router.post("/mentorship/register", async (req, res) => {
-  const { name, email, phone , collegeName, domain , passingyear } = req.body;
+  const { name, email, phone , collegeName, domain , passingyear , reason } = req.body;
   try {
     const existingUser = await Mentorship.findOne({ email });
     if (existingUser) {
@@ -18,7 +18,9 @@ router.post("/mentorship/register", async (req, res) => {
       phone,
       collegeName,
       domain,
-      passingyear
+      passingyear,
+      reason
+
     });
     await newRegistration.save();
     res.status(201).json({ message: "Registration successful!" });

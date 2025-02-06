@@ -44,6 +44,10 @@ const BBookedPayment = () => {
     setFilteredStudents(filtered);
   };
 
+  const date = new Date();
+  const options = { month: 'long', year: 'numeric' };
+  const currentMonthYear = date.toLocaleDateString('en-US', options);
+
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
@@ -65,6 +69,7 @@ const BBookedPayment = () => {
       </div>
       </div>
     </section>
+    <h2 className="text-center font-bold text-xl text-[#F15B29]">Month: {currentMonthYear}</h2>
         <table>
           <thead>
             <tr>

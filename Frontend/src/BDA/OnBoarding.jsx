@@ -13,6 +13,8 @@ const OnBoarding = () => {
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
+    const [modeofpayment, setModeOfPayment] = useState("");
+  const [monthsToShow, setMonthsToShow] = useState([]);
    const [clearPaymentMonth, setClearPaymentMonth] = useState("");
 const [transactionId, setTransactionId] = useState("");
   const [course, setCourse] = useState([]);
@@ -40,8 +42,36 @@ const [transactionId, setTransactionId] = useState("");
     setMonthOpted("");
     setTransactionId("");
     setClearPaymentMonth("");
+    setModeOfPayment("")
   };
 
+  useEffect(() => {
+      const currentDate = new Date();
+      const currentMonthIndex = currentDate.getMonth();
+      const currentDay = currentDate.getDate();
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let months = [];
+      if (currentMonthIndex === 1 && currentDay <= 7) {
+        months = [monthNames[1], monthNames[2], monthNames[3]];
+      } else {
+        months = [monthNames[2], monthNames[3], monthNames[4]];
+      }
+      setMonthsToShow(months);
+    }, []);
+  
   const handleAddNewCandidate = () => {
     setiscourseFormVisible(true);
   };
@@ -91,6 +121,7 @@ const [transactionId, setTransactionId] = useState("");
       monthOpted: monthOpted,
       transactionId: transactionId,
       clearPaymentMonth: clearPaymentMonth,
+      modeofpayment: modeofpayment,
       operationName: null,
       operationId: null,
     };
@@ -176,6 +207,9 @@ const [transactionId, setTransactionId] = useState("");
       setMaxDate(maxDate);
     }, []);
 
+    const date = new Date();
+  const options = { month: 'long', year: 'numeric' };
+  const currentMonthYear = date.toLocaleDateString('en-US', options);
   return (
     <div id="OperationEnroll">
      <Toaster position="top-center" reverseOrder={false} />
@@ -226,25 +260,32 @@ const [transactionId, setTransactionId] = useState("");
               ))}
             </select>
             <select
+              value={modeofpayment}
+              onChange={(e) => setModeOfPayment(e.target.value)}
+              required
+            >
+              <option value="" selected disabled>
+                {" "}
+                Mode of Payment
+              </option>
+              <option value="RazorPay">RazorPay</option>
+              <option value="QR Code">QR Code</option>
+              <option value="EaseBuZZ">EaseBuZZ</option>
+              <option value="PayPal">PayPal</option>
+            </select>
+            <select
               value={monthOpted}
               onChange={(e) => setMonthOpted(e.target.value)}
               required
             >
-              <option value="" selected disabled>
+             <option value="" selected disabled>
                 Select Opted Month
               </option>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
+              {monthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
             </select>
             <input
               value={programPrice}
@@ -298,7 +339,7 @@ const [transactionId, setTransactionId] = useState("");
                 ) : (
               <div className="coursetable">
                 <div className="mb-2">
-                  <h2>OnBoarding Details:</h2>
+                  <h2 >OnBoarding Details:</h2>
                   <section className="flex items-center  gap-1">
                     <div className="relative group inline-block">
                       <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
@@ -316,7 +357,7 @@ const [transactionId, setTransactionId] = useState("");
                     />
                   </section>
                 </div>
-                
+                <h2 className="text-center font-bold text-xl text-[#F15B29]">Month: {currentMonthYear}</h2>
                   <table>
                     <thead>
                       <tr>
@@ -381,6 +422,9 @@ const [transactionId, setTransactionId] = useState("");
                       </p>
                       <p>
                         <strong>Month Opted:</strong> {dialogData.monthOpted}
+                      </p>
+                      <p>
+                        <strong>Mode Of Payment:</strong> {dialogData.modeofpayment}
                       </p>
         
                       <p>

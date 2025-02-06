@@ -88,8 +88,8 @@ const FullPaidList = () => {
                 </div>
               </div>
               <input
-                type="type"
-                placeholder="Search here by "
+                type="text"
+                placeholder="Search here by"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="border border-black px-2 py-1 rounded-lg"

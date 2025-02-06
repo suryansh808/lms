@@ -28,6 +28,9 @@ const MentorshipSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  reason:{
+    type:String
+  }
 });
 
 module.exports = mongoose.model("Mentorship", MentorshipSchema);

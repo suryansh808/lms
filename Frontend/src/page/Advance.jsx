@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import roadmap from "../assets/roadmap.png";
+// import roadmap from "../assets/roadmap.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -28,10 +28,10 @@ import MERN from '../assets/Advanced Course Images/Mern Stack Development/MSD 1.
 import ProductManagement from '../assets/Advanced Course Images/Product management/PM 4.jpg'
 import  ProformanceMarket from '../assets/Advanced Course Images/Performance marketing/PM 3.jpg'
 // import Getintouch from "../Components/Getintouch";
-import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
+// import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
 import axios from "axios";
 import API from "../API";
-
+import toast, { Toaster } from "react-hot-toast";
 // import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
 
 
@@ -116,6 +116,7 @@ const [formData, setFormData] = useState({
   goalOther: "",
   domain: "",
   domainOther: "",
+  interestedDomain:""
 });
 const handleInputChange = (e) => {
   const { name, value } = e.target;
@@ -123,6 +124,22 @@ const handleInputChange = (e) => {
 };
 const handleBrochureClick = () => {
   setShowForm(true);
+};
+
+const FormOff = () => {
+  setShowForm(false);
+  setFormData({
+    name: "",
+    email: "",
+    number: "",
+    currentRole: "",
+    experience: "",
+    goal: "",
+    goalOther: "",
+    domain: "",
+    domainOther: "",
+    interestedDomain: "",
+  });
 };
 
 const handleFormSubmit = async (e) => {
@@ -153,12 +170,10 @@ const handleFormSubmit = async (e) => {
       domain: formData.domain,
       domainOther:
         formData.domain === "Other" ? formData.domainOther : undefined,
-      interestedDomain: courseValue,
+      interestedDomain: formData.interestedDomain,
       reason: "Requested To Call Back",
     });
-    toast.success(
-      `You have successfully applied for the ${courseValue}. Our counselor will connect with you shortly.`
-    );
+    toast.success(`You have successfully applied, Our counselor will connect with you shortly.`);
     FormOff();
   } catch (error) {
     toast.error(
@@ -167,24 +182,11 @@ const handleFormSubmit = async (e) => {
   }
 };
 
-const FormOff = () => {
-  setShowForm(false);
-  setFormData({
-    name: "",
-    email: "",
-    number: "",
-    currentRole: "",
-    experience: "",
-    goal: "",
-    goalOther: "",
-    domain: "",
-    domainOther: "",
-  });
-};
 
 
   return (
     <div id="advance" className="">
+        <Toaster position="top-center" reverseOrder={false} />
           <section className="px-[10px] py-[60px]">
          <div  data-aos="fade-up" className="width flex items-center justify-center flex-wrap gap-[5rem]">
           <div  className="content lg:w-1/2 md:w-1/2 flex items-start flex-col max-[600px]:order-1 ">
@@ -459,7 +461,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
                             required
                           />
                           <input
-                            type="text"
+                            type="number"
                             id="number"
                             name="number"
                             placeholder="Enter your phone number"
@@ -562,6 +564,28 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
                               required
                             />
                           )}
+                          <select
+                            id="interestedDomain"
+                            name="interestedDomain"
+                            value={formData.interestedDomain}
+                            onChange={handleInputChange}
+                            className="w-full border border-gray-300 p-1.5 rounded-md"
+                            required
+                          >
+                            <option disabled value="">
+                              Select interested domain
+                            </option>
+                            <option value="Data Science">
+                            Data Science
+                            </option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="Investment Banking">
+                            Investment Banking
+                            </option>
+                            <option value="MERN Stack Devlopment">MERN Stack Devlopment</option>
+                            <option value="Product Management">Product Management</option>
+                            <option value="Performance Marketing">Performance Marketing</option>
+                          </select>
                           <div className="flex justify-center gap-2">
                             <button
                               type="button"

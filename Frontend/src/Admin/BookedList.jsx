@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../API";
+
 const BookedList = () => {
+
   const [newStudent, setNewStudent] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
+
   const fetchNewStudent = async () => {
     setLoading(true);
     try {
@@ -47,23 +50,24 @@ const BookedList = () => {
       console.error("Error updating status:", error);
     }
   };
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
-    const filtered = newStudent.filter(
-      (student) =>
-        student.email.toLowerCase().includes(value.toLowerCase()) ||
-        student.phone.toLowerCase().includes(value.toLowerCase()) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
-        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
-        student.createdAt.toLowerCase().includes(value.toLowerCase())
-    );
+    const filtered = newStudent.filter((student) => {
+      return (
+        (student.email && student.email.toLowerCase().includes(value.toLowerCase())) ||
+        (student.phone && student.phone.toLowerCase().includes(value.toLowerCase())) ||
+        (student.fullname && student.fullname.toLowerCase().includes(value.toLowerCase())) ||
+        (student.counselor && student.counselor.toLowerCase().includes(value.toLowerCase())) ||
+        (student.operationName && student.operationName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.createdAt && student.createdAt.toLowerCase().includes(value.toLowerCase()))
+      );
+    });
     setFilteredStudents(filtered);
   };
 
   const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-
   const groupedData = filteredStudents.reduce((acc, item) => {
     const date = formatDate(item.createdAt);
     if (!acc[date]) {
@@ -109,12 +113,12 @@ const BookedList = () => {
               </div>
             </div>
             <input
-              type="type"
-              placeholder="Search here by "
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="border border-black px-2 py-1 rounded-lg"
-            />
+                type="text"
+                placeholder="Search here by"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="border border-black px-2 py-1 rounded-lg"
+              />
           </section>
         </div>
         
@@ -239,7 +243,7 @@ const BookedList = () => {
               <p>
                 <strong>Program:</strong> {dialogData.program}
               </p>
-              <p>
+              <p className="text-red-600 font-bold">
                 <strong>Pending:</strong> {dialogData.programPrice - dialogData.paidAmount}
               </p>
               <p>

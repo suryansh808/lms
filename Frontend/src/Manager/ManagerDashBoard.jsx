@@ -8,7 +8,7 @@ const ManagerDashBoard = () => {
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
       setOperationData(response.data);
-      console.log("manager dashboard page data ",response.data);
+      // console.log("manager dashboard page data ",response.data);
     } catch (err) {
       console.log("Failed to fetch user data");
     }

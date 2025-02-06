@@ -45,9 +45,11 @@
   }
 
   #form{
+    padding: 10px 0;
     form {
       display: flex;
       align-items: center;
+      justify-content: center;
       border-radius: 10px;
       margin: auto;
   }

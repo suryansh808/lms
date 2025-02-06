@@ -49,6 +49,7 @@ const BookedAmount = () => {
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
+   const [monthsToShow, setMonthsToShow] = useState([]);
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
   const [newStudent, setNewStudent] = useState([]);
   const [editingStudentId, setEditingStudentId] = useState(null);
@@ -123,34 +124,31 @@ const BookedAmount = () => {
     }
   };
   const [remarks, setRemarks] = useState("");
-  const handleRemark = async (event, studentId) => {
-    event.preventDefault();
-    const remarkData = {
-      remark: remarks[studentId],
-      studentId,
-    };
-    try {
-      const response = await fetch(`${API}/updateremark`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(remarkData),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        toast.success("Remark submitted successfully");
-        setRemarks("");
-      } else {
-        const errorData = await response.json();
-        toast.error(errorData.error || "Something went wrong!");
+  const handleRemarkChange = async (e, studentId) => {
+    const selectedRemark = e.target.value;
+    if (!selectedRemark) {
+      console.error("No remark selected");
+      return;
+    }
+    setRemarks(selectedRemark);
+    if (selectedRemark && studentId) {
+      try {
+        const response = await axios.post(`${API}/updateremark`, {
+          remark: selectedRemark,
+          studentId: studentId
+        });
+        if (response.status === 200) {
+          toast.success(response.data.message);
+          fetchNewStudent();
+        } else {
+          toast.error(response.data.error);
+        }
+      } catch (error) {
+        toast.error("An error occurred while updating the remark.");
       }
-    } catch (error) {
-      console.error("Error submitting remark:", error);
-    } finally {
-      fetchNewStudent();
     }
   };
+  
 
   const handleEdit = (studentId) => {
     const isConfirmed = window.confirm("Are you sure you want to edit this?");
@@ -327,8 +325,42 @@ const BookedAmount = () => {
       }
     }
   };
-
-
+ const [minDate, setMinDate] = useState("");
+ const [maxDate, setMaxDate] = useState("");
+  
+    useEffect(() => {
+      const today = new Date();
+      const minDate = today.toISOString().split('T')[0];
+      const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split('T')[0];
+      setMinDate(minDate);
+      setMaxDate(maxDate);
+    }, []);
+ useEffect(() => {
+      const currentDate = new Date();
+      const currentMonthIndex = currentDate.getMonth();
+      const currentDay = currentDate.getDate();
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let months = [];
+      if (currentMonthIndex === 1 && currentDay <= 7) {
+        months = [monthNames[1], monthNames[2], monthNames[3]];
+      } else {
+        months = [monthNames[2], monthNames[3], monthNames[4]];
+      }
+      setMonthsToShow(months);
+    }, []);
   return (
     <div id="OperationEnroll">
       <Toaster position="top-center" reverseOrder={false} />
@@ -358,7 +390,7 @@ const BookedAmount = () => {
             <input
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              type="text"
+              type="number"
               placeholder="Candidate contact no"
               required
             />
@@ -402,18 +434,11 @@ const BookedAmount = () => {
               <option value="" selected disabled>
                 Select Opted Month
               </option>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
+              {monthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
             </select>
             <input
               value={programPrice}
@@ -440,6 +465,9 @@ const BookedAmount = () => {
                 name=""
                 id=""
                 required
+                min={minDate}
+                max={maxDate}
+
               />
             </div>
             <input
@@ -483,11 +511,11 @@ const BookedAmount = () => {
               <th>Month Opted</th>
               <th>Clear Month</th>
               <th>Actions</th>
-              <th>Remark</th>
-              <th>Last Remark</th>
               <th>Login Credentials</th>
               <th>Send Onboarding Details</th>
               <th>More Details</th>
+              <th>Last Remark</th>
+              <th>Remark</th>
             </tr>
           </thead>
           <tbody>
@@ -515,29 +543,6 @@ const BookedAmount = () => {
                           Edit
                         </button>
                       </td>
-                      <td>
-                        <form
-                          action=""
-                          onSubmit={(e) => handleRemark(e, item._id)}
-                        >
-                          <input
-                            type="text"
-                            name="remark"
-                            id="remark"
-                            value={remarks[item._id] || ""}
-                            onChange={(e) =>
-                              setRemarks((prev) => ({
-                                ...prev,
-                                [item._id]: e.target.value,
-                              }))
-                            }
-                            required
-                            style={{ border: "1px solid" }}
-                          />
-                          <button>Submit</button>
-                        </form>
-                      </td>
-                      <td>{item.remark[item.remark.length - 1]}</td>
                       <td>
                         <div
                           className=" cursor-pointer"
@@ -586,6 +591,25 @@ const BookedAmount = () => {
                           onClick={() => handleDialogOpen(item)}
                         ></i>
                       </td>
+                      <td>{item.remark[item.remark.length - 1]}</td>
+                      <td>
+                        <select className="border rounded-full border-black" value={remarks} onChange={(e) => handleRemarkChange(e, item._id)} name="remark" id="remark">
+                          <option disabled value="">Select Remark</option>
+                          <option value="Reminder Issued">Reminder Issued</option>
+                          <option value="DNP">DNP</option>
+                          <option value="NATC">NATC</option>
+                          <option value="Not Interested">Not Interested</option>
+                          <option value="Cut Call">Cut Call</option>
+                          <option value="Default">Default</option>
+                          <option value="Cleared">Cleared</option>
+                          <option value="Haft Cleared">Haft Cleared</option>
+                          <option value="Switch Off">Switch Off</option>
+                          <option value="Call Back later">Call Back later</option>
+                          <option value="Busy">Busy</option>
+                          <option value="Declined">Declined</option>
+                        </select>
+                      </td>
+                      
                     </tr>
                   ))}
                 </React.Fragment>

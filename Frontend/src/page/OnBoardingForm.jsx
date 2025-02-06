@@ -51,6 +51,8 @@ const OnBoardingForm = () => {
     }
     setMonthsToShow(months);
   }, []);
+
+  
   const fetchCourses = async () => {
     try {
       const response = await axios.get(`${API}/getcourses`);
@@ -89,8 +91,8 @@ const OnBoardingForm = () => {
     try {
       const response = await axios.get(`${API}/gettransactionwithname`);
       setGetTransactionId(response.data);
-      console.log("transaction", response.data);
-      console.log("nayaresult",response.data.transaction)
+      // console.log("transaction", response.data);
+      // console.log("nayaresult",response.data.transaction)
     } catch (error) {
       console.error(error);
     }
@@ -178,7 +180,7 @@ const OnBoardingForm = () => {
         setIsSubmitting(false);
       }
     } else {
-      toast.error("Enter valid email, Please try again .");
+      toast.error("Enter valid email and counselor name.");
       setIsSubmitting(false);
 
     }
@@ -219,7 +221,7 @@ const OnBoardingForm = () => {
             <input
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              type="text"
+              type="number"
               placeholder="Candidate Contact No"
               required
             />

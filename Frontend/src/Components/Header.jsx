@@ -13,23 +13,23 @@ const Header = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
   const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
   const mobileMenuRef = useRef(null);
-  const location = useLocation();
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setisAutopopupVisible(true);
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  // const location = useLocation();
   useEffect(() => {
-  const excludedRoutes = ["/login", "/operationlogin" , "/managerlogin", "/bdalogin" , "/Advance", "/DataScience","/DigitalMarket", "/Investmentbanking","/MernStack", "/Performancemarket","/ProductManagement", "/adminlogin" , "/onboardingform"]; // List of routes to exclude
-    if (!excludedRoutes.includes(location.pathname)) {
-      const timer = setTimeout(() => {
-        setisAutopopupVisible(true);
-      }, 1000);
+    const timer = setTimeout(() => {
+      setisAutopopupVisible(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+  // useEffect(() => {
+  // const excludedRoutes = ["/login", "/operationlogin" , "/managerlogin", "/bdalogin" , "/Advance", "/DataScience","/DigitalMarket", "/Investmentbanking","/MernStack", "/Performancemarket","/ProductManagement", "/adminlogin" , "/onboardingform"]; // List of routes to exclude
+  //   if (!excludedRoutes.includes(location.pathname)) {
+  //     const timer = setTimeout(() => {
+  //       setisAutopopupVisible(true);
+  //     }, 1000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [location]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [location]);
 
   const autoPopup = () => {
     setisAutopopupVisible(false);

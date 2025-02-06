@@ -13,14 +13,14 @@ const OperationHeader = () => {
   const fetchOperationData = async () => {
     const operationId = localStorage.getItem("operationId");
     if (!operationId) {
-      console.log("User not logged in")
+      // console.log("User not logged in")
       return;
     }
     try {
       const response = await axios.get(`${API}/getoperation`, { params: { operationId }, });
       setOperationData(response.data);
     } catch (err) {
-      console.log("Failed to fetch user data");
+      // console.log("Failed to fetch user data");
     }
   };
   useEffect(() => {

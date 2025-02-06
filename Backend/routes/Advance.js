@@ -29,7 +29,7 @@ router.get("/advancequeries", async (req, res) => {
 
 router.post("/advance/register", async (req, res) => {
   const { name, email, phone, currentRole, experience, goal, goalOther, domain, domainOther ,interestedDomain ,reason } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const newRegistration = new Advance({
       name,

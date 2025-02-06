@@ -84,6 +84,7 @@ const MentorQueries = () => {
               <th>Phone</th>
               <th>College Name</th>
               <th>Interested Domain</th>
+              <th>Reason</th>
               <th>Study Year</th>
               <th>Time</th>
               <th>Action</th>
@@ -121,6 +122,7 @@ const MentorQueries = () => {
                         <td>{query.phone}</td>
                         <td className="capitalize">{query.collegeName}</td>
                         <td className="capitalize">{query.domain}</td>
+                        <td>{query.reason}</td>
                         <td>{query.passingyear}</td>
                         <td className="uppercase">{time}</td>
                         <td>

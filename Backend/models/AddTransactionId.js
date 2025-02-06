@@ -11,6 +11,11 @@ const AddTransactionIdSchema = new mongoose.Schema({
     counselor: {
         type: String,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+      
 });
 
 module.exports = mongoose.model('AddTransactionId', AddTransactionIdSchema);

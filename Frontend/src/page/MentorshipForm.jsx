@@ -18,18 +18,22 @@ const MentorshipForm = () => {
         setFormData({ ...formData, [name]: value });
       };
     
+       const [isSubmitting, setIsSubmitting] = useState(false);
       const handleFormSubmit = async (e) => {
+        setIsSubmitting(true);
         e.preventDefault();
         const phoneRegex = /^[0-9]{10}$/;
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
       
         if (!phoneRegex.test(formData.number)) {
           toast.error("Please enter a valid phone number.");
+          setIsSubmitting(false);
           return;
         }
       
         if (!emailRegex.test(formData.email)) {
           toast.error("Please enter a valid email address.");
+          setIsSubmitting(false);
           return;
         }
         
@@ -43,12 +47,14 @@ const MentorshipForm = () => {
             passingyear: formData.passingyear,
           });
           toast.success("Registration successful!");
+          setIsSubmitting(false);
           setTimeout(() => {
             window.open(selectedCourse.pdf, "_blank");
             ClearForm();
           }, 1500);
         } catch (error) {
           toast.error("Something went wrong. Please try again.");
+          setIsSubmitting(false);
           console.error(error.response?.data?.error);
         }
       };

@@ -17,9 +17,10 @@ const AddTransactionId = () => {
 
   const [getTransactionId, setGetTransactionId] = useState([]);
   const getTransactionIdList = async () => {
+    const bdaName = localStorage.getItem('bdaName');
     try {
         const response = await axios.get(`${API}/gettransactionid`);
-        setGetTransactionId(response.data);
+        setGetTransactionId(response.data.filter(item => (item.counselor === bdaName)));
         }
     catch (error) {
         console.error(error);
@@ -42,26 +43,22 @@ const AddTransactionId = () => {
     const data = { fullname,transactionId,counselor:bdaName};
     try {
       const response = await axios.post(`${API}/addtransactionid`, data);
-      toast.success('Transaction ID added successfully:');
+      toast.success('successfully added data');
         setFullname('');
         setTransactionId('');
         getTransactionIdList();
     } catch (error) {
-        toast.error('Error adding transaction ID or already exsists');
+        toast.error('Error adding data or already exsists');
     }finally {
       setIsSubmitting(false);
     }
   };
 
 
-
-
   return (
     <div id="AdminAddCourse">
          <Toaster position="top-center" reverseOrder={false}/>
         <div id='form'>
-      <h2>Add Email Id</h2>
-
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -91,7 +88,7 @@ const AddTransactionId = () => {
      
  
         <div className='coursetable'>
-        <h1>List of Onboarding Candidates</h1>
+        <h2 className='text-center text-[#f15b29] font-bold'>List of Onboarding Candidates</h2>
         <table>
             <thead>
                 <tr>
@@ -99,17 +96,27 @@ const AddTransactionId = () => {
                 <th>Full Name</th>
                 <th>Email Id</th>
                 <th>Counselor Name</th>
+                <th>Data & Time</th>
                 </tr>
             </thead>
             <tbody>
-                {getTransactionId.map((transactionId , index) => (
-                <tr key={transactionId._id}>
-                    <td>{index + 1}</td>
-                    <td>{transactionId.fullname}</td>
-                    <td>{transactionId.transactionId}</td>
-                    <td>{transactionId.counselor}</td>
-                </tr>
-                ))}
+            {getTransactionId.map((transactionId, index) => {
+    const dateInIST = new Date(transactionId.createdAt).toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour12: true,
+    });
+
+    return (
+        <tr key={transactionId._id}>
+            <td>{index + 1}</td>
+            <td>{transactionId.fullname}</td>
+            <td>{transactionId.transactionId}</td>
+            <td>{transactionId.counselor}</td>
+            <td>{dateInIST}</td>
+        </tr>
+    );
+})}
+
             </tbody>
         </table>
         </div>

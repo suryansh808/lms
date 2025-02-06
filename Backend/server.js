@@ -135,7 +135,7 @@ module.exports = app;
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://shrikant:3EMYjxbi8cUiGCZN@krutanic.pkdq7.mongodb.net/?retryWrites=true&w=majority&appName=krutanic",
+   process.env.DB_NAME,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connected to MongoDB"))

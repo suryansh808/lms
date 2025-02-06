@@ -22,7 +22,7 @@ import fintech from "../../assets/mentorshipcourses/fintech.png";
 import nano from "../../assets/mentorshipcourses/genetic.png";
 import dataanalytics from "../../assets/mentorshipcourses/DA.jpg";
 import devops from "../../assets/mentorshipcourses/DEVOPS.jpg";
-
+import { RiCustomerService2Fill } from "react-icons/ri";
 import pdf1 from "../../../krutanic/Android Development.pdf";
 import pdf2 from "../../../krutanic/Artificial Intelligence.pdf";
 import pdf3 from "../../../krutanic/AutoCad Brochure.pdf";
@@ -320,21 +320,24 @@ const CourseMentor = ({}) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = async (e , actionType ) => {
+    setIsSubmitting(true);
     e.preventDefault();
     const phoneRegex = /^[0-9]{10}$/;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  
+
     if (!phoneRegex.test(formData.number)) {
       toast.error("Please enter a valid phone number.");
+      setIsSubmitting(false);
       return;
     }
-  
     if (!emailRegex.test(formData.email)) {
       toast.error("Please enter a valid email address.");
+      setIsSubmitting(false);
       return;
     }
-    
     try {
       await axios.post(`${API}/mentorship/register`, {
         name: formData.name,
@@ -343,8 +346,10 @@ const CourseMentor = ({}) => {
         collegeName: formData.collegeName,
         domain: formData.domain,
         passingyear: formData.passingyear,
+        reason: actionType,
       });
       toast.success("Registration successful! Opening the brochure...");
+      setIsSubmitting(false);
       setTimeout(() => {
         window.open(selectedCourse.pdf, "_blank");
         ClearForm();
@@ -352,6 +357,7 @@ const CourseMentor = ({}) => {
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
       console.error(error.response?.data?.error);
+      setIsSubmitting(false);
     }
   };
 
@@ -430,11 +436,16 @@ const CourseMentor = ({}) => {
       {showForm && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white text-black p-6 rounded-lg w-[400px]">
-            <span className="text-xl bg-black text-white px-2 cursor-pointer rounded-full font-bold float-end" onClick={ClearForm}>X</span>
+            <span
+              className="text-xl bg-black text-white px-2 cursor-pointer rounded-full font-bold float-end"
+              onClick={ClearForm}
+            >
+              X
+            </span>
             <h2 className="text-lg text-center font-semibold mb-4">
               Register to Access Brochure
             </h2>
-            <form onSubmit={handleFormSubmit}>
+            <form >
               <input
                 type="text"
                 name="name"
@@ -454,7 +465,7 @@ const CourseMentor = ({}) => {
                 required
               />
               <input
-                type="text"
+                type="number"
                 name="number"
                 value={formData.number}
                 onChange={handleInputChange}
@@ -462,7 +473,7 @@ const CourseMentor = ({}) => {
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
-               <input
+              <input
                 type="text"
                 name="collegeName"
                 value={formData.collegeName}
@@ -490,7 +501,7 @@ const CourseMentor = ({}) => {
                 <option value="Graduated">Graduated</option>
                 <option value="Passed Out">Passed Out</option>
               </select>
-             
+
               <select
                 name="domain"
                 value={formData.domain}
@@ -498,7 +509,9 @@ const CourseMentor = ({}) => {
                 className="mb-4 p-2 w-full border rounded"
                 required
               >
-                <option disabled value="">Select a Domain</option>
+                <option disabled value="">
+                  Select a Domain
+                </option>
                 {[
                   "Full Stack Web Development",
                   "Android App Development",
@@ -530,12 +543,46 @@ const CourseMentor = ({}) => {
                 ))}
               </select>
 
-              <div className="flex justify-center">
-                <button
+              <div className="flex gap-2 justify-center items-center">
+                {/* <button
                   type="submit"
+                  disabled={isSubmitting}
+                  className="px-4 py-2 bg-[#f15b29] text-white rounded"
+                >
+                  Download
+                </button> */}
+                {/* <button
+                  type="submit"
+                  disabled={isSubmitting}
                   className="px-4 py-2 bg-[#f15b29] text-white rounded"
                 >
                   Submit
+                </button> */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  onClick={(e) =>
+                    handleFormSubmit(
+                      e,
+                      "Only Download Brochure",
+                    )
+                  }
+                  className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
+                >
+                  <i class="fa fa-download"></i>
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  onClick={(e) =>
+                    handleFormSubmit(
+                      e,
+                      "Requested To Call Back",
+                    )
+                  }
+                  className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
+                >
+                  <i class="fa fa-download"></i> + <RiCustomerService2Fill /> +  <span className="fa fa-graduation-cap"></span>
                 </button>
               </div>
             </form>

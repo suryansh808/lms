@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
+
+
 const OnBoardingDetails = () => {
   const [newStudent, setNewStudent] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -50,18 +52,20 @@ const OnBoardingDetails = () => {
       console.error("Error updating status:", error);
     }
   };
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
-    const filtered = newStudent.filter(
-      (student) =>
-        student.email.toLowerCase().includes(value.toLowerCase()) ||
-        student.phone.toLowerCase().includes(value.toLowerCase()) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
-        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
-        student.createdAt.toLowerCase().includes(value.toLowerCase())
-    );
+    const filtered = newStudent.filter((student) => {
+      return (
+        (student.email && student.email.toLowerCase().includes(value.toLowerCase())) ||
+        (student.phone && student.phone.toLowerCase().includes(value.toLowerCase())) ||
+        (student.fullname && student.fullname.toLowerCase().includes(value.toLowerCase())) ||
+        (student.counselor && student.counselor.toLowerCase().includes(value.toLowerCase())) ||
+        (student.operationName && student.operationName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.createdAt && student.createdAt.toLowerCase().includes(value.toLowerCase()))
+      );
+    });
     setFilteredStudents(filtered);
   };
 
@@ -104,18 +108,14 @@ useEffect(() => {
 const [selectedOperation, setSelectedOperation] = useState(null);
 const handleOperationChange = async (e, rowId) => {
   const selectedOption = operation.find(item => item.fullname === e.target.value);
-  console.log(selectedOption);
   setSelectedOperation(selectedOption);
-
   if (selectedOption) {
     const { fullname, _id } = selectedOption;
-
     try {
       const response = await axios.post(`${API}/update-operation/${rowId}`, {
         operationName: fullname,
         operationId: _id,
       });
-
       if (response.status === 200) {
         toast.success('Operation saved to the database');
       } else {
@@ -130,30 +130,11 @@ const handleOperationChange = async (e, rowId) => {
   }
 };
 
-//  const [bda, setBda] = useState([]);
-// const fetchBda = async () => {
-//   setLoading(true);
-//   try {
-//     const response = await axios.get(`${API}/getbda`);
-//     setBda(response.data);
-//     // console.log(bda);
-//   } catch (error) {
-//     console.error("There was an error fetching bda:", error);
-//   } finally{
-//     setLoading(false);
-//   }
-// };
-
-// useEffect(() => {
-//   fetchBda();
-// }, []);
 const convertToIST = (utcDate) => {
   const date = new Date(utcDate);
   // Adjust to IST (UTC +5:30)
   date.setHours(date.getHours() + 0);
   date.setMinutes(date.getMinutes() + 0);
-
-  // Format time (HH:mm:ss)
   return date.toLocaleTimeString('en-IN', {
     hour: '2-digit',
     minute: '2-digit',
@@ -186,12 +167,12 @@ const convertToIST = (utcDate) => {
               </div>
             </div>
             <input
-              type="type"
-              placeholder="Search here by "
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="border border-black px-2 py-1 rounded-lg"
-            />
+                type="text"
+                placeholder="Search here by"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="border border-black px-2 py-1 rounded-lg"
+              />
           </section>
         </div>
         
@@ -211,6 +192,7 @@ const convertToIST = (utcDate) => {
                 <th>BDA </th>
                 {/* <th>Transaction Id</th> */}
                 <th>Operation </th>
+                <th>Due Date</th>
                 <th>Status</th>
                 <th>More Details</th>
                 <th>Asign Operation</th>
@@ -237,10 +219,11 @@ const convertToIST = (utcDate) => {
                         <td>{item.monthOpted}</td>
                         <td className="text-green-600 font-bold" >{item.programPrice}</td>
                         <td>{item.paidAmount}</td>
-                        {/* <td className="text-red-600 font-bold">{item.programPrice - item.paidAmount}</td> */}
+                        {/* <td  >{item.programPrice - item.paidAmount}</td> */}
                         <td>{item.counselor}</td>
                         {/* <td className="capitalize">{item.transactionId}</td> */}
                         <td>{item.operationName}</td>
+                        <td className=" whitespace-nowrap">{item.clearPaymentMonth}</td>
                         <td>
                           <button
                           className="button"
@@ -318,10 +301,10 @@ const convertToIST = (utcDate) => {
               <p>
                 <strong>Phone:</strong> {dialogData.phone}
               </p> */}
-              <p>
+              <p >
                 <strong>Program:</strong> {dialogData.program}
               </p>
-              <p>
+              <p className="text-red-600 font-bold">
                 <strong>Pending:</strong> {dialogData.programPrice - dialogData.paidAmount}
               </p>
 
