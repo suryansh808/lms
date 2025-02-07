@@ -4,25 +4,117 @@ const NewEnrollStudent = require('../models/NewStudentEnroll');
 const CreateCourse = require("../models/CreateCourse");
 const mongoose = require('mongoose');
 // post request to post all the new student enroll
+// router.post("/newstudentenroll", async (req, res) => {
+//   const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body; 
+//   try {
+//     const course = await CreateCourse.findOne({ title: domain });
+//     const newStudent = new NewEnrollStudent({
+//         fullname,email,alternativeEmail,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
+//     });
+//     await newStudent.save();3
+//     res.status(201).json({ message: "Registration successful!" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Server error. Please try again later." });
+//   }
+// }); 
+
 router.post("/newstudentenroll", async (req, res) => {
-  const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body; 
-  // console.log("data coming from frontend" , req.body)
   try {
+    const {
+      fullname,
+      email,
+      phone,
+      program,
+      counselor,
+      domain,
+      programPrice,
+      paidAmount,
+      monthOpted,
+      clearPaymentMonth,
+      operationName,
+      operationId,
+      transactionId,
+      alternativeEmail,
+      modeofpayment
+    } = req.body;
+
+    // Find the course by domain
     const course = await CreateCourse.findOne({ title: domain });
-    // console.log("coures found" , course)
 
     const newStudent = new NewEnrollStudent({
-        fullname,email,alternativeEmail,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
+      fullname,
+      email,
+      alternativeEmail,
+      phone,
+      program,
+      counselor,
+      domain,
+      programPrice,
+      paidAmount,
+      monthOpted,
+      clearPaymentMonth,
+      operationName,
+      modeofpayment,
+      transactionId,
+      operationId,
+      status: "booked",
+      domainId: course ? course._id : null,
     });
 
-    // console.log("data saved", newStudent);
-    await newStudent.save();3
+    await newStudent.save();
+
+    // 🔹 Pass the new student's data correctly to convertExcel
+    await convertExcel(newStudent);
+
     res.status(201).json({ message: "Registration successful!" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error. Please try again later." });
   }
 }); 
+
+const convertExcel = async (studentData) => {
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwDCOCr8cVufgSCeMGJO46Huf6-fYvkX-rpVtYNWzAlT3k0CeAbYXEK8C5wsh4JeUdQ/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          fname: studentData.fullname, // 🔹 Now correctly accessing fullname
+          email: studentData.email,
+          cno: studentData.phone,
+          program: studentData.program,
+          counselor: studentData.counselor,
+          domain: studentData.domain,
+          programPrice: studentData.programPrice.toString(), // 🔹 Convert numbers to string
+          paidAmount: studentData.paidAmount.toString(),
+          monthOpted: studentData.monthOpted,
+          clearPaymentMonth: studentData.clearPaymentMonth,
+          operationName: studentData.operationName || "N/A", // Handle null values
+          operationId: studentData.operationId || "N/A",
+          transactionId: studentData.transactionId || "N/A",
+          alternativeEmail: studentData.alternativeEmail || "N/A",
+          modeofpayment: studentData.modeofpayment,
+        }),
+      }
+    );
+if (response.ok) {
+  console.log("Form submitted successfully!");
+} else {
+  throw new Error("Failed to submit form");
+}
+} catch (error) {
+console.error("Error in convertExcel:", error);
+  }
+};
+
+
+
+
 
 // GET request to retrieve all new student enroll
 router.get("/getnewstudentenroll", async (req, res) => {

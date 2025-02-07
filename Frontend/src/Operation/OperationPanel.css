@@ -127,3 +127,14 @@
         overflow-x: auto;
     }
   }
+
+  table{
+    tbody{
+        .Cleared{
+            background-color: rgb(128, 247, 128);
+        }
+        .Default{
+            background-color: rgb(255, 0, 0);
+        }
+    }
+  }

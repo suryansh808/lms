@@ -4,9 +4,10 @@ import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 import { RiMailSendFill } from "react-icons/ri";
 import { PiLockKeyOpenFill, PiLockKeyFill } from "react-icons/pi";
-
+import * as XLSX from "xlsx";
 
 const BookedAmount = () => {
+  let copynumber = ""
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const resetForm = () => {
     setiscourseFormVisible(false);
@@ -251,7 +252,8 @@ const BookedAmount = () => {
         student.phone.toLowerCase().includes(value.toLowerCase()) ||
         student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase())
+        student.operationName.toLowerCase().includes(value.toLowerCase())||
+        student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
@@ -264,6 +266,8 @@ const BookedAmount = () => {
       acc[date] = [];
     }
     acc[date].push(item);
+    copynumber = acc;
+    // console.log("aghfc",copynumber)
     return acc;
   }, {});
 
@@ -361,6 +365,59 @@ const BookedAmount = () => {
       }
       setMonthsToShow(months);
     }, []);
+
+    // const handleDownload = () => {
+    //   // Convert the JSON data to a worksheet
+    //   const ws = XLSX.utils.json_to_sheet(newStudent);
+  
+    //   // Create a new workbook
+    //   const wb = XLSX.utils.book_new();
+    //   XLSX.utils.book_append_sheet(wb, ws, "Students");
+  
+    //   // Write the Excel file to a Blob
+    //   const excelFile = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  
+    //   // Create a new Blob with the Excel file
+    //   const blob = new Blob([excelFile], { type: "application/octet-stream" });
+  
+    //   // Create a URL for the Blob
+    //   const url = URL.createObjectURL(blob);
+  
+    //   // Open the URL in a new tab
+    //   const link = document.createElement("a");
+    //   link.href = url;
+    //   link.target = "_blank";
+    //   link.download = "students.xlsx";
+    //   link.click();
+      
+    //   // Optionally, release the object URL after use
+    //   URL.revokeObjectURL(url);
+    // };
+
+    // const handleCopyMobileNumbers = () => {
+    //   // Extract all mobile numbers from the newStudent array
+
+    //   console.log("qwe",copynumber);
+    //   const mobile = Object.keys(copynumber);
+
+
+    //   console.log("mobile" , mobile)
+    //   const mobileNumbers = mobile.map((student) => student.phone).join("\n");
+    //   console.log("copyed" , mobileNumbers)
+
+
+    //   // Use the Clipboard API to copy to the clipboard
+    //   navigator.clipboard.writeText(phoneNumber)
+    //     .then(() => {
+    //       alert("Mobile numbers copied to clipboard!");
+    //     })
+    //     .catch((err) => {
+    //       alert("Failed to copy: " + err);
+    //     });
+    // };
+  
+
+
   return (
     <div id="OperationEnroll">
       <Toaster position="top-center" reverseOrder={false} />
@@ -495,16 +552,21 @@ const BookedAmount = () => {
           <div className="relative group inline-block">
             <i class="fa fa-info-circle text-lg cursor-pointer"></i>
             <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-              Name, Email, Contact ,Counselor Name, Operation Name
+              Name, Email, Contact ,Counselor, Operation and Due date
               <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
             </div>
           </div>
         </section>
+
+        {/* <div>
+            <button onClick={handleDownload}>Open in Excel in New Tab</button>
+          </div> */}
         <table>
           <thead>
             <tr>
               <th>Sl No</th>
               <th>Full Name</th>
+              <th >Number</th>
               <th>Program Price</th>
               <th>Paid Amount</th>
               <th>Remaining Amount</th>
@@ -528,9 +590,10 @@ const BookedAmount = () => {
                     </td>
                   </tr>
                   {groupedData[date].map((item, index) => (
-                    <tr key={item._id}>
+                    <tr key={item._id} className={`${item.remark[item.remark.length - 1]}`}>
                       <td>{index + 1}</td>
                       <td className="capitalize">{item.fullname}</td>
+                      <td>{item.phone}</td>
                       <td>{item.programPrice}</td>
                       <td>{item.paidAmount}</td>
                       <td>{item.programPrice - item.paidAmount}</td>
@@ -593,8 +656,8 @@ const BookedAmount = () => {
                       </td>
                       <td>{item.remark[item.remark.length - 1]}</td>
                       <td>
-                        <select className="border rounded-full border-black" value={remarks} onChange={(e) => handleRemarkChange(e, item._id)} name="remark" id="remark">
-                          <option disabled value="">Select Remark</option>
+                        <select className="border rounded-full border-black" onChange={(e) => handleRemarkChange(e, item._id)}  defaultValue="Select Remark">
+                          <option disabled value="Select Remark">Select Remark</option>
                           <option value="Reminder Issued">Reminder Issued</option>
                           <option value="DNP">DNP</option>
                           <option value="NATC">NATC</option>
@@ -628,9 +691,9 @@ const BookedAmount = () => {
               <p>
                 <strong>Email:</strong> {dialogData.email}
               </p>
-              <p>
+              {/* <p>
                 <strong>Phone:</strong> {dialogData.phone}
-              </p>
+              </p> */}
               <p>
                 <strong>Program:</strong> {dialogData.program}
               </p>

@@ -43,7 +43,8 @@
     "slick-carousel": "^1.8.1",
     "swiper": "^11.2.0",
     "typed-js": "^0.2.3",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^19.0.3",
