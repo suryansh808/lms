@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
-import Operation from "../../../Backend/models/CreateOperation";
+
 
 const OnBoardingForm = () => {
 
@@ -155,7 +155,7 @@ const OnBoardingForm = () => {
       aadharNumber: aadharNumber,
       referFriend: referFriend,
       OperationName: null,
-      OperationId: null
+      OperationId: null,
     };
   
     if (
