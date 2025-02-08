@@ -37,7 +37,6 @@ router.post("/newstudentenroll", async (req, res) => {
       transactionId,
       alternativeEmail,
       modeofpayment,
-
       whatsAppNumber,
       remainingAmount,
       collegeName,

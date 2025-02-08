@@ -5,9 +5,11 @@ const newStudentEnrollSchema = new Schema(
   {
     operationName: {
       type: String,
+      default:null
     },
     operationId: {
       type: String,
+      default:null
     },
     fullname: {
       type: String,

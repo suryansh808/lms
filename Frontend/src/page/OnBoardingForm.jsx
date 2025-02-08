@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -82,9 +82,9 @@ const OnBoardingForm = () => {
     fetchCourses();
   }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const resetForm = () => {
-    navigate("/");
+    // navigate("/");
     setiscourseFormVisible(false);
     setFullname("");
     setEmail("");
@@ -154,8 +154,6 @@ const OnBoardingForm = () => {
       branch: branch,
       aadharNumber: aadharNumber,
       referFriend: referFriend,
-      OperationName: null,
-      OperationId: null,
     };
   
     if (
@@ -168,7 +166,7 @@ const OnBoardingForm = () => {
         if (response.status === 200 || response.status === 201) {
           toast.success("Onboarding Form submitted successfully.");
           resetForm();
-          navigate("/");
+          // navigate("/");
         } else {
           toast.error("Error submitting the form.");
           resetForm();
@@ -178,11 +176,9 @@ const OnBoardingForm = () => {
           const errorMessage = error.response.data?.message || "An error occurred.";
           toast.error(`Error from backend: ${errorMessage}`);
           resetForm();
-          navigate("/");
+          // navigate("/");
         } else if (error.request) {
           toast.error("No response from the server. Please try again later.");
-        } else {
-          toast.error("An unknown error occurred.");
         }
       } 
     } else {
