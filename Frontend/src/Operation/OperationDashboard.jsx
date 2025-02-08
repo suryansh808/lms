@@ -2,9 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
 import { Pie, Line } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement
+);
 
 const OperationDashboard = () => {
   const [operationData, setOperationData] = useState([]);
@@ -39,7 +56,6 @@ const OperationDashboard = () => {
     );
   }
 
-  // Calculations for booked, full paid, and default counts
   const bookedCount = operationData.filter(
     (item) => item.status === "booked"
   ).length;
@@ -50,26 +66,39 @@ const OperationDashboard = () => {
     (item) => item.status === "default"
   ).length;
 
-  // Revenue Calculation Logic
-  const revenueByMonth = operationData.reduce((acc, item) => {
-    const month = new Date(item.createdAt).toLocaleString("default", { month: "long", year: "numeric" });
+  const totalRevenue = operationData.reduce(
+    (acc, student) => acc + (student.programPrice || 0),
+    0
+  );
+  const bookedRevenue = operationData.reduce(
+    (acc, student) => acc + (student.programPrice || 0),
+    0
+  );
+  const creditedRevenue = operationData.reduce(
+    (acc, student) =>
+      acc + ((student.paidAmount || 0) - (student.defaultAmount || 0)),
+    0
+  );
+  const pendingRevenue = bookedRevenue - creditedRevenue;
 
+  const revenueByMonth = operationData.reduce((acc, student) => {
+    const month = new Date(student.createdAt).toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
     if (!acc[month]) {
       acc[month] = { totalRevenue: 0 };
     }
-
-    if (item.status === "booked" || item.status === "default") {
-      acc[month].totalRevenue += item.paidAmount; // Only paid amount is revenue
-    } else if (item.status === "fullPaid") {
-      acc[month].totalRevenue += item.programPrice; // Full program price is revenue
+    if (student.status === "booked" || student.status === "default") {
+      acc[month].totalRevenue += student.paidAmount || 0;
+    } else if (student.status === "fullPaid") {
+      acc[month].totalRevenue += student.programPrice || 0;
     }
-
     return acc;
   }, {});
 
-  // Get the last 2 months data
-  const sortedMonths = Object.keys(revenueByMonth).sort((a, b) =>
-    new Date(`1 ${a}`) - new Date(`1 ${b}`)
+  const sortedMonths = Object.keys(revenueByMonth).sort(
+    (a, b) => new Date(`1 ${a}`) - new Date(`1 ${b}`)
   );
   const lastTwoMonths = sortedMonths.slice(-2);
   const revenueData = lastTwoMonths.map((month) => ({
@@ -77,7 +106,6 @@ const OperationDashboard = () => {
     revenue: revenueByMonth[month]?.totalRevenue || 0,
   }));
 
-  // Data for Line Chart
   const lineChartData = {
     labels: revenueData.map((data) => data.month),
     datasets: [
@@ -93,12 +121,12 @@ const OperationDashboard = () => {
   };
 
   const data = {
-    labels: ["Booked", "Full Paid", "Default"],
+    labels: ["Booked Revenue", "Credited Revenue", "Pending Revenue"],
     datasets: [
       {
-        data: [bookedCount, fullPaidCount, defaultCount],
-        backgroundColor: ["#FFD700", "#4CAF50", "#FF6347"],
-        hoverBackgroundColor: ["#FFC107", "#388E3C", "#D32F2F"],
+        data: [bookedRevenue, creditedRevenue, pendingRevenue],
+        backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
+        hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
       },
     ],
   };
@@ -125,21 +153,29 @@ const OperationDashboard = () => {
         </div>
       </div>
 
-     <div className="w-full flex items-center justify-center flex-wrap my-5 py-2">
-     <div className="text-center flex flex-col items-center justify-center">
-        <h2>Overall Status</h2>
-        <div className="w-[400px]">
-          <Pie data={data} />
+      <div className="revenue">
+        <div className="revenue-card">
+          <h2 className="text-lg font-semibold">Revenue Details</h2>
+          <p>Total Revenue: {totalRevenue}/-</p>
+          <p>Booked Revenue: {bookedRevenue}/-</p>
+          <p>Credited Revenue: {creditedRevenue}/-</p>
+          <p>Pending Revenue: {pendingRevenue}/-</p>
         </div>
-      </div>
 
-      <div className="text-center flex flex-col items-center justify-center">
-        <h2>Revenue Growth</h2>
-        <div className="w-[600px]">
-          <Line data={lineChartData} />
+        <div className="revenue-growth">
+          <h2 className="text-lg font-semibold mb-4">Revenue Growth</h2>
+          <div>
+            <Line data={lineChartData} />
+          </div>
+        </div>
+
+        <div className="revenue-card">
+          <h2 className="text-lg font-semibold mb-4">Overall Performance</h2>
+          <div>
+            <Pie data={data} />
+          </div>
         </div>
       </div>
-     </div>
     </div>
   );
 };

@@ -2,33 +2,32 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API from "../API";
 
-const RevenueSheet = () => {
-  const [payment, setPayment] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+const OperationRevenueSheets = () => {
+  const [operationData, setOperationData] = useState([]);
+  const operationId = localStorage.getItem("operationId");
 
-  const fetchNewStudent = async () => {
+  const fetchOperationData = async () => {
     try {
-      const response = await axios.get(`${API}/getnewstudentenroll`);
-      setPayment(response.data);
+      const response = await axios.get(`${API}/getnewstudentenroll`, {
+        params: { operationId },
+      });
+      setOperationData(
+        response.data.filter((data) => data.operationId == operationId)
+      );
     } catch (error) {
-      console.error("There was an error fetching new student:", error);
+      console.error("Error fetching operation data:", error);
     }
   };
 
   useEffect(() => {
-    fetchNewStudent();
+    fetchOperationData();
   }, []);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [payment]);
 
   const revenueByDay = {};
   const revenueByMonth = {};
   let totalRevenue = 0;
 
-  payment.forEach((student) => {
+  operationData.forEach((student) => {
     const date = new Date(student.createdAt).toLocaleDateString("en-GB");
     const month = new Date(student.createdAt).toLocaleString("default", {
       month: "long",
@@ -55,16 +54,6 @@ const RevenueSheet = () => {
 
     totalRevenue += revenue;
   });
-  // pagination code here
-  const sortedRevenueDays = Object.entries(revenueByDay)
-    .map(([date, data]) => ({ date, ...data }))
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const totalPages = Math.ceil(sortedRevenueDays.length / itemsPerPage);
-  const paginatedData = sortedRevenueDays.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
   const months = Object.keys(revenueByMonth);
   months.sort((a, b) => new Date(a) - new Date(b));
@@ -80,14 +69,43 @@ const RevenueSheet = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-center text-3xl font-bold mb-6">Revenue Sheet</h1>
+      <h1 className="text-center text-3xl font-bold mb-6">Revenue Sheets</h1>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4 ">Daily Revenue</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse border border-gray-200">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border p-3 text-left">Date</th>
+                <th className="border p-3 text-left">Total Revenue</th>
+                <th className="border p-3 text-left">Credited Revenue</th>
+                <th className="border p-3 text-left">Pending Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(revenueByDay).map(([date, data], index) => (
+                <tr
+                  key={date}
+                  className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                >
+                  <td className="border p-3">{date}</td>
+                  <td className="border p-3">₹{data.total.toFixed(2)}</td>
+                  <td className="border p-3">₹{data.credited.toFixed(2)}</td>
+                  <td className="border p-3">₹{data.pending.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Monthly Revenue</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-2">
+          <table className="min-w-full border-collapse border border-gray-200">
             <thead>
-              <tr className="">
+              <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
                 <th className="border p-3 text-left">Credited Revenue</th>
@@ -111,73 +129,6 @@ const RevenueSheet = () => {
         </div>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-200">
-            <thead>
-              <tr className="">
-                <th className="border p-3 text-left">Date</th>
-                <th className="border p-3 text-left">Total Revenue</th>
-                <th className="border p-3 text-left">Credited Revenue</th>
-                <th className="border p-3 text-left">Pending Revenue</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.map((data, index) => (
-                <tr
-                  key={data.date}
-                  className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
-                >
-                  <td className="border p-3">{data.date}</td>
-                  <td className="border p-3">₹{data.total.toFixed(2)}</td>
-                  <td className="border p-3">₹{data.credited.toFixed(2)}</td>
-                  <td className="border p-3">₹{data.pending.toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* pagination */}
-        <div className="flex justify-between items-center mt-4">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={`px-4 py-2 border rounded ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            Previous
-          </button>
-
-          <div className="flex space-x-2">
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`px-4 py-2 border rounded ${
-                  currentPage === i + 1 ? "bg-blue-500 text-white" : ""
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
-
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className={`px-4 py-2 border rounded ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            Next
-          </button>
-        </div>
-      </section>
-
       <section className="text-lg font-semibold">
         <h2 className="text-xl font-semibold mb-2">Total Revenue Till Now</h2>
         <p className="mb-2">
@@ -198,4 +149,4 @@ const RevenueSheet = () => {
   );
 };
 
-export default RevenueSheet;
+export default OperationRevenueSheets;

@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const NewEnrollStudent = require('../models/NewStudentEnroll');
+const NewEnrollStudent = require("../models/NewStudentEnroll");
 const CreateCourse = require("../models/CreateCourse");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 // post request to post all the new student enroll
 // router.post("/newstudentenroll", async (req, res) => {
-//   const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body; 
+//   const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body;
 //   try {
 //     const course = await CreateCourse.findOne({ title: domain });
 //     const newStudent = new NewEnrollStudent({
@@ -17,7 +17,7 @@ const mongoose = require('mongoose');
 //     console.error(error);
 //     res.status(500).json({ error: "Server error. Please try again later." });
 //   }
-// }); 
+// });
 
 router.post("/newstudentenroll", async (req, res) => {
   try {
@@ -36,11 +36,25 @@ router.post("/newstudentenroll", async (req, res) => {
       operationId,
       transactionId,
       alternativeEmail,
-      modeofpayment
-    } = req.body;
+      modeofpayment,
 
-    // Find the course by domain
+      whatsAppNumber,
+      remainingAmount,
+      collegeName,
+      branch,
+      aadharNumber,
+      referFriend,
+    } = req.body;
     const course = await CreateCourse.findOne({ title: domain });
+
+    const existingUser = await NewEnrollStudent.findOne({
+      email: req.body.email,
+    });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "You have already submitted your details." });
+    }
 
     const newStudent = new NewEnrollStudent({
       fullname,
@@ -60,61 +74,79 @@ router.post("/newstudentenroll", async (req, res) => {
       operationId,
       status: "booked",
       domainId: course ? course._id : null,
+
+      whatsAppNumber,
+      remainingAmount,
+      collegeName,
+      branch,
+      aadharNumber,
+      referFriend,
     });
 
     await newStudent.save();
-
-    // 🔹 Pass the new student's data correctly to convertExcel
+    res.status(201).json({ message: "Registration successful!" });
     await convertExcel(newStudent);
 
-    res.status(201).json({ message: "Registration successful!" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error. Please try again later." });
   }
-}); 
+});
 
 const convertExcel = async (studentData) => {
   try {
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbwDCOCr8cVufgSCeMGJO46Huf6-fYvkX-rpVtYNWzAlT3k0CeAbYXEK8C5wsh4JeUdQ/exec",
+      "https://script.google.com/macros/s/AKfycbzNjOLLASJArLOojBwDoNMkYaHYBqRf-nq5_e4esAl5epYN9chf3RjAZP2eyhc5iXUi/exec",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
+
+
         body: new URLSearchParams({
-          fname: studentData.fullname, // 🔹 Now correctly accessing fullname
+          _id: studentData._id,
+          createdAt: studentData.createdAt,
+          fullname: studentData.fullname,
           email: studentData.email,
-          cno: studentData.phone,
+          alternativeEmail: studentData.alternativeEmail,
+          phone: studentData.phone,
+          whatsAppNumber: studentData.whatsAppNumber,
+          collegeName: studentData.collegeName,
+          branch: studentData.branch,
           program: studentData.program,
           counselor: studentData.counselor,
+          domainId: studentData.domainId,
           domain: studentData.domain,
-          programPrice: studentData.programPrice.toString(), // 🔹 Convert numbers to string
-          paidAmount: studentData.paidAmount.toString(),
+          programPrice: studentData.programPrice,
+          paidAmount: studentData.paidAmount,
+          remainingAmount: studentData.remainingAmount,
+          modeofpayment: studentData.modeofpayment,
           monthOpted: studentData.monthOpted,
           clearPaymentMonth: studentData.clearPaymentMonth,
-          operationName: studentData.operationName || "N/A", // Handle null values
-          operationId: studentData.operationId || "N/A",
-          transactionId: studentData.transactionId || "N/A",
-          alternativeEmail: studentData.alternativeEmail || "N/A",
-          modeofpayment: studentData.modeofpayment,
+          transactionId: studentData.transactionId,
+          aadharNumber: studentData.aadharNumber,
+          referFriend: studentData.referFriend,
+          operationName: studentData.operationName,
+          operationId: studentData.operationId,
+          status: studentData.status,
+          mailSended: studentData.mailSended,
+          offerLetterSended: studentData.offerLetterSended,
+          __v: studentData.__v,
+          updatedAt: studentData.updatedAt,
+          onboardingSended: studentData.onboardingSended,
         }),
-      }
-    );
-if (response.ok) {
-  console.log("Form submitted successfully!");
-} else {
-  throw new Error("Failed to submit form");
-}
-} catch (error) {
-console.error("Error in convertExcel:", error);
-  }
+      }
+    );
+    if (response.ok) {
+      console.log("Form submitted successfully!");
+    } else {
+      throw new Error("Failed to submit form");
+    }
+  } catch (error) {
+    console.error("Error in convertExcel:", error);
+  }
 };
-
-
-
-
 
 // GET request to retrieve all new student enroll
 router.get("/getnewstudentenroll", async (req, res) => {
@@ -125,21 +157,28 @@ router.get("/getnewstudentenroll", async (req, res) => {
       // Fetch specific operation by userId
       StudentEnroll = await NewEnrollStudent.findById(studentenrollid);
       if (!StudentEnroll) {
-        return res.status(404).json({ message: "Student Eroll not found for the given userId" });
+        return res
+          .status(404)
+          .json({ message: "Student Eroll not found for the given userId" });
       }
     } else {
       StudentEnroll = await NewEnrollStudent.find().sort({ _id: -1 });
     }
     res.status(200).json(StudentEnroll);
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while fetching data", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "An error occurred while fetching data",
+        error: error.message,
+      });
   }
 });
 
 // Handle POST request to update remark for an existing student
 router.post("/updateremark", async (req, res) => {
   const { remark, studentId } = req.body;
-  console.log(remark, studentId)
+  console.log(remark, studentId);
   try {
     const existingStudent = await NewEnrollStudent.findById(studentId);
     if (!existingStudent) {
@@ -148,18 +187,38 @@ router.post("/updateremark", async (req, res) => {
     existingStudent.remark.push(remark);
     await existingStudent.save();
     return res.status(200).json({ message: "Remark added successfully!" });
-
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Server error. Please try again later." });
+    return res
+      .status(500)
+      .json({ error: "Server error. Please try again later." });
   }
 });
 
 // Handle PUT request to update student details
 router.put("/editstudentdetails/:_id", async (req, res) => {
   const { _id } = req.params;
-  const { fullname, email,alternativeEmail, phone, program, counselor, domain, programPrice, paidAmount, monthOpted, clearPaymentMonth } = req.body;
-
+  const {
+    fullname,
+    email,
+    alternativeEmail,
+    phone,
+    program,
+    counselor,
+    domain,
+    programPrice,
+    paidAmount,
+    monthOpted,
+    clearPaymentMonth,
+    operationName,
+    operationId,
+    whatAppNumber,
+    remainingAmount,
+    collegeName,
+    branch,
+    aadharNumber,
+    referFriend,
+  } = req.body;
   try {
     // Check if domain has changed
     let domainId = null;
@@ -184,11 +243,19 @@ router.put("/editstudentdetails/:_id", async (req, res) => {
         program,
         counselor,
         domain,
-        domainId, 
+        domainId,
         programPrice,
         paidAmount,
         monthOpted,
         clearPaymentMonth,
+        operationName,
+        operationId,
+        whatAppNumber,
+        remainingAmount,
+        collegeName,
+        branch,
+        aadharNumber,
+        referFriend,
       },
       { new: true }
     );
@@ -232,7 +299,9 @@ router.get("/enrollments", async (req, res) => {
     const updatedEnrollments = await Promise.all(
       enrollments.map(async (enrollment) => {
         if (enrollment.domainId) {
-          const course = await CreateCourse.findById(enrollment.domainId).lean();
+          const course = await CreateCourse.findById(
+            enrollment.domainId
+          ).lean();
           enrollment.domain = course || null; // Replace domainId with course data
         }
         return enrollment;
@@ -246,27 +315,27 @@ router.get("/enrollments", async (req, res) => {
   }
 });
 
-//post request to update the operation name and id from admin panel 
-router.post('/update-operation/:id', async (req, res) => {
+//post request to update the operation name and id from admin panel
+router.post("/update-operation/:id", async (req, res) => {
   try {
     const { operationName, operationId } = req.body;
     const { id } = req.params;
-   const objectId = new mongoose.Types.ObjectId(id);
+    const objectId = new mongoose.Types.ObjectId(id);
     const updatedItem = await NewEnrollStudent.findByIdAndUpdate(
-     { _id : objectId},
+      { _id: objectId },
       {
-       operationName: operationName,
+        operationName: operationName,
         operationId: operationId,
       },
       { new: true }
     );
     if (updatedItem) {
-      res.status(200).json({ message: 'Operation updated successfully' });
+      res.status(200).json({ message: "Operation updated successfully" });
     } else {
-      res.status(404).json({ message: 'Item not found' });
+      res.status(404).json({ message: "Item not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Error updating operation', error });
+    res.status(500).json({ message: "Error updating operation", error });
   }
 });
 

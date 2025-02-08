@@ -47,6 +47,8 @@ import OperationDashboard from "./Operation/OperationDashboard";
 import BookedPayment from "./Operation/BookedPayment";
 import FullPayment from "./Operation/FullPayment";
 import DefaultPayment from "./Operation/DefaultPayment";
+import OperationRevenueSheets from "./Operation/OperationRevenueSheets";
+
 // import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
@@ -57,6 +59,7 @@ import BDAHeader from "./BDA/BDAHeader";
 import BDefualtPayment from "./BDA/BDefualtPayment";
 import BFullPayment from "./BDA/BFullPayment";
 import OnBoarding from "./BDA/OnBoarding";
+import BDARevenueSheet from "./BDA/BDARevenueSheet";
 // import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
 // User Student
@@ -95,6 +98,7 @@ import Exercise from "./User/Excercise";
 import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
 import AddTransactionId from "./BDA/AddTransactionId";
+
 
 
 
@@ -165,6 +169,7 @@ const AppContent = () => {
     "/fullpayment",
     "/bookedpayment",
     "/defaultpayment",
+    "/operationrevenuesheet"
   ];
   const bdaheaderPaths = [
     "/bdadashboard",
@@ -172,7 +177,8 @@ const AppContent = () => {
     "/bdefaultpayment",
     "/bbookedpayment",
     "/onboarding",
-    "/addtransactionid"
+    "/addtransactionid",
+    "/bdarevenuesheet"
   ];
   const userheaderPaths = [
     "/dashboard",
@@ -285,6 +291,7 @@ const AppContent = () => {
         <Route path="/BookedPayment" element={isAuthenticatedOperation()?<BookedPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/FullPayment" element={isAuthenticatedOperation()?<FullPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/DefaultPayment" element={isAuthenticatedOperation()?<DefaultPayment />: <Navigate to="/OperationLogin" />} />
+        <Route path="/OperationRevenueSheet" element={isAuthenticatedOperation()?<OperationRevenueSheets />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationLogin" element={<OperationLogin />} />
         {/* <Route path="/OperationAgainLogin" element={<OperationAgainLogin/>} /> */}
         {/* Operation Panel End */}
@@ -298,7 +305,7 @@ const AppContent = () => {
           <Route path="/BBookedPayment"element={isAuthenticatedBda() ?<BBookedPayment /> : <Navigate to="/BDAlogin"/> }/>
           <Route path="/OnBoarding" element={isAuthenticatedBda() ?<OnBoarding/> : <Navigate to="/BDAlogin"/> }/>
           <Route path="/AddTransactionId" element={isAuthenticatedBda() ?<AddTransactionId/> : <Navigate to="/BDAlogin"/> }/>
-
+          <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/BDAlogin"/> }/>
 
         {/* bda panel ends */}
 

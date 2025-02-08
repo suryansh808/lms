@@ -2,15 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../API";
-import ShuffleHero from "../Components/ShuffleHero";
-import Wavefull from "../Components/wave_full";
 import toast, { Toaster } from "react-hot-toast";
 
 const OnBoardingForm = () => {
-  const [iscourseFormVisible, setiscourseFormVisible] = useState(true);
+
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
-  const [alternativeEmail ,  setAlternativeEmail] = useState("")
+  const [alternativeEmail, setAlternativeEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [program, setProgram] = useState([]);
   const [counselor, setCounselor] = useState([]);
@@ -22,6 +20,12 @@ const OnBoardingForm = () => {
   const [transactionId, setTransactionId] = useState("");
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
   const [modeofpayment, setModeOfPayment] = useState("");
+  const [whatsAppNumber, setWhatsAppNumber] = useState("");
+  const [remainingAmount, setRemainingAmount] = useState("");
+  const [collegeName, setCollegeName] = useState("");
+  const [branch, setBranch] = useState("");
+  const [aadharNumber, setAadharNumber] = useState("");
+  const [referFriend, setReferFriend] = useState("");
 
   const [course, setCourse] = useState([]);
 
@@ -29,6 +33,7 @@ const OnBoardingForm = () => {
     const currentDate = new Date();
     const currentMonthIndex = currentDate.getMonth();
     const currentDay = currentDate.getDate();
+    const currentYear = currentDate.getFullYear();
     const monthNames = [
       "January",
       "February",
@@ -44,15 +49,25 @@ const OnBoardingForm = () => {
       "December",
     ];
     let months = [];
+
+    // Logic for determining which months to show
     if (currentMonthIndex === 1 && currentDay <= 7) {
-      months = [monthNames[1], monthNames[2], monthNames[3]];
+      months = [
+        `${monthNames[1]} ${currentYear}`,
+        `${monthNames[2]} ${currentYear}`,
+        `${monthNames[3]} ${currentYear}`,
+      ];
     } else {
-      months = [monthNames[2], monthNames[3], monthNames[4]];
+      months = [
+        `${monthNames[2]} ${currentYear}`,
+        `${monthNames[3]} ${currentYear}`,
+        `${monthNames[4]} ${currentYear}`,
+      ];
     }
+
     setMonthsToShow(months);
   }, []);
 
-  
   const fetchCourses = async () => {
     try {
       const response = await axios.get(`${API}/getcourses`);
@@ -86,13 +101,10 @@ const OnBoardingForm = () => {
   };
 
   const [getTransactionId, setGetTransactionId] = useState([]);
-
   const getTransactionIdList = async () => {
     try {
       const response = await axios.get(`${API}/gettransactionwithname`);
       setGetTransactionId(response.data);
-      // console.log("transaction", response.data);
-      // console.log("nayaresult",response.data.transaction)
     } catch (error) {
       console.error(error);
     }
@@ -104,13 +116,12 @@ const OnBoardingForm = () => {
 
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-
   useEffect(() => {
     const today = new Date();
-    const minDate = today.toISOString().split("T")[0]; // Today's date in yyyy-mm-dd format
+    const minDate = today.toISOString().split("T")[0];
     const maxDate = new Date(today.setDate(today.getDate() + 5))
       .toISOString()
-      .split("T")[0]; // 5 days from today
+      .split("T")[0];
 
     setMinDate(minDate);
     setMaxDate(maxDate);
@@ -121,14 +132,11 @@ const OnBoardingForm = () => {
   const handleSubmit = async (event) => {
     setIsSubmitting(true);
     event.preventDefault();
-
-    // if (isSubmitting) return;
-    // setIsSubmitting(true);
-
+  
     const formData = {
       fullname: fullname,
       email: email.trim(),
-      alternativeEmail : alternativeEmail.trim(),
+      alternativeEmail: alternativeEmail.trim(),
       phone: phone,
       program: program,
       counselor: counselor.trim(),
@@ -139,197 +147,287 @@ const OnBoardingForm = () => {
       transactionId: transactionId,
       clearPaymentMonth: clearPaymentMonth,
       modeofpayment: modeofpayment,
-      operationName: null,
-      operationId: null,
+      whatsAppNumber: whatsAppNumber,
+      remainingAmount: remainingAmount,
+      collegeName: collegeName,
+      branch: branch,
+      aadharNumber: aadharNumber,
+      referFriend: referFriend,
     };
-    const minimalData = {
-      fullName: fullname,
-      email: email.trim(),
-      phone: phone,
-    };
+  
     if (
       getTransactionId.transaction.includes(email) &&
       getTransactionId.counselor.includes(counselor)
     ) {
-     
       try {
-        let response;
-        let minimalResponse;
-        {
-          response = await axios.post(`${API}/newstudentenroll`, formData);
-          minimalResponse = await axios.post(`${API}/users`, minimalData);
-        }
-        if (
-          (response.status === 200 || response.status === 201) &&
-          (minimalResponse.status === 200 || minimalResponse.status === 201)
-        ) {
+        let response = await axios.post(`${API}/newstudentenroll`, formData);
+  
+        if (response.status === 200 || response.status === 201) {
           toast.success("Onboarding Form submitted successfully.");
-
-          // fetchNewStudent();
           resetForm();
           navigate("/");
         } else {
           toast.error("Error submitting the form.");
-          setIsSubmitting(false);
+          resetForm();
         }
       } catch (error) {
-        toast.error(
-          "An error occurred while submitting the form. or student already exists, Please try again ."
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
+        if (error.response) {
+          const errorMessage = error.response.data?.message || "An error occurred.";
+          toast.error(`Error from backend: ${errorMessage}`);
+          resetForm();
+          navigate("/");
+        } else if (error.request) {
+          toast.error("No response from the server. Please try again later.");
+        } else {
+          toast.error("An unknown error occurred.");
+        }
+      } 
     } else {
       toast.error("Enter valid email and counselor name.");
       setIsSubmitting(false);
-
     }
   };
+  
 
   return (
-    <div id="OperationEnroll">
+    <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="hero bg-black">
-        <ShuffleHero />
-      </div>
-      <Wavefull />
-      {iscourseFormVisible && (
-        <div className="form z-[999] absolute overflow-scroll top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] p-10 rounded-lg shadow-lg">
-          <form onSubmit={handleSubmit} className="">
-            <span onClick={resetForm}>✖</span>
-            <h2>OnBoarding Form</h2>
+      <div className="container m-auto">
+      <h2 className="mt-2">OnBoarding Form</h2>
+        <form onSubmit={handleSubmit} className="">
+          <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[10px]">
+          <div className="input-field">
             <input
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
               type="text"
-              placeholder="Candidate Full Name"
               required
             />
+            <label htmlFor="fullname">Full Name</label>
+          </div>
+
+          <div className="input-field">
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="text"
-              placeholder="Candidate Email"
+              type="email"
               required
             />
+            <label htmlFor="email">Email</label>
+          </div>
+
+          <div className="input-field">
             <input
               value={alternativeEmail}
               onChange={(e) => setAlternativeEmail(e.target.value)}
-              type="text"
-              placeholder="Alternative Email"
+              type="email"
+              required
             />
+            <label htmlFor="College Email">College Email</label>
+          </div>
+
+          <div className="input-field">
             <input
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               type="number"
-              placeholder="Candidate Contact No"
               required
             />
+            <label htmlFor=" Contact No">Contact No</label>
+          </div>
+
+          <div className="input-field">
+            <input
+              value={whatsAppNumber}
+              onChange={(e) => setWhatsAppNumber(e.target.value)}
+              type="number"
+              required
+            />
+            <label htmlFor=" Whatsapp Number">Whatsapp Number</label>
+          </div>
+
+          <div className="input-field">
             <input
               type="text"
               value={counselor}
-              placeholder="Counselor Name"
               onChange={(e) => setCounselor(e.target.value)}
               required
             />
-            <select
-              value={program}
-              onChange={(e) => setProgram(e.target.value)}
-              required
-            >
-              <option value="" selected disabled>
-                {" "}
-                Mode of Program
-              </option>
-              <option value="Self-guided">Self-guided</option>
-              <option value="Instructor Led">Instructor Led</option>
-              <option value="Career Advancement">Career Advancement</option>
-            </select>
+            <label htmlFor="Counselor Name">Counselor Name</label>
+          </div>
 
-            <select
-              value={modeofpayment}
-              onChange={(e) => setModeOfPayment(e.target.value)}
-              required
-            >
-              <option value="" selected disabled>
-                {" "}
-                Mode of Payment
+          <select
+            value={program}
+            onChange={(e) => setProgram(e.target.value)}
+            required
+          >
+            <option value="" selected disabled>
+              {" "}
+              Mode of Program
+            </option>
+            <option value="Self-guided">Self-guided</option>
+            <option value="Instructor Led">Instructor Led</option>
+            <option value="Career Advancement">Career Advancement</option>
+          </select>
+          <select
+            value={modeofpayment}
+            onChange={(e) => setModeOfPayment(e.target.value)}
+            required
+          >
+            <option value="" selected disabled>
+              {" "}
+              Mode of Payment
+            </option>
+            <option value="RazorPay">RazorPay</option>
+            <option value="QR Code">QR Code</option>
+            <option value="EaseBuZZ">EaseBuZZ</option>
+            <option value="PayPal">PayPal</option>
+          </select>
+          <select
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+            required
+          >
+            <option value="" selected disabled>
+              Select Opted Domain
+            </option>
+            {course.map((item) => (
+              <option value={item.title}>{item.title}</option>
+            ))}
+          </select>
+          <select
+            value={monthOpted}
+            onChange={(e) => setMonthOpted(e.target.value)}
+            required
+          >
+            <option value="" selected disabled>
+              Select Opted Month
+            </option>
+            {monthsToShow.map((month, index) => (
+              <option key={index} value={month}>
+                {month}
               </option>
-              <option value="RazorPay">RazorPay</option>
-              <option value="QR Code">QR Code</option>
-              <option value="EaseBuZZ">EaseBuZZ</option>
-              <option value="PayPal">PayPal</option>
-            </select>
-            <select
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-              required
-            >
-              <option value="" selected disabled>
-                Select Opted Domain
-              </option>
-              {course.map((item) => (
-                <option value={item.title}>{item.title}</option>
-              ))}
-            </select>
-            <select
-              value={monthOpted}
-              onChange={(e) => setMonthOpted(e.target.value)}
-              required
-            >
-              <option value="" selected disabled>
-                Select Opted Month
-              </option>
-              {monthsToShow.map((month, index) => (
-                <option key={index} value={month}>
-                  {month}
-                </option>
-              ))}
-            </select>
+            ))}
+          </select>
+
+          <div className="input-field">
             <input
               value={programPrice}
               onChange={(e) => setProgramPrice(e.target.value)}
               type="number"
-              placeholder="Program Price"
               required
             />
+            <label htmlFor="Program Price">Program Price</label>
+          </div>
+
+          <div className="input-field">
             <input
               value={paidAmount}
               onChange={(e) => setPaidAmount(e.target.value)}
               type="number"
-              placeholder="Paid Amount"
               required
             />
-            <input
-              type="text"
-              value={transactionId}
-              onChange={(e) => setTransactionId(e.target.value)}
-              placeholder="Enter Transaction ID"
-              required
-            />
+            <label htmlFor="Paid Amount">Paid Amount</label>
+          </div>
 
-            <div>
-              Due date for clear payment ?
-              <input
-                value={clearPaymentMonth}
-                onChange={(e) => setClearPaymentMonth(e.target.value)}
-                type="date"
-                name=""
-                id=""
-                required
-                min={minDate}
-                max={maxDate}
-              />
-            </div>
+          <div className="input-field">
             <input
-              className="cursor-pointer"
-              disabled={isSubmitting}
-              type="submit"
-              value="Submit"
+              value={remainingAmount}
+              onChange={(e) => setRemainingAmount(e.target.value)}
+              type="number"
+              required
             />
-          </form>
-        </div>
-      )}
+            <label htmlFor="Remaining Amount">Remaining Amount</label>
+          </div>
+
+          <div className="input-field">
+            <input
+              value={collegeName}
+              onChange={(e) => setCollegeName(e.target.value)}
+              type="text"
+              required
+            />
+            <label htmlFor=" College Name"> College Name</label>
+          </div>
+
+          <div className="input-field">
+          <input
+            value={branch}
+            onChange={(e) => setBranch(e.target.value)}
+            type="text"
+            required
+          />
+          <label htmlFor="Branch/Department Name">Branch/Department</label>
+          </div>
+
+          <div className="input-field">
+          <input
+            type="text"
+            value={transactionId}
+            onChange={(e) => setTransactionId(e.target.value)}
+            required
+          />
+           <label htmlFor="Transaction ID">Transaction ID</label>
+          </div>
+
+          <div className="input-field">
+          <input
+            type="number"
+            value={aadharNumber}
+            onChange={(e) => setAadharNumber(e.target.value)}
+            required
+          />
+           <label htmlFor="Aadhar Number">Aadhar Number</label>
+           </div>
+
+          <div style={{display:'flex'}}>
+            <label htmlFor="">Due date for clear payment ?</label>
+            <input
+              value={clearPaymentMonth}
+              onChange={(e) => setClearPaymentMonth(e.target.value)}
+              type="date"
+              name=""
+              id=""
+              required
+              min={minDate}
+              max={maxDate}
+            />
+          </div>
+          </div>
+
+          <div> 
+            Refer your friends to earn cashback.
+            <textarea
+              value={referFriend}
+              onChange={(e) => setReferFriend(e.target.value)}
+              name="refer"
+              id="refer"
+              placeholder="Name and Contact Number"
+              cols={60}
+              rows={3}
+              className="resize-none"
+            ></textarea>
+          </div>
+
+          {!isSubmitting ? (
+  <input
+    className="cursor-pointer"
+    disabled={isSubmitting}
+    type="submit"
+    value="Submit"
+  />
+) : (
+  <div id="loader">
+  <div class="three-body">
+    <div class="three-body__dot"></div>
+    <div class="three-body__dot"></div>
+    <div class="three-body__dot"></div>
+  </div>
+</div>
+)}
+
+        </form>
+      </div>
     </div>
   );
 };

@@ -184,6 +184,7 @@ router.post("/send-email", async (req, res) => {
     fullname,
     email,
     program,
+    phone,
     counselor,
     domain,
     clearPaymentMonth,

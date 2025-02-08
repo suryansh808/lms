@@ -7,7 +7,6 @@ import { PiLockKeyOpenFill, PiLockKeyFill } from "react-icons/pi";
 import * as XLSX from "xlsx";
 
 const BookedAmount = () => {
-  let copynumber = ""
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const resetForm = () => {
     setiscourseFormVisible(false);
@@ -50,7 +49,7 @@ const BookedAmount = () => {
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
-   const [monthsToShow, setMonthsToShow] = useState([]);
+  const [monthsToShow, setMonthsToShow] = useState([]);
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
   const [newStudent, setNewStudent] = useState([]);
   const [editingStudentId, setEditingStudentId] = useState(null);
@@ -136,7 +135,7 @@ const BookedAmount = () => {
       try {
         const response = await axios.post(`${API}/updateremark`, {
           remark: selectedRemark,
-          studentId: studentId
+          studentId: studentId,
         });
         if (response.status === 200) {
           toast.success(response.data.message);
@@ -149,7 +148,6 @@ const BookedAmount = () => {
       }
     }
   };
-  
 
   const handleEdit = (studentId) => {
     const isConfirmed = window.confirm("Are you sure you want to edit this?");
@@ -196,6 +194,7 @@ const BookedAmount = () => {
     const emailData = {
       fullname: value.fullname,
       email: value.email,
+      phone: value.phone,
       program: value.program,
       counselor: value.counselor,
       domain: value.domain,
@@ -252,7 +251,7 @@ const BookedAmount = () => {
         student.phone.toLowerCase().includes(value.toLowerCase()) ||
         student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase())||
+        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
         student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
@@ -266,8 +265,6 @@ const BookedAmount = () => {
       acc[date] = [];
     }
     acc[date].push(item);
-    copynumber = acc;
-    // console.log("aghfc",copynumber)
     return acc;
   }, {});
 
@@ -329,94 +326,109 @@ const BookedAmount = () => {
       }
     }
   };
- const [minDate, setMinDate] = useState("");
- const [maxDate, setMaxDate] = useState("");
-  
-    useEffect(() => {
-      const today = new Date();
-      const minDate = today.toISOString().split('T')[0];
-      const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split('T')[0];
-      setMinDate(minDate);
-      setMaxDate(maxDate);
-    }, []);
- useEffect(() => {
-      const currentDate = new Date();
-      const currentMonthIndex = currentDate.getMonth();
-      const currentDay = currentDate.getDate();
-      const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      let months = [];
-      if (currentMonthIndex === 1 && currentDay <= 7) {
-        months = [monthNames[1], monthNames[2], monthNames[3]];
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split("T")[0];
+    const maxDate = new Date(today.setDate(today.getDate() + 5))
+      .toISOString()
+      .split("T")[0];
+    setMinDate(minDate);
+    setMaxDate(maxDate);
+  }, []);
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let months = [];
+    if (currentMonthIndex === 1 && currentDay <= 7) {
+      months = [monthNames[1], monthNames[2], monthNames[3]];
+    } else {
+      months = [monthNames[2], monthNames[3], monthNames[4]];
+    }
+    setMonthsToShow(months);
+  }, []);
+
+  // const handleDownload = () => {
+  //   // Convert the JSON data to a worksheet
+  //   const ws = XLSX.utils.json_to_sheet(newStudent);
+
+  //   // Create a new workbook
+  //   const wb = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(wb, ws, "Students");
+
+  //   // Write the Excel file to a Blob
+  //   const excelFile = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+
+  //   // Create a new Blob with the Excel file
+  //   const blob = new Blob([excelFile], { type: "application/octet-stream" });
+
+  //   // Create a URL for the Blob
+  //   const url = URL.createObjectURL(blob);
+
+  //   // Open the URL in a new tab
+  //   const link = document.createElement("a");
+  //   link.href = url;
+  //   link.target = "_blank";
+  //   link.download = "students.xlsx";
+  //   link.click();
+
+  //   // Optionally, release the object URL after use
+  //   URL.revokeObjectURL(url);
+  // };
+
+  const handleCopyMobileNumbers = (selectedDate) => {
+    const students = groupedData[selectedDate];
+    if (Array.isArray(students)) {
+      const mobileNumbers = students.map((student) => student.phone).join("\n");
+      navigator.clipboard
+        .writeText(mobileNumbers)
+        .then(() => {
+          toast.success("Mobile numbers copied to clipboard!");
+        })
+        .catch((err) => {
+          toast.error("Failed to copy: " + err);
+        });
+    } else {
+      // console.error("No students found for the given date or data format is incorrect.");
+      alert("No students found or invalid data format.");
+    }
+  };
+
+  const createAccount = async (value) => {
+    console.log(value);
+    const Data = {
+      fullname: value.fullname,
+      email: value.email,
+      phone: value.phone,
+    };
+    try {
+      const response = await axios.post(`${API}/users`, Data);
+      if (response.status === 200) {
+        toast.success("User has been created");
       } else {
-        months = [monthNames[2], monthNames[3], monthNames[4]];
+        toast.error("Failed to create user.");
       }
-      setMonthsToShow(months);
-    }, []);
-
-    // const handleDownload = () => {
-    //   // Convert the JSON data to a worksheet
-    //   const ws = XLSX.utils.json_to_sheet(newStudent);
-  
-    //   // Create a new workbook
-    //   const wb = XLSX.utils.book_new();
-    //   XLSX.utils.book_append_sheet(wb, ws, "Students");
-  
-    //   // Write the Excel file to a Blob
-    //   const excelFile = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-  
-    //   // Create a new Blob with the Excel file
-    //   const blob = new Blob([excelFile], { type: "application/octet-stream" });
-  
-    //   // Create a URL for the Blob
-    //   const url = URL.createObjectURL(blob);
-  
-    //   // Open the URL in a new tab
-    //   const link = document.createElement("a");
-    //   link.href = url;
-    //   link.target = "_blank";
-    //   link.download = "students.xlsx";
-    //   link.click();
-      
-    //   // Optionally, release the object URL after use
-    //   URL.revokeObjectURL(url);
-    // };
-
-    // const handleCopyMobileNumbers = () => {
-    //   // Extract all mobile numbers from the newStudent array
-
-    //   console.log("qwe",copynumber);
-    //   const mobile = Object.keys(copynumber);
-
-
-    //   console.log("mobile" , mobile)
-    //   const mobileNumbers = mobile.map((student) => student.phone).join("\n");
-    //   console.log("copyed" , mobileNumbers)
-
-
-    //   // Use the Clipboard API to copy to the clipboard
-    //   navigator.clipboard.writeText(phoneNumber)
-    //     .then(() => {
-    //       alert("Mobile numbers copied to clipboard!");
-    //     })
-    //     .catch((err) => {
-    //       alert("Failed to copy: " + err);
-    //     });
-    // };
-  
-
+    } catch (error) {
+      toast.success("User already Created check in active user");
+    }
+  };
 
   return (
     <div id="OperationEnroll">
@@ -524,7 +536,6 @@ const BookedAmount = () => {
                 required
                 min={minDate}
                 max={maxDate}
-
               />
             </div>
             <input
@@ -540,7 +551,7 @@ const BookedAmount = () => {
           <h2>New Enroll Booking: </h2>
           <span onClick={handleAddNewCandidate}>+ Add New Candidate</span>
         </div>
-        <section className="flex items-center gap-1">
+        <section className="flex items-center gap-1 mb-2">
           <input
             type="type"
             placeholder="Search here by "
@@ -566,7 +577,7 @@ const BookedAmount = () => {
             <tr>
               <th>Sl No</th>
               <th>Full Name</th>
-              <th >Number</th>
+              <th>Number</th>
               <th>Program Price</th>
               <th>Paid Amount</th>
               <th>Remaining Amount</th>
@@ -574,6 +585,7 @@ const BookedAmount = () => {
               <th>Clear Month</th>
               <th>Actions</th>
               <th>Login Credentials</th>
+              <th>Create User account</th>
               <th>Send Onboarding Details</th>
               <th>More Details</th>
               <th>Last Remark</th>
@@ -584,13 +596,25 @@ const BookedAmount = () => {
             {Object.keys(groupedData).length > 0 ? (
               Object.keys(groupedData).map((date) => (
                 <React.Fragment key={date}>
-                  <tr>
+                  <tr
+                    className="cursor-pointer"
+                    onClick={() => handleCopyMobileNumbers(date)}
+                  >
+                    {/* <div className="relative group"> */}
                     <td colSpan="16" style={{ fontWeight: "bold" }}>
                       {date}
                     </td>
+                    {/* <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+               click here to copy the numbers
+              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+            </div>
+          </div> */}
                   </tr>
                   {groupedData[date].map((item, index) => (
-                    <tr key={item._id} className={`${item.remark[item.remark.length - 1]}`}>
+                    <tr
+                      key={item._id}
+                      className={`${item.remark[item.remark.length - 1]}`}
+                    >
                       <td>{index + 1}</td>
                       <td className="capitalize">{item.fullname}</td>
                       <td>{item.phone}</td>
@@ -630,6 +654,13 @@ const BookedAmount = () => {
                         </div>
                       </td>
                       <td>
+                        <i
+                          class="fa fa-user text-lg cursor-pointer"
+                          onClick={() => createAccount(item)}
+                        ></i>
+                        {/* <span className="bg-green-400">Created</span> */}
+                      </td>
+                      <td>
                         <div
                           className="flex item-center justify-center cursor-pointer"
                           onClick={() => handleSendOnboardingDetails(item)}
@@ -656,23 +687,32 @@ const BookedAmount = () => {
                       </td>
                       <td>{item.remark[item.remark.length - 1]}</td>
                       <td>
-                        <select className="border rounded-full border-black" onChange={(e) => handleRemarkChange(e, item._id)}  defaultValue="Select Remark">
-                          <option disabled value="Select Remark">Select Remark</option>
-                          <option value="Reminder Issued">Reminder Issued</option>
+                        <select
+                          className="border rounded-full border-black"
+                          onChange={(e) => handleRemarkChange(e, item._id)}
+                          defaultValue="Select Remark"
+                        >
+                          <option disabled value="Select Remark">
+                            Select Remark
+                          </option>
+                          <option value="Reminder Issued">
+                            Reminder Issued
+                          </option>
                           <option value="DNP">DNP</option>
                           <option value="NATC">NATC</option>
                           <option value="Not Interested">Not Interested</option>
                           <option value="Cut Call">Cut Call</option>
                           <option value="Default">Default</option>
                           <option value="Cleared">Cleared</option>
-                          <option value="Haft Cleared">Haft Cleared</option>
+                          <option value="Half_Cleared">Half_Cleared</option>
                           <option value="Switch Off">Switch Off</option>
-                          <option value="Call Back later">Call Back later</option>
+                          <option value="Call Back later">
+                            Call Back later
+                          </option>
                           <option value="Busy">Busy</option>
                           <option value="Declined">Declined</option>
                         </select>
                       </td>
-                      
                     </tr>
                   ))}
                 </React.Fragment>

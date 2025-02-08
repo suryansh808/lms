@@ -52,6 +52,15 @@
             border-radius: 10px;
             width: 100%;
         }
+        textarea{
+            padding: 5px 10px;
+            border: 1px solid #CCCCCC;
+            margin: 2px 0;
+            margin-right: 10px;
+            border-radius: 10px;
+            width: 100%;
+        }            
+        
 
         .cursor-pointer {
             background-color: black;

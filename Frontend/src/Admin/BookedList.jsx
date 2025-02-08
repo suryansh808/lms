@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import API from "../API";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const BookedList = () => {
   const [newStudent, setNewStudent] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
+  const [editingStudentId, setEditingStudentId] = useState(null);
   const fetchNewStudent = async () => {
     setLoading(true);
     try {
@@ -97,12 +98,294 @@ const BookedList = () => {
     setDialogData(null);
   };
 
-  
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [program, setProgram] = useState([]);
+  const [counselor, setCounselor] = useState([]);
+  const [operationName, setOperationName] = useState("");
+  const [operationId , setOperationId] = useState("");
+  const [domain, setDomain] = useState([]);
+  const [programPrice, setProgramPrice] = useState("");
+  const [paidAmount, setPaidAmount] = useState("");
+  const [monthOpted, setMonthOpted] = useState("");
+  const [monthsToShow, setMonthsToShow] = useState([]);
+  const [clearPaymentMonth, setClearPaymentMonth] = useState("");
 
+  const handleEdit = (studentId) => {
+    const isConfirmed = window.confirm("Are you sure you want to edit this?");
+    if (isConfirmed) {
+      const editStudent = newStudent.find((item) => item._id === studentId);
+      setFullname(editStudent.fullname);
+      setEmail(editStudent.email);
+      setPhone(editStudent.phone);
+      setProgram(editStudent.program);
+      setCounselor(editStudent.counselor);
+      setOperationName(editStudent.operationName);
+      setDomain(editStudent.domain);
+      setProgramPrice(editStudent.programPrice);
+      setPaidAmount(editStudent.paidAmount);
+      setMonthOpted(editStudent.monthOpted);
+      setClearPaymentMonth(editStudent.clearPaymentMonth);
+      setEditingStudentId(studentId);
+      setiscourseFormVisible(true);
+    }
+  };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = {
+      fullname: fullname,
+      email: email.trim(),
+      phone: phone,
+      program: program,
+      counselor: counselor.trim(),
+      domain: domain.trim(),
+      programPrice: programPrice,
+      paidAmount: paidAmount,
+      monthOpted: monthOpted,
+      clearPaymentMonth: clearPaymentMonth,
+      operationName: operationName,
+      operationId: operationId,
+    };
+
+    try {
+      let response;
+      if (editingStudentId) {
+        response = await axios.put(
+          `${API}/editstudentdetails/${editingStudentId}`,
+          formData
+        );
+      }
+      if (response && (response.status === 200 || response.status === 201)) {
+        toast.success("Student updated successfully");
+        fetchNewStudent();
+        resetForm();
+      } else {
+        toast.error("Error submitting the form.");
+      }
+    } catch (error) {
+      toast.error(
+        "An error occurred while submitting the form. Please try again."
+      );
+    }
+  };
+
+  const resetForm = () => {
+    setiscourseFormVisible(false);
+    setFullname("");
+    setEmail("");
+    setPhone("");
+    setProgram("");
+    setCounselor("");
+    setDomain("");
+    setProgramPrice("");
+    setPaidAmount("");
+    setMonthOpted("");
+    setClearPaymentMonth("");
+    setEditingStudentId(null);
+  };
+
+  const [course, setCourse] = useState([]);
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get(`${API}/getcourses`);
+      setCourse(response.data);
+    } catch (error) {
+      console.error("There was an error fetching courses:", error);
+    }
+  };
+  const [bda, setBda] = useState([]);
+  const fetchBda = async () => {
+    try {
+      const response = await axios.get(`${API}/getbda`);
+      setBda(response.data);
+    } catch (error) {
+      console.error("There was an error fetching courses:", error);
+    }
+  };
+  const [operation, setOperation] = useState(null);
+  const fetchOperation = async () => {
+    try {
+      const response = await axios.get(`${API}/getoperation`);
+      setOperation(response.data);
+    } catch (error) {
+      console.error("There was an error fetching operation:", error);
+    }
+  };
+
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    const minDate = today.toISOString().split("T")[0];
+    const maxDate = new Date(today.setDate(today.getDate() + 5))
+      .toISOString()
+      .split("T")[0];
+    setMinDate(minDate);
+    setMaxDate(maxDate);
+  }, []);
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let months = [];
+    if (currentMonthIndex === 1 && currentDay <= 7) {
+      months = [monthNames[1], monthNames[2], monthNames[3]];
+    } else {
+      months = [monthNames[2], monthNames[3], monthNames[4]];
+    }
+    setMonthsToShow(months);
+  }, []);
+
+  useEffect(() => {
+    fetchCourses();
+    fetchBda();
+    fetchOperation();
+  }, []);
 
   return (
     <div id="AdminAddCourse">
+      <Toaster position="top-center" reverseOrder={false} />
+      {iscourseFormVisible && (
+        <div className="form">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <span onClick={resetForm}>✖</span>
+            <h2>
+              {editingStudentId
+                ? "Edit Enrolled Details"
+                : "Add New Enrollment"}
+            </h2>
+            <input
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
+              type="text"
+              placeholder="Candidate Full Name"
+              required
+            />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Candidate Email"
+              required
+            />
+            <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              type="number"
+              placeholder="Candidate contact no"
+              required
+            />
+            <select
+              value={program}
+              onChange={(e) => setProgram(e.target.value)}
+            >
+              <option value="" selected disabled>
+                {" "}
+                Mode of Program
+              </option>
+              <option value="Self-guided">Self-guided</option>
+              <option value="Instructor Led">Instructor Led</option>
+              <option value="Career Advancement">Career Advancement</option>
+            </select>
+            <select
+              value={counselor}
+              onChange={(e) => setCounselor(e.target.value)}
+            >
+              <option value="" selected disabled>
+                Select Counselor name
+              </option>
+              {bda.map((item) => (
+                <option value={item.fullname}>{item.fullname}</option>
+              ))}
+            </select>
+            <select
+              value={operationName}
+              onChange={(e) => {
+                const selectedOperation = operation.find(item => item.fullname === e.target.value);
+                setOperationName(selectedOperation.fullname);
+                setOperationId(selectedOperation._id);
+              }}
+            >
+              <option value="" selected disabled>
+                Select Operation name
+              </option>
+              {operation.map((item) => (
+                <option value={item.fullname}>{item.fullname}</option>
+              ))}
+            </select>
+
+            <select value={domain} onChange={(e) => setDomain(e.target.value)}>
+              <option value="" selected disabled>
+                Select Opted Domain
+              </option>
+              {course.map((item) => (
+                <option value={item.title}>{item.title}</option>
+              ))}
+            </select>
+            <select
+              value={monthOpted}
+              onChange={(e) => setMonthOpted(e.target.value)}
+              required
+            >
+              <option value="" selected disabled>
+                Select Opted Month
+              </option>
+              {monthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+            <input
+              value={programPrice}
+              onChange={(e) => setProgramPrice(e.target.value)}
+              type="number"
+              placeholder="Program Price"
+              required
+            />
+            <input
+              value={paidAmount}
+              onChange={(e) => setPaidAmount(e.target.value)}
+              type="number"
+              placeholder="Paid Amount"
+              required
+            />
+            Due date for clear payment ?
+            <input
+              value={clearPaymentMonth}
+              onChange={(e) => setClearPaymentMonth(e.target.value)}
+              type="date"
+              name=""
+              id=""
+              required
+              min={minDate}
+              max={maxDate}
+            />
+            <input
+              className="cursor-pointer"
+              type="submit"
+              value={editingStudentId ? "Save" : "Submit"}
+            />
+          </form>
+        </div>
+      )}
       {loading ? (
         <div id="loader">
           <div class="three-body">
@@ -133,7 +416,6 @@ const BookedList = () => {
             </section>
           </div>
 
-        
           <table>
             <thead>
               <tr>
@@ -153,6 +435,7 @@ const BookedList = () => {
                 <th>Status</th>
                 <th>Remark</th>
                 <th>More Details</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -232,6 +515,11 @@ const BookedList = () => {
                             class="fa fa-info-circle text-2xl cursor-pointer"
                             onClick={() => handleDialogOpen(item)}
                           ></i>
+                        </td>
+                        <td>
+                          <button onClick={() => handleEdit(item._id)}>
+                            <i class="fa fa-edit"></i>
+                          </button>
                         </td>
                       </tr>
                     ))}

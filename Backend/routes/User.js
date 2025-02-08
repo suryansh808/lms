@@ -9,21 +9,23 @@ const crypto = require('crypto');
 
 // create user
 router.post("/users", async (req, res) => {
-  const { fullName, email, phone } = req.body;
+  const { fullname, email, phone } = req.body;
+  console.log(req.body);
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already created check in active users" });
     }
     const newUser = new User({
-      fullName,
+      fullname,
       email,
       phone,
     });
     await newUser.save();
     res
-      .status(201)
+      .status(200)
       .json({ message: "User created successfully", user: newUser });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

@@ -48,18 +48,17 @@ const BDADashboard = () => {
     (acc, student) => acc + (student.programPrice || 0),
     0
   );
-  const totalBooked = newStudent.reduce(
-    (acc, student) => acc + (student.paidAmount || 0),
+  const bookedRevenue = newStudent.reduce(
+    (acc, student) => acc + (student.programPrice || 0),
     0
   );
-  const defaultAmount = newStudent.reduce((acc, student) => {
-    if (student.status === "default") {
-      return acc + (student.paidAmount || 0);
-    }
-    return acc + (student.defaultAmount || 0);
-  }, 0);
+  const creditedRevenue = newStudent.reduce(
+    (acc, student) =>
+      acc + ((student.paidAmount || 0) - (student.defaultAmount || 0)),
+    0
+  );
+  const pendingRevenue = bookedRevenue - creditedRevenue;
 
-  // Calculate revenue by month
   const revenueByMonth = newStudent.reduce((acc, student) => {
     const month = new Date(student.createdAt).toLocaleString("default", {
       month: "long",
@@ -79,13 +78,11 @@ const BDADashboard = () => {
     return acc;
   }, {});
 
-  // Get last 2 months
   const sortedMonths = Object.keys(revenueByMonth).sort(
     (a, b) => new Date(`1 ${a}`) - new Date(`1 ${b}`)
   );
   const lastTwoMonths = sortedMonths.slice(-2);
 
-  // Prepare line chart data
   const revenueData = lastTwoMonths.map((month) => ({
     month,
     revenue: revenueByMonth[month]?.totalRevenue || 0,
@@ -106,12 +103,12 @@ const BDADashboard = () => {
   };
 
   const data = {
-    labels: ["Total Revenue", "Total Booked", "Default Amount"],
+    labels: ["Booked Revenue", "Credited Revenue", "Pending Revenue"],
     datasets: [
       {
-        data: [totalRevenue, totalBooked, defaultAmount],
-        backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384"],
-        hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384"],
+        data: [bookedRevenue, creditedRevenue, pendingRevenue],
+        backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
+        hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
       },
     ],
   };
@@ -158,28 +155,27 @@ const BDADashboard = () => {
 
       <div className="revenue">
         <div className="revenue-card">
-          <h2>Total Revenue Details</h2>
+          <h2 className="text-lg font-bold mb-4">Revenue Details</h2>
           <p>Total Revenue: {totalRevenue}/-</p>
-          <p>Total Booked: {totalBooked}/-</p>
-          <p>Default Amount: {defaultAmount}/-</p>
+          <p>Booked Revenue: {bookedRevenue}/-</p>
+          <p>Credited Revenue: {creditedRevenue}/-</p>
+          <p>Pending Revenue: {pendingRevenue}/-</p>
         </div>
 
         <div className="revenue-growth">
-          <h2 className="text-lg font-medium mb-4">Revenue Growth</h2>
+          <h2 className="text-lg font-bold mb-4">Revenue Growth</h2>
           <div>
             <Line data={lineChartData} />
           </div>
         </div>
 
-
         <div className="revenue-card">
-          <h2 className="text-lg font-medium mb-4">Overall Performance</h2>
+          <h2 className="text-lg font-bold mb-4">Overall Performance</h2>
           <div className="">
             <Pie data={data} />
           </div>
         </div>
       </div>
-
     </div>
   );
 };

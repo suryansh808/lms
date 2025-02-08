@@ -96,7 +96,7 @@ const MentorQueries = () => {
                 <React.Fragment key={dateIndex}>
                   <tr>
                     <td
-                      colSpan="8"
+                      colSpan="9"
                       style={{
                         fontWeight: "bold",
                         backgroundColor: "#f0f0f0",
@@ -144,7 +144,7 @@ const MentorQueries = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="8">No Queries Found</td>
+                <td colSpan="9">No Queries Found</td>
               </tr>
             )}
           </tbody>

@@ -14,19 +14,18 @@ const newStudentEnrollSchema = new Schema(
     },
     email: {
       type: String,
-      lowercase: true,
       unique: true,
     },
-    alternativeEmail:{
-      type:String,
+    alternativeEmail: {
+      type: String,
     },
     phone: {
       type: String,
     },
-    transactionId:{
+    transactionId: {
       type: String,
-      unique: true
-      },
+      unique: true,
+    },
     program: {
       type: String,
     },
@@ -39,9 +38,9 @@ const newStudentEnrollSchema = new Schema(
     domain: {
       type: String,
     },
-    domainId:{
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'domain'
+    domainId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "domain",
     },
     programPrice: {
       type: Number,
@@ -56,18 +55,23 @@ const newStudentEnrollSchema = new Schema(
       type: String,
     },
     remark: [{ type: String }],
-    status: {
-      type: String,
-      default: "booked",
-      },
-      mailSended: { type: Boolean, default: false },
-      onboardingSended:{type:Boolean , default:false},
-      offerLetterSended : {type:Boolean , default:false},
+    status: { type: String, default: "booked" },
+    mailSended: { type: Boolean, default: false },
+    onboardingSended: { type: Boolean, default: false },
+    offerLetterSended: { type: Boolean, default: false },
+
+    whatsAppNumber:{type:String},
+    remainingAmount:{type:String},
+    collegeName:{type:String},
+    branch:{type:String},
+    aadharNumber:{type:String},
+    referFriend:{type:String},
   },
   {
     timestamps: true,
   },
-  
+
+
 );
 
 const NewEnroll = mongoose.model("NewEnroll", newStudentEnrollSchema);

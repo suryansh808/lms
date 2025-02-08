@@ -322,10 +322,10 @@ const [transactionId, setTransactionId] = useState("");
         </div>
       )}
         <div id="AdminAddCourse">
-           <div className="flex justify-end items-center px-2 pt-2">
+           {/* <div className="flex justify-end items-center px-2 pt-2">
 
           <button className="border px-2 py-1 rounded-lg bg-black text-white" onClick={handleAddNewCandidate}>+ Add OnBoarding Form</button>
-           </div>
+           </div> */}
        
               <Toaster position="top-center" reverseOrder={false} />
               {loading ? (

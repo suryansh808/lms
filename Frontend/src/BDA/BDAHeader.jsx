@@ -72,6 +72,7 @@ const BDAHeader = () => {
           <Link to="/bbookedpayment">Booked Payment</Link>
           <Link to="/bfullpayment">Full Payment</Link>
           <Link to="/bdefaultpayment">Default Payment</Link>
+          <Link to="/bdarevenuesheet">Revenue Sheet</Link>
          <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
         </div>
       )}
