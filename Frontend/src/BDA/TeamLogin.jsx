@@ -31,6 +31,7 @@ const TeamLogin = () => {
       const response = await axios.post(`${API}/bdaverifyotp`, { email, otp });
       if (response.status === 200) {
       toast.success("Login successful!");
+      const loginTime = new Date().getTime();
       setTimeout(() => {
       localStorage.setItem("bdaId", response.data.bdaId);
       localStorage.setItem("bdaName", response.data.bdaName);
