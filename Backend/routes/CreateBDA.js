@@ -8,13 +8,14 @@ const crypto = require('crypto');
 
 //post to create a new bda account
 router.post("/createbda", async (req, res) => {
-  const { fullname, email , password, team } = req.body;
+  const { fullname, email, team, designation, password } = req.body;
   try {
     const newbda = new CreateBDA({
-      fullname,
-      email,
-      password,
-      team,
+      fullname: fullname,
+      email: email,
+      team: team,
+      designation: designation,
+      password: password
     });
     await newbda.save();
     res.status(201).json(newbda);
@@ -27,7 +28,7 @@ router.post("/createbda", async (req, res) => {
 router.get("/getbda", async (req, res) => {
   const {bdaId} = req.query;
   try {
-    let bdaId;
+    let bda;
     if(bdaId){
        bda = await CreateBDA.findById(bdaId);
        if (!bda) {
@@ -47,10 +48,10 @@ router.get("/getbda", async (req, res) => {
 router.put("/updatebda/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, email, password , team } = req.body;
+    const { fullname, email, password , team, designation } = req.body;
     const updatedbda = await CreateBDA.findByIdAndUpdate(
       id,
-      { fullname, email, password , team },
+      { fullname, email, password , team, designation },
       { new: true }
     );
     if (!updatedbda) {

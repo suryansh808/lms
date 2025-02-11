@@ -3,7 +3,6 @@ const router = express.Router();
 const adminMail = require("../models/AdminMail"); 
 const Operation = require("../models/CreateOperation");
 const bda = require("../models/CreateBDA");
-const manager = require("../models/Manager");
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -248,66 +247,6 @@ router.put('/mailsendedbda/:id', async (req, res) => {
   }
 });
 
-//----------------------------- manager
-//send login details to sales team
-router.post('/sendmailtomanager', async (req, res) => {
-  const { fullname, email } = req.body;
-  const emailMessage = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-  <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-    <h1>Welcome to Krutanic Solutions!</h1>
-  </div>
-  <div style="padding: 20px;">
-    <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
-    <p style="font-size: 14px; color: #555;">We are excited to have you on board as a Manager at Krutanic Solutions!</p>
-    <p style="font-size: 14px; color: #555;">Here are your login details:</p>
-    <p style="font-size: 14px; color: #333;">
-      Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.
-    </p>
-    <p style="font-size: 14px; color: #555;">
-      <a href="https://www.krutanic.com/managerlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>.
-    </p>
-    <p style="font-size: 14px; color: #555;">For any assistance or technical support, feel free to reach out to the IT team.</p>
-    <p style="font-size: 14px; color: #333;">Best regards,</p>
-    <p style="font-size: 14px; color: #333;">Team Krutanic</p>
-  </div>
-  <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
-    <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
-  </div>
-</div>
-
-  `;
-  try {
-    await sendEmail({
-      email,
-      subject: 'Welcome to Krutanic Solutions - Manager Login',
-      message: emailMessage,
-    });
-    res.status(200).json({ message: 'Email sent successfully!' });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Error sending email.', error: error.message });
-  }
-});
-
-// store a value after sending a login details to sales team 
-router.put('/mailsendedmanager/:id', async (req, res) => {
-  const { id } = req.params;
-  const { mailSended } = req.body;
-  const objectId = new mongoose.Types.ObjectId(id);
-  try {
-    const managerData = await manager.findById({ _id: objectId});
-    if (!managerData) {
-      return res.status(404).send({ message: 'Manager not found.' });
-    }
-    managerData.mailSended = mailSended;
-    await managerData.save();
-    res.status(200).send({ message: 'manager record updated successfully!', managerData });
-  } catch (error) {
-    console.error('Error updating  manager data record:', error);
-    res.status(500).send({ message: 'Failed to update updating  manager record.' });
-  }
-});
 
 router.post("/sendmailtoplacementcoordinator", async (req, res) => {
   const { fullname, email } = req.body;

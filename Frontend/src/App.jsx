@@ -39,6 +39,7 @@ import AdminLogIn from "./Admin/AdminLogin";
 import Createmanager from "./Admin/CreateManager";
 import LoginAdmin from "./Admin/LoginAdmin";
 import RevenueSheet from "./Admin/RevenueSheet";
+import AllTeamDetail from "./Admin/AllTeamDetail";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -52,13 +53,15 @@ import OperationRevenueSheets from "./Operation/OperationRevenueSheets";
 // import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
-import BDAlogin from "./BDA/BDAlogin";
-import BDADashboard from "./BDA/BDADashboard";
-import BBookedPayment from "./BDA/BBookedPayment";
+import TeamLogin from "./BDA/TeamLogin";
+import Home from "./BDA/Home";
+import Booked from "./BDA/Booked";
 import BDAHeader from "./BDA/BDAHeader";
-import BDefualtPayment from "./BDA/BDefualtPayment";
-import BFullPayment from "./BDA/BFullPayment";
+import Default from "./BDA/Default";
+import FullPaid from "./BDA/FullPaid";
 import OnBoarding from "./BDA/OnBoarding";
+import AddUser from "./BDA/AddUser";
+import TeamDetail from "./BDA/TeamDetail";
 import BDARevenueSheet from "./BDA/BDARevenueSheet";
 // import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
@@ -76,14 +79,6 @@ import MentorQueries from "./Admin/MentorQueries";
 import JobBoard from "./User/JobBoard";
 import MyJob from "./User/MyJob";
 
-// Manager
-import ManagerHeader from "./Manager/ManagerHeader";
-import ManagerDashboard from "./Manager/ManagerDashBoard";
-import ManagerLogin from "./Manager/ManagerLogin";
-import BookingList from "./Manager/BookingList";
-import DefaultedList from "./Manager/DefaultedList";
-import FullPaymentList from "./Manager/FullPaymentList";
-// import ManagerAgainLogin from "./Manager/ManagerAgainLogin";
 
 // placementcoordinator
 import PCHeader from "./PlacementCoordinator.jsx/PCHeader";
@@ -97,8 +92,6 @@ import Exercise from "./User/Excercise";
 
 import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
-import AddTransactionId from "./BDA/AddTransactionId";
-
 
 
 
@@ -135,12 +128,9 @@ const AppContent = () => {
     "/investmentbanking",
     "/productmanagement",
     "/operationlogin",
-    "/bdalogin",
+    "/teamlogin",
     "/adminlogin",
     "/managerlogin",
-    // "/operationagainlogin",
-    // "/bdaagainlogin",
-    // "/manageragainlogin",
     "/loginadmin",
     "/pclogin",
     "/onboardingform",
@@ -162,6 +152,7 @@ const AppContent = () => {
     "/revenuesheet",
     "/createplacementcoordinator",
     "/onboardingdetails",
+    "/allteamdetail",
 
   ];
   const operationheaderPaths = [
@@ -172,12 +163,13 @@ const AppContent = () => {
     "/operationrevenuesheet"
   ];
   const bdaheaderPaths = [
-    "/bdadashboard",
-    "/bfullpayment",
-    "/bdefaultpayment",
-    "/bbookedpayment",
+    "/home",
+    "/fullpaid",
+    "/default",
+    "/booked",
     "/onboarding",
-    "/addtransactionid",
+    "/adduser",
+    "/teamdetail",
     "/bdarevenuesheet"
   ];
   const userheaderPaths = [
@@ -190,13 +182,7 @@ const AppContent = () => {
     "/jobboard",
     "/myjob",
   ];
-  
-  const managerHeaderPaths =[
-    "/managerdashboard",
-    "/bookinglist",
-    "/defaultedlist",
-    "/fullpaymentlist",    
-  ];
+
   const placementcoodinatorHeaderPaths = [
     "/pcdashboard",
     "/jobpost",
@@ -213,7 +199,6 @@ const AppContent = () => {
   const isAuthenticatedBda = () => !!localStorage.getItem("bdaToken");
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
   const isAuthenticatedAdmin = () => !!localStorage.getItem("adminToken");
-  const isAuthenticatedManager = () => !!localStorage.getItem("managerToken");
   const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
 
   return (
@@ -226,7 +211,6 @@ const AppContent = () => {
       {operationheaderPaths.includes(location.pathname.toLowerCase()) && (<OperationHeader />)}
       {bdaheaderPaths.includes(location.pathname.toLowerCase()) && ( <BDAHeader />)}
       {userheaderPaths.includes(location.pathname.toLowerCase()) && (<UserHeader />)}
-      {managerHeaderPaths.includes(location.pathname.toLowerCase()) && (<ManagerHeader />)}
       {placementcoodinatorHeaderPaths.includes(
         location.pathname.toLowerCase()
       ) && <PCHeader />}
@@ -274,6 +258,7 @@ const AppContent = () => {
         <Route path="/CreateManager" element={isAuthenticatedAdmin()? <Createmanager /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/RevenueSheet" element={isAuthenticatedAdmin()? <RevenueSheet /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/OnBoardingDetails" element={isAuthenticatedAdmin()? <OnBoardingDetails /> : <Navigate to="/AdminLogin"/>} />
+        <Route path="/AllTeamDetail" element={isAuthenticatedAdmin()? <AllTeamDetail /> : <Navigate to="/AdminLogin"/>} />
         <Route
           path="/CreatePlacementCoordinator"
           element={
@@ -297,15 +282,17 @@ const AppContent = () => {
         {/* Operation Panel End */}
 
         {/* bda panel start */}
-          <Route path="/BDAlogin" element={<BDAlogin />} />
+        <Route path="/TeamLogin" element={<TeamLogin />} />
           {/* <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} /> */}
-          <Route path="/BDADashboard" element={ isAuthenticatedBda() ? <BDADashboard /> : <Navigate to="/BDAlogin"/>} />
-          <Route path="/BFullPayment" element={isAuthenticatedBda() ?<BFullPayment /> : <Navigate to="/BDAlogin"/>} />
-          <Route path="/BDefaultPayment" element={isAuthenticatedBda() ?<BDefualtPayment /> : <Navigate to="/BDAlogin"/>} />
-          <Route path="/BBookedPayment"element={isAuthenticatedBda() ?<BBookedPayment /> : <Navigate to="/BDAlogin"/> }/>
-          <Route path="/OnBoarding" element={isAuthenticatedBda() ?<OnBoarding/> : <Navigate to="/BDAlogin"/> }/>
-          <Route path="/AddTransactionId" element={isAuthenticatedBda() ?<AddTransactionId/> : <Navigate to="/BDAlogin"/> }/>
-          <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/BDAlogin"/> }/>
+          <Route path="/Home" element={ isAuthenticatedBda() ? <Home /> : <Navigate to="/TeamLogin"/>} />
+          <Route path="/FullPaid" element={isAuthenticatedBda() ?<FullPaid /> : <Navigate to="/TeamLogin"/>} />
+          <Route path="/Default" element={isAuthenticatedBda() ?<Default /> : <Navigate to="/TeamLogin"/>} />
+          <Route path="/Booked"element={isAuthenticatedBda() ?<Booked /> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/OnBoarding" element={isAuthenticatedBda() ?<OnBoarding/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/AddUser" element={isAuthenticatedBda() ?<AddUser/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/TeamDetail" element={isAuthenticatedBda() ?<TeamDetail/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/TeamLogin"/> }/>
+
 
         {/* bda panel ends */}
 
@@ -335,15 +322,6 @@ const AppContent = () => {
         <Route path="/JobPost"  element={isAuthenticatedPC()? <JobPost /> : <Navigate to="/PClogin" /> }/>
         <Route path="/Application" element={isAuthenticatedPC()? <Application /> : <Navigate to="/PClogin" />}/>
         {/* placement coodinator panel ends */}
-
-        {/* Manager Panel */}
-        <Route path="/ManagerLogin" element={<ManagerLogin />} />
-        {/* <Route path="/ManagerAgainLogin" element={<ManagerAgainLogin/>} /> */}
-        <Route path="/ManagerDashboard" element={isAuthenticatedManager() ? <ManagerDashboard /> : <Navigate to="/ManagerLogin" />} />
-        <Route path="/BookingList" element={isAuthenticatedManager() ? <BookingList /> : <Navigate to="/ManagerLogin" />} />
-        <Route path="/DefaultedList" element={isAuthenticatedManager() ? <DefaultedList /> : <Navigate to="/ManagerLogin" />} />
-        <Route path="/FullPaymentList" element={isAuthenticatedManager() ? <FullPaymentList /> : <Navigate to="/ManagerLogin" />} />
-        {/* Manager Panel End */}
       </Routes>
      
       {headerPaths.includes(location.pathname.toLowerCase()) && <Footer />}

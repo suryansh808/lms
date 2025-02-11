@@ -16,7 +16,6 @@ const Excercise = require("./routes/excercise");
 
 const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
-const Manager = require("./routes/Manager");
 const bodyParser = require("body-parser");
 
 const CreateJob = require("./routes/CreateJob"); 
@@ -82,8 +81,6 @@ app.use("/", User);
 // admin
 app.use("/", admin);
 
-//manager
-app.use("/", Manager);
 
 // CREATEJOBS
 app.use("/", CreateJob);

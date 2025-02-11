@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/LOGO3.png";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import API from "../API";
+
 import toast ,{Toaster} from 'react-hot-toast';
 
 const BDAHeader = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
   const mobileMenuRef = useRef(null);
+  const navigate = useNavigate();
+  const BdaName = localStorage.getItem("bdaName");
+  const bdaId = localStorage.getItem("bdaId");
+  const [bdaData, setBdaData] = useState(null);
+
   const toggleVisibility = () => {
     setisMobileVisible((prevState) => !prevState);
   };
@@ -20,54 +27,65 @@ const BDAHeader = () => {
         setisMobileVisible(false);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
-  const navigate = useNavigate();
   const handleLogout = () => {
-    toast.success("Logged out successfully!");
     setTimeout(() => {
-    localStorage.removeItem("bdaId");
-    localStorage.removeItem("bdaName");
-    localStorage.removeItem("bdaToken");
-    navigate("/bdalogin");
+      localStorage.removeItem("bdaId");
+      localStorage.removeItem("bdaName");
+      localStorage.removeItem("bdaToken");
+      navigate("/TeamLogin");
     }, 1500);
-  }; 
+  };
 
+  const checkSession = () => {
+    const sessionStartTime = localStorage.getItem("sessionStartTime");
+    if (sessionStartTime) {
+      const currentTime = new Date().getTime();
+      const expirationTime = 3 * 60 * 60 * 1000;
+      if (currentTime - sessionStartTime > expirationTime) {
+        toast.error("Session Time Out");
+        localStorage.removeItem("bdaId");
+        localStorage.removeItem("bdaName");
+        localStorage.removeItem("bdaToken");
+        localStorage.removeItem("sessionStartTime");
+        navigate("/TeamLogin");
+      }
+    } else {
+      navigate("/TeamLogin");
+    }
+  };
 
-  // const checkSession = () => {
-  //   const sessionStartTime = localStorage.getItem("sessionStartTime");
-  //   if (sessionStartTime) {
-  //     const currentTime = new Date().getTime();
-  //     const expirationTime = 3 * 60 * 60 * 1000;
-  //     if (currentTime - sessionStartTime > expirationTime) {
-  //       localStorage.removeItem("bdaId");
-  //       localStorage.removeItem("bdaName");
-  //       localStorage.removeItem("bdaToken");
-  //       localStorage.removeItem("sessionStartTime");
-  //       navigate("/BDAlogin");
-  //     }
-  //   } else {
-  //     navigate("/BDAlogin");
-  //   }
-  // };
+  useEffect(() => {
+    checkSession();
+  }, []);
 
-  // useEffect(() => {
-  //   checkSession();
-  // }, []);
-  
- 
-   const BdaName = localStorage.getItem("bdaName");
+  const fetchBdaData = async () => {
+    console.log("bdaid", bdaId);
+    if (!bdaId) {
+      console.log("Team user not logged in");
+      return;
+    }
+    try {
+      const response = await axios.get(`${API}/getbda`, { params: { bdaId } });
+      setBdaData(response.data);
+      console.log("ownbda", response.data);
+    } catch (err) {
+      console.log("Failed to fetch bda data");
+    }
+  };
 
+  useEffect(() => {
+    fetchBdaData();
+  }, [bdaId]);
 
   return (
-    <div id="AdminHeader">
-        <Toaster position="top-center" reverseOrder={false}/>
+    <div id="UserHeader">
+       <Toaster position="top-center" reverseOrder={false}/>
       <div className="navbar">
         <div>
           <Link to="/">
@@ -80,14 +98,31 @@ const BDAHeader = () => {
       </div>
       {isMobileVisible && (
         <div className="sidebar">
-          <Link to="/bdadashboard"><i class="fa fa-home"></i> {BdaName}</Link>
-          <Link to="/AddTransactionId">Add Candidate Email</Link>
-          <Link to="/OnBoarding">OnBoarding Form</Link>
-          <Link to="/bbookedpayment">Booked Payment</Link>
-          <Link to="/bfullpayment">Full Payment</Link>
-          <Link to="/bdefaultpayment">Default Payment</Link>
-          <Link to="/bdarevenuesheet">Revenue Sheet</Link>
-         <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
+          <div className="detail">
+           {bdaData ? (
+              <>
+                <h2>{bdaData.fullname}</h2>
+                <h3>{bdaData.email}</h3>
+                <h2>{bdaData.designation}</h2>
+                <h3>{bdaData.team}</h3>
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
+          <Link to="/Home"><i class="fa fa-dashboard"></i> Home</Link>
+          <Link to="/OnBoarding"><i class="fa fa-edit"></i> OnBoarding Form</Link>
+          <Link to="/Booked"><i class="fa fa-calendar-o"></i> Booked Payment</Link>
+          <Link to="/FullPaid"><i class="fa fa-calendar-check-o"></i> Full Payment</Link>
+          <Link to="/Default"><i class="fa fa-calendar-times-o"></i> Default Payment</Link>
+          <Link to="/AddUser"><i class="	fa fa-book"></i> Add Name/Email</Link>
+          {["LEADER", "MANAGER"].includes(bdaData?.designation) &&  (
+            <>
+              <Link to="/TeamDetail"><i class="fa fa-users"></i> Team</Link>
+            </>
+          )}
+           <Link to="/BDARevenueSheet"><i class="fa fa-users"></i> Revenue</Link>
+          <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
         </div>
       )}
     </div>

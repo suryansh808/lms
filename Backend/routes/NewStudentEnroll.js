@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const CreateBDA = require("../models/CreateBDA");
 const NewEnrollStudent = require("../models/NewStudentEnroll");
 const CreateCourse = require("../models/CreateCourse");
 const mongoose = require("mongoose");
@@ -335,6 +336,25 @@ router.post("/update-operation/:id", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Error updating operation", error });
+  }
+});
+
+router.get("/bda-with-enrolls", async (req, res) => {
+  try {
+    const bdaWithEnrolls = await CreateBDA.aggregate([
+      {
+        $lookup: {
+          from: "newenrolls", // Collection name should match your MongoDB collection
+          localField: "fullname",
+          foreignField: "counselor",
+          as: "enrollments",
+        },
+      },
+    ]);
+    
+    res.status(200).json(bdaWithEnrolls);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error", message: error.message });
   }
 });
 

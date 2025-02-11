@@ -40,7 +40,7 @@ const Dashboard = () => {
         <span>
           <i className="fa fa-lock"></i> Change Password
         </span>
-        <Link to="/Setting"> Click Here</Link>
+        <Link to="/Setting" className="ease-linear duration-300"> Click Here</Link>
       </div>
       <br />
       <h2>Dashboard</h2>
@@ -81,6 +81,7 @@ const Dashboard = () => {
 
             {item.status === "fullPaid" ? (
               <button
+              className="ease-linear duration-300"
                 onClick={() =>
                   handleStartLearning(item.domain.title, item.domain.session)
                 }

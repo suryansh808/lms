@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import API from '../API';
-import axios from 'axios';
+import axios from "axios";
 
-const ManagerAgainLogin = () => {
+const BDAAgainLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -13,16 +13,16 @@ const ManagerAgainLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`${API}/checkmanager`, {
-                email, password ,
+            const response = await axios.post(`${API}/checkbdaauth`, {
+                email, password,
             });
             if (response.status === 200) {
                 toast.success('Login successful!');
                 setTimeout(() => {
-                    localStorage.setItem("managerId", response.data._id);
-                localStorage.setItem("managerEmail", response.data.email);
-                localStorage.setItem("managerToken", response.data.token);
-                navigate("/managerdashboard");
+                localStorage.setItem("bdaId", response.data.bdaId);
+                localStorage.setItem("bdaName", response.data.bdaName);
+                localStorage.setItem("bdaToken", response.data.token);
+                navigate("/bdadashboard");
                 }, 1500);
             } else {
                 toast.error(data.message || 'Login failed');
@@ -37,7 +37,7 @@ const ManagerAgainLogin = () => {
         <div id='loginpage'>
             <Toaster position="top-center" reverseOrder={false} />
             <div className='loginform'>
-                <h2>Manager Login</h2>
+                <h2>BDA Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email">Company Email:</label>
@@ -67,11 +67,11 @@ const ManagerAgainLogin = () => {
                 </form>
                 <p>--------------------or--------------------</p>
                 <div className='loginwith'>
-                    <Link to="/ManagerLogin">Login with OTP</Link>
+                    <Link to="/BDALogin">Login with OTP</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ManagerAgainLogin
+export default BDAAgainLogin;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
+
 const CreateBDA = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const CreateBDA = () => {
     email: "",
     password: "",
     team: "",
+    designation: "",
   });
   const [bda, setBda] = useState([]);
   const [editingBdaId, setEditingBdaId] = useState(null);
@@ -25,6 +27,7 @@ const CreateBDA = () => {
       email: formData.email.trim(),
       password: formData.password.trim(),
       team: formData.team.trim(),
+      designation: formData.designation.trim(),
     };
     try {
       if (editingBdaId) {
@@ -67,6 +70,7 @@ const CreateBDA = () => {
       email: "",
       password: "",
       team: "",
+      designation: "",
     });
     setEditingBdaId(null);
     setiscourseFormVisible(false);
@@ -76,7 +80,7 @@ const CreateBDA = () => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: name === "fullname" || name === "email" ? value.toLowerCase() : value,
     }));
   };
 
@@ -101,6 +105,7 @@ const CreateBDA = () => {
       email: bdaId.email,
       password: bdaId.password,
       team: bdaId.team,
+      designation: bdaId.designation,
     });
     setEditingBdaId(bdaId._id);
     setiscourseFormVisible(true);
@@ -163,6 +168,19 @@ const CreateBDA = () => {
               placeholder="Enter email id"
               required
             />
+            <select name="designation" id="designation" value={formData.designation} onChange={handleChange} required>
+              <option disabled value="">Select Designation</option>
+              <option value="MANAGER">MANAGER</option>
+              <option value="LEADER">LEADER</option>
+              <option value="BDA">BDA</option>
+            </select>
+            <select name="team" id="team" value={formData.team} onChange={handleChange} required>
+              <option disabled value="">Select Team</option>
+              <option value="TITAN">TITAN</option>
+              <option value="GLADIATOR">GLADIATOR</option>
+              <option value="BEAST">BEAST</option>
+              <option value="WARRIOR">WARRIOR</option>
+            </select>
             <input
               type="text"
               value={formData.password}
@@ -172,14 +190,6 @@ const CreateBDA = () => {
               id="password"
               placeholder="Create password"
             />
-             <select name="team" id="team" value={formData.team} onChange={handleChange} required>
-              <option disabled value="">Select Team</option>
-              <option value="TITAN">TITAN</option>
-              <option value="GLADIATOR">GLADIATOR</option>
-              <option value="BEAST">BEAST</option>
-              <option value="WARRIOR">WARRIOR</option>
-            </select>
-
             <input
               className="cursor-pointer"
               type="submit"
@@ -190,8 +200,8 @@ const CreateBDA = () => {
       )}
       <div className="coursetable">
         <div>
-          <h1>BDA's List:</h1>
-          <span onClick={toggleVisibility}>+ Add New BDA</span>
+          <h2>Team Lists</h2>
+          <span onClick={toggleVisibility}>+ Add New Member</span>
         </div>
         {loading ? (
           <div id="loader">
@@ -208,20 +218,22 @@ const CreateBDA = () => {
                 <th>Sl.No</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Password</th>
+                <th>Designation</th>
                 <th>Team</th>
+                <th>Password</th>
                 <th>Action</th>
                 <th>Send Login Credentials</th>
               </tr>
             </thead>
             <tbody>
               {bda.map((bda, index) => (
-                <tr key={index}>
+                <tr key={index} className={`${bda.designation}`}>
                   <td>{index + 1}</td>
                   <td>{bda.fullname}</td>
                   <td>{bda.email}</td>
-                  <td>{bda.password}</td>
+                  <td>{bda.designation}</td>
                   <td>{bda.team}</td>
+                  <td>{bda.password}</td>
                   <td>
                     <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>

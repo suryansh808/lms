@@ -1,17 +1,16 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../API";
 
-const BookingList = () => {
+const Booked = () => {
   const [newStudent, setNewStudent] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
   const fetchNewStudent = async () => {
+    const bdaName = localStorage.getItem("bdaName")
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
-      const bookedStudents = response.data.filter(
-        (item) => item.status === "booked"
-      );
+      const bookedStudents = response.data.filter((item) => item.counselor === bdaName && item.status === "booked");
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
     } catch (error) {
@@ -23,17 +22,14 @@ const BookingList = () => {
   }, []);
 
   if (!newStudent) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
+    return <div id="loader">
+      <div class="three-body">
+        <div class="three-body__dot"></div>
+        <div class="three-body__dot"></div>
+        <div class="three-body__dot"></div>
       </div>
-    );
+    </div>;
   }
-
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
@@ -51,7 +47,8 @@ const BookingList = () => {
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
-        <h1>Booked Payments </h1>
+      <div className="mb-2">
+        <h2>Booked Payments</h2>
         <section className="flex items-center gap-1">
           <input
             type="type"
@@ -69,6 +66,7 @@ const BookingList = () => {
             </div>
           </div>
         </section>
+        </div>
         <table>
           <thead>
             <tr>
@@ -77,40 +75,39 @@ const BookingList = () => {
               <th>Email</th>
               <th>Contact</th>
               <th>Mode of Program</th>
-              <th>Counselor Name</th>
+              <th>Operation Name</th>
               <th>Opted Domain</th>
               <th>Program Price</th>
               <th>Paid Amount </th>
               <th>Pending </th>
               <th>Month Opted</th>
               <th>Due Date</th>
+              <th>Remark</th>
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(filteredStudents) && filteredStudents.length > 0 ? (
-              filteredStudents.map((item, index) => (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td className="capitalize">{item.fullname}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                  <td className="capitalize">{item.program}</td>
-                  <td className="capitalize">{item.counselor}</td>
-                  <td className="capitalize">{item.domain}</td>
-                  <td>{item.programPrice}</td>
-                  <td>{item.paidAmount}</td>
-                  <td>{item.programPrice - item.paidAmount}</td>
-                  <td className="capitalize">{item.monthOpted}</td>
-                  <td className="whitespace-nowrap">
-                    {item.clearPaymentMonth}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="14">No data found</td>
-              </tr>
-            )}
+            {
+              Array.isArray(filteredStudents) && filteredStudents?.length > 0 ? (
+                filteredStudents?.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}</td>
+                    <td className="capitalize">{item.fullname}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                    <td className="capitalize">{item.program}</td>
+                    <td className="capitalize">{item.operationName}</td>
+                    <td className="capitalize">{item.domain}</td>
+                    <td>{item.programPrice}</td>
+                    <td>{item.paidAmount}</td>
+                    <td>{item.programPrice - item.paidAmount}</td>
+                    <td className="capitalize">{item.monthOpted}</td>
+                    <td className="whitespace-nowrap">{item.clearPaymentMonth}</td>
+                    <td>
+                      {item.remark[item.remark.length - 1]}
+                    </td>
+                  </tr>
+                ))) : <tr><td colSpan="14">No data found</td></tr>
+            }
           </tbody>
         </table>
       </div>
@@ -118,4 +115,4 @@ const BookingList = () => {
   );
 };
 
-export default BookingList;
+export default Booked;

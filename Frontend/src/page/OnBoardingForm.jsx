@@ -211,6 +211,24 @@ const OnBoardingForm = () => {
     resetForm();
   };
 
+
+  const handleEmailChange = (e) => {
+    const enteredEmail = e.target.value.trim();
+    setEmail(enteredEmail);
+    if (getTransactionId.transaction.includes(enteredEmail)) {
+      const matchedCounselor = getTransactionId.counselor.find(
+        (counselorItem, index) =>
+          getTransactionId.transaction[index] === enteredEmail
+      );
+      if (matchedCounselor) {
+        setCounselor(matchedCounselor);
+      }
+    }
+  };
+  
+
+
+
   return (
     <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
@@ -231,7 +249,8 @@ const OnBoardingForm = () => {
             <div className="input-field">
               <input
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
+                // onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 required
               />

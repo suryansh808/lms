@@ -39,7 +39,7 @@ const BDARevenueSheet = () => {
   const revenueByMonth = {};
   let totalRevenue = 0;
 
-
+ 
   newStudent.forEach((student) => {
     const date = new Date(student.createdAt).toLocaleDateString("en-GB");
     const month = new Date(student.createdAt).toLocaleString("default", {
@@ -58,7 +58,7 @@ const BDARevenueSheet = () => {
     revenueByDay[date].credited += credited;
     revenueByDay[date].pending += pending;
 
-
+    
     if (!revenueByMonth[month]) {
       revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
     }
@@ -83,7 +83,7 @@ const BDARevenueSheet = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-center text-3xl font-bold mb-6">Revenue Sheets</h1>
+      <h1 className="text-center text-3xl font-bold mb-6">BDA Revenue Sheets</h1>
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>

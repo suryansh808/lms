@@ -23,7 +23,6 @@ import './Admin/AdminPanel.css'
 import './User/UserPanel.css'
 import './BDA/BdaPanel.css'
 import './Operation/OperationPanel.css'
-import './Manager/Manager.css'
 
 import './style/OnBoardingForm.css'
 

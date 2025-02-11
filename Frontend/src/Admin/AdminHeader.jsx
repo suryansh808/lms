@@ -51,8 +51,7 @@ const navigate = useNavigate();
       <Link to="/AddCourse">Create Course</Link>
       <Link to="/AddModule">Course List</Link>
       <Link to="/CreateOperation">Create Operation A/c</Link>
-      <Link to="/CreateManager">Create Manager A/c</Link>
-      <Link to="/CreateBDA">Create BDA A/c</Link>
+      <Link to="/CreateBDA">Create Team A/c</Link>
       <Link to="/CreatePlacementCoordinator">Create PC A/c</Link>
       <Link to="/AcceptedApplication">Active Users</Link>
       <Link to="/PendingApplication">Inactive Users</Link>
@@ -62,6 +61,8 @@ const navigate = useNavigate();
       <Link to="/FullPaidList">Full Paid Amount List</Link>
       <Link to="/AdvanceQueries">Adv Course Queries</Link>
       <Link to="/MentorQueries">Mentor Course Queries</Link>
+      <Link to="/AllTeamDetail">Team Detail</Link>
+
       <Link to="/RevenueSheet">Revenue Sheet</Link>
      <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
       </div>

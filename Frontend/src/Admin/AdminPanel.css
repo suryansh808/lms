@@ -470,3 +470,12 @@
     overflow-x: scroll;
   }
 }
+
+table tbody{
+  .MANAGER{
+    background-color: rgb(0, 89, 255);
+  }
+  .LEADER{
+    background-color: greenyellow;
+  }
+}
