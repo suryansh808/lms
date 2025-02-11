@@ -38,18 +38,32 @@ const BDAHeader = () => {
     navigate("/bdalogin");
     }, 1500);
   }; 
+
+
+  // const checkSession = () => {
+  //   const sessionStartTime = localStorage.getItem("sessionStartTime");
+  //   if (sessionStartTime) {
+  //     const currentTime = new Date().getTime();
+  //     const expirationTime = 3 * 60 * 60 * 1000;
+  //     if (currentTime - sessionStartTime > expirationTime) {
+  //       localStorage.removeItem("bdaId");
+  //       localStorage.removeItem("bdaName");
+  //       localStorage.removeItem("bdaToken");
+  //       localStorage.removeItem("sessionStartTime");
+  //       navigate("/BDAlogin");
+  //     }
+  //   } else {
+  //     navigate("/BDAlogin");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   checkSession();
+  // }, []);
+  
  
    const BdaName = localStorage.getItem("bdaName");
 
-   if(!BdaName){
-    return <div id="loader">
-    <div class="three-body">
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  <div class="three-body__dot"></div>
-  </div>
-  </div>;
- }
 
   return (
     <div id="AdminHeader">
