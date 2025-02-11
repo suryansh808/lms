@@ -95,7 +95,7 @@ const FullPayment = () => {
                   <td>{item.email}</td>
                   <td>{item.phone}</td>
                   <td className="capitalize">{item.program}</td>
-                  <td className="capitalize">{item.counselor}</td>
+                  <td>{item.counselor}</td>
                   <td>
                     {" "}
                     {new Date(item.createdAt).toLocaleDateString("en-GB")}

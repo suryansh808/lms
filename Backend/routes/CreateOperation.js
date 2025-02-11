@@ -241,10 +241,12 @@ router.post("/send-email", async (req, res) => {
 //store a value after send a login details
 router.put("/mailsendedchange/:id", async (req, res) => {
   const { id } = req.params;
-  const { mailSended , onboardingSended , offerLetterSended } = req.body;
+  const { mailSended , onboardingSended , userCreated } = req.body;
+  console.log("true",userCreated);
   const objectId = new mongoose.Types.ObjectId(id);
   try {
     const student = await NewEnrollStudent.findById({ _id: objectId });
+    console.log("found", student);
     if (!student) {
       return res.status(404).send({ message: "Student not found." });
     }
@@ -254,8 +256,8 @@ router.put("/mailsendedchange/:id", async (req, res) => {
     if (onboardingSended !== undefined) {
       student.onboardingSended = onboardingSended;
     }
-    if (offerLetterSended !== undefined) {
-      student.offerLetterSended = offerLetterSended;
+    if (userCreated !== undefined) {
+      student.userCreated = userCreated;
     }
     await student.save();
     res
@@ -341,5 +343,7 @@ router.post("/sendedOnboardingMail", async (req, res) => {
       .json({ message: "Error sending email.", error: error.message });
   }
 });
+
+
 
 module.exports = router;

@@ -1,11 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
+const Dialog = ({ isOpen, onClose , fullname }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div style={styles.modal}>
+      <div style={styles.modalContent}>
+        <h2 className="mb-2">Form Submitted Successfully</h2>
+        <p>Thank you <span className="text-[#f15b29] font-bold">{fullname}</span>! <br /> Your form has been submitted successfully.</p>
+        <button className="bg-red-600 rounded-md px-6 py-2 text-white mt-2" onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+};
 
 const OnBoardingForm = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -82,23 +96,28 @@ const OnBoardingForm = () => {
     fetchCourses();
   }, []);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const resetForm = () => {
-    // navigate("/");
-    setiscourseFormVisible(false);
     setFullname("");
     setEmail("");
     setPhone("");
+    setWhatsAppNumber("");
     setAlternativeEmail("");
     setProgram("");
     setCounselor("");
     setDomain("");
     setProgramPrice("");
     setPaidAmount("");
+    setRemainingAmount("");
     setMonthOpted("");
     setTransactionId("");
+    setCollegeName("");
+    setBranch("");
+    setAadharNumber("");
     setClearPaymentMonth("");
     setModeOfPayment("");
+    setReferFriend("");
+    navigate("/onboardingform");
   };
 
   const [getTransactionId, setGetTransactionId] = useState([]);
@@ -133,7 +152,7 @@ const OnBoardingForm = () => {
   const handleSubmit = async (event) => {
     setIsSubmitting(true);
     event.preventDefault();
-  
+
     const formData = {
       fullname: fullname,
       email: email.trim(),
@@ -155,246 +174,250 @@ const OnBoardingForm = () => {
       aadharNumber: aadharNumber,
       referFriend: referFriend,
     };
-  
+
     if (
-      getTransactionId.transaction.includes(email) &&
+      getTransactionId.transaction.includes(email)
+      &&
       getTransactionId.counselor.includes(counselor)
     ) {
       try {
         let response = await axios.post(`${API}/newstudentenroll`, formData);
-  
+
         if (response.status === 200 || response.status === 201) {
           toast.success("Onboarding Form submitted successfully.");
-          resetForm();
-          // navigate("/");
+          setIsModalOpen(true);
         } else {
           toast.error("Error submitting the form.");
           resetForm();
         }
       } catch (error) {
         if (error.response) {
-          const errorMessage = error.response.data?.message || "An error occurred.";
+          const errorMessage =
+            error.response.data?.message || "An error occurred.";
           toast.error(`Error from backend: ${errorMessage}`);
           resetForm();
-          // navigate("/");
         } else if (error.request) {
           toast.error("No response from the server. Please try again later.");
         }
-      } 
+      }
     } else {
       toast.error("Enter valid email and counselor name.");
       setIsSubmitting(false);
     }
   };
-  
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    resetForm();
+  };
 
   return (
     <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container m-auto">
-      <h2 className="mt-2">OnBoarding Form</h2>
+        <h2 className="mt-2">OnBoarding Form</h2>
         <form onSubmit={handleSubmit} className="">
           <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[10px]">
-          <div className="input-field">
-            <input
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
-              type="text"
-              required
-            />
-            <label htmlFor="fullname">Full Name</label>
-          </div>
+            <div className="input-field">
+              <input
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+                type="text"
+                required
+              />
+              <label htmlFor="fullname">Full Name</label>
+            </div>
 
-          <div className="input-field">
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              required
-            />
-            <label htmlFor="email">Email</label>
-          </div>
+            <div className="input-field">
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+              />
+              <label htmlFor="email">Email</label>
+            </div>
 
-          <div className="input-field">
-            <input
-              value={alternativeEmail}
-              onChange={(e) => setAlternativeEmail(e.target.value)}
-              type="email"
-              required
-            />
-            <label htmlFor="College Email">College Email</label>
-          </div>
+            <div className="input-field">
+              <input
+                value={alternativeEmail}
+                onChange={(e) => setAlternativeEmail(e.target.value)}
+                type="email"
+                required
+              />
+              <label htmlFor="College Email">College Email</label>
+            </div>
 
-          <div className="input-field">
-            <input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              type="number"
-              required
-            />
-            <label htmlFor=" Contact No">Contact No</label>
-          </div>
+            <div className="input-field">
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                type="number"
+                required
+              />
+              <label htmlFor=" Contact No">Contact No</label>
+            </div>
 
-          <div className="input-field">
-            <input
-              value={whatsAppNumber}
-              onChange={(e) => setWhatsAppNumber(e.target.value)}
-              type="number"
-              required
-            />
-            <label htmlFor=" Whatsapp Number">Whatsapp Number</label>
-          </div>
+            <div className="input-field">
+              <input
+                value={whatsAppNumber}
+                onChange={(e) => setWhatsAppNumber(e.target.value)}
+                type="number"
+                required
+              />
+              <label htmlFor=" Whatsapp Number">Whatsapp Number</label>
+            </div>
 
-          <div className="input-field">
-            <input
-              type="text"
-              value={counselor}
-              onChange={(e) => setCounselor(e.target.value)}
-              required
-            />
-            <label htmlFor="Counselor Name">Counselor Name</label>
-          </div>
+            <div className="input-field">
+              <input
+                type="text"
+                value={counselor}
+                onChange={(e) => setCounselor(e.target.value)}
+                required
+              />
+              <label htmlFor="Counselor Name">Counselor Name</label>
+            </div>
 
-          <select
-            value={program}
-            onChange={(e) => setProgram(e.target.value)}
-            required
-          >
-            <option value="" selected disabled>
-              {" "}
-              Mode of Program
-            </option>
-            <option value="Self-guided">Self-guided</option>
-            <option value="Instructor Led">Instructor Led</option>
-            <option value="Career Advancement">Career Advancement</option>
-          </select>
-          <select
-            value={modeofpayment}
-            onChange={(e) => setModeOfPayment(e.target.value)}
-            required
-          >
-            <option value="" selected disabled>
-              {" "}
-              Mode of Payment
-            </option>
-            <option value="RazorPay">RazorPay</option>
-            <option value="QR Code">QR Code</option>
-            <option value="EaseBuZZ">EaseBuZZ</option>
-            <option value="PayPal">PayPal</option>
-          </select>
-          <select
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-            required
-          >
-            <option value="" selected disabled>
-              Select Opted Domain
-            </option>
-            {course.map((item) => (
-              <option value={item.title}>{item.title}</option>
-            ))}
-          </select>
-          <select
-            value={monthOpted}
-            onChange={(e) => setMonthOpted(e.target.value)}
-            required
-          >
-            <option value="" selected disabled>
-              Select Opted Month
-            </option>
-            {monthsToShow.map((month, index) => (
-              <option key={index} value={month}>
-                {month}
+            <select
+              value={program}
+              onChange={(e) => setProgram(e.target.value)}
+              required
+            >
+              <option value="" selected disabled>
+                {" "}
+                Mode of Program
               </option>
-            ))}
-          </select>
-
-          <div className="input-field">
-            <input
-              value={programPrice}
-              onChange={(e) => setProgramPrice(e.target.value)}
-              type="number"
+              <option value="Self-guided">Self-guided</option>
+              <option value="Instructor Led">Instructor Led</option>
+              <option value="Career Advancement">Career Advancement</option>
+            </select>
+            <select
+              value={modeofpayment}
+              onChange={(e) => setModeOfPayment(e.target.value)}
               required
-            />
-            <label htmlFor="Program Price">Program Price</label>
-          </div>
-
-          <div className="input-field">
-            <input
-              value={paidAmount}
-              onChange={(e) => setPaidAmount(e.target.value)}
-              type="number"
+            >
+              <option value="" selected disabled>
+                {" "}
+                Mode of Payment
+              </option>
+              <option value="RazorPay">RazorPay</option>
+              <option value="QR Code">QR Code</option>
+              <option value="EaseBuZZ">EaseBuZZ</option>
+              <option value="PayPal">PayPal</option>
+            </select>
+            <select
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
               required
-            />
-            <label htmlFor="Paid Amount">Paid Amount</label>
-          </div>
-
-          <div className="input-field">
-            <input
-              value={remainingAmount}
-              onChange={(e) => setRemainingAmount(e.target.value)}
-              type="number"
+            >
+              <option value="" selected disabled>
+                Select Opted Domain
+              </option>
+              {course.map((item) => (
+                <option value={item.title}>{item.title}</option>
+              ))}
+            </select>
+            <select
+              value={monthOpted}
+              onChange={(e) => setMonthOpted(e.target.value)}
               required
-            />
-            <label htmlFor="Remaining Amount">Remaining Amount</label>
+            >
+              <option value="" selected disabled>
+                Select Opted Month
+              </option>
+              {monthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+
+            <div className="input-field">
+              <input
+                value={programPrice}
+                onChange={(e) => setProgramPrice(e.target.value)}
+                type="number"
+                required
+              />
+              <label htmlFor="Program Price">Program Price</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                value={paidAmount}
+                onChange={(e) => setPaidAmount(e.target.value)}
+                type="number"
+                required
+              />
+              <label htmlFor="Paid Amount">Paid Amount</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                value={remainingAmount}
+                onChange={(e) => setRemainingAmount(e.target.value)}
+                type="number"
+                required
+              />
+              <label htmlFor="Remaining Amount">Remaining Amount</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                value={collegeName}
+                onChange={(e) => setCollegeName(e.target.value)}
+                type="text"
+                required
+              />
+              <label htmlFor=" College Name"> College Name</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                value={branch}
+                onChange={(e) => setBranch(e.target.value)}
+                type="text"
+                required
+              />
+              <label htmlFor="Branch/Department Name">Branch/Department</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                type="text"
+                value={transactionId}
+                onChange={(e) => setTransactionId(e.target.value)}
+                required
+              />
+              <label htmlFor="Transaction ID">Transaction ID</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                type="number"
+                value={aadharNumber}
+                onChange={(e) => setAadharNumber(e.target.value)}
+                required
+              />
+              <label htmlFor="Aadhar Number">Aadhar Number</label>
+            </div>
+
+            <div style={{ display: "flex" }}>
+              <label htmlFor="">Due date for clear payment ?</label>
+              <input
+                value={clearPaymentMonth}
+                onChange={(e) => setClearPaymentMonth(e.target.value)}
+                type="date"
+                name=""
+                id=""
+                required
+                min={minDate}
+                max={maxDate}
+              />
+            </div>
           </div>
 
-          <div className="input-field">
-            <input
-              value={collegeName}
-              onChange={(e) => setCollegeName(e.target.value)}
-              type="text"
-              required
-            />
-            <label htmlFor=" College Name"> College Name</label>
-          </div>
-
-          <div className="input-field">
-          <input
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
-            type="text"
-            required
-          />
-          <label htmlFor="Branch/Department Name">Branch/Department</label>
-          </div>
-
-          <div className="input-field">
-          <input
-            type="text"
-            value={transactionId}
-            onChange={(e) => setTransactionId(e.target.value)}
-            required
-          />
-           <label htmlFor="Transaction ID">Transaction ID</label>
-          </div>
-
-          <div className="input-field">
-          <input
-            type="number"
-            value={aadharNumber}
-            onChange={(e) => setAadharNumber(e.target.value)}
-            required
-          />
-           <label htmlFor="Aadhar Number">Aadhar Number</label>
-           </div>
-
-          <div style={{display:'flex'}}>
-            <label htmlFor="">Due date for clear payment ?</label>
-            <input
-              value={clearPaymentMonth}
-              onChange={(e) => setClearPaymentMonth(e.target.value)}
-              type="date"
-              name=""
-              id=""
-              required
-              min={minDate}
-              max={maxDate}
-            />
-          </div>
-          </div>
-
-          <div> 
+          <div>
             Refer your friends to earn cashback.
             <textarea
               value={referFriend}
@@ -407,28 +430,39 @@ const OnBoardingForm = () => {
               className="resize-none"
             ></textarea>
           </div>
-
-          {!isSubmitting ? (
-  <input
-    className="cursor-pointer"
-    disabled={isSubmitting}
-    type="submit"
-    value="Submit"
-  />
-) : (
-  <div id="loader">
-  <div class="three-body">
-    <div class="three-body__dot"></div>
-    <div class="three-body__dot"></div>
-    <div class="three-body__dot"></div>
-  </div>
-</div>
-)}
-
+          <input
+            className="cursor-pointer"
+            disabled={isSubmitting}
+            type="submit"
+            value="Submit"
+          />
         </form>
+        <Dialog isOpen={isModalOpen} onClose={closeModal} fullname={fullname}/>
       </div>
     </div>
   );
+};
+
+const styles = {
+  modal: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex:9999
+  },
+  modalContent: {
+    background: "white",
+    padding: "20px",
+    borderRadius: "5px",
+    width: "300px",
+    textAlign: "center",
+  },
 };
 
 export default OnBoardingForm;

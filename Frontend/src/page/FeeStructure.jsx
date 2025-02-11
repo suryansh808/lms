@@ -33,7 +33,7 @@ const features = [
   {
     category: "Self-guided",
     icon: FaClock,
-    price: "₹6999",
+    price: "₹ 6999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -52,7 +52,7 @@ const features = [
   {
     category: "Instructor Led",
     icon: FaUserFriends,
-    price: "₹9999",
+    price: "₹ 9999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -71,7 +71,7 @@ const features = [
   {
     category: "Career Advancement",
     icon: FaGraduationCap,
-    price: "₹15999",
+    price: "₹ 15999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -204,27 +204,27 @@ export default function FeeStructure() {
       
       <section ref={LeearningSectionRef} className="py-[60px] px-[10px]">
         <div className="container mx-auto">
-          <h1 data-aos="fade-up"  className="text-center font-extrabold text-[#f15b29] mb-8">
+          <h1 data-aos="fade-up"  className="text-center font-extrabold text-[#f15b29] mb-5">
             | Learning Categories
           </h1>
-          <div data-aos="fade-up"  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div data-aos="fade-up" className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white overflow-hidden shadow-lg rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl"
+                className="bg-[#ffffff11] shadow-sm shadow-white drop-shadow-md overflow-hidden rounded-3xl transition duration-300 ease-in-out transform hover:-translate-y-1"
               >
                 <div className="px-4 py-5 sm:p-6">
-                  <feature.icon className="h-8 w-8 text-[#f15b29] mb-4" />
-                  <h3 className="text-2xl font-medium text-black">
-                    {feature.category}
+                
+                  <h3 className="text-2xl font-medium text-[#eee] flex gap-2 mb-4">
+                  <feature.icon className="h-8 w-8 text-[#f15b29] border rounded-full p-2 border-[#2e2e2e]" />  {feature.category}
                   </h3>
-                  <p className="mt-2 text-sm text-black">
+                  <p className="mt-2 text-sm text-[#eee]">
                     {feature.description}
                   </p>
-                  <p className="mt-4 text-2xl font-semibold text-[#f15b29]">
-                    {feature.price}
+                  <p className="mt-4 text-2xl font-semibold text-white">
+                    {feature.price}/-
                   </p>
-                  <ul className="mt-4 list-disc pl-5 text-sm text-black">
+                  <ul className="mt-4 list-disc pl-5 text-sm text-[#eee]">
                     {feature.points.map((point, idx) => (
                       <li key={idx}>{point}</li>
                     ))}
@@ -233,7 +233,7 @@ export default function FeeStructure() {
                         href={feature.registrationLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#f15b29] "
+                        className="text-[#f15b29]"
                       >
                         Slot Booking Link
                       </a>
@@ -266,13 +266,13 @@ export default function FeeStructure() {
             {paymentOptions.map((option, index) => (
               <div
                 key={index}
-                className="bg-white overflow-hidden shadow-lg rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl"
+                className="bg-[#ffffff11] drop-shadow-md overflow-hidden shadow-lg rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl"
               >
                 <div className="px-4 py-5 sm:p-6">
-                  <h3 className="text-xl font-bold text-black">
+                  <h3 className="text-2xl font-bold text-[#eee]">
                     {option.name}
                   </h3>
-                  <p className="mt-2 text-md text-[#000]">
+                  <p className="mt-2 text-sm text-[#eee]">
                     {option.description}
                   </p>
                 </div>

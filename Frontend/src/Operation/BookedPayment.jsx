@@ -5,6 +5,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { RiMailSendFill } from "react-icons/ri";
 import { PiLockKeyOpenFill, PiLockKeyFill } from "react-icons/pi";
 import * as XLSX from "xlsx";
+import { FaUserTimes } from "react-icons/fa";
+import { FaUserCheck } from "react-icons/fa";
 
 const BookedAmount = () => {
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
@@ -70,32 +72,21 @@ const BookedAmount = () => {
       operationName: operationData.fullname,
       operationId: operationData._id,
     };
-    const minimalData = {
-      fullName: fullname,
-      email: email.trim(),
-      phone: phone,
-    };
     try {
       let response;
-      let minimalResponse;
       if (editingStudentId) {
         response = await axios.put(
           `${API}/editstudentdetails/${editingStudentId}`,
           formData
         );
-        minimalResponse = { status: 200 };
       } else {
         response = await axios.post(`${API}/newstudentenroll`, formData);
-        minimalResponse = await axios.post(`${API}/users`, minimalData);
       }
-      if (
-        (response.status === 200 || response.status === 201) &&
-        (minimalResponse.status === 200 || minimalResponse.status === 201)
-      ) {
+      if (response.status === 200 || response.status === 201) {
         toast.success(
           editingStudentId
-            ? "Student updated successfully"
-            : "Form submitted successfully and minimal data saved"
+            ? "Student updated successfully."
+            : "Form submitted successfully."
         );
         fetchNewStudent();
         resetForm();
@@ -252,7 +243,8 @@ const BookedAmount = () => {
         student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.counselor.toLowerCase().includes(value.toLowerCase()) ||
         student.operationName.toLowerCase().includes(value.toLowerCase()) ||
-        student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase())
+        student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase())||
+        student.remark[length - 1].toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
@@ -412,7 +404,8 @@ const BookedAmount = () => {
   };
 
   const createAccount = async (value) => {
-    console.log(value);
+    if (value.isSending) return;
+    value.isSending = true;
     const Data = {
       fullname: value.fullname,
       email: value.email,
@@ -422,11 +415,26 @@ const BookedAmount = () => {
       const response = await axios.post(`${API}/users`, Data);
       if (response.status === 200) {
         toast.success("User has been created");
+        const userCreated = {
+          userCreated: true,
+        };
+        const updateResponse = await axios.put(
+          `${API}/mailsendedchange/${value._id}`,
+          userCreated
+        );
+        if (updateResponse.status === 200) {
+          toast.success("User created true updated successfully!");
+        } else {
+          toast.error("Failed to update user record.");
+        }
       } else {
         toast.error("Failed to create user.");
       }
     } catch (error) {
       toast.success("User already Created check in active user");
+    }finally{
+      fetchNewStudent();
+      value.isSending = false;
     }
   };
 
@@ -563,7 +571,7 @@ const BookedAmount = () => {
           <div className="relative group inline-block">
             <i class="fa fa-info-circle text-lg cursor-pointer"></i>
             <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-              Name, Email, Contact ,Counselor, Operation and Due date
+              Name, Email, Contact No ,Counselor, Operation and Due date
               <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
             </div>
           </div>
@@ -654,11 +662,14 @@ const BookedAmount = () => {
                         </div>
                       </td>
                       <td>
-                        <i
-                          class="fa fa-user text-lg cursor-pointer"
-                          onClick={() => createAccount(item)}
-                        ></i>
-                        {/* <span className="bg-green-400">Created</span> */}
+                       <div className="cursor-pointer" onClick={() => createAccount(item)}>
+                       {item.userCreated ? (
+                          <div className="flex items-center justify-center text-green-600 font-bold flex-col"><FaUserCheck />UserCreated</div>
+                        ) : (
+                          <div className="flex items-center justify-center text-red-600 font-bold flex-col"><FaUserTimes className="text-lg"/>NotCreated</div>
+                          
+                        )}
+                       </div>
                       </td>
                       <td>
                         <div

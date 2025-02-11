@@ -60,7 +60,7 @@ const newStudentEnrollSchema = new Schema(
     status: { type: String, default: "booked" },
     mailSended: { type: Boolean, default: false },
     onboardingSended: { type: Boolean, default: false },
-    offerLetterSended: { type: Boolean, default: false },
+    userCreated: { type: Boolean, default: false },
 
     whatsAppNumber:{type:String},
     remainingAmount:{type:String},

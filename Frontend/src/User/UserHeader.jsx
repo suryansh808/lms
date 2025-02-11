@@ -77,7 +77,7 @@ const UserHeader = () => {
             <span className="fa fa-graduation-cap"></span>
             {userData ? (
               <>
-                <h2 className="capitalize">{userData.fullName}</h2>
+                <h2 className="capitalize">{userData.fullName}{userData.fullname}</h2>
                 <h3>{userData.contact}</h3>
                 <h3>{userData.email}</h3>
               </>

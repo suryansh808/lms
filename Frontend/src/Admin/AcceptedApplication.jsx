@@ -175,7 +175,7 @@ const AcceptedApplication = () => {
                 filteredStudents.map((user, index) => (
                   <tr key={user._id}>
                     <td>{index + 1}</td>
-                    <td>{user.fullName}</td>
+                    <td>{user.fullName}{user.fullname}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
                     <td>{user.password}</td>
