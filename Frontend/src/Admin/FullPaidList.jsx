@@ -7,6 +7,9 @@ const FullPaidList = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const fetchNewStudent = async () => {
     setLoading(true);
     try {
@@ -22,6 +25,7 @@ const FullPaidList = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchNewStudent();
   }, []);
@@ -30,7 +34,7 @@ const FullPaidList = () => {
     const isConfirmed = window.confirm("Are you sure you want to undo?");
     if (isConfirmed) {
       try {
-        const response = await axios.post(`${API}/updateStudentStatus`, {
+        await axios.post(`${API}/updateStudentStatus`, {
           studentId,
           status: action,
         });
@@ -40,6 +44,7 @@ const FullPaidList = () => {
       }
     }
   };
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
@@ -53,10 +58,18 @@ const FullPaidList = () => {
         student.createdAt.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
+    setCurrentPage(1);
   };
 
   const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-  const groupedData = filteredStudents.reduce((acc, item) => {
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedStudents = filteredStudents.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  const groupedData = paginatedStudents.reduce((acc, item) => {
     const date = formatDate(item.createdAt);
     if (!acc[date]) {
       acc[date] = [];
@@ -69,34 +82,26 @@ const FullPaidList = () => {
     <div id="AdminAddCourse">
       {loading ? (
         <div id="loader">
-          <div class="three-body">
-            <div class="three-body__dot"></div>
-            <div class="three-body__dot"></div>
-            <div class="three-body__dot"></div>
+          <div className="three-body">
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
           </div>
         </div>
       ) : (
         <div className="coursetable">
           <div className="mb-2">
-            <h2>Full Payments </h2>
-            <section className="flex items-center  gap-1">
-              <div className="relative group inline-block">
-                <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-                  Name, Email, Contact ,Counselor Name, Operation Name
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
-                </div>
-              </div>
+            <h2>Full Payments</h2>
+            <section className="flex items-center gap-1">
               <input
                 type="text"
-                placeholder="Search here by"
+                placeholder="Search here"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="border border-black px-2 py-1 rounded-lg"
               />
             </section>
           </div>
-
           <table>
             <thead>
               <tr>
@@ -109,8 +114,8 @@ const FullPaidList = () => {
                 <th>Op Name</th>
                 <th>Opted Domain</th>
                 <th>Program Price</th>
-                <th>Paid Amount </th>
-                <th>Pending </th>
+                <th>Paid Amount</th>
+                <th>Pending</th>
                 <th>Month Opted</th>
                 <th>Due Date</th>
                 <th>Action</th>
@@ -127,7 +132,7 @@ const FullPaidList = () => {
                     </tr>
                     {groupedData[date].map((item, index) => (
                       <tr key={item._id}>
-                        <td>{index + 1}</td>
+                        <td>{startIndex + index + 1}</td>
                         <td className="capitalize">{item.fullname}</td>
                         <td>{item.email}</td>
                         <td>{item.phone}</td>
@@ -148,13 +153,7 @@ const FullPaidList = () => {
                               handleChangeStatus(item._id, "booked")
                             }
                           >
-                            <div className="relative group inline-block">
-                              <i class="fa fa-undo"></i>
-                              <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-                                undo
-                                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
-                              </div>
-                            </div>
+                            <i className="fa fa-undo"></i>
                           </button>
                         </td>
                       </tr>
@@ -168,6 +167,34 @@ const FullPaidList = () => {
               )}
             </tbody>
           </table>
+          {/* Pagination */}
+          {filteredStudents.length > itemsPerPage && (
+            <div className="flex justify-start mt-4">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="mr-2 px-4 py-2 bg-gray-300 rounded"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    prev < Math.ceil(filteredStudents.length / itemsPerPage)
+                      ? prev + 1
+                      : prev
+                  )
+                }
+                disabled={
+                  currentPage >=
+                  Math.ceil(filteredStudents.length / itemsPerPage)
+                }
+                className="px-4 py-2 bg-gray-300 rounded"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

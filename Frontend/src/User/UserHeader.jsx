@@ -19,7 +19,6 @@ const UserHeader = () => {
     try {
       const response = await axios.get(`${API}/users`, { params: { userId } });
       setUserData(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log("Failed to fetch user data");
     }
@@ -77,7 +76,7 @@ const UserHeader = () => {
             <span className="fa fa-graduation-cap"></span>
             {userData ? (
               <>
-                <h2 className="capitalize">{userData.fullName}{userData.fullname}</h2>
+                <h2 className="capitalize">{userData.fullname}</h2>
                 <h3>{userData.contact}</h3>
                 <h3>{userData.email}</h3>
               </>

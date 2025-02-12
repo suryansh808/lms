@@ -245,7 +245,7 @@ const TeamDetail = () => {
           </thead>
           <tbody>
             {filteredData.map((bda, index) => (
-              <tr key={index}>
+              <tr key={index} className="hover:bg-slate-100">
                 <td>{index + 1}</td>
                 <td style={{ color: 'blue', cursor: 'pointer' }} onClick={() => selectedBdaDetail(bda)} >{bda.fullname}</td>
                 <td>{bda.email}</td>

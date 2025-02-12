@@ -541,7 +541,7 @@ const BookedAmount = () => {
                 type="date"
                 name=""
                 id=""
-                required
+                // required
                 min={minDate}
                 max={maxDate}
               />
@@ -591,6 +591,8 @@ const BookedAmount = () => {
               <th>Remaining Amount</th>
               <th>Month Opted</th>
               <th>Clear Month</th>
+              <th>Domain</th>
+              <th>DomainId</th>
               <th>Actions</th>
               <th>Login Credentials</th>
               <th>Create User account</th>
@@ -633,6 +635,8 @@ const BookedAmount = () => {
                       <td className="whitespace-nowrap">
                         {item.clearPaymentMonth}
                       </td>
+                      <td>{item.domain}</td>
+                      <td>{item.domainId}</td>
                       <td>
                         <button onClick={() => handleEdit(item._id)}>
                           Edit

@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
+
 const formatDate = (date) => {
   const d = new Date(date);
   return d.toISOString().split("T")[0];
 };
+
 const groupByDate = (queries) => {
   return queries.reduce((acc, query) => {
     const date = formatDate(query.createdAt);
@@ -19,45 +21,50 @@ const groupByDate = (queries) => {
 
 const MentorQueries = () => {
   const [queries, setQueries] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+
   const getQueries = async () => {
     try {
       const response = await axios.get(`${API}/mentorqueries`);
-      console.log("advance queries", response.data);
       setQueries(response.data);
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
     getQueries();
   }, []);
 
   const groupedQueries = groupByDate(queries);
 
-  if (!groupedQueries) {
-    return (
-      <div id="loader">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    );
-  }
+  const flatQueries = [];
+  Object.keys(groupedQueries).forEach((date) => {
+    flatQueries.push({ type: "date", date });
+    groupedQueries[date].forEach((query) => flatQueries.push(query));
+  });
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedQueries = flatQueries.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+  const totalPages = Math.ceil(flatQueries.length / itemsPerPage);
 
   const getBackgroundColor = (value) => {
     switch (value) {
-      case 'Shared':
-        return 'bg-blue-800';
-      case 'Not Interested':
-        return 'bg-red-800';
-      case 'Already Paid':
-        return 'bg-green-800';
+      case "Shared":
+        return "bg-blue-800";
+      case "Not Interested":
+        return "bg-red-800";
+      case "Already Paid":
+        return "bg-green-800";
       default:
-        return 'bg-black';
+        return "bg-black";
     }
   };
+
   const handleSelectChange = async (event, id) => {
     const updatedAction = event.target.value;
     try {
@@ -69,11 +76,9 @@ const MentorQueries = () => {
     }
   };
 
-
-
   return (
     <div id="AdminAddCourse">
-         <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <h2 className="text-center my-5">Mentorship Course Queries</h2>
       <div className="coursetable">
         <table>
@@ -91,10 +96,10 @@ const MentorQueries = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(groupedQueries).length > 0 ? (
-              Object.keys(groupedQueries).map((date, dateIndex) => (
-                <React.Fragment key={dateIndex}>
-                  <tr>
+            {paginatedQueries.length > 0 ? (
+              paginatedQueries.map((item, index) =>
+                item.type === "date" ? (
+                  <tr key={`date-${item.date}`}>
                     <td
                       colSpan="9"
                       style={{
@@ -103,45 +108,51 @@ const MentorQueries = () => {
                         textAlign: "center",
                       }}
                     >
-                      {date}
+                      {item.date}
                     </td>
                   </tr>
-                  {groupedQueries[date].map((query, index) => {
-                    const dateObject = new Date(query.createdAt);
-                    const time = dateObject.toLocaleTimeString("en-GB", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                      hour12: true,
-                    });
-
-                    return (
-                      <tr key={index}>
-                        <td className="capitalize">{query.name}</td>
-                        <td>{query.email}</td>
-                        <td>{query.phone}</td>
-                        <td className="capitalize">{query.collegeName}</td>
-                        <td className="capitalize">{query.domain}</td>
-                        <td>{query.reason}</td>
-                        <td>{query.passingyear}</td>
-                        <td className="uppercase">{time}</td>
-                        <td>
-                        <select
-                            value={query.action}
-                            onChange={(event) => handleSelectChange(event, query._id)}
-                            className={`text-white ${getBackgroundColor(query.action || 'Unseen')}`}
-                          >
-                            <option value="Unseen">Unseen</option>
-                            <option className="bg-blue-600" value="Shared">Shared</option>
-                            <option className="bg-red-600" value="Not Interested">Not Interested</option>
-                            <option className="bg-green-600" value="Already Paid">Already Paid</option>
-                          </select>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </React.Fragment>
-              ))
+                ) : (
+                  <tr key={item._id}>
+                    <td className="capitalize">{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                    <td className="capitalize">{item.collegeName}</td>
+                    <td className="capitalize">{item.domain}</td>
+                    <td>{item.reason}</td>
+                    <td>{item.passingyear}</td>
+                    <td className="uppercase">
+                      {new Date(item.createdAt).toLocaleTimeString("en-GB", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true,
+                      })}
+                    </td>
+                    <td>
+                      <select
+                        value={item.action}
+                        onChange={(event) =>
+                          handleSelectChange(event, item._id)
+                        }
+                        className={`text-white ${getBackgroundColor(
+                          item.action || "Unseen"
+                        )}`}
+                      >
+                        <option value="Unseen">Unseen</option>
+                        <option className="bg-blue-600" value="Shared">
+                          Shared
+                        </option>
+                        <option className="bg-red-600" value="Not Interested">
+                          Not Interested
+                        </option>
+                        <option className="bg-green-600" value="Already Paid">
+                          Already Paid
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                )
+              )
             ) : (
               <tr>
                 <td colSpan="9">No Queries Found</td>
@@ -149,6 +160,26 @@ const MentorQueries = () => {
             )}
           </tbody>
         </table>
+        {/* Pagination */}
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="mr-2 px-4 py-2 bg-gray-300 rounded"
+          >
+            Previous
+          </button>
+          <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
+            }
+            disabled={currentPage >= totalPages}
+            className="px-4 py-2 bg-gray-300 rounded"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
