@@ -12,7 +12,6 @@ const PostedJob = () => {
         try {
             const response = await axios.get(`${API}/jobs-with-users`);
             setJobs(response.data);
-            console.log("data", response.data);
         } catch (error) {
             console.error("There was an error fetching Jobs:", error);
         }
@@ -39,7 +38,6 @@ const PostedJob = () => {
             alert("Job application submitted successfully!");
             setSelectedJob(null);
             fetchJobs();
-            console.log("Application response:", response.data);
 
         } catch (error) {
             console.error("Error submitting job application:", error);

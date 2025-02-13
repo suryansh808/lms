@@ -8,7 +8,6 @@ const Learning = () => {
   const [selectedSession, setselectedSession] = useState({});
   const location = useLocation();
   const { courseTitle, sessions } = location.state || {};
-  console.log("danish", courseTitle, sessions);
 
   const sessionVisibility = () => {
     setisSessionVisible((prevState) => !prevState);
@@ -16,7 +15,6 @@ const Learning = () => {
 
   const handleSessionClick = (session) => {
     setselectedSession(session);
-    console.log("course clicked", session);
   };
 
   useEffect(() => {

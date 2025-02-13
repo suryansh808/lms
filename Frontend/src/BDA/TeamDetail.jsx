@@ -111,7 +111,6 @@ const TeamDetail = () => {
   const selectedBdaDetail = (bda) => {
     setSelectedBda(bda);
     setDetailVisible(true);
-    console.log(bda);
     setDailyRevenue(groupByDate(bda.enrollments));
     setMonthlyRevenue(groupByMonth(bda.enrollments));
   };

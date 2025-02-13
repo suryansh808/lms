@@ -13,7 +13,6 @@ const EnrolledCourse = () => {
   const navigate = useNavigate();
 
   const handleStartLearning = (title, sessionlist) => {
-    console.log("learning", title, sessionlist);
     navigate("/Learning", {
       state: { courseTitle: title, sessions: sessionlist },
     });
@@ -25,9 +24,9 @@ const EnrolledCourse = () => {
 
   const fetchenrollData = async () => {
     try {
-      const response = await axios.get(`${API}/enrollments`);
-      console.log("enrooled data", response.data);
-      setenrollData(response.data.filter((item) => item.email === userEmail));
+      const response = await axios.get(`${API}/enrollments`, { params: { userEmail } });
+      setenrollData(response.data);
+      // setenrollData(response.data.filter((item) => item.email === userEmail));
     } catch (error) {
       console.error("There was an error fetching enrolledData:", error);
     }

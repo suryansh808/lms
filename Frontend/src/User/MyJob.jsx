@@ -10,7 +10,6 @@ const MyJob = () => {
         try {
             const response = await axios.get(`${API}/jobapplications/${userId}`);
             setApplications(response.data);
-            console.log("data", response.data);
         } catch (error) {
             console.error("Failed to fetch applications:", error);
         }

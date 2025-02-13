@@ -42,7 +42,7 @@ const newStudentEnrollSchema = new Schema(
     },
     domainId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "domain",
+      ref: "CreateCourse",
     },
     programPrice: {
       type: Number,

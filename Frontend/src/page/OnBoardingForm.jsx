@@ -202,6 +202,7 @@ const OnBoardingForm = () => {
       }
     } else {
       toast.error("Enter valid email and counselor name.");
+      resetForm();
       setIsSubmitting(false);
     }
   };

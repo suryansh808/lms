@@ -13,8 +13,10 @@ const Dashboard = () => {
   const fetchenrollData = debounce(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API}/enrollments`);
-      setenrollData(response.data.filter((item) => item.email === userEmail));
+      const response = await axios.get(`${API}/enrollments`, { params: { userEmail } });
+      // console.log("data" , response.data);
+      setenrollData(response.data);
+      // setenrollData(response.data.filter((item) => item.email === userEmail));
     } catch (error) {
       console.error("There was an error fetching enrolledData:", error);
     }finally {

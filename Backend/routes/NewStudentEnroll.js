@@ -289,31 +289,6 @@ router.post("/updateStudentStatus", async (req, res) => {
   }
 });
 
-// GET request to retrieve all enroll data with course
-router.get("/enrollments", async (req, res) => {
-  try {
-    // Fetch all enrollments
-    const enrollments = await NewEnrollStudent.find().lean();
-
-    // Iterate over enrollments and replace domainId with course data
-    const updatedEnrollments = await Promise.all(
-      enrollments.map(async (enrollment) => {
-        if (enrollment.domainId) {
-          const course = await CreateCourse.findById(
-            enrollment.domainId
-          ).lean();
-          enrollment.domain = course || null; // Replace domainId with course data
-        }
-        return enrollment;
-      })
-    );
-
-    res.status(200).json(updatedEnrollments);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to fetch enrollments", error });
-  }
-});
 
 //post request to update the operation name and id from admin panel
 router.post("/update-operation/:id", async (req, res) => {
@@ -338,6 +313,34 @@ router.post("/update-operation/:id", async (req, res) => {
     res.status(500).json({ message: "Error updating operation", error });
   }
 });
+
+// GET request to retrieve all enroll data with course
+router.get("/enrollments", async (req, res) => {
+  const { userEmail } = req.query;
+  try {
+    // Fetch all enrollments
+    const enrollments = await NewEnrollStudent.find({ email: userEmail }).lean();
+
+    // Iterate over enrollments and replace domainId with course data
+    const updatedEnrollments = await Promise.all(
+      enrollments.map(async (enrollment) => {
+        if (enrollment.domainId) {
+          const course = await CreateCourse.findById(
+            enrollment.domainId
+          ).lean();
+          enrollment.domain = course || null; // Replace domainId with course data
+        }
+        return enrollment;
+      })
+    );
+    // res.status(200).json(enrollments);
+    res.status(200).json(updatedEnrollments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch enrollments", error });
+  }
+});
+
 
 router.get("/bda-with-enrolls", async (req, res) => {
   try {
