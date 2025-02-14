@@ -38,6 +38,7 @@ const BDAHeader = () => {
       localStorage.removeItem("bdaId");
       localStorage.removeItem("bdaName");
       localStorage.removeItem("bdaToken");
+      localStorage.removeItem("sessionStartTime");
       navigate("/TeamLogin");
     }, 1500);
   };
@@ -65,7 +66,6 @@ const BDAHeader = () => {
   }, []);
 
   const fetchBdaData = async () => {
-    console.log("bdaid", bdaId);
     if (!bdaId) {
       console.log("Team user not logged in");
       return;
@@ -73,7 +73,6 @@ const BDAHeader = () => {
     try {
       const response = await axios.get(`${API}/getbda`, { params: { bdaId } });
       setBdaData(response.data);
-      console.log("ownbda", response.data);
     } catch (err) {
       console.log("Failed to fetch bda data");
     }
@@ -116,12 +115,13 @@ const BDAHeader = () => {
           <Link to="/FullPaid"><i class="fa fa-calendar-check-o"></i> Full Payment</Link>
           <Link to="/Default"><i class="fa fa-calendar-times-o"></i> Default Payment</Link>
           <Link to="/AddUser"><i class="	fa fa-book"></i> Add Name/Email</Link>
+          <Link to="/Reference"><i class="fa fa-bell"></i> Your Reference</Link> 
           {["LEADER", "MANAGER"].includes(bdaData?.designation) &&  (
             <>
               <Link to="/TeamDetail"><i class="fa fa-users"></i> Team</Link>
             </>
           )}
-           <Link to="/BDARevenueSheet"><i class="fa fa-users"></i> Revenue</Link>
+           <Link to="/BDARevenueSheet"><i class="fa fa-money"></i> Revenue</Link>
           <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
         </div>
       )}

@@ -43,10 +43,12 @@ const OperationLogin = () => {
       });
       if (response.status === 200) {
         toast.success('OTP verified successfully!');
+        const loginTime = new Date().getTime();
         setTimeout(() => {
         localStorage.setItem("operationId", response.data._id);
         localStorage.setItem("operationName", response.data.operationName);
         localStorage.setItem("operationToken", response.data.token);
+        localStorage.setItem("sessionStartTime", loginTime);
         navigate("/operationdashboard");
       }, 1500); 
       }

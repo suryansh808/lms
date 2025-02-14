@@ -207,6 +207,7 @@ const AllTeamDetail = () => {
               <option value="GLADIATOR">GLADIATOR</option>
               <option value="TITAN">TITAN</option>
               <option value="WARRIOR">WARRIOR</option>
+              <option value="NO TEAM">NO TEAM</option>
             </select>
 
         </div>

@@ -48,7 +48,7 @@ const PendingApplication = () => {
     setSearchQuery(value);
     const filtered = users.filter(
       (student) =>
-        student.fullName.toLowerCase().includes(value.toLowerCase()) ||
+        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.email.toLowerCase().includes(value.toLowerCase()) ||
         student.phone.toLowerCase().includes(value.toLowerCase())
     );

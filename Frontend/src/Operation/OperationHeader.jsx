@@ -35,9 +35,36 @@ const OperationHeader = () => {
     localStorage.removeItem("operationId");
     localStorage.removeItem("operationName");
     localStorage.removeItem("operationToken");
+    localStorage.removeItem("sessionStartTime");
     navigate("/OperationLogin");
   }, 1500);
   };
+
+  const checkSession = () => {
+    const sessionStartTime = localStorage.getItem("sessionStartTime");
+    if (sessionStartTime) {
+      const currentTime = new Date().getTime();
+      const expirationTime = 3 * 60 * 60 * 1000;
+      if (currentTime - sessionStartTime > expirationTime) {
+        toast.error("Session Time Out");
+        localStorage.removeItem("operationId");
+    localStorage.removeItem("operationName");
+    localStorage.removeItem("operationToken");
+        localStorage.removeItem("sessionStartTime");
+        navigate("/OperationLogin");
+      }
+    } else {
+      navigate("/OperationLogin");
+    }
+  };
+
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (

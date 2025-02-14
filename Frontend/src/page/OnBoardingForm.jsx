@@ -186,8 +186,10 @@ const OnBoardingForm = () => {
         if (response.status === 200 || response.status === 201) {
           toast.success("Onboarding Form submitted successfully.");
           setIsModalOpen(true);
+          window.location.reload(); 
         } else {
           toast.error("Error submitting the form.");
+          window.location.reload(); 
           resetForm();
         }
       } catch (error) {
@@ -196,6 +198,7 @@ const OnBoardingForm = () => {
             error.response.data?.message || "An error occurred.";
           toast.error(`Error from backend: ${errorMessage}`);
           resetForm();
+          window.location.reload(); 
         } else if (error.request) {
           toast.error("No response from the server. Please try again later.");
         }
@@ -203,6 +206,7 @@ const OnBoardingForm = () => {
     } else {
       toast.error("Enter valid email and counselor name.");
       resetForm();
+      window.location.reload(); 
       setIsSubmitting(false);
     }
   };

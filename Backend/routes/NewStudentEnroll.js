@@ -4,21 +4,7 @@ const CreateBDA = require("../models/CreateBDA");
 const NewEnrollStudent = require("../models/NewStudentEnroll");
 const CreateCourse = require("../models/CreateCourse");
 const mongoose = require("mongoose");
-// post request to post all the new student enroll
-// router.post("/newstudentenroll", async (req, res) => {
-//   const { fullname,email,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName, operationId , transactionId, alternativeEmail, modeofpayment } = req.body;
-//   try {
-//     const course = await CreateCourse.findOne({ title: domain });
-//     const newStudent = new NewEnrollStudent({
-//         fullname,email,alternativeEmail,phone,program,counselor,domain,programPrice,paidAmount,monthOpted,clearPaymentMonth,operationName,modeofpayment, transactionId, operationId, status: "booked", domainId: course._id,
-//     });
-//     await newStudent.save();3
-//     res.status(201).json({ message: "Registration successful!" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Server error. Please try again later." });
-//   }
-// });
+
 
 router.post("/newstudentenroll", async (req, res) => {
   try {
@@ -162,7 +148,7 @@ router.get("/getnewstudentenroll", async (req, res) => {
           .json({ message: "Student Eroll not found for the given userId" });
       }
     } else {
-      StudentEnroll = await NewEnrollStudent.find().sort({ _id: -1 });
+      StudentEnroll = await NewEnrollStudent.find().sort({ createdAt: -1 });
     }
     res.status(200).json(StudentEnroll);
   } catch (error) {
@@ -358,6 +344,34 @@ router.get("/bda-with-enrolls", async (req, res) => {
     res.status(200).json(bdaWithEnrolls);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error", message: error.message });
+  }
+});
+
+
+
+router.get("/databyopname", async (req, res) => {
+  const { operationName } = req.query;
+  try {
+    const OpName = await NewEnrollStudent.find({ operationName: operationName }).sort({ createdAt: -1 }).lean();
+    res.status(200).json(OpName);
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch enrollments", error });
+  }
+});
+
+router.get("/databybdaname", async (req, res) => {
+  const { bdaName } = req.query;
+  try {
+    const students = await NewEnrollStudent.find({ counselor: bdaName })
+      .select('fullname phone referFriend')
+      .sort({ createdAt: -1 })
+      .lean();
+
+    res.status(200).json(students);
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch enrollments", error });
   }
 });
 

@@ -23,7 +23,6 @@ const AdvanceQueries = () => {
   const getQueries = async () => {
     try {
       const response = await axios.get(`${API}/advancequeries`);
-      console.log("advance queries", response.data);
       setQueries(response.data);
     } catch (error) {
       console.error(error);

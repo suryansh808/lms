@@ -180,6 +180,7 @@ const CreateBDA = () => {
               <option value="GLADIATOR">GLADIATOR</option>
               <option value="BEAST">BEAST</option>
               <option value="WARRIOR">WARRIOR</option>
+              <option value="NO TEAM">NO TEAM</option>
             </select>
             <input
               type="text"

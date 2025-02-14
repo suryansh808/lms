@@ -81,12 +81,13 @@ const AcceptedApplication = () => {
     setSearchQuery(value);
     const filtered = users.filter(
       (student) =>
-        student.fullName.toLowerCase().includes(value.toLowerCase()) ||
+        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
         student.email.toLowerCase().includes(value.toLowerCase()) ||
         student.phone.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
+
   return (
     <div id="AdminAddCourse">
       {iscourseFormVisible && (
@@ -175,7 +176,7 @@ const AcceptedApplication = () => {
                 filteredStudents.map((user, index) => (
                   <tr key={user._id}>
                     <td>{index + 1}</td>
-                    <td>{user.fullName}{user.fullname}</td>
+                    <td>{user.fullname}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
                     <td>{user.password}</td>

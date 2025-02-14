@@ -63,7 +63,8 @@ import OnBoarding from "./BDA/OnBoarding";
 import AddUser from "./BDA/AddUser";
 import TeamDetail from "./BDA/TeamDetail";
 import BDARevenueSheet from "./BDA/BDARevenueSheet";
-// import BDAAgainLogin from "./BDA/BDAAgainLogin";
+import Reference from "./BDA/Reference";
+
 
 // User Student
 import UserHeader from "./User/UserHeader";
@@ -92,6 +93,7 @@ import Exercise from "./User/Excercise";
 
 import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
+
 
 
 
@@ -170,7 +172,8 @@ const AppContent = () => {
     "/onboarding",
     "/adduser",
     "/teamdetail",
-    "/bdarevenuesheet"
+    "/bdarevenuesheet",
+    "/reference"
   ];
   const userheaderPaths = [
     "/dashboard",
@@ -282,7 +285,7 @@ const AppContent = () => {
         {/* Operation Panel End */}
 
         {/* bda panel start */}
-        <Route path="/TeamLogin" element={<TeamLogin />} />
+          <Route path="/TeamLogin" element={<TeamLogin />} />
           {/* <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} /> */}
           <Route path="/Home" element={ isAuthenticatedBda() ? <Home /> : <Navigate to="/TeamLogin"/>} />
           <Route path="/FullPaid" element={isAuthenticatedBda() ?<FullPaid /> : <Navigate to="/TeamLogin"/>} />
@@ -292,6 +295,8 @@ const AppContent = () => {
           <Route path="/AddUser" element={isAuthenticatedBda() ?<AddUser/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/TeamDetail" element={isAuthenticatedBda() ?<TeamDetail/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/Reference" element={isAuthenticatedBda() ?<Reference/> : <Navigate to="/TeamLogin"/> }/>
+         
 
 
         {/* bda panel ends */}

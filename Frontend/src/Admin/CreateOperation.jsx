@@ -10,13 +10,14 @@ const CreateOperation = () => {
     password: "",
   });
   const [operation, setOperation] = useState([]);
-  const [selectedOperationName, setSelectedOperationName] = useState(null); // Store selected operation ID
-  const [revenueData, setRevenueData] = useState(null); // Store revenue data only for selected operation
+  const [selectedOperationName, setSelectedOperationName] = useState(null);
+  const [revenueData, setRevenueData] = useState(null);
   const [editingOperationId, setEditingOperationId] = useState(null);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const toggleVisibility = () => {
     setiscourseFormVisible((prevState) => !prevState);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newOperation = {
@@ -47,6 +48,7 @@ const CreateOperation = () => {
       console.error("Error creating or updating operation", error);
     }
   };
+
   const fetchOperation = async () => {
     try {
       const response = await axios.get(`${API}/getoperation`);
@@ -54,23 +56,83 @@ const CreateOperation = () => {
     } catch (error) {
       console.error("There was an error fetching operation:", error);
     }
-  };  
-  const fetchRevenueDetails = async (operationName) => {
-    try { 
-      setRevenueData(null);
-      setIsDialogVisible(true); // Open the dialog to show data
-      setSelectedOperationName(operationName); // Store the selected operation name
+  };
 
-      const response = await axios.get(`${API}/getnewstudentenroll`, {
-        params: { operationName }, // Use operationName instead of operationId
+  // const fetchRevenueDetails = async (operationName) => {
+  //   try {
+  //     setRevenueData(null);
+  //     setIsDialogVisible(true);
+  //     setSelectedOperationName(operationName);
+
+  //     const response = await axios.get(`${API}/databyopname`, {
+  //       params: { operationName },
+  //     });
+  //     const data = response.data;
+  //     const revenueByDay = {};
+  //     const revenueByMonth = {};
+  //     let totalRevenue = 0;
+  //     data.forEach((student) => {
+  //       const date = new Date(student.createdAt).toLocaleDateString("en-GB");
+  //       const month = new Date(student.createdAt).toLocaleString("default", {
+  //         month: "long",
+  //         year: "numeric",
+  //       });
+  //       const revenue = student.programPrice || 0;
+  //       const credited = (student.paidAmount || 0) - (student.defaultAmount || 0);
+  //       const pending = revenue - credited;
+  //       if (!revenueByDay[date]) {
+  //         revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
+  //       }
+  //       if (!revenueByMonth[month]) {
+  //         revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
+  //       }
+  //       revenueByDay[date].total += revenue;
+  //       revenueByDay[date].credited += credited;
+  //       revenueByDay[date].pending += pending;
+  //       revenueByMonth[month].total += revenue;
+  //       revenueByMonth[month].credited += credited;
+  //       revenueByMonth[month].pending += pending;
+  //       totalRevenue += revenue;
+  //     });
+  //     setRevenueData({
+  //       revenueByDay,
+  //       revenueByMonth,
+  //       totalRevenue,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error fetching operation revenue data:", error);
+  //   }
+  // };
+
+  const fetchRevenueDetails = async (operationName) => {
+    try {
+      setRevenueData(null);
+      setIsDialogVisible(true);
+      setSelectedOperationName(operationName);
+
+      const response = await axios.get(`${API}/databyopname`, {
+        params: { operationName },
       });
       const data = response.data;
       const revenueByDay = {};
       const revenueByMonth = {};
       let totalRevenue = 0;
+
+      // Get the current date and date 7 days ago
+      const today = new Date();
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(today.getDate() - 7);
+
+      // Get the current month and 3 months ago
+      const currentMonth = today.getMonth();
+      const currentYear = today.getFullYear();
+      const threeMonthsAgo = new Date(today);
+      threeMonthsAgo.setMonth(today.getMonth() - 3);
+
       data.forEach((student) => {
-        const date = new Date(student.createdAt).toLocaleDateString("en-GB");
-        const month = new Date(student.createdAt).toLocaleString("default", {
+        const createdAt = new Date(student.createdAt);
+        const date = createdAt.toLocaleDateString("en-GB");
+        const month = createdAt.toLocaleString("default", {
           month: "long",
           year: "numeric",
         });
@@ -78,27 +140,35 @@ const CreateOperation = () => {
         const credited =
           (student.paidAmount || 0) - (student.defaultAmount || 0);
         const pending = revenue - credited;
-        if (!revenueByDay[date]) {
-          revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
+
+        // Filter out data that is outside of the last 7 days
+        if (createdAt >= sevenDaysAgo) {
+          if (!revenueByDay[date]) {
+            revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
+          }
+          revenueByDay[date].total += revenue;
+          revenueByDay[date].credited += credited;
+          revenueByDay[date].pending += pending;
         }
-        if (!revenueByMonth[month]) {
-          revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
+
+        // Filter out data that is outside of the last 3 months
+        if (createdAt >= threeMonthsAgo) {
+          if (!revenueByMonth[month]) {
+            revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
+          }
+          revenueByMonth[month].total += revenue;
+          revenueByMonth[month].credited += credited;
+          revenueByMonth[month].pending += pending;
         }
-        revenueByDay[date].total += revenue;
-        revenueByDay[date].credited += credited;
-        revenueByDay[date].pending += pending;
-        revenueByMonth[month].total += revenue;
-        revenueByMonth[month].credited += credited;
-        revenueByMonth[month].pending += pending;
+
         totalRevenue += revenue;
       });
+
       setRevenueData({
         revenueByDay,
         revenueByMonth,
         totalRevenue,
       });
-      // setSelectedOperationName(operationName); // Store the selected operation name
-      // setIsDialogVisible(true);
     } catch (error) {
       console.error("Error fetching operation revenue data:", error);
     }
@@ -187,6 +257,7 @@ const CreateOperation = () => {
   const closeDialog = () => {
     setIsDialogVisible(false);
   };
+
   return (
     <div id="AdminAddCourse">
       <Toaster position="top-center" reverseOrder={false} />
@@ -256,7 +327,7 @@ const CreateOperation = () => {
                 <td>{index + 1}</td>
                 <td
                   style={{ cursor: "pointer", color: "blue" }}
-                  onClick={() => fetchRevenueDetails(operation.fullname)} 
+                  onClick={() => fetchRevenueDetails(operation.fullname)}
                 >
                   {operation.fullname}
                 </td>
@@ -290,17 +361,18 @@ const CreateOperation = () => {
       </div>
       {isDialogVisible && revenueData && selectedOperationName && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden max-h-[80vh] overflow-y-auto">
+          <div className="bg-white relative w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-4 sm:p-6 rounded-xl shadow-lg overflow-hidden max-h-[80vh] scrollbar-hide  overflow-y-auto">
+            <span
+              onClick={closeDialog}
+              className="cursor-pointer absolute right-0 bg-black border rounded-full px-2 top-0 text-xl text-gray-500 hover:text-red-600"
+            >
+              X
+            </span>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">
-                Revenue Details for <span className="text-red-400">{selectedOperationName}</span>
+                Revenue Details for{" "}
+                <span className="text-[#f15b29]">{selectedOperationName}</span>
               </h2>
-              <span
-                onClick={closeDialog}
-                className="cursor-pointer text-xl text-gray-500 hover:text-gray-700"
-              >
-                X
-              </span>
             </div>
             <div>
               <h3 className="font-semibold mb-2">
