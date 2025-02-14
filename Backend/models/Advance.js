@@ -52,6 +52,10 @@ const AdvanceSchema = new mongoose.Schema({
   reason:{
     type:String,
   },
+  action:{
+    type:String,
+    default:"Unseen"
+  },
   createdAt: {
     type: Date,
     default: Date.now,

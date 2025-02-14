@@ -86,7 +86,7 @@ const FullPaid = () => {
               <th>Pending </th>
               <th>Month Opted</th>
               <th>Due Date</th>
-              <th>Remark</th>
+              {/* <th>Remark</th> */}
             </tr>
           </thead>
           <tbody>
@@ -107,7 +107,7 @@ const FullPaid = () => {
                   <td className="whitespace-nowrap">
                     {item.clearPaymentMonth}
                   </td>
-                  <td>{item.remark[item.remark.length - 1]}</td>
+                  {/* <td>{item.remark[item.remark.length - 1]}</td> */}
                 </tr>
               ))
             ) : (

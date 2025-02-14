@@ -90,3 +90,14 @@
     padding: 2px 10px;
   }
 }
+
+table{
+  tbody{
+      .Paid{
+          background-color: rgb(128, 247, 128);
+      }
+      .NotInterested{
+          background-color: rgb(255, 0, 0);
+      }
+  }
+}

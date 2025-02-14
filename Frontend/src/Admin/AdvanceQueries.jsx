@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "../API";
+import toast, { Toaster } from "react-hot-toast";
 
 const formatDate = (date) => {
   const d = new Date(date);
@@ -28,11 +29,12 @@ const AdvanceQueries = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     getQueries();
   }, []);
-  const groupedQueries = groupByDate(queries);
 
+  const groupedQueries = groupByDate(queries);
   if (!groupedQueries) {
     return (
       <div id="loader">
@@ -44,9 +46,32 @@ const AdvanceQueries = () => {
       </div>
     );
   }
+  const getBackgroundColor = (value) => {
+    switch (value) {
+      case "Shared":
+        return "bg-blue-800";
+      case "Not Interested":
+        return "bg-red-800";
+      case "Already Paid":
+        return "bg-green-800";
+      default:
+        return "bg-gray-500";
+    }
+  };
+  const handleSelectChange = async (event, id) => {
+    const updatedAction = event.target.value;
+    try {
+      await axios.put(`${API}/advancequery/${id}`, { action: updatedAction });
+      toast.success("Query updated successfully");
+      getQueries();
+    } catch (error) {
+      console.error("Error updating query:", error);
+    }
+  };
 
   return (
     <div id="AdminAddCourse">
+       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="text-center my-5">Advance Course Queries</h2>
       <div className="coursetable">
         <table>
@@ -62,6 +87,7 @@ const AdvanceQueries = () => {
               <th>Domain</th>
               <th>Reason</th>
               <th>Time</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -70,7 +96,7 @@ const AdvanceQueries = () => {
                 <React.Fragment key={dateIndex}>
                   <tr>
                     <td
-                      colSpan="10"
+                      colSpan="11"
                       style={{
                         fontWeight: "bold",
                         backgroundColor: "#f0f0f0",
@@ -90,7 +116,7 @@ const AdvanceQueries = () => {
                     });
 
                     return (
-                      <tr key={index}>
+                      <tr key={index} className={`text-white rounded-full ${getBackgroundColor(query.action)}`}>
                         <td className=" capitalize">{query.name}</td>
                         <td>{query.email}</td>
                         <td>{query.phone}</td>
@@ -109,6 +135,28 @@ const AdvanceQueries = () => {
                         </td>
                         <td>{query.reason}</td>
                         <td className=" uppercase">{time}</td>
+                        <td>
+                      <select
+                        value={query.action}
+                        onChange={(event) =>
+                          handleSelectChange(event, query._id)
+                        }
+                        className={`text-white rounded-full border ${getBackgroundColor(
+                          query.action || "Unseen"
+                        )}`}
+                      >
+                        <option value="Unseen">Unseen</option>
+                        <option className="bg-blue-600" value="Shared">
+                          Shared
+                        </option>
+                        <option className="bg-red-600" value="Not Interested">
+                          Not Interested
+                        </option>
+                        <option className="bg-green-600" value="Already Paid">
+                          Already Paid
+                        </option>
+                      </select>
+                    </td>
                       </tr>
                     );
                   })}
@@ -116,7 +164,7 @@ const AdvanceQueries = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="10">No Queries Found</td>
+                <td colSpan="11">No Queries Found</td>
               </tr>
             )}
           </tbody>

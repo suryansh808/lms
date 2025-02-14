@@ -163,14 +163,19 @@ router.get("/getnewstudentenroll", async (req, res) => {
 
 // Handle POST request to update remark for an existing student
 router.post("/updateremark", async (req, res) => {
-  const { remark, studentId } = req.body;
-  console.log(remark, studentId);
+  const { remark, studentId  , referRemark} = req.body;
   try {
     const existingStudent = await NewEnrollStudent.findById(studentId);
     if (!existingStudent) {
       return res.status(404).json({ error: "Student not found." });
     }
-    existingStudent.remark.push(remark);
+    if (remark) {
+      existingStudent.remark.push(remark);
+    }
+    
+    if (referRemark) {
+      existingStudent.referRemark.push(referRemark);
+    }
     await existingStudent.save();
     return res.status(200).json({ message: "Remark added successfully!" });
   } catch (error) {
@@ -364,7 +369,7 @@ router.get("/databybdaname", async (req, res) => {
   const { bdaName } = req.query;
   try {
     const students = await NewEnrollStudent.find({ counselor: bdaName })
-      .select('fullname phone referFriend')
+      .select('fullname phone referFriend createdAt referRemark')
       .sort({ createdAt: -1 })
       .lean();
 

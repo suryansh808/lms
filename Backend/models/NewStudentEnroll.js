@@ -68,6 +68,7 @@ const newStudentEnrollSchema = new Schema(
     branch:{type:String},
     aadharNumber:{type:String},
     referFriend:{type:String},
+    referRemark:[{type:String}],
   },
   {
     timestamps: true,

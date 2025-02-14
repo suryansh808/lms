@@ -703,12 +703,8 @@ const BookedAmount = () => {
                           onChange={(e) => handleRemarkChange(e, item._id)}
                           defaultValue="Select Remark"
                         >
-                          <option disabled value="Select Remark">
-                            Select Remark
-                          </option>
-                          <option value="Reminder Issued">
-                            Reminder Issued
-                          </option>
+                          <option disabled value="Select Remark"> Select Remark</option>
+                          <option value="Reminder Issued"> Reminder Issued</option>
                           <option value="DNP">DNP</option>
                           <option value="NATC">NATC</option>
                           <option value="Not Interested">Not Interested</option>

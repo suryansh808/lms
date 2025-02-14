@@ -61,7 +61,7 @@ const MentorQueries = () => {
       case "Already Paid":
         return "bg-green-800";
       default:
-        return "bg-black";
+        return "bg-gray-500";
     }
   };
 
@@ -112,7 +112,7 @@ const MentorQueries = () => {
                     </td>
                   </tr>
                 ) : (
-                  <tr key={item._id}>
+                  <tr key={item._id}  className={`text-white rounded-full ${getBackgroundColor(item.action)}`}>
                     <td className="capitalize">{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
@@ -134,7 +134,7 @@ const MentorQueries = () => {
                         onChange={(event) =>
                           handleSelectChange(event, item._id)
                         }
-                        className={`text-white ${getBackgroundColor(
+                        className={`text-white rounded-full border  ${getBackgroundColor(
                           item.action || "Unseen"
                         )}`}
                       >
