@@ -10,8 +10,10 @@ const LoginWithOtp = () => {
   const [otp, setOtp] = useState('');
   const [showOtp, setShowOtp] = useState(false);
   const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
   
   const handleSendOtp = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(`${API}/send-otp`, { email });
       if (response.status === 200) {
@@ -20,6 +22,8 @@ const LoginWithOtp = () => {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Error sending OTP');
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -68,8 +72,8 @@ const LoginWithOtp = () => {
             />
           </div>
           {!showOtp ? (
-            <button type="button" onClick={handleSendOtp}>
-              Send OTP
+            <button disabled={loading} type="button" onClick={handleSendOtp}>
+            { loading ? "Sending..." : "Send OTP"}
             </button>
           ) : (
             <>

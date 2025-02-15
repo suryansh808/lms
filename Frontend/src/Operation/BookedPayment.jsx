@@ -238,13 +238,12 @@ const BookedAmount = () => {
     setSearchQuery(value);
     const filtered = newStudent.filter(
       (student) =>
-        student.email.toLowerCase().includes(value.toLowerCase()) ||
-        student.phone.toLowerCase().includes(value.toLowerCase()) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
-        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
-        student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase())||
-        student.remark[length - 1].toLowerCase().includes(value.toLowerCase())
+        student.email.includes(value) ||
+        student.phone.includes(value) ||
+        student.fullname.toLowerCase().includes(value.toLowerCase())||
+        student.counselor.includes(value)||
+        (student.clearPaymentMonth &&
+          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))
     );
     setFilteredStudents(filtered);
   };
@@ -571,7 +570,7 @@ const BookedAmount = () => {
           <div className="relative group inline-block">
             <i class="fa fa-info-circle text-lg cursor-pointer"></i>
             <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-              Name, Email, Contact No ,Counselor, Operation and Due date
+              Name, Email, Contact No and Counselor Name
               <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
             </div>
           </div>

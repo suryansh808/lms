@@ -8,6 +8,7 @@ const OperationLogin = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const errorRef = useRef(null);
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const OperationLogin = () => {
       toast.error("Please enter your email.");
       return;
     }
+    setLoading(true);
     try {
       const response = await axios.post(`${API}/operationsendotp`, { email });
       if (response.status === 200) {
@@ -27,6 +29,8 @@ const OperationLogin = () => {
       toast.error(
         error.response?.data?.message || "Failed to send OTP. Please try again."
       );
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -87,7 +91,7 @@ const OperationLogin = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button>Send OTP</button>
+            <button disabled={loading}>{loading ? "Sending..." : "Send OTP"}</button>
           </form>
         ) : (
           <form onSubmit={handleVerifyOtp}>

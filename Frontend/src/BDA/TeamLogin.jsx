@@ -11,16 +11,20 @@ const TeamLogin = () => {
   const [step, setStep] = useState(1);
   const errorRef = useRef(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
  // Send OTP 
   const handleSendOTP = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.post(`${API}/bdasendotp`, { email });
       toast.success("OTP sent to your email!");
       setStep(2);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to send OTP!");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +68,7 @@ const TeamLogin = () => {
               />
             </div>
             <div>
-              <button type="submit">Send OTP</button>
+              <button disabled={loading} type="submit">{loading ? "Sending..." : "Send OTP"}</button>
             </div>
           </form>
         ) : (
