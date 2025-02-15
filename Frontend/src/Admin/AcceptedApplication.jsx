@@ -62,6 +62,7 @@ const AcceptedApplication = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
+
   const handleActiveNow = async (id) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to inactive this user?"
@@ -86,7 +87,17 @@ const AcceptedApplication = () => {
         student.phone.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStudents(filtered);
+    setCurrentPage(1);
   };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedStudents = filteredStudents.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
+  
 
   return (
     <div id="AdminAddCourse">
@@ -141,7 +152,7 @@ const AcceptedApplication = () => {
         </div>
       ) : (
         <div className="coursetable">
-          <h1>Active Users List</h1>
+          <h2>Active Users List</h2>
           <section className="flex items-center  gap-1">
             <input
               type="type"
@@ -172,8 +183,8 @@ const AcceptedApplication = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((user, index) => (
+              {paginatedStudents.length > 0 ? (
+                paginatedStudents.map((user, index) => (
                   <tr key={user._id}>
                     <td>{index + 1}</td>
                     <td>{user.fullname}</td>
@@ -210,6 +221,35 @@ const AcceptedApplication = () => {
               )}
             </tbody>
           </table>
+          {/* Pagination */}
+          {filteredStudents.length > itemsPerPage && (
+            <section className="flex items-center justify-center gap-5 mt-2">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    prev < Math.ceil(filteredStudents.length / itemsPerPage)
+                      ? prev + 1
+                      : prev
+                  )
+                }
+                disabled={
+                  currentPage >=
+                  Math.ceil(filteredStudents.length / itemsPerPage)
+                }
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
+              >
+                Next
+              </button>
+            </section>
+          )}
+
         </div>
       )}
     </div>

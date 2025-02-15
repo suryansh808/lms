@@ -72,7 +72,7 @@ const AdvanceQueries = () => {
   return (
     <div id="AdminAddCourse">
        <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="text-center my-5">Advance Course Queries</h2>
+      <h2>Advance Course Queries</h2>
       <div className="coursetable">
         <table>
           <thead>

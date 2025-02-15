@@ -74,10 +74,19 @@ const BookedList = () => {
       );
     });
     setFilteredStudents(filtered);
+    setCurrentPage(1);
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedStudents = filteredStudents.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-  const groupedData = filteredStudents.reduce((acc, item) => {
+  const groupedData = paginatedStudents.reduce((acc, item) => {
     const date = formatDate(item.createdAt);
     if (!acc[date]) {
       acc[date] = [];
@@ -259,6 +268,16 @@ const BookedList = () => {
     fetchOperation();
   }, []);
 
+
+  
+
+
+
+
+
+
+
+
   return (
     <div id="AdminAddCourse">
       <Toaster position="top-center" reverseOrder={false} />
@@ -431,7 +450,7 @@ const BookedList = () => {
                 {/* <th>Pending </th> */}
                 <th>BDA</th>
                 <th>Operation</th>
-                <th>Due Date</th>
+                {/* <th>Due Date</th> */}
                 <th>Status</th>
                 <th>Remark</th>
                 <th>More Details</th>
@@ -466,9 +485,9 @@ const BookedList = () => {
                         {/* <td className="text-red-600 font-bold">{item.programPrice - item.paidAmount}</td> */}
                         <td>{item.counselor}</td>
                         <td>{item.operationName}</td>
-                        <td className="whitespace-nowrap">
+                        {/* <td className="whitespace-nowrap">
                           {item.clearPaymentMonth}
-                        </td>
+                        </td> */}
                         <td>
                           <button
                             className="button"
@@ -533,16 +552,45 @@ const BookedList = () => {
             </tbody>
           </table>
 
+           {/* Pagination */}
+           {filteredStudents.length > itemsPerPage && (
+            <section className="flex items-center justify-center gap-5 mt-2">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    prev < Math.ceil(filteredStudents.length / itemsPerPage)
+                      ? prev + 1
+                      : prev
+                  )
+                }
+                disabled={
+                  currentPage >=
+                  Math.ceil(filteredStudents.length / itemsPerPage)
+                }
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
+              >
+                Next
+              </button>
+            </section>
+          )}
+
           {dialogVisible && dialogData && (
             <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
               <h2>Details</h2>
               <div className="space-y-2">
                 {/* <p>
                 <strong>Email:</strong> {dialogData.email}
-              </p>
-              <p>
-                <strong>Phone:</strong> {dialogData.phone}
               </p> */}
+              <p>
+                <strong>Due Date:</strong> {dialogData.clearPaymentMonth}
+              </p>
                 <p>
                   <strong>Program:</strong> {dialogData.program}
                 </p>

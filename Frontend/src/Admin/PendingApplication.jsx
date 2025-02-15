@@ -58,7 +58,7 @@ const PendingApplication = () => {
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
-        <h1>Inactive Users List</h1>
+        <h2>Inactive Users List</h2>
         <section className="flex items-center  gap-1">
           <input
             type="type"

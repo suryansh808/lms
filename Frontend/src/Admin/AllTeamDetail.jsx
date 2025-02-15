@@ -199,6 +199,7 @@ const AllTeamDetail = () => {
       )}
 
       <div className="coursetable">
+        <h2>Team Details</h2>
         <div className="mb-2">
           <h2>{selectedTeam} </h2>
             <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>

@@ -169,11 +169,11 @@ const FullPaidList = () => {
           </table>
           {/* Pagination */}
           {filteredStudents.length > itemsPerPage && (
-            <div className="flex justify-start mt-4">
+            <section className="flex items-center justify-center gap-5 mt-2">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="mr-2 px-4 py-2 bg-gray-300 rounded"
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
               >
                 Previous
               </button>
@@ -189,11 +189,11 @@ const FullPaidList = () => {
                   currentPage >=
                   Math.ceil(filteredStudents.length / itemsPerPage)
                 }
-                className="px-4 py-2 bg-gray-300 rounded"
+                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
               >
                 Next
               </button>
-            </div>
+            </section>
           )}
         </div>
       )}

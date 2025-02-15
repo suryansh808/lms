@@ -62,6 +62,12 @@
 }
 
 #AdminAddCourse {
+  h2 {
+    text-align: center;
+    color: #f15b29;
+    font-weight: 600;
+    font-size: large;
+  }
   .form {
     position: fixed;
     background-color: rgb(0, 0, 0, 0.5);
@@ -69,6 +75,8 @@
     width: 100%;
     padding: 10px;
     z-index: 9999;
+
+
 
     form {
       padding: 10px;
@@ -130,6 +138,13 @@
       text-align: center;
       color: #f15b29;
     }
+    h2 {
+      text-align: center;
+      color: #f15b29;
+      font-weight: 600;
+      font-size: large;
+    }
+
 
     > div {
       display: flex;
