@@ -7,6 +7,9 @@ const MentorshipSchema = new mongoose.Schema({
   email: {
     type: String,
   },
+  collegeEmail:{
+    type:String
+  },
   phone: {
     type: String,
     lowercase: true,

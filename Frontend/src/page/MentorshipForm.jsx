@@ -8,6 +8,7 @@ const MentorshipForm = () => {
    const [formData, setFormData] = useState({
       name: "",
       email: "",
+      collegeEmail:"",
       number: "",
       collegeName: "",
       domain: "",
@@ -41,6 +42,7 @@ const MentorshipForm = () => {
           await axios.post(`${API}/mentorship/register`, {
             name: formData.name,
             email: formData.email,
+            collegeEmail:formData.collegeEmail,
             phone: formData.number,
             collegeName: formData.collegeName,
             domain: formData.domain,
@@ -64,6 +66,7 @@ const MentorshipForm = () => {
         setFormData({
           name: "",
           email: "",
+          collegeEmail: "",
           number: "",
           collegeName: "",
           domain: "",
@@ -99,7 +102,7 @@ const MentorshipForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Enter your name"
+                placeholder="Full Name"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -108,7 +111,16 @@ const MentorshipForm = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Enter your email id"
+                placeholder="Email id"
+                className="mb-3 p-2 w-full border rounded"
+                required
+              />
+              <input
+                type="email"
+                name="collgeEmail"
+                value={formData.collegeEmail}
+                onChange={handleInputChange}
+                placeholder="Collge Email id"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -117,7 +129,7 @@ const MentorshipForm = () => {
                 name="number"
                 value={formData.number}
                 onChange={handleInputChange}
-                placeholder="Enter phone number"
+                placeholder="Whatsapp Number"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -126,7 +138,7 @@ const MentorshipForm = () => {
                 name="collegeName"
                 value={formData.collegeName}
                 onChange={handleInputChange}
-                placeholder="Enter your college name"
+                placeholder="College Name"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -194,6 +206,7 @@ const MentorshipForm = () => {
               <div className="flex justify-center">
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="px-4 py-2 bg-[#f15b29] text-white rounded"
                 >
                   Submit

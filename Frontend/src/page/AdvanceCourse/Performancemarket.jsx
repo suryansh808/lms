@@ -910,14 +910,14 @@ const Performancemarket = () => {
                             <div className="flex justify-center gap-2">
                               <button
                                 type="submit"
-                                onClick={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Performance marketing')}
+                                onSubmit={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Performance marketing')}
                                 className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                               >
                                <i class="fa fa-download"></i>
                               </button>
                               <button
                                 type="submit"
-                                onClick={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Performance marketing')}
+                                onSubmit={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Performance marketing')}
                                 className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                               >
                              <i class="fa fa-download"></i> + <RiCustomerService2Fill />

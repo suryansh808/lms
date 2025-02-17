@@ -86,6 +86,7 @@ const MentorQueries = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>College Email</th>
               <th>Phone</th>
               <th>College Name</th>
               <th>Interested Domain</th>
@@ -115,6 +116,7 @@ const MentorQueries = () => {
                   <tr key={item._id}  className={`text-white rounded-full ${getBackgroundColor(item.action)}`}>
                     <td className="capitalize">{item.name}</td>
                     <td>{item.email}</td>
+                    <td>{item.collegeEmail}</td>
                     <td>{item.phone}</td>
                     <td className="capitalize">{item.collegeName}</td>
                     <td className="capitalize">{item.domain}</td>

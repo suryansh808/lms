@@ -92,8 +92,8 @@ const UserHeader = () => {
           </Link>
           {/* <Link to="/JobBoard">
             <i className="fa fa-briefcase"></i> Job Board
-          </Link> */}
-          {/* <Link to="/MyJob">
+          </Link>
+          <Link to="/MyJob">
             <i className="fa fa-suitcase"></i> My Job
           </Link> */}
           <Link to="/Setting">

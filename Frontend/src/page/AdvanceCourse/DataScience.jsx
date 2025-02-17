@@ -895,14 +895,14 @@ const DataScience = () => {
                   <div className="flex justify-center gap-2">
                     <button
                       type="submit"
-                      onClick={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Data Science')}
+                      onSubmit={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Data Science')}
                       className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                     >
                      <i class="fa fa-download"></i>
                     </button>
                     <button
                       type="submit"
-                      onClick={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Data Science')}
+                      onSubmit={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Data Science')}
                       className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                     >
                    <i class="fa fa-download"></i> + <RiCustomerService2Fill />

@@ -57,6 +57,7 @@ const CourseMentor = ({}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    collegeEmail:"",
     number: "",
     collegeName: "",
     domain: "",
@@ -69,7 +70,7 @@ const CourseMentor = ({}) => {
     "Management",
     "Electronics/Electrical",
     "Medical",
-    "Mechanical/Civil",
+    "Mechanical",
   ];
   const coursesData = {
     "Computer science": [
@@ -276,16 +277,16 @@ const CourseMentor = ({}) => {
       },
     ],
     Medical: [
-      {
-        id: 21,
-        title: "Nano Technology & Genetic Engineering",
-        image: `${nano}`,
-        pdf: `${pdf19}`,
-        description:
-          " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
-        rating: 4.9,
-        studentsTaken: 890,
-      },
+      // {
+      //   id: 21,
+      //   title: "Nano Technology & Genetic Engineering",
+      //   image: `${nano}`,
+      //   pdf: `${pdf19}`,
+      //   description:
+      //     " Modifying organisms’ genes or manipulating matter at a microscopic level for innovation.",
+      //   rating: 4.9,
+      //   studentsTaken: 890,
+      // },
       {
         id: 22,
         title: "Psychology",
@@ -297,7 +298,7 @@ const CourseMentor = ({}) => {
         studentsTaken: 709,
       },
     ],
-    "Mechanical/Civil": [
+    "Mechanical": [
       {
         id: 23,
         title: "Auto Cad",
@@ -342,6 +343,7 @@ const CourseMentor = ({}) => {
       await axios.post(`${API}/mentorship/register`, {
         name: formData.name,
         email: formData.email,
+        collegeEmail : formData.collegeEmail,
         phone: formData.number,
         collegeName: formData.collegeName,
         domain: formData.domain,
@@ -366,6 +368,7 @@ const CourseMentor = ({}) => {
     setFormData({
       name: "",
       email: "",
+      collegeEmail:"",
       number: "",
       collegeName: "",
       domain: "",
@@ -451,7 +454,7 @@ const CourseMentor = ({}) => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Enter your name"
+                placeholder="Full Name"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -460,7 +463,16 @@ const CourseMentor = ({}) => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Enter your email id"
+                placeholder="Email Id"
+                className="mb-3 p-2 w-full border rounded"
+                required
+              />
+              <input
+                type="email"
+                name="collegeEmail"
+                value={formData.collegeEmail}
+                onChange={handleInputChange}
+                placeholder="College Email Id"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -469,7 +481,7 @@ const CourseMentor = ({}) => {
                 name="number"
                 value={formData.number}
                 onChange={handleInputChange}
-                placeholder="Enter phone number"
+                placeholder="Whatsapp Number"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -478,7 +490,7 @@ const CourseMentor = ({}) => {
                 name="collegeName"
                 value={formData.collegeName}
                 onChange={handleInputChange}
-                placeholder="Enter your college name"
+                placeholder="College Name"
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
@@ -561,7 +573,7 @@ const CourseMentor = ({}) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={(e) =>
+                  onSubmit={(e) =>
                     handleFormSubmit(
                       e,
                       "Only Download Brochure",
@@ -574,7 +586,7 @@ const CourseMentor = ({}) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={(e) =>
+                  onSubmit={(e) =>
                     handleFormSubmit(
                       e,
                       "Requested To Call Back",

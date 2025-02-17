@@ -19,6 +19,7 @@ import corporate from "../assets/corporatesolution.jpg";
 import comingsoon from "../assets/comingsoon.jpg";
 
 import roadmap from "../assets/roadmap.png";
+import AdvanceCounses from "../Components/advancecourses";
 
 const HomePage = () => {
   useEffect(() => {
@@ -259,6 +260,13 @@ const HomePage = () => {
       </div>
 
       {/* section Popular course end */}
+
+      {/* advance courses */}
+      {/* <div className="popularcourse">
+        <h1 data-aos="zoom-in">| Our advanced program</h1>
+        <AdvanceCounses />
+      </div> */}
+      {/* advance courses end  */}
 
       {/* <WhyChooseUs/> */}
       <div className="whychoose">
