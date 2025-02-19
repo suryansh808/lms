@@ -53,19 +53,19 @@ const TeamLogin = () => {
     <div id="loginpage">
       <Toaster position="top-center" reverseOrder={false}/>
       <div className="loginform">
-        <h2>Login</h2>
+        <h2>Login With Offical Email Id</h2>
         {step === 1 ? (
           <form onSubmit={handleSendOTP}>
-            <div>
-              <label htmlFor="email">Email:</label>
+            <div className="input-field">
               <input
                 type="email"
                 id="email"
-                placeholder="Enter company mail id"
+                // placeholder="Enter company mail id"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+               <label htmlFor="email">Company Email</label>
             </div>
             <div>
               <button disabled={loading} type="submit">{loading ? "Sending..." : "Send OTP"}</button>
@@ -73,16 +73,16 @@ const TeamLogin = () => {
           </form>
         ) : (
           <form onSubmit={handleVerifyOTP}>
-            <div>
-              <label htmlFor="otp">OTP:</label>
+            <div className="input-field">
               <input
                 type="text"
                 id="otp"
-                placeholder="Enter OTP"
+                // placeholder="Enter OTP"
                 required
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
               />
+              <label htmlFor="otp">OTP</label>
             </div>
             <div>
               <button type="submit">Verify OTP</button>

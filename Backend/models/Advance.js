@@ -25,7 +25,7 @@ const AdvanceSchema = new mongoose.Schema({
   },
   interestedDomain:{
      type:String,
-     enum: ["Data Science", "Digital Marketing", "Investment Banking", "MERN Stack Devlopment", "Product Management", "Performance Marketing"],
+     enum: ["Data Science", "Digital Marketing", "Investment Banking", "MERN Stack Devlopment", "Product Management", "Performance Marketing", "Prompt Engineering in Generative AI" , "Automation Testing" ],
   },
   goal: {
     type: String,

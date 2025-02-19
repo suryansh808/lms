@@ -102,7 +102,7 @@ const MentorQueries = () => {
                 item.type === "date" ? (
                   <tr key={`date-${item.date}`}>
                     <td
-                      colSpan="9"
+                      colSpan="10"
                       style={{
                         fontWeight: "bold",
                         backgroundColor: "#f0f0f0",
@@ -157,19 +157,19 @@ const MentorQueries = () => {
               )
             ) : (
               <tr>
-                <td colSpan="9">No Queries Found</td>
+                <td colSpan="10">No Queries Found</td>
               </tr>
             )}
           </tbody>
         </table>
         {/* Pagination */}
-        <div className="flex justify-center mt-4">
+        <section className="flex justify-center items-center mt-4">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="mr-2 px-4 py-2 bg-gray-300 rounded"
+            className={`text-3xl px-4  ${ currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"}`}
           >
-            Previous
+           <i class="fa fa-chevron-circle-left"></i>
           </button>
           <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
           <button
@@ -177,11 +177,11 @@ const MentorQueries = () => {
               setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
             }
             disabled={currentPage >= totalPages}
-            className="px-4 py-2 bg-gray-300 rounded"
+            className="text-3xl px-4"
           >
-            Next
+            <i class={`fa fa-chevron-circle-right ${ currentPage >= totalPages ? "cursor-not-allowed" : "cursor-pointer"} `}></i>
           </button>
-        </div>
+        </section>
       </div>
     </div>
   );

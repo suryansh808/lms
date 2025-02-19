@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import roadmap from "../assets/roadmap.png";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cube";
@@ -14,25 +14,25 @@ import img1 from "../assets/Advanced Course Images/Mern Stack Development/MSD 2.
 import img2 from "../assets/Advanced Course Images/Digital Markting/DM 4.jpg";
 import img3 from "../assets/Advanced Course Images/Data science/DS 4.jpg";
 import img4 from "../assets/Advanced Course Images/Product management/PM 5.jpg";
-// import bg from "../assets/girl.png";
 import bgImage from "../assets/BG12.png";
 import successmap from "../assets/1.png";
 import girl from "../assets/girl.png"
 
 import faqimg from '../assets/Advanced Course Images/Digital Markting/questionmark.jpg'
-
 import datascience from '../assets/Advanced Course Images/Data science/DS 3.jpg'
 import digital from '../assets/Advanced Course Images/Digital Markting/DM 1.jpg'
 import Investmentbanking from '../assets/Advanced Course Images/Investment banking/IB 6.jpg'
 import MERN from '../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg'
 import ProductManagement from '../assets/Advanced Course Images/Product management/PM 4.jpg'
 import  ProformanceMarket from '../assets/Advanced Course Images/Performance marketing/PM 3.jpg'
-// import Getintouch from "../Components/Getintouch";
-// import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
+import AutomationTesting from '../assets/Advanced Course Images/AutomationvTesting/automationtesting.jpg'
+import PromptAi from '../assets/Advanced Course Images/Prompt AI/prompt.avif'
+
+
 import axios from "axios";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
-// import AdvisorForm from "./AdvanceCourse/Components/AdvisorForm";
+
 
 
 
@@ -87,6 +87,12 @@ const Advance = () => {
   };
   const handleViewCourse6 = () => {
     navigate("/Performancemarket");
+  };  
+  const handleViewCourse7 = () => {
+    navigate("/AutomationTesting");
+  };  
+  const handleViewCourse8 = () => {
+    navigate("/PromptEngineering");
   };  
 
 
@@ -246,14 +252,11 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
       {/* Our Course Section */}
       <section ref={courseSectionRef} className="px-[10px] py-[60px]">
        <div className="width">
-       <h1
-          
-          className=" font-bold text-center py-5 text-[#f15b29]"
-        >
+       <h1 className=" font-bold text-center py-5 text-[#f15b29]">
          | Our Advanced Courses
         </h1>
         <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-[10px] md:px-12 lg:px-26">
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
            <div className="overflow-hidden  lg:h-[300px]">
            <img
               src={datascience}
@@ -270,13 +273,13 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse1}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
             </div>
           </div>
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center ">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center ">
            <div className="overflow-hidden lg:h-[300px]">
            <img
               src={digital}
@@ -293,13 +296,13 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse2}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
              Explore Details
             </button>
             </div>
           </div>
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
            <div className="overflow-hidden lg:h-[300px]">
            <img
               src={Investmentbanking}
@@ -316,13 +319,13 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse3}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
             </div>
           </div>
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
            <div className="overflow-hidden lg:h-[300px]">
            <img
               src={MERN}
@@ -339,13 +342,13 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse4}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
            </div>
           </div>
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
             <div className="overflow-hidden lg:h-[300px]">
             <img
               src={ProductManagement}
@@ -363,13 +366,13 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse5}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
                Explore Details
             </button>
             </div>
           </div>
-          <div className="bg-[#080810] rounded-xl overflow-hidden flex flex-col items-center">
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
             <div className="overflow-hidden lg:h-[300px]"> 
             <img
               src={ProformanceMarket}
@@ -387,7 +390,61 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse6}
-              className="bg-white text-black px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+            >
+              Explore Details
+            </button>
+             </div>
+          </div>
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
+            <div className="relative overflow-hidden lg:h-[300px]"> 
+            <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
+      Newly Launched
+    </span>
+            <img
+              src={AutomationTesting}
+              alt="Automation Testing"
+              className="hover:scale-110 ease-linear duration-700"
+            />
+            </div>
+             <div className="p-2">
+             <h3 className="text-xl font-semibold text-white mb-2">
+              Automation Testing
+              </h3>
+            <p className="text-sm -tracking-tighter text-white mb-4">
+            Streamlining Quality with Precision: Empowering Automation Testing
+
+            </p>
+            <button
+              onClick={handleViewCourse7}
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+            >
+              Explore Details
+            </button>
+             </div>
+          </div>
+          <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
+            <div className=" relative overflow-hidden lg:h-[300px]"> 
+            <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
+      Newly Launched
+    </span>
+            <img
+              src={PromptAi}
+              alt="Prompt engineering for generative AI"
+              className="hover:scale-110 ease-linear duration-700"
+            />
+            </div>
+             <div className="p-2">
+             <h3 className="text-xl font-semibold text-white mb-2">
+             Generative AI With Prompt Engineering 
+            </h3>
+            <p className="text-sm -tracking-tighter text-white mb-4">
+            Crafting the Future: Precision Prompt Engineering for Next-Gen AI
+
+            </p>
+            <button
+              onClick={handleViewCourse8}
+              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -579,12 +636,12 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
                             Data Science
                             </option>
                             <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="Investment Banking">
-                            Investment Banking
-                            </option>
+                            <option value="Investment Banking"> Investment Banking</option>
                             <option value="MERN Stack Devlopment">MERN Stack Devlopment</option>
                             <option value="Product Management">Product Management</option>
                             <option value="Performance Marketing">Performance Marketing</option>
+                            <option value="Automation Testing">Automation Testing</option>
+                            <option value="Generative AI With Prompt Engineering">Generative AI With Prompt Engineering</option>
                           </select>
                           <div className="flex justify-center gap-2">
                             <button

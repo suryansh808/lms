@@ -23,11 +23,11 @@ const Career = () => {
       description:"Lead and execute innovative marketing campaigns to drive brand awareness and engagement. Ideal for creative thinkers with a flair for digital marketing.",
       location: "Bangalore",
     },
-    { title: "Business Development Associate (BDA)", 
-      department: "Sales",
-       location: "Bangalore",
-        description:"Identify and engage potential clients, presenting our courses effectively. A role perfect for individuals with strong communication and sales skills.",
-      },
+    // { title: "Business Development Associate (BDA)", 
+    //   department: "Sales",
+    //    location: "Bangalore",
+    //     description:"Identify and engage potential clients, presenting our courses effectively. A role perfect for individuals with strong communication and sales skills.",
+    //   },
     { title: "Operations Executive", 
       department: "Back Office",
        location: "Bangalore",
@@ -248,9 +248,9 @@ const Career = () => {
                   <p className="py-5">
                     {job.description}
                   </p>
-                   <div>
+                   {/* <div>
                     <h2>Kindly Share your updated resume</h2>
-                   </div>
+                   </div> */}
                 </div>
               </div>
             ))}

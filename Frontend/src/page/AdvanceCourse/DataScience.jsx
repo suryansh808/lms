@@ -14,7 +14,7 @@ import StoreSection from "./Components/StoreSection";
 import pdfds from "../../../krutanic/DataScienceAdvancedProgram.pdf";
 
 import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
-import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
+// import curriculumimage from "../../assets/Advanced Course Images/Data science/DS 4.jpg";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
 import ApplyForm from "./Components/ApplyForm";
@@ -381,8 +381,8 @@ const DataScience = () => {
       domainOther: "",
     });
   }
-
-  const handleFormSubmit = async (e , actionType , interestedDomain ) => {
+const [actionType , setActionType] = useState();
+  const handleFormSubmit = async (e , actionType) => {
     e.preventDefault();
     try {
       await axios.post(`${API}/advance/register`, {
@@ -395,7 +395,7 @@ const DataScience = () => {
         goalOther: formData.goal === "Other" ? formData.goalOther : undefined,
         domain: formData.domain,
         domainOther:formData.domain === "Other" ? formData.domainOther : undefined,
-        interestedDomain: interestedDomain,
+        interestedDomain: "Data Science",
         reason: actionType,
       });
       toast.success("Registration successful! Opening the brochure...");
@@ -415,8 +415,14 @@ const DataScience = () => {
     setActiveModule(activeModule === index ? null : index);
   };
 
- 
-
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentDay = today.getDate();
+  const displayDate = currentDay > 10 || currentMonth > 1 
+    ? `10th ${new Date(today.setMonth(currentMonth + 1)).toLocaleString('en', { month: 'long' })} 2025`
+    : "10th February 2025";
+    const randomNumber = Math.floor(Math.random() * 6) + 20;
+    
   return (
     <div>
       <div className="bg-black text-white">
@@ -444,7 +450,7 @@ const DataScience = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div
                 data-aos="fade-up"
-                className=" border border-gray-700 p-6 flex flex-col bg-[#ffffff59] text-black items-center  rounded-md"
+                className=" border border-gray-700 p-6 flex flex-col backdrop-blur-md  bg-[#ffffff59] text-black items-center  rounded-md"
               >
                 <div className="bg-[#f15b29] p-3 rounded-full">
                   <svg
@@ -457,17 +463,18 @@ const DataScience = () => {
                   </svg>
                 </div>
                 <p className="mt-4 font-semibold text-lg">Batch Starting</p>
-                <p className="">15th Febraury 2025</p>
+                <p className="">{displayDate}</p>
 
                 <p className="mt-2 text-md border border-[#f15b29] rounded-lg px-2 py-1">
                   {" "}
                   Available Cohort{" "}
                 </p>
-                <p className="mt-2 text-md"> 11/60 </p>
+                <p className="mt-2 text-md"><span className="line-through">60/60</span> Batch Closed </p>
+                <p>{randomNumber}/60</p>
               </div>
               <div
                 data-aos="fade-up"
-                className=" border border-gray-700 p-6 flex flex-col bg-[#ffffff59] text-black items-center   rounded-md"
+                className=" border border-gray-700 p-6 flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center   rounded-md"
               >
                 <div className="bg-[#f15b29] p-3 rounded-full">
                   <svg
@@ -484,7 +491,7 @@ const DataScience = () => {
               </div>
               <div
                 data-aos="fade-up"
-                className=" border border-gray-700 p-6 flex flex-col bg-[#ffffff59] text-black items-center   rounded-md"
+                className=" border border-gray-700 p-6 flex flex-col backdrop-blur-md bg-[#ffffff59] text-black items-center   rounded-md"
               >
                 <div className="bg-[#f15b29] p-3 rounded-full">
                   <svg
@@ -550,6 +557,7 @@ const DataScience = () => {
                     </div>
                   ))}
                 </div>
+                <span>and more..</span>
               </div>
 
               <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
@@ -775,7 +783,7 @@ const DataScience = () => {
                 <h3 className="text-md text-center font-semibold mb-2">
                   Register to Download Brochure
                 </h3>
-                <form className="space-y-2">
+                <form className="space-y-2" onSubmit={(e) => handleFormSubmit(e, actionType)}>
                   <input
                     type="text"
                     id="name"
@@ -895,14 +903,14 @@ const DataScience = () => {
                   <div className="flex justify-center gap-2">
                     <button
                       type="submit"
-                      onSubmit={(e) => handleFormSubmit(e, 'Only Download Brochure' , 'Data Science')}
+                      onClick={(e) => setActionType('Only Download Brochure')}
                       className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                     >
                      <i class="fa fa-download"></i>
                     </button>
                     <button
                       type="submit"
-                      onSubmit={(e) => handleFormSubmit(e, 'Requested To Call Back' , 'Data Science')}
+                      onClick={(e) => setActionType('Requested To Call Back')}
                       className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                     >
                    <i class="fa fa-download"></i> + <RiCustomerService2Fill />
@@ -1074,7 +1082,7 @@ const DataScience = () => {
             }`}
           >
             <p className="text-lg font-semibold text-black">
-              Program fees 73,158/- Including GST
+              Program fees 61,999/- Including GST
             </p>
             <div className=" relative flex space-x-4">
               <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">

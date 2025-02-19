@@ -1,5 +1,5 @@
 import React from "react";
-import advance from "../../../assets/certificates/Advance/Advance certificate completion.png";
+import advance from "../../../assets/certificates/Advance/Advance certificate completion.jpg";
 
 
 

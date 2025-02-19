@@ -50,29 +50,29 @@ const Login = () => {
       <div className="loginform">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email:</label>
+          <div className="input-field">
             <input
               type="email"
               id="email"
-              placeholder="Enter your email"
+              // placeholder="Email Id"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+             <label htmlFor="email">Email Id</label>
           </div>
-          <div>
-            <label htmlFor="password">Password:</label>
+          <div className="input-field">
             <input
               type={showPassword ? "text" : "password"}
               required
-              placeholder="Enter your password"
+              // placeholder="Password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <label htmlFor="password">Password</label>
             <span
-              className=" absolute mt-2 right-7 cursor-pointer"
+              className="absolute mt-3.5 right-2.5 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <FaEye /> : <FaEyeSlash />}

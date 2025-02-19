@@ -262,10 +262,9 @@ const HomePage = () => {
       {/* section Popular course end */}
 
       {/* advance courses */}
-      {/* <div className="popularcourse">
-        <h1 data-aos="zoom-in">| Our advanced program</h1>
+      <div  className="popularcourse" >
         <AdvanceCounses />
-      </div> */}
+      </div>
       {/* advance courses end  */}
 
       {/* <WhyChooseUs/> */}

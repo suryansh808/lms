@@ -33,7 +33,7 @@ const features = [
   {
     category: "Self-guided",
     icon: FaClock,
-    price: "₹ 6999",
+    price: "₹ 6,999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -52,7 +52,7 @@ const features = [
   {
     category: "Instructor Led",
     icon: FaUserFriends,
-    price: "₹ 9999",
+    price: "₹ 9,999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -71,7 +71,7 @@ const features = [
   {
     category: "Career Advancement",
     icon: FaGraduationCap,
-    price: "₹ 15999",
+    price: "₹ 15,999",
     points: [
       "Record Session",
       "Hands On Project",
@@ -81,6 +81,9 @@ const features = [
       "Mentor Guidance",
       "Placement Assistance",
       "Mock Interviews",
+      "Access to Our Hiring Partners",
+      "ATS-Friendly Resume Building",
+      "Personality Development"
     ],
     registrationLink: "https://pages.razorpay.com/pl_NnyrDXib5xFPwv/view",
     paymentLink: "https://pages.razorpay.com/pl_NnyzSvEjIm6fog/view",

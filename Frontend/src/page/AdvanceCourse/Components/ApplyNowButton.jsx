@@ -90,7 +90,7 @@ const ApplyNowButton = ({ courseValue }) => {
       <button
         data-aos="fade-up"
         onClick={handleBrochureClick}
-        className="bg-[#f15b29] border text-white font-semibold  ease-linear duration-500 px-6 py-2 hover:rounded-xl hover:text-black rounded-sm"
+        className="bg-[#f15b29] border text-white font-semibold  px-6 py-2 hover:rounded-xl ease-linear duration-600  hover:text-black rounded-sm"
       >
         Apply Now
       </button>

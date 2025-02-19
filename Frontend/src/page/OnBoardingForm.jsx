@@ -239,7 +239,7 @@ const OnBoardingForm = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container m-auto">
         <h2 className="mt-2">OnBoarding Form</h2>
-        <form onSubmit={handleSubmit} className="">
+        <form onSubmit={handleSubmit}>
           <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[10px]">
             <div className="input-field">
               <input

@@ -93,6 +93,8 @@ import Exercise from "./User/Excercise";
 
 import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
+import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
+import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 
 
 
@@ -129,6 +131,8 @@ const AppContent = () => {
     "/mernstack",
     "/investmentbanking",
     "/productmanagement",
+    "/automationtesting",
+    "/promptengineering",
     "/operationlogin",
     "/teamlogin",
     "/adminlogin",
@@ -240,6 +244,8 @@ const AppContent = () => {
         <Route path="/MernStack" element={<MernStack />} />
         <Route path="/Investmentbanking" element={<Investmentbanking />} />
         <Route path="/ProductManagement" element={<ProductManagement />} />
+        <Route path="/AutomationTesting" element={<AutomationTesting />} />
+        <Route path="/PromptEngineering" element={<PromptEngineering />} />
         <Route path="/OnBoardingForm" element={<OnBoardingForm />} />
         
 

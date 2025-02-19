@@ -74,6 +74,7 @@ const Header = () => {
         <div className="menu">
           <Link to="/Mentorship">MENTORSHIP PROGRAM</Link>
           <Link to="/Advance">ADVANCED PROGRAM</Link>
+          <Link to="/Career">CAREER</Link>
           <Link to="/Collabration" onClick={scrollToTop}>
             COLLABRATION
           </Link>
@@ -106,13 +107,13 @@ const Header = () => {
               <li>TALENT HUNT</li>
             </Link>
             <Link to="/ContactUs" onClick={scrollToTop}>
-              <li>Contact US</li>
+              <li>CONTACT US</li>
             </Link>
             <Link to="/Career" onClick={scrollToTop}>
-              <li>Career</li>
+              <li>CAREER</li>
             </Link>
             <Link to="/AboutUs" onClick={scrollToTop}>
-              <li>About Us</li>
+              <li>ABOUT US</li>
             </Link>
 
             <Link to="/login">

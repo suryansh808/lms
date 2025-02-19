@@ -61,15 +61,15 @@ const LoginWithOtp = () => {
       <div className="loginform">
         <h2>Login with OTP</h2>
         <form onSubmit={handleVerifyOtp}>
-          <div>
-            <label>Email:</label>
+          <div className="input-field">
             <input
               type="email"
-              placeholder="Enter your email"
+              // placeholder="Enter your email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+             <label>Email</label>
           </div>
           {!showOtp ? (
             <button disabled={loading} type="button" onClick={handleSendOtp}>
@@ -77,15 +77,15 @@ const LoginWithOtp = () => {
             </button>
           ) : (
             <>
-              <div>
-                <label>OTP:</label>
+              <div className="input-field">
                 <input
                   type="text"
-                  placeholder="Enter OTP"
+                  // placeholder="Enter OTP"
                   required
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                 />
+                <label>OTP</label>
               </div>
               <button type="submit">Verify OTP</button>
             </>

@@ -122,5 +122,18 @@
   background-size: cover;
 }
 
+#advanceautomationbg {
+  background-image: url('../assets/Advanced Course Images/AutomationvTesting/automationtestingbg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#advancepromptaibg {
+  background-image: url('../assets/Advanced Course Images/Prompt AI/promptbg.avif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 

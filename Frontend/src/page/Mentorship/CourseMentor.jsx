@@ -19,9 +19,10 @@ import stockmarketing from "../../assets/mentorshipcourses/stock market.png";
 import supplychainmanagement from "../../assets/mentorshipcourses/supply.png";
 import psycho from "../../assets/mentorshipcourses/psyc.png";
 import fintech from "../../assets/mentorshipcourses/fintech.png";
-import nano from "../../assets/mentorshipcourses/genetic.png";
+// import nano from "../../assets/mentorshipcourses/genetic.png";
 import dataanalytics from "../../assets/mentorshipcourses/DA.jpg";
 import devops from "../../assets/mentorshipcourses/DEVOPS.jpg";
+import automationtesting from "../../assets/mentorshipcourses/automatingtestingmin.avif"
 import { RiCustomerService2Fill } from "react-icons/ri";
 import pdf1 from "../../../krutanic/Android Development.pdf";
 import pdf2 from "../../../krutanic/Artificial Intelligence.pdf";
@@ -41,7 +42,7 @@ import pdf15 from "../../../krutanic/Graphic Design.pdf";
 import pdf16 from "../../../krutanic/Human Resource.pdf";
 import pdf17 from "../../../krutanic/IOT and Robotics.pdf";
 import pdf18 from "../../../krutanic/Machine Learning.pdf";
-import pdf19 from "../../../krutanic/Nano Technology and Genetic.pdf";
+import pdf19 from "../../../krutanic/Automation Testing.pdf";
 import pdf20 from "../../../krutanic/Psychology.pdf";
 import pdf21 from "../../../krutanic/Stock Market.pdf";
 import pdf22 from "../../../krutanic/Supply Chain Management.pdf";
@@ -162,6 +163,15 @@ const CourseMentor = ({}) => {
         description: "Implement DevOps practices for software development.",
         rating: 4.8,
         studentsTaken: 1899,
+      },
+      {
+        id: 21,
+        title: "Automation Testing",
+        image: `${automationtesting}`,
+        pdf: `${pdf19}`,
+        description: "Speed, Accuracy, Efficiency—Redefining Quality",
+        rating: 4.5,
+        studentsTaken: 1275,
       },
     ],
     Management: [
@@ -322,10 +332,11 @@ const CourseMentor = ({}) => {
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [actionType , setActionType] = useState();
 
   const handleFormSubmit = async (e , actionType ) => {
-    setIsSubmitting(true);
     e.preventDefault();
+    setIsSubmitting(true);
     const phoneRegex = /^[0-9]{10}$/;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -448,7 +459,7 @@ const CourseMentor = ({}) => {
             <h2 className="text-lg text-center font-semibold mb-4">
               Register to Access Brochure
             </h2>
-            <form >
+            <form onSubmit={(e) => handleFormSubmit(e, actionType)} >
               <input
                 type="text"
                 name="name"
@@ -534,6 +545,7 @@ const CourseMentor = ({}) => {
                   "Data Analytics",
                   "UI/UX Design",
                   "DevOps",
+                  "Automation Testing",
                   "Business Analytics",
                   "Finance",
                   "Human Resource",
@@ -556,29 +568,10 @@ const CourseMentor = ({}) => {
               </select>
 
               <div className="flex gap-2 justify-center items-center">
-                {/* <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-4 py-2 bg-[#f15b29] text-white rounded"
-                >
-                  Download
-                </button> */}
-                {/* <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-4 py-2 bg-[#f15b29] text-white rounded"
-                >
-                  Submit
-                </button> */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onSubmit={(e) =>
-                    handleFormSubmit(
-                      e,
-                      "Only Download Brochure",
-                    )
-                  }
+                  onClick={(e) => setActionType("Only Download Brochure")}
                   className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                 >
                   <i class="fa fa-download"></i>
@@ -586,12 +579,7 @@ const CourseMentor = ({}) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onSubmit={(e) =>
-                    handleFormSubmit(
-                      e,
-                      "Requested To Call Back",
-                    )
-                  }
+                  onClick={(e) => setActionType("Requested To Call Back")}
                   className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                 >
                   <i class="fa fa-download"></i> + <RiCustomerService2Fill /> +  <span className="fa fa-graduation-cap"></span>
