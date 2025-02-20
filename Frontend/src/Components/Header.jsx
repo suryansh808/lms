@@ -76,7 +76,7 @@ const Header = () => {
           <Link to="/Advance">ADVANCED PROGRAM</Link>
           <Link to="/Career">CAREER</Link>
           <Link to="/Collabration" onClick={scrollToTop}>
-            COLLABRATION
+         COLLABORATION
           </Link>
           <Link to="/TalentHunt" onClick={scrollToTop}>
             TALENT HUNT

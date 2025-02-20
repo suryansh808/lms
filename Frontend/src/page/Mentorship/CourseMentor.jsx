@@ -22,7 +22,7 @@ import fintech from "../../assets/mentorshipcourses/fintech.png";
 // import nano from "../../assets/mentorshipcourses/genetic.png";
 import dataanalytics from "../../assets/mentorshipcourses/DA.jpg";
 import devops from "../../assets/mentorshipcourses/DEVOPS.jpg";
-import automationtesting from "../../assets/mentorshipcourses/automatingtestingmin.avif"
+import automationtesting from "../../assets/mentorshipcourses/automatingtestingmin.avif";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import pdf1 from "../../../krutanic/Android Development.pdf";
 import pdf2 from "../../../krutanic/Artificial Intelligence.pdf";
@@ -58,7 +58,7 @@ const CourseMentor = ({}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    collegeEmail:"",
+    collegeEmail: "",
     number: "",
     collegeName: "",
     domain: "",
@@ -308,7 +308,7 @@ const CourseMentor = ({}) => {
         studentsTaken: 709,
       },
     ],
-    "Mechanical": [
+    Mechanical: [
       {
         id: 23,
         title: "Auto Cad",
@@ -332,9 +332,9 @@ const CourseMentor = ({}) => {
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [actionType , setActionType] = useState();
+  const [actionType, setActionType] = useState();
 
-  const handleFormSubmit = async (e , actionType ) => {
+  const handleFormSubmit = async (e, actionType) => {
     e.preventDefault();
     setIsSubmitting(true);
     const phoneRegex = /^[0-9]{10}$/;
@@ -354,7 +354,7 @@ const CourseMentor = ({}) => {
       await axios.post(`${API}/mentorship/register`, {
         name: formData.name,
         email: formData.email,
-        collegeEmail : formData.collegeEmail,
+        collegeEmail: formData.collegeEmail,
         phone: formData.number,
         collegeName: formData.collegeName,
         domain: formData.domain,
@@ -379,7 +379,7 @@ const CourseMentor = ({}) => {
     setFormData({
       name: "",
       email: "",
-      collegeEmail:"",
+      collegeEmail: "",
       number: "",
       collegeName: "",
       domain: "",
@@ -417,12 +417,19 @@ const CourseMentor = ({}) => {
               <div
                 data-aos="fade-in"
                 key={course.id}
-                className="border rounded-lg overflow-hidden "
+                className="bg-[#080808] shadow-sm shadow-slate-50 relative rounded-lg overflow-hidden "
               >
+                 {
+                  course.title === "Automation Testing" ? (
+                    <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
+                  Newly Launched
+                </span> ): null
+
+                 }
                 <img
                   src={course.image}
                   alt={course.title}
-                  className="h-[220px] w-full object-cover"
+                  className="h-[220px] w-full object-cover hover:scale-110 ease-linear duration-700"
                   loading="lazy"
                 />
                 <div className="px-2 py-2">
@@ -434,7 +441,7 @@ const CourseMentor = ({}) => {
                   </p>
                   <div className="flex space-x-2">
                     <button
-                      className="px-4 py-2 border text-[#eee] flex items-center justify-center font-semibold rounded transition"
+                      className="px-4 py-2 bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] flex items-center justify-center font-semibold rounded transition"
                       onClick={() => handleBrochureClick(course)}
                     >
                       Brochure
@@ -459,7 +466,7 @@ const CourseMentor = ({}) => {
             <h2 className="text-lg text-center font-semibold mb-4">
               Register to Access Brochure
             </h2>
-            <form onSubmit={(e) => handleFormSubmit(e, actionType)} >
+            <form onSubmit={(e) => handleFormSubmit(e, actionType)}>
               <input
                 type="text"
                 name="name"
@@ -582,7 +589,8 @@ const CourseMentor = ({}) => {
                   onClick={(e) => setActionType("Requested To Call Back")}
                   className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                 >
-                  <i class="fa fa-download"></i> + <RiCustomerService2Fill /> +  <span className="fa fa-graduation-cap"></span>
+                  <i class="fa fa-download"></i> + <RiCustomerService2Fill /> +{" "}
+                  <span className="fa fa-graduation-cap"></span>
                 </button>
               </div>
             </form>

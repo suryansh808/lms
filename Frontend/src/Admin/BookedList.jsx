@@ -78,7 +78,7 @@ const BookedList = () => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 30;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedStudents = filteredStudents.slice(
     startIndex,

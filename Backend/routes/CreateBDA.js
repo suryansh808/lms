@@ -191,7 +191,6 @@ router.post("/addtransactionid", async (req, res) => {
     });
     await AddTransactionId.save();
     res.status(201).json(AddTransactionId);
-    console.log("xyz", AddTransactionId);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

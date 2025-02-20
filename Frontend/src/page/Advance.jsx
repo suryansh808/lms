@@ -273,7 +273,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse1}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -296,7 +296,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse2}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
              Explore Details
             </button>
@@ -319,7 +319,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse3}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -342,7 +342,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse4}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -366,7 +366,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse5}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
                Explore Details
             </button>
@@ -390,7 +390,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse6}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -417,7 +417,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse7}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
             >
               Explore Details
             </button>
@@ -444,7 +444,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </p>
             <button
               onClick={handleViewCourse8}
-              className="bg-[#000] border border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] hover:text-white ease-linear duration-700"
+              className="bg-[#000] shadow-sm shadow-slate-50 border-gray-800 text-[#eee] px-4 py-2 rounded-md hover:bg-[#f15b29] ease-linear duration-700"
             >
               Explore Details
             </button>

@@ -24,10 +24,10 @@ const Collabration = () => {
   }, []);
 
   const stats = [
-    { name: "Years of Collaboration", value: "10+" },
-    { name: "Joint Research Projects", value: "150+" },
-    { name: "Student Internships", value: "3476+" },
-    { name: "Industry Partnerships", value: "250+" },
+    { name: "Years of Collaboration", value: "1.5" },
+    { name: "Joint Research Projects", value: "150" },
+    { name: "Student Internships", value: "10000" },
+    { name: "Industry Partnerships", value: "250" },
   ];
 
   const collebrationSectionRef = useRef(null);
@@ -81,6 +81,61 @@ const Collabration = () => {
       toast.error("Failed to submit collaboration request");
     }
   };
+
+  const statRefs = useRef([]);
+
+  // Function to animate the counter from 0 to the target value
+  const animateCounter = (element, targetValue) => {
+    const startValue = 0;
+    const duration = 2500; // 2.5 seconds
+    const steps = 100;
+    const increment = (targetValue - startValue) / steps;
+    let currentValue = startValue;
+    let step = 0;
+
+    const interval = setInterval(() => {
+      currentValue += increment;
+      step++;
+
+      element.innerText = Math.floor(currentValue);
+
+      if (step === steps) {
+        clearInterval(interval);
+        element.innerText = targetValue;
+      }
+    }, duration / steps);
+  };
+
+  useEffect(() => {
+    const options = {
+      root: null, // observe in the viewport
+      threshold: 0.5, // trigger when 50% of the element is in view
+    };
+
+    const handleIntersection = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const statElement = entry.target;
+          const value = statElement.dataset.targetValue;
+          animateCounter(statElement, parseFloat(value)); // Start the animation
+          observer.unobserve(statElement); // stop observing after animation starts
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    // Initialize IntersectionObserver for each stat value
+    statRefs.current.forEach((ref) => {
+      observer.observe(ref);
+    });
+
+    return () => {
+      // Clean up the observer when the component is unmounted
+      observer.disconnect();
+    };
+  }, []);
+
 
   return (
     <div id="collebration">
@@ -389,16 +444,24 @@ const Collabration = () => {
             </p>
           </div>
           <dl className="mt-10 text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-4 sm:gap-8">
-            {stats.map((stat) => (
-              <div data-aos="fade-up" key={stat.name} className="flex flex-col">
-                <dt className="order-2 mt-2 text-lg leading-6 font-medium">
-                  {stat.name}
-                </dt>
-                <dd className="order-1 text-5xl font-extrabold text-[#f15b29]">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
+          {stats.map((stat, index) => (
+        <div
+          data-aos="fade-up"
+          key={stat.name}
+          className="flex flex-col"
+        >
+          <dt className="order-2 mt-2 text-lg leading-6 font-medium">
+            {stat.name}
+          </dt>
+          <dd
+            ref={(el) => (statRefs.current[index] = el)} // Save the ref to be used in the IntersectionObserver
+            className="order-1 text-5xl font-extrabold text-[#f15b29]"
+            data-target-value={stat.value}
+          >
+            0 
+          </dd>
+        </div>
+      ))}
           </dl>
         </div>
       </section>

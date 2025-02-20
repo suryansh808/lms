@@ -8,7 +8,7 @@ const FullPaidList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 30;
 
   const fetchNewStudent = async () => {
     setLoading(true);

@@ -9,7 +9,7 @@ const AcceptedApplication = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     phone: "",
     password: "",
@@ -110,7 +110,7 @@ const AcceptedApplication = () => {
               type="text"
               name="fullName"
               placeholder="Candidate Full Name"
-              value={formData.fullName}
+              value={formData.fullname}
               onChange={handleInputChange}
               required
             />

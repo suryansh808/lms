@@ -57,12 +57,12 @@ router.get("/users", async (req, res) => {
 
 // update user
 router.put("/users/:id", async (req, res) => {
-  const { status, fullName, email, phone, password } = req.body;
+  const { status, fullname, email, phone, password } = req.body;
   const { id } = req.params;
   try {
     const updatedFields = {
       status,
-      fullName,
+      fullname,
       email,
       phone,
       password,

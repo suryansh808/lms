@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { Link } from "react-router-dom";
 import WaveSingle from "./Wave_single";
 import Razorpay from "../assets/Razorpay.png";
@@ -23,6 +23,9 @@ const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
+
+
   return (
     <div id="footermain">
       <div style={{ rotate: "180deg" }}>
@@ -127,7 +130,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to="/Collabration" onClick={scrollToTop}>
-                    Collabration
+                    Collaboration
                   </Link>
                 </li>
                 <li>

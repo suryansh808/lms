@@ -4,19 +4,34 @@ import { useNavigate } from "react-router-dom";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
-const Dialog = ({ isOpen, onClose , fullname }) => {
+const Dialog = ({ isOpen, onClose, fullname, errorMessage }) => {
   if (!isOpen) return null;
 
   return (
     <div style={styles.modal}>
       <div style={styles.modalContent}>
-        <h2 className="mb-2">Form Submitted Successfully</h2>
-        <p>Thank you <span className="text-[#f15b29] font-bold">{fullname}</span>! <br /> Your form has been submitted successfully.</p>
-        <button className="bg-red-600 rounded-md px-6 py-2 text-white mt-2" onClick={onClose}>Close</button>
+        {errorMessage ? (
+          <div>
+           <h2>{errorMessage}</h2>
+           <p className="text-xs whitespace-nowrap mt-2">NOTE: if you have any doubt feel free to contact your counselor for more details.</p>
+          </div>
+        ) : (
+          <p>
+             <h3 className="mb-2 text-green-600 font-bold">Form Submitted Successfully</h3>
+            Thank you <span className="font-bold">{fullname}</span> <br/> Your form has been submitted successfully.
+          </p>
+        )}
+        <button
+          className="bg-red-600 float-right rounded-md px-6 py-2 text-white mt-8"
+          onClick={onClose}
+        >
+          Close
+        </button>
       </div>
     </div>
   );
 };
+
 
 const OnBoardingForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -148,6 +163,7 @@ const OnBoardingForm = () => {
   }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     setIsSubmitting(true);
@@ -176,37 +192,37 @@ const OnBoardingForm = () => {
     };
 
     if (
-      getTransactionId.transaction.includes(email)
-      &&
+      getTransactionId.transaction.includes(email) &&
       getTransactionId.counselor.includes(counselor)
     ) {
       try {
         let response = await axios.post(`${API}/newstudentenroll`, formData);
 
         if (response.status === 200 || response.status === 201) {
-          toast.success("Onboarding Form submitted successfully.");
           setIsModalOpen(true);
-          window.location.reload(); 
         } else {
           toast.error("Error submitting the form.");
-          window.location.reload(); 
           resetForm();
         }
       } catch (error) {
-        if (error.response) {
-          const errorMessage =
-            error.response.data?.message || "An error occurred.";
-          toast.error(`Error from backend: ${errorMessage}`);
-          resetForm();
-          window.location.reload(); 
-        } else if (error.request) {
-          toast.error("No response from the server. Please try again later.");
-        }
+        let errMessage = "An error occurred.";
+      if (error.response) {
+        errMessage =
+          error.response.data?.message || "An error occurred while processing your request.";
+      } else if (error.request) {
+        errMessage = "No response from the server. Please try again later.";
+      }
+
+      if (errMessage.includes("already submitted")) {
+        errMessage = "You have already submitted your details.";
+      }
+      setErrorMessage(errMessage);
+      setIsModalOpen(true);
       }
     } else {
-      toast.error("Enter valid email and counselor name.");
+      toast.error("Enter valid email and try again.");
       resetForm();
-      window.location.reload(); 
+      window.location.reload();
       setIsSubmitting(false);
     }
   };
@@ -215,7 +231,6 @@ const OnBoardingForm = () => {
     setIsModalOpen(false);
     resetForm();
   };
-
 
   const handleEmailChange = (e) => {
     const enteredEmail = e.target.value.trim();
@@ -230,9 +245,6 @@ const OnBoardingForm = () => {
       }
     }
   };
-  
-
-
 
   return (
     <div id="onboardingform">
@@ -461,7 +473,7 @@ const OnBoardingForm = () => {
             value="Submit"
           />
         </form>
-        <Dialog isOpen={isModalOpen} onClose={closeModal} fullname={fullname}/>
+        <Dialog isOpen={isModalOpen} onClose={closeModal} fullname={fullname} errorMessage={errorMessage} />
       </div>
     </div>
   );
@@ -478,13 +490,13 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex:9999
+    zIndex: 9999,
   },
   modalContent: {
     background: "white",
     padding: "20px",
     borderRadius: "5px",
-    width: "300px",
+    width: "content",
     textAlign: "center",
   },
 };
