@@ -14,6 +14,7 @@ import StoreSection from "./Components/StoreSection";
 import Certification from "./Components/Certification";
 import MERN from "../../assets/Advanced Course Images/Mern Stack Development/mern.png";
 import curriculumimage from "../../assets/Advanced Course Images/Mern Stack Development/MSD 1.jpg";
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 
 import pdfms from "../../../krutanic/Mern Stack Web Development Advanced Program.pdf";
 import toast, { Toaster } from "react-hot-toast";
@@ -1011,6 +1012,9 @@ const [actionType, setActionType] = useState();
         </section>
         <hr className=" opacity-10" />
 
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
         {/* 9 mentors section  */}
         {/* <section className="py-[60px] px-[10px]">
           <div data-aos="fade-up" className="container mx-auto">

@@ -13,7 +13,7 @@ import StoreSection from "./Components/StoreSection";
 
 import DM from "../../assets/Advanced Course Images/Digital Markting/DM.png";
 import curriculumimage from "../../assets/Advanced Course Images/Digital Markting/DM 2.jpg";
-
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 import axios from "axios";
 
 import pdfdm from "../../../krutanic/Digital Marketing Advanced Program.pdf";
@@ -1031,6 +1031,10 @@ const DigitalMarket = () => {
           </div>
         </section>
         <hr className=" opacity-10" />
+
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 9 mentors section  */}
         {/* <section className="py-[60px] px-[10px]">

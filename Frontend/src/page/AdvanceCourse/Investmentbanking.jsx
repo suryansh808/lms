@@ -13,6 +13,7 @@ import StoreSection from "./Components/StoreSection";
 import IB from "../../assets/Advanced Course Images/Investment banking/INB.png";
 import pdfib from "../../../krutanic/Investment Banking Advanced Program.pdf";
 import curriculumimage from "../../assets/Advanced Course Images/Investment banking/IB 6.jpg";
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
 import ApplyForm from "./Components/ApplyForm";
@@ -1028,6 +1029,10 @@ const [actionType, setActionType] = useState();
           </div>
         </section>
         <hr className=" opacity-10" />
+
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 9 mentors section  */}
         {/* <section className="py-[60px] px-[10px]">

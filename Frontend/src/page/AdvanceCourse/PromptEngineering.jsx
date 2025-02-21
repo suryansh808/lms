@@ -15,6 +15,7 @@ import pdfds from "../../../krutanic/Prompt engineering for generative AI Advanc
 
 import DS from "../../assets/Advanced Course Images/Prompt AI/Prompt Engineering ai.webp";
 // import curriculumimage from "../../assets/Advanced Course Images/Prompt Engineering in Generative AI/DS 4.jpg";
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
 import ApplyForm from "./Components/ApplyForm";
@@ -1026,6 +1027,10 @@ const PromptEngineering = () => {
           </div>
         </section>
         <hr className=" opacity-10" />
+
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 16 store section  */}
         <section className="py-[60px] px-[10px] bg-white">

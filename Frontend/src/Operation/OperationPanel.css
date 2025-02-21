@@ -145,5 +145,8 @@
         .Default{
             background-color: rgb(255, 0, 0);
         }
+        .Half_Cleared{
+            background-color: rgb(255, 251, 0);
+        }
     }
   }

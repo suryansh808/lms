@@ -433,7 +433,15 @@ const CourseMentor = ({}) => {
                   loading="lazy"
                 />
                 <div className="px-2 py-2">
-                  <h3 className="font-bold text-md mb-2">{course.title}</h3>
+                  <h3 className="font-bold text-md mb-2">{course.title}
+                  {
+                  course.title === "Automation Testing" ? (
+                    <span>
+                    {" "} ( Career Advancement Only  )
+                </span> ): null
+
+                 }
+                  </h3>
                   <p className="mb-2">{course.description}</p>
                   <p className="mb-2">
                     {course.rating} <span className="text-[#f15b29]">★★★★</span>

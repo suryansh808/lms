@@ -18,7 +18,7 @@ import DS from "../../assets/Advanced Course Images/Data science/DS.jpg";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
 import ApplyForm from "./Components/ApplyForm";
-
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 
 const DataScience = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
@@ -1006,6 +1006,10 @@ const [actionType , setActionType] = useState();
           </div>
         </section>
         <hr className=" opacity-10" />
+
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 16 store section  */}
         <section className="py-[60px] px-[10px] bg-white">

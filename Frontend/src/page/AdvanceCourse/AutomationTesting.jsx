@@ -12,12 +12,12 @@ import Certification from "./Components/Certification";
 import StoreSection from "./Components/StoreSection";
 
 import pdfds from "../../../krutanic/Automation testing Advanced Program.pdf";
-
 import DS from "../../assets/Advanced Course Images/AutomationvTesting/testing1.jpg";
 // import curriculumimage from "../../assets/Advanced Course Images/Automation Testing/DS 4.jpg";
 import toast, { Toaster } from "react-hot-toast";
 import ApplyNowButton from "./Components/ApplyNowButton";
 import ApplyForm from "./Components/ApplyForm";
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 
 const AutomationTesting = () => {
   const [activeCategory, setActiveCategory] = useState("Program");
@@ -328,6 +328,8 @@ const AutomationTesting = () => {
       },
     ],
   };
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1019,6 +1021,11 @@ const AutomationTesting = () => {
           </div>
         </section>
         <hr className=" opacity-10" />
+
+
+         <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 16 store section  */}
         <section className="py-[60px] px-[10px] bg-white">

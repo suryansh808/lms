@@ -15,6 +15,7 @@ import StoreSection from "./Components/StoreSection";
 
 import PM from "../../assets/Advanced Course Images/Product management/prdtman.png";
 import curriculumimage from "../../assets/Advanced Course Images/Product management/pm.jpg";
+import FlexiblePaymentOption from "./Components/FlexiblePaymentOption";
 import API from '../../API';
 import toast ,{Toaster} from 'react-hot-toast';
 import ApplyNowButton from "./Components/ApplyNowButton";
@@ -1012,6 +1013,10 @@ const [actionType, setActionType] = useState();
           </div>
         </section>
         <hr className=" opacity-10" />
+
+        <section>
+          <FlexiblePaymentOption/>
+         </section>
 
         {/* 9 mentors section  */}
         {/* <section className="py-[60px] px-[10px]">
