@@ -71,7 +71,7 @@ router.post("/newstudentenroll", async (req, res) => {
 
     await newStudent.save();
     res.status(201).json({ message: "Registration successful!" });
-    await convertExcel(newStudent);
+    // await convertExcel(newStudent);
 
   } catch (error) {
     console.error(error);
