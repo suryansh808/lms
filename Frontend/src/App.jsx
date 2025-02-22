@@ -23,6 +23,7 @@ import ProductManagement from "./page/AdvanceCourse/ProductManagement";
 import SmoothScroll from "./SmoothScroll";
 import MentorSection from "./Components/MentorSection";
 import Performancemarket from "./page/AdvanceCourse/Performancemarket";
+import MasterClass from "./page/MasterClass";
 
 // Admin
 import AdminHeader from "./Admin/AdminHeader";
@@ -37,6 +38,7 @@ import DefaultList from "./Admin/DefaultList";
 import FullPaidList from "./Admin/FullPaidList";
 import AdminLogIn from "./Admin/AdminLogin";
 import Createmanager from "./Admin/CreateManager";
+import MasterClasses from "./Admin/MasterClasses";
 import LoginAdmin from "./Admin/LoginAdmin";
 import RevenueSheet from "./Admin/RevenueSheet";
 import AllTeamDetail from "./Admin/AllTeamDetail";
@@ -96,6 +98,7 @@ import OnBoardingDetails from "./Admin/OnBoardingDetails";
 import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 import HalfPayment from "./Admin/HalfPayment";
+import EventLogin from "./page/EventLogin";
 
 
 
@@ -141,6 +144,8 @@ const AppContent = () => {
     "/loginadmin",
     "/pclogin",
     "/onboardingform",
+    "/masterclass",
+    // "/eventlogin"
   ];
   const adminheaderPaths = [
     "/admindashboard",
@@ -161,6 +166,7 @@ const AppContent = () => {
     "/createplacementcoordinator",
     "/onboardingdetails",
     "/allteamdetail",
+    "/masterclasses",
 
   ];
   const operationheaderPaths = [
@@ -237,6 +243,7 @@ const AppContent = () => {
         <Route path="/AdvanceCourses" element={<AdvanceCourses />} />
         <Route path="/FeeStructure" element={<FeeStructure />} />
         <Route path="/TalentHunt" element={<TalentHunt />} />
+        <Route path="/EventLogin" element={<EventLogin />} />
         <Route path="/Advance" element={<Advance />} />
         <Route path="/Mentorship" element={<Mentorship />} />
         <Route path="/MentorSection" element={<MentorSection />} />
@@ -249,7 +256,7 @@ const AppContent = () => {
         <Route path="/AutomationTesting" element={<AutomationTesting />} />
         <Route path="/PromptEngineering" element={<PromptEngineering />} />
         <Route path="/OnBoardingForm" element={<OnBoardingForm />} />
-        
+        <Route path="/MasterClass" element={<MasterClass />} />
 
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />
@@ -271,16 +278,8 @@ const AppContent = () => {
         <Route path="/RevenueSheet" element={isAuthenticatedAdmin()? <RevenueSheet /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/OnBoardingDetails" element={isAuthenticatedAdmin()? <OnBoardingDetails /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/AllTeamDetail" element={isAuthenticatedAdmin()? <AllTeamDetail /> : <Navigate to="/AdminLogin"/>} />
-        <Route
-          path="/CreatePlacementCoordinator"
-          element={
-            isAuthenticatedAdmin() ? (
-              <CreatePlacementCoordinator />
-            ) : (
-              <Navigate to="/AdminLogin" />
-            )
-          }
-        />
+        <Route path="/CreatePlacementCoordinator" element={isAuthenticatedAdmin() ? (<CreatePlacementCoordinator />) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/MasterClasses" element={isAuthenticatedAdmin() ? (<MasterClasses />) : (<Navigate to="/AdminLogin" />)}/>
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}

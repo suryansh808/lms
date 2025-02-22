@@ -23,11 +23,9 @@ import './Admin/AdminPanel.css'
 import './User/UserPanel.css'
 import './BDA/BdaPanel.css'
 import './Operation/OperationPanel.css'
-
+import './style/MasterClass.css'
 import './style/OnBoardingForm.css'
-
 import "./axiosConfig";
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

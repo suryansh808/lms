@@ -62,8 +62,8 @@ const navigate = useNavigate();
       <Link to="/FullPaidList">Full Paid Amount List</Link>
       <Link to="/AdvanceQueries">Adv Course Queries</Link>
       <Link to="/MentorQueries">Mentor Course Queries</Link>
+      <Link to="/MasterClasses">Master Class</Link>
       <Link to="/AllTeamDetail">Team Detail</Link>
-
       <Link to="/RevenueSheet">Revenue Sheet</Link>
      <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
       </div>

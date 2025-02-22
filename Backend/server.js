@@ -20,6 +20,7 @@ const bodyParser = require("body-parser");
 
 const CreateJob = require("./routes/CreateJob"); 
 const JobApplication = require("./routes/JobApplication")
+const MasterClass = require("./routes/MasterClass") 
 
 const os = require("os");
 // const https = require("https")
@@ -84,6 +85,9 @@ app.use("/", admin);
 
 // CREATEJOBS
 app.use("/", CreateJob);
+
+//MasterClass
+app.use("/", MasterClass);
 
 // JobApplication
 app.use("/", JobApplication);

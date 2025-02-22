@@ -81,7 +81,7 @@
 }
 
 /* mobile view */
-@media (max-width: 920px) {
+@media (max-width: 1145px) {
   #header .navbar .toggle {
     display: block;
   }

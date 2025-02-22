@@ -22,7 +22,7 @@ const groupByDate = (queries) => {
 const MentorQueries = () => {
   const [queries, setQueries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 25;
 
   const getQueries = async () => {
     try {
