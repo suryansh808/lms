@@ -41,7 +41,7 @@ const StoreSection = () => {
        <div className="container mx-auto">
             <h1
               data-aos="fade-up"
-              className="  text-black font-bold text-center mb-10"
+              className=" text-[#f15b29] font-bold text-center mb-10"
             >
               | Let’s Reveal What’s in Store!
             </h1>

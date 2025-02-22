@@ -43,15 +43,14 @@ const Footer = () => {
             <i class="fa fa-phone text-blue-600"></i>
             <br /> Call us <br /> +91-7022812878
           </a>
-          <a href="https://wa.me/7022812878" target="blank">
+          <a href="https://wa.me/7022812878?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20your%20programs." target="blank">
             {" "}
             <i class="fa fa-whatsapp text-green-600"> </i>
             <br /> WhatsApp us <br /> +91-7022812878
           </a>
           <a>
-            {" "}
             <i class="fa fa-map-marker text-red-500"> </i>
-            <br /> Find us <br /> Bengaluru, Karnataka{" "}
+            <br /> Find us <br /> Bengaluru, Karnataka
           </a>
         </div>
 
@@ -62,21 +61,25 @@ const Footer = () => {
             <br />
             <h2>Follow Us</h2>
             <a
+            target="_blank"
               href="https://www.facebook.com/people/Krutanic-Solutions/61563953173071/"
               className="text-blue-500  hover:text-blue-700"
             >
               <span className="fa fa-facebook"></span>
             </a>
-            <a  href="https://www.youtube.com/@KrutanicSolutions" className="text-red-800  hover:text-red-900">
+            <a 
+            target="_blank" href="https://www.youtube.com/@KrutanicSolutions" className="text-red-800  hover:text-red-900">
               <span className="fa fa-youtube"></span>
             </a>
             <a
+            target="_blank"
               href="https://www.instagram.com/krutanic"
               className="text-pink-500  hover:text-pink-700"
             >
               <span className="fa fa-instagram"></span>
             </a>
             <a
+            target="_blank"
               href="https://www.linkedin.com/company/krutanic/"
               className="text-blue-700  hover:text-blue-900"
             >

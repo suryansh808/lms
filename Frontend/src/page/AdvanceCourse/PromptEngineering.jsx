@@ -227,23 +227,23 @@ const PromptEngineering = () => {
       {
         question: "What are the prerequisites for the program?",
         answer:
-          "Basic programming knowledge (preferably Python) and a foundational understanding of statistics and machine learning concepts are recommended.",
+          "No prior AI experience is required! However, a basic understanding of NLP, programming (Python preferred), and AI concepts can be helpful.",
       },
       {
         question:
           "Do I need a background in Prompt Engineering in Generative AI?",
         answer:
-          "While prior experience in Prompt Engineering in Generative AI is helpful, it's not mandatory. We provide foundational support to help you succeed in the advanced topics.",
+          "No, coding is not mandatory. While Python knowledge is beneficial, the course is designed for both technical and non-technical learners with structured guidance.",
       },
       {
         question: "Can beginners apply?",
         answer:
-          "This course is designed for learners with a basic understanding of data analysis and programming. Beginners in Prompt Engineering in Generative AI should be prepared to grasp complex topics quickly.",
+          "Absolutely! This course is designed for beginners, AI enthusiasts, marketers, content creators, developers, and professionals looking to enhance their AI skills.",
       },
       {
         question: "Is there any age restriction?",
         answer:
-          "No, the program is open to anyone who meets the basic eligibility criteria, regardless of age.",
+          "No, anyone with an interest in AI and prompt engineering can enroll, regardless of age or background.",
       },
     ],
     Community: [
@@ -317,22 +317,22 @@ const PromptEngineering = () => {
       {
         question: "What career opportunities will this course open for me?",
         answer:
-          "This program prepares you for roles such as Data Scientist, Machine Learning Engineer, AI Specialist, and Data Analyst across various industries like finance, healthcare, and tech.",
+          "This course prepares you for roles like Prompt Engineer, AI Content Strategist, Conversational AI Designer, AI Researcher, and Generative AI Specialist across tech, marketing, and research sectors.",
       },
       {
         question: "Will I receive job placement assistance?",
         answer:
-          "Yes, we provide career support, including job placement assistance, resume reviews, and interview preparation.",
+          "Yes! We provide resume-building support, AI portfolio guidance, and job placement assistance through our hiring partners.",
       },
       {
         question: "Are internships available through this program?",
         answer:
-          "We offer internship opportunities through our partnerships with top companies, providing real-world experience to help you kick-start your career.",
+          "Yes, we offer internship opportunities to help you gain real-world experience in AI-driven content creation and automation.",
       },
       {
         question: "How will this course help in advancing my career?",
         answer:
-          "By mastering advanced Prompt Engineering in Generative AI skills, you will become a highly competitive candidate for senior-level roles, equipped with practical, industry-relevant knowledge.",
+          "You'll develop expertise in AI-assisted writing, chatbots, NLP techniques, and prompt engineering strategies, making you a sought-after professional in the AI space",
       },
     ],
   };
@@ -1038,9 +1038,9 @@ const PromptEngineering = () => {
         </section>
 
         {/* 17 new FAQ section */}
-        {/* <section className="py-[60px] px-[10px] bg-white">
+        <section className="py-[60px] px-[10px] bg-white">
           <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2  font-bold text-black">
+            <h1 className="text-center mb-2  font-bold text-[#f15b29]">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center   flex-col md:flex-row">
@@ -1094,7 +1094,7 @@ const PromptEngineering = () => {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* 11 scrolling section */}
         <section className=" relative">

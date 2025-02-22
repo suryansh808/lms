@@ -84,7 +84,7 @@ const DefaultPayment = () => {
             <th>Paid Amount </th>
             <th>Pending </th>
             <th>Month Opted</th>
-            <th>Due Date</th>
+            {/* <th>Due Date</th> */}
           </tr>
         </thead>
         <tbody>
@@ -103,7 +103,7 @@ const DefaultPayment = () => {
                 <td>{item.paidAmount}</td>
                 <td>{item.programPrice - item.paidAmount}</td>
                 <td className="capitalize">{item.monthOpted}</td>
-                <td className="whitespace-nowrap">{item.clearPaymentMonth}</td>
+                {/* <td className="whitespace-nowrap">{item.clearPaymentMonth}</td> */}
               </tr>
             ))
           ) : (

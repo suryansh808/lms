@@ -222,14 +222,12 @@ const TalentHunt = () => {
         <div className="container bg-white text-black flex justify-around flex-wrap ">
           <div className=" w-full sm:w-1/2 px-6 sm:px-20 py-10">
             <h2
-              data-aos="fade-up"
               className="text-2xl sm:text-3xl font-bold text-center gradient-text"
             >
               | Talent Hunt Registration
             </h2>
             <form
               onSubmit={handleSubmit}
-              data-aos="fade-up"
               className="rounded-lg p-5"
             >
               <fieldset className="mb-4">
@@ -303,35 +301,38 @@ const TalentHunt = () => {
 
           <div className="text-center w-full sm:w-1/2 px-6 sm:px-20 py-10 sm:py-40">
             <h2
-              data-aos="fade-up"
               className="text-2xl sm:text-3xl font-semibold text-black gradient-text"
             >
               | Follow Us
             </h2>
-            <p data-aos="fade-up" className="mt-4 text-lg text-black">
+            <p className="mt-4 text-lg text-black">
               Stay updated with the latest news and announcements on our social
               channels.
             </p>
-            <div data-aos="fade-up" className="mt-8 flex justify-center gap-6">
+            <div className="mt-8 flex justify-center gap-6">
               <a
+              target="_blank"   
                 href="https://www.facebook.com/people/Krutanic-Solutions/61563953173071/"
                 className="text-blue-500 text-4xl hover:text-blue-700"
               >
                 <span className="fa fa-facebook"></span>
               </a>
-              {/* <a
-                href="https://www.youtube.com/krutanic"
+              <a  
+              target="_blank"                     
+                href="https://www.youtube.com/@KrutanicSolutions"
                 className="text-red-800 text-4xl hover:text-red-900"
               >
                 <span className="fa fa-youtube"></span>
-              </a> */}
-              <a
+              </a>
+              <a  
+              target="_blank"        
                 href="https://www.instagram.com/krutanic"
                 className="text-pink-500 text-4xl hover:text-pink-700"
               >
                 <span className="fa fa-instagram"></span>
               </a>
               <a
+              target="_blank"
                 href="https://www.linkedin.com/company/krutanic/"
                 className="text-blue-700 text-4xl hover:text-blue-900"
               >

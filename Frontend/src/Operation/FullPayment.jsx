@@ -49,7 +49,7 @@ const FullPayment = () => {
   };
 
   return (
-    <div id="AdminAddCourse">
+    <div  id="AdminAddCourse">
       <div className="coursetable">
         <h1>Full Payments </h1>
         <section className="flex items-center gap-1">
@@ -83,7 +83,7 @@ const FullPayment = () => {
               <th>Paid Amount </th>
               <th>Pending </th>
               <th>Month Opted</th>
-              <th>Due Date</th>
+              {/* <th>Due Date</th> */}
             </tr>
           </thead>
           <tbody>
@@ -105,9 +105,9 @@ const FullPayment = () => {
                   <td>{item.paidAmount}</td>
                   <td>{item.programPrice - item.paidAmount}</td>
                   <td className="capitalize">{item.monthOpted}</td>
-                  <td className="whitespace-nowrap">
+                  {/* <td className="whitespace-nowrap">
                     {item.clearPaymentMonth}
-                  </td>
+                  </td> */}
                 </tr>
               ))
             ) : (

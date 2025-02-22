@@ -95,6 +95,7 @@ import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
 import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
+import HalfPayment from "./Admin/HalfPayment";
 
 
 
@@ -148,6 +149,7 @@ const AppContent = () => {
     "/pendingapplication",
     "/acceptedapplication",
     "/bookedlist",
+    "/halfpayment",
     "/defaultlist",
     "/fullpaidlist",
     "/createoperation",
@@ -260,6 +262,7 @@ const AppContent = () => {
         <Route path="/PendingApplication" element={isAuthenticatedAdmin()? <PendingApplication /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/AcceptedApplication" element={isAuthenticatedAdmin()? <AcceptedApplication /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/BookedList" element={isAuthenticatedAdmin()? <BookedList /> : <Navigate to="/AdminLogin"/>} />
+        <Route path="/HalfPayment" element={isAuthenticatedAdmin()? <HalfPayment /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/DefaultList" element={isAuthenticatedAdmin()? <DefaultList /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/FullPaidList" element={isAuthenticatedAdmin()? <FullPaidList /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/AdvanceQueries" element={isAuthenticatedAdmin()? <AdvanceQueries /> : <Navigate to="/AdminLogin"/>} />

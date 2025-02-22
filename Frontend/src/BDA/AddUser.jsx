@@ -42,12 +42,12 @@ const AddUser = () => {
     const data = { fullname,transactionId,counselor:bdaName};
     try {
       const response = await axios.post(`${API}/addtransactionid`, data);
-      toast.success('Transaction ID added successfully:');
+      toast.success('Details added successfully');
         setFullname('');
         setTransactionId('');
         getTransactionIdList();
     } catch (error) {
-        toast.error('Error adding transaction ID or already exsists');
+        toast.error('Error adding Details or user already exsists');
     }finally {
       setIsSubmitting(false);
     }

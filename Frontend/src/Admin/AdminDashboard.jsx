@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API from "../API";
+import { saveAs } from "file-saver";
+import * as XLSX from "xlsx";
+import toast ,{Toaster} from 'react-hot-toast';
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
@@ -55,8 +58,51 @@ const AdminDashboard = () => {
 
 
 
+const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [filteredPayments, setFilteredPayments] = useState(payment);
+  const [showFilters, setShowFilters] = useState(false);
+
+  const filterPaymentsByDate = () => {
+    let filteredData = payment;
+
+    if (startDate) {
+      filteredData = filteredData.filter(
+        (item) => new Date(item.createdAt) >= new Date(startDate)
+      );
+    }
+
+    if (endDate) {
+      filteredData = filteredData.filter(
+        (item) => new Date(item.createdAt) <= new Date(endDate)
+      );
+    }
+     
+    setFilteredPayments(filteredData);
+    toast.success("Data filtered successfully.");
+    setStartDate("");
+    setEndDate("");
+  };
+
+  const exportToExcel = () => {
+    if (filteredPayments.length === 0) {
+      toast.error("Please select a valid start and end date to filter the data.");
+      return;
+    }
+    const ws = XLSX.utils.json_to_sheet(filteredPayments);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Filtered Data");
+    const excelFile = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelFile], { bookType: "xlsx", type: "application/octet-stream" });
+    saveAs(blob, "filtered_students.xlsx");
+    toast.success("Data exported successfully.");
+    setShowFilters(false);
+  };
+
+
   return (
     <div id="AdminDashboard">
+      <Toaster position="top-center" reverseOrder={false}/>
       <div className="numberdiv">
         <div>
           <i className="text-blue-700	fa fa-book"></i>
@@ -87,7 +133,7 @@ const AdminDashboard = () => {
             {payment.filter((item) => item.status === "fullPaid").length}
           </span>
         </div>
-        <div>
+        <div >
           <i className="text-red-700 fa fa-times-circle"></i>
           <h2>Default</h2>
           <span>
@@ -95,7 +141,51 @@ const AdminDashboard = () => {
           </span>
         </div>
       </div>
-      <br />
+      
+      <div className="p-4 relative">
+      <button onClick={() => setShowFilters(!showFilters)} className="bg-blue-500 text-white py-2 px-4 rounded">
+        Filter Data
+      </button>
+      {showFilters && (
+        <div className="mt-4 absolute bg-white top-10 border w-[300px] p-4 rounded shadow-lg">
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Start Date:</label>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">End Date:</label>
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <button
+            onClick={filterPaymentsByDate}
+            className="bg-green-500 text-white py-2 px-4 rounded mb-4"
+          >
+            Filter Data
+          </button>
+
+          <h4 className="text-dm mb-2 font-semibold">Filtered Data: {filteredPayments.length}</h4>
+
+          <button
+            onClick={exportToExcel}
+            className="bg-yellow-500 text-white py-2 px-4 rounded"
+          >
+            Download Excel
+          </button>
+        </div>
+      )}
+    </div>
       <h3>Added Courses</h3>
       <div className="courselist">
         {loading ? (

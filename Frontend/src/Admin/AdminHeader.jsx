@@ -57,6 +57,7 @@ const navigate = useNavigate();
       <Link to="/PendingApplication">Inactive Users</Link>
       <Link to="/OnBoardingDetails">OnBoarding Details</Link>
       <Link to="/BookedList">Booked Amount List</Link>
+      <Link to="/HalfPayment">Half Amount List</Link>
       <Link to="/DefaultList">Default Amount List</Link>
       <Link to="/FullPaidList">Full Paid Amount List</Link>
       <Link to="/AdvanceQueries">Adv Course Queries</Link>

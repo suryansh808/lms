@@ -198,7 +198,7 @@ const AutomationTesting = () => {
       {
         question: "What topics are covered in the Automation Testing program?",
         answer:
-          "The program covers advanced machine learning, deep learning, big data technologies, and industry-specific applications like business forecasting, fraud detection, and customer 	segmentation.",
+          "The program covers essential automation testing concepts, including Selenium WebDriver,TestNG Framework,API Testing with Postman etc",
       },
       {
         question: "How is the course delivered?",
@@ -220,22 +220,22 @@ const AutomationTesting = () => {
       {
         question: "What are the prerequisites for the program?",
         answer:
-          "Basic programming knowledge (preferably Python) and a foundational understanding of statistics and machine learning concepts are recommended.",
+          "No prior automation testing experience is required. However, basic knowledge of manual testing, programming (Python/Java), and databases is beneficial.",
       },
       {
-        question: "Do I need a background in Automation Testing?",
+        question: "Do I need a background in testing or coding?",
         answer:
-          "While prior experience in Automation Testing is helpful, it's not mandatory. We provide foundational support to help you succeed in the advanced topics.",
+          "No, but having a basic understanding of testing concepts and coding fundamentals will help you grasp automation concepts faster.",
       },
       {
         question: "Can beginners apply?",
         answer:
-          "This course is designed for learners with a basic understanding of data analysis and programming. Beginners in Automation Testing should be prepared to grasp complex topics quickly.",
+          "Absolutely! The course is designed for beginners and working professionals looking to switch to automation testing.",
       },
       {
         question: "Is there any age restriction?",
         answer:
-          "No, the program is open to anyone who meets the basic eligibility criteria, regardless of age.",
+          "No, the course is open to anyone passionate about learning automation testing, regardless of age or experience.",
       },
     ],
     Community: [
@@ -309,22 +309,22 @@ const AutomationTesting = () => {
       {
         question: "What career opportunities will this course open for me?",
         answer:
-          "This program prepares you for roles such as Data Scientist, Machine Learning Engineer, AI Specialist, and Data Analyst across various industries like finance, healthcare, and tech.",
+          "This course prepares you for roles like Automation Test Engineer, QA Analyst, Software Tester, Selenium Tester, and Test Architect across industries such as IT, banking, e-commerce, and healthcare.",
       },
       {
         question: "Will I receive job placement assistance?",
         answer:
-          "Yes, we provide career support, including job placement assistance, resume reviews, and interview preparation.",
+          "Yes! We provide resume-building support, interview preparation, and job placement assistance through our network of hiring partners.",
       },
       {
         question: "Are internships available through this program?",
         answer:
-          "We offer internship opportunities through our partnerships with top companies, providing real-world experience to help you kick-start your career.",
+          "Yes, we offer internship opportunities to help you gain real-world experience and strengthen your practical knowledge.",
       },
       {
         question: "How will this course help in advancing my career?",
         answer:
-          "By mastering advanced Automation Testing skills, you will become a highly competitive candidate for senior-level roles, equipped with practical, industry-relevant knowledge.",
+          "You'll acquire in-demand skills in Selenium, Java/Python, API testing, CI/CD tools, and test automation frameworks, making you a valuable asset in the job market.",
       },
     ],
   };
@@ -1033,9 +1033,9 @@ const AutomationTesting = () => {
         </section>
 
         {/* 17 new FAQ section */}
-        {/* <section className="py-[60px] px-[10px] bg-white">
+        <section className="py-[60px] px-[10px] bg-white">
           <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2  font-bold text-black">
+            <h1 className="text-center mb-2  font-bold text-[#f15b29]">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center   flex-col md:flex-row">
@@ -1089,7 +1089,7 @@ const AutomationTesting = () => {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* 11 scrolling section */}
         <section className=" relative">

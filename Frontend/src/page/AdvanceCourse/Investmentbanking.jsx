@@ -1050,7 +1050,7 @@ const [actionType, setActionType] = useState();
         {/* 17 new FAQ section */}
         <section className=" bg-white py-[60px] px-[10px]">
           <div data-aos="fade-up" className="container mx-auto">
-            <h1 className="text-center mb-2  font-bold text-black">
+            <h1 className="text-center mb-2  font-bold text-[#f15b29]">
               | Ask Us Anything
             </h1>
             <div className="flex justify-center flex-col md:flex-row">
