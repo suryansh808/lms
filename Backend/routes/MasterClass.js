@@ -97,7 +97,7 @@ router.post("/masterclassapply/:id", async (req, res) => {
     }
 
     // Add the new application
-    masterClass.applications.push({ name, email, clgemail, phone, appliedAt: new Date() });
+    masterClass.applications.unshift({ name, email, clgemail, phone, appliedAt: new Date() });
     await masterClass.save();
 
     res.status(201).json({ message: "Applied successfully!" });

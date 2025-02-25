@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo3 from "../assets/LOGO3.png";
-import wipro from "../assets/wipro.svg";
-
-import mca from "../assets/poplogo/mca.png";
-import iso from "../assets/poplogo/iso.png";
-import msme from "../assets/poplogo/msme.png";
+// import wipro from "../assets/wipro.svg";
+// import mca from "../assets/poplogo/mca.png";
+// import iso from "../assets/poplogo/iso.png";
+// import msme from "../assets/poplogo/msme.png";
+import celebration from "../assets/Celebrating One Year of Success.png";
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -127,7 +127,7 @@ const Header = () => {
         </div>
       )}
 
-      {isAutopopupVisible && (
+      {/* {isAutopopupVisible && (
         <div id="autopopup">
           <div className="autotext">
             <div className="close">
@@ -145,6 +145,14 @@ const Header = () => {
               <img src={msme} alt="" />
             </div>
           </div>
+        </div>
+      )} */}
+      {/* <img src={celebration} alt="" /> */}
+       {isAutopopupVisible && (
+        <div id="autopopup">
+          
+           <img src={celebration} onClick={autoPopup} alt="" />
+       
         </div>
       )}
     </div>
