@@ -291,7 +291,7 @@ const AboutUs = () => {
                 },
               ].map((item, index) => (
                 <div key={index}>
-                  <div className="py-6 text-center bg-[#080810] rounded-md">
+                  <div className="py-6 text-center bg-[#080808] rounded-md">
                     <span className="text-4xl mb-2 font-bold flex items-center justify-center text-orange-800">{item.icon}</span>
                     <h3 className="font-semibold text-lg mb-2"> {item.title}</h3>
                     <p className="">{item.description}</p>

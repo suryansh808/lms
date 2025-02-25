@@ -77,7 +77,7 @@ const PopularCourse = () => {
           {popularCourses.map((course) => (
             <div
               key={course.id}
-              className={`border rounded-lg overflow-hidden shadow-lg group transition duration-300 ${
+              className={` bg-[#080808] shadow-sm shadow-slate-50 rounded-lg overflow-hidden group transition duration-300 ${
                 hoveredId && hoveredId !== course.id
                   ? "lg:filter lg:blur-sm"
                   : ""

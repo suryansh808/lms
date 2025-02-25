@@ -17,6 +17,7 @@ import img4 from "../assets/Advanced Course Images/Product management/PM 5.jpg";
 import bgImage from "../assets/BG12.png";
 import successmap from "../assets/1.png";
 import girl from "../assets/girl.png"
+import img from "../assets/developers/hacker.png"
 
 import faqimg from '../assets/Advanced Course Images/Digital Markting/questionmark.jpg'
 import datascience from '../assets/Advanced Course Images/Data science/DS 3.jpg'
@@ -682,7 +683,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
           </h1>
           <div data-aos='fade-up' className="px-4 grid lg:grid-cols-3 gap-3 text-white">
            
-            <div className="bg-[#080810] rounded-lg p-4 text-center">
+            <div className="bg-[#080808] rounded-lg p-4 text-center">
               <div className="text-3xl mb-4">📄</div>
               <h3 className="text-xl font-semibold mb-2">
                 {" "}
@@ -695,7 +696,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </div>
 
             
-            <div className="bg-[#080810] rounded-lg p-4 text-center hover:shadow-lg">
+            <div className="bg-[#080808] rounded-lg p-4 text-center hover:shadow-lg">
               <div className="text-3xl mb-4">👨‍👩‍👦</div>
               <h3 className="text-xl font-semibold mb-2">
                 Want to learn on the go?
@@ -707,7 +708,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </div>
 
             
-            <div className="bg-[#080810] rounded-lg p-4 text-center hover:shadow-lg">
+            <div className="bg-[#080808] rounded-lg p-4 text-center hover:shadow-lg">
               <div className="text-3xl mb-4">🏢</div>
               <h3 className="text-xl font-semibold mb-2">
                 {" "}
@@ -720,7 +721,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </div>
 
            
-            <div className="bg-[#080810]  rounded-lg p-4 text-center hover:shadow-lg">
+            <div className="bg-[#080808]  rounded-lg p-4 text-center hover:shadow-lg">
               <div className="text-3xl mb-4">📑</div>
               <h3 className="text-xl font-semibold mb-2">
                 Looking for community support?
@@ -732,7 +733,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             </div>
 
           
-            <div className="bg-[#080810] lg:col-span-2 rounded-lg p-4 text-center hover:shadow-lg">
+            <div className="bg-[#080808] lg:col-span-2 rounded-lg p-4 text-center hover:shadow-lg">
               <div className="text-3xl mb-4">❓</div>
               <h3 className="text-xl font-semibold mb-2">
                 {" "}
@@ -752,41 +753,41 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
        {/* what our student say */}
       <section className=" px-[10px] py-[60px]">
         <div className="container mx-auto">
-          <h1 data-aos="fade-up"   className=" font-bold text-center mb-12 text-[#f15b29]">
-            | What Our Students Say
+          <h1 data-aos="fade-up" className=" font-bold text-center mb-12 text-[#f15b29]">
+            | Voices of Our Students
           </h1>
           <div data-aos="fade-up"   className="grid md:grid-cols-3 lg:gap-8 gap-3">
             {[
               {
-                // image: `${img1}`,
+                image: `${img}`,
                 name: <a href="https://in.linkedin.com/in/mohammedafan" target="blank" >"Mohammed Afan R" </a>,
                 role: "MERN Developer",
                 quote: "my journey with krutanic Innovators has been an incredible learning experience. The hands-on projects and guidance from experts have truly shaped my skills and passion for development.",
               },
               {
-                // image: `${img2}`,
+                image: `${img}`,
                 name: <a href="https://in.linkedin.com/in/danish-raja-akhtar" target="blank" >"Danish Raja Akhtar"</a>,
                 role: "Web Developer",
                 quote: "Being a student here has been amazing! The mentorship and teamwork have helped me develop both technically and personally. I feel more confident in my skills every day.",
               },
               {
-                // image: `${img3}`,
+                image: `${img}`,
                 name: <a href="https://in.linkedin.com/in/suryansh-saxena" target="blank" >"Suryansh Saxena" </a>,
                 role: "MERN Developer",
                 quote: "I’ve gained so much from krutanic Solution. The exposure to real-world challenges has helped me grow my problem-solving skills and prepared me for a successful career in tech.",
               },
               
             ].map((testimonial, index) => (
-              <div key={index} className="bg-[#080810] rounded-md">
+              <div key={index} className="bg-[#080808] border border-slate-900 rounded-md">
                 <div className="p-6">
                   <p className="mb-4 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center">
-                    {/* <div className="w-12 h-12 rounded-full mr-4">
+                    <div className="w-12 h-12 rounded-full mr-4">
                       <img src={testimonial.image} alt="employee" className="w-full h-full object-cover"/>
-                    </div> */}
+                    </div>
                     <div>
                       <h2 className="font-semibold">{testimonial.name}</h2>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-[#F15B29] italic">
                         {testimonial.role}
                       </p>
                     </div>
@@ -807,9 +808,9 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
          <div className="lg:flex lg:gap-2  overflow-hidden">
          <div  className="lg:space-y-6 space-y-1 lg:w-1/2">
             {faqs.map((faq, index) => (
-              <div  key={index} className=" rounded-lg overflow-hidden ease-linear duration-500">
+              <div  key={index} className="border border-[#00000034] rounded-lg overflow-hidden ease-linear duration-500">
                 <button
-                  className="flex justify-between items-center w-full p-4 text-left bg-[#080810]"
+                  className="flex justify-between items-center w-full p-4 text-left bg-[#161515]"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={openIndex === index}
                 >
@@ -819,8 +820,8 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
                   </span>
                 </button>
                 {openIndex === index && (
-                  <div className="p-4 bg-[#080810] border-t border-[#f15b29]">
-                    <p className="text-gray-300">{faq.answer}</p>
+                  <div className="p-4 bg-[#e5e5e9]">
+                    <p className="text-black">{faq.answer}</p>
                   </div>
                 )}
               </div>

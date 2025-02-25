@@ -125,36 +125,38 @@ const AdvanceCounses = () => {
 
   const Difference = [
     {
-      title: "Expert Instructors",
-      description: "Learn from experienced professionals.",
-      icon: "🧑‍🏫",
+      title: "Resume Making With AI",
+      description: "Create AI-enhanced, personalized resumes.",
+      icon: "📝",
     },
     {
       title: "Hands-on Learning",
-      description: "Practical projects for real experience.",
-      icon: " 🛠️ ",
+      description: "Learn through real-world projects.",
+      icon: "🔧",
     },
     {
-      title: "Flexible Schedules",
-      description: "Learn at your own pace.",
-      icon: "⏰",
+      title: "Careers Counselling",
+      description: "Get personalized career advice.",
+      icon: "💼",
     },
     {
-      title: "Career Advancement",
-      description: "Boost career growth and opportunities.",
-      icon: "🚀",
+      title: "AI-Powered Mock Interviews",
+      description: "Prepare with AI-driven mock interviews.",
+      icon: "🤖",
     },
     {
-      title: "Cutting-edge Curriculum",
-      description: "Learn the latest industry trends.",
-      icon: "💻",
+      title: "Help With Referrals",
+      description: "Receive guidance on job referrals.",
+      icon: "🔗",
     },
     {
       title: "Global Network",
-      description: "Collaborate with a global community.",
-      icon: "🌍",
+      description: "Connect with professionals worldwide.",
+      icon: "🌐",
     },
   ];
+  
+  
   
 
   return (

@@ -51,7 +51,7 @@ const FAQMentor = () => {
                 className=" rounded-lg overflow-hidden ease-linear duration-500"
               >
                 <button
-                  className="flex justify-between items-center w-full p-4 text-left bg-[#080810]"
+                  className="flex justify-between items-center w-full p-4 text-left bg-[#080808]"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={openIndex === index}
                 >
