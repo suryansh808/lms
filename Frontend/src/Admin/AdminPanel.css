@@ -175,6 +175,8 @@
       width: 100%;
       text-align: center;
       border-collapse: collapse;
+    
+  
 
       button {
         color: rgb(0, 0, 0);
@@ -194,6 +196,7 @@
     th {
       border: 1px solid rgb(0, 0, 0, 0.3);
       padding: 3px;
+
     }
     th {
       background-color: grey;
@@ -449,6 +452,8 @@
     padding: 20px;
 
     .jobdetailsdiv {
+      overflow-y: scroll; 
+      scrollbar-width: none; 
       background-color: white;
       height: calc(100vh - 120px);
       width: 100%;
@@ -469,6 +474,7 @@
         width: 100%;
         text-align: center;
         font-size: 14px;
+    
       }
       td {
         padding: 5px;

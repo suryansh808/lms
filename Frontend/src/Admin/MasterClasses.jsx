@@ -193,7 +193,7 @@ const MasterClasses = () => {
                   <th>Sl</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>College Email</th>
+                  <th>Student's College Email</th>
                   <th>Number</th>
                 </tr>
               </thead>

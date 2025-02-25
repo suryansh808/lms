@@ -144,7 +144,7 @@ const [startDate, setStartDate] = useState("");
       
       <div className="p-4 relative">
       <button onClick={() => setShowFilters(!showFilters)} className="bg-blue-500 text-white py-2 px-4 rounded">
-        Filter Data
+      <i class="fa fa-filter" aria-hidden="true"></i> Filter
       </button>
       {showFilters && (
         <div className="mt-4 absolute bg-white top-10 border w-[300px] p-4 rounded shadow-lg">

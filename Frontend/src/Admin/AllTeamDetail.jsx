@@ -54,15 +54,20 @@ const AllTeamDetail = () => {
     }));
   };
 
-
   // Function to group enrollments by month (current and previous month only)
   const groupByMonth = (enrollments) => {
     const result = {};
     const today = new Date();
     const currentMonth = today.toISOString().slice(0, 7); // YYYY-MM
-    const prevMonth1 = new Date(today.getFullYear(), today.getMonth() - 1, 1).toISOString().slice(0, 7);
-    const prevMonth2 = new Date(today.getFullYear(), today.getMonth() - 2, 1).toISOString().slice(0, 7);
-    const prevMonth3 = new Date(today.getFullYear(), today.getMonth() - 3, 1).toISOString().slice(0, 7);
+    const prevMonth1 = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+      .toISOString()
+      .slice(0, 7);
+    const prevMonth2 = new Date(today.getFullYear(), today.getMonth() - 2, 1)
+      .toISOString()
+      .slice(0, 7);
+    const prevMonth3 = new Date(today.getFullYear(), today.getMonth() - 3, 1)
+      .toISOString()
+      .slice(0, 7);
 
     enrollments.forEach((item) => {
       const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-MM
@@ -86,8 +91,6 @@ const AllTeamDetail = () => {
     }));
   };
 
-
-
   const selectedBdaDetail = (bda) => {
     setSelectedBda(bda);
     setDetailVisible(true);
@@ -101,17 +104,25 @@ const AllTeamDetail = () => {
     setDetailVisible(false);
   };
 
-  const filteredData = selectedTeam ? allData.filter((bda) => bda.team === selectedTeam) : allData;
+  const filteredData = selectedTeam
+    ? allData.filter((bda) => bda.team === selectedTeam)
+    : allData;
 
   return (
     <div id="AdminAddCourse">
       {/* selected bda detail */}
       {detailVisible && selectedBda && (
-        <div className="form" >
-          <div className="p-2 rounded-lg mx-auto bg-white w-fit" >
+        <div className="form">
+          <div className="p-2 rounded-lg mx-auto bg-white w-fit">
             <div className="flex justify-between">
               <strong>{selectedBda.fullname}</strong>
-              <strong onClick={resetData} className=" text-red-500 " style={{ cursor: 'pointer' }}>EXIT</strong>
+              <strong
+                onClick={resetData}
+                className=" text-red-500 "
+                style={{ cursor: "pointer" }}
+              >
+                EXIT
+              </strong>
             </div>
             <u>Daily Revenue</u>
             <table className="bdarevenuetable">
@@ -136,13 +147,15 @@ const AllTeamDetail = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="5">No Data</td></tr>
+                  <tr>
+                    <td colSpan="5">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
 
             <u>Monthly Revenue</u>
-            <table className="bdarevenuetable" >
+            <table className="bdarevenuetable">
               <thead>
                 <tr>
                   <th>Month</th>
@@ -164,12 +177,14 @@ const AllTeamDetail = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="5">No Data</td></tr>
+                  <tr>
+                    <td colSpan="5">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
             <u>ALL Revenue</u>
-            <table className="bdarevenuetable" >
+            <table className="bdarevenuetable">
               <thead>
                 <tr>
                   <th>No of Booked</th>
@@ -182,15 +197,36 @@ const AllTeamDetail = () => {
                 {selectedBda.enrollments.length > 0 ? (
                   <tr>
                     <td>{selectedBda.enrollments.length}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0)}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0)}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0) -
-                      selectedBda.enrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0)}
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.programPrice || 0),
+                        0
+                      )}
+                    </td>
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.paidAmount || 0),
+                        0
+                      )}
+                    </td>
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.programPrice || 0),
+                        0
+                      ) -
+                        selectedBda.enrollments.reduce(
+                          (sum, item) => sum + (item.paidAmount || 0),
+                          0
+                        )}
                     </td>
                   </tr>
-
                 ) : (
-                  <tr><td colSpan="4">No Data</td></tr>
+                  <tr>
+                    <td colSpan="4">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
@@ -202,15 +238,61 @@ const AllTeamDetail = () => {
         <h2>Team Details</h2>
         <div className="mb-2">
           <h2>{selectedTeam} </h2>
-            <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
+          <div className="flex justify-between items-center gap-5"> 
+      <div><strong>Total BDA: </strong>{filteredData.length}</div>
+      <div>
+       <strong> Total Program Price:{" "}</strong>
+        {filteredData.reduce((acc, bda) => {
+          return (
+            acc +
+            bda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0)
+          );
+        }, 0)}
+      </div>
+      <div>
+        <strong>Total Paid Amount:{" "}</strong>
+        {filteredData.reduce((acc, bda) => {
+          return (
+            acc +
+            bda.enrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0)
+          );
+        }, 0)}
+      </div>
+      <div>
+        <strong>Total Pending Amount:{" "}</strong>
+        {filteredData.reduce((acc, bda) => {
+          return (
+            acc +
+            bda.enrollments.reduce(
+              (sum, item) => sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
+              0
+            )
+          );
+        }, 0)}
+      </div>
+      <div>
+    <strong>Total Default Amount:{" "}</strong>
+    {filteredData.reduce((acc, bda) => {
+      return (
+        acc +
+        bda.enrollments
+          .filter((item) => item.status === "default")
+          .reduce((sum, item) => sum + (item.paidAmount || 0), 0)
+      );
+    }, 0)}
+  </div>
+    </div>
+          <select
+            value={selectedTeam}
+            onChange={(e) => setSelectedTeam(e.target.value)}
+          >
             <option value="">All Team</option>
-              <option value="BEAST">BEAST</option>
-              <option value="GLADIATOR">GLADIATOR</option>
-              <option value="TITAN">TITAN</option>
-              <option value="WARRIOR">WARRIOR</option>
-              <option value="NO TEAM">NO TEAM</option>
-            </select>
-
+            <option value="BEAST">BEAST</option>
+            <option value="GLADIATOR">GLADIATOR</option>
+            <option value="TITAN">TITAN</option>
+            <option value="WARRIOR">WARRIOR</option>
+            <option value="NO TEAM">NO TEAM</option>
+          </select>
         </div>
         <table border="1">
           <thead>
@@ -229,13 +311,28 @@ const AllTeamDetail = () => {
             {filteredData.map((bda, index) => (
               <tr key={index} className="hover:bg-slate-100">
                 <td>{index + 1}</td>
-                <td style={{ color: 'blue', cursor: 'pointer' }} onClick={() => selectedBdaDetail(bda)} >{bda.fullname}</td>
+                <td
+                  style={{ color: "blue", cursor: "pointer" }}
+                  onClick={() => selectedBdaDetail(bda)}
+                >
+                  {bda.fullname}
+                </td>
                 <td>{bda.email}</td>
                 <td>{bda.designation}</td>
                 <td>{bda.team}</td>
                 <td>{bda.enrollments.length}</td>
-                <td>{bda.enrollments.filter((item) => item.status === "fullPaid").length}</td>
-                <td>{bda.enrollments.filter((item) => item.status === "default").length}</td>
+                <td>
+                  {
+                    bda.enrollments.filter((item) => item.status === "fullPaid")
+                      .length
+                  }
+                </td>
+                <td>
+                  {
+                    bda.enrollments.filter((item) => item.status === "default")
+                      .length
+                  }
+                </td>
               </tr>
             ))}
           </tbody>
