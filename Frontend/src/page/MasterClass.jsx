@@ -13,6 +13,7 @@ import imgmentor from "../assets/Advanced Course Images/Product management/pm.jp
 import imgadvance from "../assets/courses/feesimg.jpeg"
 import imgalt from "../assets/defaultmasterclass.jpg"
 import Popularcourse from "../Components/popularcourse";
+import imgsecond from "../assets/Masterclass22.jpg";
 
 
 const MasterClass = () => {
@@ -177,6 +178,20 @@ const MasterClass = () => {
             </div>
           </div>
         ))}
+        <div className="item">
+            <img src={imgsecond} alt="masterclass"/>
+            <div className="text" >
+              <div className="content" >
+                <h2>Mastering Full- Stack Development</h2>
+                <h3>Start time: March 8, 2025 at 6:30 PM</h3>
+                <h3>End time: March 8, 2025 at 8:30 PM</h3>
+              </div>
+              <div className="register">
+                <span> Registration will start soon !</span>
+                {/* <button >Register Now</button> */}
+              </div>
+            </div>
+          </div>
        </div>
       </div>
       <div className="benifits">

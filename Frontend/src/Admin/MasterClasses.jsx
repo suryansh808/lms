@@ -185,8 +185,12 @@ const MasterClasses = () => {
               <h2>{selectedMC.title}</h2>
               < span onClick={() => setSelectedMC(null)} >✖</span>
             </div>
+            <div className="title">
+            <a className="text-black" href={selectedMC.link} target="_blank" rel="noopener noreferrer">{selectedMC.link}</a>
+              <input type="search" name="" id="" />
+            </div>
           
-            <a href={selectedMC.link} target="_blank" rel="noopener noreferrer">{selectedMC.link}</a>
+            
             <table>
               <thead>
                 <tr>

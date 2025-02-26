@@ -21,6 +21,7 @@ const bodyParser = require("body-parser");
 const CreateJob = require("./routes/CreateJob"); 
 const JobApplication = require("./routes/JobApplication")
 const MasterClass = require("./routes/MasterClass") 
+const AddEvent = require("./routes/AddEvent")
 
 const os = require("os");
 // const https = require("https")
@@ -95,6 +96,9 @@ app.use("/", JobApplication);
 app.use("/",Mockai);
 
 app.use("/",Excercise);
+
+//AddEvent
+app.use("/", AddEvent);
 
 // app.use("/",PlacementCoordinator);
 

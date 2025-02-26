@@ -63,6 +63,7 @@ const navigate = useNavigate();
       <Link to="/AdvanceQueries">Adv Course Queries</Link>
       <Link to="/MentorQueries">Mentor Course Queries</Link>
       <Link to="/MasterClasses">Master Class</Link>
+      <Link to="/AddEvent">Add Event</Link>
       <Link to="/AllTeamDetail">Team Detail</Link>
       <Link to="/RevenueSheet">Revenue Sheet</Link>
      <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>

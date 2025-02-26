@@ -42,6 +42,7 @@ import MasterClasses from "./Admin/MasterClasses";
 import LoginAdmin from "./Admin/LoginAdmin";
 import RevenueSheet from "./Admin/RevenueSheet";
 import AllTeamDetail from "./Admin/AllTeamDetail";
+import AddEvent from "./Admin/AddEvent";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -99,6 +100,7 @@ import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 import HalfPayment from "./Admin/HalfPayment";
 import EventLogin from "./page/EventLogin";
+
 
 
 
@@ -167,6 +169,7 @@ const AppContent = () => {
     "/onboardingdetails",
     "/allteamdetail",
     "/masterclasses",
+    "/addevent"
 
   ];
   const operationheaderPaths = [
@@ -280,6 +283,7 @@ const AppContent = () => {
         <Route path="/AllTeamDetail" element={isAuthenticatedAdmin()? <AllTeamDetail /> : <Navigate to="/AdminLogin"/>} />
         <Route path="/CreatePlacementCoordinator" element={isAuthenticatedAdmin() ? (<CreatePlacementCoordinator />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/MasterClasses" element={isAuthenticatedAdmin() ? (<MasterClasses />) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/AddEvent" element={isAuthenticatedAdmin() ? (<AddEvent />) : (<Navigate to="/AdminLogin" />)}/>
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
