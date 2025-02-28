@@ -96,7 +96,7 @@ const TalentHunt = () => {
             the difference. Explore why people turn to this invaluable resource
             to unlock their potential.
           </p>
-          <button onClick={() => window.open("/EventLogin", "_blank")} className="border border-[#f15b29] rounded-md px-4 py-1">Join Us</button>
+          {/* <button onClick={() => window.open("/EventLogin", "_blank")} className="border border-[#f15b29] rounded-md px-4 py-1">Join Us</button> */}
         </div>
         <div className="users-color-container">
           <span className="item" style={{ "--i": 1 }}></span>

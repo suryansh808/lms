@@ -9,37 +9,33 @@ const AddEvent = () => {
   const [editId, setEditId] = useState(null);
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSetectedEvent] = useState([]);
+  const [form, setForm] = useState({
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      answer: "",
+  });
 
   const [formData, setFormData] = useState({
     title: "",
     start: "",
-    questions:[ 
-      {
-          question: "",
-          option1: "",
-          option2: "",
-          option3: "",
-          option4: "",
-          answer: "",
-        }
-      ]  
   });
 
   const resetForm = () => {
     setFormData({
       title: "",
       start: "",
-      questions: [
-        {
-          question: "",
-          option1: "",
-          option2: "",
-          option3: "",
-          option4: "",
-          answer: "",
-        }
-      ]
     });
+    setForm({
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      answer: "",
+    })
     setEditId(null);
     setisFormVisible(false);
     setisQuestionFormVisible(false);
@@ -52,8 +48,18 @@ const AddEvent = () => {
       [name]: value,
     }));
   };
+  const handleChangeQuestions = (event) => {
+    const { name, value } = event.target;
+    setForm((prevData) => {
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+  };
 
   const handleSubmit = async (e) => {
+    console.log("Form Data:", formData);
     e.preventDefault();
     try {
       if (editId) {
@@ -69,7 +75,9 @@ const AddEvent = () => {
       fetchEvent();
       resetForm();
     } catch (error) {
-      toast.error("There was an error while creating or updating the Event. Please try again.");
+      toast.error(
+        "There was an error while creating or updating the Event. Please try again."
+      );
       console.error("Error creating or updating Event", error);
     }
   };
@@ -116,7 +124,69 @@ const AddEvent = () => {
   useEffect(() => {
     fetchEvent();
   }, []);
-
+ 
+  const handleSubmitQuestion = async (e) => {
+    e.preventDefault();
+    const newQuestion = {
+      question: form.question,
+      option1: form.option1,
+      option2: form.option2,
+      option3: form.option3,
+      option4: form.option4,
+      answer: form.answer,
+    };
+    try {
+      let response;
+      if (editId) {
+        response = await axios.put(
+          `${API}/addquestions/${selectedEvent._id}/questions/${editId}`,
+          newQuestion
+        );
+        toast.success("Question updated successfully");
+      } else {
+        response = await axios.put(
+          `${API}/addquestions/${selectedEvent._id}`,
+          newQuestion
+        );
+        toast.success("Question added successfully");
+      }
+      fetchEvent();
+      resetForm();
+    } catch (error) {
+      toast.error(
+        "There was an error while adding or updating the question. Please try again."
+      );
+      console.error("Error adding or updating the question", error);
+    }
+  };
+  const handleDeleteQuestion = async (eventId, questionId) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this question?");
+    if (!isConfirmed) return; 
+    try {
+      const response = await axios.delete(`${API}/allevents/${eventId}/questions/${questionId}`);
+      toast.success("Question deleted successfully!");
+      fetchEvent();
+    } catch (error) {
+      toast.error("Error deleting question");
+      console.error("Delete Error:", error.response?.data || error.message);
+    }
+  };
+  const handleEditQuestion = (question) => {
+    const isConfirmed = window.confirm("Are you sure you want to edit the event?");
+    if (!isConfirmed) return;
+    setForm({
+        question: question.question,
+        option1: question.option1,
+        option2: question.option2,
+        option3: question.option3,
+        option4: question.option4,
+        answer: question.answer,
+    });
+    setEditId(question._id);
+    setisQuestionFormVisible(true);
+  };
+  
+  
   return (
     <div id="Event">
       <Toaster position="top-center" reverseOrder={false} />
@@ -153,15 +223,15 @@ const AddEvent = () => {
           </form>
         </div>
       )}
-      
+
       {isQuestionFormVisible && (
         <div className="form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmitQuestion}>
             <h2>{editId ? "Edit Questions" : "Add Questions"}</h2>
             <span onClick={resetForm}>✖</span>
             <input
-              value={formData.questions.question}
-              onChange={handleChange}
+              value={form.question}
+              onChange={handleChangeQuestions}
               type="text"
               name="question"
               id="question"
@@ -169,8 +239,8 @@ const AddEvent = () => {
               required
             />
             <input
-              value={formData.questions.option1}
-              onChange={handleChange}
+              value={form.option1}
+              onChange={handleChangeQuestions}
               type="text"
               name="option1"
               id="option1"
@@ -178,8 +248,8 @@ const AddEvent = () => {
               required
             />
             <input
-              value={formData.questions.option2}
-              onChange={handleChange}
+              value={form.option2}
+              onChange={handleChangeQuestions}
               type="text"
               name="option2"
               id="option2"
@@ -187,8 +257,8 @@ const AddEvent = () => {
               required
             />
             <input
-              value={formData.questions.option3}
-              onChange={handleChange}
+              value={form.option3}
+              onChange={handleChangeQuestions}
               type="text"
               name="option3"
               id="option3"
@@ -196,8 +266,8 @@ const AddEvent = () => {
               required
             />
             <input
-              value={formData.questions.option4}
-              onChange={handleChange}
+              value={form.option4}
+              onChange={handleChangeQuestions}
               type="text"
               name="option4"
               id="option4"
@@ -205,8 +275,8 @@ const AddEvent = () => {
               required
             />
             <input
-              value={formData.questions.answer}
-              onChange={handleChange}
+              value={form.answer}
+              onChange={handleChangeQuestions}
               type="text"
               name="answer"
               id="answer"
@@ -233,6 +303,7 @@ const AddEvent = () => {
             + Add Events
           </button>
         </div>
+        <div className="qanda">
         <table>
           <thead>
             <tr>
@@ -278,21 +349,55 @@ const AddEvent = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {selectedEvent && (
-      <div className="coursetable" >
-        <div className="eventdetail">
-          <h2>{selectedEvent.title}</h2>
-          <h2>{selectedEvent.type}</h2>
-          <button onClick={() => setisQuestionFormVisible(true)} className="p-1 flex items-center gap-2 border border-black rounded-md">
-          <i class="fa fa-plus"></i> Add Question
-          </button>
+        <div className="coursetable">
+          <div className="eventdetail">
+            <h2>{selectedEvent.title}</h2>
+            <h2>{selectedEvent.type}</h2>
+            <button
+              onClick={() => setisQuestionFormVisible(true)}
+              className="p-1 flex items-center gap-2 border border-black rounded-md"
+            >
+              <i class="fa fa-plus"></i> Add Question
+            </button>
+          </div>
+          <div className="qanda">
+            {selectedEvent?.questions?.length ? (
+              selectedEvent.questions.map((question, index) => (
+                <div key={index}>
+                  <p className="flex items-center gap-2">
+                    {index + 1}. {question.question}
+                    <div className="flex items-center gap-2">
+                    <button>
+                    <i
+                      class="fa fa-edit"
+                      onClick={() => handleEditQuestion(question)}
+                    ></i>
+                  </button>
+                  <button onClick={() => handleDeleteQuestion(selectedEvent._id, question._id)}>
+                    <i class="fa fa-trash-o text-red-600"></i>
+                  </button>
+                    </div>
+                  </p>
+                  <ul>
+                    <li>Option1: {question.option1}</li>
+                    <li>Option2: {question.option2}</li>
+                    <li>Option3: {question.option3}</li>
+                    <li>Option4: {question.option4}</li>
+                  </ul>
+                  <p>
+                    <strong>Answer:</strong> {question.answer}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>No questions available</p>
+            )}
+          </div>
         </div>
-        <div className="qanda">
-          
-        </div>
-      </div>
       )}
     </div>
   );

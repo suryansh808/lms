@@ -4,6 +4,7 @@ const router = express.Router();
 
 // add a new event
 router.post("/addevent", async (req, res) => {
+  console.log(req.body);
     try {
         const addevent = new AddEvent(req.body);
         await addevent.save();
@@ -34,8 +35,7 @@ router.put("/allevents/:id", async (req, res) => {
     }
   });
 
-
-  // Delete a events
+// Delete a events
 router.delete("/allevents/:id", async (req, res) => {
   try {
     const addEvent = await AddEvent.findByIdAndDelete(req.params.id);
@@ -46,65 +46,72 @@ router.delete("/allevents/:id", async (req, res) => {
   }
 });
 
-// fetch masterclass with length of application
-// router.get("/allmasterclasswithsapplicant", async (req, res) => {
-//   try {
-//     const masterClasses = await MasterClass.find({}, { 
-//       title: 1, 
-//       start: 1, 
-//       end: 1, 
-//       link: 1, 
-//       image: 1,
-//       status: 1,
-//       applications: { $size: "$applications" } // Get only the count of applications
-//     }).lean();
+//push question to event
+router.put("/addquestions/:id", async (req, res) => {
+  try {
+    const event = await AddEvent.findById(req.params.id);
+    if (req.body.question) {
+      const newQuestion = {
+        question: req.body.question,
+        option1: req.body.option1, 
+        option2: req.body.option2, 
+        option3:req.body.option3,
+        option4: req.body.option4, 
+        answer: req.body.answer 
+      }; 
+    event.questions.push(newQuestion);}
+    const updatedEvent = await event.save();
+    res.status(200).json(updatedEvent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
-//     res.json(masterClasses);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+//delete event question
+router.delete("/allevents/:eventId/questions/:questionId", async (req, res) => {
+  try {
+    const { eventId, questionId } = req.params;
+    const event = await AddEvent.findById(eventId);
+    // if (!event) return res.status(404).json({ error: "Event not found" });
+    const questionIndex = event.questions.findIndex(q => q._id.toString() === questionId);
+    // if (questionIndex === -1) return res.status(404).json({ error: "Question not found" });
+    event.questions.splice(questionIndex, 1);
+    await event.save();
+    res.status(200).json({ message: "Question deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-// masterclass apply
-// router.post("/masterclassapply/:id", async (req, res) => {
-//   try {
-//       const masterClass = await MasterClass.findById(req.params.id);
-//       if (!masterClass) return res.status(404).json({ message: "MasterClass not found" });
+//edit event question
+router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
+  const { eventId, questionId } = req.params;
+  const { question, option1, option2, option3, option4, answer } = req.body;
+  try {
+    const event = await AddEvent.findById(eventId);
+    if (!event) {return res.status(404).json({ message: 'Event not found' });}
+    const existingQuestion =  event.questions.find(q => q._id.toString() === questionId);
+    if (!existingQuestion) {return res.status(404).json({ message: 'Question not found' });}
+    existingQuestion.question = question;
+    existingQuestion.option1 = option1;
+    existingQuestion.option2 = option2;
+    existingQuestion.option3 = option3;
+    existingQuestion.option4 = option4;
+    existingQuestion.answer = answer;
+    await event.save();
+    res.status(200).json({ message: 'Question updated successfully', question: existingQuestion });
+  } catch (error) {
+    console.error('Error updating question:', error);
+    res.status(500).json({ message: 'Error updating question', error });
+  }
+});
 
-//       masterClass.applications.push({ ...req.body, appliedAt: new Date() });
-//       await masterClass.save();
-//       res.json({ message: "Applied successfully!", masterClass });
-//   } catch (error) {
-//       res.status(500).json({ message: "Error applying", error: error.message });
-//   }
-// });
 
-// masterclass apply
-// router.post("/masterclassapply/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { name, email, clgemail, phone } = req.body;
 
-//     // Find the masterclass
-//     const masterClass = await MasterClass.findById(id);
-//     if (!masterClass) {
-//       return res.status(404).json({ message: "MasterClass not found" });
-//     }
 
-//     // Check if the user has already applied using their email
-//     if (masterClass.applications.some((app) => app.email === email || app.phone === phone)) {
-//       return res.status(400).json({ message: "You have already applied" });
-//     }
 
-//     // Add the new application
-//     masterClass.applications.unshift({ name, email, clgemail, phone, appliedAt: new Date() });
-//     await masterClass.save();
 
-//     res.status(201).json({ message: "Applied successfully!" });
-//   } catch (error) {
-//     res.status(500).json({ message: "Error applying", error: error.message });
-//   }
-// });
 
 
 
