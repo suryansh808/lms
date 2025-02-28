@@ -26,6 +26,7 @@ import './Operation/OperationPanel.css'
 import './style/MasterClass.css'
 import './style/OnBoardingForm.css'
 import "./axiosConfig";
+import "./style/Event.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -149,18 +149,17 @@ const OnBoardingForm = () => {
     getTransactionIdList();
   }, []);
 
-  const [minDate, setMinDate] = useState("");
-  const [maxDate, setMaxDate] = useState("");
-  useEffect(() => {
-    const today = new Date();
-    const minDate = today.toISOString().split("T")[0];
-    const maxDate = new Date(today.setDate(today.getDate() + 5))
-      .toISOString()
-      .split("T")[0];
+  
+  // useEffect(() => {
+  //   const today = new Date();
+  //   const minDate = today.toISOString().split("T")[0];
+  //   const maxDate = new Date(today.setDate(today.getDate() + 5))
+  //     .toISOString()
+  //     .split("T")[0];
 
-    setMinDate(minDate);
-    setMaxDate(maxDate);
-  }, []);
+  //   setMinDate(minDate);
+  //   setMaxDate(maxDate);
+  // }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -245,6 +244,27 @@ const OnBoardingForm = () => {
       }
     }
   };
+
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+  
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  useEffect(() => {
+    if (monthOpted === monthsToShow[currentMonth]) {
+      const maxDateForCurrentMonth = new Date(currentYear, currentMonth, 5).toISOString().split('T')[0];
+      setMaxDate(maxDateForCurrentMonth);
+    } else {
+      const today = new Date();
+      const minDate = today.toISOString().split("T")[0];
+      const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split("T")[0];
+
+      setMinDate(minDate);
+      setMaxDate(maxDate);
+    }
+  }, [monthOpted, currentMonth, currentYear]);
 
   return (
     <div id="onboardingform">

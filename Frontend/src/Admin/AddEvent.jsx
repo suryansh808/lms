@@ -5,24 +5,44 @@ import toast, { Toaster } from "react-hot-toast";
 
 const AddEvent = () => {
   const [isFormVisible, setisFormVisible] = useState(false);
+  const [isQuestionFormVisible, setisQuestionFormVisible] = useState(false);
   const [editId, setEditId] = useState(null);
   const [allEvents, setAllEvents] = useState([]);
-  const [selectedMC, setSelectedMC] = useState(null);
+  const [selectedEvent, setSetectedEvent] = useState([]);
 
   const [formData, setFormData] = useState({
     title: "",
     start: "",
-    question: "",
+    questions:[ 
+      {
+          question: "",
+          option1: "",
+          option2: "",
+          option3: "",
+          option4: "",
+          answer: "",
+        }
+      ]  
   });
 
   const resetForm = () => {
     setFormData({
       title: "",
       start: "",
-      question: "",
+      questions: [
+        {
+          question: "",
+          option1: "",
+          option2: "",
+          option3: "",
+          option4: "",
+          answer: "",
+        }
+      ]
     });
     setEditId(null);
     setisFormVisible(false);
+    setisQuestionFormVisible(false);
   };
 
   const handleChange = (event) => {
@@ -49,9 +69,7 @@ const AddEvent = () => {
       fetchEvent();
       resetForm();
     } catch (error) {
-      toast.error(
-        "There was an error while creating or updating the Event. Please try again."
-      );
+      toast.error("There was an error while creating or updating the Event. Please try again.");
       console.error("Error creating or updating Event", error);
     }
   };
@@ -60,6 +78,7 @@ const AddEvent = () => {
     try {
       const response = await axios.get(`${API}/allevents`);
       setAllEvents(response.data);
+      setSetectedEvent(response.data[0]);
     } catch (error) {
       console.error("There was an error fetching MasterClass:", error);
     }
@@ -73,29 +92,11 @@ const AddEvent = () => {
       setFormData({
         title: events.title,
         start: new Date(events.start).toISOString().slice(0, 16),
-        question: events.question,
       });
       setEditId(events._id);
       setisFormVisible(true);
     }
   };
-
-//   const handleStatusChange = async (e, id) => {
-//     const newStatus = e.target.value;
-
-//     try {
-//       const response = await axios.put(`${API}/masterclass/${id}`, {
-//         status: newStatus,
-//       });
-//       console.log(response.data.message);
-//       fetchMasterclass();
-//     } catch (error) {
-//       console.error(
-//         "Error updating status:",
-//         error.response?.data?.message || error.message
-//       );
-//     }
-//   };
 
   const handleDelete = async (id) => {
     const isConfirmed = window.confirm(
@@ -112,13 +113,12 @@ const AddEvent = () => {
     }
   };
 
-
   useEffect(() => {
     fetchEvent();
   }, []);
 
   return (
-    <div id="AdminAddCourse">
+    <div id="Event">
       <Toaster position="top-center" reverseOrder={false} />
       {isFormVisible && (
         <div className="form">
@@ -145,16 +145,6 @@ const AddEvent = () => {
               id="start"
               required
             />
-            <textarea
-              required
-              placeholder="Enter Question and Answer"
-              name="question"
-              id="question"
-              cols="30"
-              value={formData.question}
-              onChange={handleChange}
-              rows="10"
-            ></textarea>
             <input
               className="cursor-pointer"
               type="submit"
@@ -163,45 +153,78 @@ const AddEvent = () => {
           </form>
         </div>
       )}
-
-{selectedMC && (
-  <div className="jobdetails">
-  <div className="jobdetailsdiv">
-    <div className="title">
-      <h2>Question Details</h2>
-      <span onClick={() => setSelectedMC(null)}>✖</span>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Sl</th>
-          <th>Question</th>
-          <th>Options</th>
-          <th>Answer</th>
-        </tr>
-      </thead>
-      <tbody>
-        {selectedMC.questions.map((question, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{question.question}</td>
-            <td>{question.options}</td>
-            <td>{question.answer}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-)}
-
-
-
-
+      
+      {isQuestionFormVisible && (
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <h2>{editId ? "Edit Questions" : "Add Questions"}</h2>
+            <span onClick={resetForm}>✖</span>
+            <input
+              value={formData.questions.question}
+              onChange={handleChange}
+              type="text"
+              name="question"
+              id="question"
+              placeholder="Enter Question"
+              required
+            />
+            <input
+              value={formData.questions.option1}
+              onChange={handleChange}
+              type="text"
+              name="option1"
+              id="option1"
+              placeholder="Enter Options 1"
+              required
+            />
+            <input
+              value={formData.questions.option2}
+              onChange={handleChange}
+              type="text"
+              name="option2"
+              id="option2"
+              placeholder="Enter Options 2"
+              required
+            />
+            <input
+              value={formData.questions.option3}
+              onChange={handleChange}
+              type="text"
+              name="option3"
+              id="option3"
+              placeholder="Enter Options 3"
+              required
+            />
+            <input
+              value={formData.questions.option4}
+              onChange={handleChange}
+              type="text"
+              name="option4"
+              id="option4"
+              placeholder="Enter Options 4"
+              required
+            />
+            <input
+              value={formData.questions.answer}
+              onChange={handleChange}
+              type="text"
+              name="answer"
+              id="answer"
+              placeholder="Enter Answer"
+              required
+            />
+            <input
+              className="cursor-pointer"
+              type="submit"
+              value={editId ? "Update Questions" : "Create Questions"}
+            />
+          </form>
+        </div>
+      )}
 
       <div className="coursetable">
         <div>
-          <h2>MasterClass List</h2>
+          <h2>Events List</h2>
           <button
             className="p-2 border border-black rounded-md"
             onClick={() => setisFormVisible(true)}
@@ -218,7 +241,7 @@ const AddEvent = () => {
               <th>Start Time</th>
               <th>Status</th>
               <th>Type</th>
-              <th>Questions</th>
+              <th>Applied</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -226,7 +249,7 @@ const AddEvent = () => {
             {allEvents?.map((events, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{events.title}</td>
+                <td onClick={() => setSetectedEvent(events)}>{events.title}</td>
                 <td>
                   {new Date(events.start).toLocaleString("en-US", {
                     day: "numeric",
@@ -239,19 +262,38 @@ const AddEvent = () => {
                 </td>
                 <td>{events.status}</td>
                 <td>{events.type}</td>
-                <td
-                >
-                  {events.question}
-                </td>
+                <td>0</td>
                 <td>
-                  <button ><i class="fa fa-edit" onClick={() => handleEdit(events)}></i></button>
-                  <button onClick={() => handleDelete(events._id)}><i class="fa fa-trash-o text-red-600"></i></button>
+                  <button>
+                    <i
+                      class="fa fa-edit"
+                      onClick={() => handleEdit(events)}
+                    ></i>
+                  </button>
+                  <button onClick={() => handleDelete(events._id)}>
+                    <i class="fa fa-trash-o text-red-600"></i>
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {selectedEvent && (
+      <div className="coursetable" >
+        <div className="eventdetail">
+          <h2>{selectedEvent.title}</h2>
+          <h2>{selectedEvent.type}</h2>
+          <button onClick={() => setisQuestionFormVisible(true)} className="p-1 flex items-center gap-2 border border-black rounded-md">
+          <i class="fa fa-plus"></i> Add Question
+          </button>
+        </div>
+        <div className="qanda">
+          
+        </div>
+      </div>
+      )}
     </div>
   );
 };

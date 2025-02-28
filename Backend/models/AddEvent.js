@@ -1,11 +1,20 @@
 const mongoose = require("mongoose");
 
 const AddEventSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  start: { type: Date, required: true },
+  title: { type: String },
+  start: { type: Date },
   status: { type: String, default: "active" },
   type: { type: String, default:"MCQ"},
-  question: { type: String, required: true },
+  questions: [
+    {
+      question: { type: String },
+      option1: { type: String },
+      option2: { type: String },
+      option3: { type: String },
+      option4: { type: String },
+      answer: { type: String },
+    }
+  ],
   
 });
 

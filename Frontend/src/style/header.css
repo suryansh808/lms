@@ -106,14 +106,14 @@
   justify-content: center;
   align-items: center;
 
-  img{
+  /* img{
     width: 70vw;
     border-radius: 10px;
     cursor: pointer;
     height: auto;
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s;
-  }
+  } */
   h1 {
     font-size: 3vw;
   }
