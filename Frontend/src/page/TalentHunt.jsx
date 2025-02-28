@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import API from "../API";
 
 const TalentHunt = () => {
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
     collegeName: "",
-    category: "",
+    collegeEmailId: "",
   });
 
   const handleChange = (e) => {
@@ -22,23 +25,14 @@ const TalentHunt = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbz0NY4GvnNV1Mm4Hwj40015NB0U-U83VwaMBGnfM-BiOVECmrrRAkfcZgvEHfrkbbPV/exec",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded", 
-          },
-          body: new URLSearchParams(formData).toString(),  
-          mode: 'no-cors', 
-        }
-      );
+      const response = await axios.post(`${API}/eventregistration`, formData);
       toast.success("Form submitted successfully!");
       setFormData({
         name: "",
+        phone: "",
         email: "",
         collegeName: "",
-        category: "",
+        collegeEmailId: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -85,7 +79,7 @@ const TalentHunt = () => {
 
   return (
     <div id="talenthunt">
-        <Toaster position="top-center" reverseOrder={false}/>
+      <Toaster position="top-center" reverseOrder={false} />
       <section class="home">
         <div class="description">
           <h1 data-aos="fade-up" class="title">
@@ -222,15 +216,10 @@ const TalentHunt = () => {
       <section className="bg-white">
         <div className="container bg-white text-black flex justify-around flex-wrap ">
           <div className=" w-full sm:w-1/2 px-6 sm:px-20 py-10">
-            <h2
-              className="text-2xl sm:text-3xl font-bold text-center gradient-text"
-            >
+            <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
               | Talent Hunt Registration
             </h2>
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-lg p-5"
-            >
+            <form onSubmit={handleSubmit} className="rounded-lg p-5">
               <fieldset className="mb-4">
                 <input
                   type="text"
@@ -238,7 +227,18 @@ const TalentHunt = () => {
                   placeholder="Full Name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-3 mt-2 text-black placeholder:text-black border-b rounded-lg focus:outline-none"
+                  className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                  required
+                />
+              </fieldset>
+              <fieldset className="mb-4">
+                <input
+                  type="number"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
                   required
                 />
               </fieldset>
@@ -246,11 +246,21 @@ const TalentHunt = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email id"
+                  placeholder="Personal Email ID"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-3 mt-2 text-black placeholder:text-black border-b rounded-lg focus:outline-none"
+                  className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
                   required
+                />
+              </fieldset>
+              <fieldset className="mb-4">
+                <input
+                  type="text"
+                  name="collegeEmailId"
+                  placeholder="Student's College Email ID"
+                   className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                  value={formData.collegeEmailId}
+                  onChange={handleChange}
                 />
               </fieldset>
               <fieldset className="mb-4">
@@ -260,35 +270,11 @@ const TalentHunt = () => {
                   placeholder="College Name"
                   value={formData.collegeName}
                   onChange={handleChange}
-                  className="w-full p-3 mt-2 text-black placeholder:text-black border-b rounded-lg focus:outline-none"
+                  className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
                   required
                 />
               </fieldset>
-              <fieldset className="mb-4">
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  className="w-full p-3 mt-2 text-black placeholder:text-black border-b rounded-lg focus:outline-none"
-                  required
-                >
-                  <option value="">Select a category</option>
-                  <option value="MERN">MERN Mastermind Challenge</option>
-                  <option value="UX/UI Design">UX/UI Design Excellence</option>
-                  <option value="FULL STACK">
-                    Full-Stack Innovators Quest
-                  </option>
-                  <option value="Digital Marketing">
-                    Digital Marketing Mavericks
-                  </option>
-                  <option value="Data Science">
-                    Data Science Visionaries Challenge
-                  </option>
-                  <option value="Performance Marketing">
-                    Performance Marketing Prodigies
-                  </option>
-                </select>
-              </fieldset>
+             
               <fieldset className="mb-4">
                 <button
                   type="submit"
@@ -301,9 +287,7 @@ const TalentHunt = () => {
           </div>
 
           <div className="text-center w-full sm:w-1/2 px-6 sm:px-20 py-10 sm:py-40">
-            <h2
-              className="text-2xl sm:text-3xl font-semibold text-black gradient-text"
-            >
+            <h2 className="text-2xl sm:text-3xl font-semibold text-black gradient-text">
               | Follow Us
             </h2>
             <p className="mt-4 text-lg text-black">
@@ -312,28 +296,28 @@ const TalentHunt = () => {
             </p>
             <div className="mt-8 flex justify-center gap-6">
               <a
-              target="_blank"   
+                target="_blank"
                 href="https://www.facebook.com/people/Krutanic-Solutions/61563953173071/"
                 className="text-blue-500 text-4xl hover:text-blue-700"
               >
                 <span className="fa fa-facebook"></span>
               </a>
-              <a  
-              target="_blank"                     
+              <a
+                target="_blank"
                 href="https://www.youtube.com/@KrutanicSolutions"
                 className="text-red-800 text-4xl hover:text-red-900"
               >
                 <span className="fa fa-youtube"></span>
               </a>
-              <a  
-              target="_blank"        
+              <a
+                target="_blank"
                 href="https://www.instagram.com/krutanic"
                 className="text-pink-500 text-4xl hover:text-pink-700"
               >
                 <span className="fa fa-instagram"></span>
               </a>
               <a
-              target="_blank"
+                target="_blank"
                 href="https://www.linkedin.com/company/krutanic/"
                 className="text-blue-700 text-4xl hover:text-blue-900"
               >

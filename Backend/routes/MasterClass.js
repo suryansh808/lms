@@ -56,8 +56,9 @@ router.get("/allmasterclasswithsapplicant", async (req, res) => {
       link: 1, 
       image: 1,
       status: 1,
+      pdfstatus: 1,
       applications: { $size: "$applications" } // Get only the count of applications
-    }).lean();
+    }).sort({ start: 1 }).lean();
 
     res.json(masterClasses);
   } catch (error) {
@@ -65,25 +66,12 @@ router.get("/allmasterclasswithsapplicant", async (req, res) => {
   }
 });
 
-// masterclass apply
-// router.post("/masterclassapply/:id", async (req, res) => {
-//   try {
-//       const masterClass = await MasterClass.findById(req.params.id);
-//       if (!masterClass) return res.status(404).json({ message: "MasterClass not found" });
-
-//       masterClass.applications.push({ ...req.body, appliedAt: new Date() });
-//       await masterClass.save();
-//       res.json({ message: "Applied successfully!", masterClass });
-//   } catch (error) {
-//       res.status(500).json({ message: "Error applying", error: error.message });
-//   }
-// });
 
 // masterclass apply
 router.post("/masterclassapply/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, clgemail, phone } = req.body;
+    const { name, email, clgemail, collegename, phone } = req.body;
 
     // Find the masterclass
     const masterClass = await MasterClass.findById(id);
@@ -97,7 +85,7 @@ router.post("/masterclassapply/:id", async (req, res) => {
     }
 
     // Add the new application
-    masterClass.applications.unshift({ name, email, clgemail, phone, appliedAt: new Date() });
+    masterClass.applications.unshift({ name, email, clgemail, collegename, phone, appliedAt: new Date() });
     await masterClass.save();
 
     res.status(201).json({ message: "Applied successfully!" });
@@ -106,8 +94,29 @@ router.post("/masterclassapply/:id", async (req, res) => {
   }
 });
 
+// download certificate for masterclass
+router.get("/masterclassauth/:id/:email", async (req, res) => {
+  try {
+    const { id, email } = req.params;
 
+    const masterClass = await MasterClass.findById(id);
+    if (!masterClass) {
+      return res.status(404).json({ message: "MasterClass not found" });
+    }
 
+    const user = masterClass.applications.find(
+      (app) => app.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found in this MasterClass" });
+    }
+
+    return res.status(200).json({ message: "User found", user });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
 
 
 module.exports = router;

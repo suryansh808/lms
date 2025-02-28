@@ -1,10 +1,10 @@
 const express = require("express");
 const AddEvent = require("../models/AddEvent");
+const EventRegistration = require("../models/EventRegistration");
 const router = express.Router();
 
 // add a new event
 router.post("/addevent", async (req, res) => {
-  console.log(req.body);
     try {
         const addevent = new AddEvent(req.body);
         await addevent.save();
@@ -107,6 +107,18 @@ router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
   }
 });
 
+// --------------------------------------------------------------------------------------------------------------------
+
+router.post("/eventregistration", async (req, res) => {
+  console.log(req.body);
+    try {
+        const eventregister = new EventRegistration(req.body);
+        await eventregister.save();
+        res.status(201).json(eventregister);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+})
 
 
 

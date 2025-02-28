@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 import toast, { Toaster } from "react-hot-toast";
 
 const MasterClasses = () => {
@@ -9,7 +11,6 @@ const MasterClasses = () => {
   const [editClassId, setEditClassId] = useState(null);
   const [allMasterClass, setAllMasterClass] = useState([]);
   const [selectedMC, setSelectedMC] = useState(null);
-
   const [formData, setFormData] = useState({
     title: "",
     start: "",
@@ -63,8 +64,9 @@ const MasterClasses = () => {
     try {
       const response = await axios.get(`${API}/allmasterclass`);
       setAllMasterClass(response.data);
+      console.log(response.data);
     } catch (error) {
-      console.error("There was an error fetching MasterClass:", error);
+      console.error("There was an error fsetching MasterClass:", error);
     }
   };
 
@@ -73,13 +75,32 @@ const MasterClasses = () => {
     if (isConfirmed) {
       setFormData({
         title: masterclass.title,
-        start: new Date(masterclass.start).toISOString().slice(0, 16),
-        end: new Date(masterclass.end).toISOString().slice(0, 16),
+        start: masterclass.start,
+        end: masterclass.end,
+        // start: new Date(masterclass.start).toISOString().slice(0, 16),
+        // end: new Date(masterclass.end).toISOString().slice(0, 16),
         link: masterclass.link,
         image: masterclass.image,
       });
       setEditClassId(masterclass._id);
       setisFormVisible(true);
+    }
+  };
+
+  const handlePdfChange = async (e, masterclass) => {
+    const newPdf = e.target.value;
+
+    if (masterclass.status === "completed"){
+      try {
+        const response = await axios.put(`${API}/masterclass/${masterclass._id}`, { pdfstatus: newPdf });
+        console.log(response.data.message);
+        fetchMasterclass();
+      } catch (error) {
+        console.error("Error updating status:", error.response?.data?.message || error.message);
+      }
+    }
+    else{
+      alert("please change the status first");
     }
   };
 
@@ -106,6 +127,21 @@ const MasterClasses = () => {
       toast.error("Error deleting MasterClass");
       console.error("Delete Error:", error.response?.data || error.message);
     }
+  };
+
+  const exportToExcel = () => {
+    console.log(selectedMC);
+    if (selectedMC.applications === 0) {
+      toast.error("No data available to download!");
+      return;
+    }
+    const worksheet = XLSX.utils.json_to_sheet(selectedMC.applications);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Masterclass Data");
+    const excelFile = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelFile], { bookType: "xlsx", type: "application/octet-stream" });
+    saveAs(blob,`${selectedMC.title}.xlsx`);
+    toast.success("Downloda successfully.");
   };
 
   useEffect(() => {
@@ -183,14 +219,12 @@ const MasterClasses = () => {
           <div className="jobdetailsdiv">
             <div className="title">
               <h2>{selectedMC.title}</h2>
+              <span onClick={exportToExcel} >Download Excel</span>
               < span onClick={() => setSelectedMC(null)} >✖</span>
             </div>
-            <div className="title">
-            <a className="text-black" href={selectedMC.link} target="_blank" rel="noopener noreferrer">{selectedMC.link}</a>
-              <input type="search" name="" id="" />
-            </div>
-          
+            <a href={selectedMC.link} target="_blank" rel="noopener noreferrer">{selectedMC.link}</a>
             
+            <span></span>
             <table>
               <thead>
                 <tr>
@@ -198,7 +232,8 @@ const MasterClasses = () => {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Student's College Email</th>
-                  <th>Number</th>
+                  <th>College Name</th>
+                  <th >Number</th>
                 </tr>
               </thead>
               <tbody>
@@ -208,6 +243,7 @@ const MasterClasses = () => {
                     <td>{application.name}</td>
                     <td>{application.email}</td>
                     <td>{application.clgemail}</td>
+                    <td>{application.collegename}</td>
                     <td>{application.phone}</td>
                   </tr>
                 ))}
@@ -222,7 +258,6 @@ const MasterClasses = () => {
           <h2>MasterClass List</h2>
           <button className="p-2 border border-black rounded-md" onClick={() => setisFormVisible(true)}> + Add MasterClass</button>
         </div>
-
         <table>
           <thead>
             <tr>
@@ -231,8 +266,10 @@ const MasterClasses = () => {
               <th>Start Time</th>
               <th>End Time</th>
               <th>Applicant</th>
-              <th>Status</th>
+              <th>Pdf Downlowd</th>
+              <th>Change PdfDownload</th>
               <th>Action</th>
+              <th>Status</th>
               <th>Change Status</th>
             </tr>
           </thead>
@@ -244,11 +281,23 @@ const MasterClasses = () => {
                 <td>{new Date(masterclass.start).toLocaleString('en-US', {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true})}</td>
                 <td>{new Date(masterclass.end).toLocaleString('en-US', {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true})}</td>
                 <td className="applicationclick" onClick={() => setSelectedMC(masterclass)} >{masterclass.applications.length}</td>
-                <td>{masterclass.status}</td>
+                <td>{masterclass.pdfstatus ? 'ACTIVE' : 'INACTIVE'}</td>
+                <td>
+                  <select
+                    className="border rounded-full border-black p-1"
+                    onChange={(e) => handlePdfChange(e, masterclass)}
+                    defaultValue="Select Remark"
+                  >
+                    <option disabled value="Select Remark"> Select Active Status</option>
+                    <option value="true"> ACTIVE</option>
+                    <option value="false">INACTIVE</option>
+                  </select>
+                </td>
                 <td>
                   <button ><i class="fa fa-edit" onClick={() => handleEdit(masterclass)}></i></button>
                   <button onClick={() => handleDelete(masterclass._id)}><i class="fa fa-trash-o text-red-600"></i></button>
                 </td>
+                <td>{masterclass.status}</td>
                 <td>
                   <select
                     className="border rounded-full border-black p-1"
