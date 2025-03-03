@@ -76,7 +76,7 @@ const OperationRevenueSheets = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse border border-gray-200">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-white">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
                 <th className="border p-3 text-left">Credited Revenue</th>

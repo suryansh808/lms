@@ -112,7 +112,32 @@ router.get("/masterclassauth/:id/:email", async (req, res) => {
       return res.status(404).json({ message: "User not found in this MasterClass" });
     }
 
-    return res.status(200).json({ message: "User found", user });
+    const getOrdinalSuffix = (day) => {
+      if (day > 3 && day < 21) return "th"; // Covers 4th - 20th (special case)
+      switch (day % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+      }
+    };
+
+    const formatDate = (dateString) => {
+      const dateObj = new Date(dateString);
+
+      const day = dateObj.getDate();
+      const month = dateObj.toLocaleString('en-US', { month: 'long' });
+      const year = dateObj.getFullYear();
+
+      return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
+    };
+
+    const date = formatDate(masterClass.start);
+    const value = `${masterClass.title} held on ${date}.`;
+
+    const certificateUrl = `https://res.cloudinary.com/dtchuqy2n/image/upload/co_rgb:000000,l_text:times%20new%20roman_150_bold_normal_left:${encodeURIComponent(user.name)}/fl_layer_apply,y_-45/co_rgb:000000,l_text:times%20new%20roman_35_normal_left:${encodeURIComponent(value)}/fl_layer_apply,y_170/masterclass/cdxtjxpgefkcjgejotg0`;
+
+    return res.status(200).json({ message: "User found", certificate: certificateUrl });
   } catch (error) {
     return res.status(500).json({ message: "Server error", error: error.message });
   }

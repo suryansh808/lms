@@ -79,8 +79,6 @@ const OnBoardingForm = () => {
       "December",
     ];
     let months = [];
-
-    // Logic for determining which months to show
     if (currentMonthIndex === 1 && currentDay <= 7) {
       months = [
         `${monthNames[1]} ${currentYear}`,
@@ -149,17 +147,6 @@ const OnBoardingForm = () => {
     getTransactionIdList();
   }, []);
 
-  
-  // useEffect(() => {
-  //   const today = new Date();
-  //   const minDate = today.toISOString().split("T")[0];
-  //   const maxDate = new Date(today.setDate(today.getDate() + 5))
-  //     .toISOString()
-  //     .split("T")[0];
-
-  //   setMinDate(minDate);
-  //   setMaxDate(maxDate);
-  // }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -245,6 +232,29 @@ const OnBoardingForm = () => {
     }
   };
 
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    
+    // Set minDate to today
+    const minDate = currentDate.toISOString().split("T")[0];
+  
+    let maxDate;
+  
+    // If today is between the 1st and 5th, set maxDate to the 5th of the current month
+    if (currentDay >= 1 && currentDay <= 5) {
+      maxDate = new Date(currentYear, currentMonthIndex, 5).toISOString().split("T")[0];
+    } else {
+      // If today is after the 5th, set maxDate to 5 days from today
+      maxDate = new Date(currentDate.setDate(currentDate.getDate() + 5)).toISOString().split("T")[0];
+    }
+  
+    setMinDate(minDate);
+    setMaxDate(maxDate);
+  }, []);
+  
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
   
@@ -253,18 +263,30 @@ const OnBoardingForm = () => {
   const currentYear = currentDate.getFullYear();
 
   useEffect(() => {
-    if (monthOpted === monthsToShow[currentMonth]) {
-      const maxDateForCurrentMonth = new Date(currentYear, currentMonth, 5).toISOString().split('T')[0];
-      setMaxDate(maxDateForCurrentMonth);
-    } else {
-      const today = new Date();
-      const minDate = today.toISOString().split("T")[0];
-      const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split("T")[0];
-
-      setMinDate(minDate);
-      setMaxDate(maxDate);
+    // This effect will run if monthOpted changes and update the date range accordingly
+    if (monthOpted) {
+      // Get the selected month and year
+      const [selectedMonthName, selectedYear] = monthOpted.split(" "); // Example: "May 2025"
+      const selectedMonthIndex = new Date(`${selectedMonthName} 1, ${selectedYear}`).getMonth(); // Get the index of the selected month
+      const selectedYearNum = parseInt(selectedYear); // Extract year
+  
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+  
+      if (selectedYearNum === currentYear && selectedMonthIndex === currentDate.getMonth()) {
+        // If opted month is the current month (March), set the max date to 5th of the month
+        const maxDateForCurrentMonth = new Date(selectedYearNum, selectedMonthIndex, 6).toISOString().split('T')[0];
+        setMaxDate(maxDateForCurrentMonth);
+      } else {
+        // For other months, set minDate to today's date, maxDate to 5 days after today
+        const today = new Date();
+        const minDate = today.toISOString().split("T")[0];
+        const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split("T")[0];
+        setMinDate(minDate);
+        setMaxDate(maxDate);
+      }
     }
-  }, [monthOpted, currentMonth, currentYear]);
+  }, [monthOpted, monthsToShow]);
 
   return (
     <div id="onboardingform">

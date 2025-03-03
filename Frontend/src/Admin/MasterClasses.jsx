@@ -41,6 +41,7 @@ const MasterClasses = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
       if (editClassId) {
         const response = await axios.put(`${API}/masterclass/${editClassId}`, formData);
@@ -77,8 +78,6 @@ const MasterClasses = () => {
         title: masterclass.title,
         start: masterclass.start,
         end: masterclass.end,
-        // start: new Date(masterclass.start).toISOString().slice(0, 16),
-        // end: new Date(masterclass.end).toISOString().slice(0, 16),
         link: masterclass.link,
         image: masterclass.image,
       });
@@ -165,6 +164,7 @@ const MasterClasses = () => {
               placeholder="Enter Masterclass title"
               required
             />
+            input
             <label htmlFor="start" className="text-gray-500">
               Select Start Date and Time
             </label>
@@ -278,8 +278,8 @@ const MasterClasses = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{masterclass.title}</td>
-                <td>{new Date(masterclass.start).toLocaleString('en-US', {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true})}</td>
-                <td>{new Date(masterclass.end).toLocaleString('en-US', {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true})}</td>
+                <td>{new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</td>
+                <td>{new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</td>
                 <td className="applicationclick" onClick={() => setSelectedMC(masterclass)} >{masterclass.applications.length}</td>
                 <td>{masterclass.pdfstatus ? 'ACTIVE' : 'INACTIVE'}</td>
                 <td>

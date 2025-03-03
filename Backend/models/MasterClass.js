@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const MasterClassSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  start: { type: Date, required: true },
-  end: { type: Date, required: true, trim: true },
+  start: { type: String, required: true },
+  end: { type: String, required: true },
   link: { type: String, required: true },
   image: { type: String, required: true, trim: true },
   pdfstatus: { type: Boolean, default: true },

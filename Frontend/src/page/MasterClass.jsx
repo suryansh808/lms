@@ -93,296 +93,319 @@ const MasterClass = () => {
   const downloadCertificate = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
-    console.log("Submitted Email:", email);
-    console.log("Submitted id:", selectedMasterClass);
-      try {
-        const response = await axios.get(`${API}/masterclassauth/${selectedMasterClass._id}/${email}`);
-        console.log("masteruser",response.data)
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong");
+    // console.log("Submitted Email:", email);
+    // console.log("Submitted id:", selectedMasterClass);
+    try {
+      const response = await axios.get(`${API}/masterclassauth/${selectedMasterClass._id}/${email}`);
+      const certificateData = response.data;
+      // console.log("final",response.data);
+      setisDownloadForm(false);
+      setSelectedMasterClass(null);
+
+      if (!certificateData.certificate) {
+        throw new Error("Certificate not available");
       }
+
+      // console.log("masteruser", certificateData.certificate);
+
+      // Fetch the image as blob to force download
+    const imageResponse = await fetch(certificateData.certificate);
+    const blob = await imageResponse.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = "certificate.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(blobUrl);
+      toast.success("Certificate downloaded successfully!");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
   };
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await axios.post(`${API}/masterclassapply/${selectedMasterClass._id}`, formData);
-        toast.success("Successfully Applied! Join our Community group");
-        setTimeout(() => {
-          window.open(selectedMasterClass.link, "_blank");
-        }, 2000);
-        fetchMasterclass();
-        closeForm();
-      } catch (error) {
-        console.error("Error applying for MasterClass", error);
-        toast.error(error.response?.data?.message || "Error applying for MasterClass");
-      }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API}/masterclassapply/${selectedMasterClass._id}`, formData);
+      toast.success("Successfully Applied! Join our Community group");
+      setTimeout(() => {
+        window.open(selectedMasterClass.link, "_blank");
+      }, 3000);
+      fetchMasterclass();
+      closeForm();
+    } catch (error) {
+      console.error("Error applying for MasterClass", error);
+      toast.error(error.response?.data?.message || "Error applying for MasterClass");
+    }
+  };
 
-    return (
-      <div id="MasterClass">
-        <Toaster position="top-center" reverseOrder={false} />
-        <div className="masterclasshero">
-          <input className="radio" type="radio" name="card" id="cardUno" defaultChecked />
-          <label className="content" htmlFor="cardUno" style={{ backgroundImage: `url(${imghero})` }}>
-            {/* <h1 className="title-card">
+  return (
+    <div id="MasterClass">
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className="masterclasshero">
+        <input className="radio" type="radio" name="card" id="cardUno" defaultChecked />
+        <label className="content" htmlFor="cardUno" style={{ backgroundImage: `url(${imghero})` }}>
+          {/* <h1 className="title-card">
             Masterclasses to Boost Your Skills
           </h1>
           <h3 className="card-title subsubtitle">
             <span>Join our comprehensive masterclass and take your expertise to the next level. Learn from industry experts and transform your career.</span>
           </h3> */}
-          </label>
-          <input className="radio" type="radio" name="card" id="cardDos" />
-          <label className="content" htmlFor="cardDos" style={{ backgroundImage: `url(${imgmentor})` }}>
-            {/* <h1 className="title-card">
+        </label>
+        <input className="radio" type="radio" name="card" id="cardDos" />
+        <label className="content" htmlFor="cardDos" style={{ backgroundImage: `url(${imgmentor})` }}>
+          {/* <h1 className="title-card">
             <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
             <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
           </h1>
           <h3 className="card-title subsubtitle">
             <span>EXAMPLE SOME ADDITIONS</span>
           </h3> */}
-          </label>
-          <input className="radio" type="radio" name="card" id="cardTres" />
-          <label className="content" htmlFor="cardTres" style={{ backgroundImage: `url(${imgadvance})` }}>
-            {/* <h1 className="title-card">
+        </label>
+        <input className="radio" type="radio" name="card" id="cardTres" />
+        <label className="content" htmlFor="cardTres" style={{ backgroundImage: `url(${imgadvance})` }}>
+          {/* <h1 className="title-card">
             <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
             <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
           </h1>
           <h3 className="card-title subsubtitle">
             <span>EXAMPLE SOME ADDITIONS</span>
           </h3> */}
-          </label>
+        </label>
+      </div>
+      <div className="aboutwhy">
+        <div className="about">
+          <h1>| About Masterclass</h1> <br />
+          <p>
+            Krutanic MasterClass is a premier online learning initiative that brings together top educators, industry experts, and professionals to deliver engaging, interactive, and insightful masterclasses on a variety of subjects. <br /><br /> Whether you want to upskill, explore new domains, or gain a competitive edge, our free masterclass is your gateway to excellence.
+          </p>
         </div>
-        <div className="aboutwhy">
-          <div className="about">
-            <h1>| About Masterclass</h1> <br />
-            <p>
-              Krutanic MasterClass is a premier online learning initiative that brings together top educators, industry experts, and professionals to deliver engaging, interactive, and insightful masterclasses on a variety of subjects. <br /><br /> Whether you want to upskill, explore new domains, or gain a competitive edge, our free masterclass is your gateway to excellence.
-            </p>
-          </div>
-          <div className="why">
-            <h1>| Why Join Krutanic Masterclass ? </h1> <br />
-            <div>
-              <div className="item">
-                <i className="fa fa-certificate"></i>
-                <h2>Certificate</h2>
-              </div>
-              <div className="item">
-                <i className="	fa fa-mortar-board"></i>
-                <h2>Expert Mentor</h2>
-              </div>
-              <div className="item">
-                <i className="fa fa-line-chart"></i>
-                <h2>Career Guidance</h2>
-              </div>
-              <div className="item">
-                <i className="fa fa-video-camera"></i>
-                <h2>Live Interactive</h2>
-              </div>
-              <div className="item">
-                <i className="fa fa-briefcase"></i>
-                <h2>Industrial Topic</h2>
-              </div>
-              <div className="item">
-                <i className="fa fa-rupee"></i>
-                <h2>Free of Cost</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="classess">
-          <div>
-            {allMasterClass?.map((masterclass, index) => (
-              <div className="item">
-                <img src={masterclass.image} alt="masterclass"
-                  onError={(e) => e.target.src = imgalt}
-                />
-                <div className="text" key={masterclass._id || index}>
-                  <div className="content" >
-                    <h2>{masterclass.title}</h2>
-                    <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                    <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                  </div>
-                  {masterclass.status === "upcoming" ? (
-                    <div className="register">
-                      <p>Registration will start soon !</p>
-                    </div>
-
-                  ) : (
-                    <div className="register">
-                      <span>{masterclass.applications} learners have registered</span>
-                      <button onClick={() => handleApply(masterclass)}>Register Now</button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="benifits">
-          <h1>| Benefits of the Masterclass</h1> <br />
+        <div className="why">
+          <h1>| Why Join Krutanic Masterclass ? </h1> <br />
           <div>
             <div className="item">
               <i className="fa fa-certificate"></i>
-              <h2>Industry-Recognized Certification</h2>
-              <p>Receive a certificate upon completion to boost your credentials.</p>
+              <h2>Certificate</h2>
+            </div>
+            <div className="item">
+              <i className="	fa fa-mortar-board"></i>
+              <h2>Expert Mentor</h2>
             </div>
             <div className="item">
               <i className="fa fa-line-chart"></i>
-              <h2>Career Guidance </h2>
-              <p> Get personalized advice to navigate your career path.</p>
+              <h2>Career Guidance</h2>
             </div>
             <div className="item">
-              <i className="fa fa-globe"></i>
-              <h2>Networking Opportunities</h2>
-              <p>Connect with like-minded professionals and industry leaders.</p>
+              <i className="fa fa-video-camera"></i>
+              <h2>Live Interactive</h2>
+            </div>
+            <div className="item">
+              <i className="fa fa-briefcase"></i>
+              <h2>Industrial Topic</h2>
+            </div>
+            <div className="item">
+              <i className="fa fa-rupee"></i>
+              <h2>Free of Cost</h2>
             </div>
           </div>
         </div>
-
-        <div className="certificateparticipate">
-          <div className="text">
-            <h1>| Certificate of Participation</h1> <br />
-            <p>After attending the Krutanic masterclass, you'll receive a certificate of participation. <br /><br /> This certificate acknowledges your commitment to professional development and can be shared on LinkedIn and other professional platforms to highlight your expertise and showcase your continuous learning.</p>
-          </div>
-          <div className="image">
-            <img src={img} alt="" />
-          </div>
-        </div>
-
-
-        {/* completed course section */}
-        <div className="classess">
-          <div>
-            {completedMasterClass?.slice().reverse().map((masterclass, index) => (
-              <div className="item">
-                <img src={masterclass.image} alt="masterclass"
-                  onError={(e) => e.target.src = imgalt}
-                />
-                <div className="text" key={masterclass._id || index}>
-                  <div className="content" >
-                    <h2>{masterclass.title}</h2>
-                    <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                    <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                  </div>
-                  <div className="register">
-                    <span>{masterclass.applications} learners have participated</span>
-                    {masterclass.pdfstatus && (
-                      <button onClick={() => handleDownload(masterclass)} className="fa fa-download" > Certificate</button>
-                    )}
-                  </div>
-
+      </div>
+      <div className="classess">
+        <div>
+          {allMasterClass?.map((masterclass, index) => (
+            <div className="item">
+              <img src={masterclass.image} alt="masterclass"
+                onError={(e) => e.target.src = imgalt}
+              />
+              <div className="text" key={masterclass._id || index}>
+                <div className="content" >
+                  <h2>{masterclass.title}</h2>
+                  <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
+                  <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                {masterclass.status === "upcoming" ? (
+                  <div className="register">
+                    <p>Registration will start soon !</p>
+                  </div>
 
-        <div className="popularcourse">
-          <h1 data-aos="zoom-in">| Popular Courses</h1>
-          <Popularcourse />
-        </div>
-
-        <div className="faqsection">
-          <div className="max-w-[1200px] mx-auto p-4 border rounded-lg shadow-lg bg-white">
-            <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b py-2">
-                <button
-                  className="w-full text-left font-semibold text-lg flex justify-between"
-                  onClick={() => toggleFAQ(index)}
-                >
-                  {faq.question}
-                  <span>{openIndex === index ? "▲" : "▼"}</span>
-                </button>
-                {openIndex === index && <p className="text-gray-700 mt-2">{faq.answer}</p>}
+                ) : (
+                  <div className="register">
+                    <span>{masterclass.applications} learners have registered</span>
+                    <button onClick={() => handleApply(masterclass)}>Register Now</button>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-
-        </div>
-        {/* Registration Form */}
-        {isRegisterForm && selectedMasterClass && (
-          <div id="registrationform">
-            <div className="form">
-              <div className="close">
-                <h3>Register NOW!</h3>
-                <span class="fa fa-close" onClick={closeForm}></span>
-              </div>
-              <h3 className="title">{selectedMasterClass.title}</h3>
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Personal Email id"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Student's College Email id"
-                  name="clgemail"
-                  value={formData.clgemail}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Enter College Name"
-                  name="collegename"
-                  value={formData.collegename}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="WhatsApp Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-                <input className="submitbtn" type="submit" value="SUBMIT" />
-                <p><span>NOTE : </span>Enter your details carefully, they will appear on your certificate.</p>
-              </form>
             </div>
+          ))}
+        </div>
+      </div>
+      <div className="benifits">
+        <h1>| Benefits of the Masterclass</h1> <br />
+        <div>
+          <div className="item">
+            <i className="fa fa-certificate"></i>
+            <h2>Industry-Recognized Certification</h2>
+            <p>Receive a certificate upon completion to boost your credentials.</p>
           </div>
-        )}
+          <div className="item">
+            <i className="fa fa-line-chart"></i>
+            <h2>Career Guidance </h2>
+            <p> Get personalized advice to navigate your career path.</p>
+          </div>
+          <div className="item">
+            <i className="fa fa-globe"></i>
+            <h2>Networking Opportunities</h2>
+            <p>Connect with like-minded professionals and industry leaders.</p>
+          </div>
+        </div>
+      </div>
 
-        {/* Certificate Download Form */}
-        {isDownloadForm && selectedMasterClass && (
-          <div id="registrationform">
-            <div className="form">
-              <div className="close">
-                <h3>Download Certificate!</h3>
-                <span className="fa fa-close" onClick={closeForm}></span>
+      <div className="certificateparticipate">
+        <div className="text">
+          <h1>| Certificate of Participation</h1> <br />
+          <p>After attending the Krutanic masterclass, you'll receive a certificate of participation. <br /><br /> This certificate acknowledges your commitment to professional development and can be shared on LinkedIn and other professional platforms to highlight your expertise and showcase your continuous learning.</p>
+        </div>
+        <div className="image">
+          <img src={img} alt="" />
+        </div>
+      </div>
+
+
+      {/* completed course section */}
+      <div className="classess">
+        <div>
+          {completedMasterClass?.slice().reverse().map((masterclass, index) => (
+            <div className="item">
+              <img src={masterclass.image} alt="masterclass"
+                onError={(e) => e.target.src = imgalt}
+              />
+              <div className="text" key={masterclass._id || index}>
+                <div className="content" >
+                  <h2>{masterclass.title}</h2>
+                  <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
+                  <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
+                </div>
+                <div className="register">
+                  <span>{masterclass.applications} learners have participated</span>
+                  {masterclass.pdfstatus && (
+                    <button onClick={() => handleDownload(masterclass)} className="fa fa-download" > Certificate</button>
+                  )}
+                </div>
+
               </div>
-              <h3 className="title">{selectedMasterClass.title}</h3>
-              <form onSubmit={downloadCertificate}>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Personal Email id"
-                  required
-                />
-                <input className="submitbtn" type="submit" value="SUBMIT" />
-                <p><span>NOTE : </span>Please enter the same Email that you used during registration.</p>
-              </form>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
+      </div>
+
+      <div className="popularcourse">
+        <h1 data-aos="zoom-in">| Popular Courses</h1>
+        <Popularcourse />
+      </div>
+
+      <div className="faqsection">
+        <div className="max-w-[1200px] mx-auto p-4 border rounded-lg shadow-lg bg-white">
+          <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b py-2">
+              <button
+                className="w-full text-left font-semibold text-lg flex justify-between"
+                onClick={() => toggleFAQ(index)}
+              >
+                {faq.question}
+                <span>{openIndex === index ? "▲" : "▼"}</span>
+              </button>
+              {openIndex === index && <p className="text-gray-700 mt-2">{faq.answer}</p>}
+            </div>
+          ))}
+        </div>
 
       </div>
-    );
-  };
+      {/* Registration Form */}
+      {isRegisterForm && selectedMasterClass && (
+        <div id="registrationform">
+          <div className="form">
+            <div className="close">
+              <h3>Register NOW!</h3>
+              <span class="fa fa-close" onClick={closeForm}></span>
+            </div>
+            <h3 className="title">{selectedMasterClass.title}</h3>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Personal Email id"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Student's College Email id"
+                name="clgemail"
+                value={formData.clgemail}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Enter College Name"
+                name="collegename"
+                value={formData.collegename}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="WhatsApp Number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+              <input className="submitbtn" type="submit" value="SUBMIT" />
+              <p><span>NOTE : </span>Enter your details carefully, they will appear on your certificate.</p>
+            </form>
+          </div>
+        </div>
+      )}
 
-  export default MasterClass;
+      {/* Certificate Download Form */}
+      {isDownloadForm && selectedMasterClass && (
+        <div id="registrationform">
+          <div className="form">
+            <div className="close">
+              <h3>Download Certificate!</h3>
+              <span className="fa fa-close" onClick={closeForm}></span>
+            </div>
+            <h3 className="title">{selectedMasterClass.title}</h3>
+            <form onSubmit={downloadCertificate}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Personal Email id"
+                required
+              />
+              <input className="submitbtn" type="submit" value="SUBMIT" />
+              <p><span>NOTE : </span>Please enter the same Email that you used during registration.</p>
+            </form>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+};
+
+export default MasterClass;
