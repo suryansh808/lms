@@ -51,9 +51,7 @@ const PCHeader = () => {
         {isMobileVisible && (
           <div className="sidebar">
             <Link to="/PcDashboard"><i class="fa fa-home"></i>Home</Link>
-            <Link to="/jobpost">Job Post</Link>
-            <Link to="/application">Applications</Link>
-      
+            <Link to="/jobpost">Job Post</Link>    
           <button onClick={handleLogout} ><i className="fa fa-sign-out"></i> Logout</button>
           </div>
         )}

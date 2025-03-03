@@ -43,6 +43,7 @@ import LoginAdmin from "./Admin/LoginAdmin";
 import RevenueSheet from "./Admin/RevenueSheet";
 import AllTeamDetail from "./Admin/AllTeamDetail";
 import AddEvent from "./Admin/AddEvent";
+import EventRegistration from "./Admin/EventRegistration";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -82,6 +83,9 @@ import AdvanceQueries from "./Admin/AdvanceQueries";
 import MentorQueries from "./Admin/MentorQueries";
 import JobBoard from "./User/JobBoard";
 import MyJob from "./User/MyJob";
+import MockInterview from "./User/MockInterview";
+import Exercise from "./User/Excercise";
+import ResumeATS from "./User/ResumeATS"
 
 
 // placementcoordinator
@@ -89,10 +93,8 @@ import PCHeader from "./PlacementCoordinator.jsx/PCHeader";
 import PClogin from "./PlacementCoordinator.jsx/PClogin";
 import PCDashboard from "./PlacementCoordinator.jsx/PCDashboard";
 import JobPost from "./PlacementCoordinator.jsx/JobPost";
-import Application from "./PlacementCoordinator.jsx/Application";
 import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
-import MockInterview from "./User/MockInterview";
-import Exercise from "./User/Excercise";
+
 
 import OnBoardingForm from "./page/OnBoardingForm";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
@@ -100,6 +102,7 @@ import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 import HalfPayment from "./Admin/HalfPayment";
 import EventLogin from "./page/EventLogin";
+
 
 
 
@@ -169,7 +172,8 @@ const AppContent = () => {
     "/onboardingdetails",
     "/allteamdetail",
     "/masterclasses",
-    "/addevent"
+    "/addevent",
+    "/eventregistration"
 
   ];
   const operationheaderPaths = [
@@ -199,12 +203,13 @@ const AppContent = () => {
     "/exercise",
     "/jobboard",
     "/myjob",
+      "/resumeats",
   ];
 
   const placementcoodinatorHeaderPaths = [
     "/pcdashboard",
     "/jobpost",
-    "/application",
+   
   ];
 
 
@@ -284,6 +289,7 @@ const AppContent = () => {
         <Route path="/CreatePlacementCoordinator" element={isAuthenticatedAdmin() ? (<CreatePlacementCoordinator />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/MasterClasses" element={isAuthenticatedAdmin() ? (<MasterClasses />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/AddEvent" element={isAuthenticatedAdmin() ? (<AddEvent />) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/EventRegistration" element={isAuthenticatedAdmin() ? (<EventRegistration />) : (<Navigate to="/AdminLogin" />)}/>
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
@@ -330,6 +336,10 @@ const AppContent = () => {
           path="/Exercise"
           element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />}
         />
+         <Route
+          path="/ResumeATS"
+          element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}
+        />
 
         {/* User Panel End */}
 
@@ -337,7 +347,7 @@ const AppContent = () => {
         <Route path="/PClogin" element={<PClogin />} />
         <Route path="/PCDashboard"   element={ isAuthenticatedPC()? <PCDashboard /> : <Navigate to="/PClogin" />}/>
         <Route path="/JobPost"  element={isAuthenticatedPC()? <JobPost /> : <Navigate to="/PClogin" /> }/>
-        <Route path="/Application" element={isAuthenticatedPC()? <Application /> : <Navigate to="/PClogin" />}/>
+   
         {/* placement coodinator panel ends */}
       </Routes>
      

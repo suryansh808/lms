@@ -109,6 +109,7 @@ router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
 
 // --------------------------------------------------------------------------------------------------------------------
 
+// Event Registration
 router.post("/eventregistration", async (req, res) => {
   console.log(req.body);
     try {
@@ -120,10 +121,15 @@ router.post("/eventregistration", async (req, res) => {
     }
 })
 
-
-
-
-
+// Get all Event Registrations
+router.get("/alleventregistrationnts", async (req, res) => {
+  try {
+    const alleventregistrations = await EventRegistration.find().sort({ _id: -1 });
+    res.status(200).json(alleventregistrations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 

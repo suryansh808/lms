@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
   otpExpires: {
     type: Date,
   },
+  // pdfUrl: {
+  //   type: String, 
+  // },
 });
 
 module.exports = mongoose.model('User', userSchema);

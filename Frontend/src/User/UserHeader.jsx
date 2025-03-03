@@ -105,6 +105,9 @@ const UserHeader = () => {
           <Link to="/Exercise">
             <i className="fa fa-ticket"></i> Exercise Prep
           </Link> */}
+          {/* <Link to="/ResumeATS">
+            <i className="fa fa-gear"></i> ATS Checker
+          </Link> */}
           <button onClick={handleLogout}>
             <i className="fa fa-sign-out"></i> LogOut
           </button>

@@ -78,6 +78,10 @@
     }
 }
 
+.setting{
+    height: calc(100vh - 100px);
+}
+
 #UserDashboard {
     margin-bottom: 60px;
     padding: 5px;
