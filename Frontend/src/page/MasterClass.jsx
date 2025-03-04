@@ -235,6 +235,7 @@ const MasterClass = () => {
                   <div className="register">
                     <span>{masterclass.applications} learners have registered</span>
                     <button onClick={() => handleApply(masterclass)}>Register Now</button>
+                    {/* <button onClick={() => handleDownload(masterclass)} className="fa fa-download" > Certificate</button> */}
                   </div>
                 )}
               </div>

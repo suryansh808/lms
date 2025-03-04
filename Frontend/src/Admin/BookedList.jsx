@@ -440,7 +440,7 @@ const BookedList = () => {
               <tr>
                 <th>Sl</th>
                 <th>Name</th>
-                <th>Phone</th>
+                <th>WhatsApp No</th>
                 <th>Email</th>
                 <th>Domain</th>
                 {/* <th>Program</th> */}
@@ -473,7 +473,7 @@ const BookedList = () => {
                       >
                         <td>{index + 1}</td>
                         <td className="capitalize">{item.fullname}</td>
-                        <td>{item.phone}</td>
+                        <td>{item.whatsAppNumber}</td>
                         <td>{item.email}</td>
                         <td>{item.domain}</td>
                         {/* <td>{item.program}</td> */}
@@ -585,9 +585,9 @@ const BookedList = () => {
             <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
               <h2>Details</h2>
               <div className="space-y-2">
-                {/* <p>
-                <strong>Email:</strong> {dialogData.email}
-              </p> */}
+                <p>
+                <strong>Phone:</strong> {dialogData.phone}
+              </p>
               <p>
                 <strong>Due Date:</strong> {dialogData.clearPaymentMonth}
               </p>

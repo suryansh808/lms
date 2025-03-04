@@ -583,8 +583,8 @@ const BookedAmount = () => {
           <thead>
             <tr>
               <th>Sl No</th>
-              <th>Full Name</th>
-              <th>Number</th>
+              <th>Name</th>
+              <th>WhatsApp No</th>
               <th>Program Price</th>
               <th>Paid Amount</th>
               <th>Remaining Amount</th>
@@ -624,7 +624,7 @@ const BookedAmount = () => {
                     >
                       <td>{index + 1}</td>
                       <td className="capitalize">{item.fullname}</td>
-                      <td>{item.phone}</td>
+                      <td>{item.whatsAppNumber}</td>
                       <td>{item.programPrice}</td>
                       <td>{item.paidAmount}</td>
                       <td>{item.programPrice - item.paidAmount}</td>
@@ -737,9 +737,9 @@ const BookedAmount = () => {
               <p>
                 <strong>Email:</strong> {dialogData.email}
               </p>
-              {/* <p>
+              <p>
                 <strong>Phone:</strong> {dialogData.phone}
-              </p> */}
+              </p>
               <p>
                 <strong>Program:</strong> {dialogData.program}
               </p>

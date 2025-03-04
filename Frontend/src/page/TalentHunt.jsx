@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import API from "../API";
+import EventLogin from "../Components/EventLogin";
 
 const TalentHunt = () => {
   const [formData, setFormData] = useState({
@@ -76,6 +77,11 @@ const TalentHunt = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
   }, []);
+
+  // const [isFlipped, setIsFlipped] = useState(false);
+
+
+
 
   return (
     <div id="talenthunt">
@@ -214,7 +220,7 @@ const TalentHunt = () => {
       </section>
 
       <section className="bg-white">
-        <div className="container bg-white text-black flex justify-around flex-wrap ">
+        <div className={`container  bg-white text-black flex justify-around flex-wrap `}>
           <div className=" w-full sm:w-1/2 px-6 sm:px-20 py-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
               | Talent Hunt Registration
@@ -273,8 +279,7 @@ const TalentHunt = () => {
                   className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
                   required
                 />
-              </fieldset>
-             
+              </fieldset>           
               <fieldset className="mb-4">
                 <button
                   type="submit"
@@ -282,9 +287,27 @@ const TalentHunt = () => {
                 >
                   Register Now
                 </button>
+               
               </fieldset>
             </form>
+             {/* <button className=" p-3 bg-black text-white rounded-lg focus:outline-none" onClick={() => setIsFlipped(false)}>Login</button> */}
           </div>
+
+          {/* <div className="front">
+          <h1 className="title">Login</h1>
+          <form>
+            <input type="text" placeholder="Username" />
+            <input type="password" placeholder="Password" />
+            <input type="button" value="Login" />
+          </form>
+          <a
+            className="flipbutton"
+            onClick={() => setIsFlipped(true)}
+          >
+            Create my account →
+          </a>
+        </div> */}
+
 
           <div className="text-center w-full sm:w-1/2 px-6 sm:px-20 py-10 sm:py-40">
             <h2 className="text-2xl sm:text-3xl font-semibold text-black gradient-text">
@@ -326,6 +349,7 @@ const TalentHunt = () => {
             </div>
           </div>
         </div>
+        {/* <EventLogin/> */}
       </section>
     </div>
   );

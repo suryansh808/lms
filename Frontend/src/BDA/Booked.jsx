@@ -73,7 +73,7 @@ const Booked = () => {
               <th>Sl</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Contact</th>
+              <th>WhatsApp No</th>
               <th>Mode of Program</th>
               <th>Operation Name</th>
               <th>Opted Domain</th>
@@ -93,7 +93,7 @@ const Booked = () => {
                     <td>{index + 1}</td>
                     <td className="capitalize">{item.fullname}</td>
                     <td>{item.email}</td>
-                    <td>{item.phone}</td>
+                    <td>{item.whatsAppNumber}</td>
                     <td className="capitalize">{item.program}</td>
                     <td className="capitalize">{item.operationName}</td>
                     <td className="capitalize">{item.domain}</td>
