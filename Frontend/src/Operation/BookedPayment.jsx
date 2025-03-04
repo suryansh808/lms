@@ -387,7 +387,7 @@ const BookedAmount = () => {
   const handleCopyMobileNumbers = (selectedDate) => {
     const students = groupedData[selectedDate];
     if (Array.isArray(students)) {
-      const mobileNumbers = students.map((student) => student.phone).join("\n");
+      const mobileNumbers = students.map((student) => student.whatsAppNumber).join("\n");
       navigator.clipboard
         .writeText(mobileNumbers)
         .then(() => {
@@ -397,7 +397,6 @@ const BookedAmount = () => {
           toast.error("Failed to copy: " + err);
         });
     } else {
-      // console.error("No students found for the given date or data format is incorrect.");
       alert("No students found or invalid data format.");
     }
   };
