@@ -66,19 +66,31 @@ const OperationDashboard = () => {
     (item) => item.status === "default"
   ).length;
 
-  const totalRevenue = operationData.reduce(
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  
+  // Filter operationData to only include current month's records
+  const currentMonthData = operationData.filter((student) => {
+    const createdAt = new Date(student.createdAt);
+    return createdAt.getMonth() === currentMonth && createdAt.getFullYear() === currentYear;
+  });
+  
+  const totalRevenue = currentMonthData.reduce(
     (acc, student) => acc + (student.programPrice || 0),
     0
   );
-  const bookedRevenue = operationData.reduce(
+  
+  const bookedRevenue = currentMonthData.reduce(
     (acc, student) => acc + (student.programPrice || 0),
     0
   );
-  const creditedRevenue = operationData.reduce(
+  
+  const creditedRevenue = currentMonthData.reduce(
     (acc, student) =>
       acc + ((student.paidAmount || 0) - (student.defaultAmount || 0)),
     0
   );
+  
   const pendingRevenue = bookedRevenue - creditedRevenue;
 
   const revenueByMonth = operationData.reduce((acc, student) => {
@@ -155,7 +167,7 @@ const OperationDashboard = () => {
 
       <div className="revenue">
         <div className="revenue-card">
-          <h2 className="text-lg font-semibold">Revenue Details</h2>
+          <h2 className="text-lg font-semibold">Revenue Details (Current Month)</h2>
           <p>Total Revenue: {totalRevenue}/-</p>
           <p>Booked Revenue: {bookedRevenue}/-</p>
           <p>Credited Revenue: {creditedRevenue}/-</p>

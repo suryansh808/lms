@@ -4,22 +4,22 @@ import API from "../API";
 
 const OperationRevenueSheets = () => {
   const [operationData, setOperationData] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState("");
   const operationId = localStorage.getItem("operationId");
 
-  const fetchOperationData = async () => {
-    try {
-      const response = await axios.get(`${API}/getnewstudentenroll`, {
-        params: { operationId },
-      });
-      setOperationData(
-        response.data.filter((data) => data.operationId == operationId)
-      );
-    } catch (error) {
-      console.error("Error fetching operation data:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchOperationData = async () => {
+      try {
+        const response = await axios.get(`${API}/getnewstudentenroll`, {
+          params: { operationId },
+        });
+        setOperationData(
+          response.data.filter((data) => data.operationId == operationId)
+        );
+      } catch (error) {
+        console.error("Error fetching operation data:", error);
+      }
+    };
     fetchOperationData();
   }, []);
 
@@ -38,7 +38,7 @@ const OperationRevenueSheets = () => {
     const pending = revenue - credited;
 
     if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
+      revenueByDay[date] = { total: 0, credited: 0, pending: 0, month };
     }
     if (!revenueByMonth[month]) {
       revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
@@ -55,7 +55,13 @@ const OperationRevenueSheets = () => {
     totalRevenue += revenue;
   });
 
-  const months = Object.keys(revenueByMonth);
+  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(a) - new Date(b));
+  const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
+  const filteredDailyRevenue = Object.entries(revenueByDay).filter(
+    ([, data]) => data.month === (selectedMonth || currentMonth)
+  );
+
+  // const months = Object.keys(revenueByMonth);
   months.sort((a, b) => new Date(a) - new Date(b));
 
   let growthPercentage = null;
@@ -67,12 +73,29 @@ const OperationRevenueSheets = () => {
     }
   }
 
+
+
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-center text-3xl font-bold mb-6">Revenue Sheets</h1>
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4 ">Daily Revenue</h2>
+        <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>
+        <div className="mb-4">
+          <label className="font-semibold">Select Month: </label>
+          <select
+            className="border p-2 rounded"
+            value={selectedMonth || currentMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+          >
+            <option value={currentMonth}>Current Month ({currentMonth})</option>
+            {months
+              .filter((month) => month !== currentMonth)
+              .map((month) => (
+                <option key={month} value={month}>{month}</option>
+              ))}
+          </select>
+        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse border border-gray-200">
             <thead>
@@ -84,7 +107,7 @@ const OperationRevenueSheets = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(revenueByDay).map(([date, data], index) => (
+              {filteredDailyRevenue.map(([date, data], index) => (
                 <tr
                   key={date}
                   className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
@@ -113,15 +136,15 @@ const OperationRevenueSheets = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(revenueByMonth).map(([month, data], index) => (
+              {months.map((month, index) => (
                 <tr
                   key={month}
                   className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
                 >
                   <td className="border p-3">{month}</td>
-                  <td className="border p-3">₹{data.total.toFixed(2)}</td>
-                  <td className="border p-3">₹{data.credited.toFixed(2)}</td>
-                  <td className="border p-3">₹{data.pending.toFixed(2)}</td>
+                  <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
+                  <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
+                  <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -134,6 +157,7 @@ const OperationRevenueSheets = () => {
         <p className="mb-2">
           <strong>Total Revenue:</strong> ₹{totalRevenue.toFixed(2)}
         </p>
+
         {growthPercentage !== null && (
           <p
             className={
