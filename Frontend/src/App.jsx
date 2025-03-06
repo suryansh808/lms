@@ -24,6 +24,9 @@ import SmoothScroll from "./SmoothScroll";
 import MentorSection from "./Components/MentorSection";
 import Performancemarket from "./page/AdvanceCourse/Performancemarket";
 import MasterClass from "./page/MasterClass";
+import OnBoardingForm from "./page/OnBoardingForm";
+import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
+import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 
 // Admin
 import AdminHeader from "./Admin/AdminHeader";
@@ -44,6 +47,8 @@ import RevenueSheet from "./Admin/RevenueSheet";
 import AllTeamDetail from "./Admin/AllTeamDetail";
 import AddEvent from "./Admin/AddEvent";
 import EventRegistration from "./Admin/EventRegistration";
+import OnBoardingDetails from "./Admin/OnBoardingDetails";
+import HalfPayment from "./Admin/HalfPayment";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -53,7 +58,6 @@ import BookedPayment from "./Operation/BookedPayment";
 import FullPayment from "./Operation/FullPayment";
 import DefaultPayment from "./Operation/DefaultPayment";
 import OperationRevenueSheets from "./Operation/OperationRevenueSheets";
-
 // import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
@@ -96,12 +100,9 @@ import JobPost from "./PlacementCoordinator.jsx/JobPost";
 import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 
-import OnBoardingForm from "./page/OnBoardingForm";
-import OnBoardingDetails from "./Admin/OnBoardingDetails";
-import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
-import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
-import HalfPayment from "./Admin/HalfPayment";
-import EventLogin from "./page/EventLogin";
+//event
+import EventDashBoard from "./Event/EventDashBoard";
+
 
 
 
@@ -150,8 +151,8 @@ const AppContent = () => {
     "/pclogin",
     "/onboardingform",
     "/masterclass",
-    // "/eventlogin"
   ];
+
   const adminheaderPaths = [
     "/admindashboard",
     "/addcourse",
@@ -174,8 +175,8 @@ const AppContent = () => {
     "/masterclasses",
     "/addevent",
     "/eventregistration"
-
   ];
+
   const operationheaderPaths = [
     "/operationdashboard",
     "/fullpayment",
@@ -183,6 +184,7 @@ const AppContent = () => {
     "/defaultpayment",
     "/operationrevenuesheet"
   ];
+
   const bdaheaderPaths = [
     "/home",
     "/fullpaid",
@@ -194,6 +196,7 @@ const AppContent = () => {
     "/bdarevenuesheet",
     "/reference"
   ];
+
   const userheaderPaths = [
     "/dashboard",
     "/enrolledcourses",
@@ -203,7 +206,7 @@ const AppContent = () => {
     "/exercise",
     "/jobboard",
     "/myjob",
-      "/resumeats",
+    "/resumeats",
   ];
 
   const placementcoodinatorHeaderPaths = [
@@ -223,6 +226,7 @@ const AppContent = () => {
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
   const isAuthenticatedAdmin = () => !!localStorage.getItem("adminToken");
   const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
+  const isAuthenticatedEventUser = () => !!localStorage.getItem("eventToken");
 
   return (
 
@@ -251,7 +255,6 @@ const AppContent = () => {
         <Route path="/AdvanceCourses" element={<AdvanceCourses />} />
         <Route path="/FeeStructure" element={<FeeStructure />} />
         <Route path="/TalentHunt" element={<TalentHunt />} />
-        <Route path="/EventLogin" element={<EventLogin />} />
         <Route path="/Advance" element={<Advance />} />
         <Route path="/Mentorship" element={<Mentorship />} />
         <Route path="/MentorSection" element={<MentorSection />} />
@@ -314,9 +317,6 @@ const AppContent = () => {
           <Route path="/TeamDetail" element={isAuthenticatedBda() ?<TeamDetail/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/Reference" element={isAuthenticatedBda() ?<Reference/> : <Navigate to="/TeamLogin"/> }/>
-         
-
-
         {/* bda panel ends */}
 
         {/* User Panel */}
@@ -326,29 +326,20 @@ const AppContent = () => {
         <Route path="/Learning" element={isAuthenticated() ?<Learning />: <Navigate to="/login" />} />
         <Route path="/JobBoard" element={isAuthenticated() ?<JobBoard /> : <Navigate to="/login" />} />
         <Route path="/MyJob" element={isAuthenticated() ?<MyJob />: <Navigate to="/login" />} />
-        <Route
-          path="/MockInterview"
-          element={
-            isAuthenticated() ? <MockInterview /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/Exercise"
-          element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />}
-        />
-         <Route
-          path="/ResumeATS"
-          element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}
-        />
-
+        <Route path="/MockInterview" element={ isAuthenticated() ? <MockInterview /> : <Navigate to="/login" /> } />
+        <Route path="/Exercise"  element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />} />
+         <Route path="/ResumeATS" element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}/>
         {/* User Panel End */}
 
         {/* placement coodinator panel starts */}
         <Route path="/PClogin" element={<PClogin />} />
-        <Route path="/PCDashboard"   element={ isAuthenticatedPC()? <PCDashboard /> : <Navigate to="/PClogin" />}/>
+        <Route path="/PCDashboard" element={ isAuthenticatedPC()? <PCDashboard /> : <Navigate to="/PClogin" />}/>
         <Route path="/JobPost"  element={isAuthenticatedPC()? <JobPost /> : <Navigate to="/PClogin" /> }/>
-   
         {/* placement coodinator panel ends */}
+
+        {/* event */}
+        <Route path="/EventDashboard" element={ isAuthenticatedEventUser() ? <EventDashBoard /> : <Navigate to="/TalentHunt" />} />
+
       </Routes>
      
       {headerPaths.includes(location.pathname.toLowerCase()) && <Footer />}

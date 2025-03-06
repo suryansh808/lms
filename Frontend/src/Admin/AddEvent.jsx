@@ -9,6 +9,9 @@ const AddEvent = () => {
   const [editId, setEditId] = useState(null);
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSetectedEvent] = useState([]);
+  const [showAppliedDetails , setShowAppliedDetails] = useState(null)
+  // const [appliedUsers , setAppliedUsers] = useState()
+
   const [form, setForm] = useState({
       question: "",
       option1: "",
@@ -92,6 +95,15 @@ const AddEvent = () => {
     }
   };
 
+  // const fetchAppliedUsers = async () => {
+  //   try {
+  //     const response = await axios.get(`${API}/events-with-applications`);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error("There was an error fetching MasterClass:", error);
+  //   }
+  // };
+
   const handleEdit = (events) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to edit the event?"
@@ -123,6 +135,7 @@ const AddEvent = () => {
 
   useEffect(() => {
     fetchEvent();
+    // fetchAppliedUsers();
   }, []);
  
   const handleSubmitQuestion = async (e) => {
@@ -185,6 +198,10 @@ const AddEvent = () => {
     setEditId(question._id);
     setisQuestionFormVisible(true);
   };
+
+
+
+console.log(showAppliedDetails);
   
   
   return (
@@ -292,6 +309,18 @@ const AddEvent = () => {
         </div>
       )}
 
+     {showAppliedDetails && (
+        <div className="jobdetails">
+          <div className="jobdetailsdiv">
+            <div className="title">
+              <h2></h2>
+              < span onClick={() => setShowAppliedDetails(null)} >✖</span>
+            </div>  
+            <span></span>
+          </div>
+        </div>
+       )}
+
       <div className="coursetable">
         <div>
           <h2>Events List</h2>
@@ -317,36 +346,39 @@ const AddEvent = () => {
             </tr>
           </thead>
           <tbody>
-            {allEvents?.map((events, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td onClick={() => setSetectedEvent(events)}>{events.title}</td>
-                <td>
-                  {new Date(events.start).toLocaleString("en-US", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-                </td>
-                <td>{events.status}</td>
-                <td>{events.type}</td>
-                <td>0</td>
-                <td>
-                  <button>
-                    <i
-                      class="fa fa-edit"
-                      onClick={() => handleEdit(events)}
-                    ></i>
-                  </button>
-                  <button onClick={() => handleDelete(events._id)}>
-                    <i class="fa fa-trash-o text-red-600"></i>
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {allEvents?.map((events, index) => {
+          const appliedCount = appliedUsers?.filter(user => user.eventId._id === events._id).length;
+      return (
+        <tr key={index}>
+          <td>{index + 1}</td>
+          <td className=" cursor-pointer" onClick={() => setSetectedEvent(events)}>{events.title}</td>
+          <td>
+            {new Date(events.start).toLocaleString("en-US", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            })}
+          </td>
+          <td>{events.status}</td>
+          <td>{events.type}</td>
+          <td className=" cursor-pointer" onClick={() => setShowAppliedDetails(appliedUsers)}>{appliedCount}</td>
+          <td>
+            <button>
+              <i
+                className="fa fa-edit"
+                onClick={() => handleEdit(events)}
+              ></i>
+            </button>
+            <button onClick={() => handleDelete(events._id)}>
+              <i className="fa fa-trash-o text-red-600"></i>
+            </button>
+          </td>
+        </tr>
+      );
+    })}
           </tbody>
         </table>
         </div>

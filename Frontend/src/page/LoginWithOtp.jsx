@@ -64,7 +64,6 @@ const LoginWithOtp = () => {
           <div className="input-field">
             <input
               type="email"
-              // placeholder="Enter your email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +79,6 @@ const LoginWithOtp = () => {
               <div className="input-field">
                 <input
                   type="text"
-                  // placeholder="Enter OTP"
                   required
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
