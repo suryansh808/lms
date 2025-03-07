@@ -33,7 +33,7 @@ const Dialog = ({ isOpen, onClose, fullname, errorMessage }) => {
 };
 
 
-const OnBoardingForm = () => {
+const DashboardAccessForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [fullname, setFullname] = useState("");
@@ -274,7 +274,7 @@ const OnBoardingForm = () => {
     <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container m-auto">
-        <h2 className="mt-2">DashBoard Form</h2>
+        <h2 className="mt-2">DashBoard Access Form</h2>
         <form onSubmit={handleSubmit}>
           <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[10px]">
             <div className="input-field">
@@ -525,4 +525,4 @@ const styles = {
   },
 };
 
-export default OnBoardingForm;
+export default DashboardAccessForm;

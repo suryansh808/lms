@@ -24,9 +24,10 @@ import SmoothScroll from "./SmoothScroll";
 import MentorSection from "./Components/MentorSection";
 import Performancemarket from "./page/AdvanceCourse/Performancemarket";
 import MasterClass from "./page/MasterClass";
-import OnBoardingForm from "./page/OnBoardingForm";
+// import OnBoardingForm from "./page/OnBoardingForm";
 import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
+import DashboardAccessForm from "./page/DashboardAccessForm";
 
 // Admin
 import AdminHeader from "./Admin/AdminHeader";
@@ -113,6 +114,7 @@ import EventDashBoard from "./Event/EventDashBoard";
 
 
 
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -151,7 +153,7 @@ const AppContent = () => {
     "/managerlogin",
     "/loginadmin",
     "/pclogin",
-    "/onboardingform",
+    "/dashboardaccessform",
     "/masterclass",
   ];
 
@@ -269,7 +271,7 @@ const AppContent = () => {
         <Route path="/ProductManagement" element={<ProductManagement />} />
         <Route path="/AutomationTesting" element={<AutomationTesting />} />
         <Route path="/PromptEngineering" element={<PromptEngineering />} />
-        <Route path="/OnBoardingForm" element={<OnBoardingForm />} />
+        <Route path="/DashboardAccessForm" element={<DashboardAccessForm />} />
         <Route path="/MasterClass" element={<MasterClass />} />
 
         {/* Admin Panel Start */}
