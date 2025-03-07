@@ -92,7 +92,7 @@ const CompanyLeads = () => {
               <th>Phone</th>
               <th>College Name</th>
               <th>Domain</th>
-              <th>Reason</th>
+              {/* <th>Reason</th> */}
               <th>Study Year</th>
               <th>Time</th>
               <th>Action</th>
@@ -127,7 +127,7 @@ const CompanyLeads = () => {
                     <td>{item.phone}</td>
                     <td className="capitalize">{item.collegeName}</td>
                     <td className="capitalize">{item.domain}</td>
-                    <td>{item.reason}</td>
+                    {/* <td>{item.reason}</td> */}
                     <td>{item.passingyear}</td>
                     <td className="uppercase">
                       {new Date(item.createdAt).toLocaleTimeString("en-GB", {
