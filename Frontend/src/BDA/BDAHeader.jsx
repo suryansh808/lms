@@ -110,6 +110,7 @@ const BDAHeader = () => {
             )}
           </div>
           <Link to="/Home"><i class="fa fa-dashboard"></i> Home</Link>
+          <Link to="/CompanyLeads"><i class="fa fa-tags"></i> Company Leads</Link>
           <Link to="/OnBoarding"><i class="fa fa-edit"></i> OnBoarding Form</Link>
           <Link to="/Booked"><i class="fa fa-calendar-o"></i> Booked Payment</Link>
           <Link to="/FullPaid"><i class="fa fa-calendar-check-o"></i> Full Payment</Link>

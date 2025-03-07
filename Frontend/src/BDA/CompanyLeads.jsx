@@ -19,33 +19,23 @@ const groupByDate = (queries) => {
   }, {});
 };
 
-const MentorQueries = () => {
+const CompanyLeads = () => {
+    const bdaName = localStorage.getItem("bdaName");
   const [queries, setQueries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [bda, setBda] = useState([]);
   const itemsPerPage = 25;
 
   const getQueries = async () => {
     try {
       const response = await axios.get(`${API}/mentorqueries`);
-      setQueries(response.data);
+      setQueries(response.data.filter((item) => item.bda === bdaName));
     } catch (error) {
       console.error(error);
-    }
-  };
-  const fetchBda = async () => {
-    try {
-      const response = await axios.get(`${API}/getbda`);
-      setBda(response.data);
-    } catch (error) {
-      console.error("There was an error fetching bda:", error);
-    } finally {
     }
   };
 
   useEffect(() => {
     getQueries();
-    fetchBda();
   }, []);
 
   const groupedQueries = groupByDate(queries);
@@ -87,18 +77,6 @@ const MentorQueries = () => {
     }
   };
 
-  const handleBdaAsign = async(e , leadid)=>{
-    const updatedAction = e.target.value;
-    console.log("bda asign" , leadid , updatedAction);
-    try {
-      await axios.put(`${API}/bdaasign/${leadid}`, { bda: updatedAction
-        });
-        toast.success("BDA Asigned");
-        getQueries();
-        } catch (error) {
-          console.error("Error updating query:", error);
-          }
-  }
 
   return (
     <div id="AdminAddCourse">
@@ -118,7 +96,6 @@ const MentorQueries = () => {
               <th>Study Year</th>
               <th>Time</th>
               <th>Action</th>
-              <th>Asign</th>
             </tr>
           </thead>
           <tbody>
@@ -127,7 +104,7 @@ const MentorQueries = () => {
                 item.type === "date" ? (
                   <tr key={`date-${item.date}`}>
                     <td
-                      colSpan="11"
+                      colSpan="10"
                       style={{
                         fontWeight: "bold",
                         backgroundColor: "#f0f0f0",
@@ -182,35 +159,18 @@ const MentorQueries = () => {
                         </option>
                       </select>
                     </td>
-                    <td>
-                      {bda && bda.length > 0 && (
-                        <select
-                        value={item.bda}
-                          onChange={(e) => handleBdaAsign(e, item._id)}
-                          className="border rounded-full text-black border-black"
-                          defaultValue="Select Bda"
-                        >
-                          <option value="Select Bda">Select Bda</option>
-                          {bda.map((item) => (
-                            <option value={item.fullname}>
-                              {item.fullname}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    </td>
                   </tr>
                 )
               )
             ) : (
               <tr>
-                <td colSpan="11">No Queries Found</td>
+                <td colSpan="10">No Leads Found</td>
               </tr>
             )}
           </tbody>
         </table>
         {/* Pagination */}
-        <section className="flex justify-center items-center mt-4">
+        {/* <section className="flex justify-center items-center mt-4">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -236,10 +196,10 @@ const MentorQueries = () => {
               } `}
             ></i>
           </button>
-        </section>
+        </section> */}
       </div>
     </div>
   );
 };
 
-export default MentorQueries;
+export default CompanyLeads;

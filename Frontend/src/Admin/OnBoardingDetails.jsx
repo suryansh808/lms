@@ -132,7 +132,6 @@ const handleOperationChange = async (e, rowId) => {
 
 const convertToIST = (utcDate) => {
   const date = new Date(utcDate);
-  // Adjust to IST (UTC +5:30)
   date.setHours(date.getHours() + 0);
   date.setMinutes(date.getMinutes() + 0);
   return date.toLocaleTimeString('en-IN', {

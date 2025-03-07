@@ -41,7 +41,7 @@ router.get("/mentorqueries", async (req, res) => {
   }
 });
 
-//put request to update the mentorship data in admin
+//put request to update the action data in admin
 router.put("/queriesaction/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -66,6 +66,24 @@ router.put("/queriesaction/:id", async (req, res) => {
       } else {
       res.status(404).json({ message: "Query not found" });
     }
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred while updating data", error: error.message });
+  }
+});
+
+//put request to asign bda into lead
+router.put("/bdaasign/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { bda } = req.body;
+    console.log("asign bda" , id , bda);
+    const query = await Mentorship.findById(id);
+    console.log("found" , query)
+       query.bda = bda;
+      await query.save();
+
+      res.status(200).json({ message: "Query updated successfully" });
+      console.log("done")
   } catch (error) {
     res.status(500).json({ message: "An error occurred while updating data", error: error.message });
   }

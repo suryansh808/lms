@@ -198,5 +198,6 @@
   }
 
 #eventdashboard{
-  height: calc(100vh - 89px);
+  height: calc(100vh - 65px);
 }
+

@@ -33,6 +33,9 @@ const MentorshipSchema = new mongoose.Schema({
   },
   reason:{
     type:String
+  },
+  bda:{
+    type:String
   }
 });
 

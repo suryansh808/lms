@@ -72,7 +72,7 @@ import AddUser from "./BDA/AddUser";
 import TeamDetail from "./BDA/TeamDetail";
 import BDARevenueSheet from "./BDA/BDARevenueSheet";
 import Reference from "./BDA/Reference";
-
+import CompanyLeads from "./BDA/CompanyLeads";
 
 // User Student
 import UserHeader from "./User/UserHeader";
@@ -102,6 +102,8 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 //event
 import EventDashBoard from "./Event/EventDashBoard";
+
+
 
 
 
@@ -194,7 +196,8 @@ const AppContent = () => {
     "/adduser",
     "/teamdetail",
     "/bdarevenuesheet",
-    "/reference"
+    "/reference",
+    "/companyleads"
   ];
 
   const userheaderPaths = [
@@ -317,6 +320,7 @@ const AppContent = () => {
           <Route path="/TeamDetail" element={isAuthenticatedBda() ?<TeamDetail/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/BDARevenueSheet" element={isAuthenticatedBda() ?<BDARevenueSheet/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/Reference" element={isAuthenticatedBda() ?<Reference/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/CompanyLeads" element={isAuthenticatedBda() ?<CompanyLeads/> : <Navigate to="/TeamLogin"/> }/>
         {/* bda panel ends */}
 
         {/* User Panel */}
