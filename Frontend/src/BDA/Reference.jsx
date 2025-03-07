@@ -80,13 +80,13 @@ const Reference = () => {
   newStudent.map((student, index) => {
     if (student.referFriend && student.referFriend.length > 10) {
       return (
-        <tr key={index} className={`${student.referRemark}`}>
+        <tr key={index} className={`${student.referRemark[student.referRemark.length - 1]}`}>
           <td>{newStudent.filter((s) => s.referFriend && s.referFriend.length > 10).indexOf(student) + 1}</td>
           <td>{student.fullname}</td>
           <td>{student.phone}</td>
           <td>{student.referFriend}</td>
           <td>{convertToIST(student.createdAt)}</td>
-          <td>{student.referRemark}</td>
+          <td>{student.referRemark[student.referRemark.length - 1]}</td>
           <td>
             <select className="border rounded-full border-black" onChange={(e) => handleReferRemarkChange(e, student._id)} defaultValue="Select Remark" name="referremark" id="referremark">
               <option disabled value="Select Remark">Select Remark</option>

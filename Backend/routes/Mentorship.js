@@ -75,11 +75,10 @@ router.put("/queriesaction/:id", async (req, res) => {
 router.put("/bdaasign/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const { bda } = req.body;
-    console.log("asign bda" , id , bda);
+    const { bda , action } = req.body;
     const query = await Mentorship.findById(id);
-    console.log("found" , query)
        query.bda = bda;
+       query.action = action;
       await query.save();
 
       res.status(200).json({ message: "Query updated successfully" });

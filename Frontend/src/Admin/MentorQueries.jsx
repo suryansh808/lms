@@ -91,7 +91,7 @@ const MentorQueries = () => {
     const updatedAction = e.target.value;
     console.log("bda asign" , leadid , updatedAction);
     try {
-      await axios.put(`${API}/bdaasign/${leadid}`, { bda: updatedAction
+      await axios.put(`${API}/bdaasign/${leadid}`, { bda: updatedAction , action:"Shared"
         });
         toast.success("BDA Asigned");
         getQueries();
