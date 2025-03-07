@@ -305,12 +305,30 @@ router.get("/eventapplications", async (req, res) => {
 //       // Remove second $lookup since we only want the userId, not full user data
 //       {
 //         $project: {
-//           "enrollments.userId": 1, // Keep only the userId field in enrollments
 //           title: 1,
 //           start: 1,
 //           status: 1,
 //           type: 1,
 //           questions: 1,
+//           enrollments: { userId: 1 }, // Only include the userId from the enrollments
+//         },
+//       }, 
+//       {
+//         $addFields: {
+//           enrollments: {
+//             $ifNull: ["$enrollments", []], // Ensure enrollments is always an array
+//           },
+//         },
+//       },
+//       {
+//         $addFields: {
+//           enrollments: {
+//             $map: {
+//               input: "$enrollments", // Map over the enrollments array
+//               as: "enrollment",
+//               in: "$$enrollment.userId", // Extract only the userId
+//             },
+//           },
 //         },
 //       },
 //     ]);
@@ -320,6 +338,75 @@ router.get("/eventapplications", async (req, res) => {
 //     res.status(500).json({ error: "Internal Server Error", message: error.message });
 //   }
 // });
+
+router.get("/events-with-applications", async (req, res) => {
+  try {
+    const eventWithEnrolls = await AddEvent.aggregate([
+      {
+        $lookup: {
+          from: "eventapplications", // Collection name should match your MongoDB collection
+          localField: "_id", // Local field in AddEvent (the event's _id)
+          foreignField: "eventId", // Foreign field in EventApplication (the eventId)
+          as: "enrollments", // Alias for the array of applications
+        },
+      },
+      {
+        $addFields: {
+          enrollments: {
+            $cond: {
+              if: { $isArray: "$enrollments" }, // Check if enrollments is an array
+              then: "$enrollments", // If it's already an array, keep it
+              else: [ "$enrollments" ], // Otherwise, wrap it in an array
+            },
+          },
+        },
+      },
+      {
+        $addFields: {
+          enrollments: {
+            $map: {
+              input: "$enrollments", // Map over the enrollments array
+              as: "enrollment",
+              in: "$$enrollment.userId", // Extract only the userId from each enrollment
+            },
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "eventregistrations", // Join with the eventregistrations collection to get user details
+          localField: "enrollments", // Local field (enrollments array of userIds)
+          foreignField: "_id", // Foreign field (userId in eventregistrations)
+          as: "userDetails", // Store matched user details in 'userDetails'
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          start: 1,
+          status: 1,
+          type: 1,
+          questions: 1,
+          enrollments: 1, // Final result will have an array of userIds
+          userDetails: {
+            name: 1,
+            phone: 1,
+            email: 1,
+            collegeName: 1,
+            collegeEmailId: 1, // Only include relevant user fields
+            _id:1,
+          },
+        },
+      },
+    ]);
+
+    res.status(200).json(eventWithEnrolls);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error", message: error.message });
+  }
+});
+
+
 
 
 module.exports = router;

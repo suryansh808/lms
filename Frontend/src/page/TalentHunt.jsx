@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -131,7 +131,10 @@ const TalentHunt = () => {
     }
   };
 
-
+  // const LeearningSectionRef = useRef(null);
+  // const scrollToCourse = () => {
+  //   LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
+  // };
 
 
 
@@ -148,7 +151,7 @@ const TalentHunt = () => {
             the difference. Explore why people turn to this invaluable resource
             to unlock their potential.
           </p>
-          {/* <button onClick={() => window.open("/EventLogin", "_blank")} className="border border-[#f15b29] rounded-md px-4 py-1">Join Us</button> */}
+          {/* <button  onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1">Register Now</button> */}
         </div>
         <div className="users-color-container">
           <span className="item" style={{ "--i": 1 }}></span>
@@ -271,9 +274,11 @@ const TalentHunt = () => {
         </div>
       </section>
 
-      <section className="bg-white">
+      <section
+      //  ref={LeearningSectionRef}
+        className="bg-white">
       <div className={`container  bg-white text-black flex justify-around flex-wrap `}>
-          <div className="relative w-full sm:w-1/2 px-6 sm:px-20 py-8">
+          <div className="relative w-full h-[600px] sm:w-1/2 px-6 sm:px-20 py-8">
       <motion.div
         className="relative"
         animate={{ rotateY: isFlipped ? 180 : 0 }}

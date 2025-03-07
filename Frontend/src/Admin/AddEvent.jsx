@@ -10,7 +10,7 @@ const AddEvent = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSetectedEvent] = useState([]);
   const [showAppliedDetails , setShowAppliedDetails] = useState(null)
-  // const [appliedUsers , setAppliedUsers] = useState()
+
 
   const [form, setForm] = useState({
       question: "",
@@ -87,7 +87,7 @@ const AddEvent = () => {
 
   const fetchEvent = async () => {
     try {
-      const response = await axios.get(`${API}/allevents`);
+      const response = await axios.get(`${API}/events-with-applications`);
       setAllEvents(response.data);
       setSetectedEvent(response.data[0]);
     } catch (error) {
@@ -95,14 +95,7 @@ const AddEvent = () => {
     }
   };
 
-  // const fetchAppliedUsers = async () => {
-  //   try {
-  //     const response = await axios.get(`${API}/events-with-applications`);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error("There was an error fetching MasterClass:", error);
-  //   }
-  // };
+
 
   const handleEdit = (events) => {
     const isConfirmed = window.confirm(
@@ -135,7 +128,6 @@ const AddEvent = () => {
 
   useEffect(() => {
     fetchEvent();
-    // fetchAppliedUsers();
   }, []);
  
   const handleSubmitQuestion = async (e) => {
@@ -199,10 +191,14 @@ const AddEvent = () => {
     setisQuestionFormVisible(true);
   };
 
+  const handleShowAppliedDetails = (eventId) => {
+    // You can replace this with an API call or any other logic to get the applied users for the event
+    const event = allEvents.find(event => event._id === eventId);
+    console.log("found", event);
+    // setAppliedUsers(event.enrollments); // Assuming `enrollments` holds the applied users' data
+    setShowAppliedDetails(event); // Show applied details
+  };
 
-
-console.log(showAppliedDetails);
-  
   
   return (
     <div id="Event">
@@ -309,18 +305,41 @@ console.log(showAppliedDetails);
         </div>
       )}
 
-     {showAppliedDetails && (
-        <div className="jobdetails">
-          <div className="jobdetailsdiv">
-            <div className="title">
-              <h2></h2>
-              < span onClick={() => setShowAppliedDetails(null)} >✖</span>
-            </div>  
-            <span></span>
+{showAppliedDetails && (
+      <div className="jobdetails">
+        <div className="jobdetailsdiv">
+          <div className="title">
+            <h2>Applied Users</h2>
+            <span onClick={() => setShowAppliedDetails(null)}>✖</span>
           </div>
-        </div>
-       )}
 
+          <table>
+              <thead>
+                <tr>
+                  <th>Sl</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Student's College Mail Id</th>
+                  <th>Phone</th>
+                  <th>College Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {showAppliedDetails?.userDetails?.map((user, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.collegeEmailId}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.collegeName}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    )}
       <div className="coursetable">
         <div>
           <h2>Events List</h2>
@@ -347,7 +366,6 @@ console.log(showAppliedDetails);
           </thead>
           <tbody>
           {allEvents?.map((events, index) => {
-          const appliedCount = appliedUsers?.filter(user => user.eventId._id === events._id).length;
       return (
         <tr key={index}>
           <td>{index + 1}</td>
@@ -364,7 +382,7 @@ console.log(showAppliedDetails);
           </td>
           <td>{events.status}</td>
           <td>{events.type}</td>
-          <td className=" cursor-pointer" onClick={() => setShowAppliedDetails(appliedUsers)}>{appliedCount}</td>
+          <td className="cursor-pointer text-red-600 font-bold" onClick={() => handleShowAppliedDetails(events._id)}> {events.enrollments.length}</td>
           <td>
             <button>
               <i
