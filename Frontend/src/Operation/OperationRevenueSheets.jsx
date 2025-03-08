@@ -2,32 +2,46 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API from "../API";
 
-const OperationRevenueSheets = () => {
-  const [operationData, setOperationData] = useState([]);
+const BDARevenueSheet = () => {
+  const [newStudent, setNewStudent] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
-  const operationId = localStorage.getItem("operationId");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchNewStudent = async () => {
+    const operationName = localStorage.getItem("operationName");
+    console.log("op revenue sheet",operationName)
+    try {
+      const response = await axios.get(`${API}/getnewstudentenroll`);
+      const filteredData = response.data.filter(
+        (item) => item.operationName && item.operationName === operationName
+      );
+      setNewStudent(filteredData);
+    } catch (err) {
+      setError("There was an error fetching new students.");
+      console.error("Error fetching new students:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchOperationData = async () => {
-      try {
-        const response = await axios.get(`${API}/getnewstudentenroll`, {
-          params: { operationId },
-        });
-        setOperationData(
-          response.data.filter((data) => data.operationId == operationId)
-        );
-      } catch (error) {
-        console.error("Error fetching operation data:", error);
-      }
-    };
-    fetchOperationData();
+    fetchNewStudent();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   const revenueByDay = {};
   const revenueByMonth = {};
   let totalRevenue = 0;
 
-  operationData.forEach((student) => {
+  newStudent.forEach((student) => {
     const date = new Date(student.createdAt).toLocaleDateString("en-GB");
     const month = new Date(student.createdAt).toLocaleString("default", {
       month: "long",
@@ -61,7 +75,6 @@ const OperationRevenueSheets = () => {
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  // const months = Object.keys(revenueByMonth);
   months.sort((a, b) => new Date(a) - new Date(b));
 
   let growthPercentage = null;
@@ -73,11 +86,9 @@ const OperationRevenueSheets = () => {
     }
   }
 
-
-
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-center text-3xl font-bold mb-6">Revenue Sheets</h1>
+      <h2 className="text-center  font-bold mb-6">Operation Revenue Sheet</h2>
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>
@@ -99,7 +110,7 @@ const OperationRevenueSheets = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse border border-gray-200">
             <thead>
-              <tr className="bg-white">
+              <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
                 <th className="border p-3 text-left">Credited Revenue</th>
@@ -108,10 +119,7 @@ const OperationRevenueSheets = () => {
             </thead>
             <tbody>
               {filteredDailyRevenue.map(([date, data], index) => (
-                <tr
-                  key={date}
-                  className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
-                >
+                <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
@@ -137,10 +145,7 @@ const OperationRevenueSheets = () => {
             </thead>
             <tbody>
               {months.map((month, index) => (
-                <tr
-                  key={month}
-                  className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
-                >
+                <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
@@ -159,13 +164,8 @@ const OperationRevenueSheets = () => {
         </p>
 
         {growthPercentage !== null && (
-          <p
-            className={
-              growthPercentage >= 0 ? "text-green-600" : "text-red-600"
-            }
-          >
-            {growthPercentage >= 0 ? "Growth" : "Loss"}:{" "}
-            {growthPercentage.toFixed(2)}%
+          <p className={growthPercentage >= 0 ? "text-green-600" : "text-red-600"}>
+            {growthPercentage >= 0 ? "Growth" : "Loss"}: {growthPercentage.toFixed(2)}%
           </p>
         )}
       </section>
@@ -173,4 +173,4 @@ const OperationRevenueSheets = () => {
   );
 };
 
-export default OperationRevenueSheets;
+export default BDARevenueSheet;

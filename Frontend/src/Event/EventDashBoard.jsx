@@ -3,11 +3,13 @@ import logo from "../assets/logowhite.png";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Events from "./Events";
+import toast, { Toaster } from "react-hot-toast";
 
 const EventDashBoard = () => {
   const [activePage, setActivePage] = useState("events");
   const navigate = useNavigate();
   const handleLogOut = () =>{
+    toast.success('logout successful!!!');
     setTimeout(() => {
         localStorage.removeItem('eventuserId');
         localStorage.removeItem('eventuserEmail');
@@ -47,6 +49,7 @@ const EventDashBoard = () => {
 
   return (
     <div className="bg-black p-[8px]">
+       <Toaster position="top-center" reverseOrder={false} />
       <header className="flex items-center rounded-full gap-2 justify-between px-[20px] py-2 bg-[#1d1e20a1] text-white">
         <img src={logo} alt="" className="w-32" />
         <nav className="flex gap-2">
@@ -57,16 +60,16 @@ const EventDashBoard = () => {
         <i onClick={() => setActivePage("profile")} class="fa fa-user text-white cursor-pointer" aria-hidden="true"></i>
       </header>
 
-        <div id="eventdashboard" className="container m-auto">
+        <div  className="container m-auto">
         <main>
           {renderPage()}
         </main>
         </div>
 
-       <footer className="fixed left-[50%] right-[50%] bottom-0 z-[999] transform translate-x-[-50%] translate-y-[-50%] rounded-full  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
+       {/* <footer className="fixed left-[50%] right-[50%] bottom-0 z-[999] transform translate-x-[-50%] translate-y-[-50%] rounded-full  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
           <p className="text-xs">&copy; 2024 Krutanic Event. All Rights Reserved.</p>
           <button onClick={handleLogOut} className="hover:text-red-600">LogOut</button>
-        </footer>
+        </footer> */}
     </div>
   );
 };

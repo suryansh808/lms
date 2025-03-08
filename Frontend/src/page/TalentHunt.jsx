@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -107,7 +107,7 @@ const TalentHunt = () => {
     try {
       const response = await axios.post(`${API}/eventverifyotp`, { email, otp });
       toast.success('login successful!!!');
-      console.log(response.data);
+      // console.log(response.data);
       if (response.status === 200) {
         setTimeout(() => {
         localStorage.setItem('eventuserId', response.data._id);
@@ -131,10 +131,10 @@ const TalentHunt = () => {
     }
   };
 
-  const LeearningSectionRef = useRef(null);
-  const scrollToCourse = () => {
-    LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
-  };
+  // const LeearningSectionRef = useRef(null);
+  // const scrollToCourse = () => {
+  //   LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
+  // };
 
 
 
@@ -151,7 +151,7 @@ const TalentHunt = () => {
             the difference. Explore why people turn to this invaluable resource
             to unlock their potential.
           </p>
-          <button data-aos="fade-up"  onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1">Register Now</button>
+          {/* <button data-aos="fade-up"  onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1">Register Now</button> */}
         </div>
         <div className="users-color-container">
           <span className="item" style={{ "--i": 1 }}></span>
@@ -275,7 +275,7 @@ const TalentHunt = () => {
       </section>
 
       <section
-       ref={LeearningSectionRef}
+      //  ref={LeearningSectionRef}
         className="bg-white">
       <div className={`container  bg-white text-black flex justify-around flex-wrap `}>
           <div className="relative w-full h-[600px] sm:w-1/2 px-6 sm:px-20 py-8">

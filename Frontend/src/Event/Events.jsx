@@ -57,10 +57,10 @@ const Events = () => {
     }, []);
 
   return (
-    <div>
+    <div className="lg:flex ">
         <Toaster position="top-center" reverseOrder={false} />
-      <div className="p-4 rounded-2xl shadow-lg mb-2 lg:mb-0">
-          <h2 className="text-xl font-bold mb-4 text-center">
+        {/* <div className="p-4 rounded-2xl shadow-lg mb-2 lg:mb-0">
+          <h2 className="text-xl text-white font-bold mb-4 text-center">
             Events Categories
           </h2>
           <Swiper
@@ -92,6 +92,16 @@ const Events = () => {
               );
             })}
           </Swiper>
+        </div> */}
+        <div className="bg-red-700 lg:flex p-1 w-full lg:h-[600px] ">
+          <div className="bg-green-400 lg:h-full h-[600px] lg:w-1/3"></div>
+          <div className="bg-green-600 lg:h-full h-[600px] lg:w-1/3"></div>
+          <div className="bg-green-800 lg:h-full h-[600px] lg:w-1/3"></div>
+        </div>
+        <div className="bg-red-500 lg:w-1/5 w-full p-1 h-[600px]">
+          <div className="bg-green-200 h-full w-full">
+
+          </div>
         </div>
     </div>
   )
