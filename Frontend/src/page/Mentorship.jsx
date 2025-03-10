@@ -7,14 +7,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // certificate starts
-import certificate1 from "../assets/certificates/Certificateofinternship.jpg";
-import certificate2 from "../assets/certificates/CertificateofExcellence.jpg";
+import certificate1 from "../assets/certificates/Certificateofinternship.png";
+// import certificate2 from "../assets/certificates/CertificateofExcellence.jpg";
 import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
 import wiprologo from "../assets/certificates/wipro.svg";
-import aicte from "../assets/poplogo/aicte.png";
-import iso from "../assets/poplogo/iso.png";
-import mca from "../assets/poplogo/mca.png";
-import msme from "../assets/poplogo/4.png";
+// import aicte from "../assets/poplogo/aicte.png";
+// import iso from "../assets/poplogo/iso.png";
+// import mca from "../assets/poplogo/mca.png";
+// import msme from "../assets/poplogo/4.png";
 //certificate ends
 
 import Testimonial from "../Components/testimonial";
@@ -42,19 +42,19 @@ const Mentorship = () => {
     AOS.init({ duration: 2000, once: false });
   }, []);
 
-  const settings = {
-    slidesToShow: 3,
-    dots: false,
-    arrow: false,
-    responsive: [
-      {
-        breakpoint: 400,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
+  // const settings = {
+  //   slidesToShow: 2,
+  //   dots: false,
+  //   arrow: false,
+  //   responsive: [
+  //     {
+  //       breakpoint: 400,
+  //       settings: {
+  //         slidesToShow: 1,
+  //       },
+  //     },
+  //   ],
+  // };
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -119,7 +119,7 @@ const Mentorship = () => {
             <div data-aos="fade-up">
               <div className="flex items-center flex-col lg:flex-row px-3 gap-5 py-2">
                 {/* Left Section */}
-                <div className="lg:w-1/2 w-full">
+                <div className="w-full">
                   <div className="mb-8">
                     <h2 className="text-xl font-semibold text-white">
                       Program Highlight
@@ -127,8 +127,8 @@ const Mentorship = () => {
                     <p className="text-gray-300"></p>
                   </div>
 
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4">
+                  <div className="space-y-6 flex flex-wrap">
+                    <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
                       <div className="bg-[#f15b29] p-2 rounded-lg">
                         <svg
                           className="w-6 h-6 text-white"
@@ -149,7 +149,7 @@ const Mentorship = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
                       <div className="bg-[#f15b29] p-2 rounded-lg">
                         <svg
                           className="w-6 h-6 text-white"
@@ -171,7 +171,7 @@ const Mentorship = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
                       <div className="bg-[#f15b29] p-2 rounded-lg">
                         <svg
                           className="w-6 h-6 text-white"
@@ -187,10 +187,10 @@ const Mentorship = () => {
                           />
                         </svg>
                       </div>
-                      <p className="text-white">100+ Internship Partners</p>
+                      <p className="text-white">Collaboration With <span className="text-xl font-bold mr-1">Accenture</span></p>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
                       <div className="bg-[#f15b29] p-2 rounded-lg">
                         <svg
                           className="w-6 h-6 text-white"
@@ -219,7 +219,7 @@ const Mentorship = () => {
                 </div>
 
                 {/* Right Section */}
-                <div className="lg:w-1/2 w-full">
+                {/* <div className="lg:w-1/2 w-full">
                   <div className="">
                     <div className="">
                       <Slider {...settings}>
@@ -247,9 +247,31 @@ const Mentorship = () => {
                       </Slider>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <div className="brandlogo">
+                <div className="w-full mt-5">
+                  {/* <div className=""> */}
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-3 md:grid md:grid-cols-2 md:gap-3 ">
+                      {/* <Slider {...settings}> */}
+                        <div className="px-2 mb-5 lg:mb-0">
+                          <img
+                            src={certificate1}
+                            alt="Program Image 1"
+                            className="w-full object-cover rounded-lg"
+                          />
+                        </div>
+                        <div className="px-2">
+                          <img
+                            src={certificate3}
+                            alt="Program Image 3"
+                            className="w-full object-cover rounded-lg"
+                          />
+                        </div>
+                      {/* </Slider> */}
+                    </div>
+                  {/* </div> */}
+                </div>
+              {/* <div className="brandlogo">
                 <img
                   className="hover:scale-110 ease-linear duration-300"
                   src={aicte}
@@ -272,7 +294,7 @@ const Mentorship = () => {
                   alt=""
                   style={{ filter: "invert(1)" }}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

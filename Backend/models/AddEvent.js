@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const AddEventSchema = new mongoose.Schema({
   title: { type: String },
   start: { type: Date },
-  status: { type: String, default: "active" },
+  status: { type: String, default: "Upcoming Events"},
   type: { type: String, default:"MCQ"},
   questions: [
     {

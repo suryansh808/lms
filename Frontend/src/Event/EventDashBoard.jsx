@@ -48,7 +48,7 @@ const EventDashBoard = () => {
   };
 
   return (
-    <div className="bg-black p-[8px]">
+    <div id="eventdashboard">
        <Toaster position="top-center" reverseOrder={false} />
       <header className="flex items-center rounded-full gap-2 justify-between px-[20px] py-2 bg-[#1d1e20a1] text-white">
         <img src={logo} alt="" className="w-32" />
@@ -60,16 +60,16 @@ const EventDashBoard = () => {
         <i onClick={() => setActivePage("profile")} class="fa fa-user text-white cursor-pointer" aria-hidden="true"></i>
       </header>
 
-        <div  className="container m-auto">
+        <div className="container m-auto">
         <main>
           {renderPage()}
         </main>
         </div>
 
-       {/* <footer className="fixed left-[50%] right-[50%] bottom-0 z-[999] transform translate-x-[-50%] translate-y-[-50%] rounded-full  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
+       <footer className="fixed bottom-0 backdrop-blur-sm right-0 rounded-full  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
           <p className="text-xs">&copy; 2024 Krutanic Event. All Rights Reserved.</p>
           <button onClick={handleLogOut} className="hover:text-red-600">LogOut</button>
-        </footer> */}
+        </footer>
     </div>
   );
 };

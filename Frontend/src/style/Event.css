@@ -197,7 +197,12 @@
     }
   }
 
-/* #eventdashboard{
-  height: calc(100vh - 65px);
-} */
+#eventdashboard{
+  background-color: black;
+  /* height: calc(100vh - 0px); */
+}
+
+.eventheight{
+  height: calc(100vh - 49px);
+}
 

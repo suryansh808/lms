@@ -164,7 +164,6 @@ const MasterClasses = () => {
               placeholder="Enter Masterclass title"
               required
             />
-            input
             <label htmlFor="start" className="text-gray-500">
               Select Start Date and Time
             </label>
