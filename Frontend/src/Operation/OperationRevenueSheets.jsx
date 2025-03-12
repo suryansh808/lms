@@ -10,7 +10,6 @@ const BDARevenueSheet = () => {
 
   const fetchNewStudent = async () => {
     const operationName = localStorage.getItem("operationName");
-    console.log("op revenue sheet",operationName)
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
       const filteredData = response.data.filter(

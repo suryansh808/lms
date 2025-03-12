@@ -206,3 +206,28 @@
   height: calc(100vh - 49px);
 }
 
+.mainbg{
+  background-image: url('.././assets/event/mainbg.jpg');
+  background-size: cover;
+  height: calc(100vh - 49px);;
+}
+.profile{
+  background-image: url('.././assets/event/profilebg.jpg');
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 49px);
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  .inner-div{
+    text-align: center;
+    color: white;
+    font-size: 1.2rem; 
+    transform: translateY(-150%) translateX(-8%); 
+  }
+  .inner-div h2{
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+  }
+}

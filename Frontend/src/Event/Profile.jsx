@@ -24,27 +24,23 @@ const Profile = () => {
 
 
   return (
-    <div className="py-2 lg:flex gap-2">
-      <div className="text-white bg-[#1d1e20a1] p-[10px] lg:min-w-fit rounded-md">
+    <div className="inner-div">
           {users?.map((user, index) => (
             <div key={index} className="space-y-2">
-              <h2>
-                <strong>Name: </strong>
+              <h2 className="text-[#B212A8] font-semibold">
+                <strong className="text-[#130C36]">Name: </strong>
                 {user.name}
               </h2>
-              <h2>
-                <strong>Email:</strong> {user.email}
+              <h2 className="text-[#B212A8] font-semibold">
+                <strong className="text-[#130C36]">Email:</strong> {user.email}
               </h2>
-              <h2>
-                <strong>Phone No: </strong>
+              <h2 className="text-[#B212A8] font-semibold">
+                <strong className="text-[#130C36]">Phone No: </strong>
                 {user.phone}
               </h2>
             </div>
           ))}
-        </div>
-        <div className="bg-[#1d1e20a1] text-white text-center lg:w-full rounded-md">
-          <h2>LeaderBoards</h2>
-        </div>
+        
     </div>
   );
 };

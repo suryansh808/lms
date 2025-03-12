@@ -6,7 +6,7 @@ import Events from "./Events";
 import toast, { Toaster } from "react-hot-toast";
 
 const EventDashBoard = () => {
-  const [activePage, setActivePage] = useState("events");
+  const [activePage, setActivePage] = useState("home");
   const navigate = useNavigate();
   const handleLogOut = () =>{
     toast.success('logout successful!!!');
@@ -22,14 +22,20 @@ const EventDashBoard = () => {
     switch (activePage) {
       case "profile":
         return (
-          <div>
-            <h2><Profile/></h2>
+          <div className="profile relative">
+            <Profile/>
           </div>
         );
       case "quiz":
         return (
           <div>
             <h2>Quiz Page</h2>
+          </div>
+        );
+      case "home":
+        return (
+          <div className="mainbg">
+        Home Page
           </div>
         );
       case "events":
@@ -53,6 +59,7 @@ const EventDashBoard = () => {
       <header className="flex items-center rounded-full gap-2 justify-between px-[20px] py-2 bg-[#1d1e20a1] text-white">
         <img src={logo} alt="" className="w-32" />
         <nav className="flex gap-2">
+          <button onClick={() => setActivePage("home")}>Home</button>
           <button onClick={() => setActivePage("events")}>Events</button>
           <button onClick={() => setActivePage("quiz")}>Quiz</button>
           {/* <button onClick={() => setActivePage("leaderboard")}> Leaderboard</button> */}
