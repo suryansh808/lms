@@ -199,7 +199,7 @@
 
 #eventdashboard{
   background-color: black;
-  /* height: calc(100vh - 0px); */
+  color: white;
 }
 
 .eventheight{

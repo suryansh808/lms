@@ -35,7 +35,6 @@ const EventDashBoard = () => {
       case "home":
         return (
           <div className="mainbg">
-        Home Page
           </div>
         );
       case "events":
@@ -67,8 +66,8 @@ const EventDashBoard = () => {
         <i onClick={() => setActivePage("profile")} class="fa fa-user text-white cursor-pointer" aria-hidden="true"></i>
       </header>
 
-        <div className="container m-auto">
-        <main>
+        <div>
+        <main className="container m-auto">
           {renderPage()}
         </main>
         </div>

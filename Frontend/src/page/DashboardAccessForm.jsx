@@ -61,38 +61,35 @@ const DashboardAccessForm = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
+    const currentMonthIndex = currentDate.getMonth(); // 0-based index
     const currentDay = currentDate.getDate();
     const currentYear = currentDate.getFullYear();
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
     ];
+  
     let months = [];
-    if (currentMonthIndex === 1 && currentDay <= 7) {
-      months = [
-        `${monthNames[1]} ${currentYear}`,
-        `${monthNames[2]} ${currentYear}`,
-        `${monthNames[3]} ${currentYear}`,
-      ];
+    let startMonthIndex;
+  
+    // Agar date 1 se 7 ke beech hai, toh current month se list shuru hogi
+    if (currentDay >= 1 && currentDay <= 7) {
+      startMonthIndex = currentMonthIndex;
     } else {
-      months = [
-        `${monthNames[2]} ${currentYear}`,
-        `${monthNames[3]} ${currentYear}`,
-        `${monthNames[4]} ${currentYear}`,
-      ];
+      // Warna agle month se shuru hoga
+      startMonthIndex = currentMonthIndex + 1;
     }
-
+  
+    // Handle December case (Agar December hai toh agla saal start ho jayega)
+    const nextYear = startMonthIndex > 11 ? currentYear + 1 : currentYear;
+    startMonthIndex = startMonthIndex % 12;
+  
+    months = [
+      `${monthNames[startMonthIndex]} ${nextYear}`,
+      `${monthNames[(startMonthIndex + 1) % 12]} ${startMonthIndex + 1 > 11 ? nextYear + 1 : nextYear}`,
+      `${monthNames[(startMonthIndex + 2) % 12]} ${startMonthIndex + 2 > 11 ? nextYear + 1 : nextYear}`,
+    ];
+  
     setMonthsToShow(months);
   }, []);
 

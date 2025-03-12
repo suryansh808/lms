@@ -10,9 +10,9 @@ import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
-  const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
+  // const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
   const mobileMenuRef = useRef(null);
-  const location = useLocation();
+  // const location = useLocation();
   
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -21,20 +21,20 @@ const Header = () => {
   //   return () => clearTimeout(timer);
   // }, []);
 
-  useEffect(() => {
-  const excludedRoutes = ["/",];
-    if (excludedRoutes.includes(location.pathname)) {
-      const timer = setTimeout(() => {
-        setisAutopopupVisible(true);
-      }, 1000);
+  // useEffect(() => {
+  // const excludedRoutes = ["/",];
+  //   if (excludedRoutes.includes(location.pathname)) {
+  //     const timer = setTimeout(() => {
+  //       setisAutopopupVisible(true);
+  //     }, 1000);
 
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, []);
 
-  const autoPopup = () => {
-    setisAutopopupVisible(false);
-  };
+  // const autoPopup = () => {
+  //   setisAutopopupVisible(false);
+  // };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,7 +128,7 @@ const Header = () => {
         </div>
       )}
 
-      {isAutopopupVisible && (
+      {/* {isAutopopupVisible && (
         <div id="autopopup">
           <div className="autotext">
             <div className="close">
@@ -147,7 +147,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
