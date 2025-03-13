@@ -10,6 +10,8 @@ const BookedList = () => {
   const [loading, setLoading] = useState(true);
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [editingStudentId, setEditingStudentId] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(""); // Store selected month
+    const [months, setMonths] = useState([]); // Store list of months
   const fetchNewStudent = async () => {
     setLoading(true);
     try {
@@ -18,7 +20,13 @@ const BookedList = () => {
         (item) => item.status === "booked"
       );
       setNewStudent(studentsData);
-      setFilteredStudents(studentsData);
+      // Set the current month for default selection
+      const currentMonth = getCurrentMonth();
+      setSelectedMonth(currentMonth);
+      
+      // Filter the students based on the current month by default
+      const filtered = studentsData.filter((student) => getMonthFromDate(student.createdAt) === currentMonth);
+      setFilteredStudents(filtered);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     } finally {
@@ -27,6 +35,7 @@ const BookedList = () => {
   };
   useEffect(() => {
     fetchNewStudent();
+    setMonths(getPastMonths());
   }, []);
 
   const handleStatusChange = async (studentId, action) => {
@@ -77,16 +86,54 @@ const BookedList = () => {
     setCurrentPage(1);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedStudents = filteredStudents.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
 
   const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-  const groupedData = paginatedStudents.reduce((acc, item) => {
+  
+  // Get current month (in string format like "Jan", "Feb", etc.)
+  const getCurrentMonth = () => {
+    const months = [
+      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ];
+    
+    const currentMonthIndex = new Date().getMonth();
+    return months[currentMonthIndex];
+  };
+
+  // Get the previous months including the current month
+  const getPastMonths = () => {
+    const months = [
+      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ];
+    
+    const currentMonthIndex = new Date().getMonth();
+    let pastMonths = [];
+
+    for (let i = currentMonthIndex; i >= 0; i--) {
+      pastMonths.push(months[i]);
+    }
+    return pastMonths;
+  };
+
+  // Filter the students based on the selected month
+  const handleMonthChange = (event) => {
+    const selectedMonth = event.target.value;
+    setSelectedMonth(selectedMonth); // Update selected month
+    const filtered = newStudent.filter((student) =>
+      getMonthFromDate(student.createdAt) === selectedMonth
+    );
+    setFilteredStudents(filtered); // Update filtered students
+  };
+
+  // Get the month from the student's created date
+  const getMonthFromDate = (date) => {
+    const months = [
+      "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ];
+    
+    const monthIndex = new Date(date).getMonth();
+    return months[monthIndex];
+  };
+  const groupedData = filteredStudents.reduce((acc, item) => {
     const date = formatDate(item.createdAt);
     if (!acc[date]) {
       acc[date] = [];
@@ -269,14 +316,6 @@ const BookedList = () => {
   }, []);
 
 
-  
-
-
-
-
-
-
-
 
   return (
     <div id="AdminAddCourse">
@@ -434,7 +473,21 @@ const BookedList = () => {
               />
             </section>
           </div>
-
+          <div>
+            <select
+            className="border border-black px-2 py-1 rounded-lg"
+              name="month"
+              id="month"
+              value={selectedMonth} // Bind to selectedMonth state
+              onChange={handleMonthChange} // Trigger filter on month change
+            > 
+              {months.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+          </div>
           <table>
             <thead>
               <tr>
@@ -551,36 +604,6 @@ const BookedList = () => {
               )}
             </tbody>
           </table>
-
-           {/* Pagination */}
-           {filteredStudents.length > itemsPerPage && (
-            <section className="flex items-center justify-center gap-5 mt-2">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
-              >
-                Previous
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) =>
-                    prev < Math.ceil(filteredStudents.length / itemsPerPage)
-                      ? prev + 1
-                      : prev
-                  )
-                }
-                disabled={
-                  currentPage >=
-                  Math.ceil(filteredStudents.length / itemsPerPage)
-                }
-                className="border border-gray-700 px-2 py-1 rounded-lg active:bg-[#f15b29]"
-              >
-                Next
-              </button>
-            </section>
-          )}
-
           {dialogVisible && dialogData && (
             <div className="fixed flex flex-col rounded-md top-[30%] left-[50%] shadow-black shadow-sm transform translate-x-[-50%] transalate-y-[-50%] bg-white p-[20px] z-[1000]">
               <h2>Details</h2>

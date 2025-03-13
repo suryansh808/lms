@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Events from "./Events";
 import toast, { Toaster } from "react-hot-toast";
+import Home from "./Home";
 
 const EventDashBoard = () => {
   const [activePage, setActivePage] = useState("home");
@@ -34,7 +35,10 @@ const EventDashBoard = () => {
         );
       case "home":
         return (
-          <div className="mainbg">
+          <div className="mainbg overflow-auto ">
+             <div className="container m-auto">
+                 <Home/>
+             </div>
           </div>
         );
       case "events":
@@ -67,7 +71,7 @@ const EventDashBoard = () => {
       </header>
 
         <div>
-        <main className="container m-auto">
+        <main>
           {renderPage()}
         </main>
         </div>

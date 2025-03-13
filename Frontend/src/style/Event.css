@@ -209,6 +209,7 @@
 .mainbg{
   background-image: url('.././assets/event/mainbg.jpg');
   background-size: cover;
+  background-position: center;
   height: calc(100vh - 49px);;
 }
 .profile{
