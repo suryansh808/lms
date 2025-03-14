@@ -118,13 +118,13 @@
     font-size: 3vw;
   }
   h2 {
-    font-family: cursive;
+    /* font-family: cursive; */
     font-weight: 600;
-    font-size: 5vw;
+    font-size: 6vw;
   }
   h3 {
     font-weight: 600;
-    font-size: 3vw;
+    font-size: 2vw;
   }
 
   .autotext {
@@ -159,11 +159,15 @@
     width: fit-content;
     padding: 0 0 10px 0;
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
-
     gap: 5px;
+    >div{
+      display: flex;
+      gap: 50px;
+    }
     img {
-      height: 8vw;
+      height: 6vw;
     }
   }
 
@@ -176,7 +180,7 @@
     gap: 30px;
     padding-bottom: 50px;
     img {
-      height: 10vw;
+      height: 5vw;
       width: auto;
       margin: auto;
 

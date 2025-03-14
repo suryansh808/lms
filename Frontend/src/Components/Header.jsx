@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo3 from "../assets/LOGO3.png";
 import wipro from "../assets/wipro.svg";
+import accenture from "../assets/poplogo/accenture.png"
 import mca from "../assets/poplogo/mca.png";
 import iso from "../assets/poplogo/iso.png";
 import msme from "../assets/poplogo/msme.png";
@@ -10,16 +11,16 @@ import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMobileVisible, setisMobileVisible] = useState(false);
-  // const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
+  const [isAutopopupVisible, setisAutopopupVisible] = useState(false);
   const mobileMenuRef = useRef(null);
   // const location = useLocation();
   
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setisAutopopupVisible(true);
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setisAutopopupVisible(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // useEffect(() => {
   // const excludedRoutes = ["/",];
@@ -32,9 +33,9 @@ const Header = () => {
   //   }
   // }, []);
 
-  // const autoPopup = () => {
-  //   setisAutopopupVisible(false);
-  // };
+  const autoPopup = () => {
+    setisAutopopupVisible(false);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,16 +129,19 @@ const Header = () => {
         </div>
       )}
 
-      {/* {isAutopopupVisible && (
+      {isAutopopupVisible && (
         <div id="autopopup">
           <div className="autotext">
             <div className="close">
               <span onClick={autoPopup} class="fa fa-close"></span>
             </div>
-            <h1>Revealing our estimated</h1>
+            {/* <h1>Revealing our estimated</h1> */}
             <div className="first">
-              <h2>Our Credential Partner</h2>
-              <img src={wipro} alt="wipro" />
+              <h2>We are accredited by</h2>
+              <div className="my-[30px]">
+              <img src={accenture} alt="accenture" />
+              <img src={wipro} alt="wipro" /> 
+              </div>
             </div>
             <h3>Our Prestigious Certifications</h3>
             <div className="second">
@@ -147,7 +151,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
