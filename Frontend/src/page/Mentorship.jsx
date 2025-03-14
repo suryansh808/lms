@@ -187,7 +187,7 @@ const Mentorship = () => {
                           />
                         </svg>
                       </div>
-                      <p className="text-white">Collaboration With <span className="text-xl font-bold mr-1">Accenture</span></p>
+                      <p className="text-white">Accredited By <span className="text-xl font-bold mr-1">Accenture</span></p>
                     </div>
 
                     <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
@@ -207,7 +207,7 @@ const Mentorship = () => {
                         </svg>
                       </div>
                       <div className="text-white flex items-center gap-2 w-full">
-                        <p> Accreditation from</p>
+                        <p> Accredited By</p>
                         <img
                           src={wiprologo}
                           alt="logo"
@@ -313,7 +313,7 @@ const Mentorship = () => {
 
       {/* fee structure reference  */}
       <section className="py-[60px] px-[10px]">
-        <div className="container mx-auto flex items-center justify-center">
+        <div className="container mx-auto flex items-center justify-center border-t border-b border-gray-400 rounded-3xl py-6">
           <div className="text-center">
             <h1 className=" font-bold text-[#f15b29] mb-4">
               Want to Know the Fee Structure?

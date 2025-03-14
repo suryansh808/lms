@@ -57,7 +57,7 @@ const Events = () => {
     <div className="lg:flex eventheight">
       <Toaster position="top-center" reverseOrder={false} />
       <div className=" lg:flex lg:gap-1 p-1 w-full">
-        <div className="overflow-hidden border-r border-gray-900 lg:w-1/3">
+        <div className="overflow-hidden border-r border-[#47464654] lg:w-1/3">
           <h2 className="text-center text-white">Upcoming Events</h2>
           <div className="h-full overflow-auto scrollbar-hide p-1">
             {event?.map((dets) => {
@@ -69,7 +69,7 @@ const Events = () => {
                   user.eventId._id === dets._id && user.userId._id === userId
               );
               return (
-                <div className="p-2 mb-2 rounded-md bg-gradient-to-tr from-[#10ac85ec] to-[#030303]">
+                <div className="p-2 mb-2 h-[200px] backdrop-blur-sm shadow-sm shadow-[#ffffff54] rounded-md bg-gradient-to-tr from-[#2f3640] to-[#18133c50]">
                   <h2 className="text-center text-white text-2xl">
                     {dets.title}
                   </h2>
@@ -77,7 +77,7 @@ const Events = () => {
                     {dets.status}
                   </p>
                   <div className="flex items-center justify-between mt-5">
-                    <p> {appliedCount} Condidates have registered</p>
+                    <p> {appliedCount} registered</p>
                     {isAlreadyApplied ? (
                       <button className="border cursor-not-allowed px-2 py-1 rounded-md">
                         already applied
@@ -97,7 +97,7 @@ const Events = () => {
           </div>
         </div>
 
-        <div className=" overflow-hidden border-r border-gray-900 lg:w-1/3">
+        <div className=" overflow-hidden border-r border-[#47464654] lg:w-1/3">
           <h2 className="text-center text-white">Ongoing Events</h2>
           <div className="h-full overflow-auto scrollbar-hide p-1">
             {ongoing && ongoing.length > 0 ? (
@@ -110,17 +110,28 @@ const Events = () => {
                     user.eventId._id === dets._id && user.userId._id === userId
                 );
                 return (
-                  <div className="p-2 mb-2 h-1/2 rounded-md bg-gradient-to-tr from-[#10ac85ec] to-[#030303]">
-                    <h2>{dets.title}</h2>
-                    <p>{dets.status}</p>
+                  <div className="p-2 mb-2 h-[200px] backdrop-blur-sm shadow-sm shadow-[#ffffff54] rounded-md bg-gradient-to-tr from-[#2f3640] to-[#18133c50]">
+                    <h2 className="text-center text-white text-2xl">
+                    {dets.title}
+                  </h2>
+                  <p className="text-center text-xs mt-2 text-[#eee]">
+                    {dets.status}
+                  </p>
+                  <div className="flex items-center justify-between mt-5">
+                    <p> {appliedCount} registered</p>
                     {isAlreadyApplied ? (
-                      <p>Already applied</p>
+                      <button className="border cursor-not-allowed px-2 py-1 rounded-md">
+                        already applied
+                      </button>
                     ) : (
-                      <button onClick={() => handleApply(dets)}>
+                      <button
+                        className="border text-white px-2 py-1 rounded-md"
+                        onClick={() => handleApply(dets)}
+                      >
                         Apply Now
                       </button>
                     )}
-                    <p>{appliedCount} Candidates have registered</p>
+                  </div>
                   </div>
                 );
               })
@@ -130,7 +141,7 @@ const Events = () => {
           </div>
         </div>
 
-        <div className=" overflow-hidden border-r border-gray-900 lg:w-1/3">
+        <div className=" overflow-hidden border-r border-[#47464654] lg:w-1/3">
           <h2 className="text-center text-white">Completed Events</h2>
           <div className="h-full overflow-auto scrollbar-hide p-1">
           {completed && completed.length > 0 ? (
@@ -143,17 +154,28 @@ const Events = () => {
                     user.eventId._id === dets._id && user.userId._id === userId
                 );
                 return (
-                  <div className="p-2 mb-2 h-1/2 rounded-md bg-gradient-to-tr from-[#10ac85ec] to-[#030303]">
-                    <h2>{dets.title}</h2>
-                    <p>{dets.status}</p>
+                  <div className="p-2 mb-2 h-[200px] backdrop-blur-sm shadow-sm shadow-[#ffffff54] rounded-md bg-gradient-to-tr from-[#2f3640] to-[#18133c50]">
+                     <h2 className="text-center text-white text-2xl">
+                    {dets.title}
+                  </h2>
+                  <p className="text-center text-xs mt-2 text-[#eee]">
+                    {dets.status}
+                  </p>
+                  <div className="flex items-center justify-between mt-5">
+                    <p> {appliedCount} registered</p>
                     {isAlreadyApplied ? (
-                      <p>Already applied</p>
+                      <button className="border cursor-not-allowed px-2 py-1 rounded-md">
+                        already applied
+                      </button>
                     ) : (
-                      <button onClick={() => handleApply(dets)}>
+                      <button
+                        className="border text-white px-2 py-1 rounded-md"
+                        onClick={() => handleApply(dets)}
+                      >
                         Apply Now
                       </button>
                     )}
-                    <p>{appliedCount} Candidates have registered</p>
+                  </div>
                   </div>
                 );
               })

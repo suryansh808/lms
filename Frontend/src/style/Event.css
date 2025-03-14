@@ -119,16 +119,13 @@
       padding: 5px;
       height: calc(100vh - 71px);
       border-right: 1px solid rgb(0, 0, 0, 0.3);
-
       .qanda{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
-        /* height: calc(100vh - 128px); */
         overflow-y: auto;
         scrollbar-width:none;
-
 
       }
 
@@ -204,13 +201,15 @@
 
 .eventheight{
   height: calc(100vh - 49px);
+  background-color: black;
 }
 
 .mainbg{
   background-image: url('.././assets/event/mainbg.jpg');
   background-size: cover;
-  background-position: center;
-  height: calc(100vh - 49px);;
+  object-position: center;
+  height: calc(100vh - 49px);
+  overflow: auto;
 }
 .profile{
   background-image: url('.././assets/event/profilebg.jpg');
@@ -231,4 +230,43 @@
   .inner-div h2{
     text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
   }
+}
+
+#eventheight{
+  height: calc(100vh - 49px);
+  background-color: black;
+
+  .card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 }

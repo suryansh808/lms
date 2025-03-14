@@ -13,6 +13,9 @@ const EventApplicationSchema = new Schema(
       ref: "AddEvent", 
       required: true,
     },
+    coin:{
+      type:Number,
+    }
   },
   {
     timestamps: true,

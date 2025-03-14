@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Events from "./Events";
 import toast, { Toaster } from "react-hot-toast";
-import Home from "./Home";
+import Playground from "./Playground";
 
 const EventDashBoard = () => {
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState("events");
   const navigate = useNavigate();
   const handleLogOut = () =>{
     toast.success('logout successful!!!');
@@ -30,21 +30,13 @@ const EventDashBoard = () => {
       case "quiz":
         return (
           <div>
-            <h2>Quiz Page</h2>
-          </div>
-        );
-      case "home":
-        return (
-          <div className="mainbg overflow-auto ">
-             <div className="container m-auto">
-                 <Home/>
-             </div>
+            <Playground/>
           </div>
         );
       case "events":
         return (
-          <div>
-            <h2><Events/></h2>
+          <div className="">
+            <Events/>
           </div>
         );
       default:
@@ -59,12 +51,11 @@ const EventDashBoard = () => {
   return (
     <div id="eventdashboard">
        <Toaster position="top-center" reverseOrder={false} />
-      <header className="flex items-center rounded-full gap-2 justify-between px-[20px] py-2 bg-[#1d1e20a1] text-white">
+      <header className="flex items-center gap-2 justify-between px-[20px] py-2 bg-[#1d1e20a1] text-white">
         <img src={logo} alt="" className="w-32" />
         <nav className="flex gap-2">
-          <button onClick={() => setActivePage("home")}>Home</button>
-          <button onClick={() => setActivePage("events")}>Events</button>
-          <button onClick={() => setActivePage("quiz")}>Quiz</button>
+          <button onClick={() => setActivePage("events")}>All Events</button>
+          <button onClick={() => setActivePage("quiz")}>Playground</button>
           {/* <button onClick={() => setActivePage("leaderboard")}> Leaderboard</button> */}
         </nav>
         <i onClick={() => setActivePage("profile")} class="fa fa-user text-white cursor-pointer" aria-hidden="true"></i>
@@ -76,7 +67,7 @@ const EventDashBoard = () => {
         </main>
         </div>
 
-       <footer className="fixed bottom-0 backdrop-blur-sm right-0 rounded-full  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
+       <footer className="fixed bottom-0 backdrop-blur-sm right-0  bg-[#1d1e20a1] text-white w-full px-[20px] py-2 flex items-center justify-between">
           <p className="text-xs">&copy; 2024 Krutanic Event. All Rights Reserved.</p>
           <button onClick={handleLogOut} className="hover:text-red-600">LogOut</button>
         </footer>

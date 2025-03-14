@@ -258,87 +258,7 @@ router.get("/eventapplications", async (req, res) => {
   }
 });
 
-//get all the event with user application data
-// router.get("/events-with-applications", async (req, res) => {
-//   try {
-//     // Fetch all events with their applications and user data, matching by eventId
-//     const events = await EventApplication.find()
-//       .populate({
-//         path: "EventApplication",
-//         model: "EventApplication",
-//         select: "userId", // Only select userId from EventApplication
-//         match: { eventId: req.query.eventId }, // Optionally filter by eventId in the query
-//         populate: {
-//           path: "userId", // Populating the userId field with full EventRegistration data
-//           model: "EventRegistratio9n",
-//           select: "name phone email collegeName collegeEmailId" // Fields to select from EventRegistration
-//         }
-//       });
-
-//     // Return the response
-//     res.json(events);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server Error" });
-//   }
-// });
-
-
-
-// router.get("/events-with-applications", async (req, res) => {
-//   try {
-//     const eventWithEnrolls = await AddEvent.aggregate([
-//       {
-//         $lookup: {
-//           from: "eventapplications", // Collection name should match your MongoDB collection
-//           localField: "id",
-//           foreignField: "enentId",
-//           as: "enrollments",
-//         },
-//       },
-//       {
-//         $unwind: {
-//           path: "$enrollments", // Unwind the enrollments array to work with individual applications
-//           preserveNullAndEmptyArrays: true, // If no enrollments, still include the event
-//         },
-//       },
-//       // Remove second $lookup since we only want the userId, not full user data
-//       {
-//         $project: {
-//           title: 1,
-//           start: 1,
-//           status: 1,
-//           type: 1,
-//           questions: 1,
-//           enrollments: { userId: 1 }, // Only include the userId from the enrollments
-//         },
-//       }, 
-//       {
-//         $addFields: {
-//           enrollments: {
-//             $ifNull: ["$enrollments", []], // Ensure enrollments is always an array
-//           },
-//         },
-//       },
-//       {
-//         $addFields: {
-//           enrollments: {
-//             $map: {
-//               input: "$enrollments", // Map over the enrollments array
-//               as: "enrollment",
-//               in: "$$enrollment.userId", // Extract only the userId
-//             },
-//           },
-//         },
-//       },
-//     ]);
-    
-//     res.status(200).json(eventWithEnrolls);
-//   } catch (error) {
-//     res.status(500).json({ error: "Internal Server Error", message: error.message });
-//   }
-// });
-
+//get all the event with applied user data 
 router.get("/events-with-applications", async (req, res) => {
   try {
     const eventWithEnrolls = await AddEvent.aggregate([
@@ -403,6 +323,31 @@ router.get("/events-with-applications", async (req, res) => {
     res.status(200).json(eventWithEnrolls);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error", message: error.message });
+  }
+});
+
+
+//store the score as coin 
+router.post("/finalscore", async (req, res) => {
+  try {
+    const { userId, eventId, coin } = req.body;
+    if (!userId || !eventId || coin === undefined) {
+      return res.status(400).json({ error: "userId, eventId, and coin are required" });
+    }
+    const updatedApplication = await EventApplication.findOneAndUpdate(
+      { userId, eventId },
+      { $set: { coin } },
+      { new: true, upsert: false }
+    );
+
+    if (!updatedApplication) {
+      return res.status(404).json({ error: "Event application not found" });
+    }
+
+    res.status(200).json({ message: "Score updated successfully", application: updatedApplication });
+  } catch (error) {
+    console.error("Error creating event application:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
