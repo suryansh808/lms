@@ -30,7 +30,8 @@ router.post("/advance/register", async (req, res) => {
       reason:reason
     });
     await newRegistration.save();
-    res.status(201).json({ message: "Registration successful!" });
+    res.status(201).json({ message: "Registration successfull!" });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error. Please try again later." });
