@@ -9,6 +9,7 @@ import imgp4 from '../assets/process4.jpg';
 
 const VerticalAccordion = () => {
   const [open, setOpen] = useState(items[0].id);
+  // hehhehe
 
   return (
     <section className="text-white imagebox">
