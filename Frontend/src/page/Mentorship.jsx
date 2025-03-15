@@ -10,7 +10,9 @@ import "slick-carousel/slick/slick-theme.css";
 import certificate1 from "../assets/certificates/Certificateofinternship.png";
 // import certificate2 from "../assets/certificates/CertificateofExcellence.jpg";
 import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
-import wiprologo from "../assets/certificates/wipro.svg";
+// import wiprologo from "../assets/certificates/wipro.svg";
+// import accenture from "../assets/poplogo/accenturelogo.png"
+import accreditedby from "../assets/poplogo/accreditedby.png"
 // import aicte from "../assets/poplogo/aicte.png";
 // import iso from "../assets/poplogo/iso.png";
 // import mca from "../assets/poplogo/mca.png";
@@ -106,17 +108,23 @@ const Mentorship = () => {
       </section>
        <hr className=" opacity-10"/>
 
+       <section className="py-[60px] px-[10px]">
+        <div className="container mx-auto flex items-center justify-center">
+            <img src={accreditedby} alt="accreditedby" className="rounded-xl shadow-white shadow-lg" />
+        </div>
+      </section>
+       <hr className=" opacity-10"/>
+
       {/* certification section */}
       <section className="py-[60px] px-[10px]"> 
         <div className="container mx-auto">
           <h1
-            data-aos="fade-up"
             className=" font-bold text-[#f15b29] mb-2 text-center justify-center"
           >
             | Certification Overview
           </h1>
           <div className="p-6">
-            <div data-aos="fade-up">
+            <div>
               <div className="flex items-center flex-col lg:flex-row px-3 gap-5 py-2">
                 {/* Left Section */}
                 <div className="w-full">
@@ -187,7 +195,7 @@ const Mentorship = () => {
                           />
                         </svg>
                       </div>
-                      <p className="text-white">Accredited By <span className="text-xl font-bold mr-1">Accenture</span></p>
+                        <p className="text-white"> 100+ Internship Partners</p>
                     </div>
 
                     <div className="flex items-center gap-4 lg:w-1/2 md:w-1/2">
@@ -206,14 +214,7 @@ const Mentorship = () => {
                           />
                         </svg>
                       </div>
-                      <div className="text-white flex items-center gap-2 w-full">
-                        <p> Accredited By</p>
-                        <img
-                          src={wiprologo}
-                          alt="logo"
-                          className="lg:h-10 h-9 hover:scale-110 duration-500 ease-linear"
-                        />
-                      </div>
+                        <p className="text-white"> Approved by Renowned Industry Leaders</p>
                     </div>
                   </div>
                 </div>
