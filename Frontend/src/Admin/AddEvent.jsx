@@ -391,7 +391,7 @@ const AddEvent = () => {
               ></i>
             </button>
             <button onClick={() => handleDelete(events._id)}>
-              <i className="fa fa-trash-o text-red-600"></i>
+              <i className="fa fa-trash-o text-red-700"></i>
             </button>
           </td>
         </tr>
