@@ -165,7 +165,7 @@ const Dashboard = () => {
               <span>★★★★★</span>
               <p> Session {Object.keys(item.domain.session).length}</p>
               <h2>Opted Month: {item.monthOpted}</h2>
-              {item.status != "fullPaid" ? (
+              {item.status === "fullPaid" ? (
                 <div className="btndiv">
                   <button
                     className="ease-linear duration-300"
