@@ -259,7 +259,7 @@ const CreateOperation = () => {
   };
 
   return (
-    <div id="AdminAddCourse">
+    <div id="AdminAddCourse" >
       <Toaster position="top-center" reverseOrder={false} />
       {iscourseFormVisible && (
         <div className="form">

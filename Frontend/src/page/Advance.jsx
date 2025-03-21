@@ -377,7 +377,7 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
             <div className="overflow-hidden lg:h-[300px]"> 
             <img
               src={ProformanceMarket}
-              alt=" Proformance Market"
+              alt="Proformance Market"
               className="hover:scale-110 ease-linear duration-700"
             />
             </div>

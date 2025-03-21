@@ -107,6 +107,7 @@ router.get("/dashboard", authMiddleware, (req, res) => {
   res.status(200).json({ message: "Welcome to the dashboard!" });
 });
 
+
 // send otp route
 router.post("/send-otp",async (req, res) => {
   const { email } = req.body;

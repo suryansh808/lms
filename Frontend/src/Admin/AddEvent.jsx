@@ -192,16 +192,23 @@ const AddEvent = () => {
   };
 
   const handleShowAppliedDetails = (eventId) => {
-    // You can replace this with an API call or any other logic to get the applied users for the event
     const event = allEvents.find(event => event._id === eventId);
-    console.log("found", event);
-    // setAppliedUsers(event.enrollments); // Assuming `enrollments` holds the applied users' data
-    setShowAppliedDetails(event); // Show applied details
+    setShowAppliedDetails(event);
   };
 
+  const handleStatusChange = async (e, id) => {
+    const status = e.target.value;
+    try {
+      const response = await axios.put(`${API}/updatestatus/${id}`, { status: status });
+      console.log(response.data.message);
+      fetchEvent();
+    } catch (error) {
+      console.error("Error updating status:", error.response?.data?.message || error.message);
+    }
+  };
   
   return (
-    <div id="Event">
+    <div id="Event" className="ml-[270px]">
       <Toaster position="top-center" reverseOrder={false} />
       {isFormVisible && (
         <div className="form">
@@ -342,7 +349,7 @@ const AddEvent = () => {
     )}
       <div className="coursetable">
         <div>
-          <h2>Events List</h2>
+          <h1>Events List</h1>
           <button
             className="p-2 border border-black rounded-md"
             onClick={() => setisFormVisible(true)}
@@ -359,8 +366,9 @@ const AddEvent = () => {
               <th>Title</th>
               <th>Start Time</th>
               <th>Status</th>
-              <th>Type</th>
+              {/* <th>Type</th> */}
               <th>Applied</th>
+              <th>Change Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -381,8 +389,16 @@ const AddEvent = () => {
             })}
           </td>
           <td>{events.status}</td>
-          <td>{events.type}</td>
+          {/* <td>{events.type}</td> */}
           <td className="cursor-pointer text-red-600 font-bold" onClick={() => handleShowAppliedDetails(events._id)}> {events.enrollments.length}</td>
+          <td>
+            <select className="border border-gray-800 rounded-full" onChange={(e) => handleStatusChange(e, events._id)} name="status" id="status">
+              <option value="Select Status"> Select Status</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
+              <option value="Upcoming Events">Upcoming Events</option>
+            </select>
+          </td>
           <td>
             <button>
               <i
@@ -403,15 +419,15 @@ const AddEvent = () => {
       </div>
 
       {selectedEvent && (
-        <div className="coursetable">
+        <div>
+          <div className="coursetable">
           <div className="eventdetail">
             <h2>{selectedEvent.title}</h2>
-            <h2>{selectedEvent.type}</h2>
             <button
               onClick={() => setisQuestionFormVisible(true)}
-              className="p-1 flex items-center gap-2 border border-black rounded-md"
+              className="p-1 flex whitespace-nowrap items-center gap-2 border border-black rounded-md"
             >
-              <i class="fa fa-plus"></i> Add Question
+              + Add Question
             </button>
           </div>
           <div className="qanda">
@@ -446,6 +462,7 @@ const AddEvent = () => {
             ) : (
               <p>No questions available</p>
             )}
+          </div>
           </div>
         </div>
       )}

@@ -85,6 +85,13 @@ const Footer = () => {
             >
               <span class="fa fa-linkedin"></span>
             </a>
+            <a
+            target="_blank"
+              href="https://github.com/Krutanic/"
+              className="text-white"
+            >
+              <span class="fa fa-github"></span>
+            </a>
           </div>
           <div className="footerlinkright">
             {/* <Link to='/'>facebook</Link> */}

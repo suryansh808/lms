@@ -1,8 +1,8 @@
 #Event{
-
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 5fr 2fr;
     gap: 5px;
+    overflow: hidden;
 
     h2 {
       text-align: center;
@@ -23,7 +23,7 @@
         scrollbar-width: none; 
         background-color: white;
         height: calc(100vh - 120px);
-        width: 100%;
+        width: 80%;
         padding: 10px;
         .title {
           display: flex;
@@ -119,6 +119,8 @@
       padding: 5px;
       height: calc(100vh - 71px);
       border-right: 1px solid rgb(0, 0, 0, 0.3);
+      overflow: auto;
+      scrollbar-width:none;
       .qanda{
         display: flex;
         flex-direction: column;
@@ -132,13 +134,14 @@
       h1 {
         text-align: center;
         color: #f15b29;
+        font-size: 20px;
       }
 
       h2 {
         text-align: center;
         color: #f15b29;
         font-weight: 600;
-        font-size: large;
+        font-size: 12px;
       }
       > div {
         display: flex;
@@ -194,79 +197,23 @@
     }
   }
 
-#eventdashboard{
-  background-color: black;
-  color: white;
-}
+
 
 .eventheight{
-  height: calc(100vh - 49px);
-  background-color: black;
-}
-
-.mainbg{
-  background-image: url('.././assets/event/mainbg.jpg');
-  background-size: cover;
-  object-position: center;
-  height: calc(100vh - 49px);
-  overflow: auto;
-}
-.profile{
-  background-image: url('.././assets/event/profilebg.jpg');
-  background-size: cover;
-  background-position: center;
-  height: calc(100vh - 49px);
-  width: 100%;
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-
-  .inner-div{
-    text-align: center;
-    color: white;
-    font-size: 1.2rem; 
-    transform: translateY(-150%) translateX(-8%); 
-  }
-  .inner-div h2{
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
-  }
-}
-
-#eventheight{
-  height: calc(100vh - 49px);
+  height: calc(100vh - 120px);
   background-color: black;
 
-  .card-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  .scrollbar-hidden{
+    overflow-y: auto;
+    scrollbar-width:none;
   }
-  
-  .card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
-    text-align: center;
-  }
-  
-  .dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  button {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
 }
+
+@media screen and (max-width: 600px) {
+  .eventheight{
+    height: auto;
+ 
+  }
+}
+
+

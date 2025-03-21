@@ -101,7 +101,7 @@ const [startDate, setStartDate] = useState("");
 
 
   return (
-    <div id="AdminDashboard">
+    <div id="AdminDashboard" >
       <Toaster position="top-center" reverseOrder={false}/>
       <div className="numberdiv">
         <div>
@@ -141,7 +141,6 @@ const [startDate, setStartDate] = useState("");
           </span>
         </div>
       </div>
-      
       <div className="p-4 relative">
       <button onClick={() => setShowFilters(!showFilters)} className="bg-blue-500 text-white py-2 px-4 rounded">
       <i class="fa fa-filter" aria-hidden="true"></i> Filter
@@ -185,7 +184,7 @@ const [startDate, setStartDate] = useState("");
           </button>
         </div>
       )}
-    </div>
+      </div>
       <h3>Added Courses</h3>
       <div className="courselist">
         {loading ? (

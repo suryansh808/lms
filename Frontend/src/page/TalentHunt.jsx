@@ -445,6 +445,13 @@ const TalentHunt = () => {
               >
                 <span class="fa fa-linkedin"></span>
               </a>
+              <a
+            target="_blank"
+              href="https://github.com/Krutanic/"
+              className="text-black text-4xl"
+            >
+              <span class="fa fa-github"></span>
+            </a>
             </div>
           </div>
       </div>

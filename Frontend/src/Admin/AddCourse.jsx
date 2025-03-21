@@ -95,7 +95,7 @@ const AddCourse = () => {
 
 
   return (
-    <div id="AdminAddCourse">
+    <div id="AdminAddCourse" >
        {iscourseFormVisible && (
        <div className="form">
           <form onSubmit={handleSumbit}>

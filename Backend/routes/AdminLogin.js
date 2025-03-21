@@ -26,6 +26,10 @@ router.post("/admin",expressAsyncHandler(async (req, res) => {
   })
 );
 
+// router.get("/admindashboard", authMiddleware, (req, res) => {
+//   res.status(200).json({ message: "Welcome to the admin dashboard!" });
+// });
+
 // Route to send OTP
 router.post("/otpsend",expressAsyncHandler(async (req, res) => {
     const { email } = req.body;

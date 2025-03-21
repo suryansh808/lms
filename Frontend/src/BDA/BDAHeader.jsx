@@ -34,6 +34,18 @@ const BDAHeader = () => {
   }, []);
 
   const handleLogout = () => {
+    toast.success("Logged Out" , {
+      style: {
+        border: '1px solid #f15b29',
+        padding: '16px',
+        color: '#ffffff',
+        background: '#1d1e20',
+      },
+      iconTheme: {
+        primary: '#f15b29',
+        secondary: '#ffffff',
+      },
+    })
     setTimeout(() => {
       localStorage.removeItem("bdaId");
       localStorage.removeItem("bdaName");
@@ -86,7 +98,7 @@ const BDAHeader = () => {
     <div id="UserHeader">
        <Toaster position="top-center" reverseOrder={false}/>
       <div className="navbar">
-        <div>
+        <div> 
           <Link to="/">
             <img src={logo} alt="Logo" />
           </Link>

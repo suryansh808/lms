@@ -60,7 +60,6 @@ router.post("/newstudentenroll", async (req, res) => {
       operationId,
       status: "booked",
       domainId: course ? course._id : null,
-
       whatsAppNumber,
       remainingAmount,
       collegeName,
@@ -91,7 +90,7 @@ const convertExcel = async (studentData) => {
 
 
         body: new URLSearchParams({
-          _id: studentData._id,
+          // _id: studentData._id,
           createdAt: studentData.createdAt,
           fullname: studentData.fullname,
           email: studentData.email,
@@ -112,15 +111,15 @@ const convertExcel = async (studentData) => {
           clearPaymentMonth: studentData.clearPaymentMonth,
           transactionId: studentData.transactionId,
           aadharNumber: studentData.aadharNumber,
-          referFriend: studentData.referFriend,
-          operationName: studentData.operationName,
-          operationId: studentData.operationId,
-          status: studentData.status,
-          mailSended: studentData.mailSended,
-          offerLetterSended: studentData.offerLetterSended,
-          __v: studentData.__v,
-          updatedAt: studentData.updatedAt,
-          onboardingSended: studentData.onboardingSended,
+          // referFriend: studentData.referFriend,
+          // operationName: studentData.operationName,
+          // operationId: studentData.operationId,
+          // status: studentData.status,
+          // mailSended: studentData.mailSended,
+          // offerLetterSended: studentData.offerLetterSended,
+          // __v: studentData.__v,
+          // updatedAt: studentData.updatedAt,
+          // onboardingSended: studentData.onboardingSended,
         }),
       }
     );

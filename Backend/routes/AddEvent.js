@@ -51,6 +51,20 @@ router.delete("/allevents/:id", async (req, res) => {
   }
 });
 
+
+//update status
+router.put("/updatestatus/:id", async (req, res) => {
+  console.log(req.body , "status");
+  console.log(req.params.id, "id")
+  try {
+    const addEvent = await AddEvent.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!addEvent) return res.status(404).json({ error: "Event not found" });
+    res.status(200).json(addEvent);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 //push question to event
 router.put("/addquestions/:id", async (req, res) => {
   try {

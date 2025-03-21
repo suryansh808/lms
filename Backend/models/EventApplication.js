@@ -15,6 +15,7 @@ const EventApplicationSchema = new Schema(
     },
     coin:{
       type:Number,
+      default:null
     }
   },
   {

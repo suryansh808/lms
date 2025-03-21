@@ -119,7 +119,7 @@ const AddModule = () => {
   </div>;
  }
   return (
-    <div id="addmodule">
+    <div id="addmodule" >
       {isLeftSidebar && (
         <div className="left">
           <h2>Course List</h2>
