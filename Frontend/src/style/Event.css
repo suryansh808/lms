@@ -201,13 +201,23 @@
 
 .eventheight{
   height: calc(100vh - 120px);
-  background-color: black;
-
+  /* background-color: rgb(199, 21, 21); */
+  background-image: url("../assets/logo.jpg");
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
   .scrollbar-hidden{
     overflow-y: auto;
     scrollbar-width:none;
   }
+
+  .profile{
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+  }
 }
+
 
 @media screen and (max-width: 600px) {
   .eventheight{

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import logo from "../assets/logowhite.png";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
@@ -43,6 +43,8 @@ const EventDashBoard = () => {
         return <Events />;
     }
   };
+
+
 
   return (
     <div className="">

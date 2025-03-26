@@ -19,6 +19,7 @@ const AddEvent = () => {
       option3: "",
       option4: "",
       answer: "",
+      coin: "",
   });
 
   const [formData, setFormData] = useState({
@@ -62,7 +63,7 @@ const AddEvent = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
     e.preventDefault();
     try {
       if (editId) {
@@ -88,6 +89,7 @@ const AddEvent = () => {
   const fetchEvent = async () => {
     try {
       const response = await axios.get(`${API}/events-with-applications`);
+      // console.log("All Events:", response.data);
       setAllEvents(response.data);
       setSetectedEvent(response.data[0]);
     } catch (error) {
@@ -139,6 +141,7 @@ const AddEvent = () => {
       option3: form.option3,
       option4: form.option4,
       answer: form.answer,
+      coin:form.coin,
     };
     try {
       let response;
@@ -164,6 +167,7 @@ const AddEvent = () => {
       console.error("Error adding or updating the question", error);
     }
   };
+
   const handleDeleteQuestion = async (eventId, questionId) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this question?");
     if (!isConfirmed) return; 
@@ -186,6 +190,7 @@ const AddEvent = () => {
         option3: question.option3,
         option4: question.option4,
         answer: question.answer,
+        coin: question.coin,
     });
     setEditId(question._id);
     setisQuestionFormVisible(true);
@@ -193,6 +198,7 @@ const AddEvent = () => {
 
   const handleShowAppliedDetails = (eventId) => {
     const event = allEvents.find(event => event._id === eventId);
+    // console.log("Event:", event);
     setShowAppliedDetails(event);
   };
 
@@ -304,6 +310,16 @@ const AddEvent = () => {
               required
             />
             <input
+              value={form.coin}
+              onChange={handleChangeQuestions}
+              type="number"
+              name="coin"
+              id="coin"
+              placeholder="Enter Coin For Correct Answer"
+              required
+            />
+
+            <input
               className="cursor-pointer"
               type="submit"
               value={editId ? "Update Questions" : "Create Questions"}
@@ -326,9 +342,10 @@ const AddEvent = () => {
                   <th>Sl</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Student's College Mail Id</th>
                   <th>Phone</th>
+                  <th>Student College Mail Id</th>
                   <th>College Name</th>
+                  <th>Total Coins</th>
                 </tr>
               </thead>
               <tbody>
@@ -337,9 +354,12 @@ const AddEvent = () => {
                     <td>{index + 1}</td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
-                    <td>{user.collegeEmailId}</td>
                     <td>{user.phone}</td>
-                    <td>{user.collegeName}</td>
+                    <td>{user.collegeEmailId}</td>
+                    <td>{user.collegeName}</td>   
+                   {showAppliedDetails?.enrollments?.map((item)=>(
+                     <td> { item.user_id === user.id ? item.coin : 0}</td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -347,6 +367,8 @@ const AddEvent = () => {
         </div>
       </div>
     )}
+
+
       <div className="coursetable">
         <div>
           <h1>Events List</h1>
@@ -455,7 +477,7 @@ const AddEvent = () => {
                     <li>Option4: {question.option4}</li>
                   </ul>
                   <p>
-                    <strong>Answer:</strong> {question.answer}
+                    <strong>Answer:</strong> {question.answer} ({question.coin} coins)
                   </p>
                 </div>
               ))

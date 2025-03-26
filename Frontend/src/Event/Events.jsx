@@ -11,11 +11,12 @@ const Events = () => {
   const [appliedUsers, setAppliedUsers] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const userId = localStorage.getItem("eventuserId");
-  // const userEmail = localStorage.getItem("eventuserEmail");
+  const userName = localStorage.getItem("eventUserName");
 
   const fetchEventUsers = async () => {
     try {
       const response = await axios.get(`${API}/alleventregistrationnts`);
+      // console.log("event users",response.data);
       setUsers(response.data);
     } catch (error) {
       console.error("There was an error fetching the event users", error);
@@ -25,6 +26,7 @@ const Events = () => {
   const fetchEvent = async () => {
     try {
       const response = await axios.get(`${API}/allevents`);
+      // console.log("event", response.data);
       setEvent(
         response.data?.filter((item) => item.status === "Upcoming Events")
       );
@@ -58,6 +60,7 @@ const Events = () => {
   const fetchApplietUsers = async () => {
     try {
       const response = await axios.get(`${API}/eventapplications`);
+      // console.log("applied users",response.data);
       setAppliedUsers(response.data);
 
       const userCoins = users
@@ -103,7 +106,7 @@ const Events = () => {
       : false;
 
     return (
-      <div className="p-4 mb-4 rounded-lg drop-shadow-sm shadow-black border border-[#eeeeee2d] shadow-lg">
+      <div className="p-4 mb-4 rounded-lg  shadow-black shadow-md bg-[#080808]">
         <h2 className="text-xl font-bold text-white text-center mb-2">
           {dets.title}
         </h2>
@@ -140,13 +143,13 @@ const Events = () => {
   };
 
   return (
-    <div className="eventheight bg-black text-white p-2">
+    <div className="eventheight  text-white">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="grid lg:grid-cols-4 gap-3">
+      <div className="grid lg:grid-cols-4 gap-1 py-1 backdrop-blur-2xl bg-[#e7dfdf1e] h-full">
         {/* Events Sections */}
-        <div className="lg:col-span-3 grid lg:grid-cols-3 gap-3">
+        <div className="lg:col-span-3 grid lg:grid-cols-3 gap-1">
           {/* Upcoming Events */}
-          <div className="bg-[#080808] pereventheigth rounded-lg p-4 shadow-lg">
+          <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
               Upcoming Events
             </h2>
@@ -156,13 +159,13 @@ const Events = () => {
                   <EventCard key={dets._id} dets={dets} status="Upcoming" />
                 ))
               ) : (
-                <p className="text-center text-gray-400">No upcoming events</p>
+                <p className="text-center text-black">No upcoming events</p>
               )}
             </div>
           </div>
 
           {/* Ongoing Events */}
-          <div className="bg-[#080808] pereventheigth rounded-lg p-4 shadow-lg">
+          <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-green-500 to-teal-500 text-transparent bg-clip-text">
               Ongoing Events
             </h2>
@@ -172,13 +175,13 @@ const Events = () => {
                   <EventCard key={dets._id} dets={dets} status="Ongoing" />
                 ))
               ) : (
-                <p className="text-center text-gray-400">No ongoing events</p>
+                <p className="text-center text-black">No ongoing events</p>
               )}
             </div>
           </div>
 
           {/* Completed Events */}
-          <div className="bg-[#080808] pereventheigth rounded-lg p-4 shadow-lg">
+          <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
               Completed Events
             </h2>
@@ -188,14 +191,14 @@ const Events = () => {
                   <EventCard key={dets._id} dets={dets} status="Completed" />
                 ))
               ) : (
-                <p className="text-center text-gray-400">No completed events</p>
+                <p className="text-center text-black">No completed events</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Leaderboard */}
-        <div className="bg-[#080808] pereventheigth rounded-lg p-4 shadow-lg">
+        <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
           <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-transparent bg-clip-text">
             Leaderboard
           </h2>
@@ -204,7 +207,7 @@ const Events = () => {
               leaderboard.slice(0, 3).map((user, index) => (
                 <div
                   key={index}
-                  className="p-3 drop-shadow-sm shadow-black border border-[#eeeeee2d] shadow-lg rounded-md flex items-center justify-between hover:bg-gray-950 transition-colors"
+                  className="p-3 drop-shadow-sm shadow-black shadow-lg border border-[#eeeeee2d]  bg-[#080808] rounded-md flex items-center justify-between hover:bg-gray-950 transition-colors"
                 >
                   <span className="text-lg font-medium">
                     {index + 1}. {user.name}
@@ -215,10 +218,18 @@ const Events = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-400">
+              <p className="text-center text-black">
                 No users on the leaderboard yet.
               </p>
             )}
+          </div>
+          <div className=" mt-4 p-3 drop-shadow-sm shadow-black shadow-lg border border-[#eeeeee2d]  bg-[#3860e2] rounded-md flex items-center justify-between hover:bg-blue-700 transition-colors">
+            Your Score :{" "}
+             <span>
+             {leaderboard
+              .filter((user) => user.name === userName)
+              .map((user) => user.coin)}
+             </span>
           </div>
         </div>
       </div>

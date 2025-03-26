@@ -127,7 +127,7 @@ const DashboardAccessForm = () => {
     setClearPaymentMonth("");
     setModeOfPayment("");
     setReferFriend("");
-    navigate("/DashboardAccessForm");
+    navigate("/dashboardaccessform");
   };
 
   const [getTransactionId, setGetTransactionId] = useState([]);

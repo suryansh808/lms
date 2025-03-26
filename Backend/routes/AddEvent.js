@@ -76,7 +76,8 @@ router.put("/addquestions/:id", async (req, res) => {
         option2: req.body.option2, 
         option3:req.body.option3,
         option4: req.body.option4, 
-        answer: req.body.answer 
+        answer: req.body.answer ,
+        coin:req.body.coin
       }; 
     event.questions.push(newQuestion);}
     const updatedEvent = await event.save();
@@ -118,6 +119,7 @@ router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
     existingQuestion.option3 = option3;
     existingQuestion.option4 = option4;
     existingQuestion.answer = answer;
+    existingQuestion.coin = coin;
     await event.save();
     res.status(200).json({ message: 'Question updated successfully', question: existingQuestion });
   } catch (error) {
@@ -222,7 +224,7 @@ router.post("/eventverifyotp", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token, _id: user._id, email: user.email });
+    res.status(200).json({ token, _id: user._id, email: user.email , name: user.name });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error verifying OTP" });
@@ -301,7 +303,22 @@ router.get("/events-with-applications", async (req, res) => {
             $map: {
               input: "$enrollments", // Map over the enrollments array
               as: "enrollment",
-              in: "$$enrollment.userId", // Extract only the userId from each enrollment
+              // in: "$$enrollment.userId", // Extract only the userId from each enrollment
+              in: {
+                userId: "$$enrollment.userId", // Extract userId
+                coin: "$$enrollment.coin",     // Extract coin 
+              },
+            },
+          },
+        },
+      },
+      {
+        $addFields: {
+          userIds: {
+            $map: {
+              input: "$enrollments",
+              as: "enrollment",
+              in: "$$enrollment.userId",  // Extract only userId
             },
           },
         },
@@ -309,11 +326,11 @@ router.get("/events-with-applications", async (req, res) => {
       {
         $lookup: {
           from: "eventregistrations", // Join with the eventregistrations collection to get user details
-          localField: "enrollments", // Local field (enrollments array of userIds)
+          localField: "userIds", // Local field (enrollments array of userIds)
           foreignField: "_id", // Foreign field (userId in eventregistrations)
           as: "userDetails", // Store matched user details in 'userDetails'
         },
-      },
+      }, 
       {
         $project: {
           title: 1,

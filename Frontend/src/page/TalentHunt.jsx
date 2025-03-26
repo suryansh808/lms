@@ -113,6 +113,7 @@ const TalentHunt = () => {
         localStorage.setItem('eventuserId', response.data._id);
         localStorage.setItem('eventuserEmail', response.data.email);
         localStorage.setItem('eventToken', response.data.token);
+        localStorage.setItem('eventUserName', response.data.name);
         navigate('/EventDashBoard');
       }, 2000); 
       }

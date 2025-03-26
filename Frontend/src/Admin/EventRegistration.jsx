@@ -11,7 +11,7 @@ const EventRegistration = () => {
         try {
           const response = await axios.get(`${API}/alleventregistrationnts`);
           setEventRegistration(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         } catch (error) {
           console.error("There was an error fetching event registration data:", error);
         } finally{
