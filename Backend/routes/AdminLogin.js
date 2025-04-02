@@ -266,7 +266,7 @@ router.post("/sendmailtoplacementcoordinator", async (req, res) => {
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;"> Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.</p>
         <p style="font-size: 14px; color: #555;">
-          <a href="https://www.krutanic.com/placementcoordinatorlogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
+          <a href="https://www.krutanic.com/pclogin" target="_blank" style="color: #F15B29; text-decoration: none;">Click here to log in</a>. 
         </p>
         <p style="font-size: 14px; color: #555;">If you need further assistance, feel free to reach out to the IT team.</p>
         <p style="font-size: 14px; color: #333;">Best regards,</p>
