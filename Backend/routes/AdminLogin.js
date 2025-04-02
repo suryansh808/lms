@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 const crypto = require('crypto'); 
-const PlacementCoordinator = require("../models/PlacementCoordinator");
+// const PlacementCoordinator = require("../models/PlacementCoordinator");
 const { default: mongoose } = require("mongoose");
 const User = require("../models/User");
 // Route to save admin email
@@ -303,28 +303,28 @@ router.post("/sendmailtoplacementcoordinator", async (req, res) => {
 });
 
 // PUT request to update the "mailSended" field for Placement Coordinator after sending email
-router.put("/mailsendedplacementcoordinator/:id", async (req, res) => {
-  const { id } = req.params;
-  const { mailSended } = req.body;
-  try {
-    const coordinator = await PlacementCoordinator.findById(id);
-    if (!coordinator) {
-      return res.status(404).send({ message: "Coordinator not found." });
-    }
+// router.put("/mailsendedplacementcoordinator/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const { mailSended } = req.body;
+//   try {
+//     const coordinator = await PlacementCoordinator.findById(id);
+//     if (!coordinator) {
+//       return res.status(404).send({ message: "Coordinator not found." });
+//     }
 
-    coordinator.mailSended = mailSended;
-    await coordinator.save();
-    res
-      .status(200)
-      .send({
-        message: "Coordinator record updated successfully!",
-        coordinator,
-      });
-  } catch (error) {
-    console.error("Error updating coordinator record:", error);
-    res.status(500).send({ message: "Failed to update coordinator record." });
-  }
-});
+//     coordinator.mailSended = mailSended;
+//     await coordinator.save();
+//     res
+//       .status(200)
+//       .send({
+//         message: "Coordinator record updated successfully!",
+//         coordinator,
+//       });
+//   } catch (error) {
+//     console.error("Error updating coordinator record:", error);
+//     res.status(500).send({ message: "Failed to update coordinator record." });
+//   }
+// });
 
 // user component access 
 router.get('/user-components', async (req, res) => {
