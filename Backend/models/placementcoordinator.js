@@ -21,5 +21,4 @@ const PlacementCoordinatorSchema = new mongoose.Schema({
   },
 });
 
-const PlacementCoordinator = mongoose.models.PlacementCoordinator || mongoose.model("PlacementCoordinator", PlacementCoordinatorSchema);
-module.exports = PlacementCoordinator;
+module.exports = mongoose.model("PlacementCoordinator", PlacementCoordinatorSchema);
