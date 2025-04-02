@@ -12,7 +12,7 @@ const NewStudentEnroll = require("./routes/NewStudentEnroll");
 const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
 const Mockai = require("./routes/mock");
 const Excercise = require("./routes/excercise");
-const PlacementCoordinator = require("./routes/PlacementCoordinator");
+// const PlacementCoordinator = require("./routes/PlacementCoordinator");
 const ResumeATS = require("./routes/resumeats");
 
 const User = require("./routes/User");
@@ -107,7 +107,7 @@ app.use("/",Certificate);
 //AddEvent
 app.use("/", AddEvent);
 
-app.use("/",PlacementCoordinator);
+// app.use("/",PlacementCoordinator);
 
 //send mail with attchement
 app.use("/", sendMailWithAttchement);
