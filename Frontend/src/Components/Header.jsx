@@ -77,10 +77,10 @@ const Header = () => {
           <Link to="/Advance">ADVANCED PROGRAM</Link>
           <Link to="/MasterClass" onClick={scrollToTop}>MASTERCLASS</Link>
           {/* <Link to="/Career">CAREER</Link> */}
-          {/* <Link to="/TalentHunt" onClick={scrollToTop}>
+          <Link to="/TalentHunt" onClick={scrollToTop}>
             TALENT HUNT
           </Link>
-          <Link to="/Collabration" onClick={scrollToTop}>
+          {/* <Link to="/Collabration" onClick={scrollToTop}>
          COLLABORATION
           </Link> */}
           

@@ -15,9 +15,11 @@ const Events = () => {
 
   const fetchEventUsers = async () => {
     try {
-      const response = await axios.get(`${API}/alleventregistrationnts`);
+      const response = await axios.get(`${API}/alleventregistrations`);
       // console.log("event users",response.data);
       setUsers(response.data);
+      const sortedUsers = response.data.sort((a, b) => b.totalCoins - a.totalCoins);
+      setLeaderboard(sortedUsers);
     } catch (error) {
       console.error("There was an error fetching the event users", error);
     }
@@ -48,50 +50,36 @@ const Events = () => {
       const response = await axios.post(`${API}/eventapplications`, {
         userId,
         eventId: event._id,
+        remarks:event.title
       });
       toast.success("Applied Successfully!");
-      fetchApplietUsers();
+      fetchAppliedUsers();
     } catch (error) {
       console.error("Error submitting application:", error);
       toast.error("Already Applied");
     }
   };
 
-  const fetchApplietUsers = async () => {
+
+  const fetchAppliedUsers = async () => {
     try {
       const response = await axios.get(`${API}/eventapplications`);
-      // console.log("applied users",response.data);
       setAppliedUsers(response.data);
-
-      const userCoins = users
-        .map((user) => {
-          if (!user || !user._id) return { name: user?.name, coin: 0 };
-          const totalCoins = response.data
-            .filter((item) => item.userId && item.userId._id === user._id)
-            .reduce((total, item) => total + (Number(item.coin) || 0), 0);
-
-          return totalCoins !== null
-            ? { name: user.name, coin: totalCoins }
-            : null;
-        })
-        .filter((user) => user !== null);
-      const sortedLeaderboard = [...userCoins].sort((a, b) => b.coin - a.coin);
-      // console.log(sortedLeaderboard);
-      setLeaderboard(sortedLeaderboard);
     } catch (error) {
       console.error("Error fetching applied users:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchEvent();
-    fetchApplietUsers();
+    fetchAppliedUsers();
     fetchEventUsers();
   }, []);
 
   useEffect(() => {
     if (users.length > 0) {
-      fetchApplietUsers();
+      fetchAppliedUsers();
     }
   }, [users]);
 
@@ -106,12 +94,13 @@ const Events = () => {
       : false;
 
     return (
-      <div className="p-4 mb-4 rounded-lg  shadow-black shadow-md bg-[#080808]">
+      <div className="p-[4px] mb-4 relative rounded-lg shadow-black shadow-md bg-[#080808]">
+         <span className={`absolute rounded-lg inset-0 bg-gradient-to-r ${status === "Ongoing" ? "animate-pulse" : null}  from-blue-500 to-purple-500 p-[2px] mask mask-out`}></span>
+         <span className="relative block bg-black w-full rounded-lg px-4 py-4">
         <h2 className="text-xl font-bold text-white text-center mb-2">
           {dets.title}
         </h2>
-        <p className="text-orange-400 text-sm">
-          <span className="font-semibold">Start: </span>
+        <p className=" text-md text-center">
           {new Date(dets.start).toLocaleString("en-US", {
             day: "numeric",
             month: "long",
@@ -125,19 +114,22 @@ const Events = () => {
           <p className="text-gray-300 text-sm">
             {appliedCount > 0 ? `${appliedCount} registered` : "0 registered"}
           </p>
-          {isAlreadyApplied ? (
-            <button className="px-3 py-1 bg-gray-600 text-white rounded-md cursor-not-allowed opacity-75">
-              Already Applied
-            </button>
-          ) : (
-            <button
-              onClick={() => handleApply(dets)}
-              className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Apply Now
-            </button>
-          )}
+          {status === "Completed" ? (
+          <p className="text-sm text-red-500">Quiz has been ended</p>
+        ) : isAlreadyApplied ? (
+          <button className=" text-red-500 rounded-md cursor-not-allowed opacity-75">
+            Already Applied
+          </button>
+        ) : (
+          <button
+            onClick={() => handleApply(dets)}
+            className="px-3 py-1 bg-gradient-to-r  from-blue-500 to-purple-500 text-white rounded-md transition-colors"
+          >
+            Apply Now
+          </button>
+        )}
         </div>
+        </span>
       </div>
     );
   };
@@ -145,11 +137,11 @@ const Events = () => {
   return (
     <div className="eventheight  text-white">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="grid lg:grid-cols-4 gap-1 py-1 backdrop-blur-2xl bg-[#e7dfdf1e] h-full">
+      <div className="grid lg:grid-cols-4  scrollbar-hidden gap-1 py-1 backdrop-blur-xl bg-[#e7dfdf1e] h-full">
         {/* Events Sections */}
         <div className="lg:col-span-3 grid lg:grid-cols-3 gap-1">
           {/* Upcoming Events */}
-          <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
+          <div className=" shadow-black  pereventheigth rounded-lg p-4 shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
               Upcoming Events
             </h2>
@@ -166,7 +158,7 @@ const Events = () => {
 
           {/* Ongoing Events */}
           <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
-            <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-green-500 to-teal-500 text-transparent bg-clip-text">
+            <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
               Ongoing Events
             </h2>
             <div className="max-h-[70vh] scrollbar-hidden">
@@ -182,7 +174,7 @@ const Events = () => {
 
           {/* Completed Events */}
           <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
-            <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
+            <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
               Completed Events
             </h2>
             <div className="max-h-[70vh] scrollbar-hidden">
@@ -199,7 +191,7 @@ const Events = () => {
 
         {/* Leaderboard */}
         <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
-          <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-transparent bg-clip-text">
+          <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
             Leaderboard
           </h2>
           <div className="space-y-4">
@@ -207,13 +199,18 @@ const Events = () => {
               leaderboard.slice(0, 3).map((user, index) => (
                 <div
                   key={index}
-                  className="p-3 drop-shadow-sm shadow-black shadow-lg border border-[#eeeeee2d]  bg-[#080808] rounded-md flex items-center justify-between hover:bg-gray-950 transition-colors"
+                  className="relative p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full"
                 >
-                  <span className="text-lg font-medium">
+                   <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
+                   <span className="relative block bg-black w-full rounded-full px-4 py-2">
+                     <div className="flex items-center justify-between">
+                     <div className="text-md font-medium flex item-center justify-center">
                     {index + 1}. {user.name}
-                  </span>
-                  <span className="text-sm text-yellow-400">
-                    Score: {user.coin}
+                     </div>
+                    <span className="text-md text-yellow-400">
+                    Score: {user.totalCoins}
+                    </span>
+                     </div>
                   </span>
                 </div>
               ))
@@ -223,12 +220,17 @@ const Events = () => {
               </p>
             )}
           </div>
-          <div className=" mt-4 p-3 drop-shadow-sm shadow-black shadow-lg border border-[#eeeeee2d]  bg-[#3860e2] rounded-md flex items-center justify-between hover:bg-blue-700 transition-colors">
-            Your Score :{" "}
-             <span>
+          <div className="relative mt-5 p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full">
+          <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
+          <span className="relative block bg-black w-full rounded-full px-4 py-2">
+              <div className="flex items-center justify-between">
+               <span className="text-md">  Your Score :{" "}</span>
+             <span className="text-md text-yellow-400">
              {leaderboard
               .filter((user) => user.name === userName)
-              .map((user) => user.coin)}
+              .map((user) => user.totalCoins)}
+             </span>
+              </div>
              </span>
           </div>
         </div>

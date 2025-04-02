@@ -8,8 +8,9 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
 const crypto = require('crypto'); 
-const PlacementCoordinator = require("../models/placementcoordinator");
+const PlacementCoordinator = require("../models/PlacementCoordinator");
 const { default: mongoose } = require("mongoose");
+const User = require("../models/User");
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
     const { email , password , otp } = req.body;
@@ -322,6 +323,60 @@ router.put("/mailsendedplacementcoordinator/:id", async (req, res) => {
   } catch (error) {
     console.error("Error updating coordinator record:", error);
     res.status(500).send({ message: "Failed to update coordinator record." });
+  }
+});
+
+// user component access 
+router.get('/user-components', async (req, res) => {
+  try {
+    const userId = req.query.userId;
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+    const user = await User.findById(userId).select(
+      'atschecker jobboard myjob mockinterview exercise'
+    );
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({
+      components: {
+        atschecker: user.atschecker,
+        jobboard: user.jobboard,
+        myjob: user.myjob,
+        mockinterview: user.mockinterview,
+        exercise: user.exercise
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching user components:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+// PUT: Update user component status (enable/disable)
+router.put('/user-components/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { component, status } = req.body; 
+
+    if (!userId || !component || typeof status !== 'boolean') {
+      return res.status(400).json({ message: 'User ID, component, and status are required' });
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // Update the specified component status
+    if (component in user) {
+      user[component] = status;
+      await user.save();
+      res.json({ message: `Component ${component} updated to ${status}` });
+    } else {
+      res.status(400).json({ message: 'Invalid component name' });
+    }
+  } catch (error) {
+    console.error('Error updating user component:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

@@ -53,7 +53,7 @@ const PCDashboard = () => {
     }, []);
 
     return (
-        <div className="">
+        <div className="ml-[265px]">
             <div className="flex flex-wrap gap-8 justify-center">
                 <div className="bg-white p-6 rounded-lg shadow-md w-64 text-center">
                     <i className="fa fa-users text-2xl mb-3"></i>

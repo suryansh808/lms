@@ -4,7 +4,7 @@ import logo from "../assets/LOGO3.png";
 import toast ,{Toaster} from 'react-hot-toast';
 
 const PCHeader = () => {
-    const [isMobileVisible, setisMobileVisible] = useState(false);
+    const [isMobileVisible, setisMobileVisible] = useState(true);
     const mobileMenuRef = useRef(null);
    
     const navigate = useNavigate();
@@ -21,20 +21,22 @@ const PCHeader = () => {
       navigate("/PCLogin");
     }, 1500);
     };
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (
-          mobileMenuRef.current &&
-          !mobileMenuRef.current.contains(event.target)
-        ) {
-          setisMobileVisible(false);
-        }
-      };
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }, []);
+
+    // useEffect(() => {
+    //   const handleClickOutside = (event) => {
+    //     if (
+    //       mobileMenuRef.current &&
+    //       !mobileMenuRef.current.contains(event.target)
+    //     ) {
+    //       setisMobileVisible(false);
+    //     }
+    //   };
+    //   document.addEventListener("click", handleClickOutside);
+    //   return () => {
+    //     document.removeEventListener("click", handleClickOutside);
+    //   };
+    // }, []);
+
     return (
       <div id="AdminHeader">
          <Toaster position="top-center" reverseOrder={false}/>
@@ -45,7 +47,7 @@ const PCHeader = () => {
             </Link>
           </div>
           <div ref={mobileMenuRef}>
-            <span onClick={toggleVisibility}>☰</span>
+            {/* <span onClick={toggleVisibility}>☰</span> */}
           </div>
         </div>
         {isMobileVisible && (

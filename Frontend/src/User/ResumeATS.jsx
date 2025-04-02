@@ -3,7 +3,6 @@ import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { FaUpload, FaFileAlt, FaSpinner, FaChartBar, FaLightbulb, FaQuestionCircle } from "react-icons/fa";
 import API from "../API";
-
 const ResumeATS = () => {
   const [file, setFile] = useState(null);
   const [resumeUrl, setResumeUrl] = useState("");
@@ -11,9 +10,8 @@ const ResumeATS = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null);     
   const userId = localStorage.getItem("userId");
-
   useEffect(() => {
     if (!userId) {
       toast.error("Please log in to use this feature!", { id: "login-error" });
@@ -21,7 +19,6 @@ const ResumeATS = () => {
     }
     fetchUserData();
   }, [userId]);
-
   const fetchUserData = async () => {
     try {
       const res = await axios.get(`${API}/users`, { params: { userId } });
@@ -30,32 +27,25 @@ const ResumeATS = () => {
       toast.error("Failed to load user data.", { id: "fetch-error" });
     }
   };
-
   const handleFileChange = (e) => {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) {
       toast.error("No file selected!", { id: "no-file" });
       return;
     }
-    
-    // Check file size (1MB = 1,048,576 bytes)
     const maxSizeInBytes = 1048576; // 1MB
     if (selectedFile.size > maxSizeInBytes) {
       toast.error("File size exceeds 1MB limit!", { id: "file-too-large" });
-      // Reset the file input
       e.target.value = null;
       return;
     }
-
     if (selectedFile.type !== "application/pdf") {
       toast.error("Only PDF files are allowed!", { id: "invalid-file" });
       return;
     }
-    
     setFile(selectedFile);
     setAtsResult(null);
   };
-
   const uploadResume = async () => {
     if (!file) {
       toast.error("Please select a file to upload!", { id: "toast-error" });
@@ -83,7 +73,6 @@ const ResumeATS = () => {
       setIsUploading(false);
     }
   };
-
   const analyzeResume = async () => {
     if (!resumeUrl) {
       toast.error("Please upload a resume first!", { id: "toast-error" });
@@ -107,7 +96,6 @@ const ResumeATS = () => {
       setIsAnalyzing(false);
     }
   };
-
   const InstructionsDialog = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl p-6 max-w-md w-full m-4">
@@ -135,7 +123,6 @@ const ResumeATS = () => {
       </div>
     </div>
   );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-gray-200 flex items-center justify-center p-6">
       <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
@@ -187,7 +174,7 @@ const ResumeATS = () => {
           {file && (
             <p className="text-sm text-gray-600">
               Selected file: {file.name} ({(file.size / 1024).toFixed(2)} KB)
-            </p>
+            </p> 
           )}
           {file && (
             <button
@@ -298,5 +285,4 @@ const ResumeATS = () => {
     </div>
   );
 };
-
 export default ResumeATS;

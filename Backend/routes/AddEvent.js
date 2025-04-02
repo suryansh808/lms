@@ -141,16 +141,53 @@ router.post("/eventregistration", async (req, res) => {
     }
 })
 
-// Get all Event Registrations
-router.get("/alleventregistrationnts", async (req, res) => {
+// Get all Event Registrations - take it 
+router.get("/alleventregistrations", async (req, res) => {
   try {
-    const alleventregistrations = await EventRegistration.find().sort({ _id: -1 });
+    const alleventregistrations = await EventRegistration.aggregate([
+      {
+        $lookup: {
+          from: "eventapplications", // EventApplication collection ka naam
+          localField: "_id",
+          foreignField: "userId",
+          as: "applicationData",
+        },
+      },
+      {
+        $lookup: {
+          from: "addevents", // AddEvent collection ka naam
+          localField: "applicationData.eventId",
+          foreignField: "_id",
+          as: "eventData",
+        },
+      },
+      {
+        $group: {
+          _id: "$_id",
+          name: { $first: "$name" },
+          phone: { $first: "$phone" },
+          email: { $first: "$email" },
+          collegeName: { $first: "$collegeName" },
+          collegeEmailId: { $first: "$collegeEmailId" },
+          applicationData: { $first: "$applicationData" }, // Ensure all applications are stored as an array
+          eventData: { $first: "$eventData" },
+        },
+      },
+      {
+        $addFields: {
+          totalCoins: { $sum: "$applicationData.coin" } // applicationData ke andar coin ka sum
+        },
+      },
+      {
+        $sort: { _id: -1 }, // Latest records sabse upar aayenge
+      },
+    ]);
+
     res.status(200).json(alleventregistrations);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // send otp route
 router.post("/eventsendotp",async (req, res) => {
@@ -235,7 +272,7 @@ router.post("/eventverifyotp", async (req, res) => {
 //apply on event
 router.post("/eventapplications", async (req, res) => {
   try {
-    const { userId, eventId} = req.body;
+    const { userId, eventId , remarks} = req.body;
 
     if (!userId || !eventId) {
       return res.status(400).json({ error: "userId and eventId are required" });
@@ -247,7 +284,7 @@ router.post("/eventapplications", async (req, res) => {
       return res.status(400).json({ error: "User has already applied for this event" });
     }
 
-    const newEventApplication = new EventApplication({ userId, eventId});
+    const newEventApplication = new EventApplication({ userId, eventId , remarks});
     await newEventApplication.save();
     res.status(201).json({ message: "Job Applied successfully", application: newEventApplication });
   } catch (error) {
@@ -307,6 +344,7 @@ router.get("/events-with-applications", async (req, res) => {
               in: {
                 userId: "$$enrollment.userId", // Extract userId
                 coin: "$$enrollment.coin",     // Extract coin 
+                remarks: "$$enrollment.remarks", // Extract remarks
               },
             },
           },
@@ -361,13 +399,13 @@ router.get("/events-with-applications", async (req, res) => {
 //store the score as coin 
 router.post("/finalscore", async (req, res) => {
   try {
-    const { userId, eventId, coin } = req.body;
+    const { userId, eventId, coin , remarks } = req.body;
     if (!userId || !eventId || coin === undefined) {
       return res.status(400).json({ error: "userId, eventId, and coin are required" });
     }
     const updatedApplication = await EventApplication.findOneAndUpdate(
       { userId, eventId },
-      { $set: { coin } },
+      { $set: { coin}},
       { new: true, upsert: false }
     );
 
@@ -378,6 +416,20 @@ router.post("/finalscore", async (req, res) => {
     res.status(200).json({ message: "Score updated successfully", application: updatedApplication });
   } catch (error) {
     console.error("Error creating event application:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+//from admin side
+router.post("/redeemcoins", async (req, res) => {
+  try {
+    const { userId, coin, remarks} = req.body;
+    const newEventApplication = new EventApplication({ userId, coin, remarks});
+    await newEventApplication.save();
+    res.status(201).json({ message: "Job Applied successfully", application: newEventApplication });
+  } catch (error) {
+    console.error("Error creating job application:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });

@@ -58,19 +58,37 @@ const AllTeamDetail = () => {
   const groupByMonth = (enrollments) => {
     const result = {};
     const today = new Date();
-    const currentMonth = today.toISOString().slice(0, 7); // YYYY-MM
-    const prevMonth1 = new Date(today.getFullYear(), today.getMonth() - 1, 1)
-      .toISOString()
-      .slice(0, 7);
-    const prevMonth2 = new Date(today.getFullYear(), today.getMonth() - 2, 1)
-      .toISOString()
-      .slice(0, 7);
-    const prevMonth3 = new Date(today.getFullYear(), today.getMonth() - 3, 1)
-      .toISOString()
-      .slice(0, 7);
+
+
+    // const currentMonth = today.toISOString().slice(0, 7); 
+    // console.log("month current" ,currentMonth)
+    // const prevMonth1 = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+    //   .toISOString()
+    //   .slice(0, 7);
+    // const prevMonth2 = new Date(today.getFullYear(), today.getMonth() - 2, 1)
+    //   .toISOString()
+    //   .slice(0, 7);
+    // const prevMonth3 = new Date(today.getFullYear(), today.getMonth() - 3, 1)
+    //   .toISOString()
+    //   .slice(0, 7);
+    //  console.log(prevMonth1 , prevMonth2 , prevMonth3)
+
+    const getMonth = (date, offset) => {
+      const newDate = new Date(date);
+      newDate.setMonth(newDate.getMonth() - offset);  // Use setMonth to avoid month issues
+      return newDate.toISOString().slice(0, 7);
+  };
+
+  const currentMonth = getMonth(today, 0);
+  const prevMonth1 = getMonth(today, 1);
+  const prevMonth2 = getMonth(today, 2);
+  const prevMonth3 = getMonth(today, 3);
+
 
     enrollments.forEach((item) => {
-      const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-MM
+      const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-
+    const status = item.status
+    // console.log(status)
 
       // Filter only the last 3 months
       if ([currentMonth, prevMonth1, prevMonth2, prevMonth3].includes(month)) {
@@ -79,7 +97,9 @@ const AllTeamDetail = () => {
         }
         result[month].count++;
         result[month].total += item.programPrice || 0;
-        result[month].credited += item.paidAmount || 0;
+        if (status === "fullPaid") {
+          result[month].credited += item.paidAmount || 0;
+      }
       }
     });
 
@@ -94,7 +114,6 @@ const AllTeamDetail = () => {
   const selectedBdaDetail = (bda) => {
     setSelectedBda(bda);
     setDetailVisible(true);
-    console.log(bda);
     setDailyRevenue(groupByDate(bda.enrollments));
     setMonthlyRevenue(groupByMonth(bda.enrollments));
   };

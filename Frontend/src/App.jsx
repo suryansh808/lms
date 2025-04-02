@@ -86,11 +86,11 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import PageNotFound from "./PageNotFound";
 import AdvanceQueries from "./Admin/AdvanceQueries";
 import MentorQueries from "./Admin/MentorQueries";
-import JobBoard from "./User/JobBoard";
-import MyJob from "./User/MyJob";
-import MockInterview from "./User/MockInterview";
-import Exercise from "./User/Excercise";
-import ResumeATS from "./User/ResumeATS"
+// import JobBoard from "./User/JobBoard";
+// import MyJob from "./User/MyJob";
+// import MockInterview from "./User/MockInterview";
+// import Exercise from "./User/Excercise";
+// import ResumeATS from "./User/ResumeATS"
 
 
 // placementcoordinator
@@ -207,11 +207,11 @@ const AppContent = () => {
     "/enrolledcourses",
     "/learning",
     "/setting",
-    "/mockinterview",
-    "/exercise",
-    "/jobboard",
-    "/myjob",
-    "/resumeats",
+    // "/mockinterview",
+    // "/exercise",
+    // "/jobboard",
+    // "/myjob",
+    // "/resumeats",
   ];
 
   const placementcoodinatorHeaderPaths = [
@@ -330,11 +330,11 @@ const AppContent = () => {
         <Route path="/EnrolledCourses" element={isAuthenticated() ?<EnrolledCourses /> : <Navigate to="/login" />} />
         <Route path="/Setting" element={isAuthenticated() ?<Setting /> : <Navigate to="/login" />} />
         <Route path="/Learning" element={isAuthenticated() ?<Learning />: <Navigate to="/login" />} />
-        <Route path="/JobBoard" element={isAuthenticated() ?<JobBoard /> : <Navigate to="/login" />} />
+        {/* <Route path="/JobBoard" element={isAuthenticated() ?<JobBoard /> : <Navigate to="/login" />} />
         <Route path="/MyJob" element={isAuthenticated() ?<MyJob />: <Navigate to="/login" />} />
         <Route path="/MockInterview" element={ isAuthenticated() ? <MockInterview /> : <Navigate to="/login" /> } />
         <Route path="/Exercise"  element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />} />
-         <Route path="/ResumeATS" element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}/>
+         <Route path="/ResumeATS" element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}/> */}
         {/* User Panel End */}
 
         {/* placement coodinator panel starts */}

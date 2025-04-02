@@ -7,7 +7,7 @@ import API from "../API";
 import toast ,{Toaster} from 'react-hot-toast';
 
 const BDAHeader = () => {
-  const [isMobileVisible, setisMobileVisible] = useState(false);
+  const [isMobileVisible, setisMobileVisible] = useState(true);
   const mobileMenuRef = useRef(null);
   const navigate = useNavigate();
   const BdaName = localStorage.getItem("bdaName");
@@ -18,20 +18,20 @@ const BDAHeader = () => {
     setisMobileVisible((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target)
-      ) {
-        setisMobileVisible(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       mobileMenuRef.current &&
+  //       !mobileMenuRef.current.contains(event.target)
+  //     ) {
+  //       setisMobileVisible(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
 
   const handleLogout = () => {
     toast.success("Logged Out" , {
@@ -95,7 +95,7 @@ const BDAHeader = () => {
   }, [bdaId]);
 
   return (
-    <div id="UserHeader">
+    <div id="TeamHeader">
        <Toaster position="top-center" reverseOrder={false}/>
       <div className="navbar">
         <div> 
@@ -104,7 +104,7 @@ const BDAHeader = () => {
           </Link>
         </div>
         <div ref={mobileMenuRef}>
-          <span onClick={toggleVisibility}>☰</span>
+          {/* <span onClick={toggleVisibility}>☰</span> */}
         </div>
       </div>
       {isMobileVisible && (

@@ -69,7 +69,7 @@ router.get("/jobs-with-applications", async (req, res) => {
         jobs.map(async (job) => {
           // Fetch job applications for the current job
           const applications = await JobApplication.find({ jobId: job._id })
-            .populate("userId", "fullName email phone status") // Populate user details
+            .populate("userId", "fullname email phone status jobResume") // Populate user details
             .lean();
   
           return {

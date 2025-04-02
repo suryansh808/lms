@@ -86,7 +86,7 @@ const BDARevenueSheet = () => {
   }
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto ml-[265px]">
       <h2 className="text-center  font-bold mb-6">Operation Revenue Sheet</h2>
 
       <section className="mb-8">

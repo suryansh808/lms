@@ -6,7 +6,7 @@ import logo from "../assets/LOGO3.png";
 import toast ,{Toaster} from 'react-hot-toast';
 
 const OperationHeader = () => {
-  const [isMobileVisible, setisMobileVisible] = useState(false);
+  const [isMobileVisible, setisMobileVisible] = useState(true);
   const mobileMenuRef = useRef(null);
   const [operationData, setOperationData] = useState(null);
   const navigate = useNavigate();
@@ -65,20 +65,20 @@ const OperationHeader = () => {
 
 
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target)
-      ) {
-        setisMobileVisible(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       mobileMenuRef.current &&
+  //       !mobileMenuRef.current.contains(event.target)
+  //     ) {
+  //       setisMobileVisible(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
 
 
   return (
@@ -91,7 +91,7 @@ const OperationHeader = () => {
           </Link>
         </div>
         <div ref={mobileMenuRef}>
-          <span onClick={toggleVisibility}>☰</span>
+          {/* <span onClick={toggleVisibility}>☰</span> */}
         </div>
       </div>
       {isMobileVisible && (

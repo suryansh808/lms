@@ -12,8 +12,8 @@ const NewStudentEnroll = require("./routes/NewStudentEnroll");
 const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
 const Mockai = require("./routes/mock");
 const Excercise = require("./routes/excercise");
-// const PlacementCoordinator = require("./routes/PlacementCoordinator");
-// const ResumeATS = require("./routes/resumeats");
+const PlacementCoordinator = require("./routes/PlacementCoordinator");
+const ResumeATS = require("./routes/resumeats");
 
 const User = require("./routes/User");
 const admin = require("./routes/AdminLogin")
@@ -96,9 +96,9 @@ app.use("/", MasterClass);
 // JobApplication
 app.use("/", JobApplication);
 
-// app.use("/",Mockai);
+app.use("/",Mockai);
 
-// app.use("/",Excercise);
+app.use("/",Excercise);
 
 app.use("/",Certificate);
 
@@ -107,12 +107,12 @@ app.use("/",Certificate);
 //AddEvent
 app.use("/", AddEvent);
 
-// app.use("/",PlacementCoordinator);
+app.use("/",PlacementCoordinator);
 
 //send mail with attchement
 app.use("/", sendMailWithAttchement);
 
-// app.use("/",ResumeATS);
+app.use("/",ResumeATS);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Backend Server!");

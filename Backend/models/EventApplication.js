@@ -16,7 +16,10 @@ const EventApplicationSchema = new Schema(
     coin:{
       type:Number,
       default:null
-    }
+    },
+    remarks:{
+      type:String,
+    },
   },
   {
     timestamps: true,
