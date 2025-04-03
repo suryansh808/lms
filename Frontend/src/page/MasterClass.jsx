@@ -359,17 +359,21 @@ const MasterClass = () => {
         </div>
       </div>
 
-      <div className="indutrialtalk">
+      <div className="industrialtalk">
         <h1>| Industrial Talks</h1>
-        <div className="talks">
-          <div className="player">
+        <div>
+          <div className="item">
             <iframe
-              src="https://drive.google.com/file/d/10uvyAF51jXUuxFJVS8Af9hXeTNFfnCTO/preview"
+              src={`https://drive.google.com/file/d/10uvyAF51jXUuxFJVS8Af9hXeTNFfnCTO/preview?usp=sharing`}
               allow="autoplay"
               allowFullScreen
             ></iframe>
-            <div className="logo">
-              <img src={logo} alt="Logo" />
+            <div className="text">
+              <div className="content">
+                <h3>Podcast on Career Advancement with</h3>
+                <h2>Karam Dharmanandra Singh</h2>
+                <h3>Manager at <span>BOSCH</span></h3>
+              </div>
             </div>
           </div>
         </div>
