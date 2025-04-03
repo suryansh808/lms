@@ -58,18 +58,22 @@ const TeamDetail = () => {
       // Filter only last 10 days
       if (itemDate >= last10Days && itemDate <= today) {
         if (!result[date]) {
-          result[date] = { count: 0, total: 0, credited: 0 };
+          result[date] = { count: 0, total: 0, credited: 0 , booked:0 };
         }
         result[date].count++;
         result[date].total += item.programPrice || 0;
-        result[date].credited += item.paidAmount || 0;
+        result[date].booked += item.paidAmount || 0;
+        if(item.status === "fullPaid"){
+          result[date].credited += item.paidAmount || 0;
+        }
       }
     });
 
-    return Object.entries(result).map(([date, values]) => ({
+    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([date, values]) => ({
       date,
       count: values.count,
       total: values.total,
+      booked: values.booked,
       credited: values.credited,
     }));
   };
@@ -79,14 +83,19 @@ const TeamDetail = () => {
   const groupByMonth = (enrollments) => {
     const result = {};
     const today = new Date();
-    const currentMonth = today.toISOString().slice(0, 7); // YYYY-MM
-    const prevMonth1 = new Date(today.getFullYear(), today.getMonth() - 1, 1).toISOString().slice(0, 7);
-    const prevMonth2 = new Date(today.getFullYear(), today.getMonth() - 2, 1).toISOString().slice(0, 7);
-    const prevMonth3 = new Date(today.getFullYear(), today.getMonth() - 3, 1).toISOString().slice(0, 7);
+    const getMonth = (date, offset) => {
+      const newDate = new Date(date);
+      newDate.setMonth(newDate.getMonth() - offset);
+      return newDate.toISOString().slice(0, 7);
+  };
+
+  const currentMonth = getMonth(today, 0);
+  const prevMonth1 = getMonth(today, 1);
+  const prevMonth2 = getMonth(today, 2);
+  const prevMonth3 = getMonth(today, 3);
 
     enrollments.forEach((item) => {
       const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-MM
-
       // Filter only the last 3 months
       if ([currentMonth, prevMonth1, prevMonth2, prevMonth3].includes(month)) {
         if (!result[month]) {
@@ -94,11 +103,13 @@ const TeamDetail = () => {
         }
         result[month].count++;
         result[month].total += item.programPrice || 0;
-        result[month].credited += item.paidAmount || 0;
+        if(item.status === "fullPaid"){
+          result[month].credited += item.paidAmount || 0;
+        }
       }
     });
 
-    return Object.entries(result).map(([month, values]) => ({
+    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([month, values]) => ({
       month,
       count: values.count,
       total: values.total,
@@ -139,6 +150,7 @@ const TeamDetail = () => {
                   <th>Date</th>
                   <th>No of Booked</th>
                   <th>Total Revenue</th>
+                  <th>Booked</th>
                   <th>Credited</th>
                   <th>Pending</th>
                 </tr>
@@ -150,6 +162,7 @@ const TeamDetail = () => {
                       <td>{data.date}</td>
                       <td>{data.count}</td>
                       <td>₹ {data.total}</td>
+                      <td>₹ {data.booked}</td>
                       <td>₹ {data.credited}</td>
                       <td>₹ {data.total - data.credited} </td>
                     </tr>

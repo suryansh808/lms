@@ -134,8 +134,7 @@ router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
 // Event Registration
 router.post("/eventregistration", async (req, res) => {
     try {
-
-       const existingUser = await EventRegistration.findOne({ email:req.body });
+       const existingUser = await EventRegistration.findOne({ email:req.body.email });
           if (existingUser) {
             return res.status(400).json({ message: "user already exists" });
           }

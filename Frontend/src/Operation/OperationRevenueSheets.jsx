@@ -47,34 +47,39 @@ const BDARevenueSheet = () => {
       year: "numeric",
     });
     const revenue = student.programPrice || 0;
-    const credited = (student.paidAmount || 0) - (student.defaultAmount || 0);
+    const bookedAmount = student.paidAmount || 0;
+   const credited = student.status === "fullPaid" ? student.paidAmount || 0 : 0;
     const pending = revenue - credited;
 
     if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, credited: 0, pending: 0, month };
+      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+
     }
     if (!revenueByMonth[month]) {
-      revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
+      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+
     }
 
     revenueByDay[date].total += revenue;
+    revenueByDay[date].booked += bookedAmount;
     revenueByDay[date].credited += credited;
     revenueByDay[date].pending += pending;
 
     revenueByMonth[month].total += revenue;
+    revenueByMonth[month].booked += bookedAmount;
     revenueByMonth[month].credited += credited;
     revenueByMonth[month].pending += pending;
 
     totalRevenue += revenue;
   });
 
-  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(a) - new Date(b));
+  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
   const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
   const filteredDailyRevenue = Object.entries(revenueByDay).filter(
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  months.sort((a, b) => new Date(a) - new Date(b));
+  // months.sort((a, b) => new Date(b) - new Date(a));
 
   let growthPercentage = null;
   if (months.length > 1) {
@@ -112,6 +117,7 @@ const BDARevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
+                <th className="border p-3 text-left">Booked Amount</th>
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -121,6 +127,7 @@ const BDARevenueSheet = () => {
                 <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
+                  <td className="border p-3">₹{data.booked.toFixed(2)}</td>
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
                   <td className="border p-3">₹{data.pending.toFixed(2)}</td>
                 </tr>
