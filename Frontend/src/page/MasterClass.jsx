@@ -7,13 +7,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast, { Toaster } from "react-hot-toast";
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
-import img from "../assets/masterclasscertificate.jpg"
-import imghero from "../assets/masterhero.jpg"
-import imgmentor from "../assets/Advanced Course Images/Product management/pm.jpg"
-import imgadvance from "../assets/courses/feesimg.jpeg"
-import imgalt from "../assets/defaultmasterclass.jpg"
+import img from "../assets/masterclasscertificate.jpg";
+import imghero from "../assets/masterhero.jpg";
+import imgmentor from "../assets/Advanced Course Images/Product management/pm.jpg";
+import imgadvance from "../assets/courses/feesimg.jpeg";
+import imgalt from "../assets/defaultmasterclass.jpg";
 import Popularcourse from "../Components/popularcourse";
-
+import logo from "../User/playerlogo.jpg";
 
 const MasterClass = () => {
   useEffect(() => {
@@ -40,12 +40,36 @@ const MasterClass = () => {
     phone: "",
   });
   const faqs = [
-    { question: "How do I register for the masterclass?", answer: "Simply click the Register Now button and fill in your required details and join the community group." },
-    { question: "Will I receive a certificate?", answer: "Yes! After completing a MasterClass, you will receive a certificate of completion." },
-    { question: "Do I need to pay any fees?", answer: "Our MasterClasses are free of cost, making learning accessible to everyone." },
-    { question: "Can I interact with the mentor?", answer: "Yes! Our sessions are live and interactive, allowing you to ask questions and engage with mentors." },
-    { question: "What are the technical requirements to attend?", answer: "A stable internet connection, a laptop or mobile device, and a willingness to learn!" },
-    { question: "How do I access the Masterclass session link?", answer: "Once registered, you will receive the session link via email before the class starts even you will be added community group." }
+    {
+      question: "How do I register for the masterclass?",
+      answer:
+        "Simply click the Register Now button and fill in your required details and join the community group.",
+    },
+    {
+      question: "Will I receive a certificate?",
+      answer:
+        "Yes! After completing a MasterClass, you will receive a certificate of completion.",
+    },
+    {
+      question: "Do I need to pay any fees?",
+      answer:
+        "Our MasterClasses are free of cost, making learning accessible to everyone.",
+    },
+    {
+      question: "Can I interact with the mentor?",
+      answer:
+        "Yes! Our sessions are live and interactive, allowing you to ask questions and engage with mentors.",
+    },
+    {
+      question: "What are the technical requirements to attend?",
+      answer:
+        "A stable internet connection, a laptop or mobile device, and a willingness to learn!",
+    },
+    {
+      question: "How do I access the Masterclass session link?",
+      answer:
+        "Once registered, you will receive the session link via email before the class starts even you will be added community group.",
+    },
   ];
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -55,22 +79,35 @@ const MasterClass = () => {
     setisRegisterForm(false);
     setisDownloadForm(false);
     setSelectedMasterClass(null);
-    setFormData({ name: "", email: "", clgemail: "", collegename: "", phone: "" });
+    setFormData({
+      name: "",
+      email: "",
+      clgemail: "",
+      collegename: "",
+      phone: "",
+    });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: name === "email" || name === "clgemail" ? value.toLowerCase() : value,
+      [name]:
+        name === "email" || name === "clgemail" ? value.toLowerCase() : value,
     });
   };
 
   const fetchMasterclass = async () => {
     try {
       const response = await axios.get(`${API}/allmasterclasswithsapplicant`);
-      setallMasterClass(response.data.filter(item => item.status === 'upcoming' || item.status === 'ongoing'));
-      setCompletedMasterClass(response.data.filter(item => item.status === 'completed'));
+      setallMasterClass(
+        response.data.filter(
+          (item) => item.status === "upcoming" || item.status === "ongoing"
+        )
+      );
+      setCompletedMasterClass(
+        response.data.filter((item) => item.status === "completed")
+      );
     } catch (error) {
       console.error("There was an error fetching MasterClass:", error);
     }
@@ -96,7 +133,9 @@ const MasterClass = () => {
     // console.log("Submitted Email:", email);
     // console.log("Submitted id:", selectedMasterClass);
     try {
-      const response = await axios.get(`${API}/masterclassauth/${selectedMasterClass._id}/${email}`);
+      const response = await axios.get(
+        `${API}/masterclassauth/${selectedMasterClass._id}/${email}`
+      );
       const certificateData = response.data;
       // console.log("final",response.data);
       setisDownloadForm(false);
@@ -109,9 +148,9 @@ const MasterClass = () => {
       // console.log("masteruser", certificateData.certificate);
 
       // Fetch the image as blob to force download
-    const imageResponse = await fetch(certificateData.certificate);
-    const blob = await imageResponse.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+      const imageResponse = await fetch(certificateData.certificate);
+      const blob = await imageResponse.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
 
       const a = document.createElement("a");
       a.href = blobUrl;
@@ -129,7 +168,10 @@ const MasterClass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API}/masterclassapply/${selectedMasterClass._id}`, formData);
+      const response = await axios.post(
+        `${API}/masterclassapply/${selectedMasterClass._id}`,
+        formData
+      );
       toast.success("Successfully Applied! Join our Community group");
       setTimeout(() => {
         window.open(selectedMasterClass.link, "_blank");
@@ -138,7 +180,9 @@ const MasterClass = () => {
       closeForm();
     } catch (error) {
       console.error("Error applying for MasterClass", error);
-      toast.error(error.response?.data?.message || "Error applying for MasterClass");
+      toast.error(
+        error.response?.data?.message || "Error applying for MasterClass"
+      );
     }
   };
 
@@ -146,8 +190,18 @@ const MasterClass = () => {
     <div id="MasterClass">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="masterclasshero">
-        <input className="radio" type="radio" name="card" id="cardUno" defaultChecked />
-        <label className="content" htmlFor="cardUno" style={{ backgroundImage: `url(${imghero})` }}>
+        <input
+          className="radio"
+          type="radio"
+          name="card"
+          id="cardUno"
+          defaultChecked
+        />
+        <label
+          className="content"
+          htmlFor="cardUno"
+          style={{ backgroundImage: `url(${imghero})` }}
+        >
           {/* <h1 className="title-card">
             Masterclasses to Boost Your Skills
           </h1>
@@ -156,7 +210,11 @@ const MasterClass = () => {
           </h3> */}
         </label>
         <input className="radio" type="radio" name="card" id="cardDos" />
-        <label className="content" htmlFor="cardDos" style={{ backgroundImage: `url(${imgmentor})` }}>
+        <label
+          className="content"
+          htmlFor="cardDos"
+          style={{ backgroundImage: `url(${imgmentor})` }}
+        >
           {/* <h1 className="title-card">
             <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
             <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
@@ -166,7 +224,11 @@ const MasterClass = () => {
           </h3> */}
         </label>
         <input className="radio" type="radio" name="card" id="cardTres" />
-        <label className="content" htmlFor="cardTres" style={{ backgroundImage: `url(${imgadvance})` }}>
+        <label
+          className="content"
+          htmlFor="cardTres"
+          style={{ backgroundImage: `url(${imgadvance})` }}
+        >
           {/* <h1 className="title-card">
             <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
             <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
@@ -180,7 +242,13 @@ const MasterClass = () => {
         <div className="about">
           <h1>| About Masterclass</h1> <br />
           <p>
-            Krutanic MasterClass is a premier online learning initiative that brings together top educators, industry experts, and professionals to deliver engaging, interactive, and insightful masterclasses on a variety of subjects. <br /><br /> Whether you want to upskill, explore new domains, or gain a competitive edge, our free masterclass is your gateway to excellence.
+            Krutanic MasterClass is a premier online learning initiative that
+            brings together top educators, industry experts, and professionals
+            to deliver engaging, interactive, and insightful masterclasses on a
+            variety of subjects. <br />
+            <br /> Whether you want to upskill, explore new domains, or gain a
+            competitive edge, our free masterclass is your gateway to
+            excellence.
           </p>
         </div>
         <div className="why">
@@ -217,24 +285,49 @@ const MasterClass = () => {
         <div>
           {allMasterClass?.map((masterclass, index) => (
             <div className="item">
-              <img src={masterclass.image} alt="masterclass"
-                onError={(e) => e.target.src = imgalt}
+              <img
+                src={masterclass.image}
+                alt="masterclass"
+                onError={(e) => (e.target.src = imgalt)}
               />
               <div className="text" key={masterclass._id || index}>
-                <div className="content" >
+                <div className="content">
                   <h2>{masterclass.title}</h2>
-                  <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                  <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
+                  <h3>
+                    Start time:{" "}
+                    {new Date(masterclass.start).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}
+                  </h3>
+                  <h3>
+                    End time:{" "}
+                    {new Date(masterclass.end).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}
+                  </h3>
                 </div>
                 {masterclass.status === "upcoming" ? (
                   <div className="register">
                     <p>Registration will start soon !</p>
                   </div>
-
                 ) : (
                   <div className="register">
-                    <span>{masterclass.applications} learners have registered</span>
-                    <button onClick={() => handleApply(masterclass)}>Register Now</button>
+                    <span>
+                      {masterclass.applications} learners have registered
+                    </span>
+                    <button onClick={() => handleApply(masterclass)}>
+                      Register Now
+                    </button>
                     {/* <button onClick={() => handleDownload(masterclass)} className="fa fa-download" > Certificate</button> */}
                   </div>
                 )}
@@ -249,7 +342,9 @@ const MasterClass = () => {
           <div className="item">
             <i className="fa fa-certificate"></i>
             <h2>Industry-Recognized Certification</h2>
-            <p>Receive a certificate upon completion to boost your credentials.</p>
+            <p>
+              Receive a certificate upon completion to boost your credentials.
+            </p>
           </div>
           <div className="item">
             <i className="fa fa-line-chart"></i>
@@ -264,41 +359,95 @@ const MasterClass = () => {
         </div>
       </div>
 
+      <div className="indutrialtalk">
+        <h1>| Industrial Talks</h1>
+        <div className="talks">
+          <div className="player">
+            <iframe
+              src="https://drive.google.com/file/d/10uvyAF51jXUuxFJVS8Af9hXeTNFfnCTO/preview"
+              allow="autoplay"
+              allowFullScreen
+            ></iframe>
+            <div className="logo">
+              <img src={logo} alt="Logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="certificateparticipate">
         <div className="text">
           <h1>| Certificate of Participation</h1> <br />
-          <p>After attending the Krutanic masterclass, you'll receive a certificate of participation. <br /><br /> This certificate acknowledges your commitment to professional development and can be shared on LinkedIn and other professional platforms to highlight your expertise and showcase your continuous learning.</p>
+          <p>
+            After attending the Krutanic masterclass, you'll receive a
+            certificate of participation. <br />
+            <br /> This certificate acknowledges your commitment to professional
+            development and can be shared on LinkedIn and other professional
+            platforms to highlight your expertise and showcase your continuous
+            learning.
+          </p>
         </div>
         <div className="image">
           <img src={img} alt="" />
         </div>
       </div>
 
-
       {/* completed course section */}
       <div className="classess">
         <div>
-          {completedMasterClass?.slice().reverse().map((masterclass, index) => (
-            <div className="item">
-              <img src={masterclass.image} alt="masterclass"
-                onError={(e) => e.target.src = imgalt}
-              />
-              <div className="text" key={masterclass._id || index}>
-                <div className="content" >
-                  <h2>{masterclass.title}</h2>
-                  <h3>Start time: {new Date(masterclass.start).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
-                  <h3>End time: {new Date(masterclass.end).toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}</h3>
+          {completedMasterClass
+            ?.slice()
+            .reverse()
+            .map((masterclass, index) => (
+              <div className="item">
+                <img
+                  src={masterclass.image}
+                  alt="masterclass"
+                  onError={(e) => (e.target.src = imgalt)}
+                />
+                <div className="text" key={masterclass._id || index}>
+                  <div className="content">
+                    <h2>{masterclass.title}</h2>
+                    <h3>
+                      Start time:{" "}
+                      {new Date(masterclass.start).toLocaleString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </h3>
+                    <h3>
+                      End time:{" "}
+                      {new Date(masterclass.end).toLocaleString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </h3>
+                  </div>
+                  <div className="register">
+                    <span>
+                      {masterclass.applications} learners have participated
+                    </span>
+                    {masterclass.pdfstatus && (
+                      <button
+                        onClick={() => handleDownload(masterclass)}
+                        className="fa fa-download"
+                      >
+                        {" "}
+                        Certificate
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="register">
-                  <span>{masterclass.applications} learners have participated</span>
-                  {masterclass.pdfstatus && (
-                    <button onClick={() => handleDownload(masterclass)} className="fa fa-download" > Certificate</button>
-                  )}
-                </div>
-
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -309,7 +458,9 @@ const MasterClass = () => {
 
       <div className="faqsection">
         <div className="max-w-[1200px] mx-auto p-4 border rounded-lg shadow-lg bg-white">
-          <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            Frequently Asked Questions
+          </h2>
           {faqs.map((faq, index) => (
             <div key={index} className="border-b py-2">
               <button
@@ -319,11 +470,12 @@ const MasterClass = () => {
                 {faq.question}
                 <span>{openIndex === index ? "▲" : "▼"}</span>
               </button>
-              {openIndex === index && <p className="text-gray-700 mt-2">{faq.answer}</p>}
+              {openIndex === index && (
+                <p className="text-gray-700 mt-2">{faq.answer}</p>
+              )}
             </div>
           ))}
         </div>
-
       </div>
       {/* Registration Form */}
       {isRegisterForm && selectedMasterClass && (
@@ -376,7 +528,10 @@ const MasterClass = () => {
                 required
               />
               <input className="submitbtn" type="submit" value="SUBMIT" />
-              <p><span>NOTE : </span>Enter your details carefully, they will appear on your certificate.</p>
+              <p>
+                <span>NOTE : </span>Enter your details carefully, they will
+                appear on your certificate.
+              </p>
             </form>
           </div>
         </div>
@@ -399,12 +554,14 @@ const MasterClass = () => {
                 required
               />
               <input className="submitbtn" type="submit" value="SUBMIT" />
-              <p><span>NOTE : </span>Please enter the same Email that you used during registration.</p>
+              <p>
+                <span>NOTE : </span>Please enter the same Email that you used
+                during registration.
+              </p>
             </form>
           </div>
         </div>
       )}
-
     </div>
   );
 };
