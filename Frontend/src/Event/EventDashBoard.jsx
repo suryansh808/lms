@@ -28,6 +28,7 @@ const EventDashBoard = () => {
       localStorage.removeItem("eventuserId");
       localStorage.removeItem("eventuserEmail");
       localStorage.removeItem("eventToken");
+      localStorage.removeItem("eventUserName");
       navigate("/Talenthunt");
     }, 1500);
   };

@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { sendEmail } = require("../controllers/emailController");
+const cloudinary = require("../middleware/cloudinary.js")
 
 // add a new event
 router.post("/addevent", async (req, res) => {
@@ -133,6 +134,11 @@ router.put('/addquestions/:eventId/questions/:questionId', async (req, res) => {
 // Event Registration
 router.post("/eventregistration", async (req, res) => {
     try {
+
+       const existingUser = await EventRegistration.findOne({ email:req.body });
+          if (existingUser) {
+            return res.status(400).json({ message: "user already exists" });
+          }
         const eventregister = new EventRegistration(req.body);
         await eventregister.save();
         res.status(201).json(eventregister);
@@ -167,6 +173,7 @@ router.get("/alleventregistrations", async (req, res) => {
           name: { $first: "$name" },
           phone: { $first: "$phone" },
           email: { $first: "$email" },
+          profilePhoto: { $first: "$profilePhoto" },
           collegeName: { $first: "$collegeName" },
           collegeEmailId: { $first: "$collegeEmailId" },
           applicationData: { $first: "$applicationData" }, // Ensure all applications are stored as an array
@@ -435,6 +442,28 @@ router.post("/redeemcoins", async (req, res) => {
 });
 
 
+//add profile image 
+router.post("/upload-profile-photo/:id", async (req, res) => {
+  try {
+    const { image } = req.body;
+    if (!image) {
+      return res.status(400).json({ message: "No image provided" });
+    }
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "profile_photos",
+    });
+    // Update user profile with image URL
+    const user = await EventRegistration.findByIdAndUpdate(
+      req.params.id,
+      { profilePhoto: result.url },
+      { new: true }
+    );
+    res.json({ message: "Profile photo uploaded", user });
+  } catch (error) {
+    res.status(500).json({ message: "Error uploading image", error });
+  }
+});
 
 
 module.exports = router;

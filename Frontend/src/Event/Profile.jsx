@@ -1,30 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "../API";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import toast, { Toaster } from "react-hot-toast";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import "swiper/css/scrollbar";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const userEmail = localStorage.getItem("eventuserEmail");
+  const userId = localStorage.getItem("eventuserId");
+  const [file, setFile] = useState(null);
 
   const fetchEventUsers = async () => {
     try {
       setLoading(true);
       setError(null);
       const response = await axios.get(`${API}/alleventregistrations`);
-      console.log(
-        "event users",
-        response.data.filter((item) => item.email === userEmail)
-      );
-      setUsers(
-        response.data.filter((item) => item.email && item.email === userEmail)
-      );
+      setUsers(response.data.filter((item) => item.email && item.email === userEmail));
     } catch (error) {
       console.error("There was an error fetching the event users", error);
       setError("Failed to load profile data. Please try again later.");
@@ -33,6 +29,50 @@ const Profile = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+  
+    if (selectedFile) {
+      const fileSizeKB = selectedFile.size / 1024; // Convert bytes to KB
+      if (fileSizeKB > 50) {
+        toast.error("File size must be under 50KB!");
+        return;
+      }
+      setFile(selectedFile);
+    }
+  };
+  
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if (!file) {
+      toast.error("Please select a file.");
+      return;
+    }
+  
+    const reader = new FileReader();
+  
+    reader.onloadend = async () => {
+      try {
+        const response = await axios.post(`${API}/upload-profile-photo/${userId}`, {
+          image: reader.result, // 🔥 Send Base64 instead of FormData
+        });
+  
+        if (response.status === 200) {
+          toast.success("Profile photo updated successfully!");
+          fetchEventUsers(); // ✅ Refresh only profile photo without reloading full UI
+          setFile(null);
+        } else {
+          toast.error("Upload failed. Please try again.");
+        }
+      } catch (error) {
+        console.error("Upload Error:", error);
+        toast.error("Error uploading photo.");
+      }
+    };
+  
+    reader.readAsDataURL(file);
+  };
+  
   useEffect(() => {
     if (userEmail) {
       fetchEventUsers();
@@ -62,6 +102,7 @@ const Profile = () => {
 
   return (
     <div className="eventheight">
+        <Toaster position="top-center" reverseOrder={false} />
       <div className="backdrop-blur-2xl bg-[#9e9a9a46] profile h-full">
         <div className="p-1 border-r-2 border-[#0808083a]">
           {users.length > 0 ? (
@@ -70,6 +111,27 @@ const Profile = () => {
                 key={index}
                 className="space-y-4 p-3 bg-gradient-to-r from-white to-purple-500 text-transparent bg-clip-text"
               >
+               <div className="flex flex-col items-center gap-4">
+  <form onSubmit={handleUpload} className="flex flex-col items-center gap-4">
+    <div className="relative group">
+      <img
+        src={user.profilePhoto || "/default-avatar.png"}
+        alt="Profile"
+        className="w-28 h-28 rounded-full object-cover border-4 border-gray-300 shadow-lg"
+      />
+      <label className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+        <i className="fa fa-edit text-white text-xl"></i>
+        <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} required />
+      </label>
+    </div>
+
+    <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-all shadow-md">
+      Update
+    </button>
+  </form>
+</div>
+
+
                 <h2 className="text-xl font-semibold">
                   <span className="font-bold">Name: </span>
                   {user.name}
@@ -99,7 +161,7 @@ const Profile = () => {
               </p>
             </div>
           )}
-           <div className="text-center mt-5 space-y-4">
+          <div className="text-center mt-5 space-y-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-black gradient-text">
               | Follow Us
             </h2>
@@ -107,7 +169,6 @@ const Profile = () => {
               Stay updated with the latest news and announcements on our social
               channels.
             </p>
-
             <div className=" flex justify-center gap-6">
               <a
                 target="_blank"
@@ -138,12 +199,12 @@ const Profile = () => {
                 <span class="fa fa-linkedin"></span>
               </a>
               <a
-            target="_blank"
-              href="https://github.com/Krutanic/"
-              className="text-black text-4xl"
-            >
-              <span class="fa fa-github"></span>
-            </a>
+                target="_blank"
+                href="https://github.com/Krutanic/"
+                className="text-black text-4xl"
+              >
+                <span class="fa fa-github"></span>
+              </a>
             </div>
           </div>
         </div>
@@ -153,53 +214,48 @@ const Profile = () => {
             Events Details
           </h2>
           <div className="rounded-xl mt-3 overflow-hidden">
-          <table className="min-w-full">
-            <thead>
-              <tr className="bg-purple-500 text-white">
-                 <th className=" px-4 py-2">SL No</th>
-                <th className=" px-4 py-2">Events</th>
-                <th className=" px-4 py-2">Date & Time</th>
-                <th className=" px-4 py-2">Coins</th>
-              </tr>
-            </thead>
-            <tbody>
-              {applicationData.length > 0 ? (
-                applicationData.map((user, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white odd:bg-gray-100 text-center"
-                  >
-                    <td className="px-4 py-2">{index + 1}</td>
-                    <td className=" px-4 py-2">
-                      {user.remarks || "N/A"}
-                    </td>
-                    <td className=" px-4 py-2">
-                      {new Date(user.createdAt).toLocaleString("en-US", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                        hour: "numeric",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </td>
-                    <td className=" px-4 py-2">
-                      {user.coin !== null ? user.coin : "Not Assigned"}
+            <table className="min-w-full">
+              <thead>
+                <tr className="bg-purple-500 text-white">
+                  <th className=" px-4 py-2">SL No</th>
+                  <th className=" px-4 py-2">Events</th>
+                  <th className=" px-4 py-2">Date & Time</th>
+                  <th className=" px-4 py-2">Coins</th>
+                </tr>
+              </thead>
+              <tbody>
+                {applicationData.length > 0 ? (
+                  applicationData.map((user, index) => (
+                    <tr
+                      key={index}
+                      className="bg-white odd:bg-gray-100 text-center"
+                    >
+                      <td className="px-4 py-2">{index + 1}</td>
+                      <td className=" px-4 py-2">{user.remarks || "N/A"}</td>
+                      <td className=" px-4 py-2">
+                        {new Date(user.createdAt).toLocaleString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className=" px-4 py-2">
+                        {user.coin !== null ? user.coin : "Not Assigned"}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" className="text-center px-4 py-2">
+                      No data found
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td
-                    colSpan="4"
-                    className="text-center px-4 py-2"
-                  >
-                    No data found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

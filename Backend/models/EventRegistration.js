@@ -9,6 +9,7 @@ const EventRegistrationSchema = new mongoose.Schema({
     collegeEmailId: { type: String},
     otp: {type: String},
     otpExpires: {type: Date},
+    profilePhoto:{type:String},
 });
 
 const EventRegistration = mongoose.model("EventRegistration", EventRegistrationSchema);

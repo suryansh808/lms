@@ -21,4 +21,5 @@
 //   },
 // });
 
-// module.exports = mongoose.model("PlacementCoordinator", PlacementCoordinatorSchema);
+// const PlacementCoordinator = mongoose.model("PlacementCoordinator", PlacementCoordinatorSchema);
+// module.exports = PlacementCoordinator;

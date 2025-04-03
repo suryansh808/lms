@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import toast, { Toaster } from "react-hot-toast";
@@ -26,6 +26,7 @@ const TalentHunt = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`${API}/eventregistration`, formData);
       toast.success("Form submitted successfully!");
@@ -37,8 +38,10 @@ const TalentHunt = () => {
         collegeEmailId: "",
       });
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to submit the form");
+      console.error("User Already Registed", error);
+      toast.error("user already exists");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,23 +84,23 @@ const TalentHunt = () => {
 
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
   const [showOtp, setShowOtp] = useState(false);
   const navigate = useNavigate();
-   const [loading, setLoading] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   const handleSendOtp = async () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API}/eventsendotp`, { email });
       if (response.status === 200) {
-        toast.success('OTP sent successfully');
+        toast.success("OTP sent successfully");
         setShowOtp(true);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Error sending OTP');
-    }finally {
+      toast.error(error.response?.data?.message || "Error sending OTP");
+    } finally {
       setLoading(false);
     }
   };
@@ -105,17 +108,20 @@ const TalentHunt = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API}/eventverifyotp`, { email, otp });
-      toast.success('login successful!!!');
+      const response = await axios.post(`${API}/eventverifyotp`, {
+        email,
+        otp,
+      });
+      toast.success("login successful!!!");
       // console.log(response.data);
       if (response.status === 200) {
         setTimeout(() => {
-        localStorage.setItem('eventuserId', response.data._id);
-        localStorage.setItem('eventuserEmail', response.data.email);
-        localStorage.setItem('eventToken', response.data.token);
-        localStorage.setItem('eventUserName', response.data.name);
-        navigate('/EventDashBoard');
-      }, 2000); 
+          localStorage.setItem("eventuserId", response.data._id);
+          localStorage.setItem("eventuserEmail", response.data.email);
+          localStorage.setItem("eventToken", response.data.token);
+          localStorage.setItem("eventUserName", response.data.name);
+          navigate("/EventDashBoard");
+        }, 2000);
       }
     } catch (error) {
       if (error.response?.status === 403) {
@@ -126,18 +132,17 @@ const TalentHunt = () => {
         toast.error("User not found. Please check your email.");
       } else {
         toast.error(
-          error.response?.data?.message || "An error occurred while verifying OTP. Please try again."
+          error.response?.data?.message ||
+            "An error occurred while verifying OTP. Please try again."
         );
       }
     }
   };
 
-  // const LeearningSectionRef = useRef(null);
-  // const scrollToCourse = () => {
-  //   LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
-  // };
-
-
+  const LeearningSectionRef = useRef(null);
+  const scrollToCourse = () => {
+    LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
+  };
 
   return (
     <div id="talenthunt">
@@ -152,7 +157,13 @@ const TalentHunt = () => {
             the difference. Explore why people turn to this invaluable resource
             to unlock their potential.
           </p>
-          {/* <button data-aos="fade-up"  onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1">Register Now</button> */}
+          <button
+            data-aos="fade-up"
+            onClick={scrollToCourse}
+            className="border border-[#f15b29] rounded-md px-4 py-1"
+          >
+            Register Now
+          </button>
         </div>
         <div className="users-color-container">
           <span className="item" style={{ "--i": 1 }}></span>
@@ -249,23 +260,23 @@ const TalentHunt = () => {
         <div className="container mx-auto">
           <h1
             data-aos="fade-up"
-            className=" font-bold mb-12 text-center text-[#f15b29]"
+            className="font-bold mb-12 text-center text-[#f15b29]"
           >
-            | How to Participate
+            | How to Participate in the Quiz
           </h1>
           <div className="flex items-center justify-center flex-wrap gap-4 max-[600px]:justify-start">
             {[
-              "Register on our platform",
-              "Choose your category",
-              "Submit your project",
-              "Present to our panel of judges",
+              "Register for the quiz",
+              "Join the quiz lobby before it starts",
+              "Answer the questions within the time limit",
+              "Score the highest to win prizes!",
             ].map((step, index) => (
               <div
                 data-aos="fade-up"
                 key={index}
                 className="flex items-center mb-6"
               >
-                <div className="bg-[#f15b29] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">
+                <div className="bg-[#f15b29] text-white font-semibold rounded-full w-8 h-8 flex items-center justify-center mr-4">
                   {index + 1}
                 </div>
                 <p className="text-lg dark:text-gray-300">{step}</p>
@@ -275,139 +286,159 @@ const TalentHunt = () => {
         </div>
       </section>
 
-      <section
-      //  ref={LeearningSectionRef}
-        className="bg-white">
-      <div className={`container  bg-white text-black flex justify-around flex-wrap `}>
+      <section ref={LeearningSectionRef} className="bg-white">
+        <div
+          className={`container  bg-white text-black flex justify-around flex-wrap `}
+        >
           <div className="relative w-full h-[600px] sm:w-1/2 px-6 sm:px-20 py-8">
-      <motion.div
-        className="relative"
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        {/* Front Side - Registration Form */}
-        <div className={`absolute w-full backface-hidden ${isFlipped ? "hidden" : "block"}`}>
-          <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
-            | Talent Hunt Registration
-          </h2>
-          <form onSubmit={handleSubmit} className="rounded-lg p-5">
-            <fieldset className="mb-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                required
-              />
-            </fieldset>
-            <fieldset className="mb-4">
-              <input
-                type="number"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                required
-              />
-            </fieldset>
-            <fieldset className="mb-4">
-              <input
-                type="email"
-                name="email"
-                placeholder="Personal Email ID"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                required
-              />
-            </fieldset>
-            <fieldset className="mb-4">
-              <input
-                type="text"
-                name="collegeEmailId"
-                placeholder="Student's College Email ID"
-                className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                value={formData.collegeEmailId}
-                onChange={handleChange}
-              />
-            </fieldset>
-            <fieldset className="mb-4">
-              <input
-                type="text"
-                name="collegeName"
-                placeholder="College Name"
-                value={formData.collegeName}
-                onChange={handleChange}
-                className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                required
-              />
-            </fieldset>
-            <fieldset className="mb-2">
-              <button
-                type="submit"
-                className="w-full p-3 bg-black text-white rounded-lg focus:outline-none"
+            <motion.div
+              className="relative"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.6 }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Front Side - Registration Form */}
+              <div
+                className={`absolute w-full backface-hidden ${
+                  isFlipped ? "hidden" : "block"
+                }`}
               >
-                Register Now
-              </button>
-            </fieldset>
-            <button
-              className="w-full p-2 text-blue-600 underline"
-              onClick={() => setIsFlipped(true)}
-            >
-              Already registered? Login
-            </button>
-          </form>
-        </div>
-
-        {/* Back Side - Login Form */}
-        <div className={`absolute w-full backface-hidden ${isFlipped ? "block" : "hidden"}`} style={{ transform: "rotateY(180deg)" }}>
-          <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
-            | Login
-          </h2>
-          <form onSubmit={handleVerifyOtp} className="rounded-lg p-5">
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Enter Email ID"
-	            className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          {!showOtp ? (
-            <button disabled={loading} type="button"  className="w-full p-3 bg-black text-white rounded-lg focus:outline-none" onClick={handleSendOtp}>
-            { loading ? "Sending..." : "Send OTP"}
-            </button>
-          ) : (
-            <>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Enter OTP"
-		             className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
-                  required
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                />
+                <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
+                  | Talent Hunt Registration
+                </h2>
+                <form onSubmit={handleSubmit} className="rounded-lg p-5">
+                  <fieldset className="mb-4">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Full Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      required
+                    />
+                  </fieldset>
+                  <fieldset className="mb-4">
+                    <input
+                      type="number"
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      required
+                    />
+                  </fieldset>
+                  <fieldset className="mb-4">
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Personal Email ID"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      required
+                    />
+                  </fieldset>
+                  <fieldset className="mb-4">
+                    <input
+                      type="text"
+                      name="collegeEmailId"
+                      placeholder="Student's College Email ID"
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      value={formData.collegeEmailId}
+                      onChange={handleChange}
+                    />
+                  </fieldset>
+                  <fieldset className="mb-4">
+                    <input
+                      type="text"
+                      name="collegeName"
+                      placeholder="College Name"
+                      value={formData.collegeName}
+                      onChange={handleChange}
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      required
+                    />
+                  </fieldset>
+                  <fieldset className="mb-2">
+                    <button
+                      disabled={loading}
+                      type="submit"
+                      className="w-full p-3 bg-black text-white rounded-lg focus:outline-none"
+                    >
+                      {loading ? "Loading..." : "Resgiter Now"}
+                    </button>
+                  </fieldset>
+                  <button
+                    className="w-full p-2 text-blue-600 underline"
+                    onClick={() => setIsFlipped(true)}
+                  >
+                    Already registered? Login
+                  </button>
+                </form>
               </div>
-              <button  className="w-full p-3 bg-black text-white rounded-lg focus:outline-none" type="submit">Verify OTP</button>
-            </>
-          )}
 
-            <button
-              className="w-full p-2 mt-4 text-blue-600 underline"
-              onClick={() => setIsFlipped(false)}
-            >
-              Back to Registration
-            </button>
-          </form>
-        </div>
-      </motion.div>
+              {/* Back Side - Login Form */}
+              <div
+                className={`absolute w-full backface-hidden ${
+                  isFlipped ? "block" : "hidden"
+                }`}
+                style={{ transform: "rotateY(180deg)" }}
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold text-center gradient-text">
+                  | Login
+                </h2>
+                <form onSubmit={handleVerifyOtp} className="rounded-lg p-5">
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      placeholder="Enter Email ID"
+                      className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  {!showOtp ? (
+                    <button
+                      disabled={loading}
+                      type="button"
+                      className="w-full p-3 bg-black text-white rounded-lg focus:outline-none"
+                      onClick={handleSendOtp}
+                    >
+                      {loading ? "Sending..." : "Send OTP"}
+                    </button>
+                  ) : (
+                    <>
+                      <div className="mb-4">
+                        <input
+                          type="text"
+                          placeholder="Enter OTP"
+                          className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
+                          required
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value)}
+                        />
+                      </div>
+                      <button
+                        className="w-full p-3 bg-black text-white rounded-lg focus:outline-none"
+                        type="submit"
+                      >
+                        Verify OTP
+                      </button>
+                    </>
+                  )}
+
+                  <button
+                    className="w-full p-2 mt-4 text-blue-600 underline"
+                    onClick={() => setIsFlipped(false)}
+                  >
+                    Back to Registration
+                  </button>
+                </form>
+              </div>
+            </motion.div>
           </div>
           <div className="text-center w-full sm:w-1/2 px-6 sm:px-20 py-10 sm:py-40">
             <h2 className="text-2xl sm:text-3xl font-semibold text-black gradient-text">
@@ -447,15 +478,15 @@ const TalentHunt = () => {
                 <span class="fa fa-linkedin"></span>
               </a>
               <a
-            target="_blank"
-              href="https://github.com/Krutanic/"
-              className="text-black text-4xl"
-            >
-              <span class="fa fa-github"></span>
-            </a>
+                target="_blank"
+                href="https://github.com/Krutanic/"
+                className="text-black text-4xl"
+              >
+                <span class="fa fa-github"></span>
+              </a>
             </div>
           </div>
-      </div>
+        </div>
       </section>
     </div>
   );

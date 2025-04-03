@@ -437,7 +437,7 @@ const BookedAmount = () => {
   };
 
   return (
-    <div id="OperationEnroll">
+    <div id="OperationEnroll" className="ml-[265px]">
       <Toaster position="top-center" reverseOrder={false} />
       {iscourseFormVisible && (
         <div className="form">
@@ -697,7 +697,7 @@ const BookedAmount = () => {
                       <td>{item.remark[item.remark.length - 1]}</td>
                       <td>
                         <select
-                          className="border rounded-full border-black"
+                          className="border rounded-full w-40 border-black"
                           onChange={(e) => handleRemarkChange(e, item._id)}
                           defaultValue="Select Remark"
                         >
@@ -711,11 +711,12 @@ const BookedAmount = () => {
                           <option value="Cleared">Cleared</option>
                           <option value="Half_Cleared">Half_Cleared</option>
                           <option value="Switch Off">Switch Off</option>
-                          <option value="Call Back later">
-                            Call Back later
-                          </option>
+                          <option value="Call Back later"> Call Back later</option>
                           <option value="Busy">Busy</option>
                           <option value="Declined">Declined</option>
+                          <option value="Need More Time">Need More Time</option>
+                          <option value="When Batch Starts">When Batch Starts</option>
+                          <option value="Counselor Told To Pay Before Class Start">Counselor Told To Pay Before Class Start</option>
                         </select>
                       </td>
                     </tr>

@@ -16,9 +16,11 @@ const Events = () => {
   const fetchEventUsers = async () => {
     try {
       const response = await axios.get(`${API}/alleventregistrations`);
-      // console.log("event users",response.data);
+      // console.log("event users", response.data);
       setUsers(response.data);
-      const sortedUsers = response.data.sort((a, b) => b.totalCoins - a.totalCoins);
+      const sortedUsers = response.data.sort(
+        (a, b) => b.totalCoins - a.totalCoins
+      );
       setLeaderboard(sortedUsers);
     } catch (error) {
       console.error("There was an error fetching the event users", error);
@@ -50,7 +52,7 @@ const Events = () => {
       const response = await axios.post(`${API}/eventapplications`, {
         userId,
         eventId: event._id,
-        remarks:event.title
+        remarks: event.title,
       });
       toast.success("Applied Successfully!");
       fetchAppliedUsers();
@@ -60,7 +62,6 @@ const Events = () => {
     }
   };
 
-
   const fetchAppliedUsers = async () => {
     try {
       const response = await axios.get(`${API}/eventapplications`);
@@ -69,7 +70,6 @@ const Events = () => {
       console.error("Error fetching applied users:", error);
     }
   };
-  
 
   useEffect(() => {
     fetchEvent();
@@ -85,55 +85,65 @@ const Events = () => {
 
   const EventCard = ({ dets, status }) => {
     const appliedCount = Array.isArray(appliedUsers)
-      ? appliedUsers.filter((user) => user.eventId && user.eventId._id === dets._id).length
+      ? appliedUsers.filter(
+          (user) => user.eventId && user.eventId._id === dets._id
+        ).length
       : 0;
     const isAlreadyApplied = Array.isArray(appliedUsers)
       ? appliedUsers.some(
-          (user) => user.eventId && user.eventId._id === dets._id && user.userId &&  user.userId._id === userId
+          (user) =>
+            user.eventId &&
+            user.eventId._id === dets._id &&
+            user.userId &&
+            user.userId._id === userId
         )
       : false;
 
     return (
       <div className="p-[4px] mb-4 relative rounded-lg shadow-black shadow-md bg-[#080808]">
-         <span className={`absolute rounded-lg inset-0 bg-gradient-to-r ${status === "Ongoing" ? "animate-pulse" : null}  from-blue-500 to-purple-500 p-[2px] mask mask-out`}></span>
-         <span className="relative block bg-black w-full rounded-lg px-4 py-4">
-        <h2 className="text-xl font-bold text-white text-center mb-2">
-          {dets.title}
-        </h2>
-        <p className=" text-md text-center">
-          {new Date(dets.start).toLocaleString("en-US", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-          })}
-        </p>
-        <div className="mt-4 flex justify-between items-center">
-          <p className="text-gray-300 text-sm">
-            {appliedCount > 0 ? `${appliedCount} registered` : "0 registered"}
+        <span
+          className={`absolute rounded-lg inset-0 bg-gradient-to-r ${
+            status === "Ongoing" ? "animate-pulse" : null
+          }  from-blue-500 to-purple-500 p-[2px] mask mask-out`}
+        ></span>
+        <span className="relative block bg-black w-full rounded-lg px-4 py-4">
+          <h2 className="text-xl font-bold text-white text-center mb-2">
+            {dets.title}
+          </h2>
+          <p className=" text-md text-center">
+            {new Date(dets.start).toLocaleString("en-US", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            })}
           </p>
-          {status === "Completed" ? (
-          <p className="text-sm text-red-500">Quiz has been ended</p>
-        ) : isAlreadyApplied ? (
-          <button className=" text-red-500 rounded-md cursor-not-allowed opacity-75">
-            Already Applied
-          </button>
-        ) : (
-          <button
-            onClick={() => handleApply(dets)}
-            className="px-3 py-1 bg-gradient-to-r  from-blue-500 to-purple-500 text-white rounded-md transition-colors"
-          >
-            Apply Now
-          </button>
-        )}
-        </div>
+          <div className="mt-4 flex justify-between items-center">
+            <p className="text-gray-300 text-sm">
+              {appliedCount > 0 ? `${appliedCount} registered` : "0 registered"}
+            </p>
+            {status === "Completed" ? (
+              <p className="text-sm text-red-500">Quiz has been ended</p>
+            ) : isAlreadyApplied ? (
+              <button className=" text-red-500 rounded-md cursor-not-allowed opacity-75">
+                Already Applied
+              </button>
+            ) : (
+              <button
+                onClick={() => handleApply(dets)}
+                className="px-3 py-1 bg-gradient-to-r  from-blue-500 to-purple-500 text-white rounded-md transition-colors"
+              >
+                Apply Now
+              </button>
+            )}
+          </div>
         </span>
       </div>
     );
   };
-
+  const filteredLeaderboard = leaderboard.filter((user) => user.totalCoins > 0);
   return (
     <div className="eventheight  text-white">
       <Toaster position="top-center" reverseOrder={false} />
@@ -195,43 +205,69 @@ const Events = () => {
             Leaderboard
           </h2>
           <div className="space-y-4">
-            {leaderboard.length > 0 ? (
-              leaderboard.slice(0, 3).map((user, index) => (
-                <div
-                  key={index}
-                  className="relative p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full"
-                >
-                   <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
-                   <span className="relative block bg-black w-full rounded-full px-4 py-2">
-                     <div className="flex items-center justify-between">
-                     <div className="text-md font-medium flex item-center justify-center">
-                    {index + 1}. {user.name}
-                     </div>
-                    <span className="text-md text-yellow-400">
-                    Score: {user.totalCoins}
+            {filteredLeaderboard.length > 0 ? (
+              filteredLeaderboard.slice(0, 3).map((user, index) => {
+                const medals = ["🥇", "🥈", "🥉"];
+                return (
+                  <div
+                    key={index}
+                    className="relative p-[3px] drop-shadow-sm shadow-black shadow-lg bg-[#080808] rounded-full"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
+                    <span className="relative block bg-black w-full rounded-full px-2 py-2">
+                      <div className="flex items-center justify-between">
+                        <div className="text-md font-medium flex items-center gap-2 justify-center">
+                          <img
+                            src={user.profilePhoto || "default-avatar.png"}
+                            className="h-11 w-11 rounded-full"
+                            alt="User Avatar"
+                          />
+                          <span>
+                            {medals[index]}
+                            {user.name}
+                          </span>
+                        </div>
+                        <span className="text-md text-yellow-400">
+                          Score: {user.totalCoins}
+                        </span>
+                      </div>
                     </span>
-                     </div>
-                  </span>
-                </div>
-              ))
+                  </div>
+                );
+              })
             ) : (
-              <p className="text-center text-black">
-                No users on the leaderboard yet.
-              </p>
+              <div className="text-center text-black">
+                <p>Leaderboard is empty. Be the first to score!</p>
+              </div>
             )}
           </div>
-          <div className="relative mt-5 p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full">
-          <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
-          <span className="relative block bg-black w-full rounded-full px-4 py-2">
+          <div className="relative p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full">
+            <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
+            <span className="relative block bg-black w-full rounded-full px-2 py-2">
               <div className="flex items-center justify-between">
-               <span className="text-md">  Your Score :{" "}</span>
-             <span className="text-md text-yellow-400">
-             {leaderboard
-              .filter((user) => user.name === userName)
-              .map((user) => user.totalCoins)}
-             </span>
+                <div className="flex items-center gap-1 justify-center">
+                  {leaderboard
+                    .filter((user) => user.name === userName)
+                    .map((user) => (
+                      <img
+                        src={user.profilePhoto}
+                        className={`h-12 w-12 ${
+                          !user.profilePhoto
+                            ? "bg-gradient-to-r animate-pulse from-blue-500 to-purple-500"
+                            : ""
+                        } rounded-full`}
+                        alt=""
+                      />
+                    ))}
+                  <span className="text-md"> Your Score : </span>
+                </div>
+                <span className="text-md text-yellow-400">
+                  {leaderboard
+                    .filter((user) => user.name === userName)
+                    .map((user) => user.totalCoins)}
+                </span>
               </div>
-             </span>
+            </span>
           </div>
         </div>
       </div>
