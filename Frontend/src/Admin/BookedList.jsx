@@ -432,7 +432,6 @@ const BookedList = () => {
               type="date"
               name=""
               id=""
-              required
               min={minDate}
               max={maxDate}
             />

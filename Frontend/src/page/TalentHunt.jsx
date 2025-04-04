@@ -7,6 +7,8 @@ import axios from "axios";
 import API from "../API";
 import { motion } from "framer-motion";
 
+import quizpost from "../assets/quizpost.png";
+
 const TalentHunt = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -157,13 +159,7 @@ const TalentHunt = () => {
             the difference. Explore why people turn to this invaluable resource
             to unlock their potential.
           </p>
-          <button
-            data-aos="fade-up"
-            onClick={scrollToCourse}
-            className="border border-[#f15b29] rounded-md px-4 py-1"
-          >
-            Register Now
-          </button>
+         
         </div>
         <div className="users-color-container">
           <span className="item" style={{ "--i": 1 }}></span>
@@ -233,25 +229,11 @@ const TalentHunt = () => {
       </section>
 
       <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <h1
-            data-aos="fade-up"
-            className="font-bold mb-12 text-center gradient-text"
-          >
-            | Categories
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {category.map((category, index) => (
-              <div
-                data-aos="fade-up"
-                key={index}
-                className="bg-[#080808] shadow-md rounded-lg p-6 text-center"
-              >
-                <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                <p className="">{category.description}</p>
-              </div>
-            ))}
-          </div>
+        <div className="container mx-auto text-center">
+          <h1 data-aos="fade-up" className="font-bold text-center gradient-text" >| Categories </h1>
+          <img src={quizpost} alt="QuizComp" className="max-h-[600px] w-auto rounded-md my-[20px]" />
+          <button onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1"> Register Now
+          </button>
         </div>
       </section>
       <hr className=" opacity-10" />
