@@ -58,52 +58,6 @@ const CreateOperation = () => {
     }
   };
 
-  // const fetchRevenueDetails = async (operationName) => {
-  //   try {
-  //     setRevenueData(null);
-  //     setIsDialogVisible(true);
-  //     setSelectedOperationName(operationName);
-
-  //     const response = await axios.get(`${API}/databyopname`, {
-  //       params: { operationName },
-  //     });
-  //     const data = response.data;
-  //     const revenueByDay = {};
-  //     const revenueByMonth = {};
-  //     let totalRevenue = 0;
-  //     data.forEach((student) => {
-  //       const date = new Date(student.createdAt).toLocaleDateString("en-GB");
-  //       const month = new Date(student.createdAt).toLocaleString("default", {
-  //         month: "long",
-  //         year: "numeric",
-  //       });
-  //       const revenue = student.programPrice || 0;
-  //       const credited = (student.paidAmount || 0) - (student.defaultAmount || 0);
-  //       const pending = revenue - credited;
-  //       if (!revenueByDay[date]) {
-  //         revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
-  //       }
-  //       if (!revenueByMonth[month]) {
-  //         revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
-  //       }
-  //       revenueByDay[date].total += revenue;
-  //       revenueByDay[date].credited += credited;
-  //       revenueByDay[date].pending += pending;
-  //       revenueByMonth[month].total += revenue;
-  //       revenueByMonth[month].credited += credited;
-  //       revenueByMonth[month].pending += pending;
-  //       totalRevenue += revenue;
-  //     });
-  //     setRevenueData({
-  //       revenueByDay,
-  //       revenueByMonth,
-  //       totalRevenue,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error fetching operation revenue data:", error);
-  //   }
-  // };
-
   const fetchRevenueDetails = async (operationName) => {
     try {
       setRevenueData(null);
@@ -137,8 +91,7 @@ const CreateOperation = () => {
           year: "numeric",
         });
         const revenue = student.programPrice || 0;
-        const credited =
-          (student.paidAmount || 0) - (student.defaultAmount || 0);
+        const credited = (student.paidAmount || 0);
         const pending = revenue - credited;
 
         // Filter out data that is outside of the last 7 days
@@ -147,8 +100,10 @@ const CreateOperation = () => {
             revenueByDay[date] = { total: 0, credited: 0, pending: 0 };
           }
           revenueByDay[date].total += revenue;
-          revenueByDay[date].credited += credited;
           revenueByDay[date].pending += pending;
+          if (student.status === "fullPaid"|| (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared")) {
+            revenueByDay[date].credited += credited;
+        }
         }
 
         // Filter out data that is outside of the last 3 months
@@ -157,8 +112,10 @@ const CreateOperation = () => {
             revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
           }
           revenueByMonth[month].total += revenue;
-          revenueByMonth[month].credited += credited;
           revenueByMonth[month].pending += pending;
+          if (student.status === "fullPaid"|| (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared")) {
+          revenueByMonth[month].credited += credited;
+        }
         }
 
         totalRevenue += revenue;

@@ -41,10 +41,10 @@ const BDARevenueSheet = () => {
       month: "long",
       year: "numeric",
     });
-
+      console.log("Student Data:", student.remark);
     const revenue = student.programPrice || 0;
     const bookedAmount = student.paidAmount || 0;
-    const credited = student.status === "fullPaid" ? student.paidAmount || 0 : 0;
+    const credited = student.status === "fullPaid" || (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared") ? student.paidAmount || 0 : 0;
     const pending = revenue - credited;
 
     if (!revenueByDay[date]) {

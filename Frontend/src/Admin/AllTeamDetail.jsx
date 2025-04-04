@@ -43,7 +43,7 @@ const AllTeamDetail = () => {
         result[date].count++;
         result[date].total += item.programPrice || 0;
         result[date].booked += item.paidAmount || 0;
-        if(item.status === "fullPaid"){
+        if(item.status === "fullPaid"|| (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")){
           result[date].credited += item.paidAmount || 0;
         }
       }
@@ -92,7 +92,7 @@ const AllTeamDetail = () => {
     enrollments.forEach((item) => {
       const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-
       const status = item.status
-      // console.log(status)
+      // console.log("item remark", item.remark)
 
       // Filter only the last 3 months
       if ([currentMonth, prevMonth1, prevMonth2, prevMonth3].includes(month)) {
@@ -101,7 +101,7 @@ const AllTeamDetail = () => {
         }
         result[month].count++;
         result[month].total += item.programPrice || 0;
-        if (status === "fullPaid") {
+        if (status === "fullPaid"|| (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")) {
           result[month].credited += item.paidAmount || 0;
       }
       }
@@ -173,7 +173,7 @@ const AllTeamDetail = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5">No Data</td>
+                    <td colSpan="6">No Data</td>
                   </tr>
                 )}
               </tbody>

@@ -63,7 +63,7 @@ const TeamDetail = () => {
         result[date].count++;
         result[date].total += item.programPrice || 0;
         result[date].booked += item.paidAmount || 0;
-        if(item.status === "fullPaid"){
+        if(item.status === "fullPaid"|| (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")){
           result[date].credited += item.paidAmount || 0;
         }
       }
@@ -103,7 +103,7 @@ const TeamDetail = () => {
         }
         result[month].count++;
         result[month].total += item.programPrice || 0;
-        if(item.status === "fullPaid"){
+        if(item.status === "fullPaid" || (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")){
           result[month].credited += item.paidAmount || 0;
         }
       }

@@ -43,21 +43,25 @@ const RevenueSheet = () => {
       year: "numeric",
     });
     const revenue = student.programPrice || 0;
-    const credited = (student.paidAmount || 0) - (student.defaultAmount || 0);
+    const booked = student.paidAmount || 0;
+    const credited = student.status === "fullPaid" || (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared") ? student.paidAmount || 0 : 0;
     const pending = revenue - credited;
 
+
     if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, credited: 0, pending: 0, month };
+      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
     }
     if (!revenueByMonth[month]) {
-      revenueByMonth[month] = { total: 0, credited: 0, pending: 0 };
+      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 };
     }
 
     revenueByDay[date].total += revenue;
+    revenueByDay[date].booked += booked;
     revenueByDay[date].credited += credited;
     revenueByDay[date].pending += pending;
 
     revenueByMonth[month].total += revenue;
+    revenueByMonth[month].booked += booked;
     revenueByMonth[month].credited += credited;
     revenueByMonth[month].pending += pending;
 
@@ -108,6 +112,7 @@ const RevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
+                <th className="border p-3 text-left">Booked Amount</th>
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -117,6 +122,7 @@ const RevenueSheet = () => {
                 <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
+                  <td className="border p-3">₹{data.booked.toFixed(2)}</td>
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
                   <td className="border p-3">₹{data.pending.toFixed(2)}</td>
                 </tr>
@@ -134,6 +140,7 @@ const RevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
+                <th className="border p-3 text-left">Booked Amount</th>
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -143,6 +150,7 @@ const RevenueSheet = () => {
                 <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
+                  <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
                 </tr>
