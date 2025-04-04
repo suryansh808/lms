@@ -38,18 +38,22 @@ const AllTeamDetail = () => {
       // Filter only last 10 days
       if (itemDate >= last10Days && itemDate <= today) {
         if (!result[date]) {
-          result[date] = { count: 0, total: 0, credited: 0 };
+          result[date] = { count: 0, total: 0, credited: 0,booked:0 };
         }
         result[date].count++;
         result[date].total += item.programPrice || 0;
-        result[date].credited += item.paidAmount || 0;
+        result[date].booked += item.paidAmount || 0;
+        if(item.status === "fullPaid"){
+          result[date].credited += item.paidAmount || 0;
+        }
       }
     });
 
-    return Object.entries(result).map(([date, values]) => ({
+    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([date, values]) => ({
       date,
       count: values.count,
       total: values.total,
+      booked: values.booked,
       credited: values.credited,
     }));
   };
@@ -87,8 +91,8 @@ const AllTeamDetail = () => {
 
     enrollments.forEach((item) => {
       const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-
-    const status = item.status
-    // console.log(status)
+      const status = item.status
+      // console.log(status)
 
       // Filter only the last 3 months
       if ([currentMonth, prevMonth1, prevMonth2, prevMonth3].includes(month)) {
@@ -103,7 +107,7 @@ const AllTeamDetail = () => {
       }
     });
 
-    return Object.entries(result).map(([month, values]) => ({
+    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([month, values]) => ({
       month,
       count: values.count,
       total: values.total,
@@ -150,6 +154,7 @@ const AllTeamDetail = () => {
                   <th>Date</th>
                   <th>No of Booked</th>
                   <th>Total Revenue</th>
+                  <th>Booked</th>
                   <th>Credited</th>
                   <th>Pending</th>
                 </tr>
@@ -161,6 +166,7 @@ const AllTeamDetail = () => {
                       <td>{data.date}</td>
                       <td>{data.count}</td>
                       <td>₹ {data.total}</td>
+                      <td>₹ {data.booked}</td>
                       <td>₹ {data.credited}</td>
                       <td>₹ {data.total - data.credited} </td>
                     </tr>

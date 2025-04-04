@@ -202,7 +202,7 @@ const Events = () => {
         {/* Leaderboard */}
         <div className=" shadow-black pereventheigth rounded-lg p-4 shadow-lg">
           <h2 className="text-2xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
-            Leaderboard
+            Leaderboard Top 3
           </h2>
           <div className="space-y-4">
             {filteredLeaderboard.length > 0 ? (
@@ -227,7 +227,7 @@ const Events = () => {
                             {user.name}
                           </span>
                         </div>
-                        <span className="text-md text-yellow-400">
+                        <span className="text-md text-yellow-400 mr-2">
                           Score: {user.totalCoins}
                         </span>
                       </div>
@@ -241,7 +241,7 @@ const Events = () => {
               </div>
             )}
           </div>
-          <div className="relative p-[3px] drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full">
+          <div className="relative p-[3px] mt-5 drop-shadow-sm shadow-black shadow-lg  bg-[#080808] rounded-full">
             <span className="absolute inset-0 bg-gradient-to-r animate-pulse from-blue-500 to-purple-500 rounded-full p-[2px] mask mask-out"></span>
             <span className="relative block bg-black w-full rounded-full px-2 py-2">
               <div className="flex items-center justify-between">
@@ -261,7 +261,7 @@ const Events = () => {
                     ))}
                   <span className="text-md"> Your Score : </span>
                 </div>
-                <span className="text-md text-yellow-400">
+                <span className="text-md text-yellow-400 mr-2">
                   {leaderboard
                     .filter((user) => user.name === userName)
                     .map((user) => user.totalCoins)}

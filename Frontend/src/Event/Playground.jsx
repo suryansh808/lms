@@ -63,15 +63,15 @@ const Playground = () => {
     return () => clearInterval(timer);
   }, [state.isDialogOpen, state.timeLeft, state.quizCompleted]);
 
-  // useEffect(() => {
-  //   const handleVisibilityChange = () => {
-  //     if (document.hidden && state.isDialogOpen && !state.quizCompleted) {
-  //       storeScore(scoreRef.current);
-  //     }
-  //   }; 
-  //   document.addEventListener("visibilitychange", handleVisibilityChange);
-  //   return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  // }, [state.isDialogOpen, state.quizCompleted]);
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && state.isDialogOpen && !state.quizCompleted) {
+        storeScore(scoreRef.current);
+      }
+    }; 
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [state.isDialogOpen, state.quizCompleted]);
 
   const startQuiz = (quiz) => {
     setState((prev) => ({
@@ -148,8 +148,8 @@ const Playground = () => {
   };
 
   const nextQuestion = () => {
-    if (!state.selectedOption)
-      return toast.error("Please select an option before proceeding.");
+    // if (!state.selectedOption)
+    //   return toast.error("Please select an option before proceeding.");
 
     const currentQuestion =
       state.currentQuiz.questions[state.currentQuestionIndex];
