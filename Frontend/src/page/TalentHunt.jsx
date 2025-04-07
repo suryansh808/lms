@@ -16,6 +16,7 @@ const TalentHunt = () => {
     email: "",
     collegeName: "",
     collegeEmailId: "",
+    yearofstudy: "",
   });
 
   const handleChange = (e) => {
@@ -38,6 +39,7 @@ const TalentHunt = () => {
         email: "",
         collegeName: "",
         collegeEmailId: "",
+        yearofstudy: "",
       });
     } catch (error) {
       console.error("User Already Registed", error);
@@ -47,38 +49,7 @@ const TalentHunt = () => {
     }
   };
 
-  const category = [
-    {
-      name: "MERN Mastermind Challenge",
-      description:
-        "Showcase your ability to build dynamic, high-performance applications using the MERN stack (MongoDB, Express.js, React, Node.js).",
-    },
-    {
-      name: "UX/UI Design Excellence",
-      description:
-        "Compete to design intuitive and visually captivating user interfaces that elevate the digital experience.",
-    },
-    {
-      name: "Full-Stack Innovators Quest",
-      description:
-        "Develop end-to-end solutions with a full-stack approach, combining front-end and back-end technologies.",
-    },
-    {
-      name: "Digital Marketing Mavericks",
-      description:
-        "Create innovative digital marketing campaigns that drive engagement and measurable results across platforms.",
-    },
-    {
-      name: "Data Science Visionaries Challenge",
-      description:
-        "Apply data science techniques to uncover insights and solve complex real-world business problems.",
-    },
-    {
-      name: "Performance Marketing Prodigies",
-      description:
-        "Design high-performance marketing campaigns optimized for exceptional ROI and conversion rates.",
-    },
-  ];
+ 
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -342,6 +313,17 @@ const TalentHunt = () => {
                       className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none"
                       required
                     />
+                  </fieldset>
+                  <fieldset className="mb-4">
+                    <select name="yearofstudy" id="yearofstudy" value={formData.yearofstudy} onChange={handleChange}  className="w-full p-3 mt-2 text-black placeholder:text-[#00000096] border-b rounded-lg focus:outline-none">
+                      <option value="" disabled selected hidden> Year of Study</option>
+                      <option value="1st Year">1st Year</option>
+                      <option value="2nd Year">2nd Year</option>
+                      <option value="3rd Year">3rd Year</option>
+                      <option value="4th Year">4th Year</option>
+                      <option value="Post Graduation">Post Graduation</option>
+                      <option value="Passed Out">Passed Out</option>
+                    </select>
                   </fieldset>
                   <fieldset className="mb-2">
                     <button

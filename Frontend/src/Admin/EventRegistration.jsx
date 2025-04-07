@@ -163,6 +163,7 @@ const EventRegistration = () => {
                 <th>Phone</th>
                 <th>Email Id</th>
                 <th>Student College Mail Id</th>
+                <th>Year of Study</th>
                 <th>College Name</th>
                 <th>Total Coins</th>
                 <th>Action</th>
@@ -176,6 +177,7 @@ const EventRegistration = () => {
                   <td>{register.phone}</td>
                   <td>{register.email}</td>
                   <td>{register.collegeEmailId}</td>
+                  <td>{register.yearofstudy}</td>
                   <td>{register.collegeName}</td>
                   <td className='cursor-pointer' onClick={()=>handleDetails(register)}>{register.totalCoins}</td>
                   <td onClick={() => handleRedeemCoins(register._id)} className='cursor-pointer font-bold text-blue-700'> Redeem Coins</td>

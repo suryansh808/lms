@@ -174,6 +174,7 @@ router.get("/alleventregistrations", async (req, res) => {
           email: { $first: "$email" },
           profilePhoto: { $first: "$profilePhoto" },
           collegeName: { $first: "$collegeName" },
+          yearofstudy: { $first: "$yearofstudy" },
           collegeEmailId: { $first: "$collegeEmailId" },
           applicationData: { $first: "$applicationData" }, // Ensure all applications are stored as an array
           eventData: { $first: "$eventData" },

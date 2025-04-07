@@ -68,13 +68,13 @@ const RevenueSheet = () => {
     totalRevenue += revenue;
   });
 
-  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(a) - new Date(b));
+  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
   const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
   const filteredDailyRevenue = Object.entries(revenueByDay).filter(
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  months.sort((a, b) => new Date(a) - new Date(b));
+  // months.sort((a, b) => new Date(a) - new Date(b));
 
   let growthPercentage = null;
   if (months.length > 1) {

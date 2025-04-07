@@ -83,7 +83,11 @@ const EventDashBoard = () => {
 
           <i
             onClick={() => setActivePage("profile")}
-            className="fa fa-user text-xl cursor-pointer ease-linear hover:text-purple-700 transition-colors duration-300"
+            className={`fa fa-user text-xl mr-2 cursor-pointer ease-linear hover:text-purple-700 transition-colors duration-300 ${
+              activePage === "profile"
+                ? " text-purple-700 ease-linear duration-300 shadow-md"
+                : " hover:bg-gray-950"
+            }`}
             aria-hidden="true"
           />
         </div>
@@ -183,10 +187,10 @@ const EventDashBoard = () => {
                 <p className="mt-2 font-semibold">
                   Email:{" "}
                   <a
-                    href="mailto:info@krutanic.com"
+                    href="mailto:support@krutanic.com"
                     className="text-blue-600 underline"
                   >
-                    info@krutanic.com
+                    support@krutanic.com
                   </a>
                 </p>
               </div>
