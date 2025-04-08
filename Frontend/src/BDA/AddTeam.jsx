@@ -1,9 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 
-const CreateBDA = () => {
+const AddTeam = () => {
+ const bdaId = localStorage.getItem("bdaId");
+  const [bdaData, setBdaData] = useState(null);
+  const fetchBdaData = async () => {
+    try {
+      const response = await axios.get(`${API}/getbda`, { params: { bdaId } });
+      if (response.data.status === "Inactive") {
+        toast.error("Your account is inactive. Please contact the admin.");
+        setTimeout(() => {
+          localStorage.removeItem("bdaId");
+          localStorage.removeItem("bdaName");
+          localStorage.removeItem("bdaToken");
+          localStorage.removeItem("sessionStartTime");
+          navigate("/TeamLogin");
+          window.location.reload();
+        }, 1500);
+      } else {
+        setBdaData(response.data);
+      }
+    } catch (err) {
+      console.log("Failed to fetch bda data");
+    }
+  };
+  useEffect(() => {
+    fetchBdaData();
+  }, [bdaId]);
+
   const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
@@ -47,11 +74,13 @@ const CreateBDA = () => {
       console.error("There was an error submitting the bda:", error);
     }
   };
-  
+      
+  const navigate = useNavigate();
   const fetchBda = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
+      // console.log(response.data);
       setBda(response.data);
     } catch (error) {
       console.error("There was an error fetching bda:", error);
@@ -84,32 +113,33 @@ const CreateBDA = () => {
     }));
   };
 
-  const handleDelete = (_id) => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to delete the BDA account?"
-    );
-    if (isConfirmed) {
-      axios
-        .delete(`${API}/deletebda/${_id}`)
-        .then((response) => {
-          fetchBda();
-        })
-        .catch((error) => {
-          console.error("There was an error deleting the bda:", error);
-        });
-    }
-  };
-  const handleEdit = (bdaId) => {
-    setFormData({
-      fullname: bdaId.fullname,
-      email: bdaId.email,
-      password: bdaId.password,
-      team: bdaId.team,
-      designation: bdaId.designation,
-    });
-    setEditingBdaId(bdaId._id);
-    setiscourseFormVisible(true);
-  };
+  // const handleDelete = (_id) => {
+  //   const isConfirmed = window.confirm(
+  //     "Are you sure you want to delete the BDA account?"
+  //   );
+  //   if (isConfirmed) {
+  //     axios
+  //       .delete(`${API}/deletebda/${_id}`)
+  //       .then((response) => {
+  //         fetchBda();
+  //       })
+  //       .catch((error) => {
+  //         console.error("There was an error deleting the bda:", error);
+  //       });
+  //   }
+  // };
+
+  // const handleEdit = (bdaId) => {
+  //   setFormData({
+  //     fullname: bdaId.fullname,
+  //     email: bdaId.email,
+  //     password: bdaId.password,
+  //     team: bdaId.team,
+  //     designation: bdaId.designation,
+  //   });
+  //   setEditingBdaId(bdaId._id);
+  //   setiscourseFormVisible(true);
+  // };
 
   const handleSendEmail = async (value) => {
     const emailData = {
@@ -140,25 +170,7 @@ const CreateBDA = () => {
     }
     fetchBda();
   };
- 
-  const handleChangeStatus = async (bdaId, status) => {
-    const isConfirmed = window.confirm(
-      `Are you sure you want to ${status} this account to add team member?`
-    );
-    if (isConfirmed) {
-      try {
-        const response = await axios.put(`${API}/updatestatus/${bdaId}`, { status });
-        if (response.status === 200) {
-          toast.success(`Account ${status} successfully!`);
-          fetchBda();
-        } else {
-          toast.error("Failed to update account status.");
-        }
-      } catch (error) {
-        toast.error("An error occurred while updating the status.");
-      }
-    }
-  }
+
 
   return (
     <div id="AdminAddCourse" >
@@ -240,8 +252,7 @@ const CreateBDA = () => {
                 <th>Designation</th>
                 <th>Team</th>
                 <th>Password</th>
-                <th>Action</th>
-                <th>Add Team Active</th>
+                {/* <th>Action</th> */}
                 <th>Send Login Credentials</th>
               </tr>
             </thead>
@@ -254,19 +265,10 @@ const CreateBDA = () => {
                   <td>{bda.designation}</td>
                   <td>{bda.team}</td>
                   <td>{bda.password}</td>
-                  <td>
+                  {/* <td>
                     <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
-                  </td>
-                  <td>
-                    <div className="cursor-pointer">
-                      {bda.status === "Active" ? (
-                        <i onClick={()=> handleChangeStatus(bda._id , "Inactive")} className="fa fa-check text-green-900"></i>
-                      ) : (
-                        <i onClick={()=> handleChangeStatus(bda._id , "Active")} className="fa fa-times text-red-600"></i>
-                      )}
-                    </div>
-                  </td>
+                  </td> */}
                   <td>
                     <div
                       className=" cursor-pointer"
@@ -290,4 +292,4 @@ const CreateBDA = () => {
   );
 };
 
-export default CreateBDA;
+export default AddTeam;

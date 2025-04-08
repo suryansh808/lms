@@ -8,6 +8,7 @@ const CreateBDA = new mongoose.Schema({
     designation: { type: String},
     otp: { type: String },
     mailSended : {type: Boolean , default: false},
+    status: { type: String , default: "Inactive"},
   });
   
   const BDA = mongoose.model("BDA", CreateBDA);

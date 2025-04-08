@@ -4,7 +4,7 @@ import logo from "../assets/LOGO3.png";
 import axios from "axios";
 import API from "../API";
 
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 const BDAHeader = () => {
   const [isMobileVisible, setisMobileVisible] = useState(true);
@@ -34,18 +34,18 @@ const BDAHeader = () => {
   // }, []);
 
   const handleLogout = () => {
-    toast.success("Logged Out" , {
+    toast.success("Logged Out", {
       style: {
-        border: '1px solid #f15b29',
-        padding: '16px',
-        color: '#ffffff',
-        background: '#1d1e20',
+        border: "1px solid #f15b29",
+        padding: "16px",
+        color: "#ffffff",
+        background: "#1d1e20",
       },
       iconTheme: {
-        primary: '#f15b29',
-        secondary: '#ffffff',
+        primary: "#f15b29",
+        secondary: "#ffffff",
       },
-    })
+    });
     setTimeout(() => {
       localStorage.removeItem("bdaId");
       localStorage.removeItem("bdaName");
@@ -96,9 +96,9 @@ const BDAHeader = () => {
 
   return (
     <div id="TeamHeader">
-       <Toaster position="top-center" reverseOrder={false}/>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="navbar">
-        <div> 
+        <div>
           <Link to="/">
             <img src={logo} alt="Logo" />
           </Link>
@@ -110,7 +110,7 @@ const BDAHeader = () => {
       {isMobileVisible && (
         <div className="sidebar">
           <div className="detail">
-           {bdaData ? (
+            {bdaData ? (
               <>
                 <h2>{bdaData.fullname}</h2>
                 <h3>{bdaData.email}</h3>
@@ -121,21 +121,50 @@ const BDAHeader = () => {
               <p>Loading...</p>
             )}
           </div>
-          <Link to="/Home"><i class="fa fa-dashboard"></i> Home</Link>
-          <Link to="/CompanyLeads"><i class="fa fa-tags"></i> Company Leads</Link>
-          <Link to="/OnBoarding"><i class="fa fa-edit"></i> OnBoarding Form</Link>
-          <Link to="/Booked"><i class="fa fa-calendar-o"></i> Booked Payment</Link>
-          <Link to="/FullPaid"><i class="fa fa-calendar-check-o"></i> Full Payment</Link>
-          <Link to="/Default"><i class="fa fa-calendar-times-o"></i> Default Payment</Link>
-          <Link to="/AddUser"><i class="	fa fa-book"></i> Add Name/Email</Link>
-          <Link to="/Reference"><i class="fa fa-bell"></i> Your Reference</Link> 
-          {["LEADER", "MANAGER"].includes(bdaData?.designation) &&  (
+          <Link to="/Home">
+            <i class="fa fa-dashboard"></i> Home
+          </Link>
+          <Link to="/CompanyLeads">
+            <i class="fa fa-tags"></i> Company Leads
+          </Link>
+          <Link to="/OnBoarding">
+            <i class="fa fa-edit"></i> OnBoarding Form
+          </Link>
+          <Link to="/Booked">
+            <i class="fa fa-calendar-o"></i> Booked Payment
+          </Link>
+          <Link to="/FullPaid">
+            <i class="fa fa-calendar-check-o"></i> Full Payment
+          </Link>
+          <Link to="/Default">
+            <i class="fa fa-calendar-times-o"></i> Default Payment
+          </Link>
+          <Link to="/AddUser">
+            <i class="	fa fa-book"></i> Add Name/Email
+          </Link>
+          <Link to="/Reference">
+            <i class="fa fa-bell"></i> Your Reference
+          </Link>
+          {["LEADER", "MANAGER"].includes(bdaData?.designation) && (
             <>
-              <Link to="/TeamDetail"><i class="fa fa-users"></i> Team</Link>
+              <Link to="/TeamDetail">
+                <i class="fa fa-users"></i> Team
+              </Link>
             </>
           )}
-           <Link to="/BDARevenueSheet"><i class="fa fa-money"></i> Revenue</Link>
-          <button onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</button>
+          {bdaData?.designation === "MANAGER" &&
+            bdaData?.status === "Active" && (
+              <Link to="/AddTeam">
+                <i class="fa fa-user"></i> Add Team
+              </Link>
+            )}
+
+          <Link to="/BDARevenueSheet">
+            <i class="fa fa-money"></i> Revenue
+          </Link>
+          <button onClick={handleLogout}>
+            <i className="fa fa-sign-out"></i> Logout
+          </button>
         </div>
       )}
     </div>
