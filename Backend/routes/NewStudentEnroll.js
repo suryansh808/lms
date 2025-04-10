@@ -337,7 +337,7 @@ router.get("/bda-with-enrolls", async (req, res) => {
     const bdaWithEnrolls = await CreateBDA.aggregate([
       {
         $lookup: {
-          from: "newenrolls", // Collection name should match your MongoDB collection
+          from: "newenrolls",
           localField: "fullname",
           foreignField: "counselor",
           as: "enrollments",
