@@ -9,7 +9,7 @@ const TeamDetail = () => {
   const [allData, setAllData] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
   const [selectedBda, setSelectedBda] = useState(null);
-
+  const [getteamName, setGetTeamName] = useState([]);
   const [dailyRevenue, setDailyRevenue] = useState([]);
   const [monthlyRevenue, setMonthlyRevenue] = useState([]);
 
@@ -20,7 +20,9 @@ const TeamDetail = () => {
         return;
       }
       try {
-        const response = await axios.get(`${API}/getbda`, { params: { bdaId } });
+        const response = await axios.get(`${API}/getbda`, {
+          params: { bdaId },
+        });
         setBdaData(response.data);
         setSelectedTeam(response.data.team);
       } catch (err) {
@@ -40,8 +42,18 @@ const TeamDetail = () => {
     }
   };
 
+  const fetchTeamname = async () => {
+    try {
+      const response = await axios.get(`${API}/getteamname`);
+      setGetTeamName(response.data);
+    } catch (error) {
+      console.error("There was an error fetching teamname:", error);
+    }
+  };
+
   useEffect(() => {
     fetchAllData();
+    fetchTeamname();
   }, []);
 
   // Function to group enrollments by date (last 7 days only)
@@ -58,26 +70,31 @@ const TeamDetail = () => {
       // Filter only last 10 days
       if (itemDate >= last10Days && itemDate <= today) {
         if (!result[date]) {
-          result[date] = { count: 0, total: 0, credited: 0 , booked:0 };
+          result[date] = { count: 0, total: 0, credited: 0, booked: 0 };
         }
         result[date].count++;
         result[date].total += item.programPrice || 0;
         result[date].booked += item.paidAmount || 0;
-        if(item.status === "fullPaid"|| (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")){
+        if (
+          item.status === "fullPaid" ||
+          (Array.isArray(item.remark) &&
+            item.remark[item.remark.length - 1] === "Half_Cleared")
+        ) {
           result[date].credited += item.paidAmount || 0;
         }
       }
     });
 
-    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([date, values]) => ({
-      date,
-      count: values.count,
-      total: values.total,
-      booked: values.booked,
-      credited: values.credited,
-    }));
+    return Object.entries(result)
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      .map(([date, values]) => ({
+        date,
+        count: values.count,
+        total: values.total,
+        booked: values.booked,
+        credited: values.credited,
+      }));
   };
-
 
   // Function to group enrollments by month (current and previous month only)
   const groupByMonth = (enrollments) => {
@@ -87,12 +104,12 @@ const TeamDetail = () => {
       const newDate = new Date(date);
       newDate.setMonth(newDate.getMonth() - offset);
       return newDate.toISOString().slice(0, 7);
-  };
+    };
 
-  const currentMonth = getMonth(today, 0);
-  const prevMonth1 = getMonth(today, 1);
-  const prevMonth2 = getMonth(today, 2);
-  const prevMonth3 = getMonth(today, 3);
+    const currentMonth = getMonth(today, 0);
+    const prevMonth1 = getMonth(today, 1);
+    const prevMonth2 = getMonth(today, 2);
+    const prevMonth3 = getMonth(today, 3);
 
     enrollments.forEach((item) => {
       const month = new Date(item.createdAt).toISOString().slice(0, 7); // Extract YYYY-MM
@@ -103,45 +120,54 @@ const TeamDetail = () => {
         }
         result[month].count++;
         result[month].total += item.programPrice || 0;
-        if(item.status === "fullPaid" || (Array.isArray(item.remark) && item.remark[item.remark.length - 1] === "Half_Cleared")){
+        if (
+          item.status === "fullPaid" ||
+          (Array.isArray(item.remark) &&
+            item.remark[item.remark.length - 1] === "Half_Cleared")
+        ) {
           result[month].credited += item.paidAmount || 0;
         }
       }
     });
 
-    return Object.entries(result).sort((a, b) => b[0].localeCompare(a[0])).map(([month, values]) => ({
-      month,
-      count: values.count,
-      total: values.total,
-      credited: values.credited,
-    }));
+    return Object.entries(result)
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      .map(([month, values]) => ({
+        month,
+        count: values.count,
+        total: values.total,
+        credited: values.credited,
+      }));
   };
-
-
-
   const selectedBdaDetail = (bda) => {
     setSelectedBda(bda);
     setDetailVisible(true);
     setDailyRevenue(groupByDate(bda.enrollments));
     setMonthlyRevenue(groupByMonth(bda.enrollments));
   };
-
   const resetData = () => {
     setSelectedBda(null);
     setDetailVisible(false);
   };
 
   const filteredData = allData.filter((bda) => bda.team === selectedTeam);
+  console.log(filteredData);
 
   return (
     <div id="AdminAddCourse">
       {/* selected bda detail */}
       {detailVisible && selectedBda && (
-        <div className="form" >
-          <div className="p-2 rounded-lg mx-auto bg-white w-fit" >
+        <div className="form">
+          <div className="p-2 rounded-lg mx-auto bg-white w-fit">
             <div className="flex justify-between">
               <strong>{selectedBda.fullname}</strong>
-              <strong onClick={resetData} className=" text-red-500 " style={{ cursor: 'pointer' }}>EXIT</strong>
+              <strong
+                onClick={resetData}
+                className=" text-red-500 "
+                style={{ cursor: "pointer" }}
+              >
+                EXIT
+              </strong>
             </div>
             <u>Daily Revenue</u>
             <table className="bdarevenuetable">
@@ -168,13 +194,15 @@ const TeamDetail = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="5">No Data</td></tr>
+                  <tr>
+                    <td colSpan="5">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
 
             <u>Monthly Revenue</u>
-            <table className="bdarevenuetable" >
+            <table className="bdarevenuetable">
               <thead>
                 <tr>
                   <th>Month</th>
@@ -196,12 +224,14 @@ const TeamDetail = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="5">No Data</td></tr>
+                  <tr>
+                    <td colSpan="5">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
             <u>ALL Revenue</u>
-            <table className="bdarevenuetable" >
+            <table className="bdarevenuetable">
               <thead>
                 <tr>
                   <th>No of Booked</th>
@@ -214,15 +244,36 @@ const TeamDetail = () => {
                 {selectedBda.enrollments.length > 0 ? (
                   <tr>
                     <td>{selectedBda.enrollments.length}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0)}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0)}</td>
-                    <td>₹ {selectedBda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0) -
-                      selectedBda.enrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0)}
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.programPrice || 0),
+                        0
+                      )}
+                    </td>
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.paidAmount || 0),
+                        0
+                      )}
+                    </td>
+                    <td>
+                      ₹{" "}
+                      {selectedBda.enrollments.reduce(
+                        (sum, item) => sum + (item.programPrice || 0),
+                        0
+                      ) -
+                        selectedBda.enrollments.reduce(
+                          (sum, item) => sum + (item.paidAmount || 0),
+                          0
+                        )}
                     </td>
                   </tr>
-
                 ) : (
-                  <tr><td colSpan="4">No Data</td></tr>
+                  <tr>
+                    <td colSpan="4">No Data</td>
+                  </tr>
                 )}
               </tbody>
             </table>
@@ -234,11 +285,20 @@ const TeamDetail = () => {
         <div className="mb-2">
           <h2>{selectedTeam} </h2>
           {bdaData && bdaData.designation === "MANAGER" && (
-            <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
-              {bdaData && bdaData.team && <option value={bdaData.team}>Your Team</option>}
-              <option value="BEAST">BEAST</option>
-              <option value="TITAN">TITAN</option>
-              <option value="WARRIOR">WARRIOR</option>
+            <select
+              value={selectedTeam}
+              onChange={(e) => setSelectedTeam(e.target.value)}
+            >
+              {bdaData && bdaData.team && (
+                <option value={bdaData.team}>Your Team</option>
+              )}
+              {getteamName.map((team, index) => {
+                return (
+                  <option key={index} value={team.teamname}>
+                    {team.teamname}
+                  </option>
+                );
+              })}
             </select>
           )}
         </div>
@@ -259,17 +319,97 @@ const TeamDetail = () => {
             {filteredData.map((bda, index) => (
               <tr key={index} className="hover:bg-slate-100">
                 <td>{index + 1}</td>
-                <td style={{ color: 'blue', cursor: 'pointer' }} onClick={() => selectedBdaDetail(bda)} >{bda.fullname}</td>
+                <td
+                  style={{ color: "blue", cursor: "pointer" }}
+                  onClick={() => selectedBdaDetail(bda)}
+                >
+                  {bda.fullname}
+                </td>
                 <td>{bda.email}</td>
                 <td>{bda.designation}</td>
                 <td>{bda.team}</td>
                 <td>{bda.enrollments.length}</td>
-                <td>{bda.enrollments.filter((item) => item.status === "fullPaid").length}</td>
-                <td>{bda.enrollments.filter((item) => item.status === "default").length}</td>
+                <td>
+                  {
+                    bda.enrollments.filter((item) => item.status === "fullPaid")
+                      .length
+                  }
+                </td>
+                <td>
+                  {
+                    bda.enrollments.filter((item) => item.status === "default")
+                      .length
+                  }
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div>
+          {selectedTeam &&
+            (() => {
+              const team = getteamName.find((t) => t.teamname === selectedTeam);
+              const latestTargetObj = team?.target?.[team.target.length - 1];
+              if (!latestTargetObj || !latestTargetObj.targetValue) {
+                return (
+                  <div
+                    style={{
+                      marginTop: "1rem",
+                      padding: "10px",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    <h3>Target Summary - {selectedTeam}</h3>
+                    <p>
+                      <strong>Target:</strong> Not assigned yet
+                    </p>
+                  </div>
+                );
+              }
+              const lastTarget = parseInt(latestTargetObj.targetValue, 10);
+              const currentMonth = new Date().toISOString().slice(0, 7);
+              const enrollmentsThisMonth = filteredData
+                .flatMap((bda) => bda.enrollments)
+                .filter((enroll) => {
+                  const enrollMonth = new Date(enroll.createdAt)
+                    .toISOString()
+                    .slice(0, 7);
+                  const isHalfCleared =
+                    Array.isArray(enroll.remark) &&
+                    enroll.remark[enroll.remark.length - 1] === "Half_Cleared";
+                  return (
+                    enrollMonth === currentMonth &&
+                    (enroll.status === "fullPaid" || isHalfCleared)
+                  );
+                });
+              const achievedTarget = enrollmentsThisMonth.reduce(
+                (sum, enroll) => sum + (enroll.paidAmount || 0),
+                0
+              );
+              const pendingTarget = lastTarget - achievedTarget;
+              return (
+                <div
+                  style={{
+                    marginTop: "1rem",
+                    padding: "10px",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  <h3>Target Summary - {selectedTeam}</h3>
+                  <p>
+                    <strong>🎯Target:</strong> ₹ {lastTarget.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>✅Achieved:</strong> ₹{" "}
+                    {achievedTarget.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>⏳Pending:</strong> ₹ {pendingTarget.toLocaleString()}
+                  </p>
+                </div>
+              );
+            })()}
+        </div>
       </div>
     </div>
   );

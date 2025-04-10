@@ -50,6 +50,7 @@ import AddEvent from "./Admin/AddEvent";
 import EventRegistration from "./Admin/EventRegistration";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
 import HalfPayment from "./Admin/HalfPayment";
+import Target from "./Admin/Target";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -75,6 +76,7 @@ import BDARevenueSheet from "./BDA/BDARevenueSheet";
 import Reference from "./BDA/Reference";
 import CompanyLeads from "./BDA/CompanyLeads";
 import AddTeam from "./BDA/AddTeam";
+import AssignTarget from "./BDA/AssignTarget";
 
 // User Student
 import UserHeader from "./User/UserHeader";
@@ -104,6 +106,8 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 //event
 import EventDashBoard from "./Event/EventDashBoard";
+
+
 
 
 
@@ -180,7 +184,8 @@ const AppContent = () => {
     "/allteamdetail",
     "/masterclasses",
     "/addevent",
-    "/eventregistration"
+    "/eventregistration",
+    "/target",
   ];
 
   const operationheaderPaths = [
@@ -203,6 +208,7 @@ const AppContent = () => {
     "/reference",
     "/companyleads",
     "/addteam",
+    "/assigntarget",
   ];
 
   const userheaderPaths = [
@@ -223,12 +229,8 @@ const AppContent = () => {
    
   ];
 
-
-
-
   const lmsFooterPaths = ['/dashboard','/enrolledcourses','/learning','/setting','/jobboard','/myjob'];
 
-  
   const isAuthenticated = () => !!localStorage.getItem("token");
   const isAuthenticatedBda = () => !!localStorage.getItem("bdaToken");
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
@@ -237,7 +239,6 @@ const AppContent = () => {
   const isAuthenticatedEventUser = () => !!localStorage.getItem("eventToken");
 
   return (
-
     <div>
       <SmoothScroll />
       <ScrollToTop />
@@ -301,6 +302,7 @@ const AppContent = () => {
         <Route path="/MasterClasses" element={isAuthenticatedAdmin() ? (<MasterClasses />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/AddEvent" element={isAuthenticatedAdmin() ? (<AddEvent />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/EventRegistration" element={isAuthenticatedAdmin() ? (<EventRegistration />) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/Target" element={isAuthenticatedAdmin() ? (<Target/>) : (<Navigate to="/AdminLogin" />)}/>
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
@@ -327,6 +329,7 @@ const AppContent = () => {
           <Route path="/Reference" element={isAuthenticatedBda() ?<Reference/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/CompanyLeads" element={isAuthenticatedBda() ?<CompanyLeads/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/AddTeam" element={isAuthenticatedBda() ?<AddTeam/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/AssignTarget" element={isAuthenticatedBda() ?<AssignTarget/> : <Navigate to="/TeamLogin"/> }/>
         {/* bda panel ends */}
 
         {/* User Panel */}

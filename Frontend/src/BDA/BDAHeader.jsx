@@ -116,6 +116,8 @@ const BDAHeader = () => {
                 <h3>{bdaData.email}</h3>
                 <h2>{bdaData.designation}</h2>
                 <h3>{bdaData.team}</h3>
+                {/* <h3 className="">This Month Target:{' '}{bdaData.target.length > 0 ? (<p>₹{bdaData.target[bdaData.target.length - 1].targetValue}</p>) : (<p>No target assigned</p>)}</h3> */}
+
               </>
             ) : (
               <p>Loading...</p>
@@ -127,6 +129,13 @@ const BDAHeader = () => {
           <Link to="/CompanyLeads">
             <i class="fa fa-tags"></i> Company Leads
           </Link>
+          {["LEADER", "MANAGER"].includes(bdaData?.designation) && (
+            <>
+              <Link to="/AssignTarget">
+              <i className="fa fa-bullseye"></i> Assign Target
+              </Link>
+            </>
+          )}
           <Link to="/OnBoarding">
             <i class="fa fa-edit"></i> OnBoarding Form
           </Link>

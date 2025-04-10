@@ -3,8 +3,9 @@ const router = express.Router();
 const { sendEmail } = require("../controllers/emailController");
 const jwt = require("jsonwebtoken");
 const CreateBDA = require("../models/CreateBDA");
+const TeamName = require("../models/TeamName");
 const TransactionId = require("../models/AddTransactionId");
-const crypto = require('crypto'); 
+const crypto = require('crypto');
 
 //post to create a new bda account
 router.post("/createbda", async (req, res) => {
@@ -63,6 +64,7 @@ router.put("/updatebda/:id", async (req, res) => {
   }
 });
 
+//put request to update the bda status
 router.put("/updatestatus/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -81,6 +83,25 @@ router.put("/updatestatus/:id", async (req, res) => {
   }
 });
 
+//put request to asign a target to all bda accounts
+router.post("/assigntarget/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { target } = req.body;
+    const updatedBDA = await CreateBDA.findByIdAndUpdate(
+      id,
+      { $push: { target } },
+      { new: true }
+    );
+    if (!updatedBDA) {
+      return res.status(404).json({ error: "BDA not found" });
+    }
+    res.status(200).json(updatedBDA);
+  } catch (error) {
+    res.status(400).json({ error: "Error updating bda" });
+  }
+});
+
 //delete request to delete the bda account
 router.delete("/deletebda/:id", async (req, res) => {
   try {
@@ -94,6 +115,25 @@ router.delete("/deletebda/:id", async (req, res) => {
     res.status(500).json({ error: "Error deleting bda" });
   }
 });
+
+//delete request to delete the target 
+router.put("/deletetarget/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { target } = req.body;
+    const updatedBDA = await CreateBDA.findByIdAndUpdate(
+      id,
+      { $pull: { target: target } },
+      { new: true }
+      );
+    if (!updatedBDA) {
+      return res.status(404).json({ error: "BDA not found" });
+      }
+      res.status(200).json(updatedBDA);
+    } catch (error) {
+      res.status(400).json({ error: "Error deleting target" });
+      }
+  });
 
 
 //Send OTP to BDA Email
@@ -245,6 +285,86 @@ router.get("/gettransactionwithname", async (req, res) => {
 }
 );
 
+//add team name from create bda page 
+router.post("/addteamname", async (req, res) => {
+  const { teamname } = req.body;
+  try {
+    const newTeam = new TeamName({
+      teamname,
+    });
+    await newTeam.save();
+    res.status(200).json(newTeam);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// GET request to retrieve all team names
+router.get("/getteamname", async (req, res) => {
+  try {
+    const teamname = await TeamName.find();
+    res.status(200).json(teamname);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// post request to assign target to team
+router.post("/targetassigntoteam", async (req, res) => {
+  try {
+    const { teamId, targetValue, currentMonth } = req.body;
+
+    if (!teamId || !targetValue || !currentMonth) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const newTarget = {
+      currentMonth,
+      targetValue,
+    };
+
+    const updatedTeam = await TeamName.findByIdAndUpdate(
+      teamId,
+      { $push: { target: newTarget } },
+      { new: true }
+    );
+
+    if (!updatedTeam) {
+      return res.status(404).json({ error: "Team not found" });
+    }
+
+    res.status(200).json(updatedTeam);
+  } catch (error) {
+    console.error("Error updating team target:", error);
+    res.status(500).json({ error: "Server error while assigning target" });
+  }
+});
+
+//delete team last index target 
+router.delete("/delete-target", async (req, res) => {
+  try {
+    const { teamId, targetId } = req.body;
+
+    if (!teamId || !targetId) {
+      return res.status(400).json({ error: "Missing teamId or targetId" });
+    }
+
+    const updatedTeam = await TeamName.findByIdAndUpdate(
+      teamId,
+      { $pull: { target: { _id: targetId } } }, // precise pull
+      { new: true }
+    );
+
+    if (!updatedTeam) {
+      return res.status(404).json({ error: "Team not found" });
+    }
+
+    res.status(200).json(updatedTeam);
+  } catch (error) {
+    console.error("Error deleting target:", error);
+    res.status(500).json({ error: "Internal server error while deleting target" });
+  }
+});
 
 
 

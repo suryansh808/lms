@@ -9,6 +9,7 @@ const CreateBDA = new mongoose.Schema({
     otp: { type: String },
     mailSended : {type: Boolean , default: false},
     status: { type: String , default: "Inactive"},
+    target:[{ currentMonth: { type: String }, targetValue: { type: String } }],
   });
   
   const BDA = mongoose.model("BDA", CreateBDA);

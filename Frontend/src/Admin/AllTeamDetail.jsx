@@ -10,6 +10,7 @@ const AllTeamDetail = () => {
 
   const [dailyRevenue, setDailyRevenue] = useState([]);
   const [monthlyRevenue, setMonthlyRevenue] = useState([]);
+   const [getteamName, setGetTeamName] = useState([]);
 
   const fetchAllData = async () => {
     try {
@@ -20,8 +21,18 @@ const AllTeamDetail = () => {
     }
   };
 
+  const fetchTeamname = async () => {
+    try {
+      const response = await axios.get(`${API}/getteamname`);
+      setGetTeamName(response.data);
+    } catch (error) {
+      console.error("There was an error fetching teamname:", error);
+    } 
+  };
+
   useEffect(() => {
     fetchAllData();
+    fetchTeamname();
   }, []);
 
   // Function to group enrollments by date (last 7 days only)
@@ -312,11 +323,7 @@ const AllTeamDetail = () => {
             onChange={(e) => setSelectedTeam(e.target.value)}
           >
             <option value="">All Team</option>
-            <option value="BEAST">BEAST</option>
-            <option value="GLADIATOR">GLADIATOR</option>
-            <option value="TITAN">TITAN</option>
-            <option value="WARRIOR">WARRIOR</option>
-            <option value="NO TEAM">NO TEAM</option>
+             {getteamName.map((team, index) => { return(  <option key={index} value={team.teamname}>{team.teamname}</option>)})}
           </select>
         </div>
         <table border="1">
@@ -362,6 +369,71 @@ const AllTeamDetail = () => {
             ))}
           </tbody>
         </table>
+        <div>
+        {selectedTeam &&
+            (() => {
+              const team = getteamName.find((t) => t.teamname === selectedTeam);
+              const latestTargetObj = team?.target?.[team.target.length - 1];
+              if (!latestTargetObj || !latestTargetObj.targetValue) {
+                return (
+                  <div
+                    style={{
+                      marginTop: "1rem",
+                      padding: "10px",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    <h3>Target Summary - {selectedTeam}</h3>
+                    <p>
+                      <strong>Target:</strong> Not assigned yet
+                    </p>
+                  </div>
+                );
+              }
+              const lastTarget = parseInt(latestTargetObj.targetValue, 10);
+              const currentMonth = new Date().toISOString().slice(0, 7);
+              const enrollmentsThisMonth = filteredData
+                .flatMap((bda) => bda.enrollments)
+                .filter((enroll) => {
+                  const enrollMonth = new Date(enroll.createdAt)
+                    .toISOString()
+                    .slice(0, 7);
+                  const isHalfCleared =
+                    Array.isArray(enroll.remark) &&
+                    enroll.remark[enroll.remark.length - 1] === "Half_Cleared";
+                  return (
+                    enrollMonth === currentMonth &&
+                    (enroll.status === "fullPaid" || isHalfCleared)
+                  );
+                });
+              const achievedTarget = enrollmentsThisMonth.reduce(
+                (sum, enroll) => sum + (enroll.paidAmount || 0),
+                0
+              );
+              const pendingTarget = lastTarget - achievedTarget;
+              return (
+                <div
+                  style={{
+                    marginTop: "1rem",
+                    padding: "10px",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  <h3>Target Summary - {selectedTeam}</h3>
+                  <p>
+                    <strong>🎯Target:</strong> ₹ {lastTarget.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>✅Achieved:</strong> ₹{" "}
+                    {achievedTarget.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>⏳Pending:</strong> ₹ {pendingTarget.toLocaleString()}
+                  </p>
+                </div>
+              );
+            })()}
+        </div>
       </div>
     </div>
   );

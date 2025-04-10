@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Pie, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -12,7 +12,7 @@ import {
   LineElement,
 } from "chart.js";
 import API from "../API";
-import { IoHomeSharp } from "react-icons/io5";
+
 
 ChartJS.register(
   ArcElement,
@@ -26,9 +26,11 @@ ChartJS.register(
 
 const Home = () => {
   const [newStudent, setNewStudent] = useState([]);
-
+  const [bda, setBda] = useState([]);
+  const bdaName = localStorage.getItem("bdaName");
+  const today = new Date();
+  const currentMonth = today.toISOString().slice(0, 7);
   const fetchNewStudent = async () => {
-    const bdaName = localStorage.getItem("bdaName");
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
       setNewStudent(
@@ -41,7 +43,17 @@ const Home = () => {
     }
   };
 
+  const fetchBda = async () => {
+    try {
+      const response = await axios.get(`${API}/getbda`);
+      setBda(response.data.filter((item) => item.fullname === bdaName));
+    } catch (error) {
+      console.error("There was an error fetching bda:", error);
+    }
+  };
+
   useEffect(() => {
+    fetchBda();
     fetchNewStudent();
   }, []);
 
@@ -103,17 +115,6 @@ const Home = () => {
     ],
   };
 
-  const data = {
-    labels: ["Booked Revenue", "Credited Revenue", "Pending Revenue"],
-    datasets: [
-      {
-        data: [bookedRevenue, creditedRevenue, pendingRevenue],
-        backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
-        hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
-      },
-    ],
-  };
-
   if (!newStudent) {
     return (
       <div id="loader">
@@ -171,9 +172,50 @@ const Home = () => {
         </div>
 
         <div className="revenue-card">
-          <h2 className="text-lg font-bold mb-4">Overall Performance</h2>
-          <div className="">
-            <Pie data={data} />
+          <h2 className="text-lg font-bold mb-4">Your Target </h2>
+          <div>
+          {bda.map((item, index) => {
+  // Check if item.target is not empty and has a valid target
+  if (item.target && item.target.length > 0) {
+    const lastTarget = item.target[item.target.length - 1];
+
+    if (lastTarget.currentMonth === currentMonth) {
+      const eligibleStudents = newStudent.filter((student) => {
+        const studentMonth = new Date(student.createdAt).toISOString().slice(0, 7);
+        return (
+          studentMonth === currentMonth &&
+          (student.status === "fullPaid" || student.status === "Half_Cleared")
+        );
+      });
+
+      if (eligibleStudents.length === 0) {
+        return <p key={index}>No eligible students for this month.</p>;
+      }
+
+      const achievedTarget = eligibleStudents.reduce(
+        (acc, student) => acc + (parseFloat(student.paidAmount) || 0),
+        0
+      );
+
+      const pendingTarget = lastTarget.targetValue - achievedTarget;
+
+      return (
+        <div key={index}>
+          <p>🎯 Target Assigned: ₹{lastTarget.targetValue}</p>
+          <p>✅ Target Achieved: ₹{achievedTarget}</p>
+          <p>⏳ Pending Target: ₹{pendingTarget > 0 ? pendingTarget : 0}</p>
+        </div>
+      );
+    } else {
+      return <p key={index}>No target assigned for this month.</p>;
+    }
+  } else {
+    // If there's no target or empty target array
+    return <p key={index}>No target assigned.</p>;
+  }
+})}
+
+
           </div>
         </div>
       </div>
