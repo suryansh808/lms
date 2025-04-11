@@ -13,7 +13,6 @@ import {
 } from "chart.js";
 import API from "../API";
 
-
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -30,6 +29,7 @@ const Home = () => {
   const bdaName = localStorage.getItem("bdaName");
   const today = new Date();
   const currentMonth = today.toISOString().slice(0, 7);
+
   const fetchNewStudent = async () => {
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`);
@@ -172,50 +172,62 @@ const Home = () => {
         </div>
 
         <div className="revenue-card">
-          <h2 className="text-lg font-bold mb-4">Your Target </h2>
+          <h2 className="text-lg font-bold mb-4">Your Target</h2>
           <div>
-          {bda.map((item, index) => {
-  // Check if item.target is not empty and has a valid target
-  if (item.target && item.target.length > 0) {
-    const lastTarget = item.target[item.target.length - 1];
+            {bda.map((item, index) => {
+              if (item.target && item.target.length > 0) {
+                const lastTarget = item.target[item.target.length - 1];
 
-    if (lastTarget.currentMonth === currentMonth) {
-      const eligibleStudents = newStudent.filter((student) => {
-        const studentMonth = new Date(student.createdAt).toISOString().slice(0, 7);
-        return (
-          studentMonth === currentMonth &&
-          (student.status === "fullPaid" || student.status === "Half_Cleared")
-        );
-      });
+                if (lastTarget.currentMonth === currentMonth) {
+                  const eligibleStudents = newStudent.filter((student) => {
+                    const studentMonth = new Date(student.createdAt)
+                      .toISOString()
+                      .slice(0, 7);
+                    return (
+                      studentMonth === currentMonth &&
+                      (student.status === "fullPaid" ||
+                        student.remark[student.remark.length - 1] === "Half_Cleared")
+                    );
+                  });
 
-      if (eligibleStudents.length === 0) {
-        return <p key={index}>No eligible students for this month.</p>;
-      }
+                  const achievedTarget = eligibleStudents.reduce(
+                    (acc, student) =>
+                      acc + (parseFloat(student.paidAmount) || 0),
+                    0
+                  );
 
-      const achievedTarget = eligibleStudents.reduce(
-        (acc, student) => acc + (parseFloat(student.paidAmount) || 0),
-        0
-      );
+                  const pendingTarget = lastTarget.targetValue - achievedTarget;
 
-      const pendingTarget = lastTarget.targetValue - achievedTarget;
-
-      return (
-        <div key={index}>
-          <p>🎯 Target Assigned: ₹{lastTarget.targetValue}</p>
-          <p>✅ Target Achieved: ₹{achievedTarget}</p>
-          <p>⏳ Pending Target: ₹{pendingTarget > 0 ? pendingTarget : 0}</p>
-        </div>
-      );
-    } else {
-      return <p key={index}>No target assigned for this month.</p>;
-    }
-  } else {
-    // If there's no target or empty target array
-    return <p key={index}>No target assigned.</p>;
-  }
-})}
-
-
+                  return (
+                    <div key={index}>
+                      <p>🎯 Target Assigned: ₹{lastTarget.targetValue}</p>
+                      {eligibleStudents.length === 0 ? (
+                        <>
+                          <p>
+                            ❌ None of your leads have been marked as Full Paid
+                            or Half Cleared for this month.
+                          </p>
+                          <p>✅ Target Achieved: ₹0</p>
+                          <p>⏳ Pending Target: ₹{lastTarget.targetValue}</p>
+                        </>
+                      ) : (
+                        <>
+                          <p>✅ Target Achieved: ₹{achievedTarget}</p>
+                          <p>
+                            ⏳ Pending Target: ₹
+                            {pendingTarget > 0 ? pendingTarget : 0}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  );
+                } else {
+                  return <p key={index}>No target assigned for this month.</p>;
+                }
+              } else {
+                return <p key={index}>No target assigned.</p>;
+              }
+            })}
           </div>
         </div>
       </div>
