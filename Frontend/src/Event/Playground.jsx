@@ -243,10 +243,10 @@ const Playground = () => {
 
       <div className="h-full backdrop-blur-xl  p-1">
         <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-          {appliedUsers.filter((quiz) => quiz.status === "Upcoming Events").length >
+          {appliedUsers.filter((quiz) => quiz.status === "Ongoing").length >
           0 ? (
             appliedUsers
-              .filter((quiz) => quiz.status === "Upcoming Events")
+              .filter((quiz) => quiz.status === "Ongoing")
               .map((quiz, index) => {
                 const appliedQuiz = applied.find(
                   (item) =>
