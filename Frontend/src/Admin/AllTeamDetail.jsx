@@ -255,10 +255,19 @@ const AllTeamDetail = () => {
                     </td>
                     <td>
                       ₹{" "}
-                      {selectedBda.enrollments.reduce(
-                        (sum, item) => sum + (item.paidAmount || 0),
-                        0
-                      )}
+                      {selectedBda.enrollments.reduce((sum, item) => {
+                        const isFullPaid = item.status === "fullPaid";
+                        const hasHalfClearedRemark =
+                          Array.isArray(item.remarks) &&
+                          item.remarks.length > 0 &&
+                          item.remarks[
+                            item.remarks.length - 1
+                          ]?.toLowerCase() === "half_cleared";
+                        if (isFullPaid || hasHalfClearedRemark) {
+                          return sum + (item.paidAmount || 0);
+                        }
+                        return sum;
+                      }, 0)}
                     </td>
                     <td>
                       ₹{" "}
@@ -266,10 +275,19 @@ const AllTeamDetail = () => {
                         (sum, item) => sum + (item.programPrice || 0),
                         0
                       ) -
-                        selectedBda.enrollments.reduce(
-                          (sum, item) => sum + (item.paidAmount || 0),
-                          0
-                        )}
+                        selectedBda.enrollments.reduce((sum, item) => {
+                          const isFullPaid = item.status === "fullPaid";
+                          const hasHalfClearedRemark =
+                            Array.isArray(item.remarks) &&
+                            item.remarks.length > 0 &&
+                            item.remarks[
+                              item.remarks.length - 1
+                            ]?.toLowerCase() === "half_cleared";
+                          if (isFullPaid || hasHalfClearedRemark) {
+                            return sum + (item.paidAmount || 0);
+                          }
+                          return sum;
+                        }, 0)}
                     </td>
                   </tr>
                 ) : (
@@ -288,59 +306,86 @@ const AllTeamDetail = () => {
         <div className="mb-2">
           <h2>{selectedTeam} </h2>
           <div className="flex justify-between items-center gap-5 flex-wrap">
-  <div><strong>Total BDA: </strong>{filteredData.length}</div>
+            <div>
+              <strong>Total BDA: </strong>
+              {filteredData.length}
+            </div>
 
-  <div>
-    <strong>Total Program Price: </strong>
-    {filteredData.reduce((acc, bda) => {
-      const monthEnrollments = bda.enrollments.filter(
-        (item) =>
-          new Date(item.createdAt).toISOString().slice(0, 7) === currentMonth
-      );
-      return acc + monthEnrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0);
-    }, 0)}
-  </div>
+            <div>
+              <strong>Total Program Price: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                    currentMonth
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.programPrice || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
 
-  <div>
-  <strong>Total Paid Amount: </strong>
-  {filteredData.reduce((acc, bda) => {
-    const monthEnrollments = bda.enrollments.filter(
-      (item) =>
-        new Date(item.createdAt).toISOString().slice(0, 7) === currentMonth &&
-        (item.status === "fullPaid" || item.remark[item.remark.length - 1] === "Half_Cleared")
-    );
-    return acc + monthEnrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0);
-  }, 0)}
-</div>
+            <div>
+              <strong>Total Paid Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                      currentMonth &&
+                    (item.status === "fullPaid" ||
+                      item.remark[item.remark.length - 1] === "Half_Cleared")
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.paidAmount || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
 
+            <div>
+              <strong>Total Pending Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                    currentMonth
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) =>
+                      sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
 
-  <div>
-    <strong>Total Pending Amount: </strong>
-    {filteredData.reduce((acc, bda) => {
-      const monthEnrollments = bda.enrollments.filter(
-        (item) =>
-          new Date(item.createdAt).toISOString().slice(0, 7) === currentMonth
-      );
-      return acc + monthEnrollments.reduce(
-        (sum, item) =>
-          sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
-        0
-      );
-    }, 0)}
-  </div>
-
-  <div>
-    <strong>Total Default Amount: </strong>
-    {filteredData.reduce((acc, bda) => {
-      const monthEnrollments = bda.enrollments.filter(
-        (item) =>
-          new Date(item.createdAt).toISOString().slice(0, 7) === currentMonth &&
-          item.status === "default"
-      );
-      return acc + monthEnrollments.reduce((sum, item) => sum + (item.paidAmount || 0), 0);
-    }, 0)}
-  </div>
-</div>
+            <div>
+              <strong>Total Default Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                      currentMonth && item.status === "default"
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.paidAmount || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
+          </div>
 
           <select
             value={selectedTeam}

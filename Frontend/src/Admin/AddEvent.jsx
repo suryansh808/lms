@@ -386,9 +386,9 @@ const AddEvent = () => {
             <tr>
               <th>Sl No.</th>
               <th>Title</th>
+              <th>Total Questions</th>
               <th>Start Time</th>
               <th>Status</th>
-              {/* <th>Type</th> */}
               <th>Applied</th>
               <th>Change Status</th>
               <th>Action</th>
@@ -400,6 +400,7 @@ const AddEvent = () => {
         <tr key={index}>
           <td>{index + 1}</td>
           <td className=" cursor-pointer" onClick={() => setSetectedEvent(events)}>{events.title}</td>
+          <td>{events.questions.length}</td>
           <td>
             {new Date(events.start).toLocaleString("en-US", {
               day: "numeric",
@@ -411,7 +412,6 @@ const AddEvent = () => {
             })}
           </td>
           <td>{events.status}</td>
-          {/* <td>{events.type}</td> */}
           <td className="cursor-pointer text-red-600 font-bold" onClick={() => handleShowAppliedDetails(events._id)}> {events.enrollments.length}</td>
           <td>
             <select className="border border-gray-800 rounded-full" onChange={(e) => handleStatusChange(e, events._id)} name="status" id="status">

@@ -325,7 +325,7 @@ const CreateBDA = () => {
                   <td>{bda.designation}</td>
                   <td>{bda.team}</td>
                   <td>{bda.password}</td>
-                  {/* <td className="cursor-pointer" onClick={() => handleloginteam(bda.email, bda.password)}>Login</td> */}
+                  {/* <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td> */}
                   <td>
                     <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>

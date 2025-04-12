@@ -195,7 +195,7 @@ const TeamDetail = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5">No Data</td>
+                    <td colSpan="6">No Data</td>
                   </tr>
                 )}
               </tbody>
@@ -252,23 +252,34 @@ const TeamDetail = () => {
                       )}
                     </td>
                     <td>
-                      ₹{" "}
-                      {selectedBda.enrollments.reduce(
-                        (sum, item) => sum + (item.paidAmount || 0),
-                        0
-                      )}
-                    </td>
-                    <td>
-                      ₹{" "}
-                      {selectedBda.enrollments.reduce(
-                        (sum, item) => sum + (item.programPrice || 0),
-                        0
-                      ) -
-                        selectedBda.enrollments.reduce(
-                          (sum, item) => sum + (item.paidAmount || 0),
-                          0
-                        )}
-                    </td>
+          ₹{" "}
+          {selectedBda.enrollments.reduce((sum, item) => {
+            const isFullPaid = item.status === "fullPaid";
+            const hasHalfClearedRemark =
+              Array.isArray(item.remarks) &&
+              item.remarks.length > 0 &&
+              item.remarks[item.remarks.length - 1]?.toLowerCase() === "half_cleared";
+            if (isFullPaid || hasHalfClearedRemark) {
+              return sum + (item.paidAmount || 0);
+            }
+            return sum;
+          }, 0)}
+        </td>
+        <td>
+          ₹{" "}
+          {selectedBda.enrollments.reduce((sum, item) => sum + (item.programPrice || 0), 0) -
+            selectedBda.enrollments.reduce((sum, item) => {
+              const isFullPaid = item.status === "fullPaid";
+              const hasHalfClearedRemark =
+                Array.isArray(item.remarks) &&
+                item.remarks.length > 0 &&
+                item.remarks[item.remarks.length - 1]?.toLowerCase() === "half_cleared";
+              if (isFullPaid || hasHalfClearedRemark) {
+                return sum + (item.paidAmount || 0);
+              }
+              return sum;
+            }, 0)}
+        </td>
                   </tr>
                 ) : (
                   <tr>

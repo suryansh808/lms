@@ -405,8 +405,8 @@ const BookedAmount = () => {
     if (value.isSending) return;
     value.isSending = true;
     const Data = {
-      fullname: value.fullname,
-      email: value.email,
+      fullname: value.fullname.trim(),
+      email: value.email.trim(),
       phone: value.phone,
     };
     try {

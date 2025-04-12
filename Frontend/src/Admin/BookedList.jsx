@@ -38,8 +38,12 @@ const BookedList = () => {
     setMonths(getPastMonths());
   }, []);
 
-  const handleStatusChange = async (studentId, action) => {
+  const handleStatusChange = async (studentId, action , userCreated) => {
     try {
+      if (!userCreated) {
+        toast.error("User is not created yet. Please ensure login credentials are set up before proceeding.");
+        return;
+      }
       let updatedData = {};
       const isConfirmedFullPaid = window.confirm(
         "Are you sure you want to change?"
@@ -495,14 +499,11 @@ const BookedList = () => {
                 <th>WhatsApp No</th>
                 <th>Email</th>
                 <th>Domain</th>
-                {/* <th>Program</th> */}
                 <th>Month Opted</th>
                 <th>Program Price</th>
                 <th>Paid Amount </th>
-                {/* <th>Pending </th> */}
                 <th>BDA</th>
                 <th>Operation</th>
-                {/* <th>Due Date</th> */}
                 <th>Status</th>
                 <th>Remark</th>
                 <th>More Details</th>
@@ -528,23 +529,18 @@ const BookedList = () => {
                         <td>{item.whatsAppNumber}</td>
                         <td>{item.email}</td>
                         <td>{item.domain}</td>
-                        {/* <td>{item.program}</td> */}
                         <td className="capitalize">{item.monthOpted}</td>
                         <td className="text-green-600 font-bold">
                           {item.programPrice}
                         </td>
                         <td>{item.paidAmount}</td>
-                        {/* <td className="text-red-600 font-bold">{item.programPrice - item.paidAmount}</td> */}
                         <td>{item.counselor}</td>
                         <td>{item.operationName}</td>
-                        {/* <td className="whitespace-nowrap">
-                          {item.clearPaymentMonth}
-                        </td> */}
                         <td>
                           <button
                             className="button"
                             onClick={() =>
-                              handleStatusChange(item._id, "fullPaid")
+                              handleStatusChange(item._id, "fullPaid" , item.userCreated)
                             }
                           >
                             <div className="relative group inline-block">

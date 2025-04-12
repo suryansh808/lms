@@ -13,7 +13,7 @@ const Playground = () => {
     score: 0,
     quizCompleted: false,
     appliedUsers: [],
-    timeLeft: 45,
+    timeLeft: 60,
     applied: [],
     quizEndedDueToTabSwitch: false,
     showInstructions: false,
@@ -90,7 +90,7 @@ const Playground = () => {
       score: 0,
       selectedOption: null,
       quizCompleted: false,
-      timeLeft: 45,
+      timeLeft: 60,
     }));
 
   const reset = () =>
@@ -165,7 +165,7 @@ const Playground = () => {
         ? {
             ...prev,
             currentQuestionIndex: nextIndex,
-            timeLeft: 45,
+            timeLeft: 60,
             selectedOption: null,
           }
         : { ...prev, quizCompleted: true, selectedOption: null }
@@ -176,7 +176,7 @@ const Playground = () => {
     const confirm = window.confirm("Are you sure you want to quit the quiz?");
     if (!confirm) return;
     reset();
-    toast("You have exited the quiz. You can retake it anytime.", {
+    toast("You have exited the quiz. You can retake it before end of this event time.", {
       icon: "⚠️",
     });
   };
@@ -243,10 +243,10 @@ const Playground = () => {
 
       <div className="h-full backdrop-blur-xl  p-1">
         <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-          {appliedUsers.filter((quiz) => quiz.status === "Ongoing").length >
+          {appliedUsers.filter((quiz) => quiz.status === "Upcoming Events").length >
           0 ? (
             appliedUsers
-              .filter((quiz) => quiz.status === "Ongoing")
+              .filter((quiz) => quiz.status === "Upcoming Events")
               .map((quiz, index) => {
                 const appliedQuiz = applied.find(
                   (item) =>
@@ -316,7 +316,7 @@ const Playground = () => {
             <div className="relative flex justify-between items-center text-center my-4 gap-3 p-[3px] rounded-full">
               <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r animate-pulse from-blue-500 to-purple-500"></div>
               <div className="relative bg-[#000000] w-full text-lg rounded-full p-10">
-                {currentQuiz.questions[currentQuestionIndex].question}
+                {currentQuiz.questions[currentQuestionIndex].question}{" "} <span className="text-blue-600"> ( {currentQuiz.questions[currentQuestionIndex].coin} coins )</span>
               </div>
             </div>
             <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
@@ -331,7 +331,7 @@ const Playground = () => {
                   }`}
                 >
                   <span className="absolute inset-0 rounded-full animate-pulse bg-gradient-to-r from-blue-500 to-purple-500"></span>
-                  <span className="relative flex items-center bg-[#000000] w-full rounded-full p-4">
+                  <span className="relative flex items-center bg-[#000000] w-full h-full  rounded-full p-5">
                     <input
                       type="radio"
                       name="option"
