@@ -198,24 +198,24 @@ const CreateBDA = () => {
       });
   }
 
-  // const handleloginteam = async (email,password) => {
-  //   try {
-  //     const response = await axios.post(`${API}/checkbdaauth`, { email, password });
-  //     if (response.status === 200) {
-  //     toast.success("Login successful!");
-  //     const loginTime = new Date().getTime();
-  //     setTimeout(() => {
-  //     localStorage.setItem("bdaId", response.data.bdaId);
-  //     localStorage.setItem("bdaName", response.data.bdaName);
-  //     localStorage.setItem("bdaToken", response.data.token);
-  //      localStorage.setItem("sessionStartTime", loginTime);
-  //      window.open("/Home", "_blank"); 
-  //   }, 500);
-  //   }
-  //   } catch (error) {
-  //     toast.error(error.response?.data?.message || "Failed to verify OTP!");
-  //   }
-  // };
+  const handleloginteam = async (email,password) => {
+    try {
+      const response = await axios.post(`${API}/checkbdaauth`, { email, password });
+      if (response.status === 200) {
+      toast.success("Login successful!");
+      const loginTime = new Date().getTime();
+      setTimeout(() => {
+      localStorage.setItem("bdaId", response.data.bdaId);
+      localStorage.setItem("bdaName", response.data.bdaName);
+      localStorage.setItem("bdaToken", response.data.token);
+       localStorage.setItem("sessionStartTime", loginTime);
+       window.open("/Home", "_blank"); 
+    }, 500);
+    }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to verify OTP!");
+    }
+  };
 
   return (
     <div id="AdminAddCourse" >
@@ -310,7 +310,7 @@ const CreateBDA = () => {
                 <th>Designation</th>
                 <th>Team</th>
                 <th>Password</th>
-                {/* <th>Login</th> */}
+                <th>Login</th>
                 <th>Action</th>
                 <th>Add Team Active</th>
                 <th>Send Login Credentials</th>
@@ -325,7 +325,7 @@ const CreateBDA = () => {
                   <td>{bda.designation}</td>
                   <td>{bda.team}</td>
                   <td>{bda.password}</td>
-                  {/* <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td> */}
+                  <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td>
                   <td>
                     <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
