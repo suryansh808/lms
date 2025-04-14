@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -7,7 +7,7 @@ import axios from "axios";
 import API from "../API";
 import { motion } from "framer-motion";
 
-import quizpost from "../assets/quizpost.png";
+// import quizpost from "../assets/quizpost.png";
 
 const TalentHunt = () => {
   const [formData, setFormData] = useState({
@@ -112,10 +112,10 @@ const TalentHunt = () => {
     }
   };
 
-  const LeearningSectionRef = useRef(null);
-  const scrollToCourse = () => {
-    LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
-  };
+  // const LeearningSectionRef = useRef(null);
+  // const scrollToCourse = () => {
+  //   LeearningSectionRef.current?.scrollIntoView({ behavior: "auto" });
+  // };
 
   return (
     <div id="talenthunt">
@@ -199,14 +199,14 @@ const TalentHunt = () => {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      {/* <section className="py-16 px-4">
         <div className="container mx-auto text-center">
           <h1 data-aos="fade-up" className="font-bold text-center gradient-text" >| Categories </h1>
           <img src={quizpost} alt="QuizComp" className="max-h-[600px] w-auto rounded-md my-[20px]" />
           <button onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1"> Register Now
           </button>
         </div>
-      </section>
+      </section> */}
       <hr className=" opacity-10" />
 
       <section className="py-16 px-4">
@@ -239,7 +239,7 @@ const TalentHunt = () => {
         </div>
       </section>
 
-      <section ref={LeearningSectionRef} className="bg-white">
+      <section  className="bg-white">
         <div
           className={`container  bg-white text-black flex justify-around flex-wrap `}
         >
