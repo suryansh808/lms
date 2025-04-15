@@ -399,9 +399,9 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
           </div>
           <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
             <div className="relative overflow-hidden lg:h-[300px]"> 
-            <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
+            {/* <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
       Newly Launched
-    </span>
+    </span> */}
             <img
               src={AutomationTesting}
               alt="Automation Testing"
@@ -426,9 +426,9 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
           </div>
           <div className="bg-[#080808] shadow-sm shadow-slate-50 rounded-xl overflow-hidden flex flex-col items-center">
             <div className=" relative overflow-hidden lg:h-[300px]"> 
-            <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
+            {/* <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
       Newly Launched
-    </span>
+    </span> */}
             <img
               src={PromptAi}
               alt="Prompt engineering for generative AI"

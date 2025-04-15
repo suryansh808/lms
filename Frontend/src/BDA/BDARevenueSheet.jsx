@@ -73,14 +73,14 @@ const BDARevenueSheet = () => {
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  let growthPercentage = null;
-  if (months.length > 1) {
-    const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
-    const currentMonthRevenue = revenueByMonth[months[months.length - 1]].total || 0;
-    if (lastMonth > 0) {
-      growthPercentage = ((currentMonthRevenue - lastMonth) / lastMonth) * 100;
-    }
-  }
+  // let growthPercentage = null;
+  // if (months.length > 1) {
+  //   const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
+  //   const currentMonthRevenue = revenueByMonth[months[months.length - 1]].total || 0;
+  //   if (lastMonth > 0) {
+  //     growthPercentage = ((currentMonthRevenue - lastMonth) / lastMonth) * 100;
+  //   }
+  // }
 
   return (
     <div className="p-6 max-w-6xl mx-auto ml-[270px]">
@@ -163,11 +163,11 @@ const BDARevenueSheet = () => {
           <strong>Total Revenue:</strong> ₹{totalRevenue.toFixed(2)}
         </p>
 
-        {growthPercentage !== null && (
+        {/* {growthPercentage !== null && (
           <p className={growthPercentage >= 0 ? "text-green-600" : "text-red-600"}>
             {growthPercentage >= 0 ? "Growth" : "Loss"}: {growthPercentage.toFixed(2)}%
           </p>
-        )}
+        )} */}
       </section>
     </div>
   );

@@ -76,14 +76,14 @@ const RevenueSheet = () => {
 
   // months.sort((a, b) => new Date(a) - new Date(b));
 
-  let growthPercentage = null;
-  if (months.length > 1) {
-    const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
-    const currentMonth = revenueByMonth[months[months.length - 1]].total || 0;
-    if (lastMonth > 0) {
-      growthPercentage = ((currentMonth - lastMonth) / lastMonth) * 100;
-    }
-  }
+  // let growthPercentage = null;
+  // if (months.length > 1) {
+  //   const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
+  //   const currentMonth = revenueByMonth[months[months.length - 1]].total || 0;
+  //   if (lastMonth > 0) {
+  //     growthPercentage = ((currentMonth - lastMonth) / lastMonth) * 100;
+  //   }
+  // }
 
   return (
     <div className="p-6 ml-[270px] mx-auto">
@@ -166,11 +166,11 @@ const RevenueSheet = () => {
           <strong>Total Revenue:</strong> ₹{totalRevenue.toFixed(2)}
         </p>
 
-        {growthPercentage !== null && (
+        {/* {growthPercentage !== null && (
           <p className={growthPercentage >= 0 ? "text-green-600" : "text-red-600"}>
             {growthPercentage >= 0 ? "Growth" : "Loss"}: {growthPercentage.toFixed(2)}%
           </p>
-        )}
+        )} */}
       </section>
     </div>
   );

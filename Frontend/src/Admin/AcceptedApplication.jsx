@@ -9,14 +9,14 @@ const PROGRAM_OPTIONS = [
   { value: "Instructor Led", label: "Instructor Led" },
   { value: "Career Advancement", label: "Career Advancement" },
 ];
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 40;
 const AcceptedApplication = () => {
   const [users, setUsers] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [programFilter, setProgramFilter] = useState("");
-  const [showFullyPaidOnly, setShowFullyPaidOnly] = useState(false); // New state for fully paid filter
+  const [showFullyPaidOnly, setShowFullyPaidOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState(null);
   const fetchUsers = useCallback(async () => {

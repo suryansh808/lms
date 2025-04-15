@@ -28,12 +28,13 @@ const OperationDashboard = () => {
 
   const fetchOperationData = async () => {
     const operationId = localStorage.getItem("operationId");
+    const operationName = localStorage.getItem("operationName");
     try {
       const response = await axios.get(`${API}/getnewstudentenroll`, {
         params: { operationId },
       });
       setOperationData(
-        response.data.filter((data) => data.operationId == operationId)
+        response.data.filter((data) => data.operationName === operationName)
       );
     } catch (err) {
       console.log("Failed to fetch user data");
@@ -56,15 +57,9 @@ const OperationDashboard = () => {
     );
   }
 
-  const bookedCount = operationData.filter(
-    (item) => item.status === "booked"
-  ).length;
-  const fullPaidCount = operationData.filter(
-    (item) => item.status === "fullPaid"
-  ).length;
-  const defaultCount = operationData.filter(
-    (item) => item.status === "default"
-  ).length;
+  const bookedCount = operationData.filter((item) => item.status === "booked").length;
+  const fullPaidCount = operationData.filter((item) => item.status === "fullPaid").length;
+  const defaultCount = operationData.filter((item) => item.status === "default").length;
 
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
@@ -74,24 +69,37 @@ const OperationDashboard = () => {
     const createdAt = new Date(student.createdAt);
     return createdAt.getMonth() === currentMonth && createdAt.getFullYear() === currentYear;
   });
+
+  console.log("currentmonth" , currentMonthData)
   
   const totalRevenue = currentMonthData.reduce(
     (acc, student) => acc + (student.programPrice || 0),
     0
   );
-  
+
   const bookedRevenue = currentMonthData.reduce(
-    (acc, student) => acc + (student.programPrice || 0),
+    (acc, student) => acc + (student.paidAmount || 0),
     0
   );
   
-  const creditedRevenue = currentMonthData.reduce(
-    (acc, student) =>
-      acc + ((student.paidAmount || 0) - (student.defaultAmount || 0)),
-    0
-  );
+  const creditedRevenue = currentMonthData.reduce((acc, student) => {
+    const lastRemark = Array.isArray(student.remark) && student.remark.length > 0
+      ? student.remark[student.remark.length - 1]
+      : null;
   
-  const pendingRevenue = bookedRevenue - creditedRevenue;
+    if (
+      student.status === "fullPaid" ||
+      lastRemark === "Half_Cleared"
+    ) {
+      return acc + (student.paidAmount || 0);
+    }
+  
+    return acc;
+  }, 0);
+  
+  
+  
+  const pendingRevenue = totalRevenue - creditedRevenue;
 
   const revenueByMonth = operationData.reduce((acc, student) => {
     const month = new Date(student.createdAt).toLocaleString("default", {

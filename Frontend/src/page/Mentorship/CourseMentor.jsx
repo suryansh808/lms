@@ -338,24 +338,24 @@ const CourseMentor = ({}) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!emailVerified) {
-      toast.error("Please verify your email before submitting.");
-      return;
-    }
+    // if (!emailVerified) {
+    //   toast.error("Please verify your email before submitting.");
+    //   return;
+    // }
 
     const phoneRegex = /^[0-9]{10}$/;
-    // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     if (!phoneRegex.test(formData.number)) {
       toast.error("Please enter a valid phone number.");
       setIsSubmitting(false);
       return;
     }
-    // if (!emailRegex.test(formData.email)) {
-    //   toast.error("Please enter a valid email address.");
-    //   setIsSubmitting(false);
-    //   return;
-    // }
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
     try {
       await axios.post(`${API}/mentorship/register`, {
         name: formData.name,
@@ -393,40 +393,40 @@ const CourseMentor = ({}) => {
     });
   };
 
-  const [otpSent, setOtpSent] = useState(false);
-const [otp, setOtp] = useState("");
-const [emailVerified, setEmailVerified] = useState(false);
+//   const [otpSent, setOtpSent] = useState(false);
+// const [otp, setOtp] = useState("");
+// const [emailVerified, setEmailVerified] = useState(false);
 
-  const sendOTP = async () => {
-    if (!formData.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
+//   const sendOTP = async () => {
+//     if (!formData.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)) {
+//       toast.error("Please enter a valid email address.");
+//       return;
+//     }
   
-    try {
-      const response = await axios.post(`${API}/mentorship-send-otp`, { email: formData.email });
-      toast.success("OTP sent to your email!");
-      setOtpSent(true);
-    } catch (error) {
-      toast.error("Failed to send OTP. Try again.");
-    }
-  };
+//     try {
+//       const response = await axios.post(`${API}/mentorship-send-otp`, { email: formData.email });
+//       toast.success("OTP sent to your email!");
+//       setOtpSent(true);
+//     } catch (error) {
+//       toast.error("Failed to send OTP. Try again.");
+//     }
+//   };
   
-  const verifyOTP = async () => {
-    try {
-      const response = await axios.post(`${API}/mentorship-verify-otp`, { email: formData.email, otp });
-      if (response.data.success) {
-        toast.success("Email verified successfully!");
-        setEmailVerified(true);
-        setOtp("");
-        setOtpSent(false)
-      } else {
-        toast.error("Invalid OTP. Try again.");
-      }
-    } catch (error) {
-      toast.error("Verification failed.");
-    }
-  };
+//   const verifyOTP = async () => {
+//     try {
+//       const response = await axios.post(`${API}/mentorship-verify-otp`, { email: formData.email, otp });
+//       if (response.data.success) {
+//         toast.success("Email verified successfully!");
+//         setEmailVerified(true);
+//         setOtp("");
+//         setOtpSent(false)
+//       } else {
+//         toast.error("Invalid OTP. Try again.");
+//       }
+//     } catch (error) {
+//       toast.error("Verification failed.");
+//     }
+//   };
   
 
   return (
@@ -459,13 +459,7 @@ const [emailVerified, setEmailVerified] = useState(false);
               <div
                 data-aos="fade-in"
                 key={course.id}
-                className="bg-[#080808] shadow-sm shadow-slate-50 relative rounded-lg overflow-hidden "
-              >
-                {course.title === "Automation Testing" ? (
-                  <span className="absolute top-0 left-0 bg-red-500 rounded-br-md text-white px-2 py-1 text-sm font-semibold">
-                    Newly Launched
-                  </span>
-                ) : null}
+                className="bg-[#080808] shadow-sm shadow-slate-50 relative rounded-lg overflow-hidden">
                 <img
                   src={course.image}
                   alt={course.title}
@@ -530,7 +524,7 @@ const [emailVerified, setEmailVerified] = useState(false);
                 className="mb-3 p-2 w-full border rounded"
                 required
               />
-              {!otpSent ? (
+              {/* {!otpSent ? (
                 <button
                   type="button"
                   onClick={sendOTP}
@@ -556,7 +550,7 @@ const [emailVerified, setEmailVerified] = useState(false);
                     Verify OTP
                   </button>
                 </>
-              )}
+              )} */}
               <input
                 type="email"
                 name="collegeEmail"

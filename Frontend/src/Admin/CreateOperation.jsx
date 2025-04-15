@@ -215,6 +215,25 @@ const CreateOperation = () => {
     setIsDialogVisible(false);
   };
 
+  const handleloginteam = async (email,password) => {
+    try {
+      const response = await axios.post(`${API}/checkoperation`, { email, password });
+      if (response.status === 200) {
+      toast.success("Login successful!");
+      const loginTime = new Date().getTime();
+      setTimeout(() => {
+        localStorage.setItem("operationId", response.data._id);
+        localStorage.setItem("operationName", response.data.operationName);
+        localStorage.setItem("operationToken", response.data.token);
+        localStorage.setItem("sessionStartTime", loginTime);
+        window.open("/operationdashboard", "_blank"); 
+    }, 500);
+    }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to verify OTP!");
+    }
+  };
+
   return (
     <div id="AdminAddCourse" >
       <Toaster position="top-center" reverseOrder={false} />
@@ -274,6 +293,7 @@ const CreateOperation = () => {
               <th>Full Name</th>
               <th>Email</th>
               <th>Password</th>
+              <th>Login</th>
               <th>Action</th>
               <th>Send Login Credentials</th>
             </tr>
@@ -290,6 +310,7 @@ const CreateOperation = () => {
                 </td>
                 <td>{operation.email}</td>
                 <td>{operation.password}</td>
+                <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(operation.email, operation.password)}>Login <i class="fa fa-sign-in"></i></td>
                 <td>
                   <button onClick={() => handleEdit(operation)}>
                     <i className="fa fa-edit"></i>

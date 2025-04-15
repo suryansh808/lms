@@ -239,7 +239,7 @@ const TalentHunt = () => {
         </div>
       </section>
 
-      <section  className="bg-white">
+      <section   className="bg-white">
         <div
           className={`container  bg-white text-black flex justify-around flex-wrap `}
         >

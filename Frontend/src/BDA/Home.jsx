@@ -62,15 +62,25 @@ const Home = () => {
     0
   );
   const bookedRevenue = newStudent.reduce(
-    (acc, student) => acc + (student.programPrice || 0),
+    (acc, student) => acc + (student.paidAmount || 0),
     0
   );
-  const creditedRevenue = newStudent.reduce(
-    (acc, student) =>
-      acc + ((student.paidAmount || 0) - (student.defaultAmount || 0)),
-    0
-  );
-  const pendingRevenue = bookedRevenue - creditedRevenue;
+  const creditedRevenue = newStudent.reduce((acc, student) => {
+    const lastRemark = Array.isArray(student.remark) && student.remark.length > 0
+      ? student.remark[student.remark.length - 1]
+      : null;
+  
+    if (
+      student.status === "fullPaid" ||
+      lastRemark === "Half_Cleared"
+    ) {
+      return acc + (student.paidAmount || 0);
+    }
+  
+    return acc;
+  }, 0);
+  
+  const pendingRevenue = totalRevenue - creditedRevenue;
 
   const revenueByMonth = newStudent.reduce((acc, student) => {
     const month = new Date(student.createdAt).toLocaleString("default", {
