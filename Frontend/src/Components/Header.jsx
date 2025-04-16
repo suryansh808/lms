@@ -73,8 +73,8 @@
           <div className="menu">
             <Link to="/Mentorship">MENTORSHIP PROGRAM</Link>
             <Link to="/Advance">ADVANCED PROGRAM</Link>
-            <Link to="/MasterClass" onClick={scrollToTop}>MASTERCLASS</Link>
             <Link to="/Alumni">ALUMNI</Link>
+            <Link to="/MasterClass" onClick={scrollToTop}>MASTERCLASS</Link>
             {/* <Link to="/Career">CAREER</Link> */}
             <Link to="/TalentHunt" onClick={scrollToTop}>
               TALENT HUNT
@@ -102,6 +102,7 @@
               <Link to="/Advance">
                 <li>ADVANCED PROGRAM</li>
               </Link>
+              <Link to="/Alumni" onClick={scrollToTop}><li>ALUMNI</li></Link>
               <Link to="/MasterClass" onClick={scrollToTop}>
                 <li>MASTERCLASS</li>
               </Link>

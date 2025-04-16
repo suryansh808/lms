@@ -100,7 +100,7 @@ const Alumni = () => {
         onClick={() =>
           setDropdownOpen((prev) => ({ ...prev, [field]: !prev[field] }))
         }
-        className="w-full bg-[#1A1A1A] text-white px-4 py-2 rounded text-sm text-left flex justify-between"
+        className="w-full bg-black text-white px-4 py-2 rounded-md text-sm text-left flex justify-between"
       >
         {filters[field] || placeholder}
       </button>
@@ -138,7 +138,7 @@ const Alumni = () => {
         At Krutanic, learners transform their careers, mastering coding and
         securing dream jobs.
       </p>
-      <div className="bg-black text-white rounded-md p-4 mb-6 flex flex-col md:flex-row gap-2 justify-end">
+      <div className="bg-[#1A1A1A] text-white rounded-xl p-5 mb-6 flex flex-col md:flex-row gap-2 justify-end">
         <Dropdown
           field="post"
           placeholder="Select Company"
@@ -159,7 +159,7 @@ const Alumni = () => {
         <span></span>
         <button
           onClick={handleSearch}
-          className="w-full active:scale-105 duration-300 ease-linear bg-[#F15B29] px-6 py-2 rounded text-white font-bold text-sm"
+          className=" active:scale-105 duration-300 ease-linear bg-[#F15B29] px-4 w-full rounded-md text-white font-bold text-sm"
         >
           SEARCH ALUMNI
         </button>
