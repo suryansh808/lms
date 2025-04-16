@@ -11,6 +11,7 @@ const crypto = require('crypto');
 // const PlacementCoordinator = require("../models/PlacementCoordinator");
 const { default: mongoose } = require("mongoose");
 const User = require("../models/User");
+const Alumni = require("../models/Alumni");
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
     const { email , password , otp } = req.body;
@@ -379,6 +380,44 @@ router.put('/user-components/:userId', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+// alumni data and retreive route 
+
+
+router.post("/alumni-data", async (req, res) => {
+  try {
+    const alumni = new Alumni(req.body);
+    await alumni.save();
+    res.status(201).json({
+      success: true,
+      message: "Alumni data submitted successfully",
+      data: alumni,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to submit alumni data",
+    });
+  }
+});
+
+router.get("/alumni-data", async (req, res) => {
+  try {
+    const alumni = await Alumni.find().sort({ createdAt: -1 });
+    res.status(200).json({
+      success: true,
+      data: alumni,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve alumni data",
+    });
+  }
+});
+
+
+
 
 
 

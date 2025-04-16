@@ -74,6 +74,7 @@
             <Link to="/Mentorship">MENTORSHIP PROGRAM</Link>
             <Link to="/Advance">ADVANCED PROGRAM</Link>
             <Link to="/MasterClass" onClick={scrollToTop}>MASTERCLASS</Link>
+            <Link to="/Alumni">ALUMNI</Link>
             {/* <Link to="/Career">CAREER</Link> */}
             <Link to="/TalentHunt" onClick={scrollToTop}>
               TALENT HUNT

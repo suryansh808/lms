@@ -28,6 +28,7 @@ import MasterClass from "./page/MasterClass";
 import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 import DashboardAccessForm from "./page/DashboardAccessForm";
+import Alumni from "./page/Alumni";
 
 // Admin
 import AdminHeader from "./Admin/AdminHeader";
@@ -106,6 +107,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 //event
 import EventDashBoard from "./Event/EventDashBoard";
+import AlumniData from "./Admin/AlumniData";
 
 
 
@@ -161,6 +163,7 @@ const AppContent = () => {
     "/pclogin",
     "/dashboardaccessform",
     "/masterclass",
+    "/alumni"
   ];
 
   const adminheaderPaths = [
@@ -186,6 +189,7 @@ const AppContent = () => {
     "/addevent",
     "/eventregistration",
     "/target",
+    "/alumnidata"
   ];
 
   const operationheaderPaths = [
@@ -277,6 +281,7 @@ const AppContent = () => {
         <Route path="/PromptEngineering" element={<PromptEngineering />} />
         <Route path="/DashboardAccessForm" element={<DashboardAccessForm />} />
         <Route path="/MasterClass" element={<MasterClass />} />
+        <Route path="/Alumni" element={<Alumni/>} />
 
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />
@@ -303,6 +308,8 @@ const AppContent = () => {
         <Route path="/AddEvent" element={isAuthenticatedAdmin() ? (<AddEvent />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/EventRegistration" element={isAuthenticatedAdmin() ? (<EventRegistration />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/Target" element={isAuthenticatedAdmin() ? (<Target/>) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/AlumniData" element={isAuthenticatedAdmin() ? (<AlumniData/>) : (<Navigate to="/AdminLogin" />)}/>
+
         {/* Admin Panel End */}
 
         {/* Operation Panel Start */}
