@@ -122,9 +122,9 @@ const AdminHeader = () => {
         <Link to="/CreatePlacementCoordinator">
           <i className="fa fa-user mr-2"></i>Create PC A/c
         </Link>
-        <Link to="/AcceptedApplication">
+        {/* <Link to="/AcceptedApplication">
           <i className="fa fa-check-circle mr-2"></i>Active Users
-        </Link>
+        </Link> */}
         <Link to="/PendingApplication">
           <i className="fa fa-times-circle mr-2"></i>Inactive Users
         </Link>
