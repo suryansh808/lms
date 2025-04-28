@@ -373,11 +373,13 @@ const AutomationTesting = () => {
       domainOther: "",
     });
   };
-
+  const [loading, setLoading] = useState(false);
   const [actionType, setActionType] = useState();
   const handleFormSubmit = async (e, actionType) => {
+   
     e.preventDefault();
     try {
+      setLoading(true);
       await axios.post(`${API}/advance/register`, {
         name: formData.name,
         email: formData.email,
@@ -401,6 +403,8 @@ const AutomationTesting = () => {
       toast.error(
         error.response?.data?.error || "Something went wrong. Please try again."
       );
+    }finally {
+      setLoading(false);
     }
   };
   const [activeModule, setActiveModule] = useState(null);
@@ -914,18 +918,20 @@ const AutomationTesting = () => {
                   <div className="flex justify-center gap-2">
                     <button
                       type="submit"
+                      disabled={loading}
                       onClick={(e) => setActionType("Only Download Brochure")}
                       className="px-4 py-2 w-full bg-[#f15b29] text-white rounded-md"
                     >
-                      <i class="fa fa-download"></i>
+                      {loading ? "Loading..." :  <i class="fa fa-download"></i>}
                     </button>
                     <button
                       type="submit"
+                      disabled={loading}
                       onClick={(e) => setActionType("Requested To Call Back")}
                       className="px-4 py-2 w-full bg-[#f15b29] flex items-center justify-center gap-1 text-white rounded-md"
                     >
-                      <i class="fa fa-download"></i> +{" "}
-                      <RiCustomerService2Fill />
+                      {loading ? "Loading..." : <p className="flex items-center justify-center"><i class="fa fa-download"></i> +  <RiCustomerService2Fill /></p>}
+                      
                     </button>
                   </div>
                 </form>

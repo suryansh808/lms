@@ -23,12 +23,12 @@ const Login = () => {
       toast.success("Login successful!!!");
       if (response.status === 200) {
         setTimeout(() => {
-          console.log(response.data);
+          // console.log(response.data);
           localStorage.setItem("userId", response.data._id);
           localStorage.setItem("userEmail", response.data.email);
           localStorage.setItem("token", response.data.token);
           navigate("/Dashboard");
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
       if (error.response?.status === 403) {

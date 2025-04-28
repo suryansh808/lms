@@ -6,6 +6,7 @@ import API from "../../../API";
 import toast, { Toaster } from "react-hot-toast";
 
 const ApplyForm = ({ courseValue }) => {
+     const [loading, setLoading] = useState(false);
   // const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -27,6 +28,7 @@ const ApplyForm = ({ courseValue }) => {
   // };
 
   const handleFormSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const phoneRegex = /^[0-9]{10}$/;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -63,6 +65,8 @@ const ApplyForm = ({ courseValue }) => {
       toast.error(
         error.response?.data?.error || "Something went wrong. Please try again."
       );
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -232,9 +236,10 @@ const ApplyForm = ({ courseValue }) => {
                     </button> */}
               <button
                 type="submit"
+                disabled={loading}
                 className="px-4 py-1 bg-[#f15b29] text-white rounded-md"
               >
-                Submit
+                {loading ? "Loading..." : "Submit"}
               </button>
             </div>
           </form>

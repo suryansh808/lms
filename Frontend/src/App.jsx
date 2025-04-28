@@ -251,9 +251,7 @@ const AppContent = () => {
       {operationheaderPaths.includes(location.pathname.toLowerCase()) && (<OperationHeader />)}
       {bdaheaderPaths.includes(location.pathname.toLowerCase()) && ( <BDAHeader />)}
       {userheaderPaths.includes(location.pathname.toLowerCase()) && (<UserHeader />)}
-      {placementcoodinatorHeaderPaths.includes(
-        location.pathname.toLowerCase()
-      ) && <PCHeader />}
+      {placementcoodinatorHeaderPaths.includes(location.pathname.toLowerCase()) && <PCHeader />}
 
       <Routes>
         <Route path="*" element={<PageNotFound />} />

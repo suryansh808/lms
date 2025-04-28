@@ -120,6 +120,7 @@ const TalentHunt = () => {
   return (
     <div id="talenthunt">
       <Toaster position="top-center" reverseOrder={false} />
+      
       <section class="home">
         <div class="description">
           <h1 data-aos="fade-up" class="title">
@@ -198,15 +199,6 @@ const TalentHunt = () => {
           </p>
         </div>
       </section>
-
-      {/* <section className="py-16 px-4">
-        <div className="container mx-auto text-center">
-          <h1 data-aos="fade-up" className="font-bold text-center gradient-text" >| Categories </h1>
-          <img src={quizpost} alt="QuizComp" className="max-h-[600px] w-auto rounded-md my-[20px]" />
-          <button onClick={scrollToCourse} className="border border-[#f15b29] rounded-md px-4 py-1"> Register Now
-          </button>
-        </div>
-      </section> */}
       <hr className=" opacity-10" />
 
       <section className="py-16 px-4">

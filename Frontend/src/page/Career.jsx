@@ -9,6 +9,7 @@ import { IoMdInfinite } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
 import { SiRipple } from "react-icons/si";
 
+import img from '../assets/career.jpg'
 
 const Career = () => {
   const jobSectionRef = useRef(null);
@@ -97,9 +98,9 @@ const Career = () => {
   return (
     <div id="career" className="bg-black text-white min-h-screen">
       {/* Hero Section */}
-      <section className="py-[60px] px-[10px] h-[600px]">
-       <div className="lg:flex career  justify-between px-4">
-       <div className="lg:w-1/2 w-full  flex flex-col lg:items-center items-start lg:justify-center justify-start ">
+      <section  style={{ backgroundImage: `url(${img})` }} className={`py-[20px]  bg-cover bg-center h-[100dvh] flex items-center justify-center  px-[10px]`}>
+       <div className="flex  container mx-auto  justify-between px-4">
+       <div className="w-full text-center flex items-center justify-center flex-col ">
           <h1
           data-aos="fade-up"   className="text-4xl font-bold mb-4 text-orange-700">
             Join Our Mission to Transform Education
@@ -115,9 +116,6 @@ const Career = () => {
           >
             View Open Positions
           </button>
-        </div>
-        <div className="lg:w-1/2 w-full opacity-15 ">
-          <img src="https://images.unsplash.com/photo-1510519138101-570d1dca3d66?q=80&w=1694&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img" />
         </div>
        </div>
       </section>
