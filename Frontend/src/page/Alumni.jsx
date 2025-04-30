@@ -147,7 +147,7 @@ const Alumni = () => {
           <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
           <meta name="twitter:description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
 
-          <link rel="canonical" href="https://www.krutanic.com/Alumni" />
+          <link rel="canonical" href="https://www.krutanic.com/" />
 
       </Helmet>
 

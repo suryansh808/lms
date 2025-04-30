@@ -207,7 +207,7 @@ const MasterClass = () => {
         <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
         <meta property="twitter:description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
 
-        <link rel="canonical" href="https://www.krutanic.com/MasterClass" />
+        <link rel="canonical" href="https://www.krutanic.com/" />
 
        </Helmet>
 
