@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import imgadvance from "../assets/courses/feesimg.jpeg";
 import imgalt from "../assets/defaultmasterclass.jpg";
 import Popularcourse from "../Components/popularcourse";
 import logo from "../User/playerlogo.jpg";
+
 
 const MasterClass = () => {
   useEffect(() => {
@@ -188,6 +190,27 @@ const MasterClass = () => {
 
   return (
     <div id="MasterClass">
+       
+       <Helmet>
+        <title>Krutanic MasterClass | Upskill in Tech, Coding & AI</title>
+        <meta name="keywords" content="e-learning, Krutanic MasterClass, coding, data science, AI courses, tech upskilling, online mentorship"/>
+        <meta name="description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
+
+        <meta property="og:title" content="Krutanic MasterClass | Upskill in Tech, Coding & AI"/>
+        <meta property="og:url" content="https://www.krutanic.com/MasterClass"/>
+        <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="og:description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
+        <meta property="og:type" content="website"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta property="twitter:title" content="Krutanic MasterClass | Upskill in Tech, Coding & AI"/>
+        <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="twitter:description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
+
+        <link rel="canonical" href="https://www.krutanic.com/MasterClass" />
+
+       </Helmet>
+
       <Toaster position="top-center" reverseOrder={false} />
       <div className="masterclasshero">
         <input

@@ -1,7 +1,9 @@
+import { Helmet } from "react-helmet";
 import React, { useState, useMemo } from "react";
 import axios from "axios";
 import AlumniData from "../Components/alumniData";
 import API from "../API";
+
 
 const Alumni = () => {
   const [filters, setFilters] = useState({ post: "", location: "", role: "" });
@@ -128,6 +130,27 @@ const Alumni = () => {
 
   return (
     <div className="container m-auto px-[10px] py-[20px]">
+
+      <Helmet>
+          <title>Krutanic Alumni | Success Stories from E-Learning Leaders</title>
+          <meta name="keywords" content="e-learning alumni, Krutanic graduates, tech careers, coding success, mentorship stories"/>
+          <meta name="description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
+
+          <meta property="og:title" content="Krutanic Alumni | Success Stories from E-Learning Leaders"/>
+          <meta property="og:url" content="https://www.krutanic.com/Alumni"/>
+          <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+          <meta property="og:description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
+          <meta property="og:type" content="website"/>
+
+          <meta name="twitter:card" content="summary"/>
+          <meta name="twitter:title" content="Krutanic Alumni | Success Stories from E-Learning Leaders"/>
+          <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+          <meta name="twitter:description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
+
+          <link rel="canonical" href="https://www.krutanic.com/Alumni" />
+
+      </Helmet>
+
       <h1 className="text-3xl font-bold mb-2">
         Krutanic Reviews
         <span className="inline-flex items-center text-[#F15B29] text-base border border-[#F15B29] rounded px-2 py-0.5 ml-2">

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
@@ -6,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import API from "../API";
 import { motion } from "framer-motion";
+
 
 // import quizpost from "../assets/quizpost.png";
 
@@ -119,6 +121,26 @@ const TalentHunt = () => {
 
   return (
     <div id="talenthunt">
+        <Helmet>
+        <title>Krutanic Talent Hunt | Discover Top Tech Talent & Innovators</title>
+        <meta name="keywords" content="e-learning talent, tech talent, coding experts, AI professionals, data science, Krutanic recruitment, talent hunt"/>
+        <meta name="description" content="Connect with top-tier tech talent through Krutanic’s Talent Hunt. Discover skilled professionals in coding, AI, and data science ready to power your company."/>
+
+        <meta property="og:title" content="Krutanic Talent Hunt | Discover Top Tech Talent & Innovators"/>
+        <meta property="og:url" content="https://www.krutanic.com/TalentHunt"/>
+        <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="og:description" content="Connect with top-tier tech talent through Krutanic’s Talent Hunt. Discover skilled professionals in coding, AI, and data science ready to power your company."/>
+        <meta property="og:type" content="website"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta property="twitter:title" content="Krutanic Talent Hunt | Discover Top Tech Talent & Innovators"/>
+        <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="twitter:description" content="Connect with top-tier tech talent through Krutanic’s Talent Hunt. Discover skilled professionals in coding, AI, and data science ready to power your company."/>
+
+        <link rel="canonical" href="https://www.krutanic.com/TalentHunt" />
+
+        </Helmet>
+
       <Toaster position="top-center" reverseOrder={false} />
       
       <section class="home">

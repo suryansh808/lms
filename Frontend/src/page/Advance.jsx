@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet';
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -193,6 +194,36 @@ const handleFormSubmit = async (e) => {
 
   return (
     <div id="advance" className="">
+
+      <Helmet>
+        <title>Krutanic Advance: Expert-Led Online Courses for Career Growth</title>
+        <meta name="description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
+        <meta name="keywords" content="online learning, career development, professional courses, tech training, data science, coding, upskilling, e-learning platform"/>
+        <link rel="canonical" href="https://www.krutanic.com/Advance"/>
+
+        <meta property="og:title" content="Krutanic Advance: Expert-Led Online Courses for Career Growth"/>
+        <meta property="og:description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
+        <meta property="og:url" content="https://www.krutanic.com/Advance"/>
+        <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="og:type" content="website"/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="Krutanic Advance: Expert-Led Online Courses for Career Growth"/>
+        <meta name="twitter:description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
+        <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+
+      </Helmet>
+
+
+
+
+
+
+
+
+
+
+
         <Toaster position="top-center" reverseOrder={false} />
           <section className="px-[10px] py-[60px]">
          <div  data-aos="fade-up" className="width flex items-center justify-center flex-wrap gap-[5rem]">

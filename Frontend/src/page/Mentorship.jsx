@@ -1,24 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import {Helmet} from 'react-helmet';
+import React, {useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-// certificate starts
 import certificate1 from "../assets/certificates/Certificateofinternship.png";
-// import certificate2 from "../assets/certificates/CertificateofExcellence.jpg";
 import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
-// import wiprologo from "../assets/certificates/wipro.svg";
-// import accenture from "../assets/poplogo/accenturelogo.png"
 import accreditedby from "../assets/poplogo/accreditedby.png"
-// import aicte from "../assets/poplogo/aicte.png";
-// import iso from "../assets/poplogo/iso.png";
-// import mca from "../assets/poplogo/mca.png";
-// import msme from "../assets/poplogo/4.png";
-//certificate ends
-
 import Testimonial from "../Components/testimonial";
 import FAQMentor from "./Mentorship/FAQMentor";
 import EnrollMentor from "./Mentorship/EnrollMentor";
@@ -27,10 +15,8 @@ import CourseMentor from "./Mentorship/CourseMentor";
 import Getintouch from "../Components/Getintouch";
 import { useNavigate } from "react-router-dom";
 import MentorShipMentors from "../Components/MentorShipMentors";
-// import ApplyNowButton from "./AdvanceCourse/Components/ApplyNowButton";
 import MentorshipForm from "./MentorshipForm";
 
-// import ApplyForm from "./AdvanceCourse/Components/ApplyForm";
 
 const Mentorship = () => {
 
@@ -44,20 +30,6 @@ const Mentorship = () => {
     AOS.init({ duration: 2000, once: false });
   }, []);
 
-  // const settings = {
-  //   slidesToShow: 2,
-  //   dots: false,
-  //   arrow: false,
-  //   responsive: [
-  //     {
-  //       breakpoint: 400,
-  //       settings: {
-  //         slidesToShow: 1,
-  //       },
-  //     },
-  //   ],
-  // };
-
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/FeeStructure");
@@ -65,6 +37,22 @@ const Mentorship = () => {
 
   return (
     <div id="mentorship" className="text-white bg-black">
+    <Helmet>
+        <title>Top E-Learning Mentorship Programs | Krutanic </title>
+        <meta name="keywords" content="Top E-learning, mentorship, tech mentorship, data science, coding, online learning, career growth"/>
+        <meta name="description" content="Join Krutanic’s top e-learning mentorship to grow your tech, coding, and data skills with expert guidance."/>
+        <meta property="og:title" content="Top E-Learning Mentorship Programs | Krutanic"/>
+        <meta property="og:url" content="https://www.krutanic.com/Mentorship"/>
+        <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="og:description" content="Join Krutanic’s top e-learning mentorship to grow your tech, coding, and data skills with expert guidance."/>
+        <meta property="og:type" content="website"/>
+        <meta name="twitter:card" content="summary"/>
+        <meta property="twitter:title" content="Top E-Learning Mentorship Programs | Krutanic"/>
+        <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
+        <meta property="twitter:description" content="Join Krutanic’s top e-learning mentorship to grow your tech, coding, and data skills with expert guidance."/>
+        <link rel="canonical" href="https://www.krutanic.com/Mentorship" />
+    </Helmet>
+
       {/* Hero Section */}
       <section id="mentorshipbg" className="h-[650px] shadow-lg shadow-[#f15b29]  flex  items-center justify-center py-[60px] px-[10px] overflow-hidden">
         <div className="container mx-auto">
