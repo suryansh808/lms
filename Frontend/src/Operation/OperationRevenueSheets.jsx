@@ -117,7 +117,7 @@ const BDARevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                <th className="border p-3 text-left">Booked Amount</th>
+                {/* <th className="border p-3 text-left">Booked Amount</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -127,7 +127,7 @@ const BDARevenueSheet = () => {
                 <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
-                  <td className="border p-3">₹{data.booked.toFixed(2)}</td>
+                  {/* <td className="border p-3">₹{data.booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
                   <td className="border p-3">₹{data.pending.toFixed(2)}</td>
                 </tr>
@@ -145,7 +145,7 @@ const BDARevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                <th className="border p-3 text-left">Booked Revenue</th>
+                {/* <th className="border p-3 text-left">Booked Revenue</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -155,7 +155,7 @@ const BDARevenueSheet = () => {
                 <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
-                  <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td>
+                  {/* <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
                 </tr>

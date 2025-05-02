@@ -155,6 +155,67 @@ const AllTeamDetail = () => {
     ? allData.filter((bda) => bda.team === selectedTeam)
     : allData;
 
+    const getMonth = (date, offset) => {
+      const newDate = new Date(date);
+      newDate.setMonth(newDate.getMonth() - offset);
+      return newDate.toISOString().slice(0, 7);
+    };
+    
+    // const currentMonth = getMonth(today, 0);
+    const prevMonth1 = getMonth(today, 1);
+    const prevMonth2 = getMonth(today, 2);
+    const prevMonth3 = getMonth(today, 3);
+    const getTeamRevenueForMonth = (month) => {
+      let totalProgram = 0;
+      let totalPaid = 0;
+      let totalPending = 0;
+      let totalDefault = 0;
+      let noOfPayments = 0;
+    
+      filteredData.forEach((bda) => {
+        const monthEnrollments = bda.enrollments.filter(
+          (item) =>
+            new Date(item.createdAt).toISOString().slice(0, 7) === month
+        );
+    
+        totalProgram += monthEnrollments.reduce(
+          (sum, item) => sum + (item.programPrice || 0),
+          0
+        );
+    
+        totalPaid += monthEnrollments.reduce((sum, item) => {
+          const isHalfCleared =
+            Array.isArray(item.remark) &&
+            item.remark[item.remark.length - 1] === "Half_Cleared";
+          if (item.status === "fullPaid" || isHalfCleared) {
+            return sum + (item.paidAmount || 0);
+          }
+          return sum;
+        }, 0);
+    
+        totalPending += monthEnrollments.reduce(
+          (sum, item) =>
+            sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
+          0
+        );
+    
+        totalDefault += monthEnrollments
+          .filter((item) => item.status === "default")
+          .reduce((sum, item) => sum + (item.paidAmount || 0), 0);
+
+          noOfPayments += monthEnrollments.filter((item) => (item.paidAmount || 0) > 0).length;
+      });
+    
+      return {
+        totalProgram,
+        totalPaid,
+        totalPending,
+        totalDefault,
+        noOfPayments
+      };
+    };
+    
+
   return (
     <div id="AdminAddCourse">
       {/* selected bda detail */}
@@ -178,7 +239,7 @@ const AllTeamDetail = () => {
                   <th>Date</th>
                   <th>No of Booked</th>
                   <th>Total Revenue</th>
-                  <th>Booked</th>
+                  {/* <th>Booked</th> */}
                   <th>Credited</th>
                   <th>Pending</th>
                 </tr>
@@ -190,7 +251,7 @@ const AllTeamDetail = () => {
                       <td>{data.date}</td>
                       <td>{data.count}</td>
                       <td>₹ {data.total}</td>
-                      <td>₹ {data.booked}</td>
+                      {/* <td>₹ {data.booked}</td> */}
                       <td>₹ {data.credited}</td>
                       <td>₹ {data.total - data.credited} </td>
                     </tr>
@@ -510,6 +571,38 @@ const AllTeamDetail = () => {
               );
             })()}
         </div>
+        <div className="flex flex-col">
+  <h3>📊 Previous Month Revenue Summary</h3>
+  <table className="bdarevenuetable">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>No. of Payments</th>
+        <th>Total Program Price</th>
+        <th>Total Paid Amount</th>
+        <th>Total Pending Amount</th>
+        <th>Total Default Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[prevMonth1, prevMonth2, prevMonth3].map((month) => {
+        const revenue = getTeamRevenueForMonth(month);
+        return (
+          <tr key={month}>
+            <td>{month}</td>
+            <td>{revenue.noOfPayments}</td>
+            <td>₹ {revenue.totalProgram.toLocaleString()}</td>
+            <td>₹ {revenue.totalPaid.toLocaleString()}</td>
+            <td>₹ {revenue.totalPending.toLocaleString()}</td>
+            <td>₹ {revenue.totalDefault.toLocaleString()}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+
       </div>
     </div>
   );

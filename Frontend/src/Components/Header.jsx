@@ -21,7 +21,7 @@
     // }, []);
 
     useEffect(() => {
-      if (location.pathname === "/") {
+      if (location.pathname === "/" || location.pathname === "/dashboardaccessform") {
         const timer = setTimeout(() => {
           setisAutopopupVisible(true);
         }, 1000);

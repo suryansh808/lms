@@ -59,7 +59,9 @@ const BookedList = () => {
         studentId,
         ...updatedData,
       });
-      fetchNewStudent();
+
+      setNewStudent((prev) => prev.filter((student) => student._id !== studentId));
+      setFilteredStudents((prev) => prev.filter((student) => student._id !== studentId));
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -481,8 +483,8 @@ const BookedList = () => {
             className="border border-black px-2 py-1 rounded-lg"
               name="month"
               id="month"
-              value={selectedMonth} // Bind to selectedMonth state
-              onChange={handleMonthChange} // Trigger filter on month change
+              value={selectedMonth} 
+              onChange={handleMonthChange}
             > 
               {months.map((month, index) => (
                 <option key={index} value={month}>

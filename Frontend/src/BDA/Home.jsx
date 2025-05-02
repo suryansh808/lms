@@ -169,7 +169,7 @@ const Home = () => {
         <div className="revenue-card">
           <h2 className="text-lg font-bold mb-4">Revenue Details</h2>
           <p>Total Revenue: {totalRevenue}/-</p>
-          <p>Booked Revenue: {bookedRevenue}/-</p>
+          {/* <p>Booked Revenue: {bookedRevenue}/-</p> */}
           <p>Credited Revenue: {creditedRevenue}/-</p>
           <p>Pending Revenue: {pendingRevenue}/-</p>
         </div>

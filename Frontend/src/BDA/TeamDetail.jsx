@@ -176,7 +176,7 @@ const TeamDetail = () => {
                   <th>Date</th>
                   <th>No of Booked</th>
                   <th>Total Revenue</th>
-                  <th>Booked</th>
+                  {/* <th>Booked</th> */}
                   <th>Credited</th>
                   <th>Pending</th>
                 </tr>
@@ -188,7 +188,7 @@ const TeamDetail = () => {
                       <td>{data.date}</td>
                       <td>{data.count}</td>
                       <td>₹ {data.total}</td>
-                      <td>₹ {data.booked}</td>
+                      {/* <td>₹ {data.booked}</td> */}
                       <td>₹ {data.credited}</td>
                       <td>₹ {data.total - data.credited} </td>
                     </tr>

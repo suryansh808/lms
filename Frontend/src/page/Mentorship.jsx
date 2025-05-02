@@ -50,7 +50,7 @@ const Mentorship = () => {
         <meta property="twitter:title" content="Top E-Learning Mentorship Programs | Krutanic"/>
         <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
         <meta property="twitter:description" content="Join Krutanic’s top e-learning mentorship to grow your tech, coding, and data skills with expert guidance."/>
-        <link rel="canonical" href="https://www.krutanic.com/" />
+        <link rel="canonical" href="https://www.krutanic.com/Mentorship"/>
     </Helmet>
 
       {/* Hero Section */}

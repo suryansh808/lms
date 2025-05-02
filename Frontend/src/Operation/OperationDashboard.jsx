@@ -177,7 +177,7 @@ const OperationDashboard = () => {
         <div className="revenue-card">
           <h2 className="text-lg font-semibold">Revenue Details (Current Month)</h2>
           <p>Total Revenue: {totalRevenue}/-</p>
-          <p>Booked Revenue: {bookedRevenue}/-</p>
+          {/* <p>Booked Revenue: {bookedRevenue}/-</p> */}
           <p>Credited Revenue: {creditedRevenue}/-</p>
           <p>Pending Revenue: {pendingRevenue}/-</p>
         </div>

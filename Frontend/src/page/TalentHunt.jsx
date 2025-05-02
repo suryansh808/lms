@@ -133,7 +133,7 @@ const TalentHunt = () => {
         <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
         <meta property="twitter:description" content="Connect with top-tier tech talent through Krutanic’s Talent Hunt. Discover skilled professionals in coding, AI, and data science ready to power your company."/>
 
-        <link rel="canonical" href="https://www.krutanic.com/" />
+        <link rel="canonical" href="https://www.krutanic.com/TalentHunt" />
 
         </Helmet>
 

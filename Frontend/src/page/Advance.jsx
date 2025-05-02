@@ -199,8 +199,7 @@ const handleFormSubmit = async (e) => {
         <title>Krutanic Advance: Expert-Led Online Courses for Career Growth</title>
         <meta name="description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
         <meta name="keywords" content="online learning, career development, professional courses, tech training, data science, coding, upskilling, e-learning platform"/>
-        <link rel="canonical" href="https://www.krutanic.com/"/>
-
+        <link rel="canonical" href="https://www.krutanic.com/Advance"/>
         <meta property="og:title" content="Krutanic Advance: Expert-Led Online Courses for Career Growth"/>
         <meta property="og:description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
         <meta property="og:url" content="https://www.krutanic.com/Advance"/>
