@@ -366,6 +366,24 @@ router.delete("/delete-target", async (req, res) => {
   }
 });
 
-
+//put request to update the bda access
+router.put("/updateaccess/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {Access } = req.body;
+    // console.log(id , Access);
+    const updatedstatus = await CreateBDA.findByIdAndUpdate(
+      id,
+      { $set: { Access } },
+      { new: true }
+    );
+    if (!updatedstatus) {
+      return res.status(404).json({ error: "bda account not found" });
+    }
+    res.status(200).json(updatedstatus);
+  } catch (error) {
+    res.status(400).json({ error: "Error updating bda account" });
+  }
+});
 
 module.exports = router;

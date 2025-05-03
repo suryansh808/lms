@@ -8,6 +8,7 @@ const CreateBDA = new mongoose.Schema({
     designation: { type: String},
     otp: { type: String },
     mailSended : {type: Boolean , default: false},
+    Access:{type:Boolean , default : true},
     status: { type: String , default: "Inactive"},
     target:[{ currentMonth: { type: String }, targetValue: { type: String } }],
   });

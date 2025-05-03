@@ -55,7 +55,7 @@ const CreateBDA = () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
-      setBda(response.data);
+      setBda(response.data.filter((item) => item && item.Access === true));
     } catch (error) {
       console.error("There was an error fetching bda:", error);
     } finally{
@@ -180,7 +180,7 @@ const CreateBDA = () => {
     const teamData = {
       teamname: teamName.trim(),
     };
-    console.log("teamData", teamData);
+    // console.log("teamData", teamData);
     axios.post(`${API}/addteamname`, teamData)
       .then((response) => {
         if (response.status === 200) {
@@ -216,6 +216,26 @@ const CreateBDA = () => {
       toast.error(error.response?.data?.message || "Failed to verify OTP!");
     }
   };
+
+  const handleChangeAccess = async (id)=>{
+     const isConfirmed = window.confirm(
+      `Are you sure you want to inactive this account?`
+    );
+    if (isConfirmed) {
+      try {
+        const response = await axios.put(`${API}/updateaccess/${id}`, {Access: false});
+        if (response.status === 200) {
+          toast.success(`Account inactive successfully!`);
+          fetchBda();
+        } else {
+          toast.error("Failed to update account");
+        }
+      } catch (error) {
+        toast.error("An error occurred while updating the account");
+      }
+    }
+
+  }
 
   return (
     <div id="AdminAddCourse" >
@@ -327,8 +347,9 @@ const CreateBDA = () => {
                   <td>{bda.password}</td>
                   <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td>
                   <td>
-                    <button onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
-                    <button onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
+                    <button title="Edit" onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
+                    <button title="Delete" onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
+                    <button title="Inactive BDA" onClick={() => handleChangeAccess(bda._id)}><i class="fa fa-eye-slash"></i></button>
                   </td>
                   <td>
                     <div className="cursor-pointer">

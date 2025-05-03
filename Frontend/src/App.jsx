@@ -52,6 +52,8 @@ import EventRegistration from "./Admin/EventRegistration";
 import OnBoardingDetails from "./Admin/OnBoardingDetails";
 import HalfPayment from "./Admin/HalfPayment";
 import Target from "./Admin/Target";
+import AlumniData from "./Admin/AlumniData";
+import InactiveBda from "./Admin/InactiveBda";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -107,7 +109,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 //event
 import EventDashBoard from "./Event/EventDashBoard";
-import AlumniData from "./Admin/AlumniData";
+
 
 
 
@@ -189,7 +191,8 @@ const AppContent = () => {
     "/addevent",
     "/eventregistration",
     "/target",
-    "/alumnidata"
+    "/alumnidata",
+    "/inactivebda"
   ];
 
   const operationheaderPaths = [
@@ -307,6 +310,8 @@ const AppContent = () => {
         <Route path="/EventRegistration" element={isAuthenticatedAdmin() ? (<EventRegistration />) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/Target" element={isAuthenticatedAdmin() ? (<Target/>) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/AlumniData" element={isAuthenticatedAdmin() ? (<AlumniData/>) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/InactiveBda" element={isAuthenticatedAdmin() ? (<InactiveBda/>) : (<Navigate to="/AdminLogin" />)}/>
+
 
         {/* Admin Panel End */}
 
