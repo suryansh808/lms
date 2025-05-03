@@ -29,12 +29,16 @@ const Dashboard = () => {
   }, 500);
 
   const handleSubmit = async (data) => {
-    if (!window.confirm("Are you sure your internship is complete? If not,please cancel. If it's complete, click 'ok' to proceed.")) {
+    if (
+      !window.confirm(
+        "Are you sure your internship is complete? If not,please cancel. If it's complete, click 'ok' to proceed."
+      )
+    ) {
       return;
-  }
-  if (!window.confirm("Do you really want to apply for your certificate?")) {
-    return;
-}
+    }
+    if (!window.confirm("Do you really want to apply for your certificate?")) {
+      return;
+    }
     console.log("c", data);
     const name = data.fullname;
     const email = data.email;
@@ -83,14 +87,14 @@ const Dashboard = () => {
   const addLinkedin = (data) => {
     console.log("linkedin", data.date);
     let year = new Date(data.date).toLocaleDateString("en-US", {
-      year: "numeric"
+      year: "numeric",
     });
     let month = new Date(data.date).toLocaleDateString("en-US", {
       month: "numeric",
     });
-    let linkurl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${data.domain}&organizationName=Krutanic&issueYear=${year}&issueMonth=${month}&certUrl=${data.url}&certId=${data._id}`
-    window.open(linkurl, "_blank"); 
-  }
+    let linkurl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${data.domain}&organizationName=Krutanic&issueYear=${year}&issueMonth=${month}&certUrl=${data.url}&certId=${data._id}`;
+    window.open(linkurl, "_blank");
+  };
 
   return (
     <div id="UserDashboard">
@@ -113,8 +117,18 @@ const Dashboard = () => {
               <hr />
               {/* <button className="border-2 border-blue-600 text-blue-600"><i class="fa fa-download"></i>  As Image </button>
               <button className="border-2 border-red-600 text-red-600"><i class="fa fa-download"></i>  Certificate</button> */}
-              <button className="border-2 border-blue-800 bg-blue-700 text-white" onClick={() => addLinkedin(selectedCertificate)}>Add to linkedin </button>
-              <button className="border-2 border-black bg-black text-white" onClick={() => setSelectedCertificate(null)}>CLOSE</button>
+              <button
+                className="border-2 border-blue-800 bg-blue-700 text-white"
+                onClick={() => addLinkedin(selectedCertificate)}
+              >
+                Add to linkedin{" "}
+              </button>
+              <button
+                className="border-2 border-black bg-black text-white"
+                onClick={() => setSelectedCertificate(null)}
+              >
+                CLOSE
+              </button>
             </div>
           </div>
         </div>
@@ -194,6 +208,16 @@ const Dashboard = () => {
                     <strong>Your Due Payment Amount Is :</strong> ₹{" "}
                     {item.programPrice - item.paidAmount}/-
                   </p>
+                  <div>
+                    <strong>
+                        You can pay your remaining amount through this{" "}
+                      <a className="text-blue-700 font-bold" href="https://smartpay.easebuzz.in/132907/pay" target="_blank">
+                        PayNow
+                      </a>
+                      . <i title=" share the screenshot to your counselor" class="fa fa-info-circle" aria-hidden="true"></i>
+                    </strong>
+                  </div>
+
                   <p className="text-center">
                     <strong>Note:</strong>{" "}
                     <span className="font-bold">

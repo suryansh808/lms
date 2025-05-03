@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../API";
+import toast, { Toaster } from "react-hot-toast";
 
 const TeamDetail = () => {
   const bdaId = localStorage.getItem("bdaId");
@@ -151,10 +152,28 @@ const TeamDetail = () => {
   };
 
   const filteredData = allData.filter((bda) => bda.team === selectedTeam);
-  console.log(filteredData);
+   const handleloginteam = async (email,password) => {
+      try {
+        const response = await axios.post(`${API}/checkbdaauth`, { email, password });
+        if (response.status === 200) {
+        toast.success("Login successful!");
+        const loginTime = new Date().getTime();
+        setTimeout(() => {
+        localStorage.setItem("bdaId", response.data.bdaId);
+        localStorage.setItem("bdaName", response.data.bdaName);
+        localStorage.setItem("bdaToken", response.data.token);
+         localStorage.setItem("sessionStartTime", loginTime);
+         window.open("/Home", "_blank"); 
+      }, 500);
+      }
+      } catch (error) {
+        toast.error(error.response?.data?.message || "Failed to verify OTP!");
+      }
+    };
 
   return (
     <div id="AdminAddCourse">
+        <Toaster position="top-center" reverseOrder={false} />
       {/* selected bda detail */}
       {detailVisible && selectedBda && (
         <div className="form">
@@ -319,6 +338,7 @@ const TeamDetail = () => {
               <th>Sl</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Login</th>
               <th>Designation</th>
               <th>Team</th>
               <th>Total</th>
@@ -328,7 +348,7 @@ const TeamDetail = () => {
           </thead>
           <tbody>
             {filteredData.map((bda, index) => (
-              <tr key={index} className="hover:bg-slate-100">
+              <tr key={index} onClick={()=> console.log(bda)} className="hover:bg-slate-100">
                 <td>{index + 1}</td>
                 <td
                   style={{ color: "blue", cursor: "pointer" }}
@@ -337,6 +357,7 @@ const TeamDetail = () => {
                   {bda.fullname}
                 </td>
                 <td>{bda.email}</td>
+                <td className="font-bold cursor-pointer" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td>
                 <td>{bda.designation}</td>
                 <td>{bda.team}</td>
                 <td>{bda.enrollments.length}</td>
