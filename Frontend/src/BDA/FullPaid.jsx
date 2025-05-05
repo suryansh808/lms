@@ -15,12 +15,21 @@ const FullPaid = () => {
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
+
+
+      const currentMonth = getCurrentMonth();
+      setSelectedMonth(currentMonth);
+      
+      // Filter the students based on the current month by default
+      const filtered = bookedStudents.filter((student) => getMonthFromDate(student.createdAt) === currentMonth);
+      setFilteredStudents(filtered);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     }
   };
   useEffect(() => {
     fetchNewStudent();
+    setMonths(getPastMonths());
   }, []);
 
   if (!newStudent) {
@@ -48,6 +57,65 @@ const FullPaid = () => {
     setFilteredStudents(filtered);
   };
 
+    const [selectedMonth, setSelectedMonth] = useState("");
+      const [months, setMonths] = useState([]);
+    const handleMonthChange = (event) => {
+      const selectedMonth = event.target.value;
+      setSelectedMonth(selectedMonth); // Update selected month
+      const filtered = newStudent.filter((student) =>
+        getMonthFromDate(student.createdAt) === selectedMonth
+      );
+      setFilteredStudents(filtered); // Update filtered students
+    };
+ // Format date to display
+ const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+
+ // Get current month (in string format like "Jan", "Feb", etc.)
+ const getCurrentMonth = () => {
+   const months = [
+     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+   ];
+   
+   const currentMonthIndex = new Date().getMonth();
+   return months[currentMonthIndex];
+ };
+
+ // Get the previous months including the current month
+ const getPastMonths = () => {
+   const months = [
+     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+   ];
+   
+   const currentMonthIndex = new Date().getMonth();
+   let pastMonths = [];
+
+   for (let i = 0; i < 4; i++) {
+    const index = (currentMonthIndex - i + 12) % 12; // handles wrap-around
+    pastMonths.push(months[index]);
+  }
+
+  return pastMonths; 
+ };
+
+
+ // Get the month from the student's created date
+ const getMonthFromDate = (date) => {
+   const months = [
+     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+   ];
+   
+   const monthIndex = new Date(date).getMonth();
+   return months[monthIndex];
+ };
+
+ const groupedData = filteredStudents.reduce((acc, item) => {
+   const date = formatDate(item.createdAt);
+   if (!acc[date]) {
+     acc[date] = [];
+   }
+   acc[date].push(item);
+   return acc;
+ }, {});
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
@@ -63,14 +131,29 @@ const FullPaid = () => {
 
           <div className="relative group inline-block">
             <i class="fa fa-info-circle text-lg cursor-pointer"></i>
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
+            <div className="absolute left-1/2 z-[9999] -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
               Name, Email, Contact ,Counselor Name, Operation Name
-              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
+              <div className="absolute left-1/2  z-[9999] -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
             </div>
           </div>
         </section>
         <h2>Full Payment</h2>
         </div>
+        <div>
+            <select
+            className="border border-black px-2 py-1 rounded-lg"
+              name="month"
+              id="month"
+              value={selectedMonth} // Bind to selectedMonth state
+              onChange={handleMonthChange} // Trigger filter on month change
+            > 
+              {months.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+          </div>
         <table>
           <thead>
             <tr>
@@ -86,35 +169,41 @@ const FullPaid = () => {
               <th>Pending </th>
               <th>Month Opted</th>
               <th>Due Date</th>
-              {/* <th>Remark</th> */}
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(filteredStudents) && filteredStudents.length > 0 ? (
-              filteredStudents?.map((item, index) => (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td className="capitalize">{item.fullname}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                  <td className="capitalize">{item.program}</td>
-                  <td className="capitalize">{item.operationName}</td>
-                  <td className="capitalize">{item.domain}</td>
-                  <td>{item.programPrice}</td>
-                  <td>{item.paidAmount}</td>
-                  <td>{item.programPrice - item.paidAmount}</td>
-                  <td className="capitalize">{item.monthOpted}</td>
-                  <td className="whitespace-nowrap">
-                    {item.clearPaymentMonth}
-                  </td>
-                  {/* <td>{item.remark[item.remark.length - 1]}</td> */}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="14">No data found</td>
-              </tr>
-            )}
+             {Object.keys(groupedData).length > 0 ? (
+                            Object.keys(groupedData).map((date) => (
+                              <React.Fragment key={date}>
+                                <tr>
+                                  <td colSpan="16" style={{ fontWeight: "bold" }}>
+                                    {date}
+                                  </td>
+                                </tr>
+                                {groupedData[date].map((item, index) => (
+                                  <tr key={item._id}>
+                                    <td>{index + 1}</td>
+                                    <td className="capitalize">{item.fullname}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.phone}</td>
+                                    <td className="capitalize">{item.program}</td>
+                                    {/* <td>{item.counselor}</td> */}
+                                    <td>{item.operationName}</td>
+                                    <td className="capitalize">{item.domain}</td>
+                                    <td>{item.programPrice}</td>
+                                    <td>{item.paidAmount}</td>
+                                    <td>{item.programPrice - item.paidAmount}</td>
+                                    <td className="capitalize">{item.monthOpted}</td>
+                                    <td className=" whitespace-nowrap">{item.clearPaymentMonth}</td>
+                                  </tr>
+                                ))}
+                              </React.Fragment>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="14">No data found</td>
+                            </tr>
+                          )}
           </tbody>
         </table>
       </div>
