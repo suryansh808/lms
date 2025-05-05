@@ -13,8 +13,11 @@ const EnrolledCourse = () => {
   const navigate = useNavigate();
 
   const handleStartLearning = (title, sessionlist) => {
+    const firstSessionKey = Object.keys(sessionlist)[0];  // Get the first session's key
+  const firstSession = { [firstSessionKey]: sessionlist[firstSessionKey] }; // Create a new object with only the first session
+    
     navigate("/Learning", {
-      state: { courseTitle: title, sessions: sessionlist },
+      state: { courseTitle: title, sessions: firstSession },
     });
   };
 
@@ -104,7 +107,7 @@ const EnrolledCourse = () => {
             ><span>☰ </span></h2>
             <h2>{selectedCourse.title}</h2>
             <h2></h2>
-            {/* <button onClick={() => handleStartLearning(selectedCourse.title,selectedCourse.session)}>Start Learning</button> */}
+            <button onClick={() => handleStartLearning(selectedCourse.title,selectedCourse.session)}>DEMO</button>
           </div>
           {/* <pre dangerouslySetInnerHTML={{ __html: sanitizedDescription }} /> */}
           <pre>{selectedCourse.description}</pre>
