@@ -3,6 +3,8 @@ import axios from "axios";
 import API from "../API";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import debounce from "lodash.debounce";
+
 const PROGRAM_OPTIONS = [
   { value: "", label: "All Programs" },
   { value: "Self-guided", label: "Self-guided" },
@@ -10,22 +12,42 @@ const PROGRAM_OPTIONS = [
   { value: "Career Advancement", label: "Career Advancement" },
 ];
 const ITEMS_PER_PAGE = 40;
+
 const AcceptedApplication = () => {
   const [users, setUsers] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [programFilter, setProgramFilter] = useState("");
   const [showFullyPaidOnly, setShowFullyPaidOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState(null);
+
+  const debouncedSetSearchQuery = useMemo(
+    () =>
+      debounce((value) => {
+        setDebouncedSearchQuery(value);
+        setCurrentPage(1);
+      }, 500),
+    []
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    debouncedSetSearchQuery(e.target.value);
+  };
+
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
-      const [usersResponse, enrollmentsResponse] = await Promise.all([
-        axios.get(`${API}/users`),
-        axios.get(`${API}/getnewstudentenroll`),
-      ]);
+      const [usersResponse, enrollmentsResponse, componentsResponse] =
+        await Promise.all([
+          axios.get(`${API}/users`),
+          axios.get(`${API}/getnewstudentenroll`),
+          axios.get(`${API}/all-user-components`),
+        ]);
+
       const enrollmentsMap = new Map(
         enrollmentsResponse.data.map((e) => [
           e.email,
@@ -35,6 +57,11 @@ const AcceptedApplication = () => {
           },
         ])
       );
+
+      const componentsMap = new Map(
+        componentsResponse.data.map((c) => [c.userId, c.components])
+      );
+
       const activeUsers = usersResponse.data
         .filter((user) => user.status === "active")
         .map((user) => {
@@ -43,10 +70,11 @@ const AcceptedApplication = () => {
             ...user,
             program: enrollment?.program || "Self-guided",
             isFullyPaid: enrollment?.isFullyPaid || false,
-            components: null,
+            components: componentsMap.get(user._id) || {},
             isLoadingComponent: false,
           };
         });
+
       setUsers(activeUsers);
       if (activeUsers.length === 0) {
         toast.info("No active users found.", {
@@ -61,17 +89,7 @@ const AcceptedApplication = () => {
       setLoading(false);
     }
   }, []);
-  const fetchComponents = useCallback(async (userId) => {
-    try {
-      const response = await axios.get(`${API}/user-components`, {
-        params: { userId },
-      });
-      return response.data.components;
-    } catch (error) {
-      console.error(`Error fetching components for user ${userId}:`, error);
-      return {};
-    }
-  }, []);
+
   const handleToggleComponent = useCallback(
     async (userId, component, status) => {
       const toastId = toast.info(
@@ -95,7 +113,10 @@ const AcceptedApplication = () => {
                     component,
                     status,
                   });
-                  const components = await fetchComponents(userId);
+                  const response = await axios.get(`${API}/user-components`, {
+                    params: { userId },
+                  });
+                  const components = response.data.components;
                   setUsers((prev) =>
                     prev.map((u) =>
                       u._id === userId
@@ -140,32 +161,38 @@ const AcceptedApplication = () => {
         }
       );
     },
-    [fetchComponents]
+    []
   );
+
   const filteredUsers = useMemo(() => {
     return users.filter((user) => {
       const matchesSearch =
-        !searchQuery ||
-        (programFilter && user.program !== programFilter
-          ? false
-          : user.fullname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.phone.toLowerCase().includes(searchQuery.toLowerCase()));
+        !debouncedSearchQuery ||
+        (user.fullname
+          .toLowerCase()
+          .includes(debouncedSearchQuery.toLowerCase()) ||
+          user.email
+            .toLowerCase()
+            .includes(debouncedSearchQuery.toLowerCase()) ||
+          user.phone.toLowerCase().includes(debouncedSearchQuery.toLowerCase()));
       const matchesProgram = !programFilter || user.program === programFilter;
       const matchesPayment = !showFullyPaidOnly || user.isFullyPaid;
       return matchesSearch && matchesProgram && matchesPayment;
     });
-  }, [users, searchQuery, programFilter, showFullyPaidOnly]);
+  }, [users, debouncedSearchQuery, programFilter, showFullyPaidOnly]);
+
   const paginatedUsers = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredUsers.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredUsers, currentPage]);
+
   const handleEdit = useCallback((user) => {
     if (window.confirm("Are you sure you want to edit the user details?")) {
       setFormData(user);
       setIsFormVisible(true);
     }
   }, []);
+
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -181,6 +208,7 @@ const AcceptedApplication = () => {
     },
     [formData, fetchUsers]
   );
+
   const handleInactivate = useCallback(
     async (id) => {
       if (window.confirm("Are you sure you want to inactivate this user?")) {
@@ -198,21 +226,12 @@ const AcceptedApplication = () => {
     },
     [fetchUsers]
   );
+
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
   const RenderRow = React.memo(({ user, index }) => {
-    const loadComponents = async () => {
-      if (user.components === null) {
-        const components = await fetchComponents(user._id);
-        setUsers((prev) =>
-          prev.map((u) => (u._id === user._id ? { ...u, components } : u))
-        );
-      }
-    };
-    useEffect(() => {
-      loadComponents();
-    }, []);
     return (
       <tr key={user._id}>
         <td>{(currentPage - 1) * ITEMS_PER_PAGE + index + 1}</td>
@@ -428,7 +447,13 @@ const AcceptedApplication = () => {
         </td>
       </tr>
     );
-  });
+  }, [
+    currentPage,
+    handleToggleComponent,
+    handleInactivate,
+    handleEdit,
+  ]);
+
   return (
     <div id="AdminAddCourse">
       <ToastContainer />
@@ -532,12 +557,15 @@ const AcceptedApplication = () => {
                       : "Search by name, email, or contact..."
                   }
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={handleSearchChange}
                   className="border border-black px-2 py-1 rounded-lg w-[400px] focus:outline-none"
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => setSearchQuery("")}
+                    onClick={() => {
+                      setSearchQuery("");
+                      debouncedSetSearchQuery("");
+                    }}
                     className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                   >
                     ✕
@@ -545,7 +573,6 @@ const AcceptedApplication = () => {
                 )}
               </div>
             </div>
-
             <div className="flex items-center justify-center gap-1">
               <label>
                 <input
@@ -565,6 +592,7 @@ const AcceptedApplication = () => {
                   setProgramFilter(e.target.value);
                   setCurrentPage(1);
                   setSearchQuery("");
+                  debouncedSetSearchQuery("");
                 }}
                 className="border border-black px-2 py-1 rounded-lg focus:outline-none"
               >
@@ -649,4 +677,5 @@ const AcceptedApplication = () => {
     </div>
   );
 };
+
 export default AcceptedApplication;

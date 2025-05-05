@@ -381,6 +381,70 @@ router.put('/user-components/:userId', async (req, res) => {
   }
 });
 
+// NEW GET: Fetch components for all active users
+router.get('/all-user-components', async (req, res) => {
+  try {
+    const users = await User.find({ status: 'active' }).select(
+      '_id atschecker jobboard myjob mockinterview exercise'
+    );
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: 'No active users found' });
+    }
+
+    const componentsData = users.map((user) => ({
+      userId: user._id,
+      components: {
+        atschecker: user.atschecker,
+        jobboard: user.jobboard,
+        myjob: user.myjob,
+        mockinterview: user.mockinterview,
+        exercise: user.exercise,
+      },
+    }));
+
+    res.json(componentsData);
+  } catch (error) {
+    console.error('Error fetching all user components:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// NEW POST: Fetch components for a batch of users
+router.post('/batch-user-components', async (req, res) => {
+  try {
+    const { userIds } = req.body;
+
+    if (!Array.isArray(userIds) || userIds.length === 0) {
+      return res.status(400).json({ message: 'Array of user IDs is required' });
+    }
+
+    const users = await User.find({
+      _id: { $in: userIds },
+      status: 'active',
+    }).select(' _id atschecker jobboard myjob mockinterview exercise');
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: 'No active users found for provided IDs' });
+    }
+
+    const componentsData = users.map((user) => ({
+      userId: user._id,
+      components: {
+        atschecker: user.atschecker,
+        jobboard: user.jobboard,
+        myjob: user.myjob,
+        mockinterview: user.mockinterview,
+        exercise: user.exercise,
+      },
+    }));
+
+    res.json(componentsData);
+  } catch (error) {
+    console.error('Error fetching batch user components:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // alumni data and retreive route 
 
 
