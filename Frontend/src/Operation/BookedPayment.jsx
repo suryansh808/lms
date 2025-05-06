@@ -25,6 +25,51 @@ const BookedAmount = () => {
     setEditingStudentId(null);
   };
   const [course, setCourse] = useState([]);
+
+  const [offerData, setOfferData] = useState(null);
+  const [offerDate, setOfferDate] = useState("");
+  const [offerDuration, setOfferDuration] = useState("");
+  const [offerStart, setOfferStart] = useState("");
+  const [offerEnd, setOfferEnd] = useState("");
+  const [isOfferLetterSending, setIsOfferLetterSending] = useState(false);
+
+  const resetOfferLeter = () => {
+    setOfferData(null);
+    setOfferDate("");
+    setOfferDuration("");
+    setOfferStart("");
+    setOfferEnd("");
+  };
+
+  const sendOfferleter = async (e) => {
+    e.preventDefault();
+    setIsOfferLetterSending(true);
+
+    const offerLetterDetails = {
+      id: offerData._id,
+      fullname: offerData.fullname.charAt(0).toUpperCase() + offerData.fullname.slice(1).toLowerCase(),
+      domain: offerData.domain,
+      email: offerData.email,
+      date: new Date(offerDate).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
+      duration: offerDuration,
+      start: new Date(offerStart).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
+      end: new Date(offerEnd).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
+    };
+    console.log("Sending Offer Letter:", offerLetterDetails);
+    try {
+      const response = await axios.post(`${API}/sendofferletter`, offerLetterDetails);
+      toast.success("Offer letter sent successfully");
+      fetchNewStudent();
+      resetOfferLeter();
+
+    } catch (error) {
+      console.error("There was an error sending the offer letter:", error);
+    }finally {
+      setIsOfferLetterSending(false); // Ensure this always executes
+    }
+  };
+
+
   const fetchCourses = async () => {
     try {
       const response = await axios.get(`${API}/getcourses`);
@@ -439,6 +484,32 @@ const BookedAmount = () => {
   return (
     <div id="OperationEnroll" className="ml-[265px]">
       <Toaster position="top-center" reverseOrder={false} />
+      {offerData && (
+        <div className="form">
+          <form onSubmit={sendOfferleter}>
+            <span onClick={resetOfferLeter}>✖</span>
+            <h2>Send Offer Letter</h2>
+            <p>
+              Name: <strong>{offerData?.fullname}</strong><br />
+              Domain: <strong>{offerData?.domain}</strong><br />
+              Email: <strong>{offerData?.email}</strong>
+            </p>
+            <label>Offer Letter Date:</label>
+            <input type="date" value={offerDate} onChange={(e) => setOfferDate(e.target.value)} required />
+            <label>Internship Duration:</label>
+            <select value={offerDuration} onChange={(e) => setOfferDuration(e.target.value)} required>
+              <option value="">Select Duration</option>
+              <option value="Two">Two</option>
+              <option value="Three">Three</option>
+            </select>
+            <label>Internship Start Date:</label>
+            <input type="date" value={offerStart} onChange={(e) => setOfferStart(e.target.value)} required />
+            <label>Internship End Date:</label>
+            <input type="date" value={offerEnd} onChange={(e) => setOfferEnd(e.target.value)} required />
+            <input type="submit" value={isOfferLetterSending ? "Sending Pls Wait..." : "Send Offer Letter"} className="cursor-pointer" disabled={isOfferLetterSending} />
+          </form>
+        </div>
+      )}
       {iscourseFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -593,6 +664,7 @@ const BookedAmount = () => {
               <th>Login Credentials</th>
               <th>Create User account</th>
               <th>Send Onboarding Details</th>
+              <th>send offer letter</th>
               <th>More Details</th>
               <th>Last Remark</th>
               <th>Remark</th>
@@ -687,6 +759,13 @@ const BookedAmount = () => {
                             </div>
                           )}
                         </div>
+                      </td>
+                      <td onClick={() => setOfferData(item)} style={{ cursor: 'pointer', color: 'blue' }} >
+                        {item.offerlettersended ? (
+                          <i className="fa fa-send">sended</i>)
+                          :(
+                          <i className="fa fa-send"></i>
+                          )}
                       </td>
                       <td>
                         <i

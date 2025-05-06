@@ -59,15 +59,28 @@ const FullPaidList = () => {
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
-    const filtered = newStudent.filter(
-      (student) =>
-        student.email.toLowerCase().includes(value.toLowerCase()) ||
-        student.phone.toLowerCase().includes(value.toLowerCase()) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
-        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase()) ||
-        student.createdAt.toLowerCase().includes(value.toLowerCase())
-    );
+    const filtered = newStudent.filter((student) => {
+      return (
+        (student.email &&
+          student.email.toLowerCase().includes(value.toLowerCase())) ||
+        (student.phone &&
+          student.phone.toLowerCase().includes(value.toLowerCase())) ||
+        (student.fullname &&
+          student.fullname.toLowerCase().includes(value.toLowerCase())) ||
+        (student.counselor &&
+          student.counselor.toLowerCase().includes(value.toLowerCase())) ||
+        (student.operationName &&
+          student.operationName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.createdAt &&
+          student.createdAt.toLowerCase().includes(value.toLowerCase())) ||
+        (student.clearPaymentMonth &&
+          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))||
+          (student.collegeName &&
+            student.collegeName.toLowerCase().includes(value.toLowerCase()))||
+            (student.branch &&
+              student.branch.toLowerCase().includes(value.toLowerCase()))
+      );
+    });
     setFilteredStudents(filtered);
   };
 
@@ -146,7 +159,7 @@ const FullPaidList = () => {
               <div className="relative group inline-block">
                 <i className="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
                 <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-                  Name, Email, Contact ,Counselor, Operation and Due date
+                  Name, Email, Contact ,Counselor, Operation , Due date ,  CollegeName and Branch
                   <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
                 </div>
               </div>

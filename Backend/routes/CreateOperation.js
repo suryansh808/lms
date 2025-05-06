@@ -4,6 +4,7 @@ const authMiddleware = require("../middleware/UserAuth");
 const CreateOperation = require("../models/CreateOperation");
 const NewEnrollStudent = require("../models/NewStudentEnroll");
 const { sendEmail } = require("../controllers/emailController");
+const {sendOfferLetter} = require("../controllers/offerLetter")
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
@@ -344,6 +345,22 @@ router.post("/sendedOnboardingMail", async (req, res) => {
   }
 });
 
+router.post("/sendofferletter", async (req, res) => {
+  try {
+    const {id, fullname, domain, email, date, duration, start, end } = req.body;
+    
+    await sendOfferLetter({ email, fullname, date, start, end, domain, duration });
 
+    const updatedStudent = await NewEnrollStudent.findByIdAndUpdate(id,{ offerlettersended: true },{ new: true });
+
+    if (!updatedStudent) {return res.status(404).json({ error: "Student not found" });}
+
+    res.status(200).json({ message: "Offer letter sent and status updated.!" });
+
+  } catch (error) {
+    console.error("Error in /sendofferletter:", error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+});
 
 module.exports = router;

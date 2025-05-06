@@ -85,7 +85,11 @@ const BookedList = () => {
         (student.createdAt &&
           student.createdAt.toLowerCase().includes(value.toLowerCase())) ||
         (student.clearPaymentMonth &&
-          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))
+          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))||
+          (student.collegeName &&
+            student.collegeName.toLowerCase().includes(value.toLowerCase()))||
+            (student.branch &&
+              student.branch.toLowerCase().includes(value.toLowerCase()))
       );
     });
     setFilteredStudents(filtered);
@@ -465,7 +469,7 @@ const BookedList = () => {
               <div className="relative group inline-block">
                 <i class="fa fa-info-circle text-lg cursor-pointer text-gray-500"></i>
                 <div className="absolute left-1/2 -translate-x-1/2 bottom-full z-[9999] mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-                  Name, Email, Contact ,Counselor, Operation and Due date
+                  Name, Email, Contact ,Counselor, Operation , Due date , Collegename and Branch
                   <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
                 </div>
               </div>
@@ -621,6 +625,18 @@ const BookedList = () => {
                 <p>
                   <strong> Alternative Email:</strong>{" "}
                   {dialogData.alternativeEmail}
+                </p>
+                <p>
+                  <strong>College Name:</strong>{" "}
+                  {dialogData.collegeName}
+                </p>
+                <p>
+                  <strong>Branch:</strong>{" "}
+                  {dialogData.branch}
+                </p>
+                <p>
+                  <strong>Aadhar No:</strong>{" "}
+                  {dialogData.aadharNumber}
                 </p>
               </div>
               <button
