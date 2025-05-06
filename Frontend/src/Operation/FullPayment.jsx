@@ -37,16 +37,28 @@ const FullPayment = () => {
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
-    const filtered = newStudent.filter(
-      (student) =>
-        student.email.toLowerCase().includes(value.toLowerCase()) ||
-        student.phone.toLowerCase().includes(value.toLowerCase()) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase()) ||
-        student.counselor.toLowerCase().includes(value.toLowerCase()) ||
-        student.operationName.toLowerCase().includes(value.toLowerCase())||
-        (student.mailSended !== undefined &&
-          student.mailSended.toString().toLowerCase().includes(value.toLowerCase()))
-    );
+    const filtered = newStudent.filter((student) => {
+      return (
+        (student.email &&
+          student.email.toLowerCase().includes(value.toLowerCase())) ||
+        (student.phone &&
+          student.phone.toLowerCase().includes(value.toLowerCase())) ||
+        (student.fullname &&
+          student.fullname.toLowerCase().includes(value.toLowerCase())) ||
+        (student.counselor &&
+          student.counselor.toLowerCase().includes(value.toLowerCase())) ||
+        (student.operationName &&
+          student.operationName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.createdAt &&
+          student.createdAt.toLowerCase().includes(value.toLowerCase())) ||
+        (student.clearPaymentMonth &&
+          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))||
+          (student.collegeName &&
+            student.collegeName.toLowerCase().includes(value.toLowerCase()))||
+            (student.branch &&
+              student.branch.toLowerCase().includes(value.toLowerCase()))
+      );
+    });
     setFilteredStudents(filtered);
   };
 

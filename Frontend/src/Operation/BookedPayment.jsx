@@ -281,15 +281,28 @@ const BookedAmount = () => {
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
-    const filtered = newStudent.filter(
-      (student) =>
-        student.email.includes(value) ||
-        student.phone.includes(value) ||
-        student.fullname.toLowerCase().includes(value.toLowerCase())||
-        student.counselor.includes(value)||
+    const filtered = newStudent.filter((student) => {
+      return (
+        (student.email &&
+          student.email.toLowerCase().includes(value.toLowerCase())) ||
+        (student.phone &&
+          student.phone.toLowerCase().includes(value.toLowerCase())) ||
+        (student.fullname &&
+          student.fullname.toLowerCase().includes(value.toLowerCase())) ||
+        (student.counselor &&
+          student.counselor.toLowerCase().includes(value.toLowerCase())) ||
+        (student.operationName &&
+          student.operationName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.createdAt &&
+          student.createdAt.toLowerCase().includes(value.toLowerCase())) ||
         (student.clearPaymentMonth &&
-          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))
-    );
+          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))||
+          (student.collegeName &&
+            student.collegeName.toLowerCase().includes(value.toLowerCase()))||
+            (student.branch &&
+              student.branch.toLowerCase().includes(value.toLowerCase()))
+      );
+    });
     setFilteredStudents(filtered);
   };
 
@@ -829,6 +842,18 @@ const BookedAmount = () => {
               <p>
                 <strong>Counselor:</strong> {dialogData.counselor}
               </p>
+              <p>
+                  <strong>College Name:</strong>{" "}
+                  {dialogData.collegeName}
+                </p>
+                <p>
+                  <strong>Branch:</strong>{" "}
+                  {dialogData.branch}
+                </p>
+                <p>
+                  <strong>Aadhar No:</strong>{" "}
+                  {dialogData.aadharNumber}
+                </p>
             </div>
             <button onClick={handleDialogClose}>Close</button>
           </div>
