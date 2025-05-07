@@ -265,8 +265,7 @@ const Alumni = () => {
                   <div>
                     <h2 className="text-xl font-bold">{selectedAlumni.name}</h2>
                     <p className="text-sm">
-                      {/* {selectedAlumni.role}  */}
-                    {selectedAlumni.post}
+                      {selectedAlumni.role} at  {selectedAlumni.post}
                     </p>
                     {/* <a
                       href={selectedAlumni.linkdinUrl}
