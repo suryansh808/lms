@@ -13,6 +13,14 @@ const DefaultPayment = () => {
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
+      const currentMonth = getCurrentMonth();
+      setSelectedMonth(currentMonth);
+
+      // Filter the students based on the current month by default
+      const filtered = bookedStudents.filter(
+        (student) => getMonthFromDate(student.createdAt) === currentMonth
+      );
+      setFilteredStudents(filtered);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     }
@@ -20,6 +28,7 @@ const DefaultPayment = () => {
   
   useEffect(() => {
     fetchNewStudent();
+    setMonths(getPastMonths());
   }, []);
 
   if(!newStudent){
@@ -31,6 +40,8 @@ const DefaultPayment = () => {
   </div>
   </div>;
  }
+
+
 
   const [searchQuery, setSearchQuery] = useState("");
       const [filteredStudents, setFilteredStudents] = useState([]);
@@ -62,6 +73,91 @@ const DefaultPayment = () => {
        setFilteredStudents(filtered);
      };
  
+
+      const [selectedMonth, setSelectedMonth] = useState("");
+         const [months, setMonths] = useState([]);
+         const handleMonthChange = (event) => {
+           const selectedMonth = event.target.value;
+           setSelectedMonth(selectedMonth); // Update selected month
+           const filtered = newStudent.filter(
+             (student) => getMonthFromDate(student.createdAt) === selectedMonth
+           );
+           setFilteredStudents(filtered); // Update filtered students
+         };
+         // Format date to display
+         // const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+       
+         // Get current month (in string format like "Jan", "Feb", etc.)
+         const getCurrentMonth = () => {
+           const months = [
+             "January",
+             "February",
+             "March",
+             "April",
+             "May",
+             "June",
+             "July",
+             "August",
+             "September",
+             "October",
+             "November",
+             "December",
+           ];
+       
+           const currentMonthIndex = new Date().getMonth();
+           return months[currentMonthIndex];
+         };
+       
+         // Get the previous months including the current month
+         const getPastMonths = () => {
+           const months = [
+             "January",
+             "February",
+             "March",
+             "April",
+             "May",
+             "June",
+             "July",
+             "August",
+             "September",
+             "October",
+             "November",
+             "December",
+           ];
+       
+           const currentMonthIndex = new Date().getMonth();
+           let pastMonths = [];
+       
+           for (let i = 0; i < 4; i++) {
+             const index = (currentMonthIndex - i + 12) % 12; // handles wrap-around
+             pastMonths.push(months[index]);
+           }
+         
+           return pastMonths; 
+         };
+       
+         // Get the month from the student's created date
+         const getMonthFromDate = (date) => {
+           const months = [
+             "January",
+             "February",
+             "March",
+             "April",
+             "May",
+             "June",
+             "July",
+             "August",
+             "September",
+             "October",
+             "November",
+             "December",
+           ];
+       
+           const monthIndex = new Date(date).getMonth();
+           return months[monthIndex];
+         };
+       
+
   return (
     <div id="AdminAddCourse">
       <div className="coursetable">
@@ -83,6 +179,20 @@ const DefaultPayment = () => {
       </div>
       </div>
     </section>
+    <select
+            className="border border-black px-2 py-1 rounded-lg"
+            name="month"
+            id="month"
+            value={selectedMonth} // Bind to selectedMonth state
+            onChange={handleMonthChange} // Trigger filter on month change
+          >
+            {months.map((month, index) => (
+              <option key={index} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+       
       <table>
         <thead>
           <tr>

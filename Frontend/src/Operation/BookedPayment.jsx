@@ -4,7 +4,6 @@ import API from "../API";
 import toast, { Toaster } from "react-hot-toast";
 import { RiMailSendFill } from "react-icons/ri";
 import { PiLockKeyOpenFill, PiLockKeyFill } from "react-icons/pi";
-import * as XLSX from "xlsx";
 import { FaUserTimes } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
 
@@ -155,6 +154,16 @@ const BookedAmount = () => {
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
+
+
+      const currentMonth = getCurrentMonth();
+      setSelectedMonth(currentMonth);
+
+      // Filter the students based on the current month by default
+      const filtered = bookedStudents.filter(
+        (student) => getMonthFromDate(student.createdAt) === currentMonth
+      );
+      setFilteredStudents(filtered);
     } catch (error) {
       console.error("There was an error fetching new student:", error);
     }
@@ -222,6 +231,7 @@ const BookedAmount = () => {
     fetchBda();
     fetchNewStudent();
     fetchOperationData();
+    setMonths(getPastMonths());
   }, []);
 
   const handleSendEmail = async (value) => {
@@ -414,34 +424,6 @@ const BookedAmount = () => {
     setMonthsToShow(months);
   }, []);
 
-  // const handleDownload = () => {
-  //   // Convert the JSON data to a worksheet
-  //   const ws = XLSX.utils.json_to_sheet(newStudent);
-
-  //   // Create a new workbook
-  //   const wb = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(wb, ws, "Students");
-
-  //   // Write the Excel file to a Blob
-  //   const excelFile = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-
-  //   // Create a new Blob with the Excel file
-  //   const blob = new Blob([excelFile], { type: "application/octet-stream" });
-
-  //   // Create a URL for the Blob
-  //   const url = URL.createObjectURL(blob);
-
-  //   // Open the URL in a new tab
-  //   const link = document.createElement("a");
-  //   link.href = url;
-  //   link.target = "_blank";
-  //   link.download = "students.xlsx";
-  //   link.click();
-
-  //   // Optionally, release the object URL after use
-  //   URL.revokeObjectURL(url);
-  // };
-
   const handleCopyMobileNumbers = (selectedDate) => {
     const students = groupedData[selectedDate];
     if (Array.isArray(students)) {
@@ -493,6 +475,90 @@ const BookedAmount = () => {
       value.isSending = false;
     }
   };
+
+   const [selectedMonth, setSelectedMonth] = useState("");
+    const [months, setMonths] = useState([]);
+    const handleMonthChange = (event) => {
+      const selectedMonth = event.target.value;
+      setSelectedMonth(selectedMonth); // Update selected month
+      const filtered = newStudent.filter(
+        (student) => getMonthFromDate(student.createdAt) === selectedMonth
+      );
+      setFilteredStudents(filtered); // Update filtered students
+    };
+    // Format date to display
+    // const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+  
+    // Get current month (in string format like "Jan", "Feb", etc.)
+    const getCurrentMonth = () => {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+  
+      const currentMonthIndex = new Date().getMonth();
+      return months[currentMonthIndex];
+    };
+  
+    // Get the previous months including the current month
+    const getPastMonths = () => {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+  
+      const currentMonthIndex = new Date().getMonth();
+      let pastMonths = [];
+  
+      for (let i = 0; i < 4; i++) {
+        const index = (currentMonthIndex - i + 12) % 12; // handles wrap-around
+        pastMonths.push(months[index]);
+      }
+    
+      return pastMonths; 
+    };
+  
+    // Get the month from the student's created date
+    const getMonthFromDate = (date) => {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+  
+      const monthIndex = new Date(date).getMonth();
+      return months[monthIndex];
+    };
+  
 
   return (
     <div id="OperationEnroll" className="ml-[265px]">
@@ -658,10 +724,21 @@ const BookedAmount = () => {
             </div>
           </div>
         </section>
-
-        {/* <div>
-            <button onClick={handleDownload}>Open in Excel in New Tab</button>
-          </div> */}
+        
+        <select
+            className="border border-black px-2 py-1 rounded-lg"
+            name="month"
+            id="month"
+            value={selectedMonth} // Bind to selectedMonth state
+            onChange={handleMonthChange} // Trigger filter on month change
+          >
+            {months.map((month, index) => (
+              <option key={index} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+       
         <table>
           <thead>
             <tr>
@@ -691,15 +768,9 @@ const BookedAmount = () => {
                     className="cursor-pointer"
                     onClick={() => handleCopyMobileNumbers(date)}
                   >
-                    {/* <div className="relative group"> */}
                     <td colSpan="16" style={{ fontWeight: "bold" }}>
                       {date}
                     </td>
-                    {/* <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden w-max bg-gray-800 text-white text-sm rounded-md py-2 px-3 group-hover:block">
-               click here to copy the numbers
-              <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-t-8 border-gray-800 border-x-8 border-x-transparent"></div>
-            </div>
-          </div> */}
                   </tr>
                   {groupedData[date].map((item, index) => (
                     <tr
