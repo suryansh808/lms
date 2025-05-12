@@ -293,9 +293,9 @@ const BookedList = () => {
     setMaxDate(maxDate);
   }, []);
   useEffect(() => {
-    const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
-    const currentDay = currentDate.getDate();
+    // const currentDate = new Date();
+    // const currentMonthIndex = currentDate.getMonth();
+    // const currentDay = currentDate.getDate();
     const monthNames = [
       "January",
       "February",
@@ -310,13 +310,13 @@ const BookedList = () => {
       "November",
       "December",
     ];
-    let months = [];
-    if (currentMonthIndex === 1 && currentDay <= 7) {
-      months = [monthNames[1], monthNames[2], monthNames[3]];
-    } else {
-      months = [monthNames[2], monthNames[3], monthNames[4]];
-    }
-    setMonthsToShow(months);
+    // let months = [];
+    // if (currentMonthIndex === 1 && currentDay <= 7) {
+    //   months = [monthNames[1], monthNames[2], monthNames[3]];
+    // } else {
+    //   months = [monthNames[2], monthNames[3], monthNames[4]];
+    // }
+    setMonthsToShow(monthNames);
   }, []);
 
   useEffect(() => {
