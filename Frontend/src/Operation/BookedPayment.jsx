@@ -578,8 +578,12 @@ const BookedAmount = () => {
             <label>Internship Duration:</label>
             <select value={offerDuration} onChange={(e) => setOfferDuration(e.target.value)} required>
               <option value="">Select Duration</option>
+              <option value="One">One</option>
               <option value="Two">Two</option>
               <option value="Three">Three</option>
+              <option value="Four">Four</option>
+              <option value="Five">Five</option>
+              <option value="Six">Six</option>
             </select>
             <label>Internship Start Date:</label>
             <input type="date" value={offerStart} onChange={(e) => setOfferStart(e.target.value)} required />
