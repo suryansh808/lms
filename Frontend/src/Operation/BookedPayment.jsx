@@ -97,6 +97,7 @@ const BookedAmount = () => {
   const [monthOpted, setMonthOpted] = useState("");
   const [monthsToShow, setMonthsToShow] = useState([]);
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
+  const [whatsAppNumber , setWhatsAppNumber] = useState("");
   const [newStudent, setNewStudent] = useState([]);
   const [editingStudentId, setEditingStudentId] = useState(null);
 
@@ -201,6 +202,7 @@ const BookedAmount = () => {
       setFullname(editStudent.fullname);
       setEmail(editStudent.email);
       setPhone(editStudent.phone);
+      setWhatsAppNumber(editStudent.whatsAppNumber);
       setProgram(editStudent.program);
       setCounselor(editStudent.counselor);
       setDomain(editStudent.domain);
@@ -623,6 +625,13 @@ const BookedAmount = () => {
               placeholder="Candidate contact no"
               required
             />
+            <input
+              value={whatsAppNumber}
+              onChange={(e) => setWhatsAppNumber(e.target.value)}
+              type="number"
+              placeholder="Candidate whatsapp no"
+              required
+            />
             <select
               value={program}
               onChange={(e) => setProgram(e.target.value)}
@@ -706,6 +715,10 @@ const BookedAmount = () => {
           </form>
         </div>
       )}
+
+
+
+
       <div className="coursetable">
         <div className="mb-2">
           <h2>New Enroll Booking: </h2>
