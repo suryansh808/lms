@@ -30,6 +30,8 @@ router.post("/newstudentenroll", async (req, res) => {
       branch,
       aadharNumber,
       referFriend,
+      internshipstartsmonth,
+      internshipendsmonth,
     } = req.body;
     const course = await CreateCourse.findOne({ title: domain });
 
@@ -66,6 +68,8 @@ router.post("/newstudentenroll", async (req, res) => {
       branch,
       aadharNumber,
       referFriend,
+      internshipstartsmonth,
+      internshipendsmonth,
     });
 
     await newStudent.save();

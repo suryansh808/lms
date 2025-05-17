@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet";
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import axios from "axios";
 import AlumniData from "../Components/alumniData";
 import API from "../API";
 
 
 const Alumni = () => {
+
   const [filters, setFilters] = useState({ post: "", location: "", role: "" });
   const [dropdownOpen, setDropdownOpen] = useState({
     post: false,
@@ -152,7 +153,7 @@ const Alumni = () => {
       </Helmet>
 
       <h1 className="text-3xl font-bold mb-2">
-        Krutanic Reviews
+        Krutanic Alumni
         <span className="inline-flex items-center text-[#F15B29] text-base border border-[#F15B29] rounded px-2 py-0.5 ml-2">
           ⭐ 4.9 <span className="text-gray-500 ml-1">(8,980 learners)</span>
         </span>
@@ -196,11 +197,6 @@ const Alumni = () => {
               onClick={() => handleCardClick(alumni)}
             >
               <div className="flex gap-4 items-center">
-                {/* <img
-                  src={alumni.image}
-                  alt={alumni.name}
-                  className="w-20 h-20 rounded-full border-4 border-purple-700"
-                /> */}
                 <div>
                   <h2 className="text-lg font-semibold">{alumni.name}</h2>
                   {/* <div className="text-sm text-gray-600">🔒 {alumni.role}</div> */}
@@ -244,6 +240,7 @@ const Alumni = () => {
           <p className="text-gray-600">No alumni found.</p>
         )}
       </div>
+
       {selectedAlumni && (
         <div className="fixed inset-0 px-1 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="relative w-full max-w-2xl bg-white rounded-lg p-3 max-h-[80vh] overflow-y-auto scrollbar-hide">
@@ -445,6 +442,7 @@ const Alumni = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

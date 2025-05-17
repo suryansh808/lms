@@ -72,6 +72,8 @@ const newStudentEnrollSchema = new Schema(
     aadharNumber:{type:String},
     referFriend:{type:String},
     referRemark:[{type:String}],
+    internshipstartsmonth:{type:String},
+    internshipendsmonth:{type:String},
   },
   {
     timestamps: true,

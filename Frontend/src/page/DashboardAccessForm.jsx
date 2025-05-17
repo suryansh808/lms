@@ -12,13 +12,19 @@ const Dialog = ({ isOpen, onClose, fullname, errorMessage }) => {
       <div style={styles.modalContent}>
         {errorMessage ? (
           <div>
-           <h2>{errorMessage}</h2>
-           <p className="text-xs whitespace-nowrap mt-2">NOTE: if you have any doubt feel free to contact your counselor for more details.</p>
+            <h2>{errorMessage}</h2>
+            <p className="text-xs whitespace-nowrap mt-2">
+              NOTE: if you have any doubt feel free to contact your counselor
+              for more details.
+            </p>
           </div>
         ) : (
           <p>
-             <h3 className="mb-2 text-green-600 font-bold">Form Submitted Successfully</h3>
-            Thank you <span className="font-bold">{fullname}</span> <br/> Your form has been submitted successfully.
+            <h3 className="mb-2 text-green-600 font-bold">
+              Form Submitted Successfully
+            </h3>
+            Thank you <span className="font-bold">{fullname}</span> <br /> Your
+            form has been submitted successfully.
           </p>
         )}
         <button
@@ -31,7 +37,6 @@ const Dialog = ({ isOpen, onClose, fullname, errorMessage }) => {
     </div>
   );
 };
-
 
 const DashboardAccessForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +51,6 @@ const DashboardAccessForm = () => {
   const [programPrice, setProgramPrice] = useState("");
   const [paidAmount, setPaidAmount] = useState("");
   const [monthOpted, setMonthOpted] = useState("");
-  const [monthsToShow, setMonthsToShow] = useState([]);
   const [transactionId, setTransactionId] = useState("");
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
   const [modeofpayment, setModeOfPayment] = useState("");
@@ -56,22 +60,38 @@ const DashboardAccessForm = () => {
   const [branch, setBranch] = useState("");
   const [aadharNumber, setAadharNumber] = useState("");
   const [referFriend, setReferFriend] = useState("");
-
+  const [internshipstartsmonth, setInternshipStartsMonth] = useState("");
+  const [internshipendsmonth, setInternshipEndsMonth] = useState("");
   const [course, setCourse] = useState([]);
+
+  const [monthsToShow, setMonthsToShow] = useState([]);
+  const [endsMonthsToShow, setEndsMonthsToShow] = useState([]);
+
+ const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
   useEffect(() => {
     const currentDate = new Date();
     const currentMonthIndex = currentDate.getMonth(); // 0-based index
     const currentDay = currentDate.getDate();
     const currentYear = currentDate.getFullYear();
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December"
-    ];
-  
+   
+
     let months = [];
     let startMonthIndex;
-  
+
     // Agar date 1 se 7 ke beech hai, toh current month se list shuru hogi
     if (currentDay >= 1 && currentDay <= 7) {
       startMonthIndex = currentMonthIndex;
@@ -79,19 +99,40 @@ const DashboardAccessForm = () => {
       // Warna agle month se shuru hoga
       startMonthIndex = currentMonthIndex + 1;
     }
-  
+
     // Handle December case (Agar December hai toh agla saal start ho jayega)
     const nextYear = startMonthIndex > 11 ? currentYear + 1 : currentYear;
     startMonthIndex = startMonthIndex % 12;
-  
+
     months = [
       `${monthNames[startMonthIndex]} ${nextYear}`,
-      `${monthNames[(startMonthIndex + 1) % 12]} ${startMonthIndex + 1 > 11 ? nextYear + 1 : nextYear}`,
-      `${monthNames[(startMonthIndex + 2) % 12]} ${startMonthIndex + 2 > 11 ? nextYear + 1 : nextYear}`,
+      `${monthNames[(startMonthIndex + 1) % 12]} ${
+        startMonthIndex + 1 > 11 ? nextYear + 1 : nextYear
+      }`,
+      `${monthNames[(startMonthIndex + 2) % 12]} ${
+        startMonthIndex + 2 > 11 ? nextYear + 1 : nextYear
+      }`,
     ];
-  
+
     setMonthsToShow(months);
   }, []);
+  // Dynamically calculate next 3 months based on selected start month
+  useEffect(() => {
+    if (!internshipstartsmonth) return;
+
+    const [startMonthName, startYearStr] = internshipstartsmonth.split(" ");
+    const startMonthIndex = monthNames.indexOf(startMonthName);
+    const startYear = parseInt(startYearStr);
+
+    const ends = [1, 2, 3].map((offset) => {
+      const index = (startMonthIndex + offset) % 12;
+      const year = startMonthIndex + offset > 11 ? startYear + 1 : startYear;
+      return `${monthNames[index]} ${year}`;
+    });
+
+    setEndsMonthsToShow(ends);
+    setInternshipEndsMonth(""); // Reset end month when start month changes
+  }, [internshipstartsmonth]);
 
   const fetchCourses = async () => {
     try {
@@ -127,6 +168,8 @@ const DashboardAccessForm = () => {
     setClearPaymentMonth("");
     setModeOfPayment("");
     setReferFriend("");
+    setInternshipStartsMonth("");
+    setInternshipEndsMonth("");
     navigate("/dashboardaccessform");
   };
 
@@ -144,9 +187,8 @@ const DashboardAccessForm = () => {
     getTransactionIdList();
   }, []);
 
-
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     setIsSubmitting(true);
@@ -172,6 +214,8 @@ const DashboardAccessForm = () => {
       branch: branch,
       aadharNumber: aadharNumber,
       referFriend: referFriend,
+      internshipstartsmonth: internshipstartsmonth,
+      internshipendsmonth: internshipendsmonth,
     };
 
     if (
@@ -189,18 +233,19 @@ const DashboardAccessForm = () => {
         }
       } catch (error) {
         let errMessage = "An error occurred.";
-      if (error.response) {
-        errMessage =
-          error.response.data?.message || "An error occurred while processing your request.";
-      } else if (error.request) {
-        errMessage = "No response from the server. Please try again later.";
-      }
+        if (error.response) {
+          errMessage =
+            error.response.data?.message ||
+            "An error occurred while processing your request.";
+        } else if (error.request) {
+          errMessage = "No response from the server. Please try again later.";
+        }
 
-      if (errMessage.includes("already submitted")) {
-        errMessage = "You have already submitted your details.";
-      }
-      setErrorMessage(errMessage);
-      setIsModalOpen(true);
+        if (errMessage.includes("already submitted")) {
+          errMessage = "You have already submitted your details.";
+        }
+        setErrorMessage(errMessage);
+        setIsModalOpen(true);
       }
     } else {
       toast.error("Enter valid email and try again.");
@@ -234,37 +279,43 @@ const DashboardAccessForm = () => {
     const currentYear = currentDate.getFullYear();
     const currentMonthIndex = currentDate.getMonth();
     const currentDay = currentDate.getDate();
-    
+
     // Set minDate to today
     const minDate = currentDate.toISOString().split("T")[0];
-  
+
     let maxDate;
-  
+
     // If today is between the 1st and 5th, set maxDate to the 5th of the current month
     if (currentDay >= 1 && currentDay <= 5) {
-      maxDate = new Date(currentYear, currentMonthIndex, 5).toISOString().split("T")[0];
+      maxDate = new Date(currentYear, currentMonthIndex, 5)
+        .toISOString()
+        .split("T")[0];
     } else {
       // If today is after the 5th, set maxDate to 5 days from today
-      maxDate = new Date(currentDate.setDate(currentDate.getDate() + 5)).toISOString().split("T")[0];
+      maxDate = new Date(currentDate.setDate(currentDate.getDate() + 5))
+        .toISOString()
+        .split("T")[0];
     }
-  
+
     setMinDate(minDate);
     setMaxDate(maxDate);
   }, []);
-  
+
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-  
+
   // const currentDate = new Date();
   // const currentMonth = currentDate.getMonth();
   // const currentYear = currentDate.getFullYear();
 
   useEffect(() => {
     const today = new Date();
-        const minDate = today.toISOString().split("T")[0];
-        const maxDate = new Date(today.setDate(today.getDate() + 5)).toISOString().split("T")[0];
-        setMinDate(minDate);
-        setMaxDate(maxDate);
+    const minDate = today.toISOString().split("T")[0];
+    const maxDate = new Date(today.setDate(today.getDate() + 5))
+      .toISOString()
+      .split("T")[0];
+    setMinDate(minDate);
+    setMaxDate(maxDate);
   }, [monthOpted, monthsToShow]);
 
   return (
@@ -348,6 +399,7 @@ const DashboardAccessForm = () => {
               <option value="Instructor Led">Instructor Led</option>
               <option value="Career Advancement">Career Advancement</option>
             </select>
+
             <select
               value={modeofpayment}
               onChange={(e) => setModeOfPayment(e.target.value)}
@@ -362,6 +414,7 @@ const DashboardAccessForm = () => {
               <option value="EaseBuZZ">EaseBuZZ</option>
               <option value="PayPal">PayPal</option>
             </select>
+
             <select
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
@@ -374,6 +427,7 @@ const DashboardAccessForm = () => {
                 <option value={item.title}>{item.title}</option>
               ))}
             </select>
+
             <select
               value={monthOpted}
               onChange={(e) => setMonthOpted(e.target.value)}
@@ -472,9 +526,40 @@ const DashboardAccessForm = () => {
                 max={maxDate}
               />
             </div>
+
+            <select
+              value={internshipstartsmonth}
+              onChange={(e) => setInternshipStartsMonth(e.target.value)}
+              required
+            >
+              <option value="" selected disabled>
+                Internship starts month
+              </option>
+              {monthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={internshipendsmonth}
+              onChange={(e) => setInternshipEndsMonth(e.target.value)}
+              required
+              disabled={!internshipstartsmonth}
+            >
+              <option value="" disabled>
+                Internship ends month
+              </option>
+              {endsMonthsToShow.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div>
+          <div className="mt-5">
             Refer your friends to earn cashback.
             <textarea
               value={referFriend}
@@ -487,6 +572,7 @@ const DashboardAccessForm = () => {
               className="resize-none"
             ></textarea>
           </div>
+
           <input
             className="cursor-pointer"
             disabled={isSubmitting}
@@ -494,7 +580,12 @@ const DashboardAccessForm = () => {
             value="Submit"
           />
         </form>
-        <Dialog isOpen={isModalOpen} onClose={closeModal} fullname={fullname} errorMessage={errorMessage} />
+        <Dialog
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          fullname={fullname}
+          errorMessage={errorMessage}
+        />
       </div>
     </div>
   );
