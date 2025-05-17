@@ -23,7 +23,6 @@ const CertificateSchema = new mongoose.Schema({
   },
   enrolment: {
     type: String,
-    unique: true,
     default: "",
   },
   url: {

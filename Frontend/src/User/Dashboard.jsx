@@ -43,6 +43,7 @@ const Dashboard = () => {
     const name = data.fullname;
     const email = data.email;
     const domain = data.domain.title;
+    console.log(name,email,domain);
 
     try {
       const response = await axios.post(`${API}/applycertificate`, {

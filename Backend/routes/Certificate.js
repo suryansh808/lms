@@ -5,13 +5,12 @@ const Certificate = require("../models/Certificate");
 // Create a new certificate entry
 router.post("/applycertificate", async (req, res) => {
     const { name, email, domain } = req.body;
-
+    console.log(name,email,domain);
     try {
         const existingCertificate = await Certificate.findOne({ email });
         if (existingCertificate) {
             return res.status(400).json({ error: "Certificate already exists for this email" });
         }
-
         const newCertificate = new Certificate({
             name, email, domain,
         });
@@ -20,6 +19,7 @@ router.post("/applycertificate", async (req, res) => {
         res.status(201).json({ message: "Certificate added successfully", certificate: newCertificate });
 
     } catch (error) {
+        console.error("Save Error:", error); 
         res.status(500).json({ error: "Server error" });
     }
 });
