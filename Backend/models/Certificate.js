@@ -13,7 +13,11 @@ const CertificateSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-  date: {
+  startdate: {
+    type: String,
+    default: "",
+  },
+  enddate: {
     type: String,
     default: "",
   },

@@ -5,7 +5,7 @@ const Certificate = require("../models/Certificate");
 // Create a new certificate entry
 router.post("/applycertificate", async (req, res) => {
     const { name, email, domain } = req.body;
-    console.log(name,email,domain);
+    // console.log(name,email,domain);
     try {
         const existingCertificate = await Certificate.findOne({ email });
         if (existingCertificate) {

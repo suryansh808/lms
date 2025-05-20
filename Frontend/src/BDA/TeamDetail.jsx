@@ -171,6 +171,69 @@ const TeamDetail = () => {
       }
     };
 
+    
+  const today = new Date();
+  const currentMonth = today.toISOString().slice(0, 7);
+
+   const getMonth = (date, offset) => {
+      const newDate = new Date(date);
+      newDate.setMonth(newDate.getMonth() - offset);
+      return newDate.toISOString().slice(0, 7);
+    };
+
+   const prevMonth1 = getMonth(today, 1);
+    const prevMonth2 = getMonth(today, 2);
+    const prevMonth3 = getMonth(today, 3);
+    const getTeamRevenueForMonth = (month) => {
+      let totalProgram = 0;
+      let totalPaid = 0;
+      let totalPending = 0;
+      let totalDefault = 0;
+      let noOfPayments = 0;
+    
+      filteredData.forEach((bda) => {
+        const monthEnrollments = bda.enrollments.filter(
+          (item) =>
+            new Date(item.createdAt).toISOString().slice(0, 7) === month
+        );
+    
+        totalProgram += monthEnrollments.reduce(
+          (sum, item) => sum + (item.programPrice || 0),
+          0
+        );
+    
+        totalPaid += monthEnrollments.reduce((sum, item) => {
+          const isHalfCleared =
+            Array.isArray(item.remark) &&
+            item.remark[item.remark.length - 1] === "Half_Cleared";
+          if (item.status === "fullPaid" || isHalfCleared) {
+            return sum + (item.paidAmount || 0);
+          }
+          return sum;
+        }, 0);
+    
+        totalPending += monthEnrollments.reduce(
+          (sum, item) =>
+            sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
+          0
+        );
+    
+        totalDefault += monthEnrollments
+          .filter((item) => item.status === "default")
+          .reduce((sum, item) => sum + (item.paidAmount || 0), 0);
+
+          noOfPayments += monthEnrollments.filter((item) => (item.paidAmount || 0) > 0).length;
+      });
+    
+      return {
+        totalProgram,
+        totalPaid,
+        totalPending,
+        totalDefault,
+        noOfPayments
+      };
+    };
+
   return (
     <div id="AdminAddCourse">
         <Toaster position="top-center" reverseOrder={false} />
@@ -314,6 +377,89 @@ const TeamDetail = () => {
       <div className="coursetable">
         <div className="mb-2">
           <h2>{selectedTeam} </h2>
+           
+             <div className="flex justify-between items-center gap-5 flex-wrap">
+            <div>
+              <strong>Total BDA: </strong>
+              {filteredData.length}
+            </div>
+
+            <div>
+              <strong>Total Program Price: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                    currentMonth
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.programPrice || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
+
+            <div>
+              <strong>Total Paid Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                      currentMonth &&
+                    (item.status === "fullPaid" ||
+                      item.remark[item.remark.length - 1] === "Half_Cleared")
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.paidAmount || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
+
+            <div>
+              <strong>Total Pending Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                    currentMonth
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) =>
+                      sum + ((item.programPrice || 0) - (item.paidAmount || 0)),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
+
+            <div>
+              <strong>Total Default Amount: </strong>
+              {filteredData.reduce((acc, bda) => {
+                const monthEnrollments = bda.enrollments.filter(
+                  (item) =>
+                    new Date(item.createdAt).toISOString().slice(0, 7) ===
+                      currentMonth && item.status === "default"
+                );
+                return (
+                  acc +
+                  monthEnrollments.reduce(
+                    (sum, item) => sum + (item.paidAmount || 0),
+                    0
+                  )
+                );
+              }, 0)}
+            </div>
+          </div>
+
           {bdaData && bdaData.designation === "MANAGER" && (
             <select
               value={selectedTeam}
@@ -441,6 +587,36 @@ const TeamDetail = () => {
                 </div>
               );
             })()}
+        </div>
+         <div className="flex flex-col">
+  <h3>📊 Previous Month Revenue Summary</h3>
+  <table className="bdarevenuetable">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>No. of Payments</th>
+        <th>Total Program Price</th>
+        <th>Total Paid Amount</th>
+        <th>Total Pending Amount</th>
+        <th>Total Default Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[prevMonth1, prevMonth2, prevMonth3].map((month) => {
+        const revenue = getTeamRevenueForMonth(month);
+        return (
+          <tr key={month}>
+            <td>{month}</td>
+            <td>{revenue.noOfPayments}</td>
+            <td>₹ {revenue.totalProgram.toLocaleString()}</td>
+            <td>₹ {revenue.totalPaid.toLocaleString()}</td>
+            <td>₹ {revenue.totalPending.toLocaleString()}</td>
+            <td>₹ {revenue.totalDefault.toLocaleString()}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
         </div>
       </div>
     </div>

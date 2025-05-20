@@ -20,6 +20,8 @@ const Dashboard = () => {
       });
       // console.log("data" , response.data);
       setenrollData(response.data);
+      // console.log(response.data[0].createdAt);
+
       // setenrollData(response.data.filter((item) => item.email === userEmail));
     } catch (error) {
       console.error("There was an error fetching enrolledData:", error);
@@ -28,7 +30,22 @@ const Dashboard = () => {
     }
   }, 500);
 
+  
+       
   const handleSubmit = async (data) => {
+
+   const createdAt = new Date(data.createdAt);
+const currentDate = new Date();
+const eligibleDate = new Date(createdAt);
+eligibleDate.setMonth(createdAt.getMonth() + 2);
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const eligibleDateFormatted = eligibleDate.toLocaleDateString('en-US', options);
+
+if (currentDate < eligibleDate) {
+  alert(`You can apply for a certificate after ${eligibleDateFormatted}.`);
+  return;
+}
+
     if (
       !window.confirm(
         "Are you sure your internship is complete? If not,please cancel. If it's complete, click 'ok' to proceed."
@@ -39,11 +56,11 @@ const Dashboard = () => {
     if (!window.confirm("Do you really want to apply for your certificate?")) {
       return;
     }
-    console.log("c", data);
-    const name = data.fullname;
+    // console.log("c", data);
+    const name = data.fullname.toLowerCase().split(" ").map(word =>  word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     const email = data.email;
     const domain = data.domain.title;
-    console.log(name,email,domain);
+    // console.log(name,email,domain);
 
     try {
       const response = await axios.post(`${API}/applycertificate`, {
@@ -68,7 +85,7 @@ const Dashboard = () => {
         params: { email: userEmail },
       });
       setCertificate(response.data);
-      console.log("certificate", response.data);
+      // console.log("certificate", response.data);
     } catch (error) {
       console.error("There was an error fetching enrolledData:", error);
     }

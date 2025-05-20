@@ -450,8 +450,7 @@ const AllTeamDetail = () => {
 
           <select
             value={selectedTeam}
-            onChange={(e) => setSelectedTeam(e.target.value)}
-          >
+            onChange={(e) => setSelectedTeam(e.target.value)}>
             <option value="">All Team</option>
             {getteamName.map((team, index) => {
               return (
@@ -600,7 +599,7 @@ const AllTeamDetail = () => {
       })}
     </tbody>
   </table>
-</div>
+        </div>
 
 
       </div>
