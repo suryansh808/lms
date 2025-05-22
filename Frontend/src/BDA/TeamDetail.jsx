@@ -38,6 +38,7 @@ const TeamDetail = () => {
     try {
       const response = await axios.get(`${API}/bda-with-enrolls`);
       setAllData(response.data);
+      console.log("All Data:", response.data);
     } catch (error) {
       console.error("There was an error fetching all Data:", error);
     }

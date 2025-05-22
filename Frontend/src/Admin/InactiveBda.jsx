@@ -12,7 +12,7 @@ const InactiveBda = () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
-      setBda(response.data.filter((item) => item && item.Access === false));
+      setBda(response.data.filter((item) => item && item.status === "Inactive"));
     } catch (error) {
       console.error("There was an error fetching bda:", error);
     } finally{
@@ -49,25 +49,25 @@ const InactiveBda = () => {
     }
   };
 
-  const handleChangeAccess = async (id)=>{
-     const isConfirmed = window.confirm(
-      `Are you sure you want to Active this account?`
+   const handleChangeStatus = async (bdaId, status) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to ${status} this account?`
     );
     if (isConfirmed) {
       try {
-        const response = await axios.put(`${API}/updateaccess/${id}`, {Access: true});
+        const response = await axios.put(`${API}/updatestatus/${bdaId}`, { status });
         if (response.status === 200) {
-          toast.success(`Account Active successfully!`);
-          // fetchBda();
+          toast.success(`Account ${status} successfully!`);
+          fetchBda();
         } else {
-          toast.error("Failed to update account");
+          toast.error("Failed to update account status.");
         }
       } catch (error) {
-        toast.error("An error occurred while updating the account");
+        toast.error("An error occurred while updating the status.");
       }
     }
-
   }
+
 
   return (
     <div id="AdminAddCourse" >
@@ -97,6 +97,7 @@ const InactiveBda = () => {
                 <th>Password</th>
                 <th>Login</th>
                 <th>Action</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +111,10 @@ const InactiveBda = () => {
                   <td>{bda.password}</td>
                   <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td>
                   <td>
-                    <button title="Active BDA" onClick={() => handleChangeAccess(bda._id)}><i class="fa fa-eye-slash"></i></button>
+                    <button title="Active BDA" onClick={() => handleChangeStatus(bda._id , "Active")}><i class="fa fa-eye-slash"></i></button>
+                  </td>
+                  <td>
+                    {bda.status}
                   </td>
                 </tr>
               ))}

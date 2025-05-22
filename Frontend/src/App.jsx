@@ -110,7 +110,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 //event
 import EventDashBoard from "./Event/EventDashBoard";
 
-
+// import checkAdminAuth from "./checkAdminAuth";
 
 
 
@@ -242,6 +242,8 @@ const AppContent = () => {
   const isAuthenticatedBda = () => !!localStorage.getItem("bdaToken");
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
   const isAuthenticatedAdmin = () => !!localStorage.getItem("adminToken");
+  // const isAuthenticatedAdmin = async () => await checkAdminAuth();
+
   const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
   const isAuthenticatedEventUser = () => !!localStorage.getItem("eventToken");
 

@@ -64,7 +64,7 @@ router.put("/updatebda/:id", async (req, res) => {
   }
 });
 
-//put request to update the bda status
+//put request to update the bda status inactive 
 router.put("/updatestatus/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -75,7 +75,7 @@ router.put("/updatestatus/:id", async (req, res) => {
       { new: true }
     );
     if (!updatedstatus) {
-      return res.status(404).json({ error: "Manager not found" });
+      return res.status(404).json({ error: "bda not found" });
     }
     res.status(200).json(updatedstatus);
   } catch (error) {
@@ -144,10 +144,14 @@ router.post("/bdasendotp", async (req, res) => {
     if (!bda) {
       return res.status(404).json({ message: "BDA not found" });
     }
+     
+     if (bda.status === "Inactive") {
+      return res.status(403).json({ message: "Access denied. Your account is inactive." });
+    }
+
     const otp = crypto.randomInt(100000, 1000000);
 
       // Send OTP via Email
-  
          const emailMessage = `
            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
@@ -191,6 +195,11 @@ router.post("/bdaverifyotp", async (req, res) => {
     if (bda.otp !== otp) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
+
+     if (bda.status === "Inactive") {
+      return res.status(403).json({ message: "Access denied. Your account is inactive." });
+    }
+
     // Clear OTP after successful login
     bda.otp = null;
     await bda.save();

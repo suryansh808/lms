@@ -24,14 +24,14 @@ const JobApplication = require("./routes/JobApplication")
 const MasterClass = require("./routes/MasterClass") 
 const AddEvent = require("./routes/AddEvent")
 const Certificate = require("./routes/Certificate")
-
+// const cookieParser = require("cookie-parser");
 const os = require("os");
 // const https = require("https")
 
 dotenv.config();
 const app = express();
-
-app.use(cors());
+// app.use(cookieParser());
+// app.use(cors());
 
 const allowedOrigins = process.env.FRONTEND_URL
 app.use(cors({
@@ -42,9 +42,9 @@ app.use(cors({
       callback(new Error('Not allowed by CORS')); 
     }
   },
+  credentials: true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
-  credentials: true 
 }));
 
 

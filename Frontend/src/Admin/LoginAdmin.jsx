@@ -11,7 +11,8 @@ const LoginAdmin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!email || !password) {
       toast.error("Email and Password are required");
       return;
@@ -38,7 +39,8 @@ const LoginAdmin = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="loginform">
         <h2>Admin LogIn</h2>
-        <input
+         <form onSubmit={handleLogin}>
+           <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -49,6 +51,7 @@ const LoginAdmin = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          autoComplete="off"
         />
         <span
           className=" absolute mt-2 right-9 cursor-pointer"
@@ -56,7 +59,8 @@ const LoginAdmin = () => {
         >
           {showPassword ? <FaEye /> : <FaEyeSlash />}
         </span>
-        <button onClick={handleLogin}>Log In</button>
+        <button >Log In</button>
+         </form>
         <p>--------------------or--------------------</p>
         <div className="loginwith">
           <Link to="/AdminLogin">Login with OTP</Link>

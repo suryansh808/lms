@@ -5,7 +5,6 @@ const NewEnrollStudent = require("../models/NewStudentEnroll");
 const CreateCourse = require("../models/CreateCourse");
 const mongoose = require("mongoose");
 
-
 router.post("/newstudentenroll", async (req, res) => {
   try {
     const {
@@ -75,7 +74,6 @@ router.post("/newstudentenroll", async (req, res) => {
     await newStudent.save();
     res.status(201).json({ message: "Registration successful!" });
     await convertExcel(newStudent);
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error. Please try again later." });
@@ -91,7 +89,6 @@ const convertExcel = async (studentData) => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-
 
         body: new URLSearchParams({
           // _id: studentData._id,
@@ -155,18 +152,16 @@ router.get("/getnewstudentenroll", async (req, res) => {
     }
     res.status(200).json(StudentEnroll);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while fetching data",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "An error occurred while fetching data",
+      error: error.message,
+    });
   }
 });
 
 // Handle POST request to update remark for an existing student
 router.post("/updateremark", async (req, res) => {
-  const { remark, studentId  , referRemark} = req.body;
+  const { remark, studentId, referRemark } = req.body;
   try {
     const existingStudent = await NewEnrollStudent.findById(studentId);
     if (!existingStudent) {
@@ -175,7 +170,7 @@ router.post("/updateremark", async (req, res) => {
     if (remark) {
       existingStudent.remark.push(remark);
     }
-    
+
     if (referRemark) {
       existingStudent.referRemark.push(referRemark);
     }
@@ -283,7 +278,6 @@ router.post("/updateStudentStatus", async (req, res) => {
   }
 });
 
-
 //post request to update the operation name and id from admin panel
 router.post("/update-operation/:id", async (req, res) => {
   try {
@@ -313,7 +307,9 @@ router.get("/enrollments", async (req, res) => {
   const { userEmail } = req.query;
   try {
     // Fetch all enrollments
-    const enrollments = await NewEnrollStudent.find({ email: userEmail }).lean();
+    const enrollments = await NewEnrollStudent.find({
+      email: userEmail,
+    }).lean();
 
     // Iterate over enrollments and replace domainId with course data
     const updatedEnrollments = await Promise.all(
@@ -335,10 +331,14 @@ router.get("/enrollments", async (req, res) => {
   }
 });
 
-
 router.get("/bda-with-enrolls", async (req, res) => {
   try {
     const bdaWithEnrolls = await CreateBDA.aggregate([
+      {
+        $match: {
+          status: { $ne: "Inactive" },
+        },
+      },
       {
         $lookup: {
           from: "newenrolls",
@@ -348,21 +348,23 @@ router.get("/bda-with-enrolls", async (req, res) => {
         },
       },
     ]);
-    
+
     res.status(200).json(bdaWithEnrolls);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error", message: error.message });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
   }
 });
-
-
 
 router.get("/databyopname", async (req, res) => {
   const { operationName } = req.query;
   try {
-    const OpName = await NewEnrollStudent.find({ operationName: operationName }).sort({ createdAt: -1 }).lean();
+    const OpName = await NewEnrollStudent.find({ operationName: operationName })
+      .sort({ createdAt: -1 })
+      .lean();
     res.status(200).json(OpName);
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch enrollments", error });
   }
@@ -372,12 +374,12 @@ router.get("/databybdaname", async (req, res) => {
   const { bdaName } = req.query;
   try {
     const students = await NewEnrollStudent.find({ counselor: bdaName })
-      .select('fullname phone referFriend createdAt referRemark')
+      .select("fullname phone referFriend createdAt referRemark")
       .sort({ createdAt: -1 })
       .lean();
 
     res.status(200).json(students);
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch enrollments", error });
   }

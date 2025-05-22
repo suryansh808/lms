@@ -51,7 +51,7 @@ const AdminLogIn = () => {
       if(response.status === 200){
         toast.success('login successful!!!');
         setTimeout(() => {
-          localStorage.setItem("adminToken", response.data.token);
+           localStorage.setItem("adminToken", response.data.token);
           navigate("/AdminDashboard");
         }, 1500);
       }

@@ -162,7 +162,7 @@ const BDAHeader = () => {
             </>
           )}
           {bdaData?.designation === "MANAGER" &&
-            bdaData?.status === "Active" && (
+            bdaData?.Access === true && (
               <Link to="/AddTeam">
                 <i class="fa fa-user"></i> Add Team
               </Link>

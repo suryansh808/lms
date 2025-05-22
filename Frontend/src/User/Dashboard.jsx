@@ -44,7 +44,7 @@ const eligibleDateFormatted = eligibleDate.toLocaleDateString('en-US', options);
 if (currentDate < eligibleDate) {
   alert(`You can apply for a certificate after ${eligibleDateFormatted}.`);
   return;
-}
+} 
 
     if (
       !window.confirm(

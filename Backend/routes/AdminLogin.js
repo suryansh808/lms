@@ -12,6 +12,9 @@ const crypto = require('crypto');
 const { default: mongoose } = require("mongoose");
 const User = require("../models/User");
 const Alumni = require("../models/Alumni");
+// const VerifyAdminCookie = require("../middleware/verifyAdminCookie");
+
+
 // Route to save admin email
 router.post("/admin",expressAsyncHandler(async (req, res) => {
     const { email , password , otp } = req.body;
@@ -28,9 +31,6 @@ router.post("/admin",expressAsyncHandler(async (req, res) => {
   })
 );
 
-// router.get("/admindashboard", authMiddleware, (req, res) => {
-//   res.status(200).json({ message: "Welcome to the admin dashboard!" });
-// });
 
 // Route to send OTP
 router.post("/otpsend",expressAsyncHandler(async (req, res) => {
@@ -101,17 +101,26 @@ router.post("/otpverify",expressAsyncHandler(async (req, res) => {
 
       // Generate JWT
       const token = jwt.sign(
-        { email: admin.email }, // Payload
-        process.env.JWT_SECRET, // Secret key from .env
-        { expiresIn: "1h" } // Token expiration time
+        { email: admin.email }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: "1h" } 
       );
 
-      res.status(200).json({ message: "OTP verified successfully", token });
+    //     res.cookie("adminToken", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: "Strict",
+    //   maxAge: 60 * 60 * 1000 // 1 hour
+    // });
+
+      res.status(200).json({ message: "OTP verified successfully" , token });
     } catch (error) {
       res.status(500).json({ message: "Failed to verify OTP", error: error.message });
     }
   })
 );
+
+
 
 //if in case login with password so cheack email and password 
 router.post("/checkadmin", async (req, res) => {
@@ -119,11 +128,11 @@ router.post("/checkadmin", async (req, res) => {
   try {
     const admin = await adminMail.findOne({ email });
     if (!admin) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "login faild , please try again" });
     }
 
     if (password !== admin.password) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "server issue , or invalid details" });
     }
 
     const token = jwt.sign(
@@ -131,7 +140,10 @@ router.post("/checkadmin", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ token, _id: admin._id, email: admin.email });
+
+        
+
+    res.status(200).json({ message: "Login successful" , token});
   } catch (err) {
     console.error("Error during login", err);
     res.status(500).json({ message: "Server error" });
@@ -303,29 +315,6 @@ router.post("/sendmailtoplacementcoordinator", async (req, res) => {
   }
 });
 
-// PUT request to update the "mailSended" field for Placement Coordinator after sending email
-// router.put("/mailsendedplacementcoordinator/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const { mailSended } = req.body;
-//   try {
-//     const coordinator = await PlacementCoordinator.findById(id);
-//     if (!coordinator) {
-//       return res.status(404).send({ message: "Coordinator not found." });
-//     }
-
-//     coordinator.mailSended = mailSended;
-//     await coordinator.save();
-//     res
-//       .status(200)
-//       .send({
-//         message: "Coordinator record updated successfully!",
-//         coordinator,
-//       });
-//   } catch (error) {
-//     console.error("Error updating coordinator record:", error);
-//     res.status(500).send({ message: "Failed to update coordinator record." });
-//   }
-// });
 
 // user component access 
 router.get('/user-components', async (req, res) => {

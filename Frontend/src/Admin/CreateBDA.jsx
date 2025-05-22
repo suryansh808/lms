@@ -55,7 +55,7 @@ const CreateBDA = () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/getbda`);
-      setBda(response.data.filter((item) => item && item.Access === true));
+      setBda(response.data.filter((item) => item && item.status === "Active"));
     } catch (error) {
       console.error("There was an error fetching bda:", error);
     } finally{
@@ -159,7 +159,7 @@ const CreateBDA = () => {
  
   const handleChangeStatus = async (bdaId, status) => {
     const isConfirmed = window.confirm(
-      `Are you sure you want to ${status} this account to add team member?`
+      `Are you sure you want to ${status} this account?`
     );
     if (isConfirmed) {
       try {
@@ -175,6 +175,8 @@ const CreateBDA = () => {
       }
     }
   }
+
+
   const handleAddTeamname = (e)=>{
     e.preventDefault();
     const teamData = {
@@ -219,7 +221,7 @@ const CreateBDA = () => {
 
   const handleChangeAccess = async (id)=>{
      const isConfirmed = window.confirm(
-      `Are you sure you want to inactive this account?`
+      `Are you sure you want to change the access of this account?`
     );
     if (isConfirmed) {
       try {
@@ -331,6 +333,7 @@ const CreateBDA = () => {
                 <th>Team</th>
                 <th>Password</th>
                 <th>Login</th>
+                <th>Status</th>
                 <th>Action</th>
                 <th>Add Team Active</th>
                 <th>Send Login Credentials</th>
@@ -346,17 +349,18 @@ const CreateBDA = () => {
                   <td>{bda.team}</td>
                   <td>{bda.password}</td>
                   <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(bda.email, bda.password)}>Login <i class="fa fa-sign-in"></i></td>
+                  <td>{bda.status}</td>
                   <td>
                     <button title="Edit" onClick={() => handleEdit(bda)}><i class="fa fa-edit"></i></button>
                     <button title="Delete" onClick={() => handleDelete(bda._id)}><i class="fa fa-trash-o text-red-600"></i></button>
-                    <button title="Inactive BDA" onClick={() => handleChangeAccess(bda._id)}><i class="fa fa-eye-slash"></i></button>
+                    <button title="Inactive BDA" onClick={() => handleChangeStatus(bda._id , "Inactive")}><i class="fa fa-eye-slash"></i></button>
                   </td>
                   <td>
                     <div className="cursor-pointer">
-                      {bda.status === "Active" ? (
-                        <i onClick={()=> handleChangeStatus(bda._id , "Inactive")} className="fa fa-check text-green-900"></i>
+                      {bda.Access === true ? (
+                        <i onClick={()=> handleChangeAccess(bda._id)} title="Access given" className="fa fa-check text-green-900"></i>
                       ) : (
-                        <i onClick={()=> handleChangeStatus(bda._id , "Active")} className="fa fa-times text-red-600"></i>
+                        <i onClick={()=> handleChangeAccess(bda._id)} title="Access not given" className="fa fa-times text-red-600"></i>
                       )}
                     </div>
                   </td>
