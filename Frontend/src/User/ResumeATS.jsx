@@ -12,6 +12,7 @@ const ResumeATS = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const fileInputRef = useRef(null);     
   const userId = localStorage.getItem("userId");
+
   useEffect(() => {
     if (!userId) {
       toast.error("Please log in to use this feature!", { id: "login-error" });
@@ -19,6 +20,7 @@ const ResumeATS = () => {
     }
     fetchUserData();
   }, [userId]);
+
   const fetchUserData = async () => {
     try {
       const res = await axios.get(`${API}/users`, { params: { userId } });
@@ -73,6 +75,7 @@ const ResumeATS = () => {
       setIsUploading(false);
     }
   };
+
   const analyzeResume = async () => {
     if (!resumeUrl) {
       toast.error("Please upload a resume first!", { id: "toast-error" });
@@ -85,7 +88,7 @@ const ResumeATS = () => {
       return;
     }
     setIsAnalyzing(true);
-    toast.loading("Analyzing resume...", { id: "toast-loading" });
+    // toast.loading("Analyzing resume...", { id: "toast-loading" });
     try {
       const res = await axios.post(`${API}/score-uploaded-resume`, { userId });
       setAtsResult(res.data);
@@ -124,16 +127,16 @@ const ResumeATS = () => {
     </div>
   );
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-gray-200 flex items-center justify-center p-6">
-      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-2xl transform transition-all hover:scale-[1.02] relative">
-        <div className="flex justify-between items-center mb-6">
+    <div className="fixed top-[70px] flex items-center justify-center -z-10 over w-[100%] h-[calc(100vh-120px)] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden overflow-auto bg-white">
+      <Toaster position="top-center" />
+      <div className="bg-white  pt-20 rounded-2xl shadow-2xl p-10">
+        <div className="flex justify-between items-center  mb-6">
           <h2 className="text-3xl font-bold text-black text-center flex items-center gap-2">
             <FaChartBar /> Ultimate ATS Analyzer
           </h2>
           <button
             onClick={() => setShowInstructions(true)}
-            className="text-orange-600 hover:text-orange-700 transition-all"
+            className="text-orange-600 hover:text-orange-700 transition-all ml-3"
             title="View Instructions"
           >
             <FaQuestionCircle size={24} />
@@ -208,11 +211,18 @@ const ResumeATS = () => {
           </div>
         )}
         {atsResult && (
-          <div className="mt-8 space-y-6">
-            <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-200">
+          <div className="mt-20 pt-30 space-y-2">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-2xl font-semibold text-gray-800">
+                ATS Analysis Result
+              </h3>
+                 <span className="font-bold cursor-pointer bg-black px-3 py-1 text-white rounded-full" onClick={() => setAtsResult(null)}>X</span>
+            </div>
+            <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-200">
               <h3 className="text-xl font-semibold text-black mb-4 flex items-center gap-2">
                 <FaChartBar /> ATS Score Overview
               </h3>
+         
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-4xl font-bold text-orange-600">

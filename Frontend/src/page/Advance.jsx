@@ -864,7 +864,15 @@ The Krutanic Advanced Program offers an intensive curriculum that combines theor
         </div>
       </section>
      
-    
+    <div className="fixed bottom-8 bg-green-800 animate-bounce right-7 z-50 px-3 py-2 rounded-full">
+        <a
+          href="https://api.whatsapp.com/send?phone=919380736449&text=Hello%20Krutanic%20Team,%0A%0AI%20have%20some%20queries%20regarding%20my%20course.%0A%0AThank%20you!"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-whatsapp rounded-full text-[3rem]"></i>
+        </a>
+      </div>
       
        {/* <section>
           <Getintouch/>

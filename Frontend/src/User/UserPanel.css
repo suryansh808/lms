@@ -17,14 +17,14 @@
 
     span {
       cursor: pointer;
-      font-size: 28px;
+      font-size: 20px;
       font-weight: 600;
       transition: all ease 0.3s;
     }
 
     span:hover {
       color: #f15b29;
-      font-size: 30px;
+      font-size: 22px;
     }
   }
 
@@ -76,9 +76,7 @@
   }
 }
 
-.setting {
-  height: calc(100vh - 100px);
-}
+
 
 #UserDashboard {
   margin-bottom: 100px;
@@ -230,7 +228,9 @@
 
 
   }
+  
 }
+
 
 #enrolledcourse {
   margin-bottom: 60px;

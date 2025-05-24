@@ -1,6 +1,5 @@
-import React from 'react'
-// import Tawk from './Tawk';
 
+// import Tawk from './Tawk';
 const LmsFooter = () => {
   return (
     <div id='lmsFooter'>

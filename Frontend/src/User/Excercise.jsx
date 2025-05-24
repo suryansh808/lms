@@ -137,13 +137,13 @@ const Exercise = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-gray-200 flex flex-col items-center justify-center p-6">
-  <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-3xl transform transition-all hover:scale-[1.02] relative">
-    {error && (
-      <div className="bg-red-50 p-6 rounded-xl border border-red-200 mb-8 text-center text-red-600">
-        {error}
-      </div>
-    )}
+    <div className="fixed top-[70px] flex items-center justify-center -z-10 over w-[100%] h-[calc(100vh-120px)] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden overflow-auto bg-white">
+      <div className="bg-white h-[80dvh] w-[700px] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden overflow-auto  rounded-2xl shadow-2xl p-10">
+        {error && (
+        <div className="bg-red-50 p-6 rounded-xl border border-red-200 mb-8 text-center text-red-600">
+         {error}
+        </div>
+       )}
     {!testStarted && (
       <div className="text-center">
         <p className="text-3xl font-bold text-black mb-7">MCQ Test</p>
@@ -169,15 +169,15 @@ const Exercise = () => {
         )}
         <button
           onClick={() => setShowStartDialog(true)}
-          className="w-48 py-3 bg-gradient-to-r from-orange-500 to-orange-300 text-white rounded-full hover:from-orange-300 hover:to-orange-600 transition-all font-semibold"
+          className="w-48 py-3 bg-orange-700 text-white rounded-full font-semibold"
         >
           Start Your Test
         </button>
       </div>
     )}
     {testStarted && (
-      <div>
-        <div className="flex justify-between items-center mb-6">
+      <div className="">
+        <div className="flex justify-between items-center mb-3">
           <button
             onClick={() => setTestStarted(false)}
             className="px-4 py-2 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition-all"
