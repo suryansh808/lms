@@ -108,7 +108,7 @@ app.use("/", sendMailWithAttchement);
 
 app.use("/",ResumeATS);
 
-app.use("/",PlacementCoordinator);
+// app.use("/",PlacementCoordinator);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Backend Server!");
