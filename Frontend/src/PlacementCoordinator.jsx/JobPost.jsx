@@ -42,7 +42,7 @@ const JobPost = () => {
         try {
             const response = await axios.get(`${API}/jobs-with-applications`);
             setJobs(response.data);
-            console.log("jobs" ,response.data);
+            // console.log("jobs" ,response.data);
         } catch (error) {
             console.error("There was an error fetching Jobs:", error) 
         }

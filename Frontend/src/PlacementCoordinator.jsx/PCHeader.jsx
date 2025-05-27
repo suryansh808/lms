@@ -22,20 +22,6 @@ const PCHeader = () => {
     }, 1500);
     };
 
-    // useEffect(() => {
-    //   const handleClickOutside = (event) => {
-    //     if (
-    //       mobileMenuRef.current &&
-    //       !mobileMenuRef.current.contains(event.target)
-    //     ) {
-    //       setisMobileVisible(false);
-    //     }
-    //   };
-    //   document.addEventListener("click", handleClickOutside);
-    //   return () => {
-    //     document.removeEventListener("click", handleClickOutside);
-    //   };
-    // }, []);
 
     return (
       <div id="AdminHeader">

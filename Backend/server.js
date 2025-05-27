@@ -12,7 +12,7 @@ const NewStudentEnroll = require("./routes/NewStudentEnroll");
 const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
 const Mockai = require("./routes/mock");
 const Excercise = require("./routes/excercise");
-// const PlacementCoordinator = require("./routes/PlacementCoordinator");
+const PlacementCoordinator = require("./routes/PlacementCoordinator");
 const ResumeATS = require("./routes/resumeats");
 
 const User = require("./routes/User");
@@ -106,9 +106,9 @@ app.use("/", AddEvent);
 //send mail with attchement
 app.use("/", sendMailWithAttchement);
 
-app.use("/",ResumeATS);
+app.use("/", ResumeATS);
 
-// app.use("/",PlacementCoordinator);
+app.use("/", PlacementCoordinator);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Backend Server!");

@@ -202,7 +202,7 @@ const CreatePlacementCoordinator = () => {
               <th>Sl No.</th>
               <th>Full Name</th>
               <th>Email</th>
-              <th>Password</th>
+              {/* <th>Password</th> */}
               <th>Action</th>
               <th>Send Login Credentials</th>
             </tr>
@@ -213,7 +213,7 @@ const CreatePlacementCoordinator = () => {
                 <td>{index + 1}</td>
                 <td>{coordinator.fullname}</td>
                 <td>{coordinator.email}</td>
-                <td>{coordinator.password}</td>
+                {/* <td>{coordinator.password}</td> */}
                 <td>
                   <button onClick={() => handleEdit(coordinator)}><i class="fa fa-edit"></i></button>
                   <button onClick={() => handleDelete(coordinator._id)}><i class="fa fa-trash-o text-red-600"></i></button>
