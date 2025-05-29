@@ -460,8 +460,8 @@ const TeamDetail = () => {
               }, 0)}
             </div>
           </div>
-
-          {bdaData && bdaData.designation === "MANAGER" && (
+          <div></div>
+          {/* {bdaData && bdaData.designation === "MANAGER" && (
             <select
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
@@ -477,7 +477,7 @@ const TeamDetail = () => {
                 );
               })}
             </select>
-          )}
+          )} */}
         </div>
         <table border="1">
           <thead>
