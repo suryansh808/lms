@@ -1,6 +1,4 @@
-
-const AlumniData =
-[
+const AlumniData = [
   {
     "name": "Dhruthi L",
     "role": "Designation",
@@ -14,7 +12,8 @@ const AlumniData =
     "experience": "Gained teamwork skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.8
   },
   {
     "name": "Harsha Vardhan S D",
@@ -29,7 +28,8 @@ const AlumniData =
     "experience": "Developed coding expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.4
   },
   {
     "name": "Chinmaya M A",
@@ -44,7 +44,8 @@ const AlumniData =
     "experience": "Enhanced problem-solving through internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.5
   },
   {
     "name": "Anusha M G",
@@ -59,7 +60,8 @@ const AlumniData =
     "experience": "Learned project management in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.2
   },
   {
     "name": "Monika B",
@@ -74,7 +76,8 @@ const AlumniData =
     "experience": "Built technical skills via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.7
   },
   {
     "name": "Keshav Regmi",
@@ -89,7 +92,8 @@ const AlumniData =
     "experience": "Improved communication during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.9
   },
   {
     "name": "Aastha Singh",
@@ -104,7 +108,8 @@ const AlumniData =
     "experience": "Mastered debugging in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/mohammedafan/"
+    "linkdinUrl": "https://www.linkedin.com/in/mohammedafan/",
+    "package": 10.3
   },
   {
     "name": "Abhishek Singh Chauhan",
@@ -119,7 +124,8 @@ const AlumniData =
     "experience": "Honed analytical skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.1
   },
   {
     "name": "Dhiraj Mandal",
@@ -134,7 +140,8 @@ const AlumniData =
     "experience": "Gained industry exposure through internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 13.6
   },
   {
     "name": "Adarsh Gidd",
@@ -149,7 +156,8 @@ const AlumniData =
     "experience": "Developed software tools in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.8
   },
   {
     "name": "Deepak Kumar",
@@ -164,7 +172,8 @@ const AlumniData =
     "experience": "Learned agile methods in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.9
   },
   {
     "name": "Harshitha",
@@ -179,7 +188,8 @@ const AlumniData =
     "experience": "Improved coding proficiency via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 14.2
   },
   {
     "name": "Jeevan S J",
@@ -194,7 +204,8 @@ const AlumniData =
     "experience": "Enhanced teamwork in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.4
   },
   {
     "name": "Ankitha R",
@@ -209,7 +220,8 @@ const AlumniData =
     "experience": "Built project experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.3
   },
   {
     "name": "Gagana Y R",
@@ -224,7 +236,8 @@ const AlumniData =
     "experience": "Mastered time management in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.8
   },
   {
     "name": "Chandana N",
@@ -239,7 +252,8 @@ const AlumniData =
     "experience": "Developed leadership skills via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 10.7
   },
   {
     "name": "Jeevan S Jayaramegowda",
@@ -254,7 +268,8 @@ const AlumniData =
     "experience": "Gained practical experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.8
   },
   {
     "name": "Kruthik B",
@@ -269,7 +284,8 @@ const AlumniData =
     "experience": "Improved technical expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 13.1
   },
   {
     "name": "Monika Muniraju",
@@ -284,7 +300,8 @@ const AlumniData =
     "experience": "Learned collaboration skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.5
   },
   {
     "name": "Arvind Kumar G",
@@ -299,7 +316,8 @@ const AlumniData =
     "experience": "Honed programming skills via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.6
   },
   {
     "name": "Kumar Vedant",
@@ -314,7 +332,8 @@ const AlumniData =
     "experience": "Built industry knowledge in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 14.0
   },
   {
     "name": "Gagan C",
@@ -329,7 +348,8 @@ const AlumniData =
     "experience": "Developed problem-solving skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.9
   },
   {
     "name": "Aishwarya",
@@ -344,7 +364,8 @@ const AlumniData =
     "experience": "Gained frontend experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.4
   },
   {
     "name": "Anirudh B Mitta",
@@ -359,7 +380,8 @@ const AlumniData =
     "experience": "Learned software development in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.1
   },
   {
     "name": "Keerthana S C",
@@ -374,7 +396,8 @@ const AlumniData =
     "experience": "Improved teamwork skills via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 10.0
   },
   {
     "name": "Apurv",
@@ -389,7 +412,8 @@ const AlumniData =
     "experience": "Developed coding skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.6
   },
   {
     "name": "Bhargav Urs S",
@@ -404,7 +428,8 @@ const AlumniData =
     "experience": "Gained project experience via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.5
   },
   {
     "name": "Beluvigi Sreeranga",
@@ -419,7 +444,8 @@ const AlumniData =
     "experience": "Honed technical skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.0
   },
   {
     "name": "Govind Biradar",
@@ -434,7 +460,8 @@ const AlumniData =
     "experience": "Learned agile practices in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.7
   },
   {
     "name": "Ayush Kumar Mishra",
@@ -449,7 +476,8 @@ const AlumniData =
     "experience": "Built coding proficiency in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 13.3
   },
   {
     "name": "Lavanya YN",
@@ -464,7 +492,8 @@ const AlumniData =
     "experience": "Gained leadership skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.2
   },
   {
     "name": "Issat Riyaz",
@@ -479,7 +508,8 @@ const AlumniData =
     "experience": "Improved problem-solving in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.4
   },
   {
     "name": "Mansi Srinivas",
@@ -494,7 +524,8 @@ const AlumniData =
     "experience": "Developed teamwork skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.2
   },
   {
     "name": "Bhuvaneshwari R",
@@ -509,7 +540,8 @@ const AlumniData =
     "experience": "Honed coding skills via internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.4
   },
   {
     "name": "Kartik Dandooti",
@@ -524,7 +556,8 @@ const AlumniData =
     "experience": "Gained industry insights in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.0
   },
   {
     "name": "Aruna K",
@@ -539,7 +572,8 @@ const AlumniData =
     "experience": "Learned project skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.6
   },
   {
     "name": "Maheshwari Khelge",
@@ -554,7 +588,8 @@ const AlumniData =
     "experience": "Built technical expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.8
   },
   {
     "name": "Anusha Makam Gopalakrishna",
@@ -569,7 +604,8 @@ const AlumniData =
     "experience": "Gained coding experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.7
   },
   {
     "name": "Bhavana Hs",
@@ -584,7 +620,8 @@ const AlumniData =
     "experience": "Developed professional skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 13.8
   },
   {
     "name": "Ashwas Ajay",
@@ -599,7 +636,8 @@ const AlumniData =
     "experience": "Honed problem-solving skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.6
   },
   {
     "name": "Dhruvin Kanani",
@@ -614,7 +652,8 @@ const AlumniData =
     "experience": "Gained technical skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.2
   },
   {
     "name": "CHANDRIKA S N",
@@ -629,7 +668,8 @@ const AlumniData =
     "experience": "Learned industry practices in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.7
   },
   {
     "name": "LAXMAN KUDDEMMI",
@@ -644,7 +684,8 @@ const AlumniData =
     "experience": "Developed coding expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.3
   },
   {
     "name": "Tejas M N",
@@ -659,7 +700,8 @@ const AlumniData =
     "experience": "Gained project management in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.5
   },
   {
     "name": "Abhijit Nashi",
@@ -674,7 +716,8 @@ const AlumniData =
     "experience": "Honed software skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.9
   },
   {
     "name": "Kavya R",
@@ -689,7 +732,8 @@ const AlumniData =
     "experience": "Built collaboration skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.1
   },
   {
     "name": "Dinesh N",
@@ -704,7 +748,8 @@ const AlumniData =
     "experience": "Gained coding proficiency in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.5
   },
   {
     "name": "Adnan Haider",
@@ -719,7 +764,8 @@ const AlumniData =
     "experience": "Developed technical skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.4
   },
   {
     "name": "MOHAMMAD ROOH ULLAH",
@@ -734,7 +780,8 @@ const AlumniData =
     "experience": "Honed leadership skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.6
   },
   {
     "name": "Gagana C M",
@@ -749,7 +796,8 @@ const AlumniData =
     "experience": "Gained industry experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.9
   },
   {
     "name": "Deepak Somayya Gond",
@@ -764,7 +812,8 @@ const AlumniData =
     "experience": "Built software skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.5
   },
   {
     "name": "Ayshna Goenka",
@@ -779,7 +828,8 @@ const AlumniData =
     "experience": "Learned coding techniques in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.3
   },
   {
     "name": "Anusha Akula",
@@ -794,7 +844,8 @@ const AlumniData =
     "experience": "Gained professional experience in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.8
   },
   {
     "name": "Suhas Indgiri",
@@ -809,7 +860,8 @@ const AlumniData =
     "experience": "Developed teamwork skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.8
   },
   {
     "name": "INCHARA KARANTH",
@@ -824,7 +876,8 @@ const AlumniData =
     "experience": "Honed coding expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.2
   },
   {
     "name": "AJAY H Hegde",
@@ -839,7 +892,8 @@ const AlumniData =
     "experience": "Gained project skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 9.7
   },
   {
     "name": "Chiranjeevi B Shankara",
@@ -854,7 +908,8 @@ const AlumniData =
     "experience": "Built technical skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.9
   },
   {
     "name": "Harshitha K M",
@@ -869,7 +924,8 @@ const AlumniData =
     "experience": "Learned software skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.6
   },
   {
     "name": "Kanneboyina Likith Adithya ",
@@ -884,7 +940,8 @@ const AlumniData =
     "experience": "Developed UI/UX design skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.7
   },
   {
     "name": "Gande Tejaswini  ",
@@ -899,7 +956,8 @@ const AlumniData =
     "experience": "Gained software development expertise in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.0
   },
   {
     "name": "Suba Dharshini P",
@@ -914,7 +972,8 @@ const AlumniData =
     "experience": "Enhanced coding proficiency through internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 5.5
   },
   {
     "name": "GILAKA SIVA PEDDANNA ",
@@ -929,7 +988,8 @@ const AlumniData =
     "experience": "Acquired management skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 5.8
   },
   {
     "name": "K.J.Pavani Durga",
@@ -944,7 +1004,8 @@ const AlumniData =
     "experience": "Honed business development skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.0
   },
   {
     "name": "ANUSHA R",
@@ -959,22 +1020,8 @@ const AlumniData =
     "experience": "Strengthened backend support skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
-  },
-  {
-    "name": "Saanchitha D",
-    "role": "AM - FP&A ",
-    "location": "Bangalore",
-    "rating": 5,
-    "pre": "Fresher",
-    "post": "Genpact",
-    "image": "https://via.placeholder.com/80?text=KC",
-    "college": "Dayananda Sagar University",
-    "degree": "Computer Science and Engineering ",
-    "experience": "Developed financial analysis skills in internship",
-    "preRole": "Internship from Krutanic",
-    "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.3
   },
   {
     "name": "Saanchitha D",
@@ -989,7 +1036,8 @@ const AlumniData =
     "experience": "Improved budgeting and forecasting skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.1
   },
   {
     "name": "Gokulakannan K ",
@@ -1004,7 +1052,8 @@ const AlumniData =
     "experience": "Gained process optimization skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.6
   },
   {
     "name": "Anusha G",
@@ -1019,7 +1068,8 @@ const AlumniData =
     "experience": "Enhanced accounting skills through internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.0
   },
   {
     "name": "Rishabh Nagar",
@@ -1034,7 +1084,8 @@ const AlumniData =
     "experience": "Developed process management skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 11.3
   },
   {
     "name": "Jayita Ghorai ",
@@ -1049,7 +1100,8 @@ const AlumniData =
     "experience": "Mastered full stack development during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.0
   },
   {
     "name": "Bhavin Sali ",
@@ -1064,7 +1116,8 @@ const AlumniData =
     "experience": "Built financial planning skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 8.5
   },
   {
     "name": "HRUSHIKESH S ",
@@ -1079,7 +1132,8 @@ const AlumniData =
     "experience": "Refined user interface design skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 13.0
   },
   {
     "name": "Kartik chauhan ",
@@ -1094,7 +1148,8 @@ const AlumniData =
     "experience": "Sharpened debugging skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 7.4
   },
   {
     "name": "K J Pavani Durga ",
@@ -1109,7 +1164,8 @@ const AlumniData =
     "experience": "Cultivated leadership skills during internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 6.8
   },
   {
     "name": "Pushpanjali verma ",
@@ -1124,9 +1180,9 @@ const AlumniData =
     "experience": "Advanced user experience design skills in internship",
     "preRole": "Internship from Krutanic",
     "postRole": "Designation ",
-    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/"
-  }
+    "linkdinUrl": "https://www.linkedin.com/in/aastha-singh-123456789/",
+    "package": 12.3
+  }
 ];
-  
-  export default AlumniData;
-  
+
+export default AlumniData;
