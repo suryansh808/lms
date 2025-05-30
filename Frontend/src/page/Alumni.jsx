@@ -208,21 +208,22 @@ const Alumni = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-sm text-gray-700 flex justify-between items-center border-t pt-2">
+              <div className="text-sm flex justify-between items-center border-t pt-2">
                 <div>
-                  <div className="font-semibold text-gray-500">
+                  <div className="font-semibold">
                     Pre Krutanic
                   </div>
                   <div>{alumni.pre}</div>
                 </div>
                 <div className="text-2xl">➡️</div>
                 <div>
-                  <div className="font-semibold text-gray-500">
+                  <div className="font-semibold">
                     Post Krutanic
                   </div>
                   <div>{alumni.post}</div>
                 </div>
               </div>
+              <div className="flex items-start justify-center"><strong className="text-sm">Package: {alumni.package} LPA</strong></div>
               <div className="text-right border-t">
                 <button
                   className="text-blue-600 text-sm mt-2"
@@ -264,7 +265,6 @@ const Alumni = () => {
                     <p className="text-sm">
                       {selectedAlumni.role} at  {selectedAlumni.post}
                     </p>
-                    <p className="text-sm">Package: {selectedAlumni.package} LPA</p>
                     {/* <a
                       href={selectedAlumni.linkdinUrl}
                       target="_blank"
