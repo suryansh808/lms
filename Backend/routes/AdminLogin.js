@@ -39,7 +39,7 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
       return res.status(400).json({ error: "Email is required" });
     }
     try {
-      const admin = await adminMail.findOne({});
+      const admin = await adminMail.findOne({email});
       if (!admin) {
         return res.status(500).json({ error: "Admin email not found" });
       }
