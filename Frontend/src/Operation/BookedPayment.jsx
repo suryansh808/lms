@@ -54,7 +54,7 @@ const BookedAmount = () => {
       start: new Date(offerStart).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
       end: new Date(offerEnd).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
     };
-    console.log("Sending Offer Letter:", offerLetterDetails);
+    // console.log("Sending Offer Letter:", offerLetterDetails);
     try {
       const response = await axios.post(`${API}/sendofferletter`, offerLetterDetails);
       toast.success("Offer letter sent successfully");
@@ -185,7 +185,6 @@ const BookedAmount = () => {
         });
         if (response.status === 200) {
           toast.success(response.data.message);
-          fetchNewStudent();
         } else {
           toast.error(response.data.error);
         }
@@ -262,6 +261,20 @@ const BookedAmount = () => {
         );
         if (updateResponse.status === 200) {
           toast.success("Operation record updated successfully!");
+          setNewStudent((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, mailSended: true }
+              : student
+          )
+        );
+        setFilteredStudents((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, mailSended: true }
+              : student
+          )
+        );
         } else {
           toast.error("Failed to update student record.");
         }
@@ -271,7 +284,6 @@ const BookedAmount = () => {
     } catch (error) {
       toast.error("An error occurred while sending the email.");
     } finally {
-      fetchNewStudent();
       value.isSending = false;
     }
   };
@@ -376,6 +388,21 @@ const BookedAmount = () => {
           );
           if (updateResponse.status === 200) {
             toast.success("Onboarding record updated successfully!");
+             setNewStudent((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, onboardingSended: true }
+              : student
+          )
+        );
+
+        setFilteredStudents((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, onboardingSended: true }
+              : student
+          )
+        );
           } else {
             toast.error("Failed to update onboarding record.");
           }
@@ -387,6 +414,8 @@ const BookedAmount = () => {
       }
     }
   };
+
+  
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
 
@@ -464,6 +493,21 @@ const BookedAmount = () => {
         );
         if (updateResponse.status === 200) {
           toast.success("User created true updated successfully!");
+           setNewStudent((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, userCreated: true }
+              : student
+          )
+        );
+
+        setFilteredStudents((prev) =>
+          prev.map((student) =>
+            student._id === value._id
+              ? { ...student, userCreated: true }
+              : student
+          )
+        );
         } else {
           toast.error("Failed to update user record.");
         }
@@ -473,7 +517,6 @@ const BookedAmount = () => {
     } catch (error) {
       toast.success("User already Created check in active user");
     }finally{
-      fetchNewStudent();
       value.isSending = false;
     }
   };
