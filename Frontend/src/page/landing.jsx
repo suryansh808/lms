@@ -18,7 +18,7 @@ import whyimg from "../assets/whychoose.jpg";
 import corporate from "../assets/corporatesolution.jpg";
 import comingsoon from "../assets/comingsoon.jpg";
 
-import roadmap from "../assets/roadmap.png";
+// import roadmap from "../assets/roadmap.png";
 import AdvanceCounses from "../Components/advancecourses";
 
 const HomePage = () => {

@@ -1,6 +1,6 @@
   import React, { useState, useEffect, useRef } from "react";
   import logo3 from "../assets/LOGO3.png";
-  import wipro from "../assets/wipro.svg";
+  // import wipro from "../assets/wipro.svg";
   import accenture from "../assets/poplogo/accenture.png"
   import mca from "../assets/poplogo/mca.png";
   import iso from "../assets/poplogo/iso.png";
@@ -140,7 +140,7 @@
                 <h2>We are accredited by</h2>
                 <div className="my-[30px]">
                 <img src={accenture} alt="accenture" />
-                <img src={wipro} alt="wipro" /> 
+                {/* <img src={wipro} alt="wipro" />  */}
                 </div>
               </div>
               <h3>Our Prestigious Certifications</h3>

@@ -98,7 +98,7 @@ const Mentorship = () => {
 
        <section className="py-[60px] px-[10px]">
         <div className="container mx-auto flex items-center justify-center">
-            <img src={accreditedby} alt="accreditedby" className="rounded-xl shadow-white shadow-lg" />
+            <img src={accreditedby} alt="accreditedby" className="rounded-xl w-[900px]" />
         </div>
       </section>
        <hr className=" opacity-10"/>
