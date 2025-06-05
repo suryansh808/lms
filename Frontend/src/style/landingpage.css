@@ -27,6 +27,12 @@
     max-width: 1500px;
     margin: 0 auto;
 
+        
+    #newh1{
+       font-size: 20px;
+       text-align: left;
+    }
+
     @media(max-width:500px) {
       section .textsuffle{
       height: 410px;

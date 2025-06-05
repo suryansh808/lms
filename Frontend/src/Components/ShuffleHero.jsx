@@ -39,19 +39,19 @@ const ShuffleHero = () => {
   return (
     <section className="w-ful px-[20px] py-[30px] grid grid-cols-1 md:grid-cols-2 items-center gap-10 ">
       <div className="textsuffle">
-        <h1 style={{color:"rgb(241 91 41)",textAlign:'left'}} className="block mb-4 text-3xl font-medium">
+        <h2 style={{color:"rgb(241 91 41)",textAlign:'left'}} className="block mb-4 text-3xl font-medium">
          | Best Learning Platform
-        </h1>
+        </h2>
         <p className="text-xl md:text-5xl font-semibold text-white" style={{fontSize:'40px'}}>
           Transform Your Passion into <br />  <span className="text-md tracking-tighter" ref={el} style={{color:"rgb(241 91 41)"}} />
         </p>  
         <br/>
-        <p className="text-white max-w-[500px]">At KRUTANIC we believe in transforming passion into profession. Our expertly designed courses equip you with the skills to excel in the digital world. 
-        Join us and start your future.</p>
+        <h1 id="newh1">Kickstart Your Career with Online Courses + Internships | Bangalore, Delhi, Mumbai, etc.</h1>
+        {/* <p className="text-white max-w-[500px]">At KRUTANIC we believe in transforming passion into profession. Our expertly designed courses equip you with the skills to excel in the digital world. 
+        Join us and start your future.</p> */}
         <br/>
-        <Link to='/Advance'><button className="bg-white hover:text-orange-700 text-black font-bold 
-        py-2 px-4 rounded">KNOW MORE</button></Link>
         
+        <Link to='/Advance'><button className="bg-white hover:text-orange-700 text-black font-bold py-2 px-4 rounded">KNOW MORE</button></Link>
       </div>
       <ShuffleGrid />
     </section>

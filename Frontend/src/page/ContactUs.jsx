@@ -237,7 +237,7 @@ const ContactUs = () => {
           <div>
             <h2 data-aos="zoom-down">Our Locations</h2>
             <p data-aos="zoom-down">
-              We have locations all over the world. Find one near you!
+              We have locations all over in India. Find one near you!
             </p>
           </div>
           <div>
