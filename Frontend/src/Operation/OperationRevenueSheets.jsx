@@ -41,6 +41,7 @@ const BDARevenueSheet = () => {
   let totalRevenue = 0;
 
   newStudent.forEach((student) => {
+      const createdDate = new Date(student.createdAt);
     const date = new Date(student.createdAt).toLocaleDateString("en-GB");
     const month = new Date(student.createdAt).toLocaleString("default", {
       month: "long",
@@ -65,15 +66,44 @@ const BDARevenueSheet = () => {
     revenueByDay[date].credited += credited;
     revenueByDay[date].pending += pending;
 
+     // Calculate cutoff date: 8th of next month for this student's month
+  const [monthName, yearStr] = month.split(" ");
+  const monthIndex = new Date(`${monthName} 1, ${yearStr}`).getMonth(); // 0-based
+  const year = parseInt(yearStr);
+  const cutoffDate = new Date(year, monthIndex + 1, 8); // 8th of next month
+
+  // ✅ Only include credited if student's createdAt is before cutoffDate
+  if (createdDate <= cutoffDate) {
+    revenueByMonth[month].credited += credited;
+  }
+
     revenueByMonth[month].total += revenue;
     revenueByMonth[month].booked += bookedAmount;
-    revenueByMonth[month].credited += credited;
+    // revenueByMonth[month].credited += credited;
     revenueByMonth[month].pending += pending;
 
     totalRevenue += revenue;
   });
 
-  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
+  function getLastNMonths(n) {
+  const result = [];
+  const today = new Date();
+
+  for (let i = 0; i < n; i++) {
+    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    const monthString = date.toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
+    result.push(monthString);
+  }
+
+  return result;
+}
+const monthsToShow = getLastNMonths(4); // current + last 3 months
+const months = monthsToShow.filter((m) => revenueByMonth[m]); 
+
+  // const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
   const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
   const filteredDailyRevenue = Object.entries(revenueByDay).filter(
     ([, data]) => data.month === (selectedMonth || currentMonth)

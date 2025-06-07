@@ -35,52 +35,110 @@ const BDARevenueSheet = () => {
   const revenueByMonth = {};
   let totalRevenue = 0;
 
-  newStudent.forEach((student) => {
-    const date = new Date(student.createdAt).toLocaleDateString("en-GB");
-    const month = new Date(student.createdAt).toLocaleString("default", {
+  // newStudent.forEach((student) => {
+  //   const date = new Date(student.createdAt).toLocaleDateString("en-GB");
+  //   const month = new Date(student.createdAt).toLocaleString("default", {
+  //     month: "long",
+  //     year: "numeric",
+  //   });
+
+  //   const revenue = student.programPrice || 0;
+  //   const bookedAmount = student.paidAmount || 0;
+  //   const credited = student.status === "fullPaid" || (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared") ? student.paidAmount || 0 : 0;
+  //   const pending = revenue - credited;
+
+  //   if (!revenueByDay[date]) {
+  //     revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+  //   }
+  //   if (!revenueByMonth[month]) {
+  //     revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 };
+  //   }
+
+  //   revenueByDay[date].total += revenue;
+  //   revenueByDay[date].booked += bookedAmount;
+  //   revenueByDay[date].credited += credited;
+  //   revenueByDay[date].pending += pending;
+
+  //   revenueByMonth[month].total += revenue;
+  //   revenueByMonth[month].booked += bookedAmount;
+  //   revenueByMonth[month].credited += credited;
+  //   revenueByMonth[month].pending += pending;
+
+  //   totalRevenue += revenue;
+  // });
+
+const today = new Date();
+
+newStudent.forEach((student) => {
+  const createdDate = new Date(student.createdAt);
+  const date = createdDate.toLocaleDateString("en-GB");
+  const month = createdDate.toLocaleString("default", {
+    month: "long",
+    year: "numeric",
+  });
+
+  const revenue = student.programPrice || 0;
+  const bookedAmount = student.paidAmount || 0;
+  const isHalfCleared = Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared";
+  const credited = student.status === "fullPaid" || isHalfCleared ? bookedAmount : 0;
+  const pending = revenue - credited;
+
+  if (!revenueByDay[date]) {
+    revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+  }
+  if (!revenueByMonth[month]) {
+    revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 };
+  }
+
+  revenueByDay[date].total += revenue;
+  revenueByDay[date].booked += bookedAmount;
+  revenueByDay[date].credited += credited;
+  revenueByDay[date].pending += pending;
+
+  // Calculate cutoff date: 8th of next month for this student's month
+  const [monthName, yearStr] = month.split(" ");
+  const monthIndex = new Date(`${monthName} 1, ${yearStr}`).getMonth(); // 0-based
+  const year = parseInt(yearStr);
+  const cutoffDate = new Date(year, monthIndex + 1, 8); // 8th of next month
+
+  // ✅ Only include credited if student's createdAt is before cutoffDate
+  if (createdDate <= cutoffDate) {
+    revenueByMonth[month].credited += credited;
+  }
+
+  revenueByMonth[month].total += revenue;
+  revenueByMonth[month].booked += bookedAmount;
+  revenueByMonth[month].pending += pending;
+
+  totalRevenue += revenue;
+});
+
+function getLastNMonths(n) {
+  const result = [];
+  const today = new Date();
+
+  for (let i = 0; i < n; i++) {
+    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    const monthString = date.toLocaleString("default", {
       month: "long",
       year: "numeric",
     });
-      console.log("Student Data:", student.remark);
-    const revenue = student.programPrice || 0;
-    const bookedAmount = student.paidAmount || 0;
-    const credited = student.status === "fullPaid" || (Array.isArray(student.remark) && student.remark[student.remark.length - 1] === "Half_Cleared") ? student.paidAmount || 0 : 0;
-    const pending = revenue - credited;
+    result.push(monthString);
+  }
 
-    if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
-    }
-    if (!revenueByMonth[month]) {
-      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 };
-    }
+  return result;
+}
+const monthsToShow = getLastNMonths(4); // current + last 3 months
+const months = monthsToShow.filter((m) => revenueByMonth[m]); 
 
-    revenueByDay[date].total += revenue;
-    revenueByDay[date].booked += bookedAmount;
-    revenueByDay[date].credited += credited;
-    revenueByDay[date].pending += pending;
 
-    revenueByMonth[month].total += revenue;
-    revenueByMonth[month].booked += bookedAmount;
-    revenueByMonth[month].credited += credited;
-    revenueByMonth[month].pending += pending;
+  // const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
 
-    totalRevenue += revenue;
-  });
-
-  const months = Object.keys(revenueByMonth).sort((a, b) => new Date(b) - new Date(a));
   const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
   const filteredDailyRevenue = Object.entries(revenueByDay).filter(
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  // let growthPercentage = null;
-  // if (months.length > 1) {
-  //   const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
-  //   const currentMonthRevenue = revenueByMonth[months[months.length - 1]].total || 0;
-  //   if (lastMonth > 0) {
-  //     growthPercentage = ((currentMonthRevenue - lastMonth) / lastMonth) * 100;
-  //   }
-  // }
 
   return (
     <div className="p-6 max-w-6xl mx-auto ml-[270px]">
@@ -137,7 +195,6 @@ const BDARevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                {/* <th className="border p-3 text-left">Booked Amount</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
               </tr>
@@ -147,7 +204,6 @@ const BDARevenueSheet = () => {
                 <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
-                  {/* <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
                 </tr>
@@ -162,12 +218,6 @@ const BDARevenueSheet = () => {
         <p className="mb-2">
           <strong>Total Revenue:</strong> ₹{totalRevenue.toFixed(2)}
         </p>
-
-        {/* {growthPercentage !== null && (
-          <p className={growthPercentage >= 0 ? "text-green-600" : "text-red-600"}>
-            {growthPercentage >= 0 ? "Growth" : "Loss"}: {growthPercentage.toFixed(2)}%
-          </p>
-        )} */}
       </section>
     </div>
   );
