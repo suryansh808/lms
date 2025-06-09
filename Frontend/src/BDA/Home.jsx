@@ -208,7 +208,12 @@ const Home = () => {
 
                   const pendingTarget = lastTarget.targetValue - achievedTarget;
                   const assignedPaymentNumber = lastTarget.payments
-                  const actualPayments = eligibleStudents.length;
+                  const allPaymentsThisMonth = newStudent.filter((enroll) => {
+          const enrollMonth = new Date(enroll.createdAt).toISOString().slice(0, 7);
+          return enrollMonth === currentMonth;
+        });
+
+      const actualPayments = allPaymentsThisMonth.length;
 
                   return (
                     <div key={index}>

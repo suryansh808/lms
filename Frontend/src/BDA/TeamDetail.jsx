@@ -567,8 +567,15 @@ const TeamDetail = () => {
                 0
               );
               const pendingTarget = lastTarget - achievedTarget;
-               const assignedPaymentNumber = latestTargetObj.payments
-               const actualPayments = enrollmentsThisMonth.length;
+              const allPaymentsThisMonth = filteredData
+        .flatMap((bda) => bda.enrollments)
+        .filter((enroll) => {
+          const enrollMonth = new Date(enroll.createdAt).toISOString().slice(0, 7);
+          return enrollMonth === currentMonth;
+        });
+
+      const assignedPaymentNumber = latestTargetObj.payments;
+      const actualPayments = allPaymentsThisMonth.length;
               return (
                 <div
                   style={{
