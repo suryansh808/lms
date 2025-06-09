@@ -321,15 +321,16 @@ router.get("/getteamname", async (req, res) => {
 // post request to assign target to team
 router.post("/targetassigntoteam", async (req, res) => {
   try {
-    const { teamId, targetValue, currentMonth } = req.body;
+    const { teamId, targetValue, payments, currentMonth } = req.body;
 
-    if (!teamId || !targetValue || !currentMonth) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
+    // if (!teamId || !targetValue || !payments || !currentMonth) {
+    //   return res.status(400).json({ error: "Missing required fields" });
+    // }
 
     const newTarget = {
       currentMonth,
       targetValue,
+      payments,
     };
 
     const updatedTeam = await TeamName.findByIdAndUpdate(

@@ -179,6 +179,7 @@
       border-collapse: collapse;
       font-size: 14px;
   
+      
 
       button {
         color: rgb(0, 0, 0);
@@ -209,6 +210,11 @@
       font-weight: 600;
       cursor: pointer;
     }
+  }
+
+  #target{
+     font-size: 12px;
+     background-color: #eee;
   }
 }
 

@@ -10,7 +10,7 @@ const CreateBDA = new mongoose.Schema({
     mailSended : {type: Boolean , default: false},
     Access:{type:Boolean , default : true},
     status: { type: String , default: "Active"},
-    target:[{ currentMonth: { type: String }, targetValue: { type: String } }],
+    target:[{ currentMonth: { type: String }, targetValue: { type: String }, payments: { type: String }, }],
   });
   
   const BDA = mongoose.model("BDA", CreateBDA);
