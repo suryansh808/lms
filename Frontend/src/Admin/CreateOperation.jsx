@@ -134,6 +134,7 @@ const CreateOperation = () => {
   useEffect(() => {
     fetchOperation();
   }, []);
+
   const resetForm = () => {
     setFormData({
       fullname: "",
@@ -234,6 +235,42 @@ const CreateOperation = () => {
     }
   };
 
+  const [targets, setTargets] = useState({});
+  const today = new Date();
+  const currentMonth = today.toISOString().slice(0, 7);
+
+  const handleInputChange = (e, id, field) => {
+    const value = e.target.value;
+    setTargets((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleAsignTarget = async (e, id) => {
+    e.preventDefault();
+    const targetValue = targets[id];
+
+    try {
+      const response = await axios.post(`${API}/assigntargettooperation/${id}`, {
+        target: {
+          currentMonth,
+          percentage: targetValue,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Target parcentage assigned successfully.");
+        setTargets((prev) => ({
+          ...prev,
+          [id]: "",
+        }));
+         fetchOperation();
+      } else {
+        toast.error("Failed to assign target.");
+      }
+    } catch (error) {
+      console.error("Error assigning target:", error);
+      toast.error("Server error while assigning target.");
+    }
+  };
+
   return (
     <div id="AdminAddCourse" >
       <Toaster position="top-center" reverseOrder={false} />
@@ -296,6 +333,8 @@ const CreateOperation = () => {
               <th>Login</th>
               <th>Action</th>
               <th>Send Login Credentials</th>
+              <th>Assinged Target</th>
+              <th>Target</th>
             </tr>
           </thead>
           <tbody>
@@ -332,6 +371,44 @@ const CreateOperation = () => {
                     )}
                   </div>
                 </td>
+                <td>
+                   <select className="border rounded-md px-2 py-1">
+                        {operation.target.map((target, index) => (
+                          <option key={index}>
+                            {new Date(
+                              `${target.currentMonth}-01`
+                            ).toLocaleString("en-US", {
+                              month: "long",
+                              year: "numeric",
+                            })}{" "}
+                            : {target.percentage}
+                          </option>
+                        ))}
+                      </select>
+                </td>
+                <td>
+                    {operation.target.length > 0 &&
+                    operation.target[operation.target.length - 1].currentMonth ===
+                      currentMonth ? (
+                      <p>already assign</p>
+                    ) : (
+                      <form onSubmit={(e) => handleAsignTarget(e, operation._id)}>
+                        <input
+                          type="text"
+                          placeholder="Target %"
+                          value={targets[operation._id] || ""}
+                          onChange={(e) =>
+                            handleInputChange(e, operation._id)
+                          }
+                          name="target"
+                          className="border rounded-md px-1 py-1 mr-1"
+                        />
+                        <button type="submit" id="target">
+                          Submit
+                        </button>
+                      </form>
+                    )}
+                  </td>
               </tr>
             ))}
           </tbody>

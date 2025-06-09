@@ -6,6 +6,7 @@ const CreateOperation = new mongoose.Schema({
     otp: { type: String },
     password: { type: String },
     mailSended: { type: Boolean, default: false },
+   target:[{currentMonth: { type: String }, percentage: { type: String }, }],
 });
 
 const Operation =  mongoose.model("Operation" , CreateOperation);

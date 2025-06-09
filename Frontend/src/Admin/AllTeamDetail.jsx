@@ -19,6 +19,7 @@ const AllTeamDetail = () => {
     try {
       const response = await axios.get(`${API}/bda-with-enrolls`);
       setAllData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("There was an error fetching all Data:", error);
     }
@@ -151,9 +152,8 @@ const AllTeamDetail = () => {
     setDetailVisible(false);
   };
 
-  const filteredData = selectedTeam
-    ? allData.filter((bda) => bda.team === selectedTeam)
-    : allData;
+  const filteredData = selectedTeam ? allData.filter((bda) => bda.team === selectedTeam) : allData;
+  console.log("filter",filteredData);
 
     const getMonth = (date, offset) => {
       const newDate = new Date(date);
@@ -214,7 +214,7 @@ const AllTeamDetail = () => {
         noOfPayments
       };
     };
-    
+  
 
   return (
     <div id="AdminAddCourse">
@@ -472,6 +472,7 @@ const AllTeamDetail = () => {
               <th>Total</th>
               <th>Full Paid</th>
               <th>Default</th>
+              <th>No Of Payments</th>
             </tr>
           </thead>
           <tbody>
@@ -499,6 +500,12 @@ const AllTeamDetail = () => {
                     bda.enrollments.filter((item) => item.status === "default")
                       .length
                   }
+                </td>
+                <td>{ bda.target && bda.target.length > 0 ? bda.target[bda.target.length - 1].payments || "N/A" : "No Target"} / {" "}
+                   { bda.enrollments.filter((item) => {
+                      const createdMonth = new Date(item.createdAt).toISOString().slice(0, 7); 
+                       return createdMonth === currentMonth}).length
+                       }
                 </td>
               </tr>
             ))}
@@ -546,6 +553,15 @@ const AllTeamDetail = () => {
                 0
               );
               const pendingTarget = lastTarget - achievedTarget;
+             const allPaymentsThisMonth = filteredData
+        .flatMap((bda) => bda.enrollments)
+        .filter((enroll) => {
+          const enrollMonth = new Date(enroll.createdAt).toISOString().slice(0, 7);
+          return enrollMonth === currentMonth;
+        });
+
+      const assignedPaymentNumber = latestTargetObj.payments;
+      const actualPayments = allPaymentsThisMonth.length;
               return (
                 <div
                   style={{
@@ -566,6 +582,8 @@ const AllTeamDetail = () => {
                     <strong>⏳Pending:</strong> ₹{" "}
                     {pendingTarget.toLocaleString()}
                   </p>
+                    <p>📅 No Of Payments : {assignedPaymentNumber}</p>
+                   <p>💰 Payments Received: {actualPayments}</p>
                 </div>
               );
             })()}

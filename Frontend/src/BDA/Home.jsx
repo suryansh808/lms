@@ -207,6 +207,8 @@ const Home = () => {
                   );
 
                   const pendingTarget = lastTarget.targetValue - achievedTarget;
+                  const assignedPaymentNumber = lastTarget.payments
+                  const actualPayments = eligibleStudents.length;
 
                   return (
                     <div key={index}>
@@ -219,6 +221,7 @@ const Home = () => {
                           </p>
                           <p>✅ Target Achieved: ₹0</p>
                           <p>⏳ Pending Target: ₹{lastTarget.targetValue}</p>
+                          <p>📅 No Of Payments : {lastTarget.payments}</p>
                         </>
                       ) : (
                         <>
@@ -227,6 +230,8 @@ const Home = () => {
                             ⏳ Pending Target: ₹
                             {pendingTarget > 0 ? pendingTarget : 0}
                           </p>
+                            <p>📅 No Of Payments : {assignedPaymentNumber}</p>
+                          <p>💰 Payments Received: {actualPayments}</p>
                         </>
                       )}
                     </div>

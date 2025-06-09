@@ -529,7 +529,8 @@ const TeamDetail = () => {
             (() => {
               const team = getteamName.find((t) => t.teamname === selectedTeam);
               const latestTargetObj = team?.target?.[team.target.length - 1];
-              if (!latestTargetObj || !latestTargetObj.targetValue) {
+              
+              if (!latestTargetObj) {
                 return (
                   <div
                     style={{
@@ -566,6 +567,8 @@ const TeamDetail = () => {
                 0
               );
               const pendingTarget = lastTarget - achievedTarget;
+               const assignedPaymentNumber = latestTargetObj.payments
+               const actualPayments = enrollmentsThisMonth.length;
               return (
                 <div
                   style={{
@@ -585,6 +588,8 @@ const TeamDetail = () => {
                   <p>
                     <strong>⏳Pending:</strong> ₹ {pendingTarget.toLocaleString()}
                   </p>
+                   <p>📅 No Of Payments : {assignedPaymentNumber}</p>
+                   <p>💰 Payments Received: {actualPayments}</p>
                 </div>
               );
             })()}

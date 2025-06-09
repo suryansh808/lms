@@ -24,7 +24,12 @@ ChartJS.register(
 );
 
 const OperationDashboard = () => {
-  const [operationData, setOperationData] = useState([]);
+     const [operationData, setOperationData] = useState([]);
+      const [newStudent, setNewStudent] = useState([]);
+     const [operation, setOperation] = useState([]);
+     const today = new Date();
+     const currentMonthWithDate = today.toISOString().slice(0, 7);
+     const operationName = localStorage.getItem("operationName");
 
   const fetchOperationData = async () => {
     const operationId = localStorage.getItem("operationId");
@@ -41,8 +46,31 @@ const OperationDashboard = () => {
     }
   };
 
+    const fetchOperation = async () => {
+    try {
+      const response = await axios.get(`${API}/getoperation`);
+      setOperation(response.data.filter((item) => item.fullname === operationName));
+    } catch (error) {
+      console.error("There was an error fetching bda:", error);
+    }
+  };
+    const fetchNewStudent = async () => {
+    try {
+      const response = await axios.get(`${API}/getnewstudentenroll`);
+      setNewStudent(
+        response.data.filter(
+          (item) => item.counselor && item.operationName === operationName
+        )
+      );
+    } catch (error) {
+      console.error("There was an error fetching new student:", error);
+    }
+  };
+
   useEffect(() => {
     fetchOperationData();
+    fetchOperation();
+    fetchNewStudent();
   }, []);
 
   if (!operationData) {
@@ -69,8 +97,6 @@ const OperationDashboard = () => {
     const createdAt = new Date(student.createdAt);
     return createdAt.getMonth() === currentMonth && createdAt.getFullYear() === currentYear;
   });
-
-  console.log("currentmonth" , currentMonthData)
   
   const totalRevenue = currentMonthData.reduce(
     (acc, student) => acc + (student.programPrice || 0),
@@ -140,16 +166,16 @@ const OperationDashboard = () => {
     ],
   };
 
-  const data = {
-    labels: ["Booked Revenue", "Credited Revenue", "Pending Revenue"],
-    datasets: [
-      {
-        data: [bookedRevenue, creditedRevenue, pendingRevenue],
-        backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
-        hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
-      },
-    ],
-  };
+  // const data = {
+  //   labels: ["Booked Revenue", "Credited Revenue", "Pending Revenue"],
+  //   datasets: [
+  //     {
+  //       data: [bookedRevenue, creditedRevenue, pendingRevenue],
+  //       backgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
+  //       hoverBackgroundColor: ["#36A2EB", "#4BC0C0", "#FF6384", "#FF9F40"],
+  //     },
+  //   ],
+  // };
 
   return (
     <div id="AdminDashboard">
@@ -190,9 +216,26 @@ const OperationDashboard = () => {
         </div>
 
         <div className="revenue-card">
-          <h2 className="text-lg font-semibold mb-4">Overall Performance</h2>
+           <h2 className="text-lg font-bold mb-4">Your Target</h2>
           <div>
-            <Pie data={data} />
+           {operation.map((item, index) => {
+  if (item.target && item.target.length > 0) {
+    const lastTarget = item.target[item.target.length - 1];
+
+    if (lastTarget.currentMonth === currentMonthWithDate && lastTarget.percentage) {
+      return (
+        <div key={index}>
+          <p>📅 Payment Percentage: {lastTarget.percentage}</p>
+        </div>
+      );
+    } else {
+      return <p key={index}>No target assigned for this month.</p>;
+    }
+  } else {
+    return <p key={index}>No target assigned.</p>;
+  }
+})}
+
           </div>
         </div>
       </div>
