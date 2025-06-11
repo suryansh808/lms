@@ -434,7 +434,7 @@ const [actionType, setActionType] = useState();
     const displayDate = currentDay > 10 || currentMonth > 1 // Past February 15th
       ? `10th ${new Date(today.setMonth(currentMonth + 1)).toLocaleString('en', { month: 'long' })} 2025`
       : "10th February 2025";
-      const randomNumber = Math.floor(Math.random() * 6) + 20;
+      // const randomNumber = Math.floor(Math.random() * 6) + 20;
   return (
     <div>
       <div className="bg-black text-white">
@@ -484,7 +484,7 @@ const [actionType, setActionType] = useState();
                     Available Cohort{" "}
                   </p>
                   <p className="mt-2 text-md"><span className="line-through">60/60</span> Batch Closed </p>
-                  <p>{randomNumber}/60</p>
+                  <p>22/60</p>
                 </div>
                 <div
                   data-aos="fade-up"

@@ -425,7 +425,7 @@ const PromptEngineering = () => {
           { month: "long" }
         )} 2025`
       : "10th February 2025";
-  const randomNumber = Math.floor(Math.random() * 6) + 20;
+  // const randomNumber = Math.floor(Math.random() * 6) + 20;
 
   return (
     <div>
@@ -481,7 +481,7 @@ const PromptEngineering = () => {
                 <p className="mt-2 text-md">
                   {/* <span className="line-through">60/60</span> Batch Closed{" "} */}
                 </p>
-                <p>{randomNumber}/60</p>
+                <p>38/60</p>
               </div>
               <div
                 data-aos="fade-up"
