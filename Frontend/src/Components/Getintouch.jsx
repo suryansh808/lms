@@ -31,7 +31,7 @@ const Getintouch = () => {
                   to="/ContactUs"
                  
                 >
-                  Connent With Us
+                  Connect With Us
                 </Link>
               </button>
             </div>

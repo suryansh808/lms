@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../API";
 import debounce from "lodash/debounce";
+import toast, { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
   const userEmail = localStorage.getItem("userEmail");
@@ -30,21 +31,21 @@ const Dashboard = () => {
     }
   }, 500);
 
-  
-       
   const handleSubmit = async (data) => {
+    const createdAt = new Date(data.createdAt);
+    const currentDate = new Date();
+    const eligibleDate = new Date(createdAt);
+    eligibleDate.setMonth(createdAt.getMonth() + 2);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const eligibleDateFormatted = eligibleDate.toLocaleDateString(
+      "en-US",
+      options
+    );
 
-   const createdAt = new Date(data.createdAt);
-const currentDate = new Date();
-const eligibleDate = new Date(createdAt);
-eligibleDate.setMonth(createdAt.getMonth() + 2);
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
-const eligibleDateFormatted = eligibleDate.toLocaleDateString('en-US', options);
-
-if (currentDate < eligibleDate) {
-  alert(`You can apply for a certificate after ${eligibleDateFormatted}.`);
-  return;
-} 
+    if (currentDate < eligibleDate) {
+      alert(`You can apply for a certificate after ${eligibleDateFormatted}.`);
+      return;
+    }
 
     if (
       !window.confirm(
@@ -57,7 +58,11 @@ if (currentDate < eligibleDate) {
       return;
     }
     // console.log("c", data);
-    const name = data.fullname.toLowerCase().split(" ").map(word =>  word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    const name = data.fullname
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
     const email = data.email;
     const domain = data.domain.title;
     // console.log(name,email,domain);
@@ -91,6 +96,30 @@ if (currentDate < eligibleDate) {
     }
   };
 
+  const trainingCertificateDownload = async () =>{
+    console.log("hi");
+    console.log(selectedCertificate.domain);
+try {
+    const imageUrl = `https://res.cloudinary.com/do5gatqvs/image/upload/co_rgb:000000,l_text:times%20new%20roman_65_bold_normal_left:${encodeURIComponent(selectedCertificate.name)}/fl_layer_apply,y_10/co_rgb:000000,l_text:times%20new%20roman_28_bold_normal_left:${encodeURIComponent(selectedCertificate.domain)}/fl_layer_apply,y_190/training_otoawc`;
+const imageResponse = await fetch(imageUrl);
+    const blob = await imageResponse.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = "Training_Certificate.jpg";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(blobUrl);
+
+    toast.success("Training Certificate downloaded successfully!");
+  } catch (error) {
+    toast.error("Failed to download training certificate");
+    console.error("Download error:", error);
+  }
+  };
+
   useEffect(() => {
     fetchenrollData();
     fethCertificate();
@@ -116,6 +145,7 @@ if (currentDate < eligibleDate) {
 
   return (
     <div id="UserDashboard">
+       <Toaster position="top-center" reverseOrder={false} />
       {selectedCertificate && (
         <div className="viewcertificate">
           <div className="view">
@@ -141,6 +171,15 @@ if (currentDate < eligibleDate) {
               >
                 Add to linkedin{" "}
               </button>
+              {/* <a href={`https://res.cloudinary.com/do5gatqvs/image/upload/co_rgb:000000,l_text:times%20new%20roman_65_bold_normal_left:${encodeURIComponent(selectedCertificate.name)}/fl_layer_apply,y_10/co_rgb:000000,l_text:times%20new%20roman_28_bold_normal_left:${encodeURIComponent(selectedCertificate.domain)}/fl_layer_apply,y_190/training_otoawc`} download='Training_Certificate.jpg'>Download Training Certificate</a> */}
+              <button
+                className="border-2 border-black bg-green-950 text-white"
+                onClick={trainingCertificateDownload}
+              >
+                {" "}
+                Download Training Certificate{" "}
+              </button>
+
               <button
                 className="border-2 border-black bg-black text-white"
                 onClick={() => setSelectedCertificate(null)}
@@ -228,11 +267,20 @@ if (currentDate < eligibleDate) {
                   </p>
                   <div>
                     <strong>
-                        You can pay your remaining amount through this{" "}
-                      <a className="text-blue-700 font-bold" href="https://smartpay.easebuzz.in/132907/pay" target="_blank">
+                      You can pay your remaining amount through this{" "}
+                      <a
+                        className="text-blue-700 font-bold"
+                        href="https://smartpay.easebuzz.in/132907/pay"
+                        target="_blank"
+                      >
                         PayNow
                       </a>
-                      . <i title=" share the screenshot to your counselor" class="fa fa-info-circle" aria-hidden="true"></i>
+                      .{" "}
+                      <i
+                        title=" share the screenshot to your counselor"
+                        class="fa fa-info-circle"
+                        aria-hidden="true"
+                      ></i>
                     </strong>
                   </div>
 

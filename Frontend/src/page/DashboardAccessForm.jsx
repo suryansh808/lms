@@ -569,6 +569,7 @@ const DashboardAccessForm = () => {
               placeholder="Name and Contact Number"
               cols={60}
               rows={3}
+              required
               className="resize-none"
             ></textarea>
           </div>

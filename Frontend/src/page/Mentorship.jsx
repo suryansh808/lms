@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import certificate1 from "../assets/certificates/Certificateofinternship.png";
 import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
+import adobe from "../assets/certificates/adobe.jpg"
 import accreditedby from "../assets/poplogo/accreditedby.png"
 import Testimonial from "../Components/testimonial";
 import FAQMentor from "./Mentorship/FAQMentor";
@@ -207,41 +208,9 @@ const Mentorship = () => {
                   </div>
                 </div>
 
-                {/* Right Section */}
-                {/* <div className="lg:w-1/2 w-full">
-                  <div className="">
-                    <div className="">
-                      <Slider {...settings}>
-                        <div className="px-2">
-                          <img
-                            src={certificate1}
-                            alt="Program Image 1"
-                            className="w-full object-cover rounded-lg"
-                          />
-                        </div>
-                        <div className="px-2">
-                          <img
-                            src={certificate2}
-                            alt="Program Image 2"
-                            className="w-full object-cover rounded-lg"
-                          />
-                        </div>
-                        <div className="px-2">
-                          <img
-                            src={certificate3}
-                            alt="Program Image 3"
-                            className="w-full object-cover rounded-lg"
-                          />
-                        </div>
-                      </Slider>
-                    </div>
-                  </div>
-                </div> */}
               </div>
                 <div className="w-full mt-5">
-                  {/* <div className=""> */}
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-3 md:grid md:grid-cols-2 md:gap-3 ">
-                      {/* <Slider {...settings}> */}
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-3 md:grid md:grid-cols-2 md:gap-3 ">               
                         <div className="px-2 mb-5 lg:mb-0">
                           <img
                             src={certificate1}
@@ -255,35 +224,14 @@ const Mentorship = () => {
                             alt="Program Image 3"
                             className="w-full object-cover rounded-lg"
                           />
-                        </div>
-                      {/* </Slider> */}
-                    </div>
-                  {/* </div> */}
+                        </div>                    
+                    </div>   
+
+                    <div className="flex items-center justify-center mt-5">
+                      <img src={adobe} alt="adobe certificate" className=' object-cover rounded-lg w-[800px]' />  
+                    </div>        
                 </div>
-              {/* <div className="brandlogo">
-                <img
-                  className="hover:scale-110 ease-linear duration-300"
-                  src={aicte}
-                  alt=""
-                />
-                <img
-                  className="hover:scale-110 ease-linear duration-300"
-                  src={iso}
-                  alt=""
-                />
-                <img
-                  className="hover:scale-110 ease-linear duration-300"
-                  src={mca}
-                  alt=""
-                  style={{ filter: "invert(1) contrast(100%)" }}
-                />
-                <img
-                  className="hover:scale-110 ease-linear duration-300"
-                  src={msme}
-                  alt=""
-                  style={{ filter: "invert(1)" }}
-                />
-              </div> */}
+     
             </div>
           </div>
         </div>
