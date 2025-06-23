@@ -96,28 +96,31 @@ const Dashboard = () => {
     }
   };
 
-  const trainingCertificateDownload = async () =>{
-    console.log("hi");
-    console.log(selectedCertificate.domain);
-try {
-    const imageUrl = `https://res.cloudinary.com/do5gatqvs/image/upload/co_rgb:000000,l_text:times%20new%20roman_65_bold_normal_left:${encodeURIComponent(selectedCertificate.name)}/fl_layer_apply,y_10/co_rgb:000000,l_text:times%20new%20roman_28_bold_normal_left:${encodeURIComponent(selectedCertificate.domain)}/fl_layer_apply,y_190/training_otoawc`;
-const imageResponse = await fetch(imageUrl);
-    const blob = await imageResponse.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+  const trainingCertificateDownload = async () => {
+    // console.log("hi",selectedCertificate);
+    // console.log(selectedCertificate.domain);
+    // console.log(new Date(selectedCertificate.startdate).toLocaleString('en-US', { month: 'long', year: 'numeric' }));    
+    let finalOutput = selectedCertificate.domain + " "+"on"+" " + new Date(selectedCertificate.startdate).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    // console.log(finalOutput);
+    try {
+      const imageUrl =`https://res.cloudinary.com/do5gatqvs/image/upload/co_rgb:000000,l_text:times%20new%20roman_65_bold_normal_left:${encodeURIComponent(selectedCertificate.name)}/fl_layer_apply,y_20/co_rgb:000000,l_text:times%20new%20roman_25_bold_normal_left:${encodeURIComponent(finalOutput)}/fl_layer_apply,y_225/training_certificate_demo_vknkst`
+      const imageResponse = await fetch(imageUrl);
+      const blob = await imageResponse.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = "Training_Certificate.jpg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(blobUrl);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = "Training_Certificate.jpg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(blobUrl);
 
-    toast.success("Training Certificate downloaded successfully!");
-  } catch (error) {
-    toast.error("Failed to download training certificate");
-    console.error("Download error:", error);
-  }
+      toast.success("Training Certificate downloaded successfully!");
+    } catch (error) {
+      toast.error("Failed to download training certificate");
+      console.error("Download error:", error);
+    }
   };
 
   useEffect(() => {
@@ -140,13 +143,14 @@ const imageResponse = await fetch(imageUrl);
       month: "numeric",
     });
     let linkurl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${data.domain}&organizationName=Krutanic&issueYear=${year}&issueMonth=${month}&certUrl=${data.url}&certId=${data._id}`;
+   
     window.open(linkurl, "_blank");
   };
 
   return (
     <div id="UserDashboard">
-       <Toaster position="top-center" reverseOrder={false} />
-      {selectedCertificate && (
+      <Toaster position="top-center" reverseOrder={false} />
+      {selectedCertificate && ( 
         <div className="viewcertificate">
           <div className="view">
             <img src={selectedCertificate.url} alt="" />
@@ -171,7 +175,6 @@ const imageResponse = await fetch(imageUrl);
               >
                 Add to linkedin{" "}
               </button>
-              {/* <a href={`https://res.cloudinary.com/do5gatqvs/image/upload/co_rgb:000000,l_text:times%20new%20roman_65_bold_normal_left:${encodeURIComponent(selectedCertificate.name)}/fl_layer_apply,y_10/co_rgb:000000,l_text:times%20new%20roman_28_bold_normal_left:${encodeURIComponent(selectedCertificate.domain)}/fl_layer_apply,y_190/training_otoawc`} download='Training_Certificate.jpg'>Download Training Certificate</a> */}
               <button
                 className="border-2 border-black bg-green-950 text-white"
                 onClick={trainingCertificateDownload}
