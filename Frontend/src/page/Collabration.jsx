@@ -12,6 +12,7 @@ import toast ,{Toaster} from 'react-hot-toast';
 const Collabration = () => {
   const [formData, setFormData] = useState({
     fullName: "",
+    number: "",
     email: "",
     collaborationType: "",
     entityType: "",
@@ -56,7 +57,7 @@ const Collabration = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbzyYvUi2vS0j7l5d9E5718Ecy8LBEWP2n7XhLHw4KS6OdUMyl9TxhDKiji7xozNTNHtAw/exec",
+        "https://script.google.com/macros/s/AKfycbxFKcggnJ4SuwZjZSqFWjnMYacMtpnNsQ7eLQH-HsshB_NKwYMnZO4Ah1LErZhx7VDqLA/exec",
         {
           method: "POST",
           headers: {
@@ -69,6 +70,7 @@ const Collabration = () => {
       toast.success("Form submitted successfully!");
       setFormData({
         fullName: "",
+        number: "",
         email: "",
         collaborationType: "",
         entityType: "",
@@ -507,6 +509,21 @@ const Collabration = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   placeholder="Enter your name"
+                  required
+                  className="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+               <div className="space-y-2">
+                <label htmlFor="fullName" className="block font-medium">
+                  Phone or WhatsApp Number
+                </label>
+                <input
+                  id="number"
+                  type="number"
+                  name="number"
+                  value={formData.number}
+                  onChange={handleChange}
+                  placeholder="Enter your phone or WhatsApp number"
                   required
                   className="w-full px-3 py-2 border rounded-md"
                 />
