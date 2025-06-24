@@ -41,7 +41,7 @@ const HomePage = () => {
           <div className="text">
             <h1 data-aos="zoom-in">| About Us</h1>
             <p>
-            Krutanic Solutions is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic Solutions today and take the next step toward achieving your career goals.
+            Krutanic is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic today and take the next step toward achieving your career goals.
             </p>
             <Link to="/AboutUs">
               <button className="btnblack">LEARN MORE</button>{" "}

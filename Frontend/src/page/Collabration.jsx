@@ -399,7 +399,7 @@ const Collabration = () => {
         </h1>
         <hr data-aos="fade-up" />
         <p data-aos="fade-up" className="quote">
-          Krutanic solutions recognize that educators and staff play in shaping
+          Krutanic recognize that educators and staff play in shaping
           their futures. By collaborating with us, your students become part of
           continuous learning opportunities, we empower our team to stay ahead
           in an ever-evolving educational landscape.

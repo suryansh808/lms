@@ -57,7 +57,7 @@ const Footer = () => {
         <div className="footerlink">
           <div className="footerlinkleft">
             <img src={logowhite} alt="" />
-            <p>Krutanic Solutions is your gateway to mastering industry-leading skills. As a premier course provider, we offer high-quality, in-demand programs. Our focus is on delivering real-world skills to empower individuals and excel in their careers.</p>
+            <p>Krutanic is your gateway to mastering industry-leading skills. As a premier course provider, we offer high-quality, in-demand programs. Our focus is on delivering real-world skills to empower individuals and excel in their careers.</p>
             <br />
             <h2>Follow Us</h2>
             <a
@@ -157,7 +157,7 @@ const Footer = () => {
         </div>
 
         <div className="footerbottom">
-          <p>Copyright 2024 KRUTANIC SOLUTIONS. All rights reserved.</p>
+          <p>Copyright 2024 KRUTANIC. All rights reserved.</p>
         </div>
       </footer>
       <div className="pay">
