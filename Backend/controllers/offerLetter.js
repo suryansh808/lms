@@ -22,9 +22,15 @@ let transporter = nodemailer.createTransport({
 const createOfferLetterPDF = async (pdfword1,pdfword2) => {
     const pdfDoc = await PDFDocument.create();
 
+    // Load and embed image for page 1
     const imagePath = path.join(__dirname, "offer.jpg");
     const imageBytes = fs.readFileSync(imagePath);
     const jpgImage = await pdfDoc.embedJpg(imageBytes);
+
+    // Load and embed image for page 2
+    const imagePath2 = path.join(__dirname, "offerback.jpg"); // Make sure this image exists
+    const imageBytes2 = fs.readFileSync(imagePath2);
+    const jpgImage2 = await pdfDoc.embedJpg(imageBytes2);
     
     const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     
@@ -68,7 +74,7 @@ const createOfferLetterPDF = async (pdfword1,pdfword2) => {
 
     // Page 2 with pdfword
     const page2 = pdfDoc.addPage([a4Width, a4Height]);
-    page2.drawImage(jpgImage, {
+    page2.drawImage(jpgImage2, {
         x: 0,
         y: 0,
         width: a4Width,
@@ -112,7 +118,7 @@ ${date}
    
 Dear ${fullname},
     
-with reference to your application regarding, we are pleased to offer you internship with Krutanic Solutions.
+With reference to your application regarding, we are pleased to offer you internship with Krutanic.
     
 We take this opportunity in wishing you the very best in you training as well as advising you that our offer letter is on the following terms and conditions:
     
@@ -148,7 +154,7 @@ Job Type: Internship
 Reporting Location: Online
     
     
-I have read and understood the above terms and conditions and I accept this offer, as set forth above with Krutanic Solutions.
+I have read and understood the above terms and conditions and I accept this offer, as set forth above with Krutanic.
     
 NAME:
     
