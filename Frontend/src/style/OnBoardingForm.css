@@ -88,7 +88,34 @@
             background-color: black;
             color: white;
         }
+
+        .marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 40s linear infinite;  /* Adjust speed here */
+}
+
+.marquee-text:hover {
+  animation-play-state: paused;  /* Pause on hover */
+}
+
+
+
     }
+    @keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
     /* @media screen and  (max-width: 769px) {
        .formgrid {

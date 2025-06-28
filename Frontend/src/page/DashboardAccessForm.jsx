@@ -67,27 +67,26 @@ const DashboardAccessForm = () => {
   const [monthsToShow, setMonthsToShow] = useState([]);
   const [endsMonthsToShow, setEndsMonthsToShow] = useState([]);
 
- const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   useEffect(() => {
     const currentDate = new Date();
     const currentMonthIndex = currentDate.getMonth(); // 0-based index
     const currentDay = currentDate.getDate();
     const currentYear = currentDate.getFullYear();
-   
 
     let months = [];
     let startMonthIndex;
@@ -322,6 +321,16 @@ const DashboardAccessForm = () => {
     <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container m-auto">
+        <div className="marquee-container">
+      <div className="marquee-text">
+        <strong>Kind Reminder:</strong> Please ensure that you complete the <strong>Dashboard Access
+        Form on the same day your payment is made.</strong> Submissions will not be
+        accepted on the following day or any later date, and access will not
+        be granted if the form is not submitted on time. We appreciate your
+        understanding and adherence to this policy.
+      </div>
+    </div>
+
         <h2 className="mt-2">DashBoard Access Form</h2>
         <form onSubmit={handleSubmit}>
           <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[10px]">
