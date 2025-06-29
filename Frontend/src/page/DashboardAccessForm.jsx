@@ -317,7 +317,7 @@ const DashboardAccessForm = () => {
     setMaxDate(maxDate);
   }, [monthOpted, monthsToShow]);
 
-  return (
+  return ( 
     <div id="onboardingform">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container m-auto">
@@ -326,8 +326,8 @@ const DashboardAccessForm = () => {
         <strong>Kind Reminder:</strong> Please ensure that you complete the <strong>Dashboard Access
         Form on the same day your payment is made.</strong> Submissions will not be
         accepted on the following day or any later date, and access will not
-        be granted if the form is not submitted on time. We appreciate your
-        understanding and adherence to this policy.
+        be granted if the form is not submitted on time (We appreciate your
+        understanding and adherence to this policy).
       </div>
     </div>
 
