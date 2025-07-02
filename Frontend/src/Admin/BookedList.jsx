@@ -514,6 +514,7 @@ const BookedList = () => {
                 <th>Remark</th>
                 <th>More Details</th>
                 <th>Action</th>
+                <th>Lead from</th>
               </tr>
             </thead>
             <tbody>
@@ -593,6 +594,9 @@ const BookedList = () => {
                           <button onClick={() => handleEdit(item._id)}>
                             <i class="fa fa-edit"></i>
                           </button>
+                        </td>
+                        <td>
+                          {item.lead ? item.lead : "N/A"}
                         </td>
                       </tr>
                     ))}

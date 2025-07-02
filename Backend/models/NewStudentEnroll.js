@@ -39,6 +39,9 @@ const newStudentEnrollSchema = new Schema(
     counselor: {
       type: String,
     },
+    lead:{
+      type: String,
+    },
     domain: {
       type: String,
     },

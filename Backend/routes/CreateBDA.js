@@ -249,12 +249,13 @@ router.post("/checkbdaauth", async (req, res) => {
 
 //post request to add transaction id
 router.post("/addtransactionid", async (req, res) => {
-  const {transactionId , fullname , counselor} = req.body;
+  const {transactionId , fullname , counselor , option} = req.body;
   try {
     const AddTransactionId = new TransactionId({
       transactionId,
       fullname,
-      counselor
+      counselor,
+      lead: option,
     });
     await AddTransactionId.save();
     res.status(201).json(AddTransactionId);
@@ -282,10 +283,12 @@ router.get("/gettransactionwithname", async (req, res) => {
    const transactions = await TransactionId.find();
    const transactionList = transactions.map(item => item.transactionId);
    const counselorList = transactions.map(item => item.counselor);
+   const lead = transactions.map(item => item.lead);
    
    res.status(200).json({
      transaction: transactionList,
-     counselor: counselorList
+     counselor: counselorList,
+     lead: lead
    });
  }
  catch (error) {

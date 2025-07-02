@@ -11,6 +11,9 @@ const AddTransactionIdSchema = new mongoose.Schema({
     counselor: {
         type: String,
     },
+    lead:{
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

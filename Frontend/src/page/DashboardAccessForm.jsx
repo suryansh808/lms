@@ -63,6 +63,7 @@ const DashboardAccessForm = () => {
   const [internshipstartsmonth, setInternshipStartsMonth] = useState("");
   const [internshipendsmonth, setInternshipEndsMonth] = useState("");
   const [course, setCourse] = useState([]);
+  const [lead, setLead] = useState("");
 
   const [monthsToShow, setMonthsToShow] = useState([]);
   const [endsMonthsToShow, setEndsMonthsToShow] = useState([]);
@@ -215,6 +216,7 @@ const DashboardAccessForm = () => {
       referFriend: referFriend,
       internshipstartsmonth: internshipstartsmonth,
       internshipendsmonth: internshipendsmonth,
+      lead: lead.trim(),
     };
 
     if (
@@ -259,19 +261,45 @@ const DashboardAccessForm = () => {
     resetForm();
   };
 
+  // const handleEmailChange = (e) => {
+  //   const enteredEmail = e.target.value.trim();
+  //   setEmail(enteredEmail);
+  //   if (getTransactionId.transaction.includes(enteredEmail)) {
+  //     const matchedCounselor = getTransactionId.counselor.find((counselorItem, index) => getTransactionId.transaction[index] === enteredEmail);
+  //      const matchedLead = getTransactionId.lead.find((counselorItem, index) => getTransactionId.transaction[index] === enteredEmail);
+  //     console.log("Matched Counselor:", matchedCounselor);
+  //     console.log("Counselor lead:", matchedLead);
+  //     if (matchedCounselor) {
+  //       setCounselor(matchedCounselor);
+  //     }
+  //   }
+  // };
+
   const handleEmailChange = (e) => {
-    const enteredEmail = e.target.value.trim();
-    setEmail(enteredEmail);
-    if (getTransactionId.transaction.includes(enteredEmail)) {
-      const matchedCounselor = getTransactionId.counselor.find(
-        (counselorItem, index) =>
-          getTransactionId.transaction[index] === enteredEmail
-      );
-      if (matchedCounselor) {
-        setCounselor(matchedCounselor);
-      }
+  const enteredEmail = e.target.value.trim();
+  setEmail(enteredEmail);
+
+  // Defensive nullish checks
+  if (getTransactionId?.transaction?.includes(enteredEmail)) {
+    const index = getTransactionId.transaction.indexOf(enteredEmail);
+
+    const matchedCounselor = getTransactionId.counselor?.[index];
+    const matchedLead = getTransactionId.lead?.[index];
+
+    console.log("Matched Counselor:", matchedCounselor);
+    console.log("Counselor Lead:", matchedLead);
+
+    if (matchedCounselor) {
+      setCounselor(matchedCounselor);
     }
-  };
+    if (matchedLead) {
+      setLead(matchedLead);
+    }
+  }
+};
+
+
+
 
   useEffect(() => {
     const currentDate = new Date();
@@ -303,9 +331,7 @@ const DashboardAccessForm = () => {
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
 
-  // const currentDate = new Date();
-  // const currentMonth = currentDate.getMonth();
-  // const currentYear = currentDate.getFullYear();
+
 
   useEffect(() => {
     const today = new Date();

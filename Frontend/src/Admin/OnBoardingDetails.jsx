@@ -189,6 +189,7 @@ const convertToIST = (utcDate) => {
                 <th>Paid Amount </th>
                 {/* <th>Pending </th> */}
                 <th>BDA </th>
+                <th>Lead from</th>
                 {/* <th>Transaction Id</th> */}
                 <th>Operation </th>
                 <th>Due Date</th>
@@ -220,6 +221,7 @@ const convertToIST = (utcDate) => {
                         <td>{item.paidAmount}</td>
                         {/* <td  >{item.programPrice - item.paidAmount}</td> */}
                         <td>{item.counselor}</td>
+                        <td>{item.lead}</td>
                         {/* <td className="capitalize">{item.transactionId}</td> */}
                         <td>{item.operationName}</td>
                         <td className=" whitespace-nowrap">{item.clearPaymentMonth}</td>

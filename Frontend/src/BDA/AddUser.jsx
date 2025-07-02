@@ -6,6 +6,7 @@ import toast ,{Toaster} from 'react-hot-toast';
 const AddUser = () => {
   const [fullname, setFullname] = useState('');
   const [transactionId, setTransactionId] = useState('');
+   const [option, setOption] = useState('');
   const bdaName = localStorage.getItem('bdaName');
   const handleFullnameChange = (e) => {
     setFullname(e.target.value);
@@ -32,19 +33,20 @@ const AddUser = () => {
     }, []);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (e) => {
-    // const bdaName = localStorage.getItem('bdaName');
     e.preventDefault();
 
     if (isSubmitting) return;
     setIsSubmitting(true);
    
-    const data = { fullname,transactionId,counselor:bdaName};
+    const data = { fullname,transactionId,counselor:bdaName , option};
     try {
       const response = await axios.post(`${API}/addtransactionid`, data);
       toast.success('Details added successfully');
         setFullname('');
         setTransactionId('');
+         setOption('');
         getTransactionIdList();
     } catch (error) {
         toast.error('Error adding Details or user already exsists');
@@ -57,7 +59,7 @@ const AddUser = () => {
   return (
     <div id="AdminAddCourse">
          <Toaster position="top-center" reverseOrder={false}/>
-        <div id='form'>
+        <div className='adduser'>
       <h2>Hi <span className='text-red-600 font-bold' >{localStorage.getItem('bdaName')}</span> kindly add Email ID below before sharing the onboarding link !!</h2>
 
       <form onSubmit={handleSubmit}>
@@ -82,6 +84,19 @@ const AddUser = () => {
           />
         </div>
         <div>
+        <select
+          id="option"
+          name="option"
+          value={option}
+          onChange={(e) => setOption(e.target.value)}
+          required
+        >
+          <option value="" disabled>Select Option</option>
+          <option value="CGFL">CGFL</option>
+          <option value="SGFL">SGFL</option>
+        </select>
+        </div>
+        <div>
           <button disabled={isSubmitting} type="submit">Submit</button>
         </div>
       </form>
@@ -96,6 +111,7 @@ const AddUser = () => {
                 <th>Full Name</th>
                 <th>Email Id</th>
                 <th>Counselor Name</th>
+                <th>Lead</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,6 +121,7 @@ const AddUser = () => {
                     <td>{transactionId.fullname}</td>
                     <td>{transactionId.transactionId}</td>
                     <td>{transactionId.counselor}</td>
+                    <td>{transactionId.lead}</td>
                 </tr>
                 ))}
             </tbody>

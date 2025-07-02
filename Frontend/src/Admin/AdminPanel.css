@@ -315,6 +315,7 @@
           border-radius: 5px;
           margin: 5px 0;
         }
+       
 
         .button {
           background-color: black;
@@ -499,6 +500,33 @@
       }
       tr {
         border: 1px solid rgb(0, 0, 0, 0.3);
+      }
+    }
+  }
+  .adduser{
+    form{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      input, select {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;  
+        margin: 2px 0;  
+      }
+      input:focus, select:focus {
+        outline: none;
+      }
+      button {
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
       }
     }
   }
