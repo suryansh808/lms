@@ -49,10 +49,10 @@ const RevenueSheet = () => {
 
 
     if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, payments:0, month };
+      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, payments:0,  paymentsByLead: { CGFL: 0, SGFL: 0 }, month };
     }
     if (!revenueByMonth[month]) {
-      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 , payments:0 };
+      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0 , payments:0 ,paymentsByLead: { CGFL: 0, SGFL: 0 } };
     }
 
     revenueByDay[date].total += revenue;
@@ -68,6 +68,15 @@ const RevenueSheet = () => {
 
     revenueByMonth[month].payments += 1;
 
+    // Count payment based on student.lead
+if (student.lead === "CGFL") {
+  revenueByDay[date].paymentsByLead.CGFL += 1;
+  revenueByMonth[month].paymentsByLead.CGFL += 1;
+} else if (student.lead === "SGFL") {
+  revenueByDay[date].paymentsByLead.SGFL += 1;
+  revenueByMonth[month].paymentsByLead.SGFL += 1;
+}
+
     totalRevenue += revenue;
   });
 
@@ -77,16 +86,7 @@ const RevenueSheet = () => {
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  // months.sort((a, b) => new Date(a) - new Date(b));
 
-  // let growthPercentage = null;
-  // if (months.length > 1) {
-  //   const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
-  //   const currentMonth = revenueByMonth[months[months.length - 1]].total || 0;
-  //   if (lastMonth > 0) {
-  //     growthPercentage = ((currentMonth - lastMonth) / lastMonth) * 100;
-  //   }
-  // }
 
   return (
     <div className="p-6 ml-[270px] mx-auto">
@@ -115,10 +115,11 @@ const RevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                {/* <th className="border p-3 text-left">Booked Amount</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
                 <th className="border p-3 text-left">Total No Of Payments</th>
+                 <th className="border p-3 text-left">CGFL Payments</th>
+                 <th className="border p-3 text-left">SGFL Payments</th>
               </tr>
             </thead>
             <tbody>
@@ -126,10 +127,11 @@ const RevenueSheet = () => {
                 <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
-                  {/* <td className="border p-3">₹{data.booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
                   <td className="border p-3">₹{data.pending.toFixed(2)}</td>
                   <td className="border p-3">{revenueByDay[date].payments}</td>
+                  <td className="border p-3">{data.paymentsByLead?.CGFL || 0}</td>
+                  <td className="border p-3">{data.paymentsByLead?.SGFL || 0}</td>
                 </tr>
               ))}
             </tbody>
@@ -145,10 +147,11 @@ const RevenueSheet = () => {
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                {/* <th className="border p-3 text-left">Booked Amount</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
                 <th className="border p-3 text-left">Total No Of Payments</th>
+                <th className="border p-3 text-left">CGFL Payments</th>
+                <th className="border p-3 text-left">SGFL Payments</th>
               </tr>
             </thead>
             <tbody>
@@ -156,10 +159,11 @@ const RevenueSheet = () => {
                 <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
-                  {/* <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
                   <td className="border p-3">{revenueByMonth[month].payments}</td>
+                  <td className="border p-3">{revenueByMonth[month].paymentsByLead?.CGFL || 0}</td>
+                  <td className="border p-3">{revenueByMonth[month].paymentsByLead?.SGFL || 0}</td>
                 </tr>
               ))}
             </tbody>

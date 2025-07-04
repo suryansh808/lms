@@ -53,11 +53,11 @@ const BDARevenueSheet = () => {
     const pending = revenue - credited;
 
     if (!revenueByDay[date]) {
-      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+      revenueByDay[date] = { total: 0, booked: 0, credited: 0, pending: 0, month, defaultPercentage:0 };
 
     }
     if (!revenueByMonth[month]) {
-      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0, month };
+      revenueByMonth[month] = { total: 0, booked: 0, credited: 0, pending: 0, month ,defaultPercentage:0 };
 
     }
 
@@ -79,8 +79,17 @@ const BDARevenueSheet = () => {
 
     revenueByMonth[month].total += revenue;
     revenueByMonth[month].booked += bookedAmount;
-    // revenueByMonth[month].credited += credited;
     revenueByMonth[month].pending += pending;
+
+revenueByDay[date].defaultPercentage = revenueByDay[date].total > 0 
+    ? ((revenueByDay[date].pending / revenueByDay[date].total) * 100).toFixed(2) 
+    : "0.00";
+
+revenueByMonth[month].defaultPercentage = revenueByMonth[month].total > 0 
+    ? ((revenueByMonth[month].pending / revenueByMonth[month].total) * 100).toFixed(2) 
+    : "0.00";
+
+
 
     totalRevenue += revenue;
   });
@@ -109,16 +118,6 @@ const months = monthsToShow.filter((m) => revenueByMonth[m]);
     ([, data]) => data.month === (selectedMonth || currentMonth)
   );
 
-  // months.sort((a, b) => new Date(b) - new Date(a));
-
-  // let growthPercentage = null;
-  // if (months.length > 1) {
-  //   const lastMonth = revenueByMonth[months[months.length - 2]].total || 0;
-  //   const currentMonth = revenueByMonth[months[months.length - 1]].total || 0;
-  //   if (lastMonth > 0) {
-  //     growthPercentage = ((currentMonth - lastMonth) / lastMonth) * 100;
-  //   }
-  // }
 
   return (
     <div className="p-6 max-w-6xl mx-auto ml-[265px]">
@@ -147,9 +146,9 @@ const months = monthsToShow.filter((m) => revenueByMonth[m]);
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Date</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                {/* <th className="border p-3 text-left">Booked Amount</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
+                <th className="border p-3 text-left">Default %</th>
               </tr>
             </thead>
             <tbody>
@@ -157,9 +156,9 @@ const months = monthsToShow.filter((m) => revenueByMonth[m]);
                 <tr key={date} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{date}</td>
                   <td className="border p-3">₹{data.total.toFixed(2)}</td>
-                  {/* <td className="border p-3">₹{data.booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{data.credited.toFixed(2)}</td>
                   <td className="border p-3">₹{data.pending.toFixed(2)}</td>
+                  <td className="border p-3">{data.defaultPercentage}%</td>
                 </tr>
               ))}
             </tbody>
@@ -175,9 +174,9 @@ const months = monthsToShow.filter((m) => revenueByMonth[m]);
               <tr className="bg-gray-100">
                 <th className="border p-3 text-left">Month</th>
                 <th className="border p-3 text-left">Total Revenue</th>
-                {/* <th className="border p-3 text-left">Booked Revenue</th> */}
                 <th className="border p-3 text-left">Credited Revenue</th>
                 <th className="border p-3 text-left">Pending Revenue</th>
+                <th className="border p-3 text-left">Default %</th>
               </tr>
             </thead>
             <tbody>
@@ -185,9 +184,9 @@ const months = monthsToShow.filter((m) => revenueByMonth[m]);
                 <tr key={month} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
                   <td className="border p-3">{month}</td>
                   <td className="border p-3">₹{revenueByMonth[month].total.toFixed(2)}</td>
-                  {/* <td className="border p-3">₹{revenueByMonth[month].booked.toFixed(2)}</td> */}
                   <td className="border p-3">₹{revenueByMonth[month].credited.toFixed(2)}</td>
                   <td className="border p-3">₹{revenueByMonth[month].pending.toFixed(2)}</td>
+                  <td className="border p-3">{revenueByMonth[month].defaultPercentage}%</td>
                 </tr>
               ))}
             </tbody>
