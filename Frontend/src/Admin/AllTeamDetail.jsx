@@ -218,6 +218,37 @@ const AllTeamDetail = () => {
     };
   };
 
+// Utility: Get Top 3 BDAs by Gross Revenue (programPrice) for a Month
+const getTop3BDAsByGrossRevenue = (month) => {
+  const bdaRevenueList = filteredData.map((bda) => {
+    const enrollmentsThisMonth = bda.enrollments.filter((enroll) => {
+      const enrollMonth = new Date(enroll.createdAt).toISOString().slice(0, 7);
+      return enrollMonth === month && (enroll.programPrice || 0) > 0;
+    });
+
+    const grossRevenue = enrollmentsThisMonth.reduce(
+      (sum, enroll) => sum + (enroll.programPrice || 0),
+      0
+    );
+
+    const paymentCount = enrollmentsThisMonth.length;
+
+    return {
+      fullname: bda.fullname,
+      team: bda.team,
+      grossRevenue,
+      paymentCount,
+    };
+  });
+
+  return bdaRevenueList
+    .sort((a, b) => b.grossRevenue - a.grossRevenue)
+    .slice(0, 3);
+};
+
+
+
+
   return (
     <div id="AdminAddCourse">
       {/* selected bda detail */}
@@ -478,6 +509,7 @@ const AllTeamDetail = () => {
             })}
           </select>
         </div>
+
         <table border="1">
           <thead>
             <tr>
@@ -536,6 +568,69 @@ const AllTeamDetail = () => {
             ))}
           </tbody>
         </table>
+
+      <div className="flex flex-col mt-6">
+  <h3>🏆 Top 3 BDAs by Gross Revenue (Month-wise)</h3>
+  {[currentMonth, prevMonth1, prevMonth2, prevMonth3].map((month) => {
+    const top3BDAs = getTop3BDAsByGrossRevenue(month);
+
+    const totalPayments = filteredData.reduce((count, bda) => {
+      const monthPayments = bda.enrollments.filter((enroll) => {
+        const enrollMonth = new Date(enroll.createdAt).toISOString().slice(0, 7);
+        return enrollMonth === month && (enroll.programPrice || 0) > 0;
+      });
+      return count + monthPayments.length;
+    }, 0);
+
+    return (
+      <div
+        key={month}
+        style={{
+          marginTop: "1rem",
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+        }}
+      >
+        <h4>{month}</h4>
+        <p>
+          <strong>💰 Total Payment Count:</strong> {totalPayments}
+        </p>
+        <table className="bdarevenuetable mt-2">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Team</th>
+              <th>Gross Revenue (Program Price)</th>
+              <th>No. of Payments</th>
+            </tr>
+          </thead>
+          <tbody>
+            {top3BDAs.length > 0 ? (
+              top3BDAs.map((bda, idx) => (
+                <tr key={idx}>
+                  <td>#{idx + 1}</td>
+                  <td>{bda.fullname}</td>
+                  <td>{bda.team}</td>
+                  <td>₹ {bda.grossRevenue.toLocaleString()}</td>
+                  <td>{bda.paymentCount}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No Data</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    );
+  })}
+</div>
+
+
+
         <div>
           {selectedTeam &&
             (() => {
@@ -615,6 +710,8 @@ const AllTeamDetail = () => {
               );
             })()}
         </div>
+       
+
         <div className="flex flex-col">
           <h3>📊 Previous Month Revenue Summary</h3>
           <table className="bdarevenuetable">
