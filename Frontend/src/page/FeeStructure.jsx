@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const courses = [
   { name: "Full Stack Web Development" },
+  { name: "Human Resource" },
   { name: "Android App Development" },
   { name: "Artificial Intelligence" },
   { name: "Machine Learning" },
