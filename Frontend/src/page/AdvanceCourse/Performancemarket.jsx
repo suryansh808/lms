@@ -1118,7 +1118,7 @@ const [actionType, setActionType] = useState();
               {" "}
               Program fees 60,999/- + 18% GST 
             </p>
-            <button className="flex items-center justify-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
+            {/* <button className="flex items-center justify-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
               <a
                 href="https://rzp.io/rzp/advanced-training-program"
                 target="blank"
@@ -1126,7 +1126,7 @@ const [actionType, setActionType] = useState();
               >
                 Enroll Now
               </a>
-            </button>
+            </button> */}
           </div>
         </section>
       </div>
