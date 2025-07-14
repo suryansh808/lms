@@ -938,7 +938,11 @@ const BookedAmount = () => {
                           <option value="Busy">Busy</option>
                           <option value="Declined">Declined</option>
                           <option value="Need More Time">Need More Time</option>
+                          <option value="Reviews are not good">Reviews are not good</option>
                           <option value="When Batch Starts">When Batch Starts</option>
+                          <option value="No response">No response</option>
+                          <option value="False pitch so not intrested">False pitch so not intrested</option>
+                          <option value="Offer letter issues">Offer letter issues</option>
                           <option value="Counselor Told To Pay Before Class Start">Counselor Told To Pay Before Class Start</option>
                         </select>
                       </td>
