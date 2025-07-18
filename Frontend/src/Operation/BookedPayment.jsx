@@ -765,7 +765,7 @@ const BookedAmount = () => {
       <div className="coursetable">
         <div className="mb-2">
           <h2>New Enroll Booking: </h2>
-          <span onClick={handleAddNewCandidate}>+ Add New Candidate</span>
+          {/* <span onClick={handleAddNewCandidate}>+ Add New Candidate</span> */}
         </div>
         <section className="flex items-center gap-1 mb-2">
           <input

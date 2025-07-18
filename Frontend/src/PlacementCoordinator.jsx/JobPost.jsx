@@ -20,7 +20,7 @@ const JobPost = () => {
         setDescription("");
         setEditingJobId(null);
         setisjobFormVisible(false);
-    };
+    }; 
     const handleSumbit = async (e) => {
         e.preventDefault();
         const newJob = { title, company, expiryDate, description };
