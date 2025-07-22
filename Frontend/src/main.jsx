@@ -24,6 +24,7 @@ import './style/MasterClass.css'
 import './style/OnBoardingForm.css'
 import "./axiosConfig";
 import "./style/Event.css";
+import "./style/verify.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

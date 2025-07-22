@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Certificate = require("../models/Certificate");
+const mongoose = require("mongoose");
 
 // Create a new certificate entry
 router.post("/applycertificate", async (req, res) => {
@@ -40,6 +41,29 @@ router.get("/getcertificate", async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
+
+// ✅ Verify certificate by ID
+router.get("/verify-certificate/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Invalid certificate ID" });
+        }
+
+        const certificate = await Certificate.findOne({ _id: id, delivered: true },{ name: 1, domain: 1, url: 1 });
+
+        if (!certificate) {
+            return res.status(404).json({ error: "Certificate not found." });
+        }
+
+        res.json(certificate);
+
+    } catch (error) {
+        res.status(500).json({ error: "Server error." });
+    }
+});
+
 
 
 module.exports = router;

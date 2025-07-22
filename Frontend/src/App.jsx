@@ -109,6 +109,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
 //event
 import EventDashBoard from "./Event/EventDashBoard";
+import Verified from "./Components/Verified";
 
 // import checkAdminAuth from "./checkAdminAuth";
 
@@ -165,7 +166,8 @@ const AppContent = () => {
     "/pclogin",
     "/dashboardaccessform",
     "/masterclass",
-    "/alumni"
+    "/alumni",
+    "/verify"
   ];
 
   const adminheaderPaths = [
@@ -285,6 +287,7 @@ const AppContent = () => {
         <Route path="/DashboardAccessForm" element={<DashboardAccessForm />} />
         <Route path="/MasterClass" element={<MasterClass />} />
         <Route path="/Alumni" element={<Alumni/>} />
+        <Route path="/Verify" element={<Verified/>} />
 
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />
