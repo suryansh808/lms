@@ -1,25 +1,19 @@
 import { Helmet } from "react-helmet";
-import { useState, useMemo } from "react";
+import { useState , useMemo } from "react";
 import axios from "axios";
 import AlumniData from "../Components/alumniData";
 import API from "../API";
 
-
 const Alumni = () => {
-
   const [filters, setFilters] = useState({ post: "", location: "", role: "" });
-  const [dropdownOpen, setDropdownOpen] = useState({
-    post: false,
-    location: false,
-    role: false,
-  });
+  const [dropdownOpen, setDropdownOpen] = useState({ post: false, location: false, role: false,});
   const [selectedAlumni, setSelectedAlumni] = useState(null);
   const [filteredResults, setFilteredResults] = useState(AlumniData);
   const [isFlipped, setIsFlipped] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
   const uniqueValues = useMemo(
-    () => ({
+    () => ({  
       posts: [...new Set(AlumniData.map((a) => a.post))].sort(),
       locations: [...new Set(AlumniData.map((a) => a.location))].sort(),
       roles: [...new Set(AlumniData.map((a) => a.role))].sort(),
@@ -131,27 +125,21 @@ const Alumni = () => {
 
   return (
     <div className="container m-auto px-[10px] py-[20px]">
-
       <Helmet>
           <title>Krutanic Alumni | Success Stories from E-Learning Leaders</title>
           <meta name="keywords" content="e-learning alumni, Krutanic graduates, tech careers, coding success, mentorship stories"/>
           <meta name="description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
-
           <meta property="og:title" content="Krutanic Alumni | Success Stories from E-Learning Leaders"/>
           <meta property="og:url" content="https://www.krutanic.com/Alumni"/>
           <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
           <meta property="og:description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
           <meta property="og:type" content="website"/>
-
           <meta name="twitter:card" content="summary"/>
           <meta name="twitter:title" content="Krutanic Alumni | Success Stories from E-Learning Leaders"/>
           <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
           <meta name="twitter:description" content="Explore how Krutanic alumni achieved career success through our top e-learning programs. Real stories in tech, coding, and data science mentorship."/>
-
           <link rel="canonical" href="https://www.krutanic.com/Alumni" />
-
       </Helmet>
-
       <h1 className="text-3xl font-bold mb-2">
         Krutanic Alumni
         <span className="inline-flex items-center text-[#F15B29] text-base border border-[#F15B29] rounded px-2 py-0.5 ml-2">
@@ -190,7 +178,7 @@ const Alumni = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {filteredResults.length ? (
-          filteredResults.map((alumni, i) => (
+            [...filteredResults].reverse().map((alumni, i) => (
             <div
               key={i}
               className="border rounded-lg p-4 flex flex-col gap-4 cursor-pointer hover:scale-104 hover:shadow-lg"
@@ -199,7 +187,6 @@ const Alumni = () => {
               <div className="flex gap-4 items-center">
                 <div>
                   <h2 className="text-lg font-semibold">{alumni.name}</h2>
-                  {/* <div className="text-sm text-gray-600">🔒 {alumni.role}</div> */}
                   <div className="text-sm text-gray-600">
                     📍 {alumni.location}
                   </div>
@@ -208,22 +195,21 @@ const Alumni = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-sm flex justify-between items-center border-t pt-2">
+              <div className="text-sm text-gray-700 flex justify-between items-center border-t pt-2">
                 <div>
-                  <div className="font-semibold">
+                  <div className="font-semibold text-gray-500">
                     Pre Krutanic
                   </div>
                   <div>{alumni.pre}</div>
                 </div>
-                <div className="text-2xl">➡️</div>
+                <div className="text-2xl">➡</div>
                 <div>
-                  <div className="font-semibold">
+                  <div className="font-semibold text-gray-500">
                     Post Krutanic
                   </div>
                   <div>{alumni.post}</div>
                 </div>
               </div>
-              <div className="flex items-start justify-center"><strong className="text-sm">Package: {alumni.package} LPA</strong></div>
               <div className="text-right border-t">
                 <button
                   className="text-blue-600 text-sm mt-2"
@@ -241,7 +227,6 @@ const Alumni = () => {
           <p className="text-gray-600">No alumni found.</p>
         )}
       </div>
-
       {selectedAlumni && (
         <div className="fixed inset-0 px-1 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="relative w-full max-w-2xl bg-white rounded-lg p-3 max-h-[80vh] overflow-y-auto scrollbar-hide">
@@ -264,6 +249,9 @@ const Alumni = () => {
                     <h2 className="text-xl font-bold">{selectedAlumni.name}</h2>
                     <p className="text-sm">
                       {selectedAlumni.role} at  {selectedAlumni.post}
+                    </p>
+                    <p className="text-sm ">
+                      Package : {selectedAlumni.package}
                     </p>
                     {/* <a
                       href={selectedAlumni.linkdinUrl}
@@ -288,7 +276,7 @@ const Alumni = () => {
                     <p className="font-semibold">{selectedAlumni.pre}</p>
                     <p className="text-xs">{selectedAlumni.preRole}</p>
                   </div>
-                  <div className="text-2xl">➡️</div>
+                  <div className="text-2xl">➡</div>
                   <div>
                     <p className="text-xs text-gray-500">Post Krutanic</p>
                     <p className="font-semibold">{selectedAlumni.post}</p>
@@ -448,4 +436,4 @@ const Alumni = () => {
   );
 };
 
-export default Alumni;
+export default Alumni;

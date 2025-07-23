@@ -430,9 +430,10 @@ const DashboardAccessForm = () => {
                 {" "}
                 Mode of Program
               </option>
-              <option value="Self-guided">Self-guided</option>
-              <option value="Instructor Led">Instructor Led</option>
-              <option value="Career Advancement">Career Advancement</option>
+            <option value="Self-Guided [2 Months – Training & Internship]">Self-Guided [2 Months – Training & Internship]</option>
+           <option value="Instructor-Led [2 Months – Training & Internship]">Instructor-Led [2 Months – Training & Internship]</option>
+         <option value="Career Advancement [3 Months – Training, Internship & Placement Assistance]">Career Advancement [3 Months – Training, Internship & Placement Assistance]</option>
+
             </select>
 
             <select
