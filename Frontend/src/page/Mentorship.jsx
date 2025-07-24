@@ -4,9 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import certificate1 from "../assets/certificates/Certificateofinternship.png";
-import certificate3 from "../assets/certificates/CertificateOfTraining.jpg";
-import adobe from "../assets/certificates/adobe.jpg"
+import certificate1 from "../assets/certificates/c/completion.jpg";
+import certificate3 from "../assets/certificates/c/training.jpg";
+import adobe from "../assets/certificates/c/internship.jpg"
 import accreditedby from "../assets/poplogo/accreditedby.png"
 import Testimonial from "../Components/testimonial";
 import FAQMentor from "./Mentorship/FAQMentor";
