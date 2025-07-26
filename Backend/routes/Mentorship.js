@@ -107,7 +107,7 @@ router.post("/mentorship-send-otp", async (req, res) => {
     const EmailMessage = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-          <h1>Krutanic Solution</h1>
+          <h1>Krutanic</h1>
         </div>
         <div style="padding: 20px; text-align: center;">
           <p style="font-size: 16px; color: #333;">Hello,</p>
@@ -117,7 +117,7 @@ router.post("/mentorship-send-otp", async (req, res) => {
         </div>
         <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
           <p>If you did not request this OTP, please ignore this email.</p>
-          <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+          <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
         </div>
       </div>
     `;

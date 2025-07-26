@@ -108,7 +108,7 @@ router.post("/operationsendotp", async (req, res) => {
     const emailMessage = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-          <h1>Krutanic Solutions</h1>
+          <h1>Krutanic</h1>
         </div>
         <div style="padding: 20px; text-align: center;">
           <p style="font-size: 16px; color: #333;">Welcome back! Operation Agent,</p>
@@ -118,7 +118,7 @@ router.post("/operationsendotp", async (req, res) => {
         </div>
         <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
           <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
-          <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+          <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
         </div>
       </div>
     `;
@@ -195,7 +195,7 @@ router.post("/send-email", async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions</h1>
+        <h1>Welcome to Krutanic</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
@@ -310,7 +310,7 @@ router.post("/sendedOnboardingMail", async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions</h1>
+        <h1>Welcome to Krutanic</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; color: #333;">Dear ${fullname},</p>

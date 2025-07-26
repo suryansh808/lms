@@ -53,7 +53,7 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
          const EmailMessage = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
               <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-                <h1>Krutanic Solutions</h1>
+                <h1>Krutanic</h1>
               </div>
               <div style="padding: 20px; text-align: center;">
                 <p style="font-size: 16px; color: #333;">Welcome back! ADMIN,</p>
@@ -63,7 +63,7 @@ router.post("/otpsend",expressAsyncHandler(async (req, res) => {
               </div>
               <div style="text-align: center; font-size: 12px; color: #888; padding: 10px 0; border-top: 1px solid #ddd;">
                 <p>If you didn’t request this OTP, please ignore this email or contact our IT team.</p>
-                <p>&copy; 2024 Krutanic Solution. All Rights Reserved.</p>
+                <p>&copy; 2024 Krutanic. All Rights Reserved.</p>
               </div>
             </div>
           `;
@@ -157,11 +157,11 @@ router.post('/sendmailtooperation', async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions!</h1>
+        <h1>Welcome to Krutanic!</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
-        <p style="font-size: 14px; color: #555;">Welcome to the Operations Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Operations Team at Krutanic!</p>
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;"> Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.</strong>)</p>
         <p style="font-size: 14px; color: #555;">
@@ -179,7 +179,7 @@ router.post('/sendmailtooperation', async (req, res) => {
   try {
     await sendEmail({
       email,
-      subject: 'Welcome to Krutanic Solutions - Operations Team Login',
+      subject: 'Welcome to Krutanic - Operations Team Login',
       message: emailMessage,
     });
     res.status(200).json({ message: 'Email sent successfully!' });
@@ -214,11 +214,11 @@ router.post('/sendmailtobda', async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions!</h1>
+        <h1>Welcome to Krutanic!</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
-        <p style="font-size: 14px; color: #555;">Welcome to the Sales Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Sales Team at Krutanic!</p>
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;"> Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.</strong>)</p>
         <p style="font-size: 14px; color: #555;">
@@ -236,7 +236,7 @@ router.post('/sendmailtobda', async (req, res) => {
   try {
     await sendEmail({
       email,
-      subject: 'Welcome to Krutanic Solutions - Sales Team Login',
+      subject: 'Welcome to Krutanic- Sales Team Login',
       message: emailMessage,
     });
     res.status(200).json({ message: 'Email sent successfully!' });
@@ -271,11 +271,11 @@ router.post("/sendmailtoplacementcoordinator", async (req, res) => {
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
-        <h1>Welcome to Krutanic Solutions!</h1>
+        <h1>Welcome to Krutanic!</h1>
       </div>
       <div style="padding: 20px;">
         <p style="font-size: 16px; text-transform: capitalize; color: #333;">Dear ${fullname},</p>
-        <p style="font-size: 14px; color: #555;">Welcome to the Placement Team at Krutanic Solutions!</p>
+        <p style="font-size: 14px; color: #555;">Welcome to the Placement Team at Krutanic!</p>
         <p style="font-size: 14px; color: #555;">Here are your login details:</p>
         <p style="font-size: 14px; color: #333;"> Use your official company email (<strong>${email}</strong>) along with the OTP provided to log in.</p>
         <p style="font-size: 14px; color: #555;">
@@ -295,7 +295,7 @@ router.post("/sendmailtoplacementcoordinator", async (req, res) => {
     // Send email to the Placement Coordinator
     await sendEmail({
       email,
-      subject: "Welcome to Krutanic Solutions - Placement Team Login",
+      subject: "Welcome to Krutanic - Placement Team Login",
       message: emailMessage,
     });
 
