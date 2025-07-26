@@ -25,6 +25,7 @@ import './style/OnBoardingForm.css'
 import "./axiosConfig";
 import "./style/Event.css";
 import "./style/verify.css";
+import './style/Linkedin.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

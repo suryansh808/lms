@@ -202,7 +202,7 @@ const Alumni = () => {
                   </div>
                   <div>{alumni.pre}</div>
                 </div>
-                <div className="text-2xl">➡</div>
+                <div className="text-2xl">➡️</div>
                 <div>
                   <div className="font-semibold text-gray-500">
                     Post Krutanic
@@ -246,21 +246,23 @@ const Alumni = () => {
                     className="w-24 h-24 rounded-full border-4 border-purple-700"
                   /> */}
                   <div>
-                    <h2 className="text-xl font-bold">{selectedAlumni.name}</h2>
+                    <h2 className="text-xl font-bold">{selectedAlumni.name}
+                    </h2>
                     <p className="text-sm">
                       {selectedAlumni.role} at  {selectedAlumni.post}
+                    
                     </p>
-                    <p className="text-sm ">
+                    {/* <p className="text-sm ">
                       Package : {selectedAlumni.package}
-                    </p>
-                    {/* <a
+                    </p> */}
+                      <a
                       href={selectedAlumni.linkdinUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 border border-blue-600 text-blue-600 px-4  rounded cursor-pointer"
+                      className="mt-2 border border-blue-600 text-blue-600 px-4 rounded cursor-pointer hover:bg-blue-600 hover:text-white transition-colors duration-300"
                     >
                       In Connect
-                    </a> */}
+                    </a>
                   </div>
                 </div>
                 <div className="text-sm text-gray-700 mb-4">
@@ -276,7 +278,7 @@ const Alumni = () => {
                     <p className="font-semibold">{selectedAlumni.pre}</p>
                     <p className="text-xs">{selectedAlumni.preRole}</p>
                   </div>
-                  <div className="text-2xl">➡</div>
+                  <div className="text-2xl">➡️</div>
                   <div>
                     <p className="text-xs text-gray-500">Post Krutanic</p>
                     <p className="font-semibold">{selectedAlumni.post}</p>
@@ -436,4 +438,4 @@ const Alumni = () => {
   );
 };
 
-export default Alumni;
+export default Alumni;

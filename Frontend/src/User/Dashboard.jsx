@@ -273,7 +273,7 @@ const Dashboard = () => {
                       You can pay your remaining amount through this{" "}
                       <a
                         className="text-blue-700 font-bold"
-                        href="https://smartpay.easebuzz.in/132907/pay"
+                        href="https://smartpay.easebuzz.in/219610/Krutanic"
                         target="_blank"
                       >
                         PayNow

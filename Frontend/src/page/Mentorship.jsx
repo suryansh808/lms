@@ -17,6 +17,7 @@ import Getintouch from "../Components/Getintouch";
 import { useNavigate } from "react-router-dom";
 import MentorShipMentors from "../Components/MentorShipMentors";
 import MentorshipForm from "./MentorshipForm";
+import LinkedIn from '../Components/LinkedIn';
 
 
 const Mentorship = () => {
@@ -244,7 +245,8 @@ const Mentorship = () => {
          <h1 data-aos='fade-up' className="text-center text-[#f15b29]"> | What Our Mentees Are Saying</h1>
        
         <div data-aos='fade-up' className="testimonial">
-          <Testimonial />
+          {/* <Testimonial /> */}
+          <LinkedIn />
         </div>
       </section>
 
