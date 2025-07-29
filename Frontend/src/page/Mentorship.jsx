@@ -245,7 +245,7 @@ const Mentorship = () => {
          <h1 data-aos='fade-up' className="text-center text-[#f15b29]"> | What Our Mentees Are Saying</h1>
        
         <div data-aos='fade-up' className="testimonial">
-          {/* <Testimonial /> */}
+          <Testimonial />
           <LinkedIn />
         </div>
       </section>

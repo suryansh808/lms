@@ -27,7 +27,7 @@ const Testimonial = () => {
 
   return (
     <div className="testimonialdiv">
-      <div className="testimonialcontainer">
+      <div className="testimonialcontainer mb-20">
         <Slider {...settings}>
           <div className="box">
             <div>
