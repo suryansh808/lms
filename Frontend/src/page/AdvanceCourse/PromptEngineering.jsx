@@ -1107,15 +1107,15 @@ const PromptEngineering = () => {
               Program fees 80,999/- Including GST
             </p>
             <div className=" relative flex space-x-4">
-              {/* <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
+              <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
                 <a
-                  href="https://rzp.io/rzp/advanced-training-program"
+                  href="https://rzp.io/rzp/Advanced_Program_Slot_Booking"
                   target="blank"
                   className="text-[#f15b29] whitespace-nowrap"
                 >
                   Enroll Now
                 </a>
-              </button> */}
+              </button>
             </div>
           </div>
         </section>
