@@ -46,28 +46,43 @@ const BookedAmount = () => {
 
     const offerLetterDetails = {
       id: offerData._id,
-      fullname: offerData.fullname.charAt(0).toUpperCase() + offerData.fullname.slice(1).toLowerCase(),
+      fullname:
+        offerData.fullname.charAt(0).toUpperCase() +
+        offerData.fullname.slice(1).toLowerCase(),
       domain: offerData.domain,
       email: offerData.email,
-      date: new Date(offerDate).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
+      date: new Date(offerDate).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
       duration: offerDuration,
-      start: new Date(offerStart).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
-      end: new Date(offerEnd).toLocaleDateString("en-GB", { year: "numeric",month: "long", day: "numeric",}),
+      start: new Date(offerStart).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      end: new Date(offerEnd).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
     };
     // console.log("Sending Offer Letter:", offerLetterDetails);
     try {
-      const response = await axios.post(`${API}/sendofferletter`, offerLetterDetails);
+      const response = await axios.post(
+        `${API}/sendofferletter`,
+        offerLetterDetails
+      );
       toast.success("Offer letter sent successfully");
       fetchNewStudent();
       resetOfferLeter();
-
     } catch (error) {
       console.error("There was an error sending the offer letter:", error);
-    }finally {
+    } finally {
       setIsOfferLetterSending(false); // Ensure this always executes
     }
   };
-
 
   const fetchCourses = async () => {
     try {
@@ -97,7 +112,7 @@ const BookedAmount = () => {
   const [monthOpted, setMonthOpted] = useState("");
   const [monthsToShow, setMonthsToShow] = useState([]);
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
-  const [whatsAppNumber , setWhatsAppNumber] = useState("");
+  const [whatsAppNumber, setWhatsAppNumber] = useState("");
   const [newStudent, setNewStudent] = useState([]);
   const [editingStudentId, setEditingStudentId] = useState(null);
 
@@ -155,7 +170,6 @@ const BookedAmount = () => {
       );
       setNewStudent(bookedStudents);
       setFilteredStudents(bookedStudents);
-
 
       const currentMonth = getCurrentMonth();
       setSelectedMonth(currentMonth);
@@ -262,19 +276,19 @@ const BookedAmount = () => {
         if (updateResponse.status === 200) {
           toast.success("Operation record updated successfully!");
           setNewStudent((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, mailSended: true }
-              : student
-          )
-        );
-        setFilteredStudents((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, mailSended: true }
-              : student
-          )
-        );
+            prev.map((student) =>
+              student._id === value._id
+                ? { ...student, mailSended: true }
+                : student
+            )
+          );
+          setFilteredStudents((prev) =>
+            prev.map((student) =>
+              student._id === value._id
+                ? { ...student, mailSended: true }
+                : student
+            )
+          );
         } else {
           toast.error("Failed to update student record.");
         }
@@ -320,11 +334,13 @@ const BookedAmount = () => {
         (student.createdAt &&
           student.createdAt.toLowerCase().includes(value.toLowerCase())) ||
         (student.clearPaymentMonth &&
-          student.clearPaymentMonth.toLowerCase().includes(value.toLowerCase()))||
-          (student.collegeName &&
-            student.collegeName.toLowerCase().includes(value.toLowerCase()))||
-            (student.branch &&
-              student.branch.toLowerCase().includes(value.toLowerCase()))
+          student.clearPaymentMonth
+            .toLowerCase()
+            .includes(value.toLowerCase())) ||
+        (student.collegeName &&
+          student.collegeName.toLowerCase().includes(value.toLowerCase())) ||
+        (student.branch &&
+          student.branch.toLowerCase().includes(value.toLowerCase()))
       );
     });
     setFilteredStudents(filtered);
@@ -388,21 +404,21 @@ const BookedAmount = () => {
           );
           if (updateResponse.status === 200) {
             toast.success("Onboarding record updated successfully!");
-             setNewStudent((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, onboardingSended: true }
-              : student
-          )
-        );
+            setNewStudent((prev) =>
+              prev.map((student) =>
+                student._id === value._id
+                  ? { ...student, onboardingSended: true }
+                  : student
+              )
+            );
 
-        setFilteredStudents((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, onboardingSended: true }
-              : student
-          )
-        );
+            setFilteredStudents((prev) =>
+              prev.map((student) =>
+                student._id === value._id
+                  ? { ...student, onboardingSended: true }
+                  : student
+              )
+            );
           } else {
             toast.error("Failed to update onboarding record.");
           }
@@ -415,7 +431,6 @@ const BookedAmount = () => {
     }
   };
 
-  
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
 
@@ -458,7 +473,9 @@ const BookedAmount = () => {
   const handleCopyMobileNumbers = (selectedDate) => {
     const students = groupedData[selectedDate];
     if (Array.isArray(students)) {
-      const mobileNumbers = students.map((student) => student.whatsAppNumber).join("\n");
+      const mobileNumbers = students
+        .map((student) => student.whatsAppNumber)
+        .join("\n");
       navigator.clipboard
         .writeText(mobileNumbers)
         .then(() => {
@@ -493,21 +510,21 @@ const BookedAmount = () => {
         );
         if (updateResponse.status === 200) {
           toast.success("User created true updated successfully!");
-           setNewStudent((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, userCreated: true }
-              : student
-          )
-        );
+          setNewStudent((prev) =>
+            prev.map((student) =>
+              student._id === value._id
+                ? { ...student, userCreated: true }
+                : student
+            )
+          );
 
-        setFilteredStudents((prev) =>
-          prev.map((student) =>
-            student._id === value._id
-              ? { ...student, userCreated: true }
-              : student
-          )
-        );
+          setFilteredStudents((prev) =>
+            prev.map((student) =>
+              student._id === value._id
+                ? { ...student, userCreated: true }
+                : student
+            )
+          );
         } else {
           toast.error("Failed to update user record.");
         }
@@ -516,94 +533,93 @@ const BookedAmount = () => {
       }
     } catch (error) {
       toast.success("User already Created check in active user");
-    }finally{
+    } finally {
       value.isSending = false;
     }
   };
 
-   const [selectedMonth, setSelectedMonth] = useState("");
-    const [months, setMonths] = useState([]);
-    const handleMonthChange = (event) => {
-      const selectedMonth = event.target.value;
-      setSelectedMonth(selectedMonth); // Update selected month
-      const filtered = newStudent.filter(
-        (student) => getMonthFromDate(student.createdAt) === selectedMonth
-      );
-      setFilteredStudents(filtered); // Update filtered students
-    };
-    // Format date to display
-    // const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
-  
-    // Get current month (in string format like "Jan", "Feb", etc.)
-    const getCurrentMonth = () => {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-  
-      const currentMonthIndex = new Date().getMonth();
-      return months[currentMonthIndex];
-    };
-  
-    // Get the previous months including the current month
-    const getPastMonths = () => {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-  
-      const currentMonthIndex = new Date().getMonth();
-      let pastMonths = [];
-  
-      for (let i = 0; i < 4; i++) {
-        const index = (currentMonthIndex - i + 12) % 12; // handles wrap-around
-        pastMonths.push(months[index]);
-      }
-    
-      return pastMonths; 
-    };
-  
-    // Get the month from the student's created date
-    const getMonthFromDate = (date) => {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-  
-      const monthIndex = new Date(date).getMonth();
-      return months[monthIndex];
-    };
-  
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [months, setMonths] = useState([]);
+  const handleMonthChange = (event) => {
+    const selectedMonth = event.target.value;
+    setSelectedMonth(selectedMonth); // Update selected month
+    const filtered = newStudent.filter(
+      (student) => getMonthFromDate(student.createdAt) === selectedMonth
+    );
+    setFilteredStudents(filtered); // Update filtered students
+  };
+  // Format date to display
+  // const formatDate = (date) => new Date(date).toLocaleDateString("en-GB");
+
+  // Get current month (in string format like "Jan", "Feb", etc.)
+  const getCurrentMonth = () => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const currentMonthIndex = new Date().getMonth();
+    return months[currentMonthIndex];
+  };
+
+  // Get the previous months including the current month
+  const getPastMonths = () => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const currentMonthIndex = new Date().getMonth();
+    let pastMonths = [];
+
+    for (let i = 0; i < 4; i++) {
+      const index = (currentMonthIndex - i + 12) % 12; // handles wrap-around
+      pastMonths.push(months[index]);
+    }
+
+    return pastMonths;
+  };
+
+  // Get the month from the student's created date
+  const getMonthFromDate = (date) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const monthIndex = new Date(date).getMonth();
+    return months[monthIndex];
+  };
 
   return (
     <div id="OperationEnroll" className="ml-[265px]">
@@ -614,14 +630,25 @@ const BookedAmount = () => {
             <span onClick={resetOfferLeter}>✖</span>
             <h2>Send Offer Letter</h2>
             <p>
-              Name: <strong>{offerData?.fullname}</strong><br />
-              Domain: <strong>{offerData?.domain}</strong><br />
+              Name: <strong>{offerData?.fullname}</strong>
+              <br />
+              Domain: <strong>{offerData?.domain}</strong>
+              <br />
               Email: <strong>{offerData?.email}</strong>
             </p>
             <label>Offer Letter Date:</label>
-            <input type="date" value={offerDate} onChange={(e) => setOfferDate(e.target.value)} required />
+            <input
+              type="date"
+              value={offerDate}
+              onChange={(e) => setOfferDate(e.target.value)}
+              required
+            />
             <label>Internship Duration:</label>
-            <select value={offerDuration} onChange={(e) => setOfferDuration(e.target.value)} required>
+            <select
+              value={offerDuration}
+              onChange={(e) => setOfferDuration(e.target.value)}
+              required
+            >
               <option value="">Select Duration</option>
               <option value="One">One</option>
               <option value="Two">Two</option>
@@ -631,10 +658,29 @@ const BookedAmount = () => {
               <option value="Six">Six</option>
             </select>
             <label>Internship Start Date:</label>
-            <input type="date" value={offerStart} onChange={(e) => setOfferStart(e.target.value)} required />
+            <input
+              type="date"
+              value={offerStart}
+              onChange={(e) => setOfferStart(e.target.value)}
+              required
+            />
             <label>Internship End Date:</label>
-            <input type="date" value={offerEnd} onChange={(e) => setOfferEnd(e.target.value)} required />
-            <input type="submit" value={isOfferLetterSending ? "Sending Pls Wait..." : "Send Offer Letter"} className="cursor-pointer" disabled={isOfferLetterSending} />
+            <input
+              type="date"
+              value={offerEnd}
+              onChange={(e) => setOfferEnd(e.target.value)}
+              required
+            />
+            <input
+              type="submit"
+              value={
+                isOfferLetterSending
+                  ? "Sending Pls Wait..."
+                  : "Send Offer Letter"
+              }
+              className="cursor-pointer"
+              disabled={isOfferLetterSending}
+            />
           </form>
         </div>
       )}
@@ -759,9 +805,6 @@ const BookedAmount = () => {
         </div>
       )}
 
-
-
-
       <div className="coursetable">
         <div className="mb-2">
           <h2>New Enroll Booking: </h2>
@@ -784,21 +827,21 @@ const BookedAmount = () => {
             </div>
           </div>
         </section>
-        
+
         <select
-            className="border border-black px-2 py-1 rounded-lg"
-            name="month"
-            id="month"
-            value={selectedMonth} // Bind to selectedMonth state
-            onChange={handleMonthChange} // Trigger filter on month change
-          >
-            {months.map((month, index) => (
-              <option key={index} value={month}>
-                {month}
-              </option>
-            ))}
-          </select>
-       
+          className="border border-black px-2 py-1 rounded-lg"
+          name="month"
+          id="month"
+          value={selectedMonth} // Bind to selectedMonth state
+          onChange={handleMonthChange} // Trigger filter on month change
+        >
+          {months.map((month, index) => (
+            <option key={index} value={month}>
+              {month}
+            </option>
+          ))}
+        </select>
+
         <table>
           <thead>
             <tr>
@@ -815,6 +858,7 @@ const BookedAmount = () => {
               <th>Create User account</th>
               <th>Send Onboarding Details</th>
               <th>send offer letter</th>
+              <th>Whatsapp</th>
               <th>More Details</th>
               <th>Last Remark</th>
               <th>Remark</th>
@@ -876,14 +920,22 @@ const BookedAmount = () => {
                         </div>
                       </td>
                       <td>
-                       <div className="cursor-pointer" onClick={() => createAccount(item)}>
-                       {item.userCreated ? (
-                          <div className="flex items-center justify-center text-green-600 font-bold flex-col"><FaUserCheck />UserCreated</div>
-                        ) : (
-                          <div className="flex items-center justify-center text-red-600 font-bold flex-col"><FaUserTimes className="text-lg"/>NotCreated</div>
-                          
-                        )}
-                       </div>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => createAccount(item)}
+                        >
+                          {item.userCreated ? (
+                            <div className="flex items-center justify-center text-green-600 font-bold flex-col">
+                              <FaUserCheck />
+                              UserCreated
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center text-red-600 font-bold flex-col">
+                              <FaUserTimes className="text-lg" />
+                              NotCreated
+                            </div>
+                          )}
+                        </div>
                       </td>
                       <td>
                         <div
@@ -904,12 +956,56 @@ const BookedAmount = () => {
                           )}
                         </div>
                       </td>
-                      <td onClick={() => setOfferData(item)} style={{ cursor: 'pointer', color: 'blue' }} >
+                      <td
+                        onClick={() => setOfferData(item)}
+                        style={{ cursor: "pointer", color: "blue" }}
+                      >
                         {item.offerlettersended ? (
-                          <i className="fa fa-send">sended</i>)
-                          :(
+                          <i className="fa fa-send">sended</i>
+                        ) : (
                           <i className="fa fa-send"></i>
-                          )}
+                        )}
+                      </td>
+                      <td>
+                        {" "}
+                        <a
+                          href={`https://web.whatsapp.com/send?phone=${
+                            item.whatsAppNumber
+                          }&text=${encodeURIComponent(
+                            `Registration Confirmation - ${item.domain} Program at Krutanic
+
+Dear ${item.fullname},
+
+Greetings from Krutanic!
+
+I am ${item.operationName.charAt(0).toUpperCase() + item.operationName.slice(1)} from the Operations Department, and I am pleased to confirm your successful registration for the ${item.domain} program at Krutanic.
+
+Please find the details of your Registration below:
+
+Program Name: ${item.domain}
+Program Fee: ₹${item.programPrice}
+Start Date: 5th ${item.monthOpted}
+Program Duration: ${item.program}
+Mode of Training: 100% Online (Virtual)
+Due Amount: ₹${item.programPrice - item.paidAmount}
+Payment Due Date: ${item.clearPaymentMonth}
+
+Thank you for choosing Krutanic as your learning partner. We are committed to delivering a high-quality training experience led by seasoned industry professionals.
+
+If you have any questions or need further assistance, feel free to reach out to us at support@krutanic.com or contact me directly.
+
+We look forward to welcoming you to the program on 5th ${item.monthOpted}!
+
+Warm regards,
+${item.operationName.charAt(0).toUpperCase() + item.operationName.slice(1)}
+Operations Department
+Team Krutanic`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="fa fa-whatsapp text-green-700 text-2xl cursor-pointer"></i>
+                        </a>
                       </td>
                       <td>
                         <i
@@ -924,8 +1020,14 @@ const BookedAmount = () => {
                           onChange={(e) => handleRemarkChange(e, item._id)}
                           defaultValue="Select Remark"
                         >
-                          <option disabled value="Select Remark"> Select Remark</option>
-                          <option value="Reminder Issued"> Reminder Issued</option>
+                          <option disabled value="Select Remark">
+                            {" "}
+                            Select Remark
+                          </option>
+                          <option value="Reminder Issued">
+                            {" "}
+                            Reminder Issued
+                          </option>
                           <option value="DNP">DNP</option>
                           <option value="NATC">NATC</option>
                           <option value="Not Interested">Not Interested</option>
@@ -934,16 +1036,29 @@ const BookedAmount = () => {
                           <option value="Cleared">Cleared</option>
                           <option value="Half_Cleared">Half_Cleared</option>
                           <option value="Switch Off">Switch Off</option>
-                          <option value="Call Back later"> Call Back later</option>
+                          <option value="Call Back later">
+                            {" "}
+                            Call Back later
+                          </option>
                           <option value="Busy">Busy</option>
                           <option value="Declined">Declined</option>
                           <option value="Need More Time">Need More Time</option>
-                          <option value="Reviews are not good">Reviews are not good</option>
-                          <option value="When Batch Starts">When Batch Starts</option>
+                          <option value="Reviews are not good">
+                            Reviews are not good
+                          </option>
+                          <option value="When Batch Starts">
+                            When Batch Starts
+                          </option>
                           <option value="No response">No response</option>
-                          <option value="False pitch so not intrested">False pitch so not intrested</option>
-                          <option value="Offer letter issues">Offer letter issues</option>
-                          <option value="Counselor Told To Pay Before Class Start">Counselor Told To Pay Before Class Start</option>
+                          <option value="False pitch so not intrested">
+                            False pitch so not intrested
+                          </option>
+                          <option value="Offer letter issues">
+                            Offer letter issues
+                          </option>
+                          <option value="Counselor Told To Pay Before Class Start">
+                            Counselor Told To Pay Before Class Start
+                          </option>
                         </select>
                       </td>
                     </tr>
@@ -978,17 +1093,14 @@ const BookedAmount = () => {
                 <strong>Counselor:</strong> {dialogData.counselor}
               </p>
               <p>
-                  <strong>College Name:</strong>{" "}
-                  {dialogData.collegeName}
-                </p>
-                <p>
-                  <strong>Branch:</strong>{" "}
-                  {dialogData.branch}
-                </p>
-                <p>
-                  <strong>Aadhar No:</strong>{" "}
-                  {dialogData.aadharNumber}
-                </p>
+                <strong>College Name:</strong> {dialogData.collegeName}
+              </p>
+              <p>
+                <strong>Branch:</strong> {dialogData.branch}
+              </p>
+              <p>
+                <strong>Aadhar No:</strong> {dialogData.aadharNumber}
+              </p>
             </div>
             <button onClick={handleDialogClose}>Close</button>
           </div>
