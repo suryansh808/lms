@@ -243,11 +243,11 @@ router.post("/send-email", async (req, res) => {
 router.put("/mailsendedchange/:id", async (req, res) => {
   const { id } = req.params;
   const { mailSended , onboardingSended , userCreated } = req.body;
-  console.log("true",userCreated);
+  // console.log("true",userCreated);
   const objectId = new mongoose.Types.ObjectId(id);
   try {
     const student = await NewEnrollStudent.findById({ _id: objectId });
-    console.log("found", student);
+    // console.log("found", student);
     if (!student) {
       return res.status(404).send({ message: "Student not found." });
     }
@@ -307,6 +307,11 @@ router.post("/sendedOnboardingMail", async (req, res) => {
     programPrice,
     paidAmount
   } = req.body;
+  const price = Number(programPrice);
+const paid = Number(paidAmount);
+const pendingAmount = price - paid;
+console.log("pending", pendingAmount);
+
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #F15B29; color: #fff; text-align: center; padding: 20px;">
@@ -317,9 +322,9 @@ router.post("/sendedOnboardingMail", async (req, res) => {
         <p style="font-size: 14px; color: #555;">Warm greetings from Krutanic! We're excited to have you on board for our ${domain}, commencing on the 5th of ${monthOpted}. Your journey with us promises to be an enriching experience.</p>
         <p style="font-size: 14px; color: #555;">To ensure a seamless start, we kindly request you to login an LMS (Learning Management System) account by visiting <a href="https://www.krutanic.com" style="color: #F15B29;">krutanic.com</a> and selecting the "Login" option. Doing this promptly will help prevent any delays when the program begins. Training sessions will be available on the start date.</p>
         <p style="font-size: 14px; color: #555;">Should you have any questions or need assistance, please don't hesitate to contact us via email at <a href="mailto:support@krutanic.com" style="color: #0066cc;">support@krutanic.com</a>. We're here to support you every step of the way.</p>
-        <p style="font-size: 14px; color: #555;">If you wish to clear your pending amount of <strong>${programPrice - paidAmount} INR</strong> in advance to expedite your participation in projects, please use the link below:</p>
+        <p style="font-size: 14px; color: #555;">If you wish to clear your pending amount of <strong>${pendingAmount} INR</strong> in advance to expedite your participation in projects, please use the link below:</p>
         <p style="text-align: center;">
-          <a href="https://smartpay.easebuzz.in/132907/pay" target="_blank" style="background-color: #F15B29; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Pay Now</a>
+          <a href="https://smartpay.easebuzz.in/219610/Krutanic" target="_blank" style="background-color: #F15B29; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Pay Now</a>
         </p>
         <p style="font-size: 14px; color: #555;">Once again, welcome to Krutanic's ${domain}. We look forward to embarking on this learning journey with you!</p>
         <p style="font-size: 14px; color: #333;">Warm regards,</p>
