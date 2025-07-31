@@ -12,6 +12,7 @@ const courses = [
   { name: "Artificial Intelligence" },
   { name: "Machine Learning" },
   { name: "Data Science" },
+  {name: "Cyber Security" },
   { name: "Data Analytics" },
   { name: "UI/UX Design" },
   { name: "DevOps" },
