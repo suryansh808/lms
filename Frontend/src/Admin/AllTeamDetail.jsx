@@ -19,7 +19,7 @@ const AllTeamDetail = () => {
     try {
       const response = await axios.get(`${API}/bda-with-enrolls`);
       setAllData(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("There was an error fetching all Data:", error);
     }
@@ -155,7 +155,7 @@ const AllTeamDetail = () => {
   const filteredData = selectedTeam
     ? allData.filter((bda) => bda.team === selectedTeam)
     : allData;
-  console.log("filter", filteredData);
+ 
 
   const getMonth = (date, offset) => {
     const newDate = new Date(date);
@@ -627,7 +627,7 @@ const getTop3BDAsByGrossRevenue = (month) => {
       </div>
     );
   })}
-</div>
+    </div>
 
 
 

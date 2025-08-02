@@ -111,6 +111,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 import EventDashBoard from "./Event/EventDashBoard";
 import Verified from "./Components/Verified";
 import ReferAndEarn from "./page/ReferAndEarn";
+import LeaderBoard from "./BDA/LeaderBoard";
 
 // import checkAdminAuth from "./checkAdminAuth";
 
@@ -220,6 +221,7 @@ const AppContent = () => {
     "/companyleads",
     "/addteam",
     "/assigntarget",
+    "/leaderboard"
   ];
 
   const userheaderPaths = [
@@ -227,11 +229,6 @@ const AppContent = () => {
     "/enrolledcourses",
     "/learning",
     "/setting",
-    // "/mockinterview",
-    // "/exercise",
-    // "/jobboard",
-    // "/myjob",
-    // "/resumeats",
   ];
 
   const placementcoodinatorHeaderPaths = [
@@ -349,6 +346,8 @@ const AppContent = () => {
           <Route path="/CompanyLeads" element={isAuthenticatedBda() ?<CompanyLeads/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/AddTeam" element={isAuthenticatedBda() ?<AddTeam/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/AssignTarget" element={isAuthenticatedBda() ?<AssignTarget/> : <Navigate to="/TeamLogin"/> }/>
+          <Route path="/LeaderBoard" element={isAuthenticatedBda() ?<LeaderBoard/> : <Navigate to="/TeamLogin"/> }/>
+
         {/* bda panel ends */}
 
         {/* User Panel */}

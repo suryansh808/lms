@@ -126,6 +126,9 @@ const BDAHeader = () => {
           <Link to="/Home">
             <i class="fa fa-dashboard"></i> Home
           </Link>
+          <Link to="/LeaderBoard">
+            <i class="fa fa-trophy"></i> LeaderBoard
+          </Link>
           <Link to="/CompanyLeads">
             <i class="fa fa-tags"></i> Company Leads
           </Link>
