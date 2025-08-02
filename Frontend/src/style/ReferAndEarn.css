@@ -1,0 +1,11 @@
+#refer-and-earn{
+    background-color: rgb(216, 213, 213);
+
+    .container-refer-and-earn{
+        background-image: url('https://www.figma.com/design/eVwSI47IaEik97bd6cDO9z/Untitled?node-id=11-2&m=dev&t=vU1PZ8WlUrrNyPT3-1');
+        background-size: cover;
+        background-position: center;
+         
+        height: 600px;
+    }
+}

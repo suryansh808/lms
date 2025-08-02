@@ -26,6 +26,7 @@ import "./axiosConfig";
 import "./style/Event.css";
 import "./style/verify.css";
 import './style/Linkedin.css'
+import "./style/ReferAndEarn.css"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

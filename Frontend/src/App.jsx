@@ -110,6 +110,7 @@ import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 //event
 import EventDashBoard from "./Event/EventDashBoard";
 import Verified from "./Components/Verified";
+import ReferAndEarn from "./page/ReferAndEarn";
 
 // import checkAdminAuth from "./checkAdminAuth";
 
@@ -167,7 +168,8 @@ const AppContent = () => {
     "/dashboardaccessform",
     "/masterclass",
     "/alumni",
-    "/verify"
+    "/verify",
+    "/referandearn"
   ];
 
   const adminheaderPaths = [
@@ -288,6 +290,8 @@ const AppContent = () => {
         <Route path="/MasterClass" element={<MasterClass />} />
         <Route path="/Alumni" element={<Alumni/>} />
         <Route path="/Verify" element={<Verified/>} />
+        <Route path="/ReferAndEarn" element={<ReferAndEarn/>} />
+
 
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />

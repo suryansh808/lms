@@ -46,8 +46,8 @@ const features = [
       "No Placement Assistance",
       "No Mock Interviews",
     ],
-    registrationLink: "https://pages.razorpay.com/Self-Paced-Reg",
-    paymentLink: "https://pages.razorpay.com/Self-Paced-Full-Payment",
+    registrationLink: "https://rzp.io/rzp/Self_Guided_Slot_Booking",
+    // paymentLink: "https://pages.razorpay.com/Self-Paced-Full-Payment",
     description:
       "Explore and learn at your own pace. Take charge of your journey with tools and resources designed for independent exploration and mastery.",
   },
@@ -65,8 +65,8 @@ const features = [
       "No Placement Assistance",
       "No Mock Interviews",
     ],
-    registrationLink: "https://pages.razorpay.com/pl_NnyW5LfRd2Cigt/view",
-    paymentLink: "https://pages.razorpay.com/pl_Nnymrk91p6HibJ/view",
+    registrationLink: "https://rzp.io/rzp/Instructor_Led_Slot_Booking",
+    paymentLink: "https://rzp.io/rzp/Instructor_Led_Full_Enrollment",
     description:
       "Learn with expert guidance in a structured environment. Benefit from real-time feedback and collaborative learning opportunities..",
   },
@@ -87,8 +87,8 @@ const features = [
       "ATS-Friendly Resume Building",
       "Personality Development"
     ],
-    registrationLink: "https://pages.razorpay.com/pl_NnyrDXib5xFPwv/view",
-    paymentLink: "https://pages.razorpay.com/pl_NnyzSvEjIm6fog/view",
+    registrationLink: "https://rzp.io/rzp/Career_Advance_Slot_Booking",
+    paymentLink: "https://rzp.io/rzp/Career_Advancement_Full_Reg",
     description:
       "Elevate your skills and unlock new opportunities. Empower your professional growth with targeted resources and support..",
   },
