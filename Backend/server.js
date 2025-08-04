@@ -24,6 +24,7 @@ const JobApplication = require("./routes/JobApplication")
 const MasterClass = require("./routes/MasterClass") 
 const AddEvent = require("./routes/AddEvent")
 const Certificate = require("./routes/Certificate")
+const ReferAndEarn = require("./routes/ReferAndEarn");
 // const cookieParser = require("cookie-parser");
 const os = require("os");
 // const https = require("https")
@@ -99,6 +100,7 @@ app.use("/",Mockai);
 app.use("/",Excercise);
 
 app.use("/",Certificate);
+app.use("/",ReferAndEarn);
 
 //AddEvent
 app.use("/", AddEvent);

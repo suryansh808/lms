@@ -112,6 +112,7 @@ import EventDashBoard from "./Event/EventDashBoard";
 import Verified from "./Components/Verified";
 import ReferAndEarn from "./page/ReferAndEarn";
 import LeaderBoard from "./BDA/LeaderBoard";
+import ReferAndEarnResponse from "./Admin/ReferAndEarnResponse";
 
 // import checkAdminAuth from "./checkAdminAuth";
 
@@ -197,7 +198,8 @@ const AppContent = () => {
     "/eventregistration",
     "/target",
     "/alumnidata",
-    "/inactivebda"
+    "/inactivebda",
+    "/referandearnresponse"
   ];
 
   const operationheaderPaths = [
@@ -317,6 +319,7 @@ const AppContent = () => {
         <Route path="/Target" element={isAuthenticatedAdmin() ? (<Target/>) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/AlumniData" element={isAuthenticatedAdmin() ? (<AlumniData/>) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/InactiveBda" element={isAuthenticatedAdmin() ? (<InactiveBda/>) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/ReferAndEarnResponse" element={isAuthenticatedAdmin() ? (<ReferAndEarnResponse/>) : (<Navigate to="/AdminLogin" />)}/>
 
 
         {/* Admin Panel End */}

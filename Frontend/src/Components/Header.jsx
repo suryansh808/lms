@@ -79,9 +79,9 @@
             <Link to="/TalentHunt" onClick={scrollToTop}>
               TALENT HUNT
             </Link>
-            {/* <Link to="/Collabration" onClick={scrollToTop}>
-          COLLABORATION
-            </Link> */}
+            <Link to="/ReferAndEarn" onClick={scrollToTop}>
+              REFER AND EARN<i className="fa fa-money text-green-400 rotate-90 animate-pulse"></i>
+            </Link>
             
 
             <Link to="/login" className="btn">

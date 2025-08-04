@@ -86,6 +86,9 @@ const AdminHeader = () => {
         <Link to="/AlumniData">
         <i class="fa fa-lightbulb-o mr-2"></i>Alumni Review
         </Link>
+        <Link to="/ReferAndEarnResponse">
+       <i class="fa fa-bell mr-2"></i>Refer & Earn
+        </Link>
         <Link to="/AllTeamDetail">
           <i className="fa fa-users mr-2"></i>Team Detail
         </Link>
