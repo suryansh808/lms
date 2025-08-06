@@ -814,7 +814,7 @@ const AdvanceCourses = () => {
                   Get in Touch
                 </h2>
                 <p data-aos="fade-down" className="text-gray-600 mb-6">
-                Want to learn more about how Krutanic Solutions can shape your
+                Want to learn more about how Krutanic can shape your
                 career? Contact us today, and let’s build your future together!
                 </p>
                 <button

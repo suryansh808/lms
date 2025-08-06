@@ -106,7 +106,7 @@ const AboutUs = () => {
             <div  className="content">
               <h2 className="title">About Us</h2>
               <p className="font-semibold">
-              Krutanic Solutions is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic Solutions today and take the next step toward achieving your career goals.
+              Krutanic is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic today and take the next step toward achieving your career goals.
               </p>
             </div>
 
@@ -160,7 +160,7 @@ const AboutUs = () => {
             </h2>
             <div className="mx-auto max-w-3xl text-lg text-center flex flex-col gap-10 tracking-tighter">
               <p data-aos="fade-up">
-                Founded in 2024, Krutanic Solutions emerged with a vision to
+                Founded in 2024, Krutanic emerged with a vision to
                 make quality education accessible to all. What started as a
                 small initiative has grown into a leading corporate company
                 trusted by thousands of learners globally.
@@ -173,7 +173,7 @@ const AboutUs = () => {
                 achieving their professional dreams.
               </p>
               <p data-aos="fade-up">
-                Today, Krutanic Solutions continues to innovate, expanding our
+                Today, Krutanic continues to innovate, expanding our
                 course offerings and strengthening partnerships with industry
                 leaders to ensure our learners are future-ready.
               </p>

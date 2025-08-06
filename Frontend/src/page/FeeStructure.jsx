@@ -47,7 +47,7 @@ const features = [
       "No Mock Interviews",
     ],
     registrationLink: "https://rzp.io/rzp/Self_Guided_Slot_Booking",
-    // paymentLink: "https://pages.razorpay.com/Self-Paced-Full-Payment",
+    paymentLink: "https://pages.razorpay.com/Self-Paced-Full-Payment",
     description:
       "Explore and learn at your own pace. Take charge of your journey with tools and resources designed for independent exploration and mastery.",
   },
@@ -250,8 +250,11 @@ export default function FeeStructure() {
                         Slot Booking Link
                       </a>
                     </li>
-                    <li>
-                      <a
+                    
+                      {
+                        feature.category === "Self-guided" ? null : (
+                          <li>
+                            <a
                         href={feature.paymentLink}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -259,7 +262,10 @@ export default function FeeStructure() {
                       >
                         Full Registration Link
                       </a>
-                    </li>
+                       </li>
+                        )
+                      }
+                     
                   </ul>
                 </div>
               </div>
