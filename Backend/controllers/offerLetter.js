@@ -170,8 +170,7 @@ DATE:
     const mailOptions = {
         from: process.env.SMTP_OFFERMAIL,
         to: email,
-        cc: "bhumika@krutanic.org",
-        cc:"shrikant@krutanic.org",
+        cc: ["bhumika@krutanic.org", "shrikant@krutanic.org"],
         subject,
         html: body,
         priority: "high",
