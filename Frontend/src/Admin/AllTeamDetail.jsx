@@ -241,7 +241,7 @@ const getTop3BDAsByGrossRevenue = (month) => {
     };
   });
 
-  return bdaRevenueList.sort((a, b) => b.grossRevenue - a.grossRevenue).slice(0, 5);
+  return bdaRevenueList.sort((a, b) => b.grossRevenue - a.grossRevenue).slice(0, 3);
 };
 
 
@@ -568,7 +568,7 @@ const getTop3BDAsByGrossRevenue = (month) => {
         </table>
 
       <div className="flex flex-col mt-6">
-  <h3>🏆 Top 5 BDAs by Gross Revenue (Month-wise)</h3>
+  <h3>🏆 Top 3 BDAs by Gross Revenue (Month-wise)</h3>
   {[currentMonth, prevMonth1, prevMonth2, prevMonth3].map((month) => {
     const top3BDAs = getTop3BDAsByGrossRevenue(month);
 

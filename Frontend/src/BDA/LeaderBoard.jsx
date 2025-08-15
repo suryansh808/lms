@@ -73,7 +73,7 @@ const LeaderBoard = () => {
 
     return bdaRevenueList
       .sort((a, b) => b.grossRevenue - a.grossRevenue)
-      .slice(0, 3);
+      .slice(0, 5);
   };
 
   const getTotalPaymentsForMonth = (month) => {
