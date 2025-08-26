@@ -12,6 +12,7 @@ import {
   LineElement,
 } from "chart.js";
 import API from "../API";
+import GrowthBarChart from "./New folder/GrowthBarChart";
 
 ChartJS.register(
   ArcElement,
@@ -137,6 +138,54 @@ const Home = () => {
     );
   }
 
+    const processedData = [];
+    const monthsToShow = Array.from({ length: 4 }, (_, i) => {
+    const date = new Date(currentMonth);
+    date.setMonth(date.getMonth() - (3 - i));
+    return date.toISOString().slice(0, 7); // YYYY-MM
+  });
+
+  monthsToShow.forEach((month) => {
+    let totalAssigned = 0;
+    let totalAchieved = 0;
+
+    // Go through all BDAs for this month
+    bda.forEach((item) => {
+      if (item.target && item.target.length > 0) {
+        const monthTarget = item.target.find((t) => t.currentMonth === month);
+
+        if (monthTarget) {
+          totalAssigned += monthTarget.targetValue;
+
+          const eligibleStudents = newStudent.filter((student) => {
+            const studentMonth = new Date(student.createdAt)
+              .toISOString()
+              .slice(0, 7);
+            return (
+              studentMonth === month &&
+              (student.status === "fullPaid" ||
+                student.remark[student.remark.length - 1] === "Half_Cleared")
+            );
+          });
+
+          totalAchieved += eligibleStudents.reduce(
+            (acc, student) => acc + (parseFloat(student.paidAmount) || 0),
+            0
+          );
+        }
+      }
+    });
+
+    // Only push if there’s data
+    if (totalAssigned > 0 || totalAchieved > 0) {
+      processedData.push({
+        month,
+        assigned: totalAssigned,
+        achieved: totalAchieved,
+      });
+    }
+  });
+
   return (
     <div id="AdminDashboard">
       <h2 className="text-center font-semibold mb-2">Dashboard</h2>
@@ -181,7 +230,10 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="revenue-card">
+       
+      </div>
+      <div id="targetSection">
+         <div className="revenue-card">
           <h2 className="text-lg font-bold mb-4">Your Target</h2>
           <div>
             {bda.map((item, index) => {
@@ -215,6 +267,14 @@ const Home = () => {
 
       const actualPayments = allPaymentsThisMonth.length;
 
+    
+
+         processedData.push({
+              month: currentMonth,
+              assigned: lastTarget.targetValue,
+              achieved: achievedTarget,
+            });
+ 
                   return (
                     <div key={index}>
                       <p>🎯 Target Assigned: ₹{lastTarget.targetValue}</p>
@@ -248,9 +308,12 @@ const Home = () => {
                 return <p key={index}>No target assigned.</p>;
               }
             })}
+
+          {processedData.length > 0 && <GrowthBarChart data={processedData} />}
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

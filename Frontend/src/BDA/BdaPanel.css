@@ -1,5 +1,4 @@
 .revenue {
-  font-family: Arial, sans-serif;
   margin: 20px 0;
   padding: 0;
   display: flex;
@@ -181,5 +180,18 @@ table{
       color: white;
       border-radius: 10px;
     }
+  }
+}
+
+#targetSection {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .revenue-card{
+    width: 100%;
   }
 }
