@@ -32,7 +32,11 @@ const GrowthBarChart = ({ data }) => {
       <ResponsiveContainer>
         <BarChart data={chartData} margin={{ top: 20, right: 20, left: 0, bottom: 20 }}>
           <XAxis dataKey="month" />
-          <YAxis />
+          {/* <YAxis unit="0" /> */}
+          <YAxis
+  tickFormatter={(val) => `₹${val.toLocaleString("en-IN")}`}
+/>
+
           <Tooltip
             formatter={(value, name) => {
               if (name === "Target Achieved") return [`₹${value}`, "Achieved"];
@@ -44,9 +48,9 @@ const GrowthBarChart = ({ data }) => {
           />
           <Legend />
 
-          {/* Assigned Target */}
+          
           <Bar dataKey="assigned" fill="#8884d8" name="Target Assigned">
-            {/* <LabelList dataKey="assigned" position="top" formatter={(val) => `₹${val}`} /> */}
+            
             <LabelList
     dataKey="assigned"
     position="top"
@@ -54,7 +58,7 @@ const GrowthBarChart = ({ data }) => {
   />
           </Bar>
 
-          {/* Achieved Target with dynamic color */}
+         
           <Bar dataKey="achieved" name="Target Achieved">
             {chartData.map((entry, index) => (
               <Cell

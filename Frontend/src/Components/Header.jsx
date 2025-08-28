@@ -129,18 +129,18 @@
           </div>
         )}
 
-        {isAutopopupVisible && (
+        {/* {isAutopopupVisible && (
           <div id="autopopup">
             <div className="autotext">
               <div className="close">
                 <span onClick={autoPopup} class="fa fa-close"></span>
               </div>
-              {/* <h1>Revealing our estimated</h1> */}
+              
               <div className="first">
                 <h2>We are accredited by</h2>
                 <div className="my-[30px]">
                 <img src={accenture} alt="accenture" />
-                {/* <img src={wipro} alt="wipro" />  */}
+                
                 </div>
               </div>
               <h3>Our Prestigious Certifications</h3>
@@ -151,7 +151,7 @@
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     );
   };
