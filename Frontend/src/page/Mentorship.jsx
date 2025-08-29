@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import certificate1 from "../assets/certificates/c/completion.jpg";
 import certificate3 from "../assets/certificates/c/training.jpg";
 import adobe from "../assets/certificates/c/internship.jpg"
-import accreditedby from "../assets/poplogo/accreditedby.png"
+// import accreditedby from "../assets/poplogo/accreditedby.png"
 import Testimonial from "../Components/testimonial";
 import FAQMentor from "./Mentorship/FAQMentor";
 import EnrollMentor from "./Mentorship/EnrollMentor";
@@ -98,12 +98,12 @@ const Mentorship = () => {
       </section>
        <hr className=" opacity-10"/>
 
-       <section className="py-[60px] px-[10px]">
+       {/* <section className="py-[60px] px-[10px]">
         <div className="container mx-auto flex items-center justify-center">
             <img src={accreditedby} alt="accreditedby" className="rounded-xl w-[900px]" />
         </div>
       </section>
-       <hr className=" opacity-10"/>
+       <hr className=" opacity-10"/> */}
 
       {/* certification section */}
       <section className="py-[60px] px-[10px]"> 
