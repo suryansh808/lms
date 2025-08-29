@@ -532,6 +532,21 @@ const DashboardAccessForm = () => {
               <label htmlFor="Branch/Department Name">Branch/Department</label>
             </div>
 
+            <select
+              value={yearOfStudy}
+              onChange={(e) => setYearOfStudy(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Year of Study
+              </option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+              <option value="Graduated">Graduated</option>
+            </select>
+
             <div className="input-field">
               <input
                 type="text"
@@ -597,20 +612,7 @@ const DashboardAccessForm = () => {
               ))}
             </select>
 
-            <select
-              value={yearOfStudy}
-              onChange={(e) => setYearOfStudy(e.target.value)}
-              required
-            >
-              <option value="" disabled>
-                Year of Study
-              </option>
-              <option value="1st Year">1st Year</option>
-              <option value="2nd Year">2nd Year</option>
-              <option value="3rd Year">3rd Year</option>
-              <option value="4th Year">4th Year</option>
-              <option value="Graduated">Graduated</option>
-            </select>
+            
 
           </div>
 

@@ -267,7 +267,7 @@ const ReferAndEarn = () => {
             <div className="testimonial">
               <div className="profile">
                 <div>
-                  <h4>Akhil Yadav</h4>
+                  <h4>Sumit Sahu</h4>
                   <span>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -278,15 +278,13 @@ const ReferAndEarn = () => {
                 </div>
               </div>
               <p>
-                "I referred my friend to the online MBA program, and the process
-                was seamless. The reward was credited promptly after my friend
-                enrolled. Highly recommend!"
+                I referred my friend to the Data Science program, and the process was seamless. The reward was credited promptly after my friend enrolled. Highly recommend!
               </p>
             </div>
             <div className="testimonial">
               <div className="profile">
                 <div>
-                  <h4>Ojas Mishra</h4>
+                  <h4>Ritik</h4>
                   <span>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -298,7 +296,7 @@ const ReferAndEarn = () => {
               </div>
               <p>
                 "The referral program is a great way to help friends and earn
-                rewards. I referred a friend to the BBA program, and the support
+                rewards. I referred a friend to the Full Stack Web Developement program, and the support
                 team was very helpful throughout the process."
               </p>
             </div>
