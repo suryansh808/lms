@@ -297,6 +297,9 @@ const convertToIST = (utcDate) => {
             <h2>Details</h2>
             <div className="space-y-2">
               <p>
+                <strong>Year of Study:</strong> {dialogData.yearOfStudy}
+              </p>
+              <p>
                 <strong>Phone:</strong> {dialogData.phone}
               </p>
               <p >

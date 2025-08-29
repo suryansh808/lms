@@ -71,6 +71,7 @@ router.post("/newstudentenroll", async (req, res) => {
       referFriend,
       internshipstartsmonth,
       internshipendsmonth,
+      yearOfStudy
     });
 
     await newStudent.save();

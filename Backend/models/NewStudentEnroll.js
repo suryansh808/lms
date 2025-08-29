@@ -77,6 +77,7 @@ const newStudentEnrollSchema = new Schema(
     referRemark:[{type:String}],
     internshipstartsmonth:{type:String},
     internshipendsmonth:{type:String},
+    yearOfStudy:{type:String},
   },
   {
     timestamps: true,

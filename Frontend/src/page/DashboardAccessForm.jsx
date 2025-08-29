@@ -62,6 +62,7 @@ const DashboardAccessForm = () => {
   const [referFriend, setReferFriend] = useState("");
   const [internshipstartsmonth, setInternshipStartsMonth] = useState("");
   const [internshipendsmonth, setInternshipEndsMonth] = useState("");
+  const [yearOfStudy, setYearOfStudy] = useState("");
   const [course, setCourse] = useState([]);
   const [lead, setLead] = useState("");
 
@@ -170,6 +171,7 @@ const DashboardAccessForm = () => {
     setReferFriend("");
     setInternshipStartsMonth("");
     setInternshipEndsMonth("");
+    setYearOfStudy("");
     navigate("/dashboardaccessform");
   };
 
@@ -216,6 +218,7 @@ const DashboardAccessForm = () => {
       referFriend: referFriend,
       internshipstartsmonth: internshipstartsmonth,
       internshipendsmonth: internshipendsmonth,
+      yearOfStudy: yearsOfStudy,
       lead: lead.trim(),
     };
 
@@ -593,6 +596,22 @@ const DashboardAccessForm = () => {
                 </option>
               ))}
             </select>
+
+            <select
+              value={yearOfStudy}
+              onChange={(e) => setYearOfStudy(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Year of Study
+              </option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+              <option value="Graduated">Graduated</option>
+            </select>
+
           </div>
 
           <div className="mt-5">
