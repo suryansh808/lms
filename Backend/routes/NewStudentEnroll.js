@@ -32,6 +32,7 @@ router.post("/newstudentenroll", async (req, res) => {
       referFriend,
       internshipstartsmonth,
       internshipendsmonth,
+      yearOfStudy
     } = req.body;
     const course = await CreateCourse.findOne({ title: domain });
 

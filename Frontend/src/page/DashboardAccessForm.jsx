@@ -218,7 +218,7 @@ const DashboardAccessForm = () => {
       referFriend: referFriend,
       internshipstartsmonth: internshipstartsmonth,
       internshipendsmonth: internshipendsmonth,
-      yearOfStudy: yearsOfStudy,
+      yearOfStudy: yearOfStudy,
       lead: lead.trim(),
     };
 
