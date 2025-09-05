@@ -208,6 +208,9 @@ const Alumni = () => {
                     Post Krutanic
                   </div>
                   <div>{alumni.post}</div>
+                  <p className="text-sm ">
+                      <strong>Package :</strong> {alumni.package}
+                    </p>
                 </div>
               </div>
               <div className="text-right border-t">
@@ -252,9 +255,9 @@ const Alumni = () => {
                       {selectedAlumni.role} at  {selectedAlumni.post}
                     
                     </p>
-                    <p className="text-sm ">
+                    {/* <p className="text-sm ">
                       Package : {selectedAlumni.package}
-                    </p>
+                    </p> */}
                       <a
                       href={selectedAlumni.linkdinUrl}
                       target="_blank"
@@ -282,6 +285,7 @@ const Alumni = () => {
                   <div>
                     <p className="text-xs text-gray-500">Post Krutanic</p>
                     <p className="font-semibold">{selectedAlumni.post}</p>
+                    
                     {/* <p className="text-xs">{selectedAlumni.postRole}</p> */}
                   </div>
                 </div>
