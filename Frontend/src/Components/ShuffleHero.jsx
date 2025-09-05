@@ -46,9 +46,9 @@ const ShuffleHero = () => {
           Transform Your Passion into <br />  <span className="text-md tracking-tighter" ref={el} style={{color:"rgb(241 91 41)"}} />
         </p>  
         <br/>
-        <h1 id="newh1">Kickstart Your Career with Online Courses + Internships | Bangalore, Delhi, Mumbai, etc.</h1>
-        {/* <p className="text-white max-w-[500px]">At KRUTANIC we believe in transforming passion into profession. Our expertly designed courses equip you with the skills to excel in the digital world. 
-        Join us and start your future.</p> */}
+        {/* <h1 id="newh1">Kickstart Your Career with Online Courses + Internships | Bangalore, Delhi, Mumbai, etc.</h1> */}
+        <p className="text-white max-w-[500px]">At KRUTANIC we believe in transforming passion into profession. Our expertly designed courses equip you with the skills to excel in the digital world. 
+        Join us and start your future.</p>
         <br/>
         
         <Link to='/Advance'><button className="bg-white hover:text-orange-700 text-black font-bold py-2 px-4 rounded">KNOW MORE</button></Link>
