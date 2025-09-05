@@ -252,9 +252,9 @@ const Alumni = () => {
                       {selectedAlumni.role} at  {selectedAlumni.post}
                     
                     </p>
-                    {/* <p className="text-sm ">
+                    <p className="text-sm ">
                       Package : {selectedAlumni.package}
-                    </p> */}
+                    </p>
                       <a
                       href={selectedAlumni.linkdinUrl}
                       target="_blank"
