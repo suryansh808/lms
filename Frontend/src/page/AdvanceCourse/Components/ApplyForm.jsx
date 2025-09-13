@@ -5,7 +5,7 @@ import axios from "axios";
 import API from "../../../API";
 import toast, { Toaster } from "react-hot-toast";
 
-const ApplyForm = ({ courseValue }) => {
+const ApplyForm = () => {
      const [loading, setLoading] = useState(false);
   // const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -101,7 +101,7 @@ const ApplyForm = ({ courseValue }) => {
       <div className=" flex justify-center items-center">
         <div className="bg-white text-black p-3 rounded-lg shadow-lg w-96">
           <h3 className="text-md text-center font-semibold mb-2">
-            Apply Now For {courseValue}
+            Apply Now
           </h3>
           <form onSubmit={handleFormSubmit} className="space-y-3">
             <input

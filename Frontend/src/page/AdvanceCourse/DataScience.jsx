@@ -562,7 +562,7 @@ const [actionType , setActionType] = useState();
 
               <div className="lg:w-1/2 w-full lg:h-[450px] rounded-lg overflow-hidden mb-5 lg:mb-0 ">
                  <div className="">
-              <ApplyForm courseValue="Data Science"/>
+              <ApplyForm />
             </div>
 
               </div>
