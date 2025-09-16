@@ -1,7 +1,6 @@
 import { Routes, Route, BrowserRouter, useLocation , Navigate } from "react-router-dom";
 import Header from "./Components/Header";
 import HomePage from "./page/landing";
-import Signup from "./page/Signup";
 import ContactUs from "./page/ContactUs";
 import AboutUs from "./page/AboutUs";
 import Login from "./page/Login";
@@ -21,10 +20,8 @@ import MernStack from "./page/AdvanceCourse/MernStack";
 import Investmentbanking from "./page/AdvanceCourse/Investmentbanking";
 import ProductManagement from "./page/AdvanceCourse/ProductManagement";
 import SmoothScroll from "./SmoothScroll";
-import MentorSection from "./Components/MentorSection";
 import Performancemarket from "./page/AdvanceCourse/Performancemarket";
 import MasterClass from "./page/MasterClass";
-// import OnBoardingForm from "./page/OnBoardingForm";
 import AutomationTesting from "./page/AdvanceCourse/AutomationTesting";
 import PromptEngineering from "./page/AdvanceCourse/PromptEngineering";
 import DashboardAccessForm from "./page/DashboardAccessForm";
@@ -63,7 +60,6 @@ import BookedPayment from "./Operation/BookedPayment";
 import FullPayment from "./Operation/FullPayment";
 import DefaultPayment from "./Operation/DefaultPayment";
 import OperationRevenueSheets from "./Operation/OperationRevenueSheets";
-// import OperationAgainLogin from "./Operation/OperationAgainLogin";
 
 // BDA Team
 import TeamLogin from "./BDA/TeamLogin";
@@ -92,11 +88,7 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import PageNotFound from "./PageNotFound";
 import AdvanceQueries from "./Admin/AdvanceQueries";
 import MentorQueries from "./Admin/MentorQueries";
-// import JobBoard from "./User/JobBoard";
-// import MyJob from "./User/MyJob";
-// import MockInterview from "./User/MockInterview";
-// import Exercise from "./User/Excercise";
-// import ResumeATS from "./User/ResumeATS"
+
 
 
 // placementcoordinator
@@ -114,7 +106,6 @@ import ReferAndEarn from "./page/ReferAndEarn";
 import LeaderBoard from "./BDA/LeaderBoard";
 import ReferAndEarnResponse from "./Admin/ReferAndEarnResponse";
 
-// import checkAdminAuth from "./checkAdminAuth";
 
 
 
@@ -152,7 +143,6 @@ const AppContent = () => {
     "/talenthunt",
     "/advance",
     "/mentorship",
-    "/mentorsection",
     "/datascience",
     "/digitalmarket",
     "/performancemarket",
@@ -245,7 +235,6 @@ const AppContent = () => {
   const isAuthenticatedBda = () => !!localStorage.getItem("bdaToken");
   const isAuthenticatedOperation = () => !!localStorage.getItem("operationToken");
   const isAuthenticatedAdmin = () => !!localStorage.getItem("adminToken");
-  // const isAuthenticatedAdmin = async () => await checkAdminAuth();
 
   const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
   const isAuthenticatedEventUser = () => !!localStorage.getItem("eventToken");
@@ -266,7 +255,6 @@ const AppContent = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/LoginWithOtp" element={<LoginWithOtp />} />
-        <Route path="/Signup" element={<Signup />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/Career" element={<Career />} />
@@ -276,7 +264,6 @@ const AppContent = () => {
         <Route path="/TalentHunt" element={<TalentHunt />} />
         <Route path="/Advance" element={<Advance />} />
         <Route path="/Mentorship" element={<Mentorship />} />
-        <Route path="/MentorSection" element={<MentorSection />} />
         <Route path="/DataScience" element={<DataScience />} />
         <Route path="/DigitalMarket" element={<DigitalMarket />} />
         <Route path="/Performancemarket" element={<Performancemarket />} />
@@ -331,12 +318,10 @@ const AppContent = () => {
         <Route path="/DefaultPayment" element={isAuthenticatedOperation()?<DefaultPayment />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationRevenueSheet" element={isAuthenticatedOperation()?<OperationRevenueSheets />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationLogin" element={<OperationLogin />} />
-        {/* <Route path="/OperationAgainLogin" element={<OperationAgainLogin/>} /> */}
         {/* Operation Panel End */}
 
         {/* bda panel start */}
           <Route path="/TeamLogin" element={<TeamLogin />} />
-          {/* <Route path="/BDAAgainLogin" element={<BDAAgainLogin />} /> */}
           <Route path="/Home" element={ isAuthenticatedBda() ? <Home /> : <Navigate to="/TeamLogin"/>} />
           <Route path="/FullPaid" element={isAuthenticatedBda() ?<FullPaid /> : <Navigate to="/TeamLogin"/>} />
           <Route path="/Default" element={isAuthenticatedBda() ?<Default /> : <Navigate to="/TeamLogin"/>} />
@@ -358,11 +343,6 @@ const AppContent = () => {
         <Route path="/EnrolledCourses" element={isAuthenticated() ?<EnrolledCourses /> : <Navigate to="/login" />} />
         <Route path="/Setting" element={isAuthenticated() ?<Setting /> : <Navigate to="/login" />} />
         <Route path="/Learning" element={isAuthenticated() ?<Learning />: <Navigate to="/login" />} />
-        {/* <Route path="/JobBoard" element={isAuthenticated() ?<JobBoard /> : <Navigate to="/login" />} />
-        <Route path="/MyJob" element={isAuthenticated() ?<MyJob />: <Navigate to="/login" />} />
-        <Route path="/MockInterview" element={ isAuthenticated() ? <MockInterview /> : <Navigate to="/login" /> } />
-        <Route path="/Exercise"  element={isAuthenticated() ? <Exercise /> : <Navigate to="/login" />} />
-         <Route path="/ResumeATS" element={isAuthenticated() ? <ResumeATS /> : <Navigate to="/login" />}/> */}
         {/* User Panel End */}
 
         {/* placement coodinator panel starts */}

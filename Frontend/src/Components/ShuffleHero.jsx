@@ -47,7 +47,7 @@ const ShuffleHero = () => {
         </p>  
         <br/>
         {/* <h1 id="newh1">Kickstart Your Career with Online Courses + Internships | Bangalore, Delhi, Mumbai, etc.</h1> */}
-        <p className="text-white max-w-[500px]">At KRUTANIC we believe in transforming passion into profession. Our expertly designed courses equip you with the skills to excel in the digital world. 
+        <p className="text-white max-w-[500px]">At KRUTANIC, we transform your passion into a successful profession. Our expertly crafted digital skill development courses provide you with the tools to excel in today’s competitive digital world. Join us now and take the first step toward a bright future. 
         Join us and start your future.</p>
         <br/>
         

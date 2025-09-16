@@ -41,7 +41,9 @@ const HomePage = () => {
           <div className="text">
             <h1 data-aos="zoom-in">| About Us</h1>
             <p>
-            Krutanic is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic today and take the next step toward achieving your career goals.
+            {/* Krutanic is your trusted partner for career growth, offering advanced tech courses designed to prepare you for the fast-paced job market. We focus on delivering industry-relevant skills through expert guidance, ensuring that you gain both theoretical knowledge and practical experience. Each course is backed by hands-on projects, allowing you to work on real-world challenges that employers value. Whether you're starting your career or looking to upskill, our programs in Web Development, Data Science, and Digital Marketing are tailored to help you succeed. Join Krutanic today and take the next step toward achieving your career goals. */}
+            Krutanic is dedicated to empowering your career growth with industry-leading tech courses designed for today’s fast-evolving job market. Learn from experienced industry experts who provide expert guidance and hands-on training through real-world projects. Gain personalized placement support and mentorship as you advance, whether you’re starting fresh or upskilling. Join Krutanic and explore courses that boost your skills and open doors to new career opportunities. 
+
             </p>
             <Link to="/AboutUs">
               <button className="btnblack">LEARN MORE</button>{" "}
@@ -130,18 +132,13 @@ const HomePage = () => {
           <div>
             <h2>Transform Your Career with Confidence </h2>
             <p>
-              <span>&#10149;</span>We've Got Your Back! Learning can be
-              challenging, but we're with you all the way tracking your
-              progress, refining your skills, and leaving no gaps.
+              <span>&#10149;</span>We've Got Your Back! Learning professional training and skill development can be challenging, but we're with you all the way-tracking your progress, refining your skills, and ensuring no gaps in your career growth.
             </p>
             <p>
-              <span>&#10149;</span>Learn Anytime, Anywhere! Join live classes,
-              connect with mentors, and study flexibly from wherever you are
+              <span>&#10149;</span>Learn Anytime, Anywhere! Join live online courses, connect with dedicated mentors, and study flexibly from wherever you are.
             </p>
             <p>
-              <span>&#10149;</span>Boost Your Portfolio! Earn completion and
-              internship certificates to level up your résumé and career
-              prospects.
+              <span>&#10149;</span>Boost Your Portfolio! Earn online certification, internship program certificates, and completion badges to strengthen your résumé and elevate your job placement opportunities.
             </p>
           </div>
         </div>
@@ -206,43 +203,36 @@ const HomePage = () => {
         <div>
           <h1 data-aos="zoom-in">| Our specialization</h1>
           <p>
-            Comprehensive Learning Approach for In-Depth Expertise and Personal
-            Growth.
+            Building Expertise and Confidence with a Complete Online Certification and Mentorship Experience 
           </p>
           <div className="specializationiner">
             <div  data-aos="fade-up-right" className="img">
-              <img src={specialization} alt="" />
+              <img src={specialization} alt="Bangalore Internship companies for students " />
             </div>
             <div className="textdiv">
               <div data-aos="fade-left" data-aos-duration="400" data-aos-delay="400" className="specialtext">
                 <span className="fa fa-check-square-o"></span>
                 <p>
                   {" "}
-                  We cover all aspects, from basic concepts to advanced
-                  techniques, ensuring you gain in-depth expertise.
+                  We cover all aspects, from basic concepts to advanced techniques, ensuring you gain comprehensive tech skills. 
                 </p>
               </div>
               <div data-aos="fade-left" data-aos-duration="600" data-aos-delay="600" className="specialtext">
                 <span className="fa fa-search"></span>
                 <p>
-                  Your learning journey is closely monitored through regular
-                  assessments to ensure you thoroughly understand and retain the
-                  concepts taught.
+                  Your learning journey is closely monitored through regular assessments to guarantee you fully understand and retain the digital marketing concepts taught. 
                 </p>
               </div>
               <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="800" className="specialtext">
                 <span class="fa fa-star"></span>
                 <p>
-                  Each program is structured to meet individual needs, ensuring
-                  maximum growth and success.
+                  Each program is structured to meet individual needs, ensuring maximum growth and success in professional training. 
                 </p>
               </div>
               <div data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1200" className="specialtext">
                 <span class="fa fa-gear"></span>
                 <p>
-                  Our personalized approach empowers you to progress at your own
-                  pace, ensuring a comprehensive and effective learning
-                  experience.
+                  Our personalized approach empowers you to progress at your own pace, delivering a comprehensive and effective online certification experience. 
                 </p>
               </div>
             </div>
@@ -275,7 +265,7 @@ const HomePage = () => {
         </p>
         <div className="whydiv">
           <div  data-aos="fade-up-right" className="whyimg">
-            <img src={whyimg} alt="" />
+            <img src={whyimg} alt="Best internship company in bangalore for students " />
           </div>
           <div className="whytext">
             <div data-aos="fade-left" data-aos-duration="400" data-aos-delay="400" className="text">
@@ -283,8 +273,7 @@ const HomePage = () => {
               <div>
                 <h2>Digital Skills</h2>
                 <p>
-                  Designed to equip students with in-demand skills for success
-                  in the digital economy.
+                 Learn AI, Data Science, Digital Marketing, Web Development, UI/UX & more in-demand skills.
                 </p>
               </div>
             </div>
@@ -293,8 +282,7 @@ const HomePage = () => {
               <div>
                 <h2>Career Support</h2>
                 <p>
-                  Career guidance to help students secure jobs and excel in
-                  their careers.
+                 Job-oriented training with resume building, mock interviews, and placement assistance.
                 </p>
               </div>
             </div>
@@ -303,8 +291,7 @@ const HomePage = () => {
               <div>
                 <h2>Flexible Learning</h2>
                 <p>
-                  Offers online and hybrid classes to suit diverse schedules and
-                  preferences.
+                  Choose online, hybrid, or self-paced classes that fit your schedule.
                 </p>
               </div>
             </div>
@@ -312,7 +299,7 @@ const HomePage = () => {
               <span>&#10149;</span>
               <div>
                 <h2>Global Networking</h2>
-                <p>Opportunities to connect with a global community of professionals and industry experts. </p>
+                <p>Connect with industry experts, mentors, and international professionals. </p>
               </div>
             </div>
           </div>
@@ -406,7 +393,7 @@ const HomePage = () => {
         </p>
         <div className="corporatediv">
           <div data-aos="fade-up-right" className="corporateimg">
-            <img src={corporate} alt="" />
+            <img src={corporate} alt="internship company in bangalore for college students" />
           </div>
           <div className="corporatetext">
             <div data-aos="fade-left" data-aos-duration="400" data-aos-delay="400" className="text">
@@ -511,7 +498,7 @@ const HomePage = () => {
             tuned for our inspiring journey!
           </p>
           <div className="storydiv">
-            <img src={comingsoon} alt="" />
+            <img src={comingsoon} alt="internship company in bangalore for freshers " />
           </div>
         </div>
 
