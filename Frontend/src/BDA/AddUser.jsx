@@ -94,6 +94,8 @@ const AddUser = () => {
           <option value="" disabled>Select Option</option>
           <option value="CGFL">CGFL</option>
           <option value="SGFL">SGFL</option>
+          <option value="Ram Charan">Ram Charan</option>
+          <option value="Abhilash">Abhilash</option>
         </select>
         </div>
         <div>
