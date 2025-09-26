@@ -387,10 +387,7 @@ const HomePage = () => {
 
       <div className="corporatesolution">
         <h1 data-aos="zoom-in">| Corporate Solutions</h1>
-        <p>
-          Corporate Solutions offers innovative strategies, cutting-edge tools,
-          and collaborative approaches to drive business growth and success.
-        </p>
+        <p >Krutanic builds meaningful partnerships to deliver tailored training, practical projects, and advanced tools that accelerate skill development and drive lasting success.  </p>
         <div className="corporatediv">
           <div data-aos="fade-up-right" className="corporateimg">
             <img src={corporate} alt="internship company in bangalore for college students" />
@@ -401,8 +398,7 @@ const HomePage = () => {
               <div>
                 <h2>Empowerment</h2>
                 <p>
-                  Proven methods that foster both professional and personal
-                  growth.
+                  Structured programs that strengthen professional abilities and create new opportunities for advancement.
                 </p>
               </div>
             </div>
@@ -411,8 +407,7 @@ const HomePage = () => {
               <div>
                 <h2>Innovative Learning</h2>
                 <p>
-                  Access to the latest tools and technologies for real-time
-                  learning.
+                 Real-time training with the latest technologies for hands-on, impactful learning experiences.
                 </p>
               </div>
             </div>
@@ -421,8 +416,7 @@ const HomePage = () => {
               <div>
                 <h2>Collaborative Networking</h2>
                 <p>
-                  Participate in group projects and cross-industry networking
-                  sessions.
+                  Engage in shared projects and interactive sessions that foster valuable industry connections.
                 </p>
               </div>
             </div>
@@ -431,8 +425,7 @@ const HomePage = () => {
               <div>
                 <h2>Creative Solutions</h2>
                 <p>
-                  We encourage creative problem-solving to meet dynamic
-                  business challenges.
+                  Encourage innovative thinking and strategic problem-solving to meet today’s dynamic challenges
                 </p>
               </div>
             </div>

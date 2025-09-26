@@ -142,12 +142,10 @@ const TalentHunt = () => {
       <section class="home">
         <div class="description">
           <h1 data-aos="fade-up" class="title">
-            <span class="gradient-text">Grow Professionally</span> with the Best
+            <span class="gradient-text">Grow Your Career </span> with the Best
           </h1>
           <p data-aos="fade-up" class="paragraph">
-            In a world filled with opportunities, having a mentor can make all
-            the difference. Explore why people turn to this invaluable resource
-            to unlock their potential.
+            In today’s competitive world, the right mentor can guide your growth. Discover why students choose mentorship to gain skills, confidence, and career success.
           </p>
          
         </div>
@@ -210,10 +208,7 @@ const TalentHunt = () => {
             data-aos="fade-up"
             className="text-lg text-center max-w-3xl mx-auto"
           >
-            Our annual Talent Hunt is designed to discover and nurture the
-            brightest minds in education technology. Whether you're a coding
-            prodigy, a design virtuoso, or an innovative thinker, this is your
-            chance to shine!
+           Krutanic Talent Hunt is created to identify and support the brightest minds in technology and innovation. Whether you’re skilled in coding, design, or problem-solving, this is your platform to showcase talent and grow your career.
           </p>
         </div>
       </section>

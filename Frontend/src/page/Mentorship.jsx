@@ -40,9 +40,9 @@ const Mentorship = () => {
   return (
     <div id="mentorship" className="text-white bg-black">
     <Helmet>
-        <title>Top E-Learning Mentorship Programs | Krutanic </title>
+        <title>Krutanic Mentorship Program - Data Science, AI, Full Stack, Digital Marketing  </title>
         <meta name="keywords" content="Top E-learning, mentorship, tech mentorship, data science, coding, online learning, career growth"/>
-        <meta name="description" content="Join Krutanic’s top e-learning mentorship to grow your tech, coding, and data skills with expert guidance."/>
+        <meta name="description" content="Krutanic offers a career-driven Mentorship Program with expert guidance, hands-on training, and 100+ internship opportunities in Data Science, Artificial Intelligence, Machine Learning, Cyber Security, Full Stack Web Development, Cloud Computing, and Digital Marketing"/>
         <meta property="og:title" content="Top E-Learning Mentorship Programs | Krutanic"/>
         <meta property="og:url" content="https://www.krutanic.com/Mentorship"/>
         <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
@@ -61,15 +61,11 @@ const Mentorship = () => {
         <div data-aos="fade-up" className="rounded-lg backdrop-blur-xl text-center py-2 bg-[#ffffff46]">      
             <div className="flex flex-col  items-center justify-center lg:py-[20px]">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-black mb-6">
-                Discover a new way of learning with our{" "}
+                Discover  a Smarter Way to Learn with Krutanic's {" "}
                 <span className="text-[#f15b29]">MENTORSHIP PROGRAM.</span>
               </h1>
               <p className="text-lg text-black mb-6">
-                Get personalized guidance from experienced mentors to help you
-                reach your career and personal goals. Whether you're building
-                new skills, advancing in your field, or exploring new
-                opportunities, our Mentorship Program offers expert advice and
-                support to help you succeed.
+                Gain personalized career guidance, hands-on training, and expert mentorship to achieve your professional and personal goals. Whether you want to build new skills, advance in your career, or explore fresh opportunities, our mentorship program provides the support you need to succeed. 
               </p>
               <button
                 onClick={scrollToCourse}
@@ -143,7 +139,7 @@ const Mentorship = () => {
                         </svg>
                       </div>
                       <p className="text-white">
-                        Tailored for business leaders, advisors, and innovators.
+                        Created for business leaders, advisors and innovators 
                       </p>
                     </div>
 
@@ -164,8 +160,7 @@ const Mentorship = () => {
                         </svg>
                       </div>
                       <p className="text-white">
-                        Promotes skill development and creativity for career
-                        advancement.
+                        Builds skills and creativity for career growth 
                       </p>
                     </div>
 
@@ -204,7 +199,7 @@ const Mentorship = () => {
                           />
                         </svg>
                       </div>
-                        <p className="text-white"> Approved by Renowned Industry Leaders</p>
+                        <p className="text-white"> Approved by leading industry experts </p>
                     </div>
                   </div>
                 </div>

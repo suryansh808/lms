@@ -264,13 +264,8 @@ const MasterClass = () => {
         <div className="about">
           <h1>| About Masterclass</h1> <br />
           <p>
-            Krutanic MasterClass is a premier online learning initiative that
-            brings together top educators, industry experts, and professionals
-            to deliver engaging, interactive, and insightful masterclasses on a
-            variety of subjects. <br />
-            <br /> Whether you want to upskill, explore new domains, or gain a
-            competitive edge, our free masterclass is your gateway to
-            excellence.
+           Krutanic MasterClass is an interactive online learning platform where students learn directly from industry experts and top educators through free, career-focused masterclasses in Data Science, AI, Full Stack Development, Digital Marketing, Cyber Security and more.  <br />
+            <br /> Whether you aim to upskill, explore new fields, or prepare for internships and job opportunities, our online courses help you build practical skills and gain a competitive edge. 
           </p>
         </div>
         <div className="why">

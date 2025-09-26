@@ -651,37 +651,30 @@ const [actionType , setActionType] = useState();
                   <span className="font-semibold text-[#f15b29]">
                     Master Advanced Machine Learning and AI Techniques
                   </span>
-                  Learn to implement and fine-tune cutting-edge machine learning
-                  algorithms and deep learning models using tools like
-                  TensorFlow and Keras to solve complex, industry-specific
-                  problems.
+                 Gain expertise with  deep learning models through the best AI and machine learning training in India. Solve industry-specific problems with hands-on projects.
                 </li>
                 <li>
                   <li>
                     <span className="font-semibold text-[#f15b29]">
                       Develop Big Data Expertise{" "}
                     </span>
-                    Gain experience with Hadoop, Spark, and NoSQL databases to
-                    process and analyze large-scale datasets efficiently.
+                   Work with Hadoop, Spark, and NoSQL databases in our big data certification courses to process and analyze large-scale datasets efficiently.
                   </li>
                   <span className="font-semibold text-[#f15b29]">
                     Enhance Data Visualization Skills
                   </span>
-                  Create insightful visualizations using tools like Tableau and
-                  Power BI to communicate findings effectively.
+                  Build dashboards with Tableau and Power BI in our data visualization training programs to communicate insights effectively.
                   <li>
                     <span className="font-semibold text-[#f15b29]">
                       Learn Predictive Analytics{"  "}
                     </span>
-                    Apply statistical models and machine learning techniques to
-                    predict trends and outcomes from data.
+                    Apply predictive analytics training and statistical models to forecast business trends and outcomes from real data.
                   </li>
                   <li>
                     <span className="font-semibold text-[#f15b29]">
                       Optimize Data Pipelines{"  "}
                     </span>
-                    Design workflows to collect, clean, and prepare data for
-                    analysis in real-world scenarios.
+                    Design workflows to collect, clean, and prepare data using tools taught in our advanced data science courses in India.
                   </li>
                   {isExpanded && (
                     <>
@@ -689,10 +682,7 @@ const [actionType , setActionType] = useState();
                         <span className="font-semibold text-[#f15b29]">
                           Solve Business Problems with Data{"  "}
                         </span>
-                        Use data science techniques to uncover patterns and
-                        provide actionable insights for decision-making.Utilize
-                        platforms like AWS, Google Cloud, or Azure to scale data
-                        science projects and manage computational demands.
+                        Use data science internship projects in Bangalore to uncover patterns, deliver insights, and support decision-making with real-time data.
                       </li>
                     </>
                   )}
@@ -703,14 +693,12 @@ const [actionType , setActionType] = useState();
                   <>
                     {/* Paragraphs */}
                     <p className="mt-4">
-                      Create Effective Content Marketing Campaigns Design and
-                      implement content strategies that attract, engage, and
-                      convert target audiences across digital platforms.
+                      <span className="font-semibold text-[#f15b29]">Create Effective Content Marketing Campaigns </span> 
+Join our digital marketing training in India to design strategies that attract, engage, and convert target audiences. 
                     </p>
                     <p>
-                      Leverage Automation for Campaign Optimization Use
-                      marketing automation tools to streamline campaigns,
-                      nurture leads, and drive higher ROI.
+                      <span className="font-semibold text-[#f15b29]">Leverage Automation for Campaign Optimization </span>
+Learn to use marketing automation tools to streamline campaigns, nurture leads, and drive higher ROI through advanced digital marketing courses. 
                     </p>
                   </>
                 )}

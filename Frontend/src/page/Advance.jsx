@@ -196,8 +196,9 @@ const handleFormSubmit = async (e) => {
     <div id="advance" className="">
 
       <Helmet>
-        <title>Krutanic Advance: Expert-Led Online Courses for Career Growth</title>
-        <meta name="description" content="Advance your career with Krutanic's expert-led online courses in tech, data science, and coding. Gain in-demand skills and certifications."/>
+        <title>Krutanic Advanced Program -Expert-Led Tech Courses with Internships 
+</title>
+        <meta name="description" content="Gain real-world skills with Krutanic's Advanced Program. Expert-led tech courses, best internships, certifications & placement support for your dream career."/>
         <meta name="keywords" content="online learning, career development, professional courses, tech training, data science, coding, upskilling, e-learning platform"/>
         <link rel="canonical" href="https://www.krutanic.com/Advance"/>
         <meta property="og:title" content="Krutanic Advance: Expert-Led Online Courses for Career Growth"/>
@@ -230,10 +231,8 @@ const handleFormSubmit = async (e) => {
             <h1  className="text-4xl font-bold mb-4 ">
           <span className="text-[#f15b29]">Transform with Krutanic’s Hands-On Learning Experience</span>
             </h1>
-            <p  className="text-md mb-8 text-white">
-          
-The Krutanic Advanced Program offers an intensive curriculum that combines theoretical knowledge with practical application. Students gain valuable experience through real-world projects, enabling them to effectively navigate the complexities of Digital Marketing, Data Science, Investment Banking, Performance Marketing, Product Management, and Mern Stack Development. For more details, fill out the registration form.
-            </p>
+            <p  className="text-md mb-8 text-white">   
+The Krutanic Advanced Program delivers an intensive, career-focused curriculum that blends theoretical learning with practical industry training. Students gain real-world project experience and mentor guidance, enabling them to confidently master the demands of Digital Marketing, Advanced Data Science, Investment Banking, Performance Marketing, Product Management, and MERN Stack Development. For more details and placement-support information, fill out the registration form.            </p>
             <button
              onClick={scrollToCourse}
               

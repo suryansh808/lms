@@ -119,9 +119,7 @@ export default function FeeStructure() {
               <span className="text-[#f15b29]">Structure</span>
             </h1>
             <p data-aos="fade-up"  className="mt-6 lg:mb-4 mb-2 text-lg">
-              Flexible payment plans are designed to fit your learning goals.
-              Choose how you invest in your growth - pay upfront, split the
-              cost, or opt for our income-share model.
+              Flexible plans help you learn and grow-pay upfront, split the fee, or use income-share, with internship and placement support included. 
             </p>
             <div data-aos="fade-up"  className="flex flex-col space-y-4 sm:items-center sm:justify-center  sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-center">
               <Link
