@@ -16,7 +16,6 @@ import imgalt from "../assets/defaultmasterclass.jpg";
 import Popularcourse from "../Components/popularcourse";
 import logo from "../User/playerlogo.jpg";
 
-
 const MasterClass = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -190,28 +189,58 @@ const MasterClass = () => {
 
   return (
     <div id="MasterClass">
-       
-       <Helmet>
+      <Helmet>
         <title>Krutanic MasterClass | Upskill in Tech, Coding & AI</title>
-        <meta name="keywords" content="e-learning, Krutanic MasterClass, coding, data science, AI courses, tech upskilling, online mentorship"/>
-        <meta name="description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
+        <meta
+          name="keywords"
+          content="e-learning, Krutanic MasterClass, coding, data science, AI courses, tech upskilling, online mentorship"
+        />
+        <meta
+          name="description"
+          content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."
+        />
 
-        <meta property="og:title" content="Krutanic MasterClass | Upskill in Tech, Coding & AI"/>
-        <meta property="og:url" content="https://www.krutanic.com/MasterClass"/>
-        <meta property="og:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
-        <meta property="og:description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
-        <meta property="og:type" content="website"/>
+        <meta
+          property="og:title"
+          content="Krutanic MasterClass | Upskill in Tech, Coding & AI"
+        />
+        <meta
+          property="og:url"
+          content="https://www.krutanic.com/MasterClass"
+        />
+        <meta
+          property="og:image"
+          content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"
+        />
+        <meta
+          property="og:description"
+          content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."
+        />
+        <meta property="og:type" content="website" />
 
-        <meta name="twitter:card" content="summary"/>
-        <meta property="twitter:title" content="Krutanic MasterClass | Upskill in Tech, Coding & AI"/>
-        <meta name="twitter:image" content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"/>
-        <meta property="twitter:description" content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."/>
+        <meta name="twitter:card" content="summary" />
+        <meta
+          property="twitter:title"
+          content="Krutanic MasterClass | Upskill in Tech, Coding & AI"
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.krutanic.com/assets/LOGO3-Do06qODb.png"
+        />
+        <meta
+          property="twitter:description"
+          content="Join Krutanic MasterClass to learn top tech skills from industry leaders. Master coding, data science, AI, and more with hands-on learning and mentorship."
+        />
 
         <link rel="canonical" href="https://www.krutanic.com/MasterClass" />
-       </Helmet>
+      </Helmet>
 
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="masterclasshero">
+      <div className="masterclassherosection">
+        <img src={imghero} alt="" />
+      </div>
+
+      {/* <div className="masterclasshero">
         <input
           className="radio"
           type="radio"
@@ -224,12 +253,12 @@ const MasterClass = () => {
           htmlFor="cardUno"
           style={{ backgroundImage: `url(${imghero})` }}
         >
-          {/* <h1 className="title-card">
+          <h1 className="title-card">
             Masterclasses to Boost Your Skills
           </h1>
           <h3 className="card-title subsubtitle">
             <span>Join our comprehensive masterclass and take your expertise to the next level. Learn from industry experts and transform your career.</span>
-          </h3> */}
+          </h3>
         </label>
         <input className="radio" type="radio" name="card" id="cardDos" />
         <label
@@ -237,13 +266,13 @@ const MasterClass = () => {
           htmlFor="cardDos"
           style={{ backgroundImage: `url(${imgmentor})` }}
         >
-          {/* <h1 className="title-card">
+          <h1 className="title-card">
             <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
             <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
           </h1>
           <h3 className="card-title subsubtitle">
             <span>EXAMPLE SOME ADDITIONS</span>
-          </h3> */}
+          </h3>
         </label>
         <input className="radio" type="radio" name="card" id="cardTres" />
         <label
@@ -251,21 +280,21 @@ const MasterClass = () => {
           htmlFor="cardTres"
           style={{ backgroundImage: `url(${imgadvance})` }}
         >
-          {/* <h1 className="title-card">
-            <span className="marg-bott">EXAMPLE TITLE OF MY CARD</span>
-            <span className="subtitle">EXAMPLE SOME SUBTITLE OR HEADER</span>
-          </h1>
-          <h3 className="card-title subsubtitle">
-            <span>EXAMPLE SOME ADDITIONS</span>
-          </h3> */}
+
         </label>
-      </div>
+      </div>  */}
       <div className="aboutwhy">
         <div className="about">
           <h1>| About Masterclass</h1> <br />
           <p>
-           Krutanic MasterClass is an interactive online learning platform where students learn directly from industry experts and top educators through free, career-focused masterclasses in Data Science, AI, Full Stack Development, Digital Marketing, Cyber Security and more.  <br />
-            <br /> Whether you aim to upskill, explore new fields, or prepare for internships and job opportunities, our online courses help you build practical skills and gain a competitive edge. 
+            Krutanic MasterClass is an interactive online learning platform
+            where students learn directly from industry experts and top
+            educators through free, career-focused masterclasses in Data
+            Science, AI, Full Stack Development, Digital Marketing, Cyber
+            Security and more. <br />
+            <br /> Whether you aim to upskill, explore new fields, or prepare
+            for internships and job opportunities, our online courses help you
+            build practical skills and gain a competitive edge.
           </p>
         </div>
         <div className="why">
@@ -389,7 +418,9 @@ const MasterClass = () => {
               <div className="content">
                 <h3>Podcast on Career Advancement with</h3>
                 <h2>Karam Dharmanandra Singh</h2>
-                <h3>Manager at <span>BOSCH</span></h3>
+                <h3>
+                  Manager at <span>BOSCH</span>
+                </h3>
               </div>
             </div>
           </div>

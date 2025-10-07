@@ -4,84 +4,85 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const MarketingAddExecutive = () => {
-  const [loading, setLoading] = useState(true);
-  const [teamName, setTeamName] = useState("");
-  const [getteamName, setGetTeamName] = useState([]);
-  const [iscourseFormVisible, setiscourseFormVisible] = useState(false);
-  const [editingOperationId, setEditingOperationId] = useState(null);
-  const [operation, setOperation] = useState([]);
+  const marketingToken = localStorage.getItem("marketingToken");
+  const [isFormVisible, setisFormVisible] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [editingExecutiveId, setEditingExecutiveId] = useState(null);
+  const [executive, setExecutive] = useState([]);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
     designation: "",
-     team: "",
-     password: "",
   });
 
-
   const toggleVisibility = () => {
-    setiscourseFormVisible((prevState) => !prevState);
+    setisFormVisible((prevState) => !prevState);
   };
 
-  const handleAddTeamname = (e) => {
-    e.preventDefault();
-    const teamData = {
-      teamname: teamName.trim(),
-    };
-    axios
-      .post(`${API}/addmarketingteamname`, teamData)
-      .then((response) => {
-        if (response.status === 200) {
-          toast.success("Team added successfully!");
-          setTeamName(" ");
-          fetchTeamname();
-        } else {
-          toast.error("Failed to add team.");
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error adding the team:", error);
-        toast.error("please enter a team name.");
-      });
-  };
-
-  const fetchTeamname = async () => {
-    setLoading(true);
+  const fetchUserData = async () => {
+    if (!marketingToken) {
+      alert("login first");
+      console.log("Marketing User not logged in");
+      return;
+    }
     try {
-      const response = await axios.get(`${API}/getmarketingteamname`);
-      setGetTeamName(response.data);
-    } catch (error) {
-      console.error("There was an error fetching teamname:", error);
-    } finally {
-      setLoading(false);
+      const response = await axios.get(`${API}/getmarketinguser`, {
+        params: { marketingToken },
+      });
+      setUserData(response.data);
+      console.log("my data", response.data);
+    } catch (err) {
+      console.log("Failed to fetch user data");
     }
   };
 
+  const fetchExecutive = async () => {
+    try {
+      const response = await axios.get(`${API}/getmarketing`);
+      const filteredExecutives = response.data.filter(
+        (item) => item.team === userData.team
+      );
+      setExecutive(filteredExecutives);
+    } catch (error) {
+      console.error("There was an error fetching Executive:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (userData?.team) {
+      fetchExecutive();
+    }
+  }, [userData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData); 
-    const newOperation = {
+    console.log("Form Data:", formData);
+    const newExecutive = {
       fullname: formData.fullname.trim(),
       email: formData.email.trim(),
       designation: formData.designation.trim(),
-      team: formData.team.trim(),
-      password: formData.password.trim(),
+      team: userData.team,
     };
+
     try {
-      if (editingOperationId) {
+      if (editingExecutiveId) {
         const response = await axios.put(
-          `${API}/updatemarketing/${editingOperationId}`,
-          newOperation
+          `${API}/updatemarketing/${editingExecutiveId}`,
+          newExecutive
         );
         toast.success("Data updated successfully");
       } else {
         const response = await axios.post(
           `${API}/createmarketing`,
-          newOperation
+          newExecutive
         );
-        toast.success("Marketing created successfully");
+        toast.success("Executive created successfully");
       }
-      fetchOperation();
+      fetchExecutive();
       resetForm();
     } catch (error) {
       toast.error("There was an error while creating or updating");
@@ -89,30 +90,14 @@ const MarketingAddExecutive = () => {
     }
   };
 
-  const fetchOperation = async () => {
-    try {
-      const response = await axios.get(`${API}/getmarketing`);
-      setOperation(response.data);
-    } catch (error) {
-      console.error("There was an error fetching operation:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchOperation();
-    fetchTeamname();
-  }, []);
-
   const resetForm = () => {
     setFormData({
       fullname: "",
       email: "",
-      designation:"",
-      team: "",
-      password: "", 
+      designation: "",
     });
-    setEditingOperationId(null);
-    setiscourseFormVisible(false);
+    setEditingExecutiveId(null);
+    setisFormVisible(false);
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -129,27 +114,25 @@ const MarketingAddExecutive = () => {
       try {
         await axios.delete(`${API}/deletemarketing/${id}`);
         alert("data deleted successfully");
-        fetchOperation();
+        fetchExecutive();
       } catch (error) {
         alert("There was an error deleting the operation");
         console.error("Error deleting operation", error);
       }
     }
   };
-  const handleEdit = (operation) => {
+  const handleEdit = (executive) => {
     const isConfirmed = window.confirm(
-      "Are you sure you want to edit the operation details?"
+      "Are you sure you want to edit the executive details?"
     );
     if (isConfirmed) {
       setFormData({
-        fullname: operation.fullname.trim(),
-        email: operation.email.trim(),
-        designation: operation.designation.trim(),
-        team: operation.team.trim(),
-        password: operation.password,
+        fullname: executive.fullname.trim(),
+        email: executive.email.trim(),
+        designation: executive.designation.trim(),
       });
-      setEditingOperationId(operation._id);
-      setiscourseFormVisible(true);
+      setEditingExecutiveId(executive._id);
+      setisFormVisible(true);
     }
   };
   const handleSendEmail = async (value) => {
@@ -182,15 +165,15 @@ const MarketingAddExecutive = () => {
     } catch (error) {
       toast.error("An error occurred while sending the email.");
     }
-    fetchOperation();
+    fetchExecutive();
   };
   return (
-    <div id="create-marketing-team">
+    <div id="AddExecutive">
       <Toaster position="top-center" reverseOrder={false} />
-      {iscourseFormVisible && (
+      {isFormVisible && (
         <div className="form">
           <form onSubmit={handleSubmit}>
-            <h2>{editingOperationId ? "Edit Account" : "Create Account"}</h2>
+            <h2>{editingExecutiveId ? "Edit Account" : "Create Account"}</h2>
             <span onClick={resetForm}>✖</span>
             <input
               value={formData.fullname}
@@ -210,17 +193,22 @@ const MarketingAddExecutive = () => {
               placeholder="Enter email id"
               required
             />
-            <select name="designation" id="designation" value={formData.designation} onChange={handleChange} required>
-              <option disabled value="">Select Designation</option>
+            <select
+              name="designation"
+              id="designation"
+              value={formData.designation}
+              onChange={handleChange}
+              required
+            >
+              <option disabled value="">
+                Select Designation
+              </option>
               {/* <option value="MANAGER">MANAGER</option> */}
               <option value="LEADER">LEADER</option>
               <option value="EXECUTIVE">EXECUTIVE</option>
             </select>
-            <select name="team" id="team" value={formData.team} onChange={handleChange} required>
-              <option disabled value="">Select Team</option>
-              {getteamName.map((team, index) => { return(  <option key={index} value={team.teamname}>{team.teamname}</option>)})}
-            </select>
-            <input
+
+            {/* <input
               type="text"
               placeholder="Create password"
               name="password"
@@ -228,53 +216,21 @@ const MarketingAddExecutive = () => {
               value={formData.password}
               onChange={handleChange}
               required
-            />
+            /> */}
             <input
               className="cursor-pointer"
               type="submit"
-              value={editingOperationId ? "Update Account" : "Create Account"}
+              value={editingExecutiveId ? "Update Account" : "Create Account"}
             />
           </form>
         </div>
       )}
       <div className="coursetable">
         <div>
-          <h1>Marketing List:</h1>
+          <h2>Marketing Executive List:</h2>
           <span onClick={toggleVisibility}>+ Add New</span>
         </div>
-        <div>
-          <form
-            onSubmit={handleAddTeamname}
-            className="flex gap-2 items-center"
-          >
-            <input
-              type="text"
-              name="teamname"
-              value={teamName}
-              onChange={(e) => setTeamName(e.target.value.toUpperCase())}
-              id="teamname"
-              placeholder="Add New Team.."
-              className="px-2 py-1 border rounded-md"
-            />
-            <input
-              type="submit"
-              value="Add Team"
-              className="bg-blue-500 px-2 py-1 border rounded-md"
-            />
-          </form>
-          <div className="flex gap-2 items-center">
-            <h2>Total Teams</h2>
-            <select className="px-2 py-1 border rounded-md">
-              {getteamName.map((team, index) => {
-                return (
-                  <option key={index} value={team.teamname}>
-                    {team.teamname}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
+
         <table>
           <thead>
             <tr>
@@ -282,23 +238,21 @@ const MarketingAddExecutive = () => {
               <th>Full Name</th>
               <th>Email</th>
               <th>Designation</th>
-                <th>Team</th>
+              <th>Team</th>
               <th>Password</th>
               {/* <th>Login</th> */}
               <th>Action</th>
               <th>Send Login Credentials</th>
-              {/* <th>Assinged Target</th> */}
-              {/* <th>Target</th> */}
             </tr>
           </thead>
           <tbody>
-            {operation?.map((operation, index) => (
+            {executive?.map((operation, index) => (
               <tr key={index} className={`${operation.designation}`}>
                 <td>{index + 1}</td>
                 <td>{operation.fullname}</td>
                 <td>{operation.email}</td>
-                 <td>{operation.designation}</td>
-                  <td>{operation.team}</td>
+                <td>{operation.designation}</td>
+                <td>{operation.team}</td>
                 <td>{operation.password}</td>
                 {/* <td className="cursor-pointer font-semibold" onClick={() => handleloginteam(operation.email, operation.password)}>Login <i class="fa fa-sign-in"></i></td> */}
                 <td>

@@ -2,13 +2,20 @@
   background-color: black;
   color: white;
 
-  .masterclasshero {
+  .masterclassherosection{
+    background-color: #d44414;
+    margin: auto;
+
+    img{
+      width: 100%;
+    }
+  }
+
+  /* .masterclasshero {
     max-width: 1500px;
     display: flex;
     gap: 0.3rem;
     aspect-ratio: 5/2;
-    /* min-height: 30vw;
-        max-height: 40vw; */
     margin: 0 auto;
     padding: 20px 10px;
 
@@ -18,7 +25,6 @@
 
     .content {
       background: transparent;
-      /* background-image: url("../assets/masterhero.jpg"); */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -45,7 +51,7 @@
       opacity: 1;
       transform: translateX(0);
     }
-  }
+  } */
 
   .aboutwhy {
     padding: 30px 10px 50px 10px;
