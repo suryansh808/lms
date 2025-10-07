@@ -310,7 +310,7 @@ router.post("/sendedOnboardingMail", async (req, res) => {
   const price = Number(programPrice);
 const paid = Number(paidAmount);
 const pendingAmount = price - paid;
-console.log("pending", pendingAmount);
+// console.log("pending", pendingAmount);
 
   const emailMessage = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">

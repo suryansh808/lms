@@ -8,7 +8,7 @@ const createbda = require("./routes/CreateBDA");
 const Mentorship = require("./routes/Mentorship");
 const Advance = require("./routes/Advance");
 const NewStudentEnroll = require("./routes/NewStudentEnroll");
-
+const CreateMarketing = require("./routes/CreateMarketing");
 const sendMailWithAttchement = require("./routes/SendMailWithAttechment");
 const Mockai = require("./routes/mock");
 const Excercise = require("./routes/excercise");
@@ -73,6 +73,7 @@ app.use(express.json());
 app.use("/", createcourse);
 //create operation
 app.use("/", createoperation);
+app.use("/", CreateMarketing);
 //create bda
 app.use("/", createbda);
 // mentorship

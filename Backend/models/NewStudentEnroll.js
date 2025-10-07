@@ -78,6 +78,8 @@ const newStudentEnrollSchema = new Schema(
     internshipstartsmonth:{type:String},
     internshipendsmonth:{type:String},
     yearOfStudy:{type:String},
+    executiveId:{type:String},
+    executive:{type:String},
   },
   {
     timestamps: true,

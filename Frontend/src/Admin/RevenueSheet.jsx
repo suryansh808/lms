@@ -100,7 +100,7 @@ if (student.lead === "CGFL") {
 
   return (
     <div className="p-6 ml-[270px] mx-auto">
-      <h2 className="text-center  font-bold mb-6">Operation Revenue Sheet</h2>
+      <h2 className="text-center  font-bold mb-6"></h2>
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>

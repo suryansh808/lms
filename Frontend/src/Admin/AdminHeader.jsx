@@ -41,6 +41,9 @@ const AdminHeader = () => {
         <Link to="/CreateBDA">
           <i className="fa fa-users mr-2"></i>Create Team A/c
         </Link>
+        <Link to="/CreateMarketingTeam">
+          <i className="fa fa-users mr-2"></i>Create Marketing
+        </Link>
         <Link to="/InactiveBda">
           <i className="fa fa-users mr-2"></i>Inactive Bda A/C
         </Link>

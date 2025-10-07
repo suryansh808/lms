@@ -414,6 +414,7 @@ const CreateOperation = () => {
           </tbody>
         </table>
       </div>
+      
       {isDialogVisible && revenueData && selectedOperationName && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white relative w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-4 sm:p-6 rounded-xl shadow-lg overflow-hidden max-h-[80vh] scrollbar-hide  overflow-y-auto">

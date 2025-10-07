@@ -27,6 +27,7 @@ import "./style/Event.css";
 import "./style/verify.css";
 import './style/Linkedin.css'
 import "./style/ReferAndEarn.css"
+import "./style/CreateMarketingTeam.css"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

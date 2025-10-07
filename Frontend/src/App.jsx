@@ -51,6 +51,8 @@ import HalfPayment from "./Admin/HalfPayment";
 import Target from "./Admin/Target";
 import AlumniData from "./Admin/AlumniData";
 import InactiveBda from "./Admin/InactiveBda";
+import ReferAndEarnResponse from "./Admin/ReferAndEarnResponse";
+import CreateMarketingTeam from "./Admin/CreateMarketingTeam";
 
 // Operation Team
 import OperationLogin from "./Operation/OperationLogin";
@@ -98,27 +100,19 @@ import PCDashboard from "./PlacementCoordinator.jsx/PCDashboard";
 import JobPost from "./PlacementCoordinator.jsx/JobPost";
 import CreatePlacementCoordinator from "./Admin/CreatePlacementCoordinator";
 
-
 //event
 import EventDashBoard from "./Event/EventDashBoard";
 import Verified from "./Components/Verified";
 import ReferAndEarn from "./page/ReferAndEarn";
 import LeaderBoard from "./BDA/LeaderBoard";
-import ReferAndEarnResponse from "./Admin/ReferAndEarnResponse";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// MarketingLogin
+import MarketingHeader from "./Marketing/MarketingHeader";
+import MarketingLogin from "./Marketing/MarketingLogin";
+import MarketingDashboard from "./Marketing/MarketingDashboard";
+import MarketingPrePayment from "./Marketing/MarketingPrePayment";
+import MarketingLeads from "./Marketing/MarketingLeads";
+import MarketingAddExecutive from "./Marketing/MarketingAddExecutive";
 
 const App = () => {
   return (
@@ -161,7 +155,8 @@ const AppContent = () => {
     "/masterclass",
     "/alumni",
     "/verify",
-    "/referandearn"
+    "/referandearn",
+    "/marketing/login",
   ];
 
   const adminheaderPaths = [
@@ -189,7 +184,9 @@ const AppContent = () => {
     "/target",
     "/alumnidata",
     "/inactivebda",
-    "/referandearnresponse"
+    "/referandearnresponse",
+    "/createmarketingteam"
+
   ];
 
   const operationheaderPaths = [
@@ -198,6 +195,13 @@ const AppContent = () => {
     "/bookedpayment",
     "/defaultpayment",
     "/operationrevenuesheet"
+  ];
+
+  const marketingheaderPaths = [
+    "/marketing/home",
+    "/marketing/previous",
+    "/marketing/leads",
+    "/marketing/addexecutive"
   ];
 
   const bdaheaderPaths = [
@@ -238,6 +242,7 @@ const AppContent = () => {
 
   const isAuthenticatedPC = () => !!localStorage.getItem("pctoken");
   const isAuthenticatedEventUser = () => !!localStorage.getItem("eventToken");
+   const isAuthenticatedMarketing = () => !!localStorage.getItem("marketingToken");
 
   return (
     <div>
@@ -246,6 +251,7 @@ const AppContent = () => {
       {headerPaths.includes(location.pathname.toLowerCase()) && <Header />}
       {adminheaderPaths.includes(location.pathname.toLowerCase()) && (<AdminHeader />)}
       {operationheaderPaths.includes(location.pathname.toLowerCase()) && (<OperationHeader />)}
+      {marketingheaderPaths.includes(location.pathname.toLowerCase()) && (<MarketingHeader />)}
       {bdaheaderPaths.includes(location.pathname.toLowerCase()) && ( <BDAHeader />)}
       {userheaderPaths.includes(location.pathname.toLowerCase()) && (<UserHeader />)}
       {placementcoodinatorHeaderPaths.includes(location.pathname.toLowerCase()) && <PCHeader />}
@@ -278,7 +284,6 @@ const AppContent = () => {
         <Route path="/Verify" element={<Verified/>} />
         <Route path="/ReferAndEarn" element={<ReferAndEarn/>} />
 
-
         {/* Admin Panel Start */}
         <Route path="/AdminLogin" element={<AdminLogIn />} />
         <Route path="/LoginAdmin" element={<LoginAdmin />} />
@@ -307,6 +312,8 @@ const AppContent = () => {
         <Route path="/AlumniData" element={isAuthenticatedAdmin() ? (<AlumniData/>) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/InactiveBda" element={isAuthenticatedAdmin() ? (<InactiveBda/>) : (<Navigate to="/AdminLogin" />)}/>
         <Route path="/ReferAndEarnResponse" element={isAuthenticatedAdmin() ? (<ReferAndEarnResponse/>) : (<Navigate to="/AdminLogin" />)}/>
+        <Route path="/CreateMarketingTeam" element={isAuthenticatedAdmin() ? (<CreateMarketingTeam/>) : (<Navigate to="/AdminLogin" />)}/>
+
 
 
         {/* Admin Panel End */}
@@ -319,6 +326,15 @@ const AppContent = () => {
         <Route path="/OperationRevenueSheet" element={isAuthenticatedOperation()?<OperationRevenueSheets />: <Navigate to="/OperationLogin" />} />
         <Route path="/OperationLogin" element={<OperationLogin />} />
         {/* Operation Panel End */}
+
+
+        {/* Marketing Panel */}
+        <Route path="/marketing/login" element={<MarketingLogin />} />
+        <Route path="/marketing/home" element={isAuthenticatedMarketing()?<MarketingDashboard />: <Navigate to="/marketing/login" />} />
+        <Route path="/marketing/previous" element={isAuthenticatedMarketing()?<MarketingPrePayment />: <Navigate to="/marketing/login" />} />
+        <Route path="/marketing/leads" element={isAuthenticatedMarketing()?<MarketingLeads />: <Navigate to="/marketing/login" />} />
+        <Route path="/marketing/addexecutive" element={isAuthenticatedMarketing()?<MarketingAddExecutive />: <Navigate to="/marketing/login" />} />
+        {/* Marketing Panel */}
 
         {/* bda panel start */}
           <Route path="/TeamLogin" element={<TeamLogin />} />
