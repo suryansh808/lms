@@ -211,6 +211,7 @@ router.put("/editstudentdetails/:_id", async (req, res) => {
     branch,
     aadharNumber,
     referFriend,
+    lead
   } = req.body;
   try {
     // Check if domain has changed
@@ -249,6 +250,7 @@ router.put("/editstudentdetails/:_id", async (req, res) => {
         branch,
         aadharNumber,
         referFriend,
+        lead
       },
       { new: true }
     );

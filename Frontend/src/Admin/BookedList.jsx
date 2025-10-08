@@ -177,6 +177,7 @@ const BookedList = () => {
   const [monthOpted, setMonthOpted] = useState("");
   const [monthsToShow, setMonthsToShow] = useState([]);
   const [clearPaymentMonth, setClearPaymentMonth] = useState("");
+  const [lead, setLead] = useState("");
 
   const handleEdit = (studentId) => {
     const isConfirmed = window.confirm("Are you sure you want to edit this?");
@@ -193,6 +194,7 @@ const BookedList = () => {
       setPaidAmount(editStudent.paidAmount);
       setMonthOpted(editStudent.monthOpted);
       setClearPaymentMonth(editStudent.clearPaymentMonth);
+      setLead(editStudent.lead);
       setEditingStudentId(studentId);
       setiscourseFormVisible(true);
     }
@@ -211,6 +213,7 @@ const BookedList = () => {
       paidAmount: paidAmount,
       monthOpted: monthOpted,
       clearPaymentMonth: clearPaymentMonth,
+      lead: lead,
       operationName: operationName,
       operationId: operationId,
     };
@@ -249,6 +252,7 @@ const BookedList = () => {
     setPaidAmount("");
     setMonthOpted("");
     setClearPaymentMonth("");
+    setLead("");
     setEditingStudentId(null);
   };
 
@@ -435,6 +439,13 @@ const BookedList = () => {
               placeholder="Paid Amount"
               required
             />
+             <select value={lead} required onChange={(e) => setLead(e.target.value)} >
+              <option value="" disabled selected> Select Lead</option>
+              <option value="CGFL"> CGFL </option>
+              <option value="SGFL"> SGFL </option>
+              <option value="Ram Charan"> Ram Charan</option>
+              <option value="Abhilash"> Abhilash </option>
+             </select>
             Due date for clear payment ?
             <input
               value={clearPaymentMonth}
@@ -445,6 +456,7 @@ const BookedList = () => {
               min={minDate}
               max={maxDate}
             />
+           
             <input
               className="cursor-pointer"
               type="submit"
