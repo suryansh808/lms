@@ -7,6 +7,9 @@ import toast ,{Toaster} from 'react-hot-toast';
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
+  const currentMonth = new Date().toLocaleString("default", { month: "long", year: "numeric" });
+  const nextMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1).toLocaleString("default", { month: "long", year: "numeric" });
+
   const [Operation, setOperation] = useState([]);
   const [bda, setBda] = useState([]);
   const [payment, setPayment] = useState([]);
@@ -201,12 +204,16 @@ const [startDate, setStartDate] = useState("");
               <th>Sl</th>
               <th>Course</th>
               <th>Session</th>
+              <th>For {currentMonth} </th>
+              <th>For {nextMonth}</th>
             </tr>
             {courses.map((course, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{course.title}</td>
                 <td>{Object.keys(course.session).length}</td>
+                <td>{payment?.filter((item) => item.domainId === course._id && item.monthOpted === currentMonth).length || 0}</td>
+                <td>{payment?.filter((item) => item.domainId === course._id && item.monthOpted === nextMonth).length || 0}</td>
               </tr>
             ))}
           </table>
