@@ -1105,7 +1105,7 @@ const AutomationTesting = () => {
             }`}
           >
             <p className="text-lg font-semibold text-black">
-              Program fees 60,999/- + 18% GST
+              Program fees 60,999/-
             </p>
             <div className=" relative flex space-x-4">
               <button className="flex items-center px-3 py-2 border rounded-md text-white bg-black  hover:text-[#f15b29]">
