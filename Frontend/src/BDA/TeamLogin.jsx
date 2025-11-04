@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link } from "react-router-dom";
 import API from "../API";
 import toast ,{Toaster} from 'react-hot-toast';
 
@@ -89,10 +89,10 @@ const TeamLogin = () => {
             </div>
           </form>
         )}
-        {/* <p>--------------------or--------------------</p> */}
-        {/* <div className="loginwith">
+        <p>--------------------or--------------------</p>
+        <div className="loginwith">
           <Link to="/BDAAgainLogin">Login with password</Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -18,11 +18,13 @@ const BDAAgainLogin = () => {
             });
             if (response.status === 200) {
                 toast.success('Login successful!');
+                 const loginTime = new Date().getTime();
                 setTimeout(() => {
                 localStorage.setItem("bdaId", response.data.bdaId);
                 localStorage.setItem("bdaName", response.data.bdaName);
                 localStorage.setItem("bdaToken", response.data.token);
-                navigate("/bdadashboard");
+                 localStorage.setItem("sessionStartTime", loginTime);
+                navigate("/Home");
                 }, 1500);
             } else {
                 toast.error(data.message || 'Login failed');

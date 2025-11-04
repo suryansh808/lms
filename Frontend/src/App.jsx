@@ -113,6 +113,7 @@ import MarketingDashboard from "./Marketing/MarketingDashboard";
 import MarketingPrePayment from "./Marketing/MarketingPrePayment";
 import MarketingLeads from "./Marketing/MarketingLeads";
 import MarketingAddExecutive from "./Marketing/MarketingAddExecutive";
+import BDAAgainLogin from "./BDA/BDAAgainLogin";
 
 const App = () => {
   return (
@@ -338,6 +339,7 @@ const AppContent = () => {
 
         {/* bda panel start */}
           <Route path="/TeamLogin" element={<TeamLogin />} />
+          <Route path="/BDAAgainLogin" element={<BDAAgainLogin/>} />
           <Route path="/Home" element={ isAuthenticatedBda() ? <Home /> : <Navigate to="/TeamLogin"/>} />
           <Route path="/FullPaid" element={isAuthenticatedBda() ?<FullPaid /> : <Navigate to="/TeamLogin"/>} />
           <Route path="/Default" element={isAuthenticatedBda() ?<Default /> : <Navigate to="/TeamLogin"/>} />
@@ -351,6 +353,7 @@ const AppContent = () => {
           <Route path="/AddTeam" element={isAuthenticatedBda() ?<AddTeam/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/AssignTarget" element={isAuthenticatedBda() ?<AssignTarget/> : <Navigate to="/TeamLogin"/> }/>
           <Route path="/LeaderBoard" element={isAuthenticatedBda() ?<LeaderBoard/> : <Navigate to="/TeamLogin"/> }/>
+         
 
         {/* bda panel ends */}
 
