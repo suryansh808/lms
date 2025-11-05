@@ -89,10 +89,10 @@ const TeamLogin = () => {
             </div>
           </form>
         )}
-        <p>--------------------or--------------------</p>
+        {/* <p>--------------------or--------------------</p>
         <div className="loginwith">
           <Link to="/BDAAgainLogin">Login with password</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
