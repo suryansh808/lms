@@ -152,7 +152,7 @@ router.get("/getnewstudentenroll", async (req, res) => {
           .json({ message: "Student Eroll not found for the given userId" });
       }
     } else {
-      StudentEnroll = await NewEnrollStudent.find().sort({ createdAt: -1 }).limit(200).lean();
+      StudentEnroll = await NewEnrollStudent.find().sort({ createdAt: -1 }).limit(700).lean();
     }
     res.status(200).json(StudentEnroll);
   } catch (error) {
