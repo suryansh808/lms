@@ -145,14 +145,14 @@ router.get("/getnewstudentenroll", async (req, res) => {
     let StudentEnroll;
     if (studentenrollid) {
       // Fetch specific operation by userId
-      StudentEnroll = await NewEnrollStudent.findById(studentenrollid);
+      StudentEnroll = await NewEnrollStudent.findById(studentenrollid) .lean();
       if (!StudentEnroll) {
         return res
           .status(404)
           .json({ message: "Student Eroll not found for the given userId" });
       }
     } else {
-      StudentEnroll = await NewEnrollStudent.find().sort({ createdAt: -1 });
+      StudentEnroll = await NewEnrollStudent.find().sort({ createdAt: -1 }).limit(200).lean();
     }
     res.status(200).json(StudentEnroll);
   } catch (error) {
