@@ -33,28 +33,28 @@ dotenv.config();
 const app = express();
 
 // ✅ GLOBAL MONGO CACHE (VERY IMPORTANT FOR VERCEL)
-let cached = global.mongoose;
+// let cached = global.mongoose;
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+// if (!cached) {
+//   cached = global.mongoose = { conn: null, promise: null };
+// }
 
-async function connectDB() {
-  if (cached.conn) return cached.conn;
+// async function connectDB() {
+//   if (cached.conn) return cached.conn;
 
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(process.env.DB_NAME, {
-      bufferCommands: false,
-      maxPoolSize: 10,
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-  }
+//   if (!cached.promise) {
+//     cached.promise = mongoose.connect(process.env.DB_NAME, {
+//       bufferCommands: false,
+//       maxPoolSize: 10,
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     });
+//   }
 
-  cached.conn = await cached.promise;
-  console.log("✅ MongoDB connected");
-  return cached.conn;
-}
+//   cached.conn = await cached.promise;
+//   console.log("✅ MongoDB connected");
+//   return cached.conn;
+// }
 
 // ✅ MIDDLEWARES
 const allowedOrigins = process.env.FRONTEND_URL
@@ -136,34 +136,34 @@ app.use("/", ResumeATS);
 
 // app.use("/", PlacementCoordinator);
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to the Backend Server!");
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to the Backend Server!");
+});
 
 // Export the app for Vercel
-// module.exports = app;
+module.exports = app;
 
 
 // Connect to MongoDB
-// mongoose
-//   .connect(
-//    process.env.DB_NAME,
-//     { useNewUrlParser: true, useUnifiedTopology: true }
-//   )
-//   .then(() => console.log("Connected to MongoDB"))
-//   .catch((err) => console.error("Failed to connect to MongoDB", err));
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
-// ✅ HEALTH CHECK
-app.get("/", async (req, res) => {
-  await connectDB();
-  res.send("✅ Backend is live and connected");
+mongoose
+  .connect(
+   process.env.DB_NAME,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Failed to connect to MongoDB", err));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
-// ✅ VERCEL HANDLER
-module.exports = async (req, res) => {
-  await connectDB();
-  return app(req, res);
-};
+// // ✅ HEALTH CHECK
+// app.get("/", async (req, res) => {
+//   await connectDB();
+//   res.send("✅ Backend is live and connected");
+// });
+
+// // ✅ VERCEL HANDLER
+// module.exports = async (req, res) => {
+//   await connectDB();
+//   return app(req, res);
+// };
